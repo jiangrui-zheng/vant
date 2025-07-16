@@ -1,12 +1,23 @@
-declare const ActionBar: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const ActionBar: import("../utils").WithInstall<import("vue").DefineComponent<{
+    placeholder: BooleanConstructor;
     safeAreaInsetBottom: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    safeAreaInsetBottom: boolean;
-} & {}>, {
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+    placeholder: BooleanConstructor;
+    safeAreaInsetBottom: {
+        type: BooleanConstructor;
+        default: true;
+    };
+}>>, {
+    placeholder: boolean;
     safeAreaInsetBottom: boolean;
 }>>;
 export default ActionBar;
-export { ActionBar };
+export type { ActionBarProps } from './ActionBar';
+declare module 'vue' {
+    interface GlobalComponents {
+        VanActionBar: typeof ActionBar;
+    }
+}

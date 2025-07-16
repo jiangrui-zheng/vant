@@ -1,17 +1,24 @@
-declare const Empty: import("../utils").WithInstall<import("vue").DefineComponent<{
-    imageSize: (NumberConstructor | StringConstructor)[];
-    description: StringConstructor;
+export declare const Empty: import("../utils").WithInstall<import("vue").DefineComponent<{
     image: {
-        type: StringConstructor;
+        type: import("vue").PropType<string>;
         default: string;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    image: string;
-} & {
-    description?: string | undefined;
-    imageSize?: string | number | undefined;
-}>, {
+    imageSize: import("vue").PropType<import("../utils").Numeric | [import("../utils").Numeric, import("../utils").Numeric]>;
+    description: StringConstructor;
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+    image: {
+        type: import("vue").PropType<string>;
+        default: string;
+    };
+    imageSize: import("vue").PropType<import("../utils").Numeric | [import("../utils").Numeric, import("../utils").Numeric]>;
+    description: StringConstructor;
+}>>, {
     image: string;
 }>>;
 export default Empty;
-export { Empty };
+export type { EmptyProps } from './Empty';
+declare module 'vue' {
+    interface GlobalComponents {
+        VanEmpty: typeof Empty;
+    }
+}

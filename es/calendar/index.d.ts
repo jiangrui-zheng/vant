@@ -1,76 +1,81 @@
-declare const Calendar: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const Calendar: import("../utils").WithInstall<import("vue").DefineComponent<{
     show: BooleanConstructor;
+    type: {
+        type: import("vue").PropType<import("./types").CalendarType>;
+        default: import("./types").CalendarType;
+    };
     title: StringConstructor;
     color: StringConstructor;
-    readonly: BooleanConstructor;
-    teleport: import("vue").PropType<string | import("vue").RendererElement | null | undefined>;
-    formatter: import("vue").PropType<(item: import("./CalendarDay").CalendarDayItem) => import("./CalendarDay").CalendarDayItem>;
-    rowHeight: (NumberConstructor | StringConstructor)[];
-    confirmText: StringConstructor;
-    rangePrompt: StringConstructor;
-    defaultDate: any;
-    allowSameDay: BooleanConstructor;
-    confirmDisabledText: StringConstructor;
-    type: {
-        type: import("vue").PropType<import("./CalendarMonth").CalendarType>;
-        default: string;
-    };
     round: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
-    position: {
-        type: import("vue").PropType<import("../popup").PopupPosition>;
-        default: string;
-    };
+    readonly: BooleanConstructor;
     poppable: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
     maxRange: {
         type: (NumberConstructor | StringConstructor)[];
         default: null;
     };
-    lazyRender: {
-        type: BooleanConstructor;
-        default: boolean;
+    position: {
+        type: import("vue").PropType<import("..").PopupPosition>;
+        default: import("..").PopupPosition;
     };
+    teleport: import("vue").PropType<string | import("vue").RendererElement | null | undefined>;
     showMark: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
     showTitle: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
+    };
+    formatter: import("vue").PropType<(item: import("./types").CalendarDayItem) => import("./types").CalendarDayItem>;
+    rowHeight: (NumberConstructor | StringConstructor)[];
+    confirmText: StringConstructor;
+    rangePrompt: StringConstructor;
+    lazyRender: {
+        type: BooleanConstructor;
+        default: true;
     };
     showConfirm: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
+    defaultDate: import("vue").PropType<Date | Date[] | null>;
+    allowSameDay: BooleanConstructor;
     showSubtitle: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
     closeOnPopstate: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
+    showRangePrompt: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    confirmDisabledText: StringConstructor;
     closeOnClickOverlay: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
+    safeAreaInsetTop: BooleanConstructor;
     safeAreaInsetBottom: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
     minDate: {
         type: DateConstructor;
-        validator: typeof import("../utils/validate/date").isDate;
+        validator: (val: unknown) => val is Date;
         default: () => Date;
     };
     maxDate: {
         type: DateConstructor;
-        validator: typeof import("../utils/validate/date").isDate;
+        validator: (val: unknown) => val is Date;
         default: () => Date;
     };
     firstDayOfWeek: {
@@ -78,59 +83,127 @@ declare const Calendar: import("../utils").WithInstall<import("vue").DefineCompo
         default: number;
         validator: (val: number) => boolean;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("select" | "update:show" | "confirm" | "unselect" | "month-show")[], "select" | "update:show" | "confirm" | "unselect" | "month-show", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    safeAreaInsetBottom: boolean;
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("select" | "update:show" | "confirm" | "click-subtitle" | "unselect" | "month-show" | "over-range")[], "select" | "update:show" | "confirm" | "click-subtitle" | "unselect" | "month-show" | "over-range", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+    show: BooleanConstructor;
+    type: {
+        type: import("vue").PropType<import("./types").CalendarType>;
+        default: import("./types").CalendarType;
+    };
+    title: StringConstructor;
+    color: StringConstructor;
+    round: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    readonly: BooleanConstructor;
+    poppable: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    maxRange: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: null;
+    };
+    position: {
+        type: import("vue").PropType<import("..").PopupPosition>;
+        default: import("..").PopupPosition;
+    };
+    teleport: import("vue").PropType<string | import("vue").RendererElement | null | undefined>;
+    showMark: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    showTitle: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    formatter: import("vue").PropType<(item: import("./types").CalendarDayItem) => import("./types").CalendarDayItem>;
+    rowHeight: (NumberConstructor | StringConstructor)[];
+    confirmText: StringConstructor;
+    rangePrompt: StringConstructor;
+    lazyRender: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    showConfirm: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    defaultDate: import("vue").PropType<Date | Date[] | null>;
+    allowSameDay: BooleanConstructor;
+    showSubtitle: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    closeOnPopstate: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    showRangePrompt: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    confirmDisabledText: StringConstructor;
+    closeOnClickOverlay: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    safeAreaInsetTop: BooleanConstructor;
+    safeAreaInsetBottom: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    minDate: {
+        type: DateConstructor;
+        validator: (val: unknown) => val is Date;
+        default: () => Date;
+    };
+    maxDate: {
+        type: DateConstructor;
+        validator: (val: unknown) => val is Date;
+        default: () => Date;
+    };
+    firstDayOfWeek: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+        validator: (val: number) => boolean;
+    };
+}>> & {
+    onSelect?: ((...args: any[]) => any) | undefined;
+    "onUpdate:show"?: ((...args: any[]) => any) | undefined;
+    onConfirm?: ((...args: any[]) => any) | undefined;
+    "onClick-subtitle"?: ((...args: any[]) => any) | undefined;
+    onUnselect?: ((...args: any[]) => any) | undefined;
+    "onMonth-show"?: ((...args: any[]) => any) | undefined;
+    "onOver-range"?: ((...args: any[]) => any) | undefined;
+}, {
+    type: import("./types").CalendarType;
+    position: import("..").PopupPosition;
     round: boolean;
-    type: import("./CalendarMonth").CalendarType;
+    readonly: boolean;
+    safeAreaInsetBottom: boolean;
     show: boolean;
     lazyRender: boolean;
     closeOnClickOverlay: boolean;
     closeOnPopstate: boolean;
-    position: import("../popup").PopupPosition;
-    readonly: boolean;
-    showMark: boolean;
-    allowSameDay: boolean;
-    showSubtitle: boolean;
-    firstDayOfWeek: string | number;
+    safeAreaInsetTop: boolean;
     minDate: Date;
     maxDate: Date;
-    showTitle: boolean;
-    defaultDate: any;
     poppable: boolean;
     maxRange: string | number;
-    showConfirm: boolean;
-} & {
-    title?: string | undefined;
-    color?: string | undefined;
-    teleport?: string | import("vue").RendererElement | null | undefined;
-    formatter?: ((item: import("./CalendarDay").CalendarDayItem) => import("./CalendarDay").CalendarDayItem) | undefined;
-    rowHeight?: string | number | undefined;
-    confirmText?: string | undefined;
-    rangePrompt?: string | undefined;
-    confirmDisabledText?: string | undefined;
-}>, {
-    safeAreaInsetBottom: boolean;
-    round: boolean;
-    type: import("./CalendarMonth").CalendarType;
-    show: boolean;
-    lazyRender: boolean;
-    closeOnClickOverlay: boolean;
-    closeOnPopstate: boolean;
-    position: import("../popup").PopupPosition;
-    readonly: boolean;
     showMark: boolean;
+    showTitle: boolean;
+    showConfirm: boolean;
     allowSameDay: boolean;
     showSubtitle: boolean;
+    showRangePrompt: boolean;
     firstDayOfWeek: string | number;
-    minDate: Date;
-    maxDate: Date;
-    showTitle: boolean;
-    defaultDate: any;
-    poppable: boolean;
-    maxRange: string | number;
-    showConfirm: boolean;
 }>>;
 export default Calendar;
-export { Calendar };
-export type { CalendarType } from './CalendarMonth';
-export type { CalendarDayItem, CalendarDayType } from './CalendarDay';
+export type { CalendarProps } from './Calendar';
+export type { CalendarType, CalendarDayItem, CalendarDayType, CalendarInstance, } from './types';
+declare module 'vue' {
+    interface GlobalComponents {
+        VanCalendar: typeof Calendar;
+    }
+}

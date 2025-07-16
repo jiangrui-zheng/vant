@@ -1,4 +1,8 @@
-declare const Tab: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const Tab: import("../utils").WithInstall<import("vue").DefineComponent<{
+    to: import("vue").PropType<import("vue-router").RouteLocationRaw>;
+    url: StringConstructor;
+    replace: BooleanConstructor;
+} & {
     dot: BooleanConstructor;
     name: (NumberConstructor | StringConstructor)[];
     badge: (NumberConstructor | StringConstructor)[];
@@ -6,25 +10,36 @@ declare const Tab: import("../utils").WithInstall<import("vue").DefineComponent<
     disabled: BooleanConstructor;
     titleClass: import("vue").PropType<unknown>;
     titleStyle: import("vue").PropType<string | import("vue").CSSProperties>;
+    showZeroBadge: {
+        type: BooleanConstructor;
+        default: true;
+    };
+}, (() => JSX.Element | undefined) | undefined, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     to: import("vue").PropType<import("vue-router").RouteLocationRaw>;
     url: StringConstructor;
     replace: BooleanConstructor;
-}, (() => JSX.Element | undefined) | undefined, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    replace: boolean;
-    dot: boolean;
-    disabled: boolean;
 } & {
-    name?: string | number | undefined;
-    title?: string | undefined;
-    to?: import("vue-router").RouteLocationRaw | (import("vue-router").RouteLocationRaw & object) | undefined;
-    url?: string | undefined;
-    badge?: string | number | undefined;
-    titleClass?: unknown;
-    titleStyle?: string | import("vue").CSSProperties | undefined;
-}>, {
+    dot: BooleanConstructor;
+    name: (NumberConstructor | StringConstructor)[];
+    badge: (NumberConstructor | StringConstructor)[];
+    title: StringConstructor;
+    disabled: BooleanConstructor;
+    titleClass: import("vue").PropType<unknown>;
+    titleStyle: import("vue").PropType<string | import("vue").CSSProperties>;
+    showZeroBadge: {
+        type: BooleanConstructor;
+        default: true;
+    };
+}>>, {
     replace: boolean;
     dot: boolean;
     disabled: boolean;
+    showZeroBadge: boolean;
 }>>;
 export default Tab;
-export { Tab };
+export type { TabProps } from './Tab';
+declare module 'vue' {
+    interface GlobalComponents {
+        VanTab: typeof Tab;
+    }
+}

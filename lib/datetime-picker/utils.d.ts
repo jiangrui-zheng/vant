@@ -1,37 +1,39 @@
-import { PropType } from 'vue';
-export declare type ColumnType = 'year' | 'month' | 'day' | 'hour' | 'minute';
-export declare type DatetimePickerType = 'date' | 'time' | 'datetime' | 'datehour' | 'month-day' | 'year-month';
+import type { PropType } from 'vue';
+import type { PickerInstance } from '../picker';
+import type { DatetimePickerColumnType } from './types';
 export declare const sharedProps: {
-    filter: PropType<(type: string, values: string[]) => string[]>;
-    columnsOrder: PropType<ColumnType[]>;
-    formatter: {
-        type: PropType<(type: string, value: string) => string>;
-        default: (type: string, value: string) => string;
-    };
     title: StringConstructor;
     loading: BooleanConstructor;
     readonly: BooleanConstructor;
     allowHtml: BooleanConstructor;
-    cancelButtonText: StringConstructor;
-    confirmButtonText: StringConstructor;
     itemHeight: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
     showToolbar: {
         type: BooleanConstructor;
-        default: boolean;
-    };
-    visibleItemCount: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
+        default: true;
     };
     swipeDuration: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
+    visibleItemCount: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    cancelButtonText: StringConstructor;
+    confirmButtonText: StringConstructor;
+} & {
+    filter: PropType<(type: string, values: string[]) => string[]>;
+    columnsOrder: PropType<DatetimePickerColumnType[]>;
+    formatter: {
+        type: PropType<(type: string, value: string) => string>;
+        default: (type: string, value: string) => string;
+    };
 };
-export declare const pickerKeys: ("title" | "loading" | "readonly" | "allowHtml" | "itemHeight" | "swipeDuration" | "visibleItemCount" | "cancelButtonText" | "confirmButtonText" | "showToolbar")[];
+export declare const pickerInheritKeys: ("title" | "readonly" | "loading" | "allowHtml" | "itemHeight" | "showToolbar" | "swipeDuration" | "visibleItemCount" | "cancelButtonText" | "confirmButtonText")[];
 export declare function times<T>(n: number, iteratee: (index: number) => T): T[];
 export declare function getTrueValue(value: string | undefined): number;
-export declare function getMonthEndDay(year: number, month: number): number;
+export declare const getMonthEndDay: (year: number, month: number) => number;
+export declare const proxyPickerMethods: (picker: PickerInstance, callback: () => void) => PickerInstance;

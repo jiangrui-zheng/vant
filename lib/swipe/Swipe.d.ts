@@ -1,28 +1,13 @@
-import { ComputedRef } from 'vue';
-export declare const SWIPE_KEY: unique symbol;
-export declare type SwipeToOptions = {
-    immediate?: boolean;
-};
-export declare type SwipeProvide = {
-    props: {
-        loop: boolean;
-        vertical?: boolean;
-        lazyRender?: boolean;
+import { type ExtractPropTypes, type InjectionKey } from 'vue';
+import { SwipeProvide } from './types';
+declare const swipeProps: {
+    loop: {
+        type: BooleanConstructor;
+        default: true;
     };
-    size: ComputedRef<number>;
-    count: ComputedRef<number>;
-    activeIndicator: ComputedRef<number>;
-};
-declare const _default: import("vue").DefineComponent<{
     width: (NumberConstructor | StringConstructor)[];
     height: (NumberConstructor | StringConstructor)[];
     vertical: BooleanConstructor;
-    lazyRender: BooleanConstructor;
-    indicatorColor: StringConstructor;
-    loop: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
     autoplay: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
@@ -33,40 +18,101 @@ declare const _default: import("vue").DefineComponent<{
     };
     touchable: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
+    lazyRender: BooleanConstructor;
     initialSwipe: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
+    indicatorColor: StringConstructor;
     showIndicators: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
     stopPropagation: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "change"[], "change", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+};
+export declare type SwipeProps = ExtractPropTypes<typeof swipeProps>;
+export declare const SWIPE_KEY: InjectionKey<SwipeProvide>;
+declare const _default: import("vue").DefineComponent<{
+    loop: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    width: (NumberConstructor | StringConstructor)[];
+    height: (NumberConstructor | StringConstructor)[];
+    vertical: BooleanConstructor;
+    autoplay: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    duration: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    touchable: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    lazyRender: BooleanConstructor;
+    initialSwipe: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    indicatorColor: StringConstructor;
+    showIndicators: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    stopPropagation: {
+        type: BooleanConstructor;
+        default: true;
+    };
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "change"[], "change", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+    loop: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    width: (NumberConstructor | StringConstructor)[];
+    height: (NumberConstructor | StringConstructor)[];
+    vertical: BooleanConstructor;
+    autoplay: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    duration: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    touchable: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    lazyRender: BooleanConstructor;
+    initialSwipe: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    indicatorColor: StringConstructor;
+    showIndicators: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    stopPropagation: {
+        type: BooleanConstructor;
+        default: true;
+    };
+}>> & {
+    onChange?: ((...args: any[]) => any) | undefined;
+}, {
+    autoplay: string | number;
+    loop: boolean;
     vertical: boolean;
     duration: string | number;
     lazyRender: boolean;
-    loop: boolean;
-    autoplay: string | number;
-    touchable: boolean;
-    initialSwipe: string | number;
-    showIndicators: boolean;
-    stopPropagation: boolean;
-} & {
-    width?: string | number | undefined;
-    height?: string | number | undefined;
-    indicatorColor?: string | undefined;
-}>, {
-    vertical: boolean;
-    duration: string | number;
-    lazyRender: boolean;
-    loop: boolean;
-    autoplay: string | number;
     touchable: boolean;
     initialSwipe: string | number;
     showIndicators: boolean;

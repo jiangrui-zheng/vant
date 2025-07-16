@@ -1,53 +1,86 @@
-declare const Circle: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const Circle: import("../utils").WithInstall<import("vue").DefineComponent<{
     text: StringConstructor;
     size: (NumberConstructor | StringConstructor)[];
-    color: import("vue").PropType<string | Record<string, string>>;
-    layerColor: StringConstructor;
-    strokeLinecap: import("vue").PropType<CanvasLineCap>;
-    currentRate: {
-        type: NumberConstructor;
-        default: number;
-    };
-    speed: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
-    };
     fill: {
-        type: StringConstructor;
+        type: import("vue").PropType<string>;
         default: string;
     };
     rate: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
+    speed: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    color: import("vue").PropType<string | Record<string, string>>;
+    clockwise: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    layerColor: StringConstructor;
+    currentRate: {
+        type: NumberConstructor;
+        default: number;
+    };
     strokeWidth: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
+    strokeLinecap: import("vue").PropType<CanvasLineCap>;
+    startPosition: {
+        type: import("vue").PropType<import("./Circle").CircleStartPosition>;
+        default: import("./Circle").CircleStartPosition;
+    };
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:currentRate"[], "update:currentRate", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+    text: StringConstructor;
+    size: (NumberConstructor | StringConstructor)[];
+    fill: {
+        type: import("vue").PropType<string>;
+        default: string;
+    };
+    rate: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    speed: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    color: import("vue").PropType<string | Record<string, string>>;
     clockwise: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:currentRate"[], "update:currentRate", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    layerColor: StringConstructor;
+    currentRate: {
+        type: NumberConstructor;
+        default: number;
+    };
+    strokeWidth: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    strokeLinecap: import("vue").PropType<CanvasLineCap>;
+    startPosition: {
+        type: import("vue").PropType<import("./Circle").CircleStartPosition>;
+        default: import("./Circle").CircleStartPosition;
+    };
+}>> & {
+    "onUpdate:currentRate"?: ((...args: any[]) => any) | undefined;
+}, {
     fill: string;
     strokeWidth: string | number;
-    currentRate: number;
-    speed: string | number;
     rate: string | number;
-    clockwise: boolean;
-} & {
-    text?: string | undefined;
-    color?: string | Record<string, string> | undefined;
-    size?: string | number | undefined;
-    strokeLinecap?: CanvasLineCap | undefined;
-    layerColor?: string | undefined;
-}>, {
-    fill: string;
-    strokeWidth: string | number;
-    currentRate: number;
     speed: string | number;
-    rate: string | number;
     clockwise: boolean;
+    currentRate: number;
+    startPosition: import("./Circle").CircleStartPosition;
 }>>;
 export default Circle;
-export { Circle };
+export type { CircleProps, CircleStartPosition } from './Circle';
+declare module 'vue' {
+    interface GlobalComponents {
+        VanCircle: typeof Circle;
+    }
+}

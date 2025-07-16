@@ -1,12 +1,27 @@
+import { type ExtractPropTypes } from 'vue';
 export declare const ACTION_BAR_KEY: unique symbol;
-declare const _default: import("vue").DefineComponent<{
+declare const actionBarProps: {
+    placeholder: BooleanConstructor;
     safeAreaInsetBottom: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    safeAreaInsetBottom: boolean;
-} & {}>, {
+};
+export declare type ActionBarProps = ExtractPropTypes<typeof actionBarProps>;
+declare const _default: import("vue").DefineComponent<{
+    placeholder: BooleanConstructor;
+    safeAreaInsetBottom: {
+        type: BooleanConstructor;
+        default: true;
+    };
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+    placeholder: BooleanConstructor;
+    safeAreaInsetBottom: {
+        type: BooleanConstructor;
+        default: true;
+    };
+}>>, {
+    placeholder: boolean;
     safeAreaInsetBottom: boolean;
 }>;
 export default _default;

@@ -1,23 +1,35 @@
-@import '../style/var.less';
+@import './var.less';
 @import '../style/mixins/hairline';
+
+:root {
+  --van-collapse-item-transition-duration: @collapse-item-transition-duration;
+  --van-collapse-item-content-padding: @collapse-item-content-padding;
+  --van-collapse-item-content-font-size: @collapse-item-content-font-size;
+  --van-collapse-item-content-line-height: @collapse-item-content-line-height;
+  --van-collapse-item-content-text-color: @collapse-item-content-text-color;
+  --van-collapse-item-content-background-color: @collapse-item-content-background-color;
+  --van-collapse-item-title-disabled-color: @collapse-item-title-disabled-color;
+}
 
 .van-collapse-item {
   position: relative;
 
   &--border {
     &::after {
-      .hairline-top(@cell-border-color, @padding-md, @padding-md);
+      .hairline-top(var(--van-border-color), var(--van-padding-md), var(--van-padding-md));
     }
   }
 
   &__title {
     .van-cell__right-icon::before {
-      transform: rotate(90deg);
-      transition: transform @collapse-item-transition-duration;
+      // using translateZ to fix safari rendering issues
+      // see: https://github.com/vant-ui/vant/issues/8608
+      transform: rotate(90deg) translateZ(0);
+      transition: transform var(--van-collapse-item-transition-duration);
     }
 
     &::after {
-      right: @padding-md;
+      right: var(--van-padding-md);
       display: none;
     }
 
@@ -42,26 +54,22 @@
 
       &,
       & .van-cell__right-icon {
-        color: @collapse-item-title-disabled-color;
-      }
-
-      &:active {
-        background-color: @white;
+        color: var(--van-collapse-item-title-disabled-color);
       }
     }
   }
 
   &__wrapper {
     overflow: hidden;
-    transition: height @collapse-item-transition-duration ease-in-out;
+    transition: height var(--van-collapse-item-transition-duration) ease-in-out;
     will-change: height;
   }
 
   &__content {
-    padding: @collapse-item-content-padding;
-    color: @collapse-item-content-text-color;
-    font-size: @collapse-item-content-font-size;
-    line-height: @collapse-item-content-line-height;
-    background-color: @collapse-item-content-background-color;
+    padding: var(--van-collapse-item-content-padding);
+    color: var(--van-collapse-item-content-text-color);
+    font-size: var(--van-collapse-item-content-font-size);
+    line-height: var(--van-collapse-item-content-line-height);
+    background: var(--van-collapse-item-content-background-color);
   }
 }

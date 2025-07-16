@@ -1,7 +1,7 @@
 declare type Message = Record<string, any>;
-declare const _default: {
+export declare const Locale: {
     messages(): Message;
-    use(newLang: string, newMessages?: Message | undefined): void;
+    use(newLang: string, newMessages?: Message): void;
     add(newMessages?: Message): void;
 };
-export default _default;
+export default Locale;

@@ -1,82 +1,145 @@
-import { PropType } from 'vue';
-declare function isOverseaCode(code: string): boolean;
-export declare type AreaList = {
-    city_list: Record<string, string>;
-    county_list: Record<string, string>;
-    province_list: Record<string, string>;
-};
-export declare type AreaColumnOption = {
-    name: string;
-    code: string;
-};
-declare const _default: import("vue").DefineComponent<{
-    value: StringConstructor;
-    areaList: {
-        type: PropType<AreaList>;
-        default: () => {};
-    };
-    columnsNum: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
-    };
-    isOverseaCode: {
-        type: PropType<(code: string) => boolean>;
-        default: typeof isOverseaCode;
-    };
-    columnsPlaceholder: {
-        type: PropType<string[]>;
-        default: () => never[];
-    };
+import { type PropType, type ExtractPropTypes } from 'vue';
+import type { AreaList } from './types';
+declare const areaProps: {
     title: StringConstructor;
     loading: BooleanConstructor;
     readonly: BooleanConstructor;
     allowHtml: BooleanConstructor;
-    cancelButtonText: StringConstructor;
-    confirmButtonText: StringConstructor;
     itemHeight: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
     showToolbar: {
         type: BooleanConstructor;
-        default: boolean;
-    };
-    visibleItemCount: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
+        default: true;
     };
     swipeDuration: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("change" | "confirm")[], "change" | "confirm", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    loading: boolean;
-    readonly: boolean;
-    allowHtml: boolean;
-    itemHeight: string | number;
-    swipeDuration: string | number;
-    visibleItemCount: string | number;
-    showToolbar: boolean;
-    areaList: AreaList;
-    columnsNum: string | number;
-    isOverseaCode: (code: string) => boolean;
-    columnsPlaceholder: string[];
+    visibleItemCount: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    cancelButtonText: StringConstructor;
+    confirmButtonText: StringConstructor;
 } & {
-    title?: string | undefined;
-    cancelButtonText?: string | undefined;
-    confirmButtonText?: string | undefined;
-    value?: string | undefined;
-}>, {
-    loading: boolean;
+    value: StringConstructor;
+    columnsNum: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    columnsPlaceholder: {
+        type: PropType<string[]>;
+        default: () => never[];
+    };
+    areaList: {
+        type: PropType<AreaList>;
+        default: () => {};
+    };
+    isOverseaCode: {
+        type: PropType<(code: string) => boolean>;
+        default: (code: string) => boolean;
+    };
+};
+export declare type AreaProps = ExtractPropTypes<typeof areaProps>;
+declare const _default: import("vue").DefineComponent<{
+    title: StringConstructor;
+    loading: BooleanConstructor;
+    readonly: BooleanConstructor;
+    allowHtml: BooleanConstructor;
+    itemHeight: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    showToolbar: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    swipeDuration: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    visibleItemCount: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    cancelButtonText: StringConstructor;
+    confirmButtonText: StringConstructor;
+} & {
+    value: StringConstructor;
+    columnsNum: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    columnsPlaceholder: {
+        type: PropType<string[]>;
+        default: () => never[];
+    };
+    areaList: {
+        type: PropType<AreaList>;
+        default: () => {};
+    };
+    isOverseaCode: {
+        type: PropType<(code: string) => boolean>;
+        default: (code: string) => boolean;
+    };
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("change" | "cancel" | "confirm")[], "change" | "cancel" | "confirm", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+    title: StringConstructor;
+    loading: BooleanConstructor;
+    readonly: BooleanConstructor;
+    allowHtml: BooleanConstructor;
+    itemHeight: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    showToolbar: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    swipeDuration: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    visibleItemCount: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    cancelButtonText: StringConstructor;
+    confirmButtonText: StringConstructor;
+} & {
+    value: StringConstructor;
+    columnsNum: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    columnsPlaceholder: {
+        type: PropType<string[]>;
+        default: () => never[];
+    };
+    areaList: {
+        type: PropType<AreaList>;
+        default: () => {};
+    };
+    isOverseaCode: {
+        type: PropType<(code: string) => boolean>;
+        default: (code: string) => boolean;
+    };
+}>> & {
+    onChange?: ((...args: any[]) => any) | undefined;
+    onCancel?: ((...args: any[]) => any) | undefined;
+    onConfirm?: ((...args: any[]) => any) | undefined;
+}, {
     readonly: boolean;
+    loading: boolean;
     allowHtml: boolean;
     itemHeight: string | number;
+    showToolbar: boolean;
     swipeDuration: string | number;
     visibleItemCount: string | number;
-    showToolbar: boolean;
-    areaList: AreaList;
     columnsNum: string | number;
-    isOverseaCode: (code: string) => boolean;
     columnsPlaceholder: string[];
+    areaList: AreaList;
+    isOverseaCode: (code: string) => boolean;
 }>;
 export default _default;

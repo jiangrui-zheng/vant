@@ -1,24 +1,42 @@
-declare const Row: import("../utils").WithInstall<import("vue").DefineComponent<{
-    align: import("vue").PropType<import("./Row").RowAlign>;
-    justify: import("vue").PropType<import("./Row").RowJustify>;
+export declare const Row: import("../utils").WithInstall<import("vue").DefineComponent<{
     tag: {
         type: import("vue").PropType<keyof HTMLElementTagNameMap>;
-        default: string;
+        default: keyof HTMLElementTagNameMap;
     };
+    wrap: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    align: import("vue").PropType<import("./Row").RowAlign>;
     gutter: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    justify: import("vue").PropType<import("./Row").RowJustify>;
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+    tag: {
+        type: import("vue").PropType<keyof HTMLElementTagNameMap>;
+        default: keyof HTMLElementTagNameMap;
+    };
+    wrap: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    align: import("vue").PropType<import("./Row").RowAlign>;
+    gutter: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    justify: import("vue").PropType<import("./Row").RowJustify>;
+}>>, {
     tag: keyof HTMLElementTagNameMap;
-    gutter: string | number;
-} & {
-    justify?: import("./Row").RowJustify | undefined;
-    align?: import("./Row").RowAlign | undefined;
-}>, {
-    tag: keyof HTMLElementTagNameMap;
+    wrap: boolean;
     gutter: string | number;
 }>>;
 export default Row;
-export { Row };
-export type { RowAlign, RowJustify } from './Row';
+export type { RowProps, RowAlign, RowJustify } from './Row';
+declare module 'vue' {
+    interface GlobalComponents {
+        VanRow: typeof Row;
+    }
+}

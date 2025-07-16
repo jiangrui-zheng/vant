@@ -1,30 +1,45 @@
-import { PropType } from 'vue';
-declare const _default: import("vue").DefineComponent<{
+import { type PropType, type ExtractPropTypes } from 'vue';
+import { type BadgeProps } from '../badge';
+declare const iconProps: {
     dot: BooleanConstructor;
+    tag: {
+        type: PropType<keyof HTMLElementTagNameMap>;
+        default: keyof HTMLElementTagNameMap;
+    };
     name: StringConstructor;
     size: (NumberConstructor | StringConstructor)[];
     badge: (NumberConstructor | StringConstructor)[];
     color: StringConstructor;
+    badgeProps: PropType<Partial<BadgeProps>>;
+    classPrefix: StringConstructor;
+};
+export declare type IconProps = ExtractPropTypes<typeof iconProps>;
+declare const _default: import("vue").DefineComponent<{
+    dot: BooleanConstructor;
     tag: {
         type: PropType<keyof HTMLElementTagNameMap>;
-        default: string;
+        default: keyof HTMLElementTagNameMap;
     };
-    classPrefix: {
-        type: StringConstructor;
-        default: import("../utils/create/bem").Mods;
+    name: StringConstructor;
+    size: (NumberConstructor | StringConstructor)[];
+    badge: (NumberConstructor | StringConstructor)[];
+    color: StringConstructor;
+    badgeProps: PropType<Partial<BadgeProps>>;
+    classPrefix: StringConstructor;
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+    dot: BooleanConstructor;
+    tag: {
+        type: PropType<keyof HTMLElementTagNameMap>;
+        default: keyof HTMLElementTagNameMap;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    name: StringConstructor;
+    size: (NumberConstructor | StringConstructor)[];
+    badge: (NumberConstructor | StringConstructor)[];
+    color: StringConstructor;
+    badgeProps: PropType<Partial<BadgeProps>>;
+    classPrefix: StringConstructor;
+}>>, {
     dot: boolean;
     tag: keyof HTMLElementTagNameMap;
-    classPrefix: string;
-} & {
-    name?: string | undefined;
-    badge?: string | number | undefined;
-    color?: string | undefined;
-    size?: string | number | undefined;
-}>, {
-    dot: boolean;
-    tag: keyof HTMLElementTagNameMap;
-    classPrefix: string;
 }>;
 export default _default;

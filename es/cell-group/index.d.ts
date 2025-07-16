@@ -1,15 +1,25 @@
-declare const CellGroup: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const CellGroup: import("../utils").WithInstall<import("vue").DefineComponent<{
     title: StringConstructor;
+    inset: BooleanConstructor;
     border: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+    title: StringConstructor;
+    inset: BooleanConstructor;
+    border: {
+        type: BooleanConstructor;
+        default: true;
+    };
+}>>, {
     border: boolean;
-} & {
-    title?: string | undefined;
-}>, {
-    border: boolean;
+    inset: boolean;
 }>>;
 export default CellGroup;
-export { CellGroup };
+export type { CellGroupProps } from './CellGroup';
+declare module 'vue' {
+    interface GlobalComponents {
+        VanCellGroup: typeof CellGroup;
+    }
+}

@@ -1,40 +1,96 @@
-import { PropType } from 'vue';
-export declare type CascaderOption = {
-    text?: string;
-    value?: string | number;
-    children?: CascaderOption[];
-    [key: string]: any;
-};
-declare type CascaderFieldNames = {
-    text?: string;
-    value?: string;
-    children?: string;
-};
-declare const _default: import("vue").DefineComponent<{
+import { type PropType, type ExtractPropTypes } from 'vue';
+import type { CascaderOption, CascaderFieldNames } from './types';
+declare const cascaderProps: {
     title: StringConstructor;
-    modelValue: (NumberConstructor | StringConstructor)[];
-    fieldNames: PropType<CascaderFieldNames>;
-    placeholder: StringConstructor;
-    activeColor: StringConstructor;
     options: {
         type: PropType<CascaderOption[]>;
         default: () => never[];
     };
     closeable: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("change" | "close" | "update:modelValue" | "finish")[], "change" | "close" | "update:modelValue" | "finish", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    swipeable: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    closeIcon: {
+        type: PropType<string>;
+        default: string;
+    };
+    showHeader: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    modelValue: (NumberConstructor | StringConstructor)[];
+    fieldNames: PropType<CascaderFieldNames>;
+    placeholder: StringConstructor;
+    activeColor: StringConstructor;
+};
+export declare type CascaderProps = ExtractPropTypes<typeof cascaderProps>;
+declare const _default: import("vue").DefineComponent<{
+    title: StringConstructor;
+    options: {
+        type: PropType<CascaderOption[]>;
+        default: () => never[];
+    };
+    closeable: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    swipeable: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    closeIcon: {
+        type: PropType<string>;
+        default: string;
+    };
+    showHeader: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    modelValue: (NumberConstructor | StringConstructor)[];
+    fieldNames: PropType<CascaderFieldNames>;
+    placeholder: StringConstructor;
+    activeColor: StringConstructor;
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change" | "close" | "click-tab" | "finish")[], "update:modelValue" | "change" | "close" | "click-tab" | "finish", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+    title: StringConstructor;
+    options: {
+        type: PropType<CascaderOption[]>;
+        default: () => never[];
+    };
+    closeable: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    swipeable: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    closeIcon: {
+        type: PropType<string>;
+        default: string;
+    };
+    showHeader: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    modelValue: (NumberConstructor | StringConstructor)[];
+    fieldNames: PropType<CascaderFieldNames>;
+    placeholder: StringConstructor;
+    activeColor: StringConstructor;
+}>> & {
+    onChange?: ((...args: any[]) => any) | undefined;
+    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+    onClose?: ((...args: any[]) => any) | undefined;
+    "onClick-tab"?: ((...args: any[]) => any) | undefined;
+    onFinish?: ((...args: any[]) => any) | undefined;
+}, {
+    closeIcon: string;
     closeable: boolean;
     options: CascaderOption[];
-} & {
-    title?: string | undefined;
-    placeholder?: string | undefined;
-    modelValue?: string | number | undefined;
-    activeColor?: string | undefined;
-    fieldNames?: CascaderFieldNames | undefined;
-}>, {
-    closeable: boolean;
-    options: CascaderOption[];
+    swipeable: boolean;
+    showHeader: boolean;
 }>;
 export default _default;

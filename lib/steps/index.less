@@ -1,8 +1,12 @@
-@import '../style/var.less';
+@import './var.less';
+
+:root {
+  --van-steps-background-color: @steps-background-color;
+}
 
 .van-steps {
   overflow: hidden;
-  background-color: @steps-background-color;
+  background-color: var(--van-steps-background-color);
 
   &--horizontal {
     padding: 10px 10px 0;
@@ -16,6 +20,6 @@
   }
 
   &--vertical {
-    padding: 0 0 0 @padding-xl;
+    padding: 0 0 0 var(--van-padding-xl);
   }
 }

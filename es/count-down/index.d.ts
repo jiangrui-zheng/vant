@@ -1,27 +1,45 @@
-declare const CountDown: import("../utils").WithInstall<import("vue").DefineComponent<{
-    millisecond: BooleanConstructor;
+export declare const CountDown: import("../utils").WithInstall<import("vue").DefineComponent<{
     time: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
     format: {
-        type: StringConstructor;
+        type: import("vue").PropType<string>;
         default: string;
     };
     autoStart: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("change" | "finish")[], "change" | "finish", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    millisecond: BooleanConstructor;
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("change" | "finish")[], "change" | "finish", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+    time: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    format: {
+        type: import("vue").PropType<string>;
+        default: string;
+    };
+    autoStart: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    millisecond: BooleanConstructor;
+}>> & {
+    onChange?: ((...args: any[]) => any) | undefined;
+    onFinish?: ((...args: any[]) => any) | undefined;
+}, {
     time: string | number;
-    millisecond: boolean;
     format: string;
     autoStart: boolean;
-} & {}>, {
-    time: string | number;
     millisecond: boolean;
-    format: string;
-    autoStart: boolean;
 }>>;
 export default CountDown;
-export { CountDown };
+export type { CountDownProps } from './CountDown';
+export type { CountDownInstance, CountDownCurrentTime } from './types';
+declare module 'vue' {
+    interface GlobalComponents {
+        VanCountDown: typeof CountDown;
+    }
+}

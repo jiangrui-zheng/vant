@@ -1,20 +1,37 @@
-import { PropType } from 'vue';
-declare const _default: import("vue").DefineComponent<{
-    offset: (NumberConstructor | StringConstructor)[];
+import { type ExtractPropTypes } from 'vue';
+declare const colProps: {
     tag: {
-        type: PropType<keyof HTMLElementTagNameMap>;
-        default: string;
+        type: import("vue").PropType<keyof HTMLElementTagNameMap>;
+        default: keyof HTMLElementTagNameMap;
     };
     span: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    span: string | number;
-    tag: keyof HTMLElementTagNameMap;
-} & {
-    offset?: string | number | undefined;
-}>, {
+    offset: (NumberConstructor | StringConstructor)[];
+};
+export declare type ColProps = ExtractPropTypes<typeof colProps>;
+declare const _default: import("vue").DefineComponent<{
+    tag: {
+        type: import("vue").PropType<keyof HTMLElementTagNameMap>;
+        default: keyof HTMLElementTagNameMap;
+    };
+    span: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    offset: (NumberConstructor | StringConstructor)[];
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+    tag: {
+        type: import("vue").PropType<keyof HTMLElementTagNameMap>;
+        default: keyof HTMLElementTagNameMap;
+    };
+    span: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    offset: (NumberConstructor | StringConstructor)[];
+}>>, {
     span: string | number;
     tag: keyof HTMLElementTagNameMap;
 }>;

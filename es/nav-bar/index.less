@@ -1,11 +1,22 @@
-@import '../style/var.less';
+@import './var.less';
+
+:root {
+  --van-nav-bar-height: @nav-bar-height;
+  --van-nav-bar-background-color: @nav-bar-background-color;
+  --van-nav-bar-arrow-size: @nav-bar-arrow-size;
+  --van-nav-bar-icon-color: @nav-bar-icon-color;
+  --van-nav-bar-text-color: @nav-bar-text-color;
+  --van-nav-bar-title-font-size: @nav-bar-title-font-size;
+  --van-nav-bar-title-text-color: @nav-bar-title-text-color;
+  --van-nav-bar-z-index: @nav-bar-z-index;
+}
 
 .van-nav-bar {
   position: relative;
-  z-index: @nav-bar-z-index;
-  line-height: @line-height-lg;
+  z-index: var(--van-nav-bar-z-index);
+  line-height: var(--van-line-height-lg);
   text-align: center;
-  background-color: @nav-bar-background-color;
+  background: var(--van-nav-bar-background-color);
   user-select: none;
 
   &--fixed {
@@ -21,27 +32,27 @@
   }
 
   .van-icon {
-    color: @nav-bar-icon-color;
+    color: var(--van-nav-bar-icon-color);
   }
 
   &__content {
     position: relative;
     display: flex;
     align-items: center;
-    height: @nav-bar-height;
+    height: var(--van-nav-bar-height);
   }
 
   &__arrow {
-    margin-right: @padding-base;
-    font-size: @nav-bar-arrow-size;
+    margin-right: var(--van-padding-base);
+    font-size: var(--van-nav-bar-arrow-size);
   }
 
   &__title {
     max-width: 60%;
     margin: 0 auto;
-    color: @nav-bar-title-text-color;
-    font-weight: @font-weight-bold;
-    font-size: @nav-bar-title-font-size;
+    color: var(--van-nav-bar-title-text-color);
+    font-weight: var(--van-font-weight-bold);
+    font-size: var(--van-nav-bar-title-font-size);
   }
 
   &__left,
@@ -51,13 +62,8 @@
     bottom: 0;
     display: flex;
     align-items: center;
-    padding: 0 @padding-md;
-    font-size: @font-size-md;
-    cursor: pointer;
-
-    &:active {
-      opacity: @active-opacity;
-    }
+    padding: 0 var(--van-padding-md);
+    font-size: var(--van-font-size-md);
   }
 
   &__left {
@@ -69,6 +75,6 @@
   }
 
   &__text {
-    color: @nav-bar-text-color;
+    color: var(--van-nav-bar-text-color);
   }
 }

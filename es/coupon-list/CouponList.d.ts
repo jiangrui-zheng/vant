@@ -1,90 +1,170 @@
-import { PropType } from 'vue';
+import { type ExtractPropTypes } from 'vue';
 import { CouponInfo } from '../coupon';
-declare const _default: import("vue").DefineComponent<{
-    enabledTitle: StringConstructor;
-    disabledTitle: StringConstructor;
-    closeButtonText: StringConstructor;
-    inputPlaceholder: StringConstructor;
-    exchangeButtonText: StringConstructor;
-    exchangeButtonLoading: BooleanConstructor;
-    exchangeButtonDisabled: BooleanConstructor;
+declare const couponListProps: {
     code: {
-        type: StringConstructor;
+        type: import("vue").PropType<string>;
         default: string;
     };
-    exchangeMinLength: {
-        type: NumberConstructor;
-        default: number;
+    coupons: {
+        type: import("vue").PropType<CouponInfo[]>;
+        default: () => never[];
     };
+    currency: {
+        type: import("vue").PropType<string>;
+        default: string;
+    };
+    showCount: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    emptyImage: StringConstructor;
     chosenCoupon: {
         type: NumberConstructor;
         default: number;
     };
-    coupons: {
-        type: PropType<CouponInfo[]>;
-        default: () => never[];
-    };
+    enabledTitle: StringConstructor;
+    disabledTitle: StringConstructor;
     disabledCoupons: {
-        type: PropType<CouponInfo[]>;
+        type: import("vue").PropType<CouponInfo[]>;
         default: () => never[];
     };
+    showExchangeBar: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    showCloseButton: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    closeButtonText: StringConstructor;
+    inputPlaceholder: StringConstructor;
+    exchangeMinLength: {
+        type: NumberConstructor;
+        default: number;
+    };
+    exchangeButtonText: StringConstructor;
     displayedCouponIndex: {
         type: NumberConstructor;
         default: number;
     };
-    showExchangeBar: {
-        type: BooleanConstructor;
-        default: boolean;
+    exchangeButtonLoading: BooleanConstructor;
+    exchangeButtonDisabled: BooleanConstructor;
+};
+export declare type CouponListProps = ExtractPropTypes<typeof couponListProps>;
+declare const _default: import("vue").DefineComponent<{
+    code: {
+        type: import("vue").PropType<string>;
+        default: string;
     };
-    showCloseButton: {
-        type: BooleanConstructor;
-        default: boolean;
+    coupons: {
+        type: import("vue").PropType<CouponInfo[]>;
+        default: () => never[];
+    };
+    currency: {
+        type: import("vue").PropType<string>;
+        default: string;
     };
     showCount: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
+    };
+    emptyImage: StringConstructor;
+    chosenCoupon: {
+        type: NumberConstructor;
+        default: number;
+    };
+    enabledTitle: StringConstructor;
+    disabledTitle: StringConstructor;
+    disabledCoupons: {
+        type: import("vue").PropType<CouponInfo[]>;
+        default: () => never[];
+    };
+    showExchangeBar: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    showCloseButton: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    closeButtonText: StringConstructor;
+    inputPlaceholder: StringConstructor;
+    exchangeMinLength: {
+        type: NumberConstructor;
+        default: number;
+    };
+    exchangeButtonText: StringConstructor;
+    displayedCouponIndex: {
+        type: NumberConstructor;
+        default: number;
+    };
+    exchangeButtonLoading: BooleanConstructor;
+    exchangeButtonDisabled: BooleanConstructor;
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("change" | "exchange" | "update:code")[], "change" | "exchange" | "update:code", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+    code: {
+        type: import("vue").PropType<string>;
+        default: string;
+    };
+    coupons: {
+        type: import("vue").PropType<CouponInfo[]>;
+        default: () => never[];
     };
     currency: {
-        type: StringConstructor;
+        type: import("vue").PropType<string>;
         default: string;
     };
-    emptyImage: {
-        type: StringConstructor;
-        default: string;
+    showCount: {
+        type: BooleanConstructor;
+        default: true;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("change" | "exchange" | "update:code")[], "change" | "exchange" | "update:code", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    emptyImage: StringConstructor;
+    chosenCoupon: {
+        type: NumberConstructor;
+        default: number;
+    };
+    enabledTitle: StringConstructor;
+    disabledTitle: StringConstructor;
+    disabledCoupons: {
+        type: import("vue").PropType<CouponInfo[]>;
+        default: () => never[];
+    };
+    showExchangeBar: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    showCloseButton: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    closeButtonText: StringConstructor;
+    inputPlaceholder: StringConstructor;
+    exchangeMinLength: {
+        type: NumberConstructor;
+        default: number;
+    };
+    exchangeButtonText: StringConstructor;
+    displayedCouponIndex: {
+        type: NumberConstructor;
+        default: number;
+    };
+    exchangeButtonLoading: BooleanConstructor;
+    exchangeButtonDisabled: BooleanConstructor;
+}>> & {
+    onChange?: ((...args: any[]) => any) | undefined;
+    onExchange?: ((...args: any[]) => any) | undefined;
+    "onUpdate:code"?: ((...args: any[]) => any) | undefined;
+}, {
     code: string;
     currency: string;
     coupons: CouponInfo[];
     chosenCoupon: number;
-    exchangeButtonLoading: boolean;
-    exchangeButtonDisabled: boolean;
-    exchangeMinLength: number;
+    showCount: boolean;
     disabledCoupons: CouponInfo[];
-    displayedCouponIndex: number;
     showExchangeBar: boolean;
     showCloseButton: boolean;
-    showCount: boolean;
-    emptyImage: string;
-} & {
-    enabledTitle?: string | undefined;
-    disabledTitle?: string | undefined;
-    closeButtonText?: string | undefined;
-    inputPlaceholder?: string | undefined;
-    exchangeButtonText?: string | undefined;
-}>, {
-    code: string;
-    currency: string;
-    coupons: CouponInfo[];
-    chosenCoupon: number;
+    exchangeMinLength: number;
+    displayedCouponIndex: number;
     exchangeButtonLoading: boolean;
     exchangeButtonDisabled: boolean;
-    exchangeMinLength: number;
-    disabledCoupons: CouponInfo[];
-    displayedCouponIndex: number;
-    showExchangeBar: boolean;
-    showCloseButton: boolean;
-    showCount: boolean;
-    emptyImage: string;
 }>;
 export default _default;

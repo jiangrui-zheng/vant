@@ -1,30 +1,60 @@
-declare const _default: import("vue").DefineComponent<{
+import { type ExtractPropTypes } from 'vue';
+declare const passwordInputProps: {
     info: StringConstructor;
-    gutter: (NumberConstructor | StringConstructor)[];
-    focused: BooleanConstructor;
-    errorInfo: StringConstructor;
     mask: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
     value: {
-        type: StringConstructor;
+        type: import("vue").PropType<string>;
         default: string;
     };
+    gutter: (NumberConstructor | StringConstructor)[];
     length: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "focus"[], "focus", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    length: string | number;
-    mask: boolean;
-    value: string;
-    focused: boolean;
-} & {
-    errorInfo?: string | undefined;
-    gutter?: string | number | undefined;
-    info?: string | undefined;
-}>, {
+    focused: BooleanConstructor;
+    errorInfo: StringConstructor;
+};
+export declare type PasswordInputProps = ExtractPropTypes<typeof passwordInputProps>;
+declare const _default: import("vue").DefineComponent<{
+    info: StringConstructor;
+    mask: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    value: {
+        type: import("vue").PropType<string>;
+        default: string;
+    };
+    gutter: (NumberConstructor | StringConstructor)[];
+    length: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    focused: BooleanConstructor;
+    errorInfo: StringConstructor;
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "focus"[], "focus", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+    info: StringConstructor;
+    mask: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    value: {
+        type: import("vue").PropType<string>;
+        default: string;
+    };
+    gutter: (NumberConstructor | StringConstructor)[];
+    length: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    focused: BooleanConstructor;
+    errorInfo: StringConstructor;
+}>> & {
+    onFocus?: ((...args: any[]) => any) | undefined;
+}, {
     length: string | number;
     mask: boolean;
     value: string;

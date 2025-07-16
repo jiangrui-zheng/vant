@@ -1,38 +1,73 @@
-declare const Cascader: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const Cascader: import("../utils").WithInstall<import("vue").DefineComponent<{
     title: StringConstructor;
-    modelValue: (NumberConstructor | StringConstructor)[];
-    fieldNames: import("vue").PropType<{
-        text?: string | undefined;
-        value?: string | undefined;
-        children?: string | undefined;
-    }>;
-    placeholder: StringConstructor;
-    activeColor: StringConstructor;
     options: {
-        type: import("vue").PropType<import("./Cascader").CascaderOption[]>;
+        type: import("vue").PropType<import("./types").CascaderOption[]>;
         default: () => never[];
     };
     closeable: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("change" | "close" | "update:modelValue" | "finish")[], "change" | "close" | "update:modelValue" | "finish", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    swipeable: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    closeIcon: {
+        type: import("vue").PropType<string>;
+        default: string;
+    };
+    showHeader: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    modelValue: (NumberConstructor | StringConstructor)[];
+    fieldNames: import("vue").PropType<import("./types").CascaderFieldNames>;
+    placeholder: StringConstructor;
+    activeColor: StringConstructor;
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change" | "close" | "click-tab" | "finish")[], "update:modelValue" | "change" | "close" | "click-tab" | "finish", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+    title: StringConstructor;
+    options: {
+        type: import("vue").PropType<import("./types").CascaderOption[]>;
+        default: () => never[];
+    };
+    closeable: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    swipeable: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    closeIcon: {
+        type: import("vue").PropType<string>;
+        default: string;
+    };
+    showHeader: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    modelValue: (NumberConstructor | StringConstructor)[];
+    fieldNames: import("vue").PropType<import("./types").CascaderFieldNames>;
+    placeholder: StringConstructor;
+    activeColor: StringConstructor;
+}>> & {
+    onChange?: ((...args: any[]) => any) | undefined;
+    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+    onClose?: ((...args: any[]) => any) | undefined;
+    "onClick-tab"?: ((...args: any[]) => any) | undefined;
+    onFinish?: ((...args: any[]) => any) | undefined;
+}, {
+    closeIcon: string;
     closeable: boolean;
-    options: import("./Cascader").CascaderOption[];
-} & {
-    title?: string | undefined;
-    placeholder?: string | undefined;
-    modelValue?: string | number | undefined;
-    activeColor?: string | undefined;
-    fieldNames?: {
-        text?: string | undefined;
-        value?: string | undefined;
-        children?: string | undefined;
-    } | undefined;
-}>, {
-    closeable: boolean;
-    options: import("./Cascader").CascaderOption[];
+    options: import("./types").CascaderOption[];
+    swipeable: boolean;
+    showHeader: boolean;
 }>>;
 export default Cascader;
-export { Cascader };
-export type { CascaderOption } from './Cascader';
+export type { CascaderProps } from './Cascader';
+export type { CascaderOption, CascaderFieldNames } from './types';
+declare module 'vue' {
+    interface GlobalComponents {
+        VanCascader: typeof Cascader;
+    }
+}

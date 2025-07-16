@@ -1,29 +1,38 @@
-declare const Radio: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const Radio: import("../utils").WithInstall<import("vue").DefineComponent<{
     name: import("vue").PropType<unknown>;
+    shape: {
+        type: import("vue").PropType<import("../checkbox/Checker").CheckerShape>;
+        default: import("../checkbox/Checker").CheckerShape;
+    };
     disabled: BooleanConstructor;
     iconSize: (NumberConstructor | StringConstructor)[];
     modelValue: import("vue").PropType<unknown>;
     checkedColor: StringConstructor;
     labelPosition: import("vue").PropType<import("../checkbox/Checker").CheckerLabelPosition>;
     labelDisabled: BooleanConstructor;
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+    name: import("vue").PropType<unknown>;
     shape: {
         type: import("vue").PropType<import("../checkbox/Checker").CheckerShape>;
-        default: string;
+        default: import("../checkbox/Checker").CheckerShape;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    disabled: BooleanConstructor;
+    iconSize: (NumberConstructor | StringConstructor)[];
+    modelValue: import("vue").PropType<unknown>;
+    checkedColor: StringConstructor;
+    labelPosition: import("vue").PropType<import("../checkbox/Checker").CheckerLabelPosition>;
+    labelDisabled: BooleanConstructor;
+}>> & {
+    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+}, {
     disabled: boolean;
-    labelDisabled: boolean;
     shape: import("../checkbox/Checker").CheckerShape;
-} & {
-    name?: unknown;
-    modelValue?: unknown;
-    iconSize?: string | number | undefined;
-    checkedColor?: string | undefined;
-    labelPosition?: import("../checkbox/Checker").CheckerLabelPosition | undefined;
-}>, {
-    disabled: boolean;
     labelDisabled: boolean;
-    shape: import("../checkbox/Checker").CheckerShape;
 }>>;
 export default Radio;
-export { Radio };
+export type { RadioProps, RadioShape, RadioLabelPosition } from './Radio';
+declare module 'vue' {
+    interface GlobalComponents {
+        VanRadio: typeof Radio;
+    }
+}

@@ -1,53 +1,74 @@
-declare const SubmitBar: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const SubmitBar: import("../utils").WithInstall<import("vue").DefineComponent<{
     tip: StringConstructor;
     label: StringConstructor;
     price: NumberConstructor;
     tipIcon: StringConstructor;
     loading: BooleanConstructor;
+    currency: {
+        type: import("vue").PropType<string>;
+        default: string;
+    };
     disabled: BooleanConstructor;
-    textAlign: import("vue").PropType<import("csstype").TextAlignProperty | undefined>;
+    textAlign: import("vue").PropType<import("./SubmitBar").SubmitBarTextAlign>;
     buttonText: StringConstructor;
+    buttonType: {
+        type: import("vue").PropType<import("..").ButtonType>;
+        default: import("..").ButtonType;
+    };
     buttonColor: StringConstructor;
     suffixLabel: StringConstructor;
-    safeAreaInsetBottom: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
+    placeholder: BooleanConstructor;
     decimalLength: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
+    safeAreaInsetBottom: {
+        type: BooleanConstructor;
+        default: true;
+    };
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "submit"[], "submit", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+    tip: StringConstructor;
+    label: StringConstructor;
+    price: NumberConstructor;
+    tipIcon: StringConstructor;
+    loading: BooleanConstructor;
     currency: {
-        type: StringConstructor;
+        type: import("vue").PropType<string>;
         default: string;
     };
+    disabled: BooleanConstructor;
+    textAlign: import("vue").PropType<import("./SubmitBar").SubmitBarTextAlign>;
+    buttonText: StringConstructor;
     buttonType: {
-        type: import("vue").PropType<import("../button").ButtonType>;
-        default: string;
+        type: import("vue").PropType<import("..").ButtonType>;
+        default: import("..").ButtonType;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "submit"[], "submit", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    buttonColor: StringConstructor;
+    suffixLabel: StringConstructor;
+    placeholder: BooleanConstructor;
+    decimalLength: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    safeAreaInsetBottom: {
+        type: BooleanConstructor;
+        default: true;
+    };
+}>> & {
+    onSubmit?: ((...args: any[]) => any) | undefined;
+}, {
+    disabled: boolean;
+    placeholder: boolean;
     safeAreaInsetBottom: boolean;
     loading: boolean;
-    disabled: boolean;
     currency: string;
     decimalLength: string | number;
-    buttonType: import("../button").ButtonType;
-} & {
-    label?: string | undefined;
-    price?: number | undefined;
-    textAlign?: import("csstype").TextAlignProperty | undefined;
-    tip?: string | undefined;
-    tipIcon?: string | undefined;
-    buttonText?: string | undefined;
-    buttonColor?: string | undefined;
-    suffixLabel?: string | undefined;
-}>, {
-    safeAreaInsetBottom: boolean;
-    loading: boolean;
-    disabled: boolean;
-    currency: string;
-    decimalLength: string | number;
-    buttonType: import("../button").ButtonType;
+    buttonType: import("..").ButtonType;
 }>>;
 export default SubmitBar;
-export { SubmitBar };
+export type { SubmitBarProps, SubmitBarTextAlign } from './SubmitBar';
+declare module 'vue' {
+    interface GlobalComponents {
+        VanSubmitBar: typeof SubmitBar;
+    }
+}

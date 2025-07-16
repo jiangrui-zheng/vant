@@ -1,24 +1,49 @@
-declare const Badge: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const Badge: import("../utils").WithInstall<import("vue").DefineComponent<{
     dot: BooleanConstructor;
     max: (NumberConstructor | StringConstructor)[];
-    color: StringConstructor;
-    offset: import("vue").PropType<[number, number]>;
-    content: (NumberConstructor | StringConstructor)[];
     tag: {
         type: import("vue").PropType<keyof HTMLElementTagNameMap>;
-        default: string;
+        default: keyof HTMLElementTagNameMap;
     };
-}, () => JSX.Element | undefined, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    color: StringConstructor;
+    offset: import("vue").PropType<[import("../utils").Numeric, import("../utils").Numeric]>;
+    content: (NumberConstructor | StringConstructor)[];
+    showZero: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    position: {
+        type: import("vue").PropType<import("./Badge").BadgePosition>;
+        default: import("./Badge").BadgePosition;
+    };
+}, () => JSX.Element | undefined, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+    dot: BooleanConstructor;
+    max: (NumberConstructor | StringConstructor)[];
+    tag: {
+        type: import("vue").PropType<keyof HTMLElementTagNameMap>;
+        default: keyof HTMLElementTagNameMap;
+    };
+    color: StringConstructor;
+    offset: import("vue").PropType<[import("../utils").Numeric, import("../utils").Numeric]>;
+    content: (NumberConstructor | StringConstructor)[];
+    showZero: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    position: {
+        type: import("vue").PropType<import("./Badge").BadgePosition>;
+        default: import("./Badge").BadgePosition;
+    };
+}>>, {
     dot: boolean;
     tag: keyof HTMLElementTagNameMap;
-} & {
-    max?: string | number | undefined;
-    color?: string | undefined;
-    offset?: [number, number] | undefined;
-    content?: string | number | undefined;
-}>, {
-    dot: boolean;
-    tag: keyof HTMLElementTagNameMap;
+    showZero: boolean;
+    position: import("./Badge").BadgePosition;
 }>>;
 export default Badge;
-export { Badge };
+export type { BadgeProps, BadgePosition } from './Badge';
+declare module 'vue' {
+    interface GlobalComponents {
+        VanBadge: typeof Badge;
+    }
+}

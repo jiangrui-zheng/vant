@@ -1,25 +1,46 @@
-import { PropType } from 'vue';
+import { type ExtractPropTypes } from 'vue';
 export declare type ContactCardType = 'add' | 'edit';
-declare const _default: import("vue").DefineComponent<{
+declare const contactCardProps: {
     tel: StringConstructor;
     name: StringConstructor;
+    type: {
+        type: import("vue").PropType<ContactCardType>;
+        default: ContactCardType;
+    };
     addText: StringConstructor;
     editable: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
+};
+export declare type ContactCardProps = ExtractPropTypes<typeof contactCardProps>;
+declare const _default: import("vue").DefineComponent<{
+    tel: StringConstructor;
+    name: StringConstructor;
     type: {
-        type: PropType<ContactCardType>;
-        default: string;
+        type: import("vue").PropType<ContactCardType>;
+        default: ContactCardType;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "click"[], "click", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    type: ContactCardType;
-    editable: boolean;
-} & {
-    name?: string | undefined;
-    tel?: string | undefined;
-    addText?: string | undefined;
-}>, {
+    addText: StringConstructor;
+    editable: {
+        type: BooleanConstructor;
+        default: true;
+    };
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "click"[], "click", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+    tel: StringConstructor;
+    name: StringConstructor;
+    type: {
+        type: import("vue").PropType<ContactCardType>;
+        default: ContactCardType;
+    };
+    addText: StringConstructor;
+    editable: {
+        type: BooleanConstructor;
+        default: true;
+    };
+}>> & {
+    onClick?: ((...args: any[]) => any) | undefined;
+}, {
     type: ContactCardType;
     editable: boolean;
 }>;

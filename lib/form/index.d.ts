@@ -1,27 +1,54 @@
-declare const Form: import("../utils").WithInstall<import("vue").DefineComponent<{
+import { FormProps } from './Form';
+export declare const Form: import("../utils").WithInstall<import("vue").DefineComponent<{
     colon: BooleanConstructor;
     disabled: BooleanConstructor;
     readonly: BooleanConstructor;
     showError: BooleanConstructor;
     labelWidth: (NumberConstructor | StringConstructor)[];
-    labelAlign: import("vue").PropType<import("../field").FieldTextAlign>;
-    inputAlign: import("vue").PropType<import("../field").FieldTextAlign>;
+    labelAlign: import("vue").PropType<import("..").FieldTextAlign>;
+    inputAlign: import("vue").PropType<import("..").FieldTextAlign>;
     scrollToError: BooleanConstructor;
     validateFirst: BooleanConstructor;
-    errorMessageAlign: import("vue").PropType<import("../field").FieldTextAlign>;
     submitOnEnter: {
         type: BooleanConstructor;
-        default: boolean;
-    };
-    validateTrigger: {
-        type: import("vue").PropType<import("../field").FieldValidateTrigger>;
-        default: string;
+        default: true;
     };
     showErrorMessage: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("submit" | "failed")[], "submit" | "failed", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    errorMessageAlign: import("vue").PropType<import("..").FieldTextAlign>;
+    validateTrigger: {
+        type: import("vue").PropType<import("..").FieldValidateTrigger | import("..").FieldValidateTrigger[]>;
+        default: string;
+    };
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("submit" | "failed")[], "submit" | "failed", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+    colon: BooleanConstructor;
+    disabled: BooleanConstructor;
+    readonly: BooleanConstructor;
+    showError: BooleanConstructor;
+    labelWidth: (NumberConstructor | StringConstructor)[];
+    labelAlign: import("vue").PropType<import("..").FieldTextAlign>;
+    inputAlign: import("vue").PropType<import("..").FieldTextAlign>;
+    scrollToError: BooleanConstructor;
+    validateFirst: BooleanConstructor;
+    submitOnEnter: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    showErrorMessage: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    errorMessageAlign: import("vue").PropType<import("..").FieldTextAlign>;
+    validateTrigger: {
+        type: import("vue").PropType<import("..").FieldValidateTrigger | import("..").FieldValidateTrigger[]>;
+        default: string;
+    };
+}>> & {
+    onSubmit?: ((...args: any[]) => any) | undefined;
+    onFailed?: ((...args: any[]) => any) | undefined;
+}, {
     disabled: boolean;
     readonly: boolean;
     colon: boolean;
@@ -29,23 +56,14 @@ declare const Form: import("../utils").WithInstall<import("vue").DefineComponent
     scrollToError: boolean;
     validateFirst: boolean;
     submitOnEnter: boolean;
-    validateTrigger: import("../field").FieldValidateTrigger;
     showErrorMessage: boolean;
-} & {
-    labelWidth?: string | number | undefined;
-    labelAlign?: import("../field").FieldTextAlign | undefined;
-    inputAlign?: import("../field").FieldTextAlign | undefined;
-    errorMessageAlign?: import("../field").FieldTextAlign | undefined;
-}>, {
-    disabled: boolean;
-    readonly: boolean;
-    colon: boolean;
-    showError: boolean;
-    scrollToError: boolean;
-    validateFirst: boolean;
-    submitOnEnter: boolean;
-    validateTrigger: import("../field").FieldValidateTrigger;
-    showErrorMessage: boolean;
+    validateTrigger: import("..").FieldValidateTrigger | import("..").FieldValidateTrigger[];
 }>>;
 export default Form;
-export { Form };
+export type { FormProps };
+export type { FormInstance } from './types';
+declare module 'vue' {
+    interface GlobalComponents {
+        VanForm: typeof Form;
+    }
+}

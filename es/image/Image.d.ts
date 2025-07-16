@@ -1,52 +1,101 @@
-import { PropType } from 'vue';
+import { type PropType, type ExtractPropTypes } from 'vue';
 export declare type ImageFit = 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
-declare const _default: import("vue").DefineComponent<{
+export declare type ImagePosition = 'center' | 'top' | 'right' | 'bottom' | 'left' | string;
+declare const imageProps: {
     src: StringConstructor;
     alt: StringConstructor;
     fit: PropType<ImageFit>;
+    position: PropType<string>;
     round: BooleanConstructor;
     width: (NumberConstructor | StringConstructor)[];
     height: (NumberConstructor | StringConstructor)[];
     radius: (NumberConstructor | StringConstructor)[];
     lazyLoad: BooleanConstructor;
-    iconPrefix: StringConstructor;
+    iconSize: (NumberConstructor | StringConstructor)[];
     showError: {
         type: BooleanConstructor;
-        default: boolean;
-    };
-    showLoading: {
-        type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
     errorIcon: {
-        type: StringConstructor;
+        type: PropType<string>;
         default: string;
+    };
+    iconPrefix: StringConstructor;
+    showLoading: {
+        type: BooleanConstructor;
+        default: true;
     };
     loadingIcon: {
-        type: StringConstructor;
+        type: PropType<string>;
         default: string;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("error" | "load")[], "error" | "load", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+};
+export declare type ImageProps = ExtractPropTypes<typeof imageProps>;
+declare const _default: import("vue").DefineComponent<{
+    src: StringConstructor;
+    alt: StringConstructor;
+    fit: PropType<ImageFit>;
+    position: PropType<string>;
+    round: BooleanConstructor;
+    width: (NumberConstructor | StringConstructor)[];
+    height: (NumberConstructor | StringConstructor)[];
+    radius: (NumberConstructor | StringConstructor)[];
+    lazyLoad: BooleanConstructor;
+    iconSize: (NumberConstructor | StringConstructor)[];
+    showError: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    errorIcon: {
+        type: PropType<string>;
+        default: string;
+    };
+    iconPrefix: StringConstructor;
+    showLoading: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    loadingIcon: {
+        type: PropType<string>;
+        default: string;
+    };
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("error" | "load")[], "error" | "load", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+    src: StringConstructor;
+    alt: StringConstructor;
+    fit: PropType<ImageFit>;
+    position: PropType<string>;
+    round: BooleanConstructor;
+    width: (NumberConstructor | StringConstructor)[];
+    height: (NumberConstructor | StringConstructor)[];
+    radius: (NumberConstructor | StringConstructor)[];
+    lazyLoad: BooleanConstructor;
+    iconSize: (NumberConstructor | StringConstructor)[];
+    showError: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    errorIcon: {
+        type: PropType<string>;
+        default: string;
+    };
+    iconPrefix: StringConstructor;
+    showLoading: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    loadingIcon: {
+        type: PropType<string>;
+        default: string;
+    };
+}>> & {
+    onLoad?: ((...args: any[]) => any) | undefined;
+    onError?: ((...args: any[]) => any) | undefined;
+}, {
     round: boolean;
-    lazyLoad: boolean;
     showError: boolean;
-    showLoading: boolean;
-    errorIcon: string;
-    loadingIcon: string;
-} & {
-    iconPrefix?: string | undefined;
-    width?: string | number | undefined;
-    src?: string | undefined;
-    alt?: string | undefined;
-    fit?: ImageFit | undefined;
-    height?: string | number | undefined;
-    radius?: string | number | undefined;
-}>, {
-    round: boolean;
     lazyLoad: boolean;
-    showError: boolean;
-    showLoading: boolean;
     errorIcon: string;
+    showLoading: boolean;
     loadingIcon: string;
 }>;
 export default _default;

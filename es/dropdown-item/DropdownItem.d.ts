@@ -1,33 +1,57 @@
-import { PropType } from 'vue';
-export declare type DropdownItemOption = {
-    text: string;
-    icon?: string;
-    value: number | string;
-};
-declare const _default: import("vue").DefineComponent<{
+import { type PropType, type ExtractPropTypes } from 'vue';
+import type { DropdownItemOption } from './types';
+declare const dropdownItemProps: {
     title: StringConstructor;
-    disabled: BooleanConstructor;
-    teleport: PropType<string | import("vue").RendererElement | null | undefined>;
-    modelValue: PropType<unknown>;
-    titleClass: PropType<unknown>;
     options: {
         type: PropType<DropdownItemOption[]>;
         default: () => never[];
     };
+    disabled: BooleanConstructor;
+    teleport: PropType<string | import("vue").RendererElement | null | undefined>;
     lazyRender: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
-}, (() => JSX.Element) | undefined, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("open" | "change" | "close" | "opened" | "closed" | "update:modelValue")[], "open" | "change" | "close" | "opened" | "closed" | "update:modelValue", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    disabled: boolean;
-    lazyRender: boolean;
-    options: DropdownItemOption[];
-} & {
-    title?: string | undefined;
-    teleport?: string | import("vue").RendererElement | null | undefined;
-    titleClass?: unknown;
-    modelValue?: unknown;
-}>, {
+    modelValue: PropType<unknown>;
+    titleClass: PropType<unknown>;
+};
+export declare type DropdownItemProps = ExtractPropTypes<typeof dropdownItemProps>;
+declare const _default: import("vue").DefineComponent<{
+    title: StringConstructor;
+    options: {
+        type: PropType<DropdownItemOption[]>;
+        default: () => never[];
+    };
+    disabled: BooleanConstructor;
+    teleport: PropType<string | import("vue").RendererElement | null | undefined>;
+    lazyRender: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    modelValue: PropType<unknown>;
+    titleClass: PropType<unknown>;
+}, (() => JSX.Element) | undefined, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "open" | "change" | "close" | "opened" | "closed")[], "open" | "update:modelValue" | "change" | "close" | "opened" | "closed", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+    title: StringConstructor;
+    options: {
+        type: PropType<DropdownItemOption[]>;
+        default: () => never[];
+    };
+    disabled: BooleanConstructor;
+    teleport: PropType<string | import("vue").RendererElement | null | undefined>;
+    lazyRender: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    modelValue: PropType<unknown>;
+    titleClass: PropType<unknown>;
+}>> & {
+    onChange?: ((...args: any[]) => any) | undefined;
+    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+    onOpen?: ((...args: any[]) => any) | undefined;
+    onClose?: ((...args: any[]) => any) | undefined;
+    onOpened?: ((...args: any[]) => any) | undefined;
+    onClosed?: ((...args: any[]) => any) | undefined;
+}, {
     disabled: boolean;
     lazyRender: boolean;
     options: DropdownItemOption[];

@@ -1,104 +1,159 @@
-import { PropType } from 'vue';
-import { PickerColumn, PickerOption, PickerObjectColumn, PickerObjectOption } from './PickerColumn';
-export declare type PickerToolbarPosition = 'top' | 'bottom';
-export declare type PickerFieldNames = {
-    text?: string;
-    values?: string;
-    children?: string;
-};
-export type { PickerColumn, PickerOption, PickerObjectColumn, PickerObjectOption, };
-export declare const pickerProps: {
+import { type PropType, type ExtractPropTypes } from 'vue';
+import type { PickerColumn, PickerOption, PickerFieldNames, PickerToolbarPosition } from './types';
+export declare const pickerSharedProps: {
     title: StringConstructor;
     loading: BooleanConstructor;
     readonly: BooleanConstructor;
     allowHtml: BooleanConstructor;
-    cancelButtonText: StringConstructor;
-    confirmButtonText: StringConstructor;
     itemHeight: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
     showToolbar: {
         type: BooleanConstructor;
-        default: boolean;
-    };
-    visibleItemCount: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
+        default: true;
     };
     swipeDuration: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
+    visibleItemCount: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    cancelButtonText: StringConstructor;
+    confirmButtonText: StringConstructor;
 };
-declare const _default: import("vue").DefineComponent<{
-    columnsFieldNames: PropType<PickerFieldNames>;
+declare const pickerProps: {
+    title: StringConstructor;
+    loading: BooleanConstructor;
+    readonly: BooleanConstructor;
+    allowHtml: BooleanConstructor;
+    itemHeight: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    showToolbar: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    swipeDuration: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    visibleItemCount: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    cancelButtonText: StringConstructor;
+    confirmButtonText: StringConstructor;
+} & {
     columns: {
-        type: PropType<PickerOption[] | PickerColumn[]>;
+        type: PropType<(PickerOption | PickerColumn)[]>;
         default: () => never[];
     };
+    valueKey: StringConstructor;
     defaultIndex: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
     toolbarPosition: {
         type: PropType<PickerToolbarPosition>;
-        default: string;
+        default: PickerToolbarPosition;
     };
-    valueKey: {
-        type: StringConstructor;
-        default: string;
-    };
+    columnsFieldNames: PropType<PickerFieldNames>;
+};
+export declare type PickerProps = ExtractPropTypes<typeof pickerProps>;
+declare const _default: import("vue").DefineComponent<{
     title: StringConstructor;
     loading: BooleanConstructor;
     readonly: BooleanConstructor;
     allowHtml: BooleanConstructor;
-    cancelButtonText: StringConstructor;
-    confirmButtonText: StringConstructor;
     itemHeight: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
     showToolbar: {
         type: BooleanConstructor;
-        default: boolean;
-    };
-    visibleItemCount: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
+        default: true;
     };
     swipeDuration: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("cancel" | "change" | "confirm")[], "cancel" | "change" | "confirm", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    loading: boolean;
-    readonly: boolean;
-    allowHtml: boolean;
-    itemHeight: string | number;
-    swipeDuration: string | number;
-    visibleItemCount: string | number;
-    defaultIndex: string | number;
-    columns: PickerOption[] | PickerColumn[];
-    toolbarPosition: PickerToolbarPosition;
-    valueKey: string;
-    showToolbar: boolean;
+    visibleItemCount: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    cancelButtonText: StringConstructor;
+    confirmButtonText: StringConstructor;
 } & {
-    title?: string | undefined;
-    columnsFieldNames?: PickerFieldNames | undefined;
-    cancelButtonText?: string | undefined;
-    confirmButtonText?: string | undefined;
-}>, {
-    loading: boolean;
+    columns: {
+        type: PropType<(PickerOption | PickerColumn)[]>;
+        default: () => never[];
+    };
+    valueKey: StringConstructor;
+    defaultIndex: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    toolbarPosition: {
+        type: PropType<PickerToolbarPosition>;
+        default: PickerToolbarPosition;
+    };
+    columnsFieldNames: PropType<PickerFieldNames>;
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("change" | "cancel" | "confirm")[], "change" | "cancel" | "confirm", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+    title: StringConstructor;
+    loading: BooleanConstructor;
+    readonly: BooleanConstructor;
+    allowHtml: BooleanConstructor;
+    itemHeight: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    showToolbar: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    swipeDuration: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    visibleItemCount: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    cancelButtonText: StringConstructor;
+    confirmButtonText: StringConstructor;
+} & {
+    columns: {
+        type: PropType<(PickerOption | PickerColumn)[]>;
+        default: () => never[];
+    };
+    valueKey: StringConstructor;
+    defaultIndex: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    toolbarPosition: {
+        type: PropType<PickerToolbarPosition>;
+        default: PickerToolbarPosition;
+    };
+    columnsFieldNames: PropType<PickerFieldNames>;
+}>> & {
+    onChange?: ((...args: any[]) => any) | undefined;
+    onCancel?: ((...args: any[]) => any) | undefined;
+    onConfirm?: ((...args: any[]) => any) | undefined;
+}, {
     readonly: boolean;
+    loading: boolean;
+    defaultIndex: string | number;
     allowHtml: boolean;
     itemHeight: string | number;
+    showToolbar: boolean;
     swipeDuration: string | number;
     visibleItemCount: string | number;
-    defaultIndex: string | number;
-    columns: PickerOption[] | PickerColumn[];
+    columns: (PickerOption | PickerColumn)[];
     toolbarPosition: PickerToolbarPosition;
-    valueKey: string;
-    showToolbar: boolean;
 }>;
 export default _default;

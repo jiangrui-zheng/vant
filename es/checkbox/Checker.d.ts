@@ -1,71 +1,85 @@
-import { PropType } from 'vue';
+import { type PropType } from 'vue';
+import { type Numeric } from '../utils';
 export declare type CheckerShape = 'square' | 'round';
 export declare type CheckerDirection = 'horizontal' | 'vertical';
 export declare type CheckerLabelPosition = 'left' | 'right';
 export declare type CheckerParent = {
     props: {
         disabled?: boolean;
-        iconSize?: number | string;
+        iconSize?: Numeric;
         direction?: CheckerDirection;
         checkedColor?: string;
     };
 };
 export declare const checkerProps: {
     name: PropType<unknown>;
+    shape: {
+        type: PropType<CheckerShape>;
+        default: CheckerShape;
+    };
     disabled: BooleanConstructor;
     iconSize: (NumberConstructor | StringConstructor)[];
     modelValue: PropType<unknown>;
     checkedColor: StringConstructor;
     labelPosition: PropType<CheckerLabelPosition>;
     labelDisabled: BooleanConstructor;
-    shape: {
-        type: PropType<CheckerShape>;
-        default: string;
-    };
 };
 declare const _default: import("vue").DefineComponent<{
+    name: PropType<unknown>;
+    shape: {
+        type: PropType<CheckerShape>;
+        default: CheckerShape;
+    };
+    disabled: BooleanConstructor;
+    iconSize: (NumberConstructor | StringConstructor)[];
+    modelValue: PropType<unknown>;
+    checkedColor: StringConstructor;
+    labelPosition: PropType<CheckerLabelPosition>;
+    labelDisabled: BooleanConstructor;
+} & {
+    bem: {
+        type: FunctionConstructor;
+        required: true;
+    };
     role: StringConstructor;
     parent: PropType<CheckerParent | null>;
     checked: BooleanConstructor;
     bindGroup: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
-    bem: {
-        type: FunctionConstructor;
-        required: true;
-    };
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("click" | "toggle")[], "click" | "toggle", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     name: PropType<unknown>;
+    shape: {
+        type: PropType<CheckerShape>;
+        default: CheckerShape;
+    };
     disabled: BooleanConstructor;
     iconSize: (NumberConstructor | StringConstructor)[];
     modelValue: PropType<unknown>;
     checkedColor: StringConstructor;
     labelPosition: PropType<CheckerLabelPosition>;
     labelDisabled: BooleanConstructor;
-    shape: {
-        type: PropType<CheckerShape>;
-        default: string;
-    };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("click" | "toggle")[], "click" | "toggle", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    bem: Function;
-    disabled: boolean;
-    checked: boolean;
-    bindGroup: boolean;
-    labelDisabled: boolean;
-    shape: CheckerShape;
 } & {
-    name?: unknown;
-    role?: string | undefined;
-    parent?: CheckerParent | null | undefined;
-    modelValue?: unknown;
-    iconSize?: string | number | undefined;
-    checkedColor?: string | undefined;
-    labelPosition?: CheckerLabelPosition | undefined;
-}>, {
-    disabled: boolean;
+    bem: {
+        type: FunctionConstructor;
+        required: true;
+    };
+    role: StringConstructor;
+    parent: PropType<CheckerParent | null>;
+    checked: BooleanConstructor;
+    bindGroup: {
+        type: BooleanConstructor;
+        default: true;
+    };
+}>> & {
+    onClick?: ((...args: any[]) => any) | undefined;
+    onToggle?: ((...args: any[]) => any) | undefined;
+}, {
     checked: boolean;
-    bindGroup: boolean;
-    labelDisabled: boolean;
+    disabled: boolean;
     shape: CheckerShape;
+    labelDisabled: boolean;
+    bindGroup: boolean;
 }>;
 export default _default;
