@@ -1,0 +1,58 @@
+declare const Cell: import("../utils").WithInstall<import("vue").DefineComponent<{
+    to: import("vue").PropType<import("vue-router").RouteLocationRaw>;
+    url: StringConstructor;
+    replace: BooleanConstructor;
+    icon: StringConstructor;
+    size: import("vue").PropType<"large">;
+    title: (NumberConstructor | StringConstructor)[];
+    value: (NumberConstructor | StringConstructor)[];
+    label: (NumberConstructor | StringConstructor)[];
+    center: BooleanConstructor;
+    isLink: BooleanConstructor;
+    required: BooleanConstructor;
+    iconPrefix: StringConstructor;
+    valueClass: import("vue").PropType<unknown>;
+    labelClass: import("vue").PropType<unknown>;
+    titleClass: import("vue").PropType<unknown>;
+    titleStyle: import("vue").PropType<string | import("vue").CSSProperties>;
+    arrowDirection: import("vue").PropType<import("./Cell").CellArrowDirection>;
+    border: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    clickable: {
+        type: import("vue").PropType<boolean | null>;
+        default: null;
+    };
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    replace: boolean;
+    center: boolean;
+    border: boolean;
+    isLink: boolean;
+    required: boolean;
+    clickable: boolean | null;
+} & {
+    label?: string | number | undefined;
+    title?: string | number | undefined;
+    to?: import("vue-router").RouteLocationRaw | (import("vue-router").RouteLocationRaw & object) | undefined;
+    url?: string | undefined;
+    icon?: string | undefined;
+    size?: "large" | undefined;
+    iconPrefix?: string | undefined;
+    value?: string | number | undefined;
+    valueClass?: unknown;
+    labelClass?: unknown;
+    titleClass?: unknown;
+    titleStyle?: string | import("vue").CSSProperties | undefined;
+    arrowDirection?: import("./Cell").CellArrowDirection | undefined;
+}>, {
+    replace: boolean;
+    center: boolean;
+    border: boolean;
+    isLink: boolean;
+    required: boolean;
+    clickable: boolean | null;
+}>>;
+export default Cell;
+export { Cell };
+export type { CellArrowDirection } from './Cell';

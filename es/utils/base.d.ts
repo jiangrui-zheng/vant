@@ -1,0 +1,11 @@
+import { PropType, ComponentPublicInstance } from 'vue';
+export declare function noop(): void;
+export declare const inBrowser: boolean;
+export declare const UnknownProp: PropType<unknown>;
+export declare type ComponentInstance = ComponentPublicInstance<{}, any>;
+export declare function isDef<T>(val: T): val is NonNullable<T>;
+export declare function isFunction(val: unknown): val is Function;
+export declare function isObject(val: unknown): val is Record<any, any>;
+export declare function isPromise<T = any>(val: unknown): val is Promise<T>;
+export declare function get(object: any, path: string): any;
+export declare function pick<T, U extends keyof T>(obj: T, keys: ReadonlyArray<U>, ignoreUndefined?: boolean): Pick<T, U>;
