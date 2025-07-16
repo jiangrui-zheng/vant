@@ -1,30 +1,36 @@
-declare const Icon: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const Icon: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     dot: BooleanConstructor;
+    tag: {
+        type: import("vue").PropType<T>;
+        default: keyof HTMLElementTagNameMap;
+    };
     name: StringConstructor;
     size: (NumberConstructor | StringConstructor)[];
     badge: (NumberConstructor | StringConstructor)[];
     color: StringConstructor;
+    badgeProps: import("vue").PropType<Partial<import("..").BadgeProps>>;
+    classPrefix: StringConstructor;
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    dot: BooleanConstructor;
     tag: {
-        type: import("vue").PropType<keyof HTMLElementTagNameMap>;
-        default: string;
+        type: import("vue").PropType<T>;
+        default: keyof HTMLElementTagNameMap;
     };
-    classPrefix: {
-        type: StringConstructor;
-        default: import("../utils/create/bem").Mods;
-    };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    name: StringConstructor;
+    size: (NumberConstructor | StringConstructor)[];
+    badge: (NumberConstructor | StringConstructor)[];
+    color: StringConstructor;
+    badgeProps: import("vue").PropType<Partial<import("..").BadgeProps>>;
+    classPrefix: StringConstructor;
+}>> & Readonly<{}>, {
     dot: boolean;
     tag: keyof HTMLElementTagNameMap;
-    classPrefix: string;
-} & {
-    name?: string | undefined;
-    badge?: string | number | undefined;
-    color?: string | undefined;
-    size?: string | number | undefined;
-}>, {
-    dot: boolean;
-    tag: keyof HTMLElementTagNameMap;
-    classPrefix: string;
-}>>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default Icon;
-export { Icon };
+export { iconProps } from './Icon';
+export type { IconProps } from './Icon';
+declare module 'vue' {
+    interface GlobalComponents {
+        VanIcon: typeof Icon;
+    }
+}

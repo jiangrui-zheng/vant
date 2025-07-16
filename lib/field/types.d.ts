@@ -1,26 +1,65 @@
-export declare type FieldType = 'tel' | 'text' | 'digit' | 'number' | 'search' | 'password' | 'textarea';
-export declare type FieldTextAlign = 'left' | 'center' | 'right';
-export declare type FieldClearTrigger = 'always' | 'focus';
-export declare type FieldFormatTrigger = 'onBlur' | 'onChange';
-export declare type FieldValidateTrigger = 'onBlur' | 'onChange' | 'onSubmit';
-export declare type FieldAutosizeConfig = {
+import type { ComputedRef, ComponentPublicInstance } from 'vue';
+import type { FieldProps } from './Field';
+export type FieldType = 'tel' | 'url' | 'date' | 'file' | 'text' | 'time' | 'week' | 'color' | 'digit' | 'email' | 'image' | 'month' | 'radio' | 'range' | 'reset' | 'button' | 'hidden' | 'number' | 'search' | 'submit' | 'checkbox' | 'password' | 'textarea' | 'datetime-local';
+export type FieldTextAlign = 'left' | 'center' | 'right' | 'top';
+export type FieldClearTrigger = 'always' | 'focus';
+export type FieldFormatTrigger = 'onBlur' | 'onChange';
+export type FieldValidateTrigger = 'onBlur' | 'onChange' | 'onSubmit';
+export type FieldAutosizeConfig = {
     maxHeight?: number;
     minHeight?: number;
 };
-export declare type FieldValidateError = {
+export type FieldValidateError = {
     name?: string;
     message: string;
 };
-export declare type FieldRule = {
+export type FieldRuleMessage = string | ((value: any, rule: FieldRule) => string);
+export type FieldRuleValidator = (value: any, rule: FieldRule) => boolean | string | Promise<boolean | string>;
+export type FieldRuleFormatter = (value: any, rule: FieldRule) => string;
+export type FieldRule = {
     pattern?: RegExp;
-    trigger?: FieldValidateTrigger;
-    message?: string | ((value: any, rule: FieldRule) => string);
+    trigger?: FieldValidateTrigger | FieldValidateTrigger[];
+    message?: FieldRuleMessage;
     required?: boolean;
-    validator?: (value: any, rule: FieldRule) => boolean | string | Promise<boolean | string>;
-    formatter?: (value: any, rule: FieldRule) => string;
+    validator?: FieldRuleValidator;
+    formatter?: FieldRuleFormatter;
+    validateEmpty?: boolean;
 };
+export type FieldValidationStatus = 'passed' | 'failed' | 'unvalidated';
+export type FieldFormSharedProps = 'colon' | 'required' | 'disabled' | 'readonly' | 'labelWidth' | 'labelAlign' | 'inputAlign' | 'errorMessageAlign';
+export type FieldExpose = {
+    blur: () => void | undefined;
+    focus: () => void | undefined;
+    validate: (rules?: FieldRule[] | undefined) => Promise<void | FieldValidateError>;
+    resetValidation: () => void;
+    getValidationStatus: () => FieldValidationStatus;
+    /** @private */
+    formValue: ComputedRef<unknown>;
+};
+export type FieldInstance = ComponentPublicInstance<FieldProps, FieldExpose>;
 declare global {
     interface EventTarget {
         composing?: boolean;
     }
 }
+export type FieldThemeVars = {
+    fieldLabelWidth?: string;
+    fieldLabelColor?: string;
+    fieldLabelMarginRight?: string;
+    fieldInputTextColor?: string;
+    fieldInputErrorTextColor?: string;
+    fieldInputDisabledTextColor?: string;
+    fieldPlaceholderTextColor?: string;
+    fieldIconSize?: string;
+    fieldClearIconSize?: string;
+    fieldClearIconColor?: string;
+    fieldRightIconColor?: string;
+    fieldErrorMessageColor?: string;
+    fieldErrorMessageFontSize?: string;
+    fieldTextAreaMinHeight?: string;
+    fieldWordLimitColor?: string;
+    fieldWordLimitFontSize?: string;
+    fieldWordLimitLineHeight?: number | string;
+    fieldDisabledTextColor?: string;
+    fieldRequiredMarkColor?: string;
+};

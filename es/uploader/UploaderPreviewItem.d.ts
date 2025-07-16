@@ -1,31 +1,40 @@
-import { PropType } from 'vue';
-import { UploaderFileListItem } from './utils';
-import { Interceptor } from '../utils/interceptor';
+import { type PropType } from 'vue';
+import { type Numeric, type Interceptor } from '../utils';
 import { ImageFit } from '../image';
-declare const _default: import("vue").DefineComponent<{
+import type { UploaderFileListItem } from './types';
+declare const _default: import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     name: (NumberConstructor | StringConstructor)[];
-    index: NumberConstructor;
-    imageFit: PropType<ImageFit>;
-    lazyLoad: BooleanConstructor;
-    deletable: BooleanConstructor;
-    previewSize: (NumberConstructor | StringConstructor)[];
-    beforeDelete: PropType<Interceptor>;
     item: {
         type: PropType<UploaderFileListItem>;
         required: true;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("delete" | "preview")[], "delete" | "preview", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    item: UploaderFileListItem;
-    lazyLoad: boolean;
-    deletable: boolean;
-} & {
-    name?: string | number | undefined;
-    index?: number | undefined;
-    imageFit?: ImageFit | undefined;
-    previewSize?: string | number | undefined;
-    beforeDelete?: Interceptor | undefined;
+    index: NumberConstructor;
+    imageFit: PropType<ImageFit>;
+    lazyLoad: BooleanConstructor;
+    deletable: BooleanConstructor;
+    reupload: BooleanConstructor;
+    previewSize: PropType<Numeric | [Numeric, Numeric]>;
+    beforeDelete: PropType<Interceptor>;
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("delete" | "reupload" | "preview")[], "delete" | "reupload" | "preview", import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    name: (NumberConstructor | StringConstructor)[];
+    item: {
+        type: PropType<UploaderFileListItem>;
+        required: true;
+    };
+    index: NumberConstructor;
+    imageFit: PropType<ImageFit>;
+    lazyLoad: BooleanConstructor;
+    deletable: BooleanConstructor;
+    reupload: BooleanConstructor;
+    previewSize: PropType<Numeric | [Numeric, Numeric]>;
+    beforeDelete: PropType<Interceptor>;
+}>> & Readonly<{
+    onDelete?: ((...args: any[]) => any) | undefined;
+    onReupload?: ((...args: any[]) => any) | undefined;
+    onPreview?: ((...args: any[]) => any) | undefined;
 }>, {
     lazyLoad: boolean;
     deletable: boolean;
-}>;
+    reupload: boolean;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

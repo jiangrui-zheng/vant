@@ -1,27 +1,21 @@
-import { PropType } from 'vue';
-import { isMobile } from '../utils/validate/mobile';
+import { type PropType, type ExtractPropTypes } from 'vue';
+import { isMobile } from '../utils';
 import { AreaList } from '../area';
-import { AddressEditSearchItem } from './AddressEditDetail';
-export declare type AddressEditInfo = {
-    tel: string;
-    name: string;
-    city: string;
-    county: string;
-    country: string;
-    province: string;
-    areaCode: string;
-    isDefault?: boolean;
-    postalCode?: string;
-    addressDetail: string;
-};
-declare function isPostal(value: string): boolean;
-declare const _default: import("vue").DefineComponent<{
+import type { AddressEditInfo, AddressEditSearchItem } from './types';
+export declare const addressEditProps: {
     areaList: PropType<AreaList>;
     isSaving: BooleanConstructor;
     isDeleting: BooleanConstructor;
     validator: PropType<(key: string, value: string) => string | undefined>;
+    showArea: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    showDetail: {
+        type: BooleanConstructor;
+        default: true;
+    };
     showDelete: BooleanConstructor;
-    showPostal: BooleanConstructor;
     disableArea: BooleanConstructor;
     searchResult: PropType<AddressEditSearchItem[]>;
     telMaxlength: (NumberConstructor | StringConstructor)[];
@@ -30,14 +24,6 @@ declare const _default: import("vue").DefineComponent<{
     areaPlaceholder: StringConstructor;
     deleteButtonText: StringConstructor;
     showSearchResult: BooleanConstructor;
-    showArea: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    showDetail: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
     detailRows: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
@@ -46,72 +32,127 @@ declare const _default: import("vue").DefineComponent<{
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
+    areaColumnsPlaceholder: {
+        type: PropType<T[]>;
+        default: () => never[];
+    };
     addressInfo: {
         type: PropType<Partial<AddressEditInfo>>;
-        default: () => {
-            tel: string;
-            name: string;
-            city: string;
-            county: string;
-            country: string;
-            province: string;
-            areaCode: string;
-            isDefault?: boolean | undefined;
-            postalCode?: string | undefined;
-            addressDetail: string;
-        };
+        default: () => AddressEditInfo;
     };
     telValidator: {
         type: PropType<(val: string) => boolean>;
         default: typeof isMobile;
     };
-    postalValidator: {
-        type: PropType<(val: string) => boolean>;
-        default: typeof isPostal;
+};
+export type AddressEditProps = ExtractPropTypes<typeof addressEditProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
+    areaList: PropType<AreaList>;
+    isSaving: BooleanConstructor;
+    isDeleting: BooleanConstructor;
+    validator: PropType<(key: string, value: string) => string | undefined>;
+    showArea: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    showDetail: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    showDelete: BooleanConstructor;
+    disableArea: BooleanConstructor;
+    searchResult: PropType<AddressEditSearchItem[]>;
+    telMaxlength: (NumberConstructor | StringConstructor)[];
+    showSetDefault: BooleanConstructor;
+    saveButtonText: StringConstructor;
+    areaPlaceholder: StringConstructor;
+    deleteButtonText: StringConstructor;
+    showSearchResult: BooleanConstructor;
+    detailRows: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    detailMaxlength: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
     };
     areaColumnsPlaceholder: {
-        type: PropType<string[]>;
+        type: PropType<T[]>;
         default: () => never[];
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("focus" | "select-search" | "save" | "delete" | "click-area" | "change-area" | "change-detail" | "cancel-delete" | "change-default")[], "focus" | "select-search" | "save" | "delete" | "click-area" | "change-area" | "change-detail" | "cancel-delete" | "change-default", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    detailRows: string | number;
-    detailMaxlength: string | number;
-    showSearchResult: boolean;
-    isSaving: boolean;
-    isDeleting: boolean;
-    showDelete: boolean;
-    showPostal: boolean;
-    disableArea: boolean;
-    showSetDefault: boolean;
-    showArea: boolean;
-    showDetail: boolean;
-    addressInfo: Partial<AddressEditInfo>;
-    telValidator: (val: string) => boolean;
-    postalValidator: (val: string) => boolean;
-    areaColumnsPlaceholder: string[];
-} & {
-    areaList?: AreaList | undefined;
-    searchResult?: AddressEditSearchItem[] | undefined;
-    validator?: ((key: string, value: string) => string | undefined) | undefined;
-    telMaxlength?: string | number | undefined;
-    saveButtonText?: string | undefined;
-    areaPlaceholder?: string | undefined;
-    deleteButtonText?: string | undefined;
+    addressInfo: {
+        type: PropType<Partial<AddressEditInfo>>;
+        default: () => AddressEditInfo;
+    };
+    telValidator: {
+        type: PropType<(val: string) => boolean>;
+        default: typeof isMobile;
+    };
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("delete" | "focus" | "change" | "selectSearch" | "save" | "clickArea" | "changeArea" | "changeDetail" | "changeDefault")[], "delete" | "focus" | "change" | "selectSearch" | "save" | "clickArea" | "changeArea" | "changeDetail" | "changeDefault", import("vue").PublicProps, Readonly<ExtractPropTypes<{
+    areaList: PropType<AreaList>;
+    isSaving: BooleanConstructor;
+    isDeleting: BooleanConstructor;
+    validator: PropType<(key: string, value: string) => string | undefined>;
+    showArea: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    showDetail: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    showDelete: BooleanConstructor;
+    disableArea: BooleanConstructor;
+    searchResult: PropType<AddressEditSearchItem[]>;
+    telMaxlength: (NumberConstructor | StringConstructor)[];
+    showSetDefault: BooleanConstructor;
+    saveButtonText: StringConstructor;
+    areaPlaceholder: StringConstructor;
+    deleteButtonText: StringConstructor;
+    showSearchResult: BooleanConstructor;
+    detailRows: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    detailMaxlength: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    areaColumnsPlaceholder: {
+        type: PropType<T[]>;
+        default: () => never[];
+    };
+    addressInfo: {
+        type: PropType<Partial<AddressEditInfo>>;
+        default: () => AddressEditInfo;
+    };
+    telValidator: {
+        type: PropType<(val: string) => boolean>;
+        default: typeof isMobile;
+    };
+}>> & Readonly<{
+    onFocus?: ((...args: any[]) => any) | undefined;
+    onChange?: ((...args: any[]) => any) | undefined;
+    onSelectSearch?: ((...args: any[]) => any) | undefined;
+    onDelete?: ((...args: any[]) => any) | undefined;
+    onSave?: ((...args: any[]) => any) | undefined;
+    onClickArea?: ((...args: any[]) => any) | undefined;
+    onChangeArea?: ((...args: any[]) => any) | undefined;
+    onChangeDetail?: ((...args: any[]) => any) | undefined;
+    onChangeDefault?: ((...args: any[]) => any) | undefined;
 }>, {
-    detailRows: string | number;
-    detailMaxlength: string | number;
-    showSearchResult: boolean;
     isSaving: boolean;
     isDeleting: boolean;
-    showDelete: boolean;
-    showPostal: boolean;
-    disableArea: boolean;
-    showSetDefault: boolean;
     showArea: boolean;
     showDetail: boolean;
+    showDelete: boolean;
+    disableArea: boolean;
+    showSetDefault: boolean;
+    showSearchResult: boolean;
+    detailRows: string | number;
+    detailMaxlength: string | number;
+    areaColumnsPlaceholder: string[];
     addressInfo: Partial<AddressEditInfo>;
     telValidator: (val: string) => boolean;
-    postalValidator: (val: string) => boolean;
-    areaColumnsPlaceholder: string[];
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

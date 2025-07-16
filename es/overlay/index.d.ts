@@ -1,24 +1,44 @@
-declare const Overlay: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const Overlay: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     show: BooleanConstructor;
     zIndex: (NumberConstructor | StringConstructor)[];
     duration: (NumberConstructor | StringConstructor)[];
     className: import("vue").PropType<unknown>;
-    customStyle: import("vue").PropType<import("vue").CSSProperties>;
     lockScroll: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    lazyRender: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    customStyle: import("vue").PropType<import("vue").CSSProperties>;
+    teleport: import("vue").PropType<import("vue").TeleportProps["to"]>;
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    show: BooleanConstructor;
+    zIndex: (NumberConstructor | StringConstructor)[];
+    duration: (NumberConstructor | StringConstructor)[];
+    className: import("vue").PropType<unknown>;
+    lockScroll: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    lazyRender: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    customStyle: import("vue").PropType<import("vue").CSSProperties>;
+    teleport: import("vue").PropType<import("vue").TeleportProps["to"]>;
+}>> & Readonly<{}>, {
     show: boolean;
     lockScroll: boolean;
-} & {
-    zIndex?: string | number | undefined;
-    duration?: string | number | undefined;
-    className?: unknown;
-    customStyle?: import("vue").CSSProperties | undefined;
-}>, {
-    show: boolean;
-    lockScroll: boolean;
-}>>;
+    lazyRender: boolean;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default Overlay;
-export { Overlay };
+export { overlayProps } from './Overlay';
+export type { OverlayProps } from './Overlay';
+export type { OverlayThemeVars } from './types';
+declare module 'vue' {
+    interface GlobalComponents {
+        VanOverlay: typeof Overlay;
+    }
+}

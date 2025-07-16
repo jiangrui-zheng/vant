@@ -1,28 +1,30 @@
-import { PropType, CSSProperties } from 'vue';
+import { Interceptor } from '../utils';
+import type { PropType, CSSProperties, TeleportProps } from 'vue';
 export declare const popupSharedProps: {
     show: BooleanConstructor;
     zIndex: (NumberConstructor | StringConstructor)[];
-    duration: (NumberConstructor | StringConstructor)[];
-    teleport: PropType<string | import("vue").RendererElement | null | undefined>;
-    overlayStyle: PropType<CSSProperties>;
-    overlayClass: PropType<unknown>;
-    transitionAppear: BooleanConstructor;
     overlay: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
+    duration: (NumberConstructor | StringConstructor)[];
+    teleport: PropType<TeleportProps["to"]>;
     lockScroll: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
     lazyRender: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
+    beforeClose: PropType<Interceptor>;
+    overlayStyle: PropType<CSSProperties>;
+    overlayClass: PropType<unknown>;
+    transitionAppear: BooleanConstructor;
     closeOnClickOverlay: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
 };
-export declare type PopupSharedPropKeys = Array<keyof typeof popupSharedProps>;
+export type PopupSharedPropKeys = Array<keyof typeof popupSharedProps>;
 export declare const popupSharedPropKeys: PopupSharedPropKeys;

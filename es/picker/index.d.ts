@@ -1,73 +1,105 @@
-declare const Picker: import("../utils").WithInstall<import("vue").DefineComponent<{
-    columnsFieldNames: import("vue").PropType<import("./Picker").PickerFieldNames>;
-    columns: {
-        type: import("vue").PropType<import("./PickerColumn").PickerOption[] | import("./PickerColumn").PickerColumn[]>;
-        default: () => never[];
-    };
-    defaultIndex: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
-    };
-    toolbarPosition: {
-        type: import("vue").PropType<import("./Picker").PickerToolbarPosition>;
-        default: string;
-    };
-    valueKey: {
-        type: StringConstructor;
-        default: string;
-    };
-    title: StringConstructor;
+import { PickerProps } from './Picker';
+export declare const Picker: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     loading: BooleanConstructor;
     readonly: BooleanConstructor;
     allowHtml: BooleanConstructor;
-    cancelButtonText: StringConstructor;
-    confirmButtonText: StringConstructor;
-    itemHeight: {
+    optionHeight: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
     showToolbar: {
         type: BooleanConstructor;
-        default: boolean;
-    };
-    visibleItemCount: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
+        default: true;
     };
     swipeDuration: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("cancel" | "change" | "confirm")[], "cancel" | "change" | "confirm", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    loading: boolean;
-    readonly: boolean;
-    allowHtml: boolean;
-    itemHeight: string | number;
-    swipeDuration: string | number;
-    visibleItemCount: string | number;
-    defaultIndex: string | number;
-    columns: import("./PickerColumn").PickerOption[] | import("./PickerColumn").PickerColumn[];
-    toolbarPosition: import("./Picker").PickerToolbarPosition;
-    valueKey: string;
-    showToolbar: boolean;
+    visibleOptionNum: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
 } & {
-    title?: string | undefined;
-    columnsFieldNames?: import("./Picker").PickerFieldNames | undefined;
-    cancelButtonText?: string | undefined;
-    confirmButtonText?: string | undefined;
+    title: StringConstructor;
+    cancelButtonText: StringConstructor;
+    confirmButtonText: StringConstructor;
+} & {
+    columns: {
+        type: import("vue").PropType<T[]>;
+        default: () => never[];
+    };
+    modelValue: {
+        type: import("vue").PropType<T[]>;
+        default: () => never[];
+    };
+    toolbarPosition: {
+        type: import("vue").PropType<T_1>;
+        default: import("./types").PickerToolbarPosition;
+    };
+    columnsFieldNames: import("vue").PropType<import("./types").PickerFieldNames>;
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "cancel" | "change" | "confirm" | "clickOption" | "scrollInto")[], "update:modelValue" | "cancel" | "change" | "confirm" | "clickOption" | "scrollInto", import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    loading: BooleanConstructor;
+    readonly: BooleanConstructor;
+    allowHtml: BooleanConstructor;
+    optionHeight: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    showToolbar: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    swipeDuration: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    visibleOptionNum: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+} & {
+    title: StringConstructor;
+    cancelButtonText: StringConstructor;
+    confirmButtonText: StringConstructor;
+} & {
+    columns: {
+        type: import("vue").PropType<T[]>;
+        default: () => never[];
+    };
+    modelValue: {
+        type: import("vue").PropType<T[]>;
+        default: () => never[];
+    };
+    toolbarPosition: {
+        type: import("vue").PropType<T_1>;
+        default: import("./types").PickerToolbarPosition;
+    };
+    columnsFieldNames: import("vue").PropType<import("./types").PickerFieldNames>;
+}>> & Readonly<{
+    onChange?: ((...args: any[]) => any) | undefined;
+    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+    onCancel?: ((...args: any[]) => any) | undefined;
+    onClickOption?: ((...args: any[]) => any) | undefined;
+    onScrollInto?: ((...args: any[]) => any) | undefined;
+    onConfirm?: ((...args: any[]) => any) | undefined;
 }>, {
-    loading: boolean;
+    modelValue: import("../utils").Numeric[];
     readonly: boolean;
+    loading: boolean;
     allowHtml: boolean;
-    itemHeight: string | number;
-    swipeDuration: string | number;
-    visibleItemCount: string | number;
-    defaultIndex: string | number;
-    columns: import("./PickerColumn").PickerOption[] | import("./PickerColumn").PickerColumn[];
-    toolbarPosition: import("./Picker").PickerToolbarPosition;
-    valueKey: string;
+    optionHeight: string | number;
     showToolbar: boolean;
-}>>;
+    swipeDuration: string | number;
+    visibleOptionNum: string | number;
+    columns: (import("./types").PickerColumn | import("./types").PickerOption)[];
+    toolbarPosition: import("./types").PickerToolbarPosition;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default Picker;
-export { Picker };
-export type { PickerColumn, PickerOption, PickerObjectColumn, PickerObjectOption, PickerToolbarPosition, } from './Picker';
+export { pickerProps } from './Picker';
+export type { PickerProps };
+export type { PickerColumn, PickerOption, PickerInstance, PickerThemeVars, PickerFieldNames, PickerToolbarPosition, PickerCancelEventParams, PickerChangeEventParams, PickerConfirmEventParams, } from './types';
+declare module 'vue' {
+    interface GlobalComponents {
+        VanPicker: typeof Picker;
+    }
+}

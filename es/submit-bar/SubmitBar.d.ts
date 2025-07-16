@@ -1,54 +1,101 @@
-import { PropType } from 'vue';
+import { type PropType, type ExtractPropTypes } from 'vue';
 import { ButtonType } from '../button';
-declare const _default: import("vue").DefineComponent<{
+export type SubmitBarTextAlign = 'left' | 'right';
+export declare const submitBarProps: {
     tip: StringConstructor;
     label: StringConstructor;
     price: NumberConstructor;
     tipIcon: StringConstructor;
     loading: BooleanConstructor;
+    currency: {
+        type: PropType<T>;
+        default: string;
+    };
     disabled: BooleanConstructor;
-    textAlign: PropType<import("csstype").TextAlignProperty | undefined>;
+    textAlign: PropType<SubmitBarTextAlign>;
     buttonText: StringConstructor;
+    buttonType: {
+        type: PropType<T>;
+        default: ButtonType;
+    };
     buttonColor: StringConstructor;
     suffixLabel: StringConstructor;
-    safeAreaInsetBottom: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
+    placeholder: BooleanConstructor;
     decimalLength: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
+    safeAreaInsetBottom: {
+        type: BooleanConstructor;
+        default: true;
+    };
+};
+export type SubmitBarProps = ExtractPropTypes<typeof submitBarProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
+    tip: StringConstructor;
+    label: StringConstructor;
+    price: NumberConstructor;
+    tipIcon: StringConstructor;
+    loading: BooleanConstructor;
     currency: {
-        type: StringConstructor;
+        type: PropType<T>;
         default: string;
     };
+    disabled: BooleanConstructor;
+    textAlign: PropType<SubmitBarTextAlign>;
+    buttonText: StringConstructor;
     buttonType: {
-        type: PropType<ButtonType>;
+        type: PropType<T>;
+        default: ButtonType;
+    };
+    buttonColor: StringConstructor;
+    suffixLabel: StringConstructor;
+    placeholder: BooleanConstructor;
+    decimalLength: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    safeAreaInsetBottom: {
+        type: BooleanConstructor;
+        default: true;
+    };
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "submit"[], "submit", import("vue").PublicProps, Readonly<ExtractPropTypes<{
+    tip: StringConstructor;
+    label: StringConstructor;
+    price: NumberConstructor;
+    tipIcon: StringConstructor;
+    loading: BooleanConstructor;
+    currency: {
+        type: PropType<T>;
         default: string;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "submit"[], "submit", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    safeAreaInsetBottom: boolean;
-    loading: boolean;
-    disabled: boolean;
-    currency: string;
-    decimalLength: string | number;
-    buttonType: ButtonType;
-} & {
-    label?: string | undefined;
-    price?: number | undefined;
-    textAlign?: import("csstype").TextAlignProperty | undefined;
-    tip?: string | undefined;
-    tipIcon?: string | undefined;
-    buttonText?: string | undefined;
-    buttonColor?: string | undefined;
-    suffixLabel?: string | undefined;
+    disabled: BooleanConstructor;
+    textAlign: PropType<SubmitBarTextAlign>;
+    buttonText: StringConstructor;
+    buttonType: {
+        type: PropType<T>;
+        default: ButtonType;
+    };
+    buttonColor: StringConstructor;
+    suffixLabel: StringConstructor;
+    placeholder: BooleanConstructor;
+    decimalLength: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    safeAreaInsetBottom: {
+        type: BooleanConstructor;
+        default: true;
+    };
+}>> & Readonly<{
+    onSubmit?: ((...args: any[]) => any) | undefined;
 }>, {
+    disabled: boolean;
+    placeholder: boolean;
     safeAreaInsetBottom: boolean;
     loading: boolean;
-    disabled: boolean;
     currency: string;
     decimalLength: string | number;
     buttonType: ButtonType;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

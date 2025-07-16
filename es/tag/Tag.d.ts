@@ -1,38 +1,63 @@
-import { PropType } from 'vue';
-export declare type TagType = 'default' | 'primary' | 'success' | 'warning' | 'danger';
-declare const _default: import("vue").DefineComponent<{
-    size: StringConstructor;
+import { type PropType, type ExtractPropTypes } from 'vue';
+import type { TagType, TagSize } from './types';
+export declare const tagProps: {
+    size: PropType<TagSize>;
     mark: BooleanConstructor;
+    show: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    type: {
+        type: PropType<T>;
+        default: TagType;
+    };
     color: StringConstructor;
     plain: BooleanConstructor;
     round: BooleanConstructor;
     textColor: StringConstructor;
     closeable: BooleanConstructor;
-    type: {
-        type: PropType<TagType>;
-        default: string;
-    };
+};
+export type TagProps = ExtractPropTypes<typeof tagProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
+    size: PropType<TagSize>;
+    mark: BooleanConstructor;
     show: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "close"[], "close", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    mark: boolean;
-    round: boolean;
-    type: TagType;
-    show: boolean;
-    plain: boolean;
-    closeable: boolean;
-} & {
-    color?: string | undefined;
-    size?: string | undefined;
-    textColor?: string | undefined;
+    type: {
+        type: PropType<T>;
+        default: TagType;
+    };
+    color: StringConstructor;
+    plain: BooleanConstructor;
+    round: BooleanConstructor;
+    textColor: StringConstructor;
+    closeable: BooleanConstructor;
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "close"[], "close", import("vue").PublicProps, Readonly<ExtractPropTypes<{
+    size: PropType<TagSize>;
+    mark: BooleanConstructor;
+    show: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    type: {
+        type: PropType<T>;
+        default: TagType;
+    };
+    color: StringConstructor;
+    plain: BooleanConstructor;
+    round: BooleanConstructor;
+    textColor: StringConstructor;
+    closeable: BooleanConstructor;
+}>> & Readonly<{
+    onClose?: ((...args: any[]) => any) | undefined;
 }>, {
+    type: TagType;
     mark: boolean;
     round: boolean;
-    type: TagType;
     show: boolean;
     plain: boolean;
     closeable: boolean;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

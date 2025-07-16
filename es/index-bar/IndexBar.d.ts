@@ -1,38 +1,64 @@
-import { PropType } from 'vue';
-export declare type IndexBarProvide = {
-    props: {
-        sticky: boolean;
-        zIndex?: number | string;
-        highlightColor?: string;
-    };
-};
+import { type PropType, type InjectionKey, type TeleportProps, type ExtractPropTypes } from 'vue';
+import { type Numeric } from '../utils';
+import { IndexBarProvide } from './types';
 declare function genAlphabet(): string[];
-export declare const INDEX_BAR_KEY: unique symbol;
-declare const _default: import("vue").DefineComponent<{
-    zIndex: (NumberConstructor | StringConstructor)[];
-    highlightColor: StringConstructor;
+export declare const indexBarProps: {
     sticky: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
+    zIndex: (NumberConstructor | StringConstructor)[];
+    teleport: PropType<TeleportProps["to"]>;
+    highlightColor: StringConstructor;
     stickyOffsetTop: {
         type: NumberConstructor;
         default: number;
     };
     indexList: {
-        type: PropType<string[]>;
+        type: PropType<Numeric[]>;
         default: typeof genAlphabet;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("select" | "change")[], "select" | "change", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    sticky: boolean;
-    stickyOffsetTop: number;
-    indexList: string[];
-} & {
-    zIndex?: string | number | undefined;
-    highlightColor?: string | undefined;
+};
+export type IndexBarProps = ExtractPropTypes<typeof indexBarProps>;
+export declare const INDEX_BAR_KEY: InjectionKey<IndexBarProvide>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
+    sticky: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    zIndex: (NumberConstructor | StringConstructor)[];
+    teleport: PropType<TeleportProps["to"]>;
+    highlightColor: StringConstructor;
+    stickyOffsetTop: {
+        type: NumberConstructor;
+        default: number;
+    };
+    indexList: {
+        type: PropType<Numeric[]>;
+        default: typeof genAlphabet;
+    };
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("select" | "change")[], "select" | "change", import("vue").PublicProps, Readonly<ExtractPropTypes<{
+    sticky: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    zIndex: (NumberConstructor | StringConstructor)[];
+    teleport: PropType<TeleportProps["to"]>;
+    highlightColor: StringConstructor;
+    stickyOffsetTop: {
+        type: NumberConstructor;
+        default: number;
+    };
+    indexList: {
+        type: PropType<Numeric[]>;
+        default: typeof genAlphabet;
+    };
+}>> & Readonly<{
+    onChange?: ((...args: any[]) => any) | undefined;
+    onSelect?: ((...args: any[]) => any) | undefined;
 }>, {
     sticky: boolean;
     stickyOffsetTop: number;
-    indexList: string[];
-}>;
+    indexList: Numeric[];
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

@@ -1,81 +1,100 @@
-import { App } from 'vue';
-import { ComponentInstance } from '../utils';
-import { NotifyType } from './Notify';
-export declare type NotifyMessage = string | number;
-export declare type NotifyOptions = {
-    type?: NotifyType;
-    color?: string;
-    message?: NotifyMessage;
-    duration?: number;
-    className?: unknown;
-    background?: string;
-    lockScroll?: boolean;
-    onClick?: (event: MouseEvent) => void;
-    onClose?: () => void;
-    onOpened?: () => void;
-};
-declare function Notify(options: NotifyMessage | NotifyOptions): ComponentInstance | undefined;
-declare namespace Notify {
-    var clear: () => void;
-    var currentOptions: NotifyOptions;
-    var setDefaultOptions: (options: NotifyOptions) => void;
-    var resetDefaultOptions: () => void;
-    var install: (app: App<any>) => void;
-    var Component: import("../utils").WithInstall<import("vue").DefineComponent<{
-        color: StringConstructor;
-        message: (NumberConstructor | StringConstructor)[];
-        className: import("vue").PropType<unknown>;
-        background: StringConstructor;
-        lockScroll: BooleanConstructor;
-        type: {
-            type: import("vue").PropType<NotifyType>;
-            default: string;
-        };
-        show: BooleanConstructor;
-        zIndex: (NumberConstructor | StringConstructor)[];
-        duration: (NumberConstructor | StringConstructor)[];
-        teleport: import("vue").PropType<string | import("vue").RendererElement | null | undefined>;
-        overlayStyle: import("vue").PropType<import("vue").CSSProperties>;
-        overlayClass: import("vue").PropType<unknown>;
-        transitionAppear: BooleanConstructor;
-        overlay: {
-            type: BooleanConstructor;
-            default: boolean;
-        };
-        lazyRender: {
-            type: BooleanConstructor;
-            default: boolean;
-        };
-        closeOnClickOverlay: {
-            type: BooleanConstructor;
-            default: boolean;
-        };
-    }, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-        type: NotifyType;
-        overlay: boolean;
-        show: boolean;
-        transitionAppear: boolean;
-        lockScroll: boolean;
-        lazyRender: boolean;
-        closeOnClickOverlay: boolean;
-    } & {
-        color?: string | undefined;
-        zIndex?: string | number | undefined;
-        duration?: string | number | undefined;
-        teleport?: string | import("vue").RendererElement | null | undefined;
-        overlayStyle?: import("vue").CSSProperties | undefined;
-        overlayClass?: unknown;
-        className?: unknown;
-        message?: string | number | undefined;
-        background?: string | undefined;
-    }>, {
-        type: NotifyType;
-        overlay: boolean;
-        show: boolean;
-        transitionAppear: boolean;
-        lockScroll: boolean;
-        lazyRender: boolean;
-        closeOnClickOverlay: boolean;
-    }>>;
-}
+export declare const Notify: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
+    show: BooleanConstructor;
+    zIndex: (NumberConstructor | StringConstructor)[];
+    overlay: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    duration: (NumberConstructor | StringConstructor)[];
+    teleport: import("vue").PropType<import("vue").TeleportProps["to"]>;
+    lockScroll: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    lazyRender: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    beforeClose: import("vue").PropType<import("../utils").Interceptor>;
+    overlayStyle: import("vue").PropType<import("vue").CSSProperties>;
+    overlayClass: import("vue").PropType<unknown>;
+    transitionAppear: BooleanConstructor;
+    closeOnClickOverlay: {
+        type: BooleanConstructor;
+        default: true;
+    };
+} & {
+    type: {
+        type: import("vue").PropType<T>;
+        default: import("./types").NotifyType;
+    };
+    color: StringConstructor;
+    message: (NumberConstructor | StringConstructor)[];
+    position: {
+        type: import("vue").PropType<T>;
+        default: import("./types").NotifyPosition;
+    };
+    className: import("vue").PropType<unknown>;
+    background: StringConstructor;
+    lockScroll: BooleanConstructor;
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:show"[], "update:show", import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    show: BooleanConstructor;
+    zIndex: (NumberConstructor | StringConstructor)[];
+    overlay: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    duration: (NumberConstructor | StringConstructor)[];
+    teleport: import("vue").PropType<import("vue").TeleportProps["to"]>;
+    lockScroll: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    lazyRender: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    beforeClose: import("vue").PropType<import("../utils").Interceptor>;
+    overlayStyle: import("vue").PropType<import("vue").CSSProperties>;
+    overlayClass: import("vue").PropType<unknown>;
+    transitionAppear: BooleanConstructor;
+    closeOnClickOverlay: {
+        type: BooleanConstructor;
+        default: true;
+    };
+} & {
+    type: {
+        type: import("vue").PropType<T>;
+        default: import("./types").NotifyType;
+    };
+    color: StringConstructor;
+    message: (NumberConstructor | StringConstructor)[];
+    position: {
+        type: import("vue").PropType<T>;
+        default: import("./types").NotifyPosition;
+    };
+    className: import("vue").PropType<unknown>;
+    background: StringConstructor;
+    lockScroll: BooleanConstructor;
+}>> & Readonly<{
+    "onUpdate:show"?: ((...args: any[]) => any) | undefined;
+}>, {
+    type: import("./types").NotifyType;
+    position: import("./types").NotifyPosition;
+    overlay: boolean;
+    show: boolean;
+    lockScroll: boolean;
+    lazyRender: boolean;
+    transitionAppear: boolean;
+    closeOnClickOverlay: boolean;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default Notify;
+export { notifyProps } from './Notify';
+export { showNotify, closeNotify, setNotifyDefaultOptions, resetNotifyDefaultOptions, } from './function-call';
+export type { NotifyProps } from './Notify';
+export type { NotifyType, NotifyOptions, NotifyThemeVars } from './types';
+declare module 'vue' {
+    interface GlobalComponents {
+        VanNotify: typeof Notify;
+    }
+}

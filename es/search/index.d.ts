@@ -1,41 +1,171 @@
-declare const Search: import("../utils").WithInstall<import("vue").DefineComponent<{
-    label: StringConstructor;
+import { SearchProps } from './Search';
+export declare const Search: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
+    id: StringConstructor;
+    name: StringConstructor;
+    leftIcon: StringConstructor;
     rightIcon: StringConstructor;
-    modelValue: StringConstructor;
-    actionText: StringConstructor;
-    background: StringConstructor;
-    showAction: BooleanConstructor;
-    clearTrigger: import("vue").PropType<import("../field").FieldClearTrigger>;
+    autofocus: BooleanConstructor;
+    clearable: BooleanConstructor;
+    maxlength: (NumberConstructor | StringConstructor)[];
+    max: NumberConstructor;
+    min: NumberConstructor;
+    formatter: import("vue").PropType<(value: string) => string>;
+    clearIcon: {
+        type: import("vue").PropType<T>;
+        default: string;
+    };
+    modelValue: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: string;
+    };
+    inputAlign: import("vue").PropType<import("..").FieldTextAlign>;
+    placeholder: StringConstructor;
+    autocomplete: StringConstructor;
+    autocapitalize: StringConstructor;
+    autocorrect: StringConstructor;
+    errorMessage: StringConstructor;
+    enterkeyhint: StringConstructor;
+    clearTrigger: {
+        type: import("vue").PropType<T>;
+        default: import("..").FieldClearTrigger;
+    };
+    formatTrigger: {
+        type: import("vue").PropType<T>;
+        default: import("..").FieldFormatTrigger;
+    };
+    spellcheck: {
+        type: BooleanConstructor;
+        default: null;
+    };
+    error: {
+        type: BooleanConstructor;
+        default: null;
+    };
+    disabled: {
+        type: BooleanConstructor;
+        default: null;
+    };
+    readonly: {
+        type: BooleanConstructor;
+        default: null;
+    };
+    inputmode: import("vue").PropType<import("vue").HTMLAttributes["inputmode"]>;
+} & {
+    label: StringConstructor;
     shape: {
-        type: import("vue").PropType<import("./Search").SearchShape>;
+        type: import("vue").PropType<T>;
+        default: import("./types").SearchShape;
+    };
+    leftIcon: {
+        type: import("vue").PropType<T>;
         default: string;
     };
     clearable: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
-    leftIcon: {
-        type: StringConstructor;
+    actionText: StringConstructor;
+    background: StringConstructor;
+    showAction: BooleanConstructor;
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("search" | "clear" | "focus" | "blur" | "clickInput" | "clickLeftIcon" | "clickRightIcon" | "update:modelValue" | "cancel")[], "search" | "clear" | "focus" | "blur" | "clickInput" | "clickLeftIcon" | "clickRightIcon" | "update:modelValue" | "cancel", import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    id: StringConstructor;
+    name: StringConstructor;
+    leftIcon: StringConstructor;
+    rightIcon: StringConstructor;
+    autofocus: BooleanConstructor;
+    clearable: BooleanConstructor;
+    maxlength: (NumberConstructor | StringConstructor)[];
+    max: NumberConstructor;
+    min: NumberConstructor;
+    formatter: import("vue").PropType<(value: string) => string>;
+    clearIcon: {
+        type: import("vue").PropType<T>;
         default: string;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("cancel" | "search" | "update:modelValue")[], "cancel" | "search" | "update:modelValue", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    leftIcon: string;
-    clearable: boolean;
-    shape: import("./Search").SearchShape;
-    showAction: boolean;
+    modelValue: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: string;
+    };
+    inputAlign: import("vue").PropType<import("..").FieldTextAlign>;
+    placeholder: StringConstructor;
+    autocomplete: StringConstructor;
+    autocapitalize: StringConstructor;
+    autocorrect: StringConstructor;
+    errorMessage: StringConstructor;
+    enterkeyhint: StringConstructor;
+    clearTrigger: {
+        type: import("vue").PropType<T>;
+        default: import("..").FieldClearTrigger;
+    };
+    formatTrigger: {
+        type: import("vue").PropType<T>;
+        default: import("..").FieldFormatTrigger;
+    };
+    spellcheck: {
+        type: BooleanConstructor;
+        default: null;
+    };
+    error: {
+        type: BooleanConstructor;
+        default: null;
+    };
+    disabled: {
+        type: BooleanConstructor;
+        default: null;
+    };
+    readonly: {
+        type: BooleanConstructor;
+        default: null;
+    };
+    inputmode: import("vue").PropType<import("vue").HTMLAttributes["inputmode"]>;
 } & {
-    label?: string | undefined;
-    rightIcon?: string | undefined;
-    modelValue?: string | undefined;
-    clearTrigger?: import("../field").FieldClearTrigger | undefined;
-    background?: string | undefined;
-    actionText?: string | undefined;
+    label: StringConstructor;
+    shape: {
+        type: import("vue").PropType<T>;
+        default: import("./types").SearchShape;
+    };
+    leftIcon: {
+        type: import("vue").PropType<T>;
+        default: string;
+    };
+    clearable: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    actionText: StringConstructor;
+    background: StringConstructor;
+    showAction: BooleanConstructor;
+}>> & Readonly<{
+    onFocus?: ((...args: any[]) => any) | undefined;
+    onBlur?: ((...args: any[]) => any) | undefined;
+    onClear?: ((...args: any[]) => any) | undefined;
+    onClickInput?: ((...args: any[]) => any) | undefined;
+    onClickLeftIcon?: ((...args: any[]) => any) | undefined;
+    onClickRightIcon?: ((...args: any[]) => any) | undefined;
+    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+    onCancel?: ((...args: any[]) => any) | undefined;
+    onSearch?: ((...args: any[]) => any) | undefined;
 }>, {
+    autofocus: boolean;
+    disabled: boolean;
+    shape: import("./types").SearchShape;
     leftIcon: string;
     clearable: boolean;
-    shape: import("./Search").SearchShape;
+    clearIcon: string;
+    modelValue: string | number;
+    clearTrigger: import("..").FieldClearTrigger;
+    formatTrigger: import("..").FieldFormatTrigger;
+    spellcheck: boolean;
+    error: boolean;
+    readonly: boolean;
     showAction: boolean;
-}>>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default Search;
-export { Search };
-export type { SearchShape } from './Search';
+export { searchProps } from './Search';
+export type { SearchProps };
+export type { SearchShape, SearchInstance, SearchThemeVars } from './types';
+declare module 'vue' {
+    interface GlobalComponents {
+        VanSearch: typeof Search;
+    }
+}

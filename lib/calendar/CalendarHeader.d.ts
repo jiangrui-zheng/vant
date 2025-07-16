@@ -1,18 +1,36 @@
-declare const _default: import("vue").DefineComponent<{
+import type { CalendarSwitchMode } from './types';
+declare const _default: import("vue").DefineComponent<import("vue").ExtractPropTypes<{
+    date: DateConstructor;
+    minDate: DateConstructor;
+    maxDate: DateConstructor;
     title: StringConstructor;
     subtitle: StringConstructor;
     showTitle: BooleanConstructor;
     showSubtitle: BooleanConstructor;
     firstDayOfWeek: NumberConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    showSubtitle: boolean;
-    showTitle: boolean;
-} & {
-    title?: string | undefined;
-    firstDayOfWeek?: number | undefined;
-    subtitle?: string | undefined;
+    switchMode: {
+        type: import("vue").PropType<T>;
+        default: CalendarSwitchMode;
+    };
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("clickSubtitle" | "panelChange")[], "clickSubtitle" | "panelChange", import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    date: DateConstructor;
+    minDate: DateConstructor;
+    maxDate: DateConstructor;
+    title: StringConstructor;
+    subtitle: StringConstructor;
+    showTitle: BooleanConstructor;
+    showSubtitle: BooleanConstructor;
+    firstDayOfWeek: NumberConstructor;
+    switchMode: {
+        type: import("vue").PropType<T>;
+        default: CalendarSwitchMode;
+    };
+}>> & Readonly<{
+    onClickSubtitle?: ((...args: any[]) => any) | undefined;
+    onPanelChange?: ((...args: any[]) => any) | undefined;
 }>, {
-    showSubtitle: boolean;
+    switchMode: CalendarSwitchMode;
     showTitle: boolean;
-}>;
+    showSubtitle: boolean;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

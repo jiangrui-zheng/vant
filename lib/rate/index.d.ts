@@ -1,58 +1,85 @@
-declare const Rate: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const Rate: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     size: (NumberConstructor | StringConstructor)[];
-    color: StringConstructor;
-    gutter: (NumberConstructor | StringConstructor)[];
-    readonly: BooleanConstructor;
-    disabled: BooleanConstructor;
-    allowHalf: BooleanConstructor;
-    voidColor: StringConstructor;
-    iconPrefix: StringConstructor;
-    disabledColor: StringConstructor;
-    modelValue: {
-        type: NumberConstructor;
-        default: number;
-    };
     icon: {
-        type: StringConstructor;
+        type: import("vue").PropType<T>;
         default: string;
     };
-    voidIcon: {
-        type: StringConstructor;
-        default: string;
-    };
+    color: StringConstructor;
     count: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
+    gutter: (NumberConstructor | StringConstructor)[];
+    clearable: BooleanConstructor;
+    readonly: BooleanConstructor;
+    disabled: BooleanConstructor;
+    voidIcon: {
+        type: import("vue").PropType<T>;
+        default: string;
+    };
+    allowHalf: BooleanConstructor;
+    voidColor: StringConstructor;
     touchable: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("change" | "update:modelValue")[], "change" | "update:modelValue", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    icon: string;
-    disabled: boolean;
-    readonly: boolean;
-    modelValue: number;
-    touchable: boolean;
-    count: string | number;
-    allowHalf: boolean;
-    voidIcon: string;
-} & {
-    color?: string | undefined;
-    size?: string | number | undefined;
-    iconPrefix?: string | undefined;
-    gutter?: string | number | undefined;
-    voidColor?: string | undefined;
-    disabledColor?: string | undefined;
+    iconPrefix: StringConstructor;
+    modelValue: {
+        type: NumberConstructor;
+        default: number;
+    };
+    disabledColor: StringConstructor;
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    size: (NumberConstructor | StringConstructor)[];
+    icon: {
+        type: import("vue").PropType<T>;
+        default: string;
+    };
+    color: StringConstructor;
+    count: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    gutter: (NumberConstructor | StringConstructor)[];
+    clearable: BooleanConstructor;
+    readonly: BooleanConstructor;
+    disabled: BooleanConstructor;
+    voidIcon: {
+        type: import("vue").PropType<T>;
+        default: string;
+    };
+    allowHalf: BooleanConstructor;
+    voidColor: StringConstructor;
+    touchable: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    iconPrefix: StringConstructor;
+    modelValue: {
+        type: NumberConstructor;
+        default: number;
+    };
+    disabledColor: StringConstructor;
+}>> & Readonly<{
+    onChange?: ((...args: any[]) => any) | undefined;
+    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
 }>, {
-    icon: string;
     disabled: boolean;
-    readonly: boolean;
+    icon: string;
+    clearable: boolean;
     modelValue: number;
+    readonly: boolean;
     touchable: boolean;
     count: string | number;
-    allowHalf: boolean;
     voidIcon: string;
-}>>;
+    allowHalf: boolean;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default Rate;
-export { Rate };
+export { rateProps } from './Rate';
+export type { RateProps } from './Rate';
+export type { RateThemeVars } from './types';
+declare module 'vue' {
+    interface GlobalComponents {
+        VanRate: typeof Rate;
+    }
+}

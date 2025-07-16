@@ -1,30 +1,32 @@
-import { PropType } from 'vue';
-export declare type AddressEditSearchItem = {
-    name: string;
-    address: string;
-};
-declare const _default: import("vue").DefineComponent<{
+import { type PropType } from 'vue';
+import type { AddressEditSearchItem } from './types';
+import type { FieldRule } from '../field/types';
+declare const _default: import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     show: BooleanConstructor;
+    rows: (NumberConstructor | StringConstructor)[];
     value: StringConstructor;
+    rules: PropType<FieldRule[]>;
     focused: BooleanConstructor;
-    detailRows: (NumberConstructor | StringConstructor)[];
+    maxlength: (NumberConstructor | StringConstructor)[];
     searchResult: PropType<AddressEditSearchItem[]>;
-    errorMessage: StringConstructor;
-    detailMaxlength: (NumberConstructor | StringConstructor)[];
     showSearchResult: BooleanConstructor;
-}, () => JSX.Element | undefined, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("input" | "blur" | "focus" | "select-search")[], "input" | "blur" | "focus" | "select-search", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    show: boolean;
-    focused: boolean;
-    showSearchResult: boolean;
-} & {
-    value?: string | undefined;
-    errorMessage?: string | undefined;
-    detailRows?: string | number | undefined;
-    searchResult?: AddressEditSearchItem[] | undefined;
-    detailMaxlength?: string | number | undefined;
+}>, () => import("vue/jsx-runtime").JSX.Element | undefined, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("input" | "focus" | "blur" | "selectSearch")[], "input" | "focus" | "blur" | "selectSearch", import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    show: BooleanConstructor;
+    rows: (NumberConstructor | StringConstructor)[];
+    value: StringConstructor;
+    rules: PropType<FieldRule[]>;
+    focused: BooleanConstructor;
+    maxlength: (NumberConstructor | StringConstructor)[];
+    searchResult: PropType<AddressEditSearchItem[]>;
+    showSearchResult: BooleanConstructor;
+}>> & Readonly<{
+    onFocus?: ((...args: any[]) => any) | undefined;
+    onBlur?: ((...args: any[]) => any) | undefined;
+    onInput?: ((...args: any[]) => any) | undefined;
+    onSelectSearch?: ((...args: any[]) => any) | undefined;
 }>, {
     show: boolean;
     focused: boolean;
     showSearchResult: boolean;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

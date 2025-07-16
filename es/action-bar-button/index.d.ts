@@ -1,28 +1,36 @@
-declare const ActionBarButton: import("../utils").WithInstall<import("vue").DefineComponent<{
-    type: import("vue").PropType<import("../button").ButtonType>;
+export declare const ActionBarButton: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
+    to: import("vue").PropType<import("vue-router").RouteLocationRaw>;
+    url: StringConstructor;
+    replace: BooleanConstructor;
+} & {
+    type: import("vue").PropType<import("..").ButtonType>;
     text: StringConstructor;
     icon: StringConstructor;
     color: StringConstructor;
     loading: BooleanConstructor;
     disabled: BooleanConstructor;
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
     to: import("vue").PropType<import("vue-router").RouteLocationRaw>;
     url: StringConstructor;
     replace: BooleanConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    replace: boolean;
-    loading: boolean;
-    disabled: boolean;
 } & {
-    text?: string | undefined;
-    to?: import("vue-router").RouteLocationRaw | (import("vue-router").RouteLocationRaw & object) | undefined;
-    url?: string | undefined;
-    color?: string | undefined;
-    icon?: string | undefined;
-    type?: import("../button").ButtonType | undefined;
-}>, {
+    type: import("vue").PropType<import("..").ButtonType>;
+    text: StringConstructor;
+    icon: StringConstructor;
+    color: StringConstructor;
+    loading: BooleanConstructor;
+    disabled: BooleanConstructor;
+}>> & Readonly<{}>, {
     replace: boolean;
-    loading: boolean;
     disabled: boolean;
-}>>;
+    loading: boolean;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default ActionBarButton;
-export { ActionBarButton };
+export { actionBarButtonProps } from './ActionBarButton';
+export type { ActionBarButtonProps } from './ActionBarButton';
+export type { ActionBarButtonThemeVars } from './types';
+declare module 'vue' {
+    interface GlobalComponents {
+        VanActionBarButton: typeof ActionBarButton;
+    }
+}

@@ -1,25 +1,39 @@
-import { CheckerParent } from '../checkbox/Checker';
-export declare const RADIO_KEY: unique symbol;
-export declare type RadioGroupProvide = CheckerParent & {
-    props: {
-        modelValue: unknown;
-    };
-    updateValue: (value: unknown) => void;
-};
-declare const _default: import("vue").DefineComponent<{
+import { type PropType, type InjectionKey, type ExtractPropTypes } from 'vue';
+import type { RadioShape } from '../radio';
+import type { CheckerDirection } from '../checkbox/Checker';
+export type RadioGroupDirection = CheckerDirection;
+export declare const radioGroupProps: {
+    shape: PropType<RadioShape>;
     disabled: BooleanConstructor;
     iconSize: (NumberConstructor | StringConstructor)[];
-    direction: StringConstructor;
-    modelValue: import("vue").PropType<unknown>;
+    direction: PropType<RadioGroupDirection>;
+    modelValue: PropType<unknown>;
     checkedColor: StringConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("change" | "update:modelValue")[], "change" | "update:modelValue", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    disabled: boolean;
-} & {
-    modelValue?: unknown;
-    iconSize?: string | number | undefined;
-    checkedColor?: string | undefined;
-    direction?: string | undefined;
+};
+export type RadioGroupProps = ExtractPropTypes<typeof radioGroupProps>;
+export type RadioGroupProvide = {
+    props: RadioGroupProps;
+    updateValue: (value: unknown) => void;
+};
+export declare const RADIO_KEY: InjectionKey<RadioGroupProvide>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
+    shape: PropType<RadioShape>;
+    disabled: BooleanConstructor;
+    iconSize: (NumberConstructor | StringConstructor)[];
+    direction: PropType<RadioGroupDirection>;
+    modelValue: PropType<unknown>;
+    checkedColor: StringConstructor;
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", import("vue").PublicProps, Readonly<ExtractPropTypes<{
+    shape: PropType<RadioShape>;
+    disabled: BooleanConstructor;
+    iconSize: (NumberConstructor | StringConstructor)[];
+    direction: PropType<RadioGroupDirection>;
+    modelValue: PropType<unknown>;
+    checkedColor: StringConstructor;
+}>> & Readonly<{
+    onChange?: ((...args: any[]) => any) | undefined;
+    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
 }>, {
     disabled: boolean;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

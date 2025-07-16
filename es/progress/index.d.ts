@@ -1,34 +1,49 @@
-declare const Progress: import("../utils").WithInstall<import("vue").DefineComponent<{
+import { ProgressProps } from './Progress';
+export declare const Progress: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     color: StringConstructor;
     inactive: BooleanConstructor;
     pivotText: StringConstructor;
     textColor: StringConstructor;
+    showPivot: {
+        type: BooleanConstructor;
+        default: true;
+    };
     pivotColor: StringConstructor;
     trackColor: StringConstructor;
     strokeWidth: (NumberConstructor | StringConstructor)[];
     percentage: {
         type: (NumberConstructor | StringConstructor)[];
-        required: true;
-        validator: (value: string | number) => boolean;
+        default: number;
+        validator: (value: import("../utils").Numeric) => boolean;
     };
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    color: StringConstructor;
+    inactive: BooleanConstructor;
+    pivotText: StringConstructor;
+    textColor: StringConstructor;
     showPivot: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    pivotColor: StringConstructor;
+    trackColor: StringConstructor;
+    strokeWidth: (NumberConstructor | StringConstructor)[];
+    percentage: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+        validator: (value: import("../utils").Numeric) => boolean;
+    };
+}>> & Readonly<{}>, {
     inactive: boolean;
+    showPivot: boolean;
     percentage: string | number;
-    showPivot: boolean;
-} & {
-    color?: string | undefined;
-    textColor?: string | undefined;
-    strokeWidth?: string | number | undefined;
-    pivotText?: string | undefined;
-    pivotColor?: string | undefined;
-    trackColor?: string | undefined;
-}>, {
-    inactive: boolean;
-    showPivot: boolean;
-}>>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default Progress;
-export { Progress };
+export { progressProps } from './Progress';
+export type { ProgressProps };
+export type { ProgressInstance, ProgressThemeVars } from './types';
+declare module 'vue' {
+    interface GlobalComponents {
+        VanProgress: typeof Progress;
+    }
+}

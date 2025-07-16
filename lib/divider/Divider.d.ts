@@ -1,22 +1,44 @@
-import { PropType } from 'vue';
-export declare type DividerContentPosition = 'left' | 'center' | 'right';
-declare const _default: import("vue").DefineComponent<{
+import { type ExtractPropTypes } from 'vue';
+export type DividerContentPosition = 'left' | 'center' | 'right';
+export declare const dividerProps: {
     dashed: BooleanConstructor;
     hairline: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
+    vertical: BooleanConstructor;
     contentPosition: {
-        type: PropType<DividerContentPosition>;
-        default: string;
+        type: import("vue").PropType<T>;
+        default: DividerContentPosition;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+};
+export type DividerProps = ExtractPropTypes<typeof dividerProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
+    dashed: BooleanConstructor;
+    hairline: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    vertical: BooleanConstructor;
+    contentPosition: {
+        type: import("vue").PropType<T>;
+        default: DividerContentPosition;
+    };
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<ExtractPropTypes<{
+    dashed: BooleanConstructor;
+    hairline: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    vertical: BooleanConstructor;
+    contentPosition: {
+        type: import("vue").PropType<T>;
+        default: DividerContentPosition;
+    };
+}>> & Readonly<{}>, {
     dashed: boolean;
+    vertical: boolean;
     hairline: boolean;
     contentPosition: DividerContentPosition;
-} & {}>, {
-    dashed: boolean;
-    hairline: boolean;
-    contentPosition: DividerContentPosition;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

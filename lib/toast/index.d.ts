@@ -1,40 +1,89 @@
-import { App, TeleportProps } from 'vue';
-import { ComponentInstance } from '../utils';
-import { ToastType, ToastPosition } from './Toast';
-import type { LoadingType } from '../loading';
-export declare type ToastOptions = {
-    icon?: string;
-    type?: ToastType;
-    mask?: boolean;
-    message?: string | number;
-    onClose?: () => void;
-    onOpened?: () => void;
-    overlay?: boolean;
-    duration?: number;
-    teleport?: TeleportProps['to'];
-    position?: ToastPosition;
-    className?: unknown;
-    transition?: string;
-    iconPrefix?: string;
-    loadingType?: LoadingType;
-    forbidClick?: boolean;
-    closeOnClick?: boolean;
-    overlayClass?: unknown;
-    overlayStyle?: Record<string, any>;
-    closeOnClickOverlay?: boolean;
-};
-declare function Toast(options?: string | ToastOptions): ComponentInstance;
-declare namespace Toast {
-    var loading: (options: string | ToastOptions) => ComponentInstance;
-    var success: (options: string | ToastOptions) => ComponentInstance;
-    var fail: (options: string | ToastOptions) => ComponentInstance;
-    var clear: (all?: boolean | undefined) => void;
-    var setDefaultOptions: {
-        (options: ToastOptions): void;
-        (type: ToastType, options: ToastOptions): void;
+export declare const Toast: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
+    icon: StringConstructor;
+    show: BooleanConstructor;
+    type: {
+        type: import("vue").PropType<T>;
+        default: import("./types").ToastType;
     };
-    var resetDefaultOptions: (type?: ToastType | undefined) => void;
-    var allowMultiple: (value?: boolean) => void;
-    var install: (app: App<any>) => void;
-}
+    overlay: BooleanConstructor;
+    message: (NumberConstructor | StringConstructor)[];
+    iconSize: (NumberConstructor | StringConstructor)[];
+    duration: {
+        type: NumberConstructor;
+        default: number;
+    };
+    position: {
+        type: import("vue").PropType<T>;
+        default: import("./types").ToastPosition;
+    };
+    teleport: import("vue").PropType<import("vue").TeleportProps["to"]>;
+    wordBreak: import("vue").PropType<import("./types").ToastWordBreak>;
+    className: import("vue").PropType<unknown>;
+    iconPrefix: StringConstructor;
+    transition: {
+        type: import("vue").PropType<T>;
+        default: string;
+    };
+    loadingType: import("vue").PropType<import("..").LoadingType>;
+    forbidClick: BooleanConstructor;
+    overlayClass: import("vue").PropType<unknown>;
+    overlayStyle: import("vue").PropType<import("vue").CSSProperties>;
+    closeOnClick: BooleanConstructor;
+    closeOnClickOverlay: BooleanConstructor;
+    zIndex: (NumberConstructor | StringConstructor)[];
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:show"[], "update:show", import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    icon: StringConstructor;
+    show: BooleanConstructor;
+    type: {
+        type: import("vue").PropType<T>;
+        default: import("./types").ToastType;
+    };
+    overlay: BooleanConstructor;
+    message: (NumberConstructor | StringConstructor)[];
+    iconSize: (NumberConstructor | StringConstructor)[];
+    duration: {
+        type: NumberConstructor;
+        default: number;
+    };
+    position: {
+        type: import("vue").PropType<T>;
+        default: import("./types").ToastPosition;
+    };
+    teleport: import("vue").PropType<import("vue").TeleportProps["to"]>;
+    wordBreak: import("vue").PropType<import("./types").ToastWordBreak>;
+    className: import("vue").PropType<unknown>;
+    iconPrefix: StringConstructor;
+    transition: {
+        type: import("vue").PropType<T>;
+        default: string;
+    };
+    loadingType: import("vue").PropType<import("..").LoadingType>;
+    forbidClick: BooleanConstructor;
+    overlayClass: import("vue").PropType<unknown>;
+    overlayStyle: import("vue").PropType<import("vue").CSSProperties>;
+    closeOnClick: BooleanConstructor;
+    closeOnClickOverlay: BooleanConstructor;
+    zIndex: (NumberConstructor | StringConstructor)[];
+}>> & Readonly<{
+    "onUpdate:show"?: ((...args: any[]) => any) | undefined;
+}>, {
+    type: import("./types").ToastType;
+    position: import("./types").ToastPosition;
+    overlay: boolean;
+    show: boolean;
+    duration: number;
+    closeOnClickOverlay: boolean;
+    transition: string;
+    forbidClick: boolean;
+    closeOnClick: boolean;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default Toast;
+export { toastProps } from './Toast';
+export { showToast, closeToast, showFailToast, showLoadingToast, showSuccessToast, allowMultipleToast, setToastDefaultOptions, resetToastDefaultOptions, } from './function-call';
+export type { ToastProps } from './Toast';
+export type { ToastType, ToastOptions, ToastPosition, ToastThemeVars, ToastWordBreak, ToastWrapperInstance, } from './types';
+declare module 'vue' {
+    interface GlobalComponents {
+        VanToast: typeof Toast;
+    }
+}

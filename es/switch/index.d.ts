@@ -1,4 +1,4 @@
-declare const Switch: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const Switch: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     size: (NumberConstructor | StringConstructor)[];
     loading: BooleanConstructor;
     disabled: BooleanConstructor;
@@ -13,21 +13,36 @@ declare const Switch: import("../utils").WithInstall<import("vue").DefineCompone
         type: import("vue").PropType<unknown>;
         default: unknown;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("change" | "update:modelValue")[], "change" | "update:modelValue", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    loading: boolean;
-    disabled: boolean;
-    activeValue: unknown;
-    inactiveValue: unknown;
-} & {
-    size?: string | number | undefined;
-    modelValue?: unknown;
-    activeColor?: string | undefined;
-    inactiveColor?: string | undefined;
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    size: (NumberConstructor | StringConstructor)[];
+    loading: BooleanConstructor;
+    disabled: BooleanConstructor;
+    modelValue: import("vue").PropType<unknown>;
+    activeColor: StringConstructor;
+    inactiveColor: StringConstructor;
+    activeValue: {
+        type: import("vue").PropType<unknown>;
+        default: unknown;
+    };
+    inactiveValue: {
+        type: import("vue").PropType<unknown>;
+        default: unknown;
+    };
+}>> & Readonly<{
+    onChange?: ((...args: any[]) => any) | undefined;
+    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
 }>, {
-    loading: boolean;
     disabled: boolean;
+    loading: boolean;
     activeValue: unknown;
     inactiveValue: unknown;
-}>>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default Switch;
-export { Switch };
+export { switchProps } from './Switch';
+export type { SwitchProps } from './Switch';
+export type { SwitchThemeVars } from './types';
+declare module 'vue' {
+    interface GlobalComponents {
+        VanSwitch: typeof Switch;
+    }
+}

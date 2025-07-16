@@ -1,52 +1,110 @@
-import { PropType } from 'vue';
-export declare type ImageFit = 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
-declare const _default: import("vue").DefineComponent<{
+import { type PropType, type ExtractPropTypes, type ImgHTMLAttributes } from 'vue';
+import type { ImageFit, ImagePosition } from './types';
+export declare const imageProps: {
     src: StringConstructor;
     alt: StringConstructor;
     fit: PropType<ImageFit>;
+    position: PropType<ImagePosition>;
     round: BooleanConstructor;
+    block: BooleanConstructor;
     width: (NumberConstructor | StringConstructor)[];
     height: (NumberConstructor | StringConstructor)[];
     radius: (NumberConstructor | StringConstructor)[];
     lazyLoad: BooleanConstructor;
-    iconPrefix: StringConstructor;
+    iconSize: (NumberConstructor | StringConstructor)[];
     showError: {
         type: BooleanConstructor;
-        default: boolean;
-    };
-    showLoading: {
-        type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
     errorIcon: {
-        type: StringConstructor;
+        type: PropType<T>;
         default: string;
+    };
+    iconPrefix: StringConstructor;
+    showLoading: {
+        type: BooleanConstructor;
+        default: true;
     };
     loadingIcon: {
-        type: StringConstructor;
+        type: PropType<T>;
         default: string;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("error" | "load")[], "error" | "load", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    round: boolean;
-    lazyLoad: boolean;
-    showError: boolean;
-    showLoading: boolean;
-    errorIcon: string;
-    loadingIcon: string;
-} & {
-    iconPrefix?: string | undefined;
-    width?: string | number | undefined;
-    src?: string | undefined;
-    alt?: string | undefined;
-    fit?: ImageFit | undefined;
-    height?: string | number | undefined;
-    radius?: string | number | undefined;
+    crossorigin: PropType<ImgHTMLAttributes["crossorigin"]>;
+    referrerpolicy: PropType<ImgHTMLAttributes["referrerpolicy"]>;
+};
+export type ImageProps = ExtractPropTypes<typeof imageProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
+    src: StringConstructor;
+    alt: StringConstructor;
+    fit: PropType<ImageFit>;
+    position: PropType<ImagePosition>;
+    round: BooleanConstructor;
+    block: BooleanConstructor;
+    width: (NumberConstructor | StringConstructor)[];
+    height: (NumberConstructor | StringConstructor)[];
+    radius: (NumberConstructor | StringConstructor)[];
+    lazyLoad: BooleanConstructor;
+    iconSize: (NumberConstructor | StringConstructor)[];
+    showError: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    errorIcon: {
+        type: PropType<T>;
+        default: string;
+    };
+    iconPrefix: StringConstructor;
+    showLoading: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    loadingIcon: {
+        type: PropType<T>;
+        default: string;
+    };
+    crossorigin: PropType<ImgHTMLAttributes["crossorigin"]>;
+    referrerpolicy: PropType<ImgHTMLAttributes["referrerpolicy"]>;
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("error" | "load")[], "error" | "load", import("vue").PublicProps, Readonly<ExtractPropTypes<{
+    src: StringConstructor;
+    alt: StringConstructor;
+    fit: PropType<ImageFit>;
+    position: PropType<ImagePosition>;
+    round: BooleanConstructor;
+    block: BooleanConstructor;
+    width: (NumberConstructor | StringConstructor)[];
+    height: (NumberConstructor | StringConstructor)[];
+    radius: (NumberConstructor | StringConstructor)[];
+    lazyLoad: BooleanConstructor;
+    iconSize: (NumberConstructor | StringConstructor)[];
+    showError: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    errorIcon: {
+        type: PropType<T>;
+        default: string;
+    };
+    iconPrefix: StringConstructor;
+    showLoading: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    loadingIcon: {
+        type: PropType<T>;
+        default: string;
+    };
+    crossorigin: PropType<ImgHTMLAttributes["crossorigin"]>;
+    referrerpolicy: PropType<ImgHTMLAttributes["referrerpolicy"]>;
+}>> & Readonly<{
+    onLoad?: ((...args: any[]) => any) | undefined;
+    onError?: ((...args: any[]) => any) | undefined;
 }>, {
     round: boolean;
-    lazyLoad: boolean;
+    block: boolean;
     showError: boolean;
-    showLoading: boolean;
+    lazyLoad: boolean;
     errorIcon: string;
+    showLoading: boolean;
     loadingIcon: string;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

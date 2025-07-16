@@ -1,5 +1,9 @@
-import { PropType, CSSProperties } from 'vue';
-declare const _default: import("vue").DefineComponent<{
+import { type PropType, type CSSProperties, type ExtractPropTypes } from 'vue';
+export declare const tabProps: {
+    to: PropType<import("vue-router").RouteLocationRaw>;
+    url: StringConstructor;
+    replace: BooleanConstructor;
+} & {
     dot: BooleanConstructor;
     name: (NumberConstructor | StringConstructor)[];
     badge: (NumberConstructor | StringConstructor)[];
@@ -7,24 +11,48 @@ declare const _default: import("vue").DefineComponent<{
     disabled: BooleanConstructor;
     titleClass: PropType<unknown>;
     titleStyle: PropType<string | CSSProperties>;
+    showZeroBadge: {
+        type: BooleanConstructor;
+        default: true;
+    };
+};
+export type TabProps = ExtractPropTypes<typeof tabProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     to: PropType<import("vue-router").RouteLocationRaw>;
     url: StringConstructor;
     replace: BooleanConstructor;
-}, (() => JSX.Element | undefined) | undefined, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    replace: boolean;
-    dot: boolean;
-    disabled: boolean;
 } & {
-    name?: string | number | undefined;
-    title?: string | undefined;
-    to?: import("vue-router").RouteLocationRaw | (import("vue-router").RouteLocationRaw & object) | undefined;
-    url?: string | undefined;
-    badge?: string | number | undefined;
-    titleClass?: unknown;
-    titleStyle?: string | CSSProperties | undefined;
-}>, {
+    dot: BooleanConstructor;
+    name: (NumberConstructor | StringConstructor)[];
+    badge: (NumberConstructor | StringConstructor)[];
+    title: StringConstructor;
+    disabled: BooleanConstructor;
+    titleClass: PropType<unknown>;
+    titleStyle: PropType<string | CSSProperties>;
+    showZeroBadge: {
+        type: BooleanConstructor;
+        default: true;
+    };
+}>, (() => import("vue/jsx-runtime").JSX.Element | undefined) | undefined, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<ExtractPropTypes<{
+    to: PropType<import("vue-router").RouteLocationRaw>;
+    url: StringConstructor;
+    replace: BooleanConstructor;
+} & {
+    dot: BooleanConstructor;
+    name: (NumberConstructor | StringConstructor)[];
+    badge: (NumberConstructor | StringConstructor)[];
+    title: StringConstructor;
+    disabled: BooleanConstructor;
+    titleClass: PropType<unknown>;
+    titleStyle: PropType<string | CSSProperties>;
+    showZeroBadge: {
+        type: BooleanConstructor;
+        default: true;
+    };
+}>> & Readonly<{}>, {
     replace: boolean;
     dot: boolean;
     disabled: boolean;
-}>;
+    showZeroBadge: boolean;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

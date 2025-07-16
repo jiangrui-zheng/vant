@@ -1,29 +1,43 @@
-import { PropType } from 'vue';
+import { type PropType, type ExtractPropTypes } from 'vue';
 import { ButtonType } from '../button';
-declare const _default: import("vue").DefineComponent<{
+export declare const actionBarButtonProps: {
+    to: PropType<import("vue-router").RouteLocationRaw>;
+    url: StringConstructor;
+    replace: BooleanConstructor;
+} & {
     type: PropType<ButtonType>;
     text: StringConstructor;
     icon: StringConstructor;
     color: StringConstructor;
     loading: BooleanConstructor;
     disabled: BooleanConstructor;
+};
+export type ActionBarButtonProps = ExtractPropTypes<typeof actionBarButtonProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     to: PropType<import("vue-router").RouteLocationRaw>;
     url: StringConstructor;
     replace: BooleanConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    replace: boolean;
-    loading: boolean;
-    disabled: boolean;
 } & {
-    text?: string | undefined;
-    to?: import("vue-router").RouteLocationRaw | (import("vue-router").RouteLocationRaw & object) | undefined;
-    url?: string | undefined;
-    color?: string | undefined;
-    icon?: string | undefined;
-    type?: ButtonType | undefined;
-}>, {
+    type: PropType<ButtonType>;
+    text: StringConstructor;
+    icon: StringConstructor;
+    color: StringConstructor;
+    loading: BooleanConstructor;
+    disabled: BooleanConstructor;
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<ExtractPropTypes<{
+    to: PropType<import("vue-router").RouteLocationRaw>;
+    url: StringConstructor;
+    replace: BooleanConstructor;
+} & {
+    type: PropType<ButtonType>;
+    text: StringConstructor;
+    icon: StringConstructor;
+    color: StringConstructor;
+    loading: BooleanConstructor;
+    disabled: BooleanConstructor;
+}>> & Readonly<{}>, {
     replace: boolean;
-    loading: boolean;
     disabled: boolean;
-}>;
+    loading: boolean;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

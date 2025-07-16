@@ -1,14 +1,29 @@
-declare const _default: import("vue").DefineComponent<{
+import { type ExtractPropTypes } from 'vue';
+export declare const cellGroupProps: {
     title: StringConstructor;
+    inset: BooleanConstructor;
     border: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+};
+export type CellGroupProps = ExtractPropTypes<typeof cellGroupProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
+    title: StringConstructor;
+    inset: BooleanConstructor;
+    border: {
+        type: BooleanConstructor;
+        default: true;
+    };
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<ExtractPropTypes<{
+    title: StringConstructor;
+    inset: BooleanConstructor;
+    border: {
+        type: BooleanConstructor;
+        default: true;
+    };
+}>> & Readonly<{}>, {
+    inset: boolean;
     border: boolean;
-} & {
-    title?: string | undefined;
-}>, {
-    border: boolean;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

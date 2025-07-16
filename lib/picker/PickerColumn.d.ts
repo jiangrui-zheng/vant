@@ -1,28 +1,19 @@
-import { PropType } from 'vue';
-export declare const PICKER_KEY: unique symbol;
-export declare type PickerObjectOption = {
-    text?: string;
-    disabled?: boolean;
-    [key: string]: any;
-};
-export declare type PickerOption = string | PickerObjectOption;
-export declare type PickerObjectColumn = {
-    values?: PickerOption[];
-    children?: PickerColumn;
-    className?: unknown;
-    defaultIndex?: number;
-    [key: string]: any;
-};
-export declare type PickerColumn = PickerOption[] | PickerObjectColumn;
-declare const _default: import("vue").DefineComponent<{
-    readonly: BooleanConstructor;
-    allowHtml: BooleanConstructor;
-    className: PropType<unknown>;
-    textKey: {
-        type: StringConstructor;
+import { type PropType, type InjectionKey } from 'vue';
+import type { PickerOption, PickerFieldNames, PickerColumnProvide } from './types';
+export declare const PICKER_KEY: InjectionKey<PickerColumnProvide>;
+declare const _default: import("vue").DefineComponent<import("vue").ExtractPropTypes<{
+    value: (NumberConstructor | StringConstructor)[];
+    fields: {
+        type: PropType<Required<PickerFieldNames>>;
         required: true;
     };
-    itemHeight: {
+    options: {
+        type: PropType<T[]>;
+        default: () => never[];
+    };
+    readonly: BooleanConstructor;
+    allowHtml: BooleanConstructor;
+    optionHeight: {
         type: NumberConstructor;
         required: true;
     };
@@ -30,33 +21,41 @@ declare const _default: import("vue").DefineComponent<{
         type: (NumberConstructor | StringConstructor)[];
         required: true;
     };
-    visibleItemCount: {
+    visibleOptionNum: {
         type: (NumberConstructor | StringConstructor)[];
         required: true;
     };
-    defaultIndex: {
-        type: NumberConstructor;
-        default: number;
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("change" | "clickOption" | "scrollInto")[], "change" | "clickOption" | "scrollInto", import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    value: (NumberConstructor | StringConstructor)[];
+    fields: {
+        type: PropType<Required<PickerFieldNames>>;
+        required: true;
     };
-    initialOptions: {
-        type: PropType<PickerOption[]>;
+    options: {
+        type: PropType<T[]>;
         default: () => never[];
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "change"[], "change", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    readonly: boolean;
-    allowHtml: boolean;
-    textKey: string;
-    itemHeight: number;
-    swipeDuration: string | number;
-    visibleItemCount: string | number;
-    defaultIndex: number;
-    initialOptions: PickerOption[];
-} & {
-    className?: unknown;
+    readonly: BooleanConstructor;
+    allowHtml: BooleanConstructor;
+    optionHeight: {
+        type: NumberConstructor;
+        required: true;
+    };
+    swipeDuration: {
+        type: (NumberConstructor | StringConstructor)[];
+        required: true;
+    };
+    visibleOptionNum: {
+        type: (NumberConstructor | StringConstructor)[];
+        required: true;
+    };
+}>> & Readonly<{
+    onChange?: ((...args: any[]) => any) | undefined;
+    onClickOption?: ((...args: any[]) => any) | undefined;
+    onScrollInto?: ((...args: any[]) => any) | undefined;
 }>, {
     readonly: boolean;
     allowHtml: boolean;
-    defaultIndex: number;
-    initialOptions: PickerOption[];
-}>;
+    options: PickerOption[];
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

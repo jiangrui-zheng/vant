@@ -1,82 +1,148 @@
-import { PropType, CSSProperties } from 'vue';
-export declare type CellArrowDirection = 'up' | 'down' | 'left' | 'right';
-export declare const cellProps: {
+import { type PropType, type CSSProperties, type ExtractPropTypes } from 'vue';
+export type CellSize = 'normal' | 'large';
+export type CellArrowDirection = 'up' | 'down' | 'left' | 'right';
+export declare const cellSharedProps: {
+    tag: {
+        type: PropType<T>;
+        default: keyof HTMLElementTagNameMap;
+    };
     icon: StringConstructor;
-    size: PropType<"large">;
+    size: PropType<CellSize>;
     title: (NumberConstructor | StringConstructor)[];
     value: (NumberConstructor | StringConstructor)[];
     label: (NumberConstructor | StringConstructor)[];
     center: BooleanConstructor;
     isLink: BooleanConstructor;
-    required: BooleanConstructor;
+    border: {
+        type: BooleanConstructor;
+        default: true;
+    };
     iconPrefix: StringConstructor;
     valueClass: PropType<unknown>;
     labelClass: PropType<unknown>;
     titleClass: PropType<unknown>;
     titleStyle: PropType<string | CSSProperties>;
     arrowDirection: PropType<CellArrowDirection>;
-    border: {
-        type: BooleanConstructor;
-        default: boolean;
+    required: {
+        type: PropType<boolean | "auto">;
+        default: null;
     };
     clickable: {
         type: PropType<boolean | null>;
         default: null;
     };
 };
-declare const _default: import("vue").DefineComponent<{
-    to: PropType<import("vue-router").RouteLocationRaw>;
-    url: StringConstructor;
-    replace: BooleanConstructor;
+export declare const cellProps: {
+    tag: {
+        type: PropType<T>;
+        default: keyof HTMLElementTagNameMap;
+    };
     icon: StringConstructor;
-    size: PropType<"large">;
+    size: PropType<CellSize>;
     title: (NumberConstructor | StringConstructor)[];
     value: (NumberConstructor | StringConstructor)[];
     label: (NumberConstructor | StringConstructor)[];
     center: BooleanConstructor;
     isLink: BooleanConstructor;
-    required: BooleanConstructor;
+    border: {
+        type: BooleanConstructor;
+        default: true;
+    };
     iconPrefix: StringConstructor;
     valueClass: PropType<unknown>;
     labelClass: PropType<unknown>;
     titleClass: PropType<unknown>;
     titleStyle: PropType<string | CSSProperties>;
     arrowDirection: PropType<CellArrowDirection>;
-    border: {
-        type: BooleanConstructor;
-        default: boolean;
+    required: {
+        type: PropType<boolean | "auto">;
+        default: null;
     };
     clickable: {
         type: PropType<boolean | null>;
         default: null;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    replace: boolean;
-    center: boolean;
-    border: boolean;
-    isLink: boolean;
-    required: boolean;
-    clickable: boolean | null;
 } & {
-    label?: string | number | undefined;
-    title?: string | number | undefined;
-    to?: import("vue-router").RouteLocationRaw | (import("vue-router").RouteLocationRaw & object) | undefined;
-    url?: string | undefined;
-    icon?: string | undefined;
-    size?: "large" | undefined;
-    iconPrefix?: string | undefined;
-    value?: string | number | undefined;
-    valueClass?: unknown;
-    labelClass?: unknown;
-    titleClass?: unknown;
-    titleStyle?: string | CSSProperties | undefined;
-    arrowDirection?: CellArrowDirection | undefined;
-}>, {
+    to: PropType<import("vue-router").RouteLocationRaw>;
+    url: StringConstructor;
+    replace: BooleanConstructor;
+};
+export type CellProps = ExtractPropTypes<typeof cellProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
+    tag: {
+        type: PropType<T>;
+        default: keyof HTMLElementTagNameMap;
+    };
+    icon: StringConstructor;
+    size: PropType<CellSize>;
+    title: (NumberConstructor | StringConstructor)[];
+    value: (NumberConstructor | StringConstructor)[];
+    label: (NumberConstructor | StringConstructor)[];
+    center: BooleanConstructor;
+    isLink: BooleanConstructor;
+    border: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    iconPrefix: StringConstructor;
+    valueClass: PropType<unknown>;
+    labelClass: PropType<unknown>;
+    titleClass: PropType<unknown>;
+    titleStyle: PropType<string | CSSProperties>;
+    arrowDirection: PropType<CellArrowDirection>;
+    required: {
+        type: PropType<boolean | "auto">;
+        default: null;
+    };
+    clickable: {
+        type: PropType<boolean | null>;
+        default: null;
+    };
+} & {
+    to: PropType<import("vue-router").RouteLocationRaw>;
+    url: StringConstructor;
+    replace: BooleanConstructor;
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<ExtractPropTypes<{
+    tag: {
+        type: PropType<T>;
+        default: keyof HTMLElementTagNameMap;
+    };
+    icon: StringConstructor;
+    size: PropType<CellSize>;
+    title: (NumberConstructor | StringConstructor)[];
+    value: (NumberConstructor | StringConstructor)[];
+    label: (NumberConstructor | StringConstructor)[];
+    center: BooleanConstructor;
+    isLink: BooleanConstructor;
+    border: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    iconPrefix: StringConstructor;
+    valueClass: PropType<unknown>;
+    labelClass: PropType<unknown>;
+    titleClass: PropType<unknown>;
+    titleStyle: PropType<string | CSSProperties>;
+    arrowDirection: PropType<CellArrowDirection>;
+    required: {
+        type: PropType<boolean | "auto">;
+        default: null;
+    };
+    clickable: {
+        type: PropType<boolean | null>;
+        default: null;
+    };
+} & {
+    to: PropType<import("vue-router").RouteLocationRaw>;
+    url: StringConstructor;
+    replace: BooleanConstructor;
+}>> & Readonly<{}>, {
     replace: boolean;
+    tag: keyof HTMLElementTagNameMap;
     center: boolean;
     border: boolean;
     isLink: boolean;
-    required: boolean;
+    required: boolean | "auto";
     clickable: boolean | null;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

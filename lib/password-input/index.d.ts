@@ -1,34 +1,51 @@
-declare const PasswordInput: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const PasswordInput: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     info: StringConstructor;
-    gutter: (NumberConstructor | StringConstructor)[];
-    focused: BooleanConstructor;
-    errorInfo: StringConstructor;
     mask: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
     value: {
-        type: StringConstructor;
+        type: import("vue").PropType<T>;
         default: string;
     };
+    gutter: (NumberConstructor | StringConstructor)[];
     length: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "focus"[], "focus", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    length: string | number;
-    mask: boolean;
-    value: string;
-    focused: boolean;
-} & {
-    errorInfo?: string | undefined;
-    gutter?: string | number | undefined;
-    info?: string | undefined;
+    focused: BooleanConstructor;
+    errorInfo: StringConstructor;
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "focus"[], "focus", import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    info: StringConstructor;
+    mask: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    value: {
+        type: import("vue").PropType<T>;
+        default: string;
+    };
+    gutter: (NumberConstructor | StringConstructor)[];
+    length: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    focused: BooleanConstructor;
+    errorInfo: StringConstructor;
+}>> & Readonly<{
+    onFocus?: ((...args: any[]) => any) | undefined;
 }>, {
     length: string | number;
     mask: boolean;
     value: string;
     focused: boolean;
-}>>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default PasswordInput;
-export { PasswordInput };
+export { passwordInputProps } from './PasswordInput';
+export type { PasswordInputProps } from './PasswordInput';
+export type { PasswordInputThemeVars } from './types';
+declare module 'vue' {
+    interface GlobalComponents {
+        VanPasswordInput: typeof PasswordInput;
+    }
+}

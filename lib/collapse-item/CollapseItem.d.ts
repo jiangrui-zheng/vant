@@ -1,57 +1,141 @@
-declare const _default: import("vue").DefineComponent<{
-    name: (NumberConstructor | StringConstructor)[];
-    disabled: BooleanConstructor;
-    isLink: {
-        type: BooleanConstructor;
-        default: boolean;
+import { type ExtractPropTypes } from 'vue';
+export declare const collapseItemProps: {
+    tag: {
+        type: import("vue").PropType<T>;
+        default: keyof HTMLElementTagNameMap;
     };
     icon: StringConstructor;
-    size: import("vue").PropType<"large">;
+    size: import("vue").PropType<import("../cell").CellSize>;
     title: (NumberConstructor | StringConstructor)[];
     value: (NumberConstructor | StringConstructor)[];
     label: (NumberConstructor | StringConstructor)[];
     center: BooleanConstructor;
-    required: BooleanConstructor;
+    isLink: BooleanConstructor;
+    border: {
+        type: BooleanConstructor;
+        default: true;
+    };
     iconPrefix: StringConstructor;
     valueClass: import("vue").PropType<unknown>;
     labelClass: import("vue").PropType<unknown>;
     titleClass: import("vue").PropType<unknown>;
     titleStyle: import("vue").PropType<string | import("vue").CSSProperties>;
     arrowDirection: import("vue").PropType<import("../cell").CellArrowDirection>;
-    border: {
-        type: BooleanConstructor;
-        default: boolean;
+    required: {
+        type: import("vue").PropType<boolean | "auto">;
+        default: null;
     };
     clickable: {
         type: import("vue").PropType<boolean | null>;
         default: null;
     };
-}, (() => JSX.Element) | undefined, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    center: boolean;
-    border: boolean;
-    disabled: boolean;
-    isLink: boolean;
-    required: boolean;
-    clickable: boolean | null;
 } & {
-    name?: string | number | undefined;
-    label?: string | number | undefined;
-    title?: string | number | undefined;
-    icon?: string | undefined;
-    size?: "large" | undefined;
-    iconPrefix?: string | undefined;
-    value?: string | number | undefined;
-    valueClass?: unknown;
-    labelClass?: unknown;
-    titleClass?: unknown;
-    titleStyle?: string | import("vue").CSSProperties | undefined;
-    arrowDirection?: import("../cell").CellArrowDirection | undefined;
-}>, {
+    name: (NumberConstructor | StringConstructor)[];
+    isLink: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    disabled: BooleanConstructor;
+    readonly: BooleanConstructor;
+    lazyRender: {
+        type: BooleanConstructor;
+        default: true;
+    };
+};
+export type CollapseItemProps = ExtractPropTypes<typeof collapseItemProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
+    tag: {
+        type: import("vue").PropType<T>;
+        default: keyof HTMLElementTagNameMap;
+    };
+    icon: StringConstructor;
+    size: import("vue").PropType<import("../cell").CellSize>;
+    title: (NumberConstructor | StringConstructor)[];
+    value: (NumberConstructor | StringConstructor)[];
+    label: (NumberConstructor | StringConstructor)[];
+    center: BooleanConstructor;
+    isLink: BooleanConstructor;
+    border: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    iconPrefix: StringConstructor;
+    valueClass: import("vue").PropType<unknown>;
+    labelClass: import("vue").PropType<unknown>;
+    titleClass: import("vue").PropType<unknown>;
+    titleStyle: import("vue").PropType<string | import("vue").CSSProperties>;
+    arrowDirection: import("vue").PropType<import("../cell").CellArrowDirection>;
+    required: {
+        type: import("vue").PropType<boolean | "auto">;
+        default: null;
+    };
+    clickable: {
+        type: import("vue").PropType<boolean | null>;
+        default: null;
+    };
+} & {
+    name: (NumberConstructor | StringConstructor)[];
+    isLink: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    disabled: BooleanConstructor;
+    readonly: BooleanConstructor;
+    lazyRender: {
+        type: BooleanConstructor;
+        default: true;
+    };
+}>, (() => import("vue/jsx-runtime").JSX.Element) | undefined, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<ExtractPropTypes<{
+    tag: {
+        type: import("vue").PropType<T>;
+        default: keyof HTMLElementTagNameMap;
+    };
+    icon: StringConstructor;
+    size: import("vue").PropType<import("../cell").CellSize>;
+    title: (NumberConstructor | StringConstructor)[];
+    value: (NumberConstructor | StringConstructor)[];
+    label: (NumberConstructor | StringConstructor)[];
+    center: BooleanConstructor;
+    isLink: BooleanConstructor;
+    border: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    iconPrefix: StringConstructor;
+    valueClass: import("vue").PropType<unknown>;
+    labelClass: import("vue").PropType<unknown>;
+    titleClass: import("vue").PropType<unknown>;
+    titleStyle: import("vue").PropType<string | import("vue").CSSProperties>;
+    arrowDirection: import("vue").PropType<import("../cell").CellArrowDirection>;
+    required: {
+        type: import("vue").PropType<boolean | "auto">;
+        default: null;
+    };
+    clickable: {
+        type: import("vue").PropType<boolean | null>;
+        default: null;
+    };
+} & {
+    name: (NumberConstructor | StringConstructor)[];
+    isLink: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    disabled: BooleanConstructor;
+    readonly: BooleanConstructor;
+    lazyRender: {
+        type: BooleanConstructor;
+        default: true;
+    };
+}>> & Readonly<{}>, {
+    tag: keyof HTMLElementTagNameMap;
     center: boolean;
-    border: boolean;
     disabled: boolean;
+    border: boolean;
     isLink: boolean;
-    required: boolean;
+    required: boolean | "auto";
     clickable: boolean | null;
-}>;
+    readonly: boolean;
+    lazyRender: boolean;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

@@ -1,52 +1,83 @@
-declare const Image: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const Image: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     src: StringConstructor;
     alt: StringConstructor;
-    fit: import("vue").PropType<import("./Image").ImageFit>;
+    fit: import("vue").PropType<import("./types").ImageFit>;
+    position: import("vue").PropType<import("./types").ImagePosition>;
     round: BooleanConstructor;
+    block: BooleanConstructor;
     width: (NumberConstructor | StringConstructor)[];
     height: (NumberConstructor | StringConstructor)[];
     radius: (NumberConstructor | StringConstructor)[];
     lazyLoad: BooleanConstructor;
-    iconPrefix: StringConstructor;
+    iconSize: (NumberConstructor | StringConstructor)[];
     showError: {
         type: BooleanConstructor;
-        default: boolean;
-    };
-    showLoading: {
-        type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
     errorIcon: {
-        type: StringConstructor;
+        type: import("vue").PropType<T>;
         default: string;
+    };
+    iconPrefix: StringConstructor;
+    showLoading: {
+        type: BooleanConstructor;
+        default: true;
     };
     loadingIcon: {
-        type: StringConstructor;
+        type: import("vue").PropType<T>;
         default: string;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("error" | "load")[], "error" | "load", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    round: boolean;
-    lazyLoad: boolean;
-    showError: boolean;
-    showLoading: boolean;
-    errorIcon: string;
-    loadingIcon: string;
-} & {
-    iconPrefix?: string | undefined;
-    width?: string | number | undefined;
-    src?: string | undefined;
-    alt?: string | undefined;
-    fit?: import("./Image").ImageFit | undefined;
-    height?: string | number | undefined;
-    radius?: string | number | undefined;
+    crossorigin: import("vue").PropType<import("vue").ImgHTMLAttributes["crossorigin"]>;
+    referrerpolicy: import("vue").PropType<import("vue").ImgHTMLAttributes["referrerpolicy"]>;
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("error" | "load")[], "error" | "load", import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    src: StringConstructor;
+    alt: StringConstructor;
+    fit: import("vue").PropType<import("./types").ImageFit>;
+    position: import("vue").PropType<import("./types").ImagePosition>;
+    round: BooleanConstructor;
+    block: BooleanConstructor;
+    width: (NumberConstructor | StringConstructor)[];
+    height: (NumberConstructor | StringConstructor)[];
+    radius: (NumberConstructor | StringConstructor)[];
+    lazyLoad: BooleanConstructor;
+    iconSize: (NumberConstructor | StringConstructor)[];
+    showError: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    errorIcon: {
+        type: import("vue").PropType<T>;
+        default: string;
+    };
+    iconPrefix: StringConstructor;
+    showLoading: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    loadingIcon: {
+        type: import("vue").PropType<T>;
+        default: string;
+    };
+    crossorigin: import("vue").PropType<import("vue").ImgHTMLAttributes["crossorigin"]>;
+    referrerpolicy: import("vue").PropType<import("vue").ImgHTMLAttributes["referrerpolicy"]>;
+}>> & Readonly<{
+    onLoad?: ((...args: any[]) => any) | undefined;
+    onError?: ((...args: any[]) => any) | undefined;
 }>, {
     round: boolean;
-    lazyLoad: boolean;
+    block: boolean;
     showError: boolean;
-    showLoading: boolean;
+    lazyLoad: boolean;
     errorIcon: string;
+    showLoading: boolean;
     loadingIcon: string;
-}>>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default Image;
-export { Image };
-export type { ImageFit } from './Image';
+export { imageProps } from './Image';
+export type { ImageProps } from './Image';
+export type { ImageFit, ImagePosition, ImageThemeVars } from './types';
+declare module 'vue' {
+    interface GlobalComponents {
+        VanImage: typeof Image;
+    }
+}

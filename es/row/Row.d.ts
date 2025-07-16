@@ -1,33 +1,68 @@
-import { PropType, ComputedRef } from 'vue';
-export declare const ROW_KEY: unique symbol;
-export declare type RowSpaces = {
+import { type PropType, type ComputedRef, type InjectionKey, type ExtractPropTypes } from 'vue';
+export type RowSpaces = {
     left?: number;
     right: number;
 }[];
-export declare type RowProvide = {
+export type VerticalSpaces = {
+    bottom?: number;
+}[];
+export type RowProvide = {
     spaces: ComputedRef<RowSpaces>;
+    verticalSpaces: ComputedRef<VerticalSpaces>;
 };
-export declare type RowAlign = 'top' | 'center' | 'bottom';
-export declare type RowJustify = 'start' | 'end' | 'center' | 'space-around' | 'space-between';
-declare const _default: import("vue").DefineComponent<{
-    align: PropType<RowAlign>;
-    justify: PropType<RowJustify>;
+export declare const ROW_KEY: InjectionKey<RowProvide>;
+export type RowAlign = 'top' | 'center' | 'bottom';
+export type RowJustify = 'start' | 'end' | 'center' | 'space-around' | 'space-between';
+export declare const rowProps: {
     tag: {
-        type: PropType<keyof HTMLElementTagNameMap>;
-        default: string;
+        type: PropType<T>;
+        default: keyof HTMLElementTagNameMap;
     };
+    wrap: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    align: PropType<RowAlign>;
     gutter: {
-        type: (NumberConstructor | StringConstructor)[];
+        type: PropType<string | number | (string | number)[]>;
         default: number;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    justify: PropType<RowJustify>;
+};
+export type RowProps = ExtractPropTypes<typeof rowProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
+    tag: {
+        type: PropType<T>;
+        default: keyof HTMLElementTagNameMap;
+    };
+    wrap: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    align: PropType<RowAlign>;
+    gutter: {
+        type: PropType<string | number | (string | number)[]>;
+        default: number;
+    };
+    justify: PropType<RowJustify>;
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<ExtractPropTypes<{
+    tag: {
+        type: PropType<T>;
+        default: keyof HTMLElementTagNameMap;
+    };
+    wrap: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    align: PropType<RowAlign>;
+    gutter: {
+        type: PropType<string | number | (string | number)[]>;
+        default: number;
+    };
+    justify: PropType<RowJustify>;
+}>> & Readonly<{}>, {
     tag: keyof HTMLElementTagNameMap;
-    gutter: string | number;
-} & {
-    justify?: RowJustify | undefined;
-    align?: RowAlign | undefined;
-}>, {
-    tag: keyof HTMLElementTagNameMap;
-    gutter: string | number;
-}>;
+    wrap: boolean;
+    gutter: string | number | (string | number)[];
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

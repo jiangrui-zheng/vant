@@ -1,37 +1,51 @@
-declare const Tag: import("../utils").WithInstall<import("vue").DefineComponent<{
-    size: StringConstructor;
+export declare const Tag: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
+    size: import("vue").PropType<import("./types").TagSize>;
     mark: BooleanConstructor;
+    show: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    type: {
+        type: import("vue").PropType<T>;
+        default: import("./types").TagType;
+    };
     color: StringConstructor;
     plain: BooleanConstructor;
     round: BooleanConstructor;
     textColor: StringConstructor;
     closeable: BooleanConstructor;
-    type: {
-        type: import("vue").PropType<import("./Tag").TagType>;
-        default: string;
-    };
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "close"[], "close", import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    size: import("vue").PropType<import("./types").TagSize>;
+    mark: BooleanConstructor;
     show: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "close"[], "close", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    mark: boolean;
-    round: boolean;
-    type: import("./Tag").TagType;
-    show: boolean;
-    plain: boolean;
-    closeable: boolean;
-} & {
-    color?: string | undefined;
-    size?: string | undefined;
-    textColor?: string | undefined;
+    type: {
+        type: import("vue").PropType<T>;
+        default: import("./types").TagType;
+    };
+    color: StringConstructor;
+    plain: BooleanConstructor;
+    round: BooleanConstructor;
+    textColor: StringConstructor;
+    closeable: BooleanConstructor;
+}>> & Readonly<{
+    onClose?: ((...args: any[]) => any) | undefined;
 }>, {
+    type: import("./types").TagType;
     mark: boolean;
     round: boolean;
-    type: import("./Tag").TagType;
     show: boolean;
     plain: boolean;
     closeable: boolean;
-}>>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default Tag;
-export { Tag };
+export { tagProps } from './Tag';
+export type { TagProps } from './Tag';
+export type { TagSize, TagType, TagThemeVars } from './types';
+declare module 'vue' {
+    interface GlobalComponents {
+        VanTag: typeof Tag;
+    }
+}

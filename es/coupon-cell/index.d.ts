@@ -1,39 +1,60 @@
-declare const CouponCell: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const CouponCell: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     title: StringConstructor;
-    coupons: {
-        type: import("vue").PropType<import("../coupon").CouponInfo[]>;
-        default: () => never[];
-    };
-    currency: {
-        type: StringConstructor;
-        default: string;
-    };
     border: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
     editable: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
+    };
+    coupons: {
+        type: import("vue").PropType<T[]>;
+        default: () => never[];
+    };
+    currency: {
+        type: import("vue").PropType<T_1>;
+        default: string;
     };
     chosenCoupon: {
-        type: (NumberConstructor | StringConstructor)[];
+        type: import("vue").PropType<number | number[]>;
         default: number;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    title: StringConstructor;
+    border: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    editable: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    coupons: {
+        type: import("vue").PropType<T[]>;
+        default: () => never[];
+    };
+    currency: {
+        type: import("vue").PropType<T_1>;
+        default: string;
+    };
+    chosenCoupon: {
+        type: import("vue").PropType<number | number[]>;
+        default: number;
+    };
+}>> & Readonly<{}>, {
     border: boolean;
     currency: string;
     editable: boolean;
-    coupons: import("../coupon").CouponInfo[];
-    chosenCoupon: string | number;
-} & {
-    title?: string | undefined;
-}>, {
-    border: boolean;
-    currency: string;
-    editable: boolean;
-    coupons: import("../coupon").CouponInfo[];
-    chosenCoupon: string | number;
-}>>;
+    coupons: import("..").CouponInfo[];
+    chosenCoupon: number | number[];
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default CouponCell;
-export { CouponCell };
+export { couponCellProps } from './CouponCell';
+export type { CouponCellProps } from './CouponCell';
+export type { CouponCellThemeVars } from './types';
+declare module 'vue' {
+    interface GlobalComponents {
+        VanCouponCell: typeof CouponCell;
+    }
+}

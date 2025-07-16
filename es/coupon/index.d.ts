@@ -1,24 +1,35 @@
-declare const Coupon: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const Coupon: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     chosen: BooleanConstructor;
-    disabled: BooleanConstructor;
     coupon: {
         type: import("vue").PropType<import("./Coupon").CouponInfo>;
         required: true;
     };
+    disabled: BooleanConstructor;
     currency: {
-        type: StringConstructor;
+        type: import("vue").PropType<T>;
         default: string;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    chosen: BooleanConstructor;
+    coupon: {
+        type: import("vue").PropType<import("./Coupon").CouponInfo>;
+        required: true;
+    };
+    disabled: BooleanConstructor;
+    currency: {
+        type: import("vue").PropType<T>;
+        default: string;
+    };
+}>> & Readonly<{}>, {
     disabled: boolean;
     currency: string;
-    coupon: import("./Coupon").CouponInfo;
     chosen: boolean;
-} & {}>, {
-    disabled: boolean;
-    currency: string;
-    chosen: boolean;
-}>>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default Coupon;
-export { Coupon };
 export type { CouponInfo } from './Coupon';
+export type { CouponThemeVars } from './types';
+declare module 'vue' {
+    interface GlobalComponents {
+        VanCoupon: typeof Coupon;
+    }
+}

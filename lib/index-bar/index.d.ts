@@ -1,29 +1,50 @@
-declare const IndexBar: import("../utils").WithInstall<import("vue").DefineComponent<{
-    zIndex: (NumberConstructor | StringConstructor)[];
-    highlightColor: StringConstructor;
+import { IndexBarProps } from './IndexBar';
+export declare const IndexBar: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     sticky: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
+    zIndex: (NumberConstructor | StringConstructor)[];
+    teleport: import("vue").PropType<import("vue").TeleportProps["to"]>;
+    highlightColor: StringConstructor;
     stickyOffsetTop: {
         type: NumberConstructor;
         default: number;
     };
     indexList: {
-        type: import("vue").PropType<string[]>;
+        type: import("vue").PropType<import("../utils").Numeric[]>;
         default: () => string[];
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("select" | "change")[], "select" | "change", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    sticky: boolean;
-    stickyOffsetTop: number;
-    indexList: string[];
-} & {
-    zIndex?: string | number | undefined;
-    highlightColor?: string | undefined;
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("select" | "change")[], "select" | "change", import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    sticky: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    zIndex: (NumberConstructor | StringConstructor)[];
+    teleport: import("vue").PropType<import("vue").TeleportProps["to"]>;
+    highlightColor: StringConstructor;
+    stickyOffsetTop: {
+        type: NumberConstructor;
+        default: number;
+    };
+    indexList: {
+        type: import("vue").PropType<import("../utils").Numeric[]>;
+        default: () => string[];
+    };
+}>> & Readonly<{
+    onChange?: ((...args: any[]) => any) | undefined;
+    onSelect?: ((...args: any[]) => any) | undefined;
 }>, {
     sticky: boolean;
     stickyOffsetTop: number;
-    indexList: string[];
-}>>;
+    indexList: import("../utils").Numeric[];
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default IndexBar;
-export { IndexBar };
+export { indexBarProps } from './IndexBar';
+export type { IndexBarProps };
+export type { IndexBarInstance, IndexBarThemeVars } from './types';
+declare module 'vue' {
+    interface GlobalComponents {
+        VanIndexBar: typeof IndexBar;
+    }
+}

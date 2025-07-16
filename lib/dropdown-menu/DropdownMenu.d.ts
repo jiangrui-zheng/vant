@@ -1,54 +1,89 @@
-import { Ref, PropType } from 'vue';
-export declare const DROPDOWN_KEY: unique symbol;
-export declare type DropdownMenuDirection = 'up' | 'down';
-export declare type DropdownMenuProvide = {
-    props: {
-        zIndex?: number | string;
-        overlay: boolean;
-        duration: number | string;
-        direction: DropdownMenuDirection;
-        activeColor?: string;
-        closeOnClickOverlay: boolean;
-    };
-    offset: Ref<number>;
-};
-declare const _default: import("vue").DefineComponent<{
-    zIndex: (NumberConstructor | StringConstructor)[];
-    activeColor: StringConstructor;
+import { type InjectionKey, type ExtractPropTypes } from 'vue';
+import type { DropdownMenuProvide, DropdownMenuDirection } from './types';
+export declare const dropdownMenuProps: {
     overlay: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
+    zIndex: (NumberConstructor | StringConstructor)[];
     duration: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
     direction: {
-        type: PropType<DropdownMenuDirection>;
-        default: string;
+        type: import("vue").PropType<T>;
+        default: DropdownMenuDirection;
     };
+    activeColor: StringConstructor;
+    autoLocate: BooleanConstructor;
     closeOnClickOutside: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
     closeOnClickOverlay: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    swipeThreshold: (NumberConstructor | StringConstructor)[];
+};
+export type DropdownMenuProps = ExtractPropTypes<typeof dropdownMenuProps>;
+export declare const DROPDOWN_KEY: InjectionKey<DropdownMenuProvide>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
+    overlay: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    zIndex: (NumberConstructor | StringConstructor)[];
+    duration: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    direction: {
+        type: import("vue").PropType<T>;
+        default: DropdownMenuDirection;
+    };
+    activeColor: StringConstructor;
+    autoLocate: BooleanConstructor;
+    closeOnClickOutside: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    closeOnClickOverlay: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    swipeThreshold: (NumberConstructor | StringConstructor)[];
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<ExtractPropTypes<{
+    overlay: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    zIndex: (NumberConstructor | StringConstructor)[];
+    duration: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    direction: {
+        type: import("vue").PropType<T>;
+        default: DropdownMenuDirection;
+    };
+    activeColor: StringConstructor;
+    autoLocate: BooleanConstructor;
+    closeOnClickOutside: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    closeOnClickOverlay: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    swipeThreshold: (NumberConstructor | StringConstructor)[];
+}>> & Readonly<{}>, {
     overlay: boolean;
     duration: string | number;
     closeOnClickOverlay: boolean;
     direction: DropdownMenuDirection;
+    autoLocate: boolean;
     closeOnClickOutside: boolean;
-} & {
-    zIndex?: string | number | undefined;
-    activeColor?: string | undefined;
-}>, {
-    overlay: boolean;
-    duration: string | number;
-    closeOnClickOverlay: boolean;
-    direction: DropdownMenuDirection;
-    closeOnClickOutside: boolean;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

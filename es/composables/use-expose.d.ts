@@ -1,1 +1,1 @@
-export declare function useExpose(apis: Record<string, any>): void;
+export declare function useExpose<T = Record<string, any>>(apis: T): void;

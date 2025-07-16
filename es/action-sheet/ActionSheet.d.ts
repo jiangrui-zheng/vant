@@ -1,5 +1,6 @@
-import { PropType } from 'vue';
-export declare type ActionSheetAction = {
+import { type ExtractPropTypes } from 'vue';
+export type ActionSheetAction = {
+    icon?: string;
     name?: string;
     color?: string;
     subname?: string;
@@ -8,87 +9,187 @@ export declare type ActionSheetAction = {
     callback?: (action: ActionSheetAction) => void;
     className?: unknown;
 };
-declare const _default: import("vue").DefineComponent<{
-    title: StringConstructor;
-    actions: PropType<ActionSheetAction[]>;
-    cancelText: StringConstructor;
-    description: StringConstructor;
-    closeOnPopstate: BooleanConstructor;
-    closeOnClickAction: BooleanConstructor;
-    round: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    closeable: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    closeIcon: {
-        type: StringConstructor;
-        default: string;
-    };
-    safeAreaInsetBottom: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
+export declare const actionSheetProps: {
     show: BooleanConstructor;
     zIndex: (NumberConstructor | StringConstructor)[];
-    duration: (NumberConstructor | StringConstructor)[];
-    teleport: PropType<string | import("vue").RendererElement | null | undefined>;
-    overlayStyle: PropType<import("vue").CSSProperties>;
-    overlayClass: PropType<unknown>;
-    transitionAppear: BooleanConstructor;
     overlay: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
+    duration: (NumberConstructor | StringConstructor)[];
+    teleport: import("vue").PropType<import("vue").TeleportProps["to"]>;
     lockScroll: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
     lazyRender: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
+    beforeClose: import("vue").PropType<import("../utils").Interceptor>;
+    overlayStyle: import("vue").PropType<import("vue").CSSProperties>;
+    overlayClass: import("vue").PropType<unknown>;
+    transitionAppear: BooleanConstructor;
     closeOnClickOverlay: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("select" | "cancel" | "update:show")[], "select" | "cancel" | "update:show", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    safeAreaInsetBottom: boolean;
-    round: boolean;
-    overlay: boolean;
-    show: boolean;
-    transitionAppear: boolean;
-    lockScroll: boolean;
-    lazyRender: boolean;
-    closeOnClickOverlay: boolean;
-    closeable: boolean;
-    closeOnPopstate: boolean;
-    closeIcon: string;
-    closeOnClickAction: boolean;
 } & {
-    title?: string | undefined;
-    zIndex?: string | number | undefined;
-    duration?: string | number | undefined;
-    teleport?: string | import("vue").RendererElement | null | undefined;
-    overlayStyle?: import("vue").CSSProperties | undefined;
-    overlayClass?: unknown;
-    actions?: ActionSheetAction[] | undefined;
-    cancelText?: string | undefined;
-    description?: string | undefined;
+    title: StringConstructor;
+    round: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    actions: {
+        type: import("vue").PropType<T[]>;
+        default: () => never[];
+    };
+    closeIcon: {
+        type: import("vue").PropType<T_1>;
+        default: string;
+    };
+    closeable: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    cancelText: StringConstructor;
+    description: StringConstructor;
+    closeOnPopstate: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    closeOnClickAction: BooleanConstructor;
+    safeAreaInsetBottom: {
+        type: BooleanConstructor;
+        default: true;
+    };
+};
+export type ActionSheetProps = ExtractPropTypes<typeof actionSheetProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
+    show: BooleanConstructor;
+    zIndex: (NumberConstructor | StringConstructor)[];
+    overlay: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    duration: (NumberConstructor | StringConstructor)[];
+    teleport: import("vue").PropType<import("vue").TeleportProps["to"]>;
+    lockScroll: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    lazyRender: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    beforeClose: import("vue").PropType<import("../utils").Interceptor>;
+    overlayStyle: import("vue").PropType<import("vue").CSSProperties>;
+    overlayClass: import("vue").PropType<unknown>;
+    transitionAppear: BooleanConstructor;
+    closeOnClickOverlay: {
+        type: BooleanConstructor;
+        default: true;
+    };
+} & {
+    title: StringConstructor;
+    round: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    actions: {
+        type: import("vue").PropType<T[]>;
+        default: () => never[];
+    };
+    closeIcon: {
+        type: import("vue").PropType<T_1>;
+        default: string;
+    };
+    closeable: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    cancelText: StringConstructor;
+    description: StringConstructor;
+    closeOnPopstate: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    closeOnClickAction: BooleanConstructor;
+    safeAreaInsetBottom: {
+        type: BooleanConstructor;
+        default: true;
+    };
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("select" | "cancel" | "update:show")[], "select" | "cancel" | "update:show", import("vue").PublicProps, Readonly<ExtractPropTypes<{
+    show: BooleanConstructor;
+    zIndex: (NumberConstructor | StringConstructor)[];
+    overlay: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    duration: (NumberConstructor | StringConstructor)[];
+    teleport: import("vue").PropType<import("vue").TeleportProps["to"]>;
+    lockScroll: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    lazyRender: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    beforeClose: import("vue").PropType<import("../utils").Interceptor>;
+    overlayStyle: import("vue").PropType<import("vue").CSSProperties>;
+    overlayClass: import("vue").PropType<unknown>;
+    transitionAppear: BooleanConstructor;
+    closeOnClickOverlay: {
+        type: BooleanConstructor;
+        default: true;
+    };
+} & {
+    title: StringConstructor;
+    round: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    actions: {
+        type: import("vue").PropType<T[]>;
+        default: () => never[];
+    };
+    closeIcon: {
+        type: import("vue").PropType<T_1>;
+        default: string;
+    };
+    closeable: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    cancelText: StringConstructor;
+    description: StringConstructor;
+    closeOnPopstate: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    closeOnClickAction: BooleanConstructor;
+    safeAreaInsetBottom: {
+        type: BooleanConstructor;
+        default: true;
+    };
+}>> & Readonly<{
+    onSelect?: ((...args: any[]) => any) | undefined;
+    "onUpdate:show"?: ((...args: any[]) => any) | undefined;
+    onCancel?: ((...args: any[]) => any) | undefined;
 }>, {
-    safeAreaInsetBottom: boolean;
     round: boolean;
     overlay: boolean;
     show: boolean;
-    transitionAppear: boolean;
+    safeAreaInsetBottom: boolean;
     lockScroll: boolean;
     lazyRender: boolean;
+    transitionAppear: boolean;
     closeOnClickOverlay: boolean;
+    closeIcon: string;
     closeable: boolean;
     closeOnPopstate: boolean;
-    closeIcon: string;
+    actions: ActionSheetAction[];
     closeOnClickAction: boolean;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

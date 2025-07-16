@@ -1,64 +1,177 @@
-import { PropType } from 'vue';
-export declare type PopoverTheme = 'light' | 'dark';
-export declare type PopoverTrigger = 'manual' | 'click';
-export declare type PopoverPlacement = 'top' | 'top-start' | 'top-end' | 'left' | 'left-start' | 'left-end' | 'right' | 'right-start' | 'right-end' | 'bottom' | 'bottom-start' | 'bottom-end';
-export declare type PopoverAction = {
-    text: string;
-    icon?: string;
-    color?: string;
-    disabled?: boolean;
-    className?: string;
-};
-declare const _default: import("vue").DefineComponent<{
+import { type PropType, type CSSProperties, type TeleportProps, type ExtractPropTypes } from 'vue';
+import { PopoverTheme, PopoverAction, PopoverActionsDirection, PopoverTrigger, PopoverPlacement } from './types';
+export declare const popoverProps: {
     show: BooleanConstructor;
+    theme: {
+        type: PropType<T>;
+        default: PopoverTheme;
+    };
     overlay: BooleanConstructor;
+    actions: {
+        type: PropType<T_1[]>;
+        default: () => never[];
+    };
+    actionsDirection: {
+        type: PropType<T>;
+        default: PopoverActionsDirection;
+    };
+    trigger: {
+        type: PropType<T>;
+        default: PopoverTrigger;
+    };
+    duration: (NumberConstructor | StringConstructor)[];
+    showArrow: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    placement: {
+        type: PropType<T>;
+        default: PopoverPlacement;
+    };
+    iconPrefix: StringConstructor;
+    overlayClass: PropType<unknown>;
+    overlayStyle: PropType<CSSProperties>;
+    closeOnClickAction: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    closeOnClickOverlay: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    closeOnClickOutside: {
+        type: BooleanConstructor;
+        default: true;
+    };
     offset: {
         type: PropType<[number, number]>;
         default: () => number[];
     };
+    teleport: {
+        type: PropType<TeleportProps["to"]>;
+        default: string;
+    };
+};
+export type PopoverProps = ExtractPropTypes<typeof popoverProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
+    show: BooleanConstructor;
     theme: {
-        type: PropType<PopoverTheme>;
-        default: string;
+        type: PropType<T>;
+        default: PopoverTheme;
     };
-    trigger: {
-        type: PropType<PopoverTrigger>;
-        default: string;
-    };
+    overlay: BooleanConstructor;
     actions: {
-        type: PropType<PopoverAction[]>;
+        type: PropType<T_1[]>;
         default: () => never[];
     };
+    actionsDirection: {
+        type: PropType<T>;
+        default: PopoverActionsDirection;
+    };
+    trigger: {
+        type: PropType<T>;
+        default: PopoverTrigger;
+    };
+    duration: (NumberConstructor | StringConstructor)[];
+    showArrow: {
+        type: BooleanConstructor;
+        default: true;
+    };
     placement: {
-        type: PropType<PopoverPlacement>;
-        default: string;
+        type: PropType<T>;
+        default: PopoverPlacement;
     };
-    teleport: {
-        type: PropType<string | import("vue").RendererElement | null | undefined>;
-        default: string;
-    };
+    iconPrefix: StringConstructor;
+    overlayClass: PropType<unknown>;
+    overlayStyle: PropType<CSSProperties>;
     closeOnClickAction: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("select" | "touchstart" | "update:show")[], "select" | "touchstart" | "update:show", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    closeOnClickOverlay: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    closeOnClickOutside: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    offset: {
+        type: PropType<[number, number]>;
+        default: () => number[];
+    };
+    teleport: {
+        type: PropType<TeleportProps["to"]>;
+        default: string;
+    };
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("select" | "touchstart" | "update:show")[], "select" | "touchstart" | "update:show", import("vue").PublicProps, Readonly<ExtractPropTypes<{
+    show: BooleanConstructor;
+    theme: {
+        type: PropType<T>;
+        default: PopoverTheme;
+    };
+    overlay: BooleanConstructor;
+    actions: {
+        type: PropType<T_1[]>;
+        default: () => never[];
+    };
+    actionsDirection: {
+        type: PropType<T>;
+        default: PopoverActionsDirection;
+    };
+    trigger: {
+        type: PropType<T>;
+        default: PopoverTrigger;
+    };
+    duration: (NumberConstructor | StringConstructor)[];
+    showArrow: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    placement: {
+        type: PropType<T>;
+        default: PopoverPlacement;
+    };
+    iconPrefix: StringConstructor;
+    overlayClass: PropType<unknown>;
+    overlayStyle: PropType<CSSProperties>;
+    closeOnClickAction: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    closeOnClickOverlay: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    closeOnClickOutside: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    offset: {
+        type: PropType<[number, number]>;
+        default: () => number[];
+    };
+    teleport: {
+        type: PropType<TeleportProps["to"]>;
+        default: string;
+    };
+}>> & Readonly<{
+    onSelect?: ((...args: any[]) => any) | undefined;
+    onTouchstart?: ((...args: any[]) => any) | undefined;
+    "onUpdate:show"?: ((...args: any[]) => any) | undefined;
+}>, {
     offset: [number, number];
+    theme: PopoverTheme;
     overlay: boolean;
     show: boolean;
     teleport: string | import("vue").RendererElement | null | undefined;
+    closeOnClickOverlay: boolean;
     actions: PopoverAction[];
     closeOnClickAction: boolean;
-    theme: PopoverTheme;
+    closeOnClickOutside: boolean;
+    actionsDirection: PopoverActionsDirection;
     trigger: PopoverTrigger;
+    showArrow: boolean;
     placement: PopoverPlacement;
-} & {}>, {
-    offset: [number, number];
-    overlay: boolean;
-    show: boolean;
-    teleport: string | import("vue").RendererElement | null | undefined;
-    actions: PopoverAction[];
-    closeOnClickAction: boolean;
-    theme: PopoverTheme;
-    trigger: PopoverTrigger;
-    placement: PopoverPlacement;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

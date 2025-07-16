@@ -1,33 +1,61 @@
-declare const _default: import("vue").DefineComponent<{
+import { type ExtractPropTypes } from 'vue';
+import { type Numeric } from '../utils';
+export declare const progressProps: {
     color: StringConstructor;
     inactive: BooleanConstructor;
     pivotText: StringConstructor;
     textColor: StringConstructor;
+    showPivot: {
+        type: BooleanConstructor;
+        default: true;
+    };
     pivotColor: StringConstructor;
     trackColor: StringConstructor;
     strokeWidth: (NumberConstructor | StringConstructor)[];
     percentage: {
         type: (NumberConstructor | StringConstructor)[];
-        required: true;
-        validator: (value: number | string) => boolean;
+        default: number;
+        validator: (value: Numeric) => boolean;
     };
+};
+export type ProgressProps = ExtractPropTypes<typeof progressProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
+    color: StringConstructor;
+    inactive: BooleanConstructor;
+    pivotText: StringConstructor;
+    textColor: StringConstructor;
     showPivot: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    pivotColor: StringConstructor;
+    trackColor: StringConstructor;
+    strokeWidth: (NumberConstructor | StringConstructor)[];
+    percentage: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+        validator: (value: Numeric) => boolean;
+    };
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<ExtractPropTypes<{
+    color: StringConstructor;
+    inactive: BooleanConstructor;
+    pivotText: StringConstructor;
+    textColor: StringConstructor;
+    showPivot: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    pivotColor: StringConstructor;
+    trackColor: StringConstructor;
+    strokeWidth: (NumberConstructor | StringConstructor)[];
+    percentage: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+        validator: (value: Numeric) => boolean;
+    };
+}>> & Readonly<{}>, {
     inactive: boolean;
+    showPivot: boolean;
     percentage: string | number;
-    showPivot: boolean;
-} & {
-    color?: string | undefined;
-    textColor?: string | undefined;
-    strokeWidth?: string | number | undefined;
-    pivotText?: string | undefined;
-    pivotColor?: string | undefined;
-    trackColor?: string | undefined;
-}>, {
-    inactive: boolean;
-    showPivot: boolean;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

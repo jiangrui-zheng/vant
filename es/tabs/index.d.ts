@@ -1,67 +1,104 @@
-declare const Tabs: import("../utils").WithInstall<import("vue").DefineComponent<{
+import { TabsProps } from './Tabs';
+export declare const Tabs: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
+    type: {
+        type: import("vue").PropType<T>;
+        default: import("./types").TabsType;
+    };
     color: StringConstructor;
     border: BooleanConstructor;
     sticky: BooleanConstructor;
-    animated: BooleanConstructor;
-    swipeable: BooleanConstructor;
-    scrollspy: BooleanConstructor;
-    background: StringConstructor;
-    lineWidth: (NumberConstructor | StringConstructor)[];
-    lineHeight: (NumberConstructor | StringConstructor)[];
-    beforeChange: import("vue").PropType<import("../utils/interceptor").Interceptor>;
-    titleActiveColor: StringConstructor;
-    titleInactiveColor: StringConstructor;
-    type: {
-        type: import("vue").PropType<import("./Tabs").TabsType>;
-        default: string;
-    };
+    shrink: BooleanConstructor;
     active: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
-    };
-    ellipsis: {
-        type: BooleanConstructor;
-        default: boolean;
     };
     duration: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
+    animated: BooleanConstructor;
+    ellipsis: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    swipeable: BooleanConstructor;
+    scrollspy: BooleanConstructor;
     offsetTop: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
+    background: StringConstructor;
     lazyRender: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
+    showHeader: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    lineWidth: (NumberConstructor | StringConstructor)[];
+    lineHeight: (NumberConstructor | StringConstructor)[];
+    beforeChange: import("vue").PropType<import("../utils").Interceptor>;
     swipeThreshold: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("scroll" | "disabled" | "click" | "change" | "rendered" | "update:active")[], "scroll" | "disabled" | "click" | "change" | "rendered" | "update:active", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    type: import("./Tabs").TabsType;
-    ellipsis: boolean;
-    sticky: boolean;
-    border: boolean;
-    active: string | number;
-    duration: string | number;
-    lazyRender: boolean;
-    offsetTop: string | number;
-    animated: boolean;
-    swipeable: boolean;
-    scrollspy: boolean;
-    swipeThreshold: string | number;
-} & {
-    color?: string | undefined;
-    background?: string | undefined;
-    lineWidth?: string | number | undefined;
-    lineHeight?: string | number | undefined;
-    beforeChange?: import("../utils/interceptor").Interceptor | undefined;
-    titleActiveColor?: string | undefined;
-    titleInactiveColor?: string | undefined;
+    titleActiveColor: StringConstructor;
+    titleInactiveColor: StringConstructor;
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("scroll" | "change" | "rendered" | "clickTab" | "update:active")[], "scroll" | "change" | "rendered" | "clickTab" | "update:active", import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    type: {
+        type: import("vue").PropType<T>;
+        default: import("./types").TabsType;
+    };
+    color: StringConstructor;
+    border: BooleanConstructor;
+    sticky: BooleanConstructor;
+    shrink: BooleanConstructor;
+    active: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    duration: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    animated: BooleanConstructor;
+    ellipsis: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    swipeable: BooleanConstructor;
+    scrollspy: BooleanConstructor;
+    offsetTop: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    background: StringConstructor;
+    lazyRender: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    showHeader: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    lineWidth: (NumberConstructor | StringConstructor)[];
+    lineHeight: (NumberConstructor | StringConstructor)[];
+    beforeChange: import("vue").PropType<import("../utils").Interceptor>;
+    swipeThreshold: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    titleActiveColor: StringConstructor;
+    titleInactiveColor: StringConstructor;
+}>> & Readonly<{
+    onChange?: ((...args: any[]) => any) | undefined;
+    onScroll?: ((...args: any[]) => any) | undefined;
+    onRendered?: ((...args: any[]) => any) | undefined;
+    onClickTab?: ((...args: any[]) => any) | undefined;
+    "onUpdate:active"?: ((...args: any[]) => any) | undefined;
 }>, {
-    type: import("./Tabs").TabsType;
+    type: import("./types").TabsType;
     ellipsis: boolean;
     sticky: boolean;
     border: boolean;
@@ -71,9 +108,17 @@ declare const Tabs: import("../utils").WithInstall<import("vue").DefineComponent
     offsetTop: string | number;
     animated: boolean;
     swipeable: boolean;
+    shrink: boolean;
     scrollspy: boolean;
+    showHeader: boolean;
     swipeThreshold: string | number;
-}>>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default Tabs;
-export { Tabs };
-export type { TabsType } from './Tabs';
+export { tabsProps } from './Tabs';
+export type { TabsProps };
+export type { TabsType, TabsInstance, TabsThemeVars } from './types';
+declare module 'vue' {
+    interface GlobalComponents {
+        VanTabs: typeof Tabs;
+    }
+}

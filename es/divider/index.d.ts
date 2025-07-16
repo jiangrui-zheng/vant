@@ -1,22 +1,37 @@
-declare const Divider: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const Divider: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     dashed: BooleanConstructor;
     hairline: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
+    vertical: BooleanConstructor;
     contentPosition: {
-        type: import("vue").PropType<import("./Divider").DividerContentPosition>;
-        default: string;
+        type: import("vue").PropType<T>;
+        default: import("./Divider").DividerContentPosition;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    dashed: BooleanConstructor;
+    hairline: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    vertical: BooleanConstructor;
+    contentPosition: {
+        type: import("vue").PropType<T>;
+        default: import("./Divider").DividerContentPosition;
+    };
+}>> & Readonly<{}>, {
     dashed: boolean;
+    vertical: boolean;
     hairline: boolean;
     contentPosition: import("./Divider").DividerContentPosition;
-} & {}>, {
-    dashed: boolean;
-    hairline: boolean;
-    contentPosition: import("./Divider").DividerContentPosition;
-}>>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default Divider;
-export { Divider };
-export type { DividerContentPosition } from './Divider';
+export { dividerProps } from './Divider';
+export type { DividerProps, DividerContentPosition } from './Divider';
+export type { DividerThemeVars } from './types';
+declare module 'vue' {
+    interface GlobalComponents {
+        VanDivider: typeof Divider;
+    }
+}

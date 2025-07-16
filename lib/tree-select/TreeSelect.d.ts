@@ -1,55 +1,106 @@
-import { PropType } from 'vue';
-export declare type TreeSelectChild = {
-    id: number | string;
+import { type PropType, type ExtractPropTypes } from 'vue';
+import { type Numeric } from '../utils';
+export type TreeSelectChild = {
+    id: Numeric;
     text: string;
     disabled?: boolean;
 };
-export declare type TreeSelectItem = {
+export type TreeSelectItem = {
     dot?: boolean;
     text: string;
-    badge?: number | string;
+    badge?: Numeric;
     children?: TreeSelectChild[];
     disabled?: boolean;
     className?: unknown;
 };
-declare const _default: import("vue").DefineComponent<{
+export declare const treeSelectProps: {
     max: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
     items: {
-        type: PropType<TreeSelectItem[]>;
+        type: PropType<T[]>;
         default: () => never[];
     };
     height: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-    activeId: {
-        type: PropType<string | number | (string | number)[]>;
-        default: number;
-    };
     selectedIcon: {
-        type: StringConstructor;
+        type: PropType<T_1>;
         default: string;
     };
     mainActiveIndex: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("click-item" | "click-nav" | "update:activeId" | "update:mainActiveIndex")[], "click-item" | "click-nav" | "update:activeId" | "update:mainActiveIndex", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    max: string | number;
+    activeId: {
+        type: PropType<Numeric | Numeric[]>;
+        default: number;
+    };
+};
+export type TreeSelectProps = ExtractPropTypes<typeof treeSelectProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
+    max: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    items: {
+        type: PropType<T[]>;
+        default: () => never[];
+    };
+    height: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    selectedIcon: {
+        type: PropType<T_1>;
+        default: string;
+    };
+    mainActiveIndex: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    activeId: {
+        type: PropType<Numeric | Numeric[]>;
+        default: number;
+    };
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("clickItem" | "clickNav" | "update:activeId" | "update:mainActiveIndex")[], "clickItem" | "clickNav" | "update:activeId" | "update:mainActiveIndex", import("vue").PublicProps, Readonly<ExtractPropTypes<{
+    max: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    items: {
+        type: PropType<T[]>;
+        default: () => never[];
+    };
+    height: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    selectedIcon: {
+        type: PropType<T_1>;
+        default: string;
+    };
+    mainActiveIndex: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    activeId: {
+        type: PropType<Numeric | Numeric[]>;
+        default: number;
+    };
+}>> & Readonly<{
+    onClickItem?: ((...args: any[]) => any) | undefined;
+    onClickNav?: ((...args: any[]) => any) | undefined;
+    "onUpdate:activeId"?: ((...args: any[]) => any) | undefined;
+    "onUpdate:mainActiveIndex"?: ((...args: any[]) => any) | undefined;
+}>, {
     height: string | number;
+    max: string | number;
     items: TreeSelectItem[];
-    activeId: string | number | (string | number)[];
     selectedIcon: string;
     mainActiveIndex: string | number;
-} & {}>, {
-    max: string | number;
-    height: string | number;
-    items: TreeSelectItem[];
-    activeId: string | number | (string | number)[];
-    selectedIcon: string;
-    mainActiveIndex: string | number;
-}>;
+    activeId: Numeric | Numeric[];
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

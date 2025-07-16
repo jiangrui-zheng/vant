@@ -1,81 +1,162 @@
-import { PropType } from 'vue';
-export declare type NumberKeyboardTheme = 'default' | 'custom';
-declare const _default: import("vue").DefineComponent<{
+import { type PropType, type TeleportProps, type ExtractPropTypes } from 'vue';
+export type NumberKeyboardTheme = 'default' | 'custom';
+export declare const numberKeyboardProps: {
     show: BooleanConstructor;
     title: StringConstructor;
+    theme: {
+        type: PropType<T>;
+        default: NumberKeyboardTheme;
+    };
     zIndex: (NumberConstructor | StringConstructor)[];
-    teleport: PropType<string | import("vue").RendererElement | null | undefined>;
+    teleport: PropType<TeleportProps["to"]>;
+    maxlength: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    modelValue: {
+        type: PropType<T>;
+        default: string;
+    };
+    transition: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    blurOnClose: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    showDeleteKey: {
+        type: BooleanConstructor;
+        default: true;
+    };
     randomKeyOrder: BooleanConstructor;
     closeButtonText: StringConstructor;
     deleteButtonText: StringConstructor;
     closeButtonLoading: BooleanConstructor;
-    theme: {
-        type: PropType<NumberKeyboardTheme>;
-        default: string;
+    hideOnClickOutside: {
+        type: BooleanConstructor;
+        default: true;
     };
-    modelValue: {
-        type: StringConstructor;
-        default: string;
+    safeAreaInsetBottom: {
+        type: BooleanConstructor;
+        default: true;
     };
     extraKey: {
         type: PropType<string | string[]>;
         default: string;
     };
+};
+export type NumberKeyboardProps = ExtractPropTypes<typeof numberKeyboardProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
+    show: BooleanConstructor;
+    title: StringConstructor;
+    theme: {
+        type: PropType<T>;
+        default: NumberKeyboardTheme;
+    };
+    zIndex: (NumberConstructor | StringConstructor)[];
+    teleport: PropType<TeleportProps["to"]>;
     maxlength: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
+    modelValue: {
+        type: PropType<T>;
+        default: string;
+    };
     transition: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
     blurOnClose: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
     showDeleteKey: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
+    randomKeyOrder: BooleanConstructor;
+    closeButtonText: StringConstructor;
+    deleteButtonText: StringConstructor;
+    closeButtonLoading: BooleanConstructor;
     hideOnClickOutside: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
     safeAreaInsetBottom: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("input" | "hide" | "show" | "blur" | "close" | "update:modelValue" | "delete")[], "input" | "hide" | "show" | "blur" | "close" | "update:modelValue" | "delete", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    safeAreaInsetBottom: boolean;
-    show: boolean;
-    transition: boolean;
-    maxlength: string | number;
-    modelValue: string;
-    theme: NumberKeyboardTheme;
-    randomKeyOrder: boolean;
-    closeButtonLoading: boolean;
-    extraKey: string | string[];
-    blurOnClose: boolean;
-    showDeleteKey: boolean;
-    hideOnClickOutside: boolean;
-} & {
-    title?: string | undefined;
-    zIndex?: string | number | undefined;
-    teleport?: string | import("vue").RendererElement | null | undefined;
-    deleteButtonText?: string | undefined;
-    closeButtonText?: string | undefined;
+    extraKey: {
+        type: PropType<string | string[]>;
+        default: string;
+    };
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("input" | "delete" | "hide" | "show" | "blur" | "update:modelValue" | "close")[], "input" | "delete" | "hide" | "show" | "blur" | "update:modelValue" | "close", import("vue").PublicProps, Readonly<ExtractPropTypes<{
+    show: BooleanConstructor;
+    title: StringConstructor;
+    theme: {
+        type: PropType<T>;
+        default: NumberKeyboardTheme;
+    };
+    zIndex: (NumberConstructor | StringConstructor)[];
+    teleport: PropType<TeleportProps["to"]>;
+    maxlength: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    modelValue: {
+        type: PropType<T>;
+        default: string;
+    };
+    transition: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    blurOnClose: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    showDeleteKey: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    randomKeyOrder: BooleanConstructor;
+    closeButtonText: StringConstructor;
+    deleteButtonText: StringConstructor;
+    closeButtonLoading: BooleanConstructor;
+    hideOnClickOutside: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    safeAreaInsetBottom: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    extraKey: {
+        type: PropType<string | string[]>;
+        default: string;
+    };
+}>> & Readonly<{
+    onBlur?: ((...args: any[]) => any) | undefined;
+    onInput?: ((...args: any[]) => any) | undefined;
+    onClose?: ((...args: any[]) => any) | undefined;
+    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+    onDelete?: ((...args: any[]) => any) | undefined;
+    onHide?: ((...args: any[]) => any) | undefined;
+    onShow?: ((...args: any[]) => any) | undefined;
 }>, {
-    safeAreaInsetBottom: boolean;
+    theme: NumberKeyboardTheme;
     show: boolean;
-    transition: boolean;
     maxlength: string | number;
     modelValue: string;
-    theme: NumberKeyboardTheme;
-    randomKeyOrder: boolean;
-    closeButtonLoading: boolean;
-    extraKey: string | string[];
+    safeAreaInsetBottom: boolean;
+    transition: boolean;
     blurOnClose: boolean;
     showDeleteKey: boolean;
+    randomKeyOrder: boolean;
+    closeButtonLoading: boolean;
     hideOnClickOutside: boolean;
-}>;
+    extraKey: string | string[];
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

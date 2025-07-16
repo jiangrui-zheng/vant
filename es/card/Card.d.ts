@@ -1,4 +1,5 @@
-declare const _default: import("vue").DefineComponent<{
+import { type ExtractPropTypes } from 'vue';
+export declare const cardProps: {
     tag: StringConstructor;
     num: (NumberConstructor | StringConstructor)[];
     desc: StringConstructor;
@@ -7,28 +8,49 @@ declare const _default: import("vue").DefineComponent<{
     price: (NumberConstructor | StringConstructor)[];
     centered: BooleanConstructor;
     lazyLoad: BooleanConstructor;
-    thumbLink: StringConstructor;
-    originPrice: (NumberConstructor | StringConstructor)[];
     currency: {
-        type: StringConstructor;
+        type: import("vue").PropType<T>;
         default: string;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "click-thumb"[], "click-thumb", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    lazyLoad: boolean;
-    centered: boolean;
-    currency: string;
-} & {
-    title?: string | undefined;
-    desc?: string | undefined;
-    tag?: string | undefined;
-    num?: string | number | undefined;
-    thumb?: string | undefined;
-    price?: string | number | undefined;
-    thumbLink?: string | undefined;
-    originPrice?: string | number | undefined;
+    thumbLink: StringConstructor;
+    originPrice: (NumberConstructor | StringConstructor)[];
+};
+export type CardProps = ExtractPropTypes<typeof cardProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
+    tag: StringConstructor;
+    num: (NumberConstructor | StringConstructor)[];
+    desc: StringConstructor;
+    thumb: StringConstructor;
+    title: StringConstructor;
+    price: (NumberConstructor | StringConstructor)[];
+    centered: BooleanConstructor;
+    lazyLoad: BooleanConstructor;
+    currency: {
+        type: import("vue").PropType<T>;
+        default: string;
+    };
+    thumbLink: StringConstructor;
+    originPrice: (NumberConstructor | StringConstructor)[];
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "clickThumb"[], "clickThumb", import("vue").PublicProps, Readonly<ExtractPropTypes<{
+    tag: StringConstructor;
+    num: (NumberConstructor | StringConstructor)[];
+    desc: StringConstructor;
+    thumb: StringConstructor;
+    title: StringConstructor;
+    price: (NumberConstructor | StringConstructor)[];
+    centered: BooleanConstructor;
+    lazyLoad: BooleanConstructor;
+    currency: {
+        type: import("vue").PropType<T>;
+        default: string;
+    };
+    thumbLink: StringConstructor;
+    originPrice: (NumberConstructor | StringConstructor)[];
+}>> & Readonly<{
+    onClickThumb?: ((...args: any[]) => any) | undefined;
 }>, {
     lazyLoad: boolean;
     centered: boolean;
     currency: string;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;
