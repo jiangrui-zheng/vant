@@ -1,24 +1,23 @@
+import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import { ref, reactive } from 'vue';
 import { deepAssign } from '../utils/deep-assign';
 import defaultMessages from './lang/zh-CN';
 var lang = ref('zh-CN');
-var messages = reactive({
+
+var _messages = reactive({
   'zh-CN': defaultMessages
 });
+
 export default {
-  messages() {
-    return messages[lang.value];
+  messages: function messages() {
+    return _messages[lang.value];
   },
-
-  use(newLang, newMessages) {
+  use: function use(newLang, newMessages) {
     lang.value = newLang;
-    this.add({
-      [newLang]: newMessages
-    });
+    this.add(_defineProperty({}, newLang, newMessages));
   },
-
-  add(newMessages = {}) {
-    deepAssign(messages, newMessages);
+  add: function add() {
+    var newMessages = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    deepAssign(_messages, newMessages);
   }
-
 };

@@ -22,11 +22,15 @@ export function useTouch() {
   var offsetY = ref(0);
   var direction = ref('');
 
-  var isVertical = () => direction.value === 'vertical';
+  var isVertical = function isVertical() {
+    return direction.value === 'vertical';
+  };
 
-  var isHorizontal = () => direction.value === 'horizontal';
+  var isHorizontal = function isHorizontal() {
+    return direction.value === 'horizontal';
+  };
 
-  var reset = () => {
+  var reset = function reset() {
     deltaX.value = 0;
     deltaY.value = 0;
     offsetX.value = 0;
@@ -34,13 +38,13 @@ export function useTouch() {
     direction.value = '';
   };
 
-  var start = event => {
+  var start = function start(event) {
     reset();
     startX.value = event.touches[0].clientX;
     startY.value = event.touches[0].clientY;
   };
 
-  var move = event => {
+  var move = function move(event) {
     var touch = event.touches[0];
     deltaX.value = touch.clientX - startX.value;
     deltaY.value = touch.clientY - startY.value;
@@ -53,17 +57,17 @@ export function useTouch() {
   };
 
   return {
-    move,
-    start,
-    reset,
-    startX,
-    startY,
-    deltaX,
-    deltaY,
-    offsetX,
-    offsetY,
-    direction,
-    isVertical,
-    isHorizontal
+    move: move,
+    start: start,
+    reset: reset,
+    startX: startX,
+    startY: startY,
+    deltaX: deltaX,
+    deltaY: deltaY,
+    offsetX: offsetX,
+    offsetY: offsetY,
+    direction: direction,
+    isVertical: isVertical,
+    isHorizontal: isHorizontal
   };
 }

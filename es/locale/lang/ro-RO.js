@@ -18,11 +18,12 @@ export default {
     title: 'Calendar',
     startEnd: 'Început/Sfârsit',
     weekdays: ['Dum', 'Lun', 'Mar', 'Mie', 'Joi', 'Vin', 'Sâm'],
-    monthTitle: (year, month) => year + "/" + month,
-    rangePrompt: maxRange => "Alege maxim " + maxRange + " zile"
-  },
-  vanCascader: {
-    select: 'Selectați'
+    monthTitle: function monthTitle(year, month) {
+      return "".concat(year, "/").concat(month);
+    },
+    rangePrompt: function rangePrompt(maxRange) {
+      return "Alege maxim ".concat(maxRange, " zile");
+    }
   },
   vanContactCard: {
     addText: 'Adaugă informațiile de contact'
@@ -43,13 +44,19 @@ export default {
   },
   vanCoupon: {
     unlimited: 'Nelimitat',
-    discount: discount => discount * 10 + "% discount",
-    condition: condition => "Cel pu\u021Bin " + condition
+    discount: function discount(_discount) {
+      return "".concat(_discount * 10, "% discount");
+    },
+    condition: function condition(_condition) {
+      return "Cel pu\u021Bin ".concat(_condition);
+    }
   },
   vanCouponCell: {
     title: 'Cupon',
     tips: 'Fără cupoane',
-    count: count => "Ai " + count + " cupoane"
+    count: function count(_count) {
+      return "Ai ".concat(_count, " cupoane");
+    }
   },
   vanCouponList: {
     empty: 'Fără cupoane',

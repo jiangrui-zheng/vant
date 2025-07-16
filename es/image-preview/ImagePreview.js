@@ -1,10 +1,7 @@
-import { mergeProps as _mergeProps } from "vue";
-import _extends from "@babel/runtime/helpers/esm/extends";
-import { createVNode as _createVNode } from "vue";
-import { ref, watch, nextTick, reactive, onMounted, defineComponent } from 'vue'; // Utils
-
-import { pick, UnknownProp, createNamespace } from '../utils';
-import { callInterceptor } from '../utils/interceptor'; // Composables
+import { nextTick, onMounted, reactive, ref, watch, createVNode } from "vue";
+// Utils
+import { bem, createComponent } from './shared';
+import { callInterceptor } from '../utils/interceptor'; // Composition
 
 import { useWindowSize } from '@vant/use';
 import { useExpose } from '../composables/use-expose'; // Components
@@ -13,20 +10,18 @@ import Icon from '../icon';
 import Swipe from '../swipe';
 import Popup from '../popup';
 import ImagePreviewItem from './ImagePreviewItem';
-var [name, bem] = createNamespace('image-preview');
-export default defineComponent({
-  name,
+export default createComponent({
   props: {
     show: Boolean,
+    className: null,
     closeable: Boolean,
-    transition: String,
-    className: UnknownProp,
     beforeClose: Function,
-    overlayStyle: Object,
     showIndicators: Boolean,
     images: {
       type: Array,
-      default: () => []
+      default: function _default() {
+        return [];
+      }
     },
     loop: {
       type: Boolean,
@@ -50,7 +45,7 @@ export default defineComponent({
     },
     swipeDuration: {
       type: [Number, String],
-      default: 300
+      default: 500
     },
     startPosition: {
       type: [Number, String],
@@ -70,11 +65,9 @@ export default defineComponent({
     }
   },
   emits: ['scale', 'close', 'closed', 'change', 'update:show'],
-
-  setup(props, {
-    emit,
-    slots
-  }) {
+  setup: function setup(props, _ref) {
+    var emit = _ref.emit,
+        slots = _ref.slots;
     var swipeRef = ref();
     var windowSize = useWindowSize();
     var state = reactive({
@@ -83,79 +76,86 @@ export default defineComponent({
       rootHeight: 0
     });
 
-    var resize = () => {
+    var resize = function resize() {
       if (swipeRef.value) {
         var rect = swipeRef.value.$el.getBoundingClientRect();
         state.rootWidth = rect.width;
         state.rootHeight = rect.height;
-        swipeRef.value.resize();
       }
     };
 
-    var emitScale = args => emit('scale', args);
+    var emitScale = function emitScale(args) {
+      emit('scale', args);
+    };
 
-    var updateShow = show => emit('update:show', show);
-
-    var emitClose = () => {
+    var emitClose = function emitClose() {
       callInterceptor({
         interceptor: props.beforeClose,
         args: [state.active],
-        done: () => updateShow(false)
+        done: function done() {
+          emit('update:show', false);
+        }
       });
     };
 
-    var setActive = active => {
+    var setActive = function setActive(active) {
       if (active !== state.active) {
         state.active = active;
         emit('change', active);
       }
     };
 
-    var renderIndex = () => {
+    var renderIndex = function renderIndex() {
       if (props.showIndex) {
-        return _createVNode("div", {
+        return createVNode("div", {
           "class": bem('index')
         }, [slots.index ? slots.index({
           index: state.active
-        }) : state.active + 1 + " / " + props.images.length]);
+        }) : "".concat(state.active + 1, " / ").concat(props.images.length)]);
       }
     };
 
-    var renderCover = () => {
+    var renderCover = function renderCover() {
       if (slots.cover) {
-        return _createVNode("div", {
+        return createVNode("div", {
           "class": bem('cover')
         }, [slots.cover()]);
       }
     };
 
-    var renderImages = () => _createVNode(Swipe, {
-      "ref": swipeRef,
-      "lazyRender": true,
-      "loop": props.loop,
-      "class": bem('swipe'),
-      "duration": props.swipeDuration,
-      "initialSwipe": props.startPosition,
-      "showIndicators": props.showIndicators,
-      "indicatorColor": "white",
-      "onChange": setActive
-    }, {
-      default: () => [props.images.map(image => _createVNode(ImagePreviewItem, {
-        "src": image,
-        "show": props.show,
-        "active": state.active,
-        "maxZoom": props.maxZoom,
-        "minZoom": props.minZoom,
-        "rootWidth": state.rootWidth,
-        "rootHeight": state.rootHeight,
-        "onScale": emitScale,
-        "onClose": emitClose
-      }, null))]
-    });
+    var renderImages = function renderImages() {
+      return createVNode(Swipe, {
+        "ref": swipeRef,
+        "lazyRender": true,
+        "loop": props.loop,
+        "class": bem('swipe'),
+        "duration": props.swipeDuration,
+        "initialSwipe": props.startPosition,
+        "showIndicators": props.showIndicators,
+        "indicatorColor": "white",
+        "onChange": setActive
+      }, {
+        default: function _default() {
+          return [props.images.map(function (image) {
+            return createVNode(ImagePreviewItem, {
+              "src": image,
+              "show": props.show,
+              "active": state.active,
+              "maxZoom": props.maxZoom,
+              "minZoom": props.minZoom,
+              "rootWidth": state.rootWidth,
+              "rootHeight": state.rootHeight,
+              "onScale": emitScale,
+              "onClose": emitClose
+            }, null);
+          })];
+        }
+      });
+    };
 
-    var renderClose = () => {
+    var renderClose = function renderClose() {
       if (props.closeable) {
-        return _createVNode(Icon, {
+        return createVNode(Icon, {
           "role": "button",
           "name": props.closeIcon,
           "class": bem('close-icon', props.closeIconPosition),
@@ -164,29 +164,33 @@ export default defineComponent({
       }
     };
 
-    var onClosed = () => emit('closed');
+    var onClosed = function onClosed() {
+      emit('closed');
+    };
 
-    var swipeTo = (index, options) => {
-      var _swipeRef$value;
-
-      return (_swipeRef$value = swipeRef.value) == null ? void 0 : _swipeRef$value.swipeTo(index, options);
+    var swipeTo = function swipeTo(index, options) {
+      if (swipeRef.value) {
+        swipeRef.value.swipeTo(index, options);
+      }
     };
 
     useExpose({
-      swipeTo
+      swipeTo: swipeTo
     });
     onMounted(resize);
     watch([windowSize.width, windowSize.height], resize);
-    watch(() => props.startPosition, value => setActive(+value));
-    watch(() => props.show, value => {
-      var {
-        images,
-        startPosition
-      } = props;
+    watch(function () {
+      return props.startPosition;
+    }, setActive);
+    watch(function () {
+      return props.show;
+    }, function (value) {
+      var images = props.images,
+          startPosition = props.startPosition;
 
       if (value) {
         setActive(+startPosition);
-        nextTick(() => {
+        nextTick(function () {
           resize();
           swipeTo(+startPosition, {
             immediate: true
@@ -199,15 +203,18 @@ export default defineComponent({
         });
       }
     });
-    return () => _createVNode(Popup, _mergeProps({
-      "class": [bem(), props.className],
-      "overlayClass": bem('overlay'),
-      "onClosed": onClosed
-    }, _extends({}, pick(props, ['show', 'transition', 'overlayStyle', 'closeOnPopstate']), {
-      'onUpdate:show': updateShow
-    })), {
-      default: () => [renderClose(), renderImages(), renderIndex(), renderCover()]
-    });
+    return function () {
+      return createVNode(Popup, {
+        "show": props.show,
+        "class": [bem(), props.className],
+        "overlayClass": bem('overlay'),
+        "closeOnPopstate": props.closeOnPopstate,
+        "onClosed": onClosed
+      }, {
+        default: function _default() {
+          return [renderClose(), renderImages(), renderIndex(), renderCover()];
+        }
+      });
+    };
   }
-
 });

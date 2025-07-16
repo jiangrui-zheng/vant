@@ -34,8 +34,6 @@
       "duration",
       "round",
       "overlay",
-      "overlay-class",
-      "overlay-style",
       "lock-scroll",
       "lazy-render",
       "close-on-popstate",
@@ -71,17 +69,6 @@
       "validator"
     ]
   },
-  "van-address-list": {
-    "attributes": [
-      "v-model",
-      "list",
-      "disabled-list",
-      "disabled-text",
-      "switchable",
-      "add-button-text",
-      "default-tag-text"
-    ]
-  },
   "van-area": {
     "attributes": [
       "value",
@@ -99,13 +86,23 @@
       "is-oversea-code"
     ]
   },
+  "van-address-list": {
+    "attributes": [
+      "v-model",
+      "list",
+      "disabled-list",
+      "disabled-text",
+      "switchable",
+      "add-button-text",
+      "default-tag-text"
+    ]
+  },
   "van-badge": {
     "attributes": [
       "content",
       "color",
       "dot",
-      "max",
-      "offset"
+      "max"
     ]
   },
   "van-button": {
@@ -132,6 +129,21 @@
       "url",
       "to",
       "replace"
+    ]
+  },
+  "van-card": {
+    "attributes": [
+      "thumb",
+      "title",
+      "desc",
+      "tag",
+      "num",
+      "price",
+      "origin-price",
+      "centered",
+      "currency",
+      "thumb-link",
+      "lazy-load"
     ]
   },
   "van-calendar": {
@@ -168,32 +180,6 @@
       "range-prompt"
     ]
   },
-  "van-card": {
-    "attributes": [
-      "thumb",
-      "title",
-      "desc",
-      "tag",
-      "num",
-      "price",
-      "origin-price",
-      "centered",
-      "currency",
-      "thumb-link",
-      "lazy-load"
-    ]
-  },
-  "van-cascader": {
-    "attributes": [
-      "title",
-      "value",
-      "options",
-      "placeholder",
-      "active-color",
-      "closeable",
-      "field-names"
-    ]
-  },
   "van-cell": {
     "attributes": [
       "title",
@@ -221,7 +207,7 @@
   },
   "van-checkbox": {
     "attributes": [
-      "v-model",
+      "v-model (value)",
       "name",
       "shape",
       "disabled",
@@ -230,7 +216,7 @@
       "icon-size",
       "checked-color",
       "bind-group",
-      "v-model",
+      "v-model (value)",
       "disabled",
       "max",
       "direction",
@@ -346,32 +332,9 @@
       "show-count"
     ]
   },
-  "van-datetime-picker": {
-    "attributes": [
-      "type",
-      "title",
-      "confirm-button-text",
-      "cancel-button-text",
-      "show-toolbar",
-      "loading",
-      "readonly",
-      "filter",
-      "formatter",
-      "columns-order",
-      "item-height",
-      "visible-item-count",
-      "swipe-duration",
-      "min-date",
-      "max-date",
-      "min-hour",
-      "max-hour",
-      "min-minute",
-      "max-minute"
-    ]
-  },
   "van-dialog": {
     "attributes": [
-      "v-model:show",
+      "v-model",
       "title",
       "width",
       "message",
@@ -396,6 +359,29 @@
       "teleport"
     ]
   },
+  "van-datetime-picker": {
+    "attributes": [
+      "type",
+      "title",
+      "confirm-button-text",
+      "cancel-button-text",
+      "show-toolbar",
+      "loading",
+      "readonly",
+      "filter",
+      "formatter",
+      "columns-order",
+      "item-height",
+      "visible-item-count",
+      "swipe-duration",
+      "min-date",
+      "max-date",
+      "min-hour",
+      "max-hour",
+      "min-minute",
+      "max-minute"
+    ]
+  },
   "van-divider": {
     "attributes": [
       "dashed",
@@ -412,7 +398,7 @@
       "overlay",
       "close-on-click-overlay",
       "close-on-click-outside",
-      "v-model",
+      "value",
       "title",
       "options",
       "disabled",
@@ -421,16 +407,9 @@
       "teleport"
     ]
   },
-  "van-empty": {
-    "attributes": [
-      "image",
-      "image-size",
-      "description"
-    ]
-  },
   "van-field": {
     "attributes": [
-      "v-model",
+      "v-model (value)",
       "label",
       "name",
       "type",
@@ -463,8 +442,14 @@
       "left-icon",
       "right-icon",
       "icon-prefix",
-      "rules",
-      "autocomplete"
+      "rules"
+    ]
+  },
+  "van-empty": {
+    "attributes": [
+      "image",
+      "image-size",
+      "description"
     ]
   },
   "van-form": {
@@ -475,8 +460,6 @@
       "error-message-align",
       "validate-trigger",
       "colon",
-      "disabled",
-      "readonly",
       "validate-first",
       "scroll-to-error",
       "show-error",
@@ -548,8 +531,6 @@
       "closeable",
       "close-icon",
       "close-icon-position",
-      "transition",
-      "overlay-style",
       "teleport"
     ]
   },
@@ -569,8 +550,8 @@
   "van-list": {
     "attributes": [
       "v-model:loading",
-      "v-model:error",
       "finished",
+      "error",
       "offset",
       "loading-text",
       "finished-text",
@@ -585,7 +566,6 @@
       "type",
       "size",
       "text-size",
-      "text-color",
       "vertical"
     ]
   },
@@ -623,7 +603,7 @@
   },
   "van-number-keyboard": {
     "attributes": [
-      "v-model",
+      "v-model (value)",
       "show",
       "title",
       "theme",
@@ -635,11 +615,9 @@
       "delete-button-text",
       "close-button-loading",
       "show-delete-key",
-      "blur-on-close",
       "hide-on-click-outside",
       "teleport",
-      "safe-area-inset-bottom",
-      "random-key-order"
+      "safe-area-inset-bottom"
     ]
   },
   "van-overlay": {
@@ -650,6 +628,17 @@
       "class-name",
       "custom-style",
       "lock-scroll"
+    ]
+  },
+  "van-password-input": {
+    "attributes": [
+      "value",
+      "info",
+      "error-info",
+      "length",
+      "gutter",
+      "mask",
+      "focused"
     ]
   },
   "van-pagination": {
@@ -665,21 +654,9 @@
       "force-ellipses"
     ]
   },
-  "van-password-input": {
-    "attributes": [
-      "value",
-      "info",
-      "error-info",
-      "length",
-      "gutter",
-      "mask",
-      "focused"
-    ]
-  },
   "van-picker": {
     "attributes": [
       "columns",
-      "columns-field-names",
       "title",
       "confirm-button-text",
       "cancel-button-text",
@@ -700,7 +677,6 @@
       "actions",
       "placement",
       "theme",
-      "trigger",
       "offset",
       "overlay",
       "close-on-click-action",
@@ -753,7 +729,6 @@
       "success-duration",
       "animation-duration",
       "head-height",
-      "pull-distance",
       "disabled"
     ]
   },
@@ -766,7 +741,7 @@
       "label-position",
       "icon-size",
       "checked-color",
-      "v-model",
+      "v-model (value)",
       "disabled",
       "direction",
       "icon-size",
@@ -820,8 +795,6 @@
       "description",
       "duration",
       "overlay",
-      "overlay-class",
-      "overlay-style",
       "lock-scroll",
       "lazy-render",
       "close-on-popstate",
@@ -858,7 +831,7 @@
   },
   "van-slider": {
     "attributes": [
-      "v-model",
+      "value",
       "max",
       "min",
       "step",
@@ -868,7 +841,6 @@
       "inactive-color",
       "range",
       "disabled",
-      "readonly",
       "vertical"
     ]
   },
@@ -890,10 +862,9 @@
       "disable-plus",
       "disable-minus",
       "disable-input",
-      "before-change",
+      "async-change",
       "show-plus",
       "show-minus",
-      "show-input",
       "long-press",
       "allow-empty"
     ]
@@ -902,18 +873,15 @@
     "attributes": [
       "active",
       "direction",
-      "active-icon",
-      "inactive-icon",
-      "finish-icon",
       "active-color",
-      "inactive-color"
+      "inactive-color",
+      "active-icon",
+      "inactive-icon"
     ]
   },
   "van-sticky": {
     "attributes": [
-      "position",
       "offset-top",
-      "offset-bottom",
       "z-index",
       "container"
     ]
@@ -1006,8 +974,7 @@
       "url",
       "to",
       "replace",
-      "title-style",
-      "title-class"
+      "title-style"
     ]
   },
   "van-tabbar": {
@@ -1060,7 +1027,7 @@
   },
   "van-uploader": {
     "attributes": [
-      "v-model",
+      "v-model (fileList)",
       "accept",
       "name",
       "preview-size",

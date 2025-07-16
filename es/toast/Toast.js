@@ -1,36 +1,34 @@
-import { mergeProps as _mergeProps } from "vue";
-import { createVNode as _createVNode } from "vue";
-import { watch, onMounted, onUnmounted, defineComponent } from 'vue'; // Utils
-
-import { createNamespace, isDef, UnknownProp } from '../utils';
+import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
+import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
+import { watch, onMounted, onUnmounted, createVNode } from "vue";
+// Utils
+import { createNamespace, isDef } from '../utils';
 import { lockClick } from './lock-click'; // Components
 
 import Icon from '../icon';
 import Popup from '../popup';
 import Loading from '../loading';
-var [name, bem] = createNamespace('toast');
-export default defineComponent({
-  name,
+
+var _createNamespace = createNamespace('toast'),
+    _createNamespace2 = _slicedToArray(_createNamespace, 2),
+    createComponent = _createNamespace2[0],
+    bem = _createNamespace2[1];
+
+export default createComponent({
   props: {
     icon: String,
     show: Boolean,
-    overlay: Boolean,
     message: [Number, String],
-    className: UnknownProp,
+    duration: Number,
+    className: null,
     iconPrefix: String,
+    lockScroll: Boolean,
     loadingType: String,
     forbidClick: Boolean,
-    overlayClass: UnknownProp,
-    overlayStyle: Object,
     closeOnClick: Boolean,
-    closeOnClickOverlay: Boolean,
     type: {
       type: String,
       default: 'text'
-    },
-    duration: {
-      type: Number,
-      default: 2000
     },
     position: {
       type: String,
@@ -42,14 +40,12 @@ export default defineComponent({
     }
   },
   emits: ['update:show'],
-
-  setup(props, {
-    emit
-  }) {
+  setup: function setup(props, _ref) {
+    var emit = _ref.emit;
     var timer;
     var clickable = false;
 
-    var toggleClickable = () => {
+    var toggleClickable = function toggleClickable() {
       var newValue = props.show && props.forbidClick;
 
       if (clickable !== newValue) {
@@ -58,29 +54,25 @@ export default defineComponent({
       }
     };
 
-    var updateShow = show => emit('update:show', show);
-
-    var onClick = () => {
+    var onClick = function onClick() {
       if (props.closeOnClick) {
-        updateShow(false);
+        emit('update:show', false);
       }
     };
 
-    var clearTimer = () => {
+    var clearTimer = function clearTimer() {
       clearTimeout(timer);
     };
 
-    var renderIcon = () => {
-      var {
-        icon,
-        type,
-        iconPrefix,
-        loadingType
-      } = props;
+    var renderIcon = function renderIcon() {
+      var icon = props.icon,
+          type = props.type,
+          iconPrefix = props.iconPrefix,
+          loadingType = props.loadingType;
       var hasIcon = icon || type === 'success' || type === 'fail';
 
       if (hasIcon) {
-        return _createVNode(Icon, {
+        return createVNode(Icon, {
           "name": icon || type,
           "class": bem('icon'),
           "classPrefix": iconPrefix
@@ -88,61 +80,60 @@ export default defineComponent({
       }
 
       if (type === 'loading') {
-        return _createVNode(Loading, {
+        return createVNode(Loading, {
           "class": bem('loading'),
           "type": loadingType
         }, null);
       }
     };
 
-    var renderMessage = () => {
-      var {
-        type,
-        message
-      } = props;
+    var renderMessage = function renderMessage() {
+      var type = props.type,
+          message = props.message;
 
       if (isDef(message) && message !== '') {
-        return type === 'html' ? _createVNode("div", {
+        return type === 'html' ? createVNode("div", {
           "class": bem('text'),
-          "innerHTML": String(message)
-        }, null) : _createVNode("div", {
+          "innerHTML": message
+        }, null) : createVNode("div", {
           "class": bem('text')
-        }, {
-          default: () => [message]
-        });
+        }, [message]);
       }
     };
 
-    watch(() => [props.show, props.forbidClick], toggleClickable);
-    watch(() => [props.show, props.duration], () => {
+    watch([function () {
+      return props.show;
+    }, function () {
+      return props.forbidClick;
+    }], toggleClickable);
+    watch([function () {
+      return props.show;
+    }, function () {
+      return props.duration;
+    }], function () {
       clearTimer();
 
       if (props.show && props.duration > 0) {
-        timer = setTimeout(() => {
-          updateShow(false);
+        timer = setTimeout(function () {
+          emit('update:show', false);
         }, props.duration);
       }
     });
     onMounted(toggleClickable);
     onUnmounted(toggleClickable);
-    return () => _createVNode(Popup, _mergeProps({
-      "show": props.show,
-      "class": [bem([props.position, {
-        [props.type]: !props.icon
-      }]), props.className],
-      "overlay": props.overlay,
-      "lockScroll": false,
-      "transition": props.transition,
-      "overlayClass": props.overlayClass,
-      "overlayStyle": props.overlayStyle,
-      "closeOnClickOverlay": props.closeOnClickOverlay,
-      "onClick": onClick,
-      "onClosed": clearTimer
-    }, {
-      'onUpdate:show': updateShow
-    }), {
-      default: () => [renderIcon(), renderMessage()]
-    });
+    return function () {
+      return createVNode(Popup, {
+        "show": props.show,
+        "class": [bem([props.position, _defineProperty({}, props.type, !props.icon)]), props.className],
+        "lockScroll": false,
+        "transition": props.transition,
+        "onClick": onClick,
+        "onClosed": clearTimer
+      }, {
+        default: function _default() {
+          return [renderIcon(), renderMessage()];
+        }
+      });
+    };
   }
-
 });

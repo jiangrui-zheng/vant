@@ -18,11 +18,12 @@ export default {
     title: 'Takvim',
     startEnd: 'Başlat/Son',
     weekdays: ['Paz', 'Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt'],
-    monthTitle: (year, month) => year + "/" + month,
-    rangePrompt: maxRange => "En fazla " + maxRange + " g\xFCn se\xE7in"
-  },
-  vanCascader: {
-    select: 'Seçiniz'
+    monthTitle: function monthTitle(year, month) {
+      return "".concat(year, "/").concat(month);
+    },
+    rangePrompt: function rangePrompt(maxRange) {
+      return "En fazla ".concat(maxRange, " g\xFCn se\xE7in");
+    }
   },
   vanContactCard: {
     addText: 'Kişi bilgisi ekle'
@@ -43,13 +44,19 @@ export default {
   },
   vanCoupon: {
     unlimited: 'Sınırsız',
-    discount: discount => "%" + discount * 10 + " indirim",
-    condition: condition => "En az " + condition
+    discount: function discount(_discount) {
+      return "%".concat(_discount * 10, " indirim");
+    },
+    condition: function condition(_condition) {
+      return "En az ".concat(_condition);
+    }
   },
   vanCouponCell: {
     title: 'Kupon',
     tips: 'Kupon yok',
-    count: count => count + " adet teklif var"
+    count: function count(_count) {
+      return "".concat(_count, " adet teklif var");
+    }
   },
   vanCouponList: {
     empty: 'Kupon yok',

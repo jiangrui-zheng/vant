@@ -1,7 +1,5 @@
 import { isDef, isObject } from '.';
-var {
-  hasOwnProperty
-} = Object.prototype;
+var hasOwnProperty = Object.prototype.hasOwnProperty;
 
 function assignKey(to, from, key) {
   var val = from[key];
@@ -19,7 +17,7 @@ function assignKey(to, from, key) {
 }
 
 export function deepAssign(to, from) {
-  Object.keys(from).forEach(key => {
+  Object.keys(from).forEach(function (key) {
     assignKey(to, from, key);
   });
   return to;

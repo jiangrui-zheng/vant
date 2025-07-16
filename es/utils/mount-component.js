@@ -6,28 +6,32 @@ export function usePopupState() {
     show: false
   });
 
-  var toggle = show => {
+  var toggle = function toggle(show) {
     state.show = show;
   };
 
-  var open = props => {
+  var open = function open(props) {
     _extends(state, props);
 
-    nextTick(() => toggle(true));
+    nextTick(function () {
+      toggle(true);
+    });
   };
 
-  var close = () => toggle(false);
+  var close = function close() {
+    toggle(false);
+  };
 
   useExpose({
-    open,
-    close,
-    toggle
+    open: open,
+    close: close,
+    toggle: toggle
   });
   return {
-    open,
-    close,
-    state,
-    toggle
+    open: open,
+    close: close,
+    state: state,
+    toggle: toggle
   };
 }
 export function mountComponent(RootComponent) {
@@ -36,11 +40,9 @@ export function mountComponent(RootComponent) {
   document.body.appendChild(root);
   return {
     instance: app.mount(root),
-
-    unmount() {
-      app.unmount();
+    unmount: function unmount() {
+      app.unmount(root);
       document.body.removeChild(root);
     }
-
   };
 }

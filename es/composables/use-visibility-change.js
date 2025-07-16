@@ -8,20 +8,20 @@ export function useVisibilityChange(target, onChange) {
     return;
   }
 
-  var observer = new IntersectionObserver(entries => {
+  var observer = new IntersectionObserver(function (entries) {
     // visibility changed
     onChange(entries[0].intersectionRatio > 0);
   }, {
     root: document.body
   });
 
-  var observe = () => {
+  var observe = function observe() {
     if (target.value) {
       observer.observe(target.value);
     }
   };
 
-  var unobserve = () => {
+  var unobserve = function unobserve() {
     if (target.value) {
       observer.unobserve(target.value);
     }

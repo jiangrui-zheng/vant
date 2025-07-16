@@ -19,11 +19,12 @@ export default {
     confirm: '確認',
     startEnd: '開始/終了',
     weekdays: ['日', '月', '火', '水', '木', '金', '土'],
-    monthTitle: (year, month) => year + "\u5E74" + month + "\u6708",
-    rangePrompt: maxRange => maxRange + "\u65E5\u4EE5\u5185\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044"
-  },
-  vanCascader: {
-    select: '選択する'
+    monthTitle: function monthTitle(year, month) {
+      return "".concat(year, "\u5E74").concat(month, "\u6708");
+    },
+    rangePrompt: function rangePrompt(maxRange) {
+      return "".concat(maxRange, "\u65E5\u4EE5\u5185\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044");
+    }
   },
   vanContactCard: {
     addText: '連絡先を追加'
@@ -44,13 +45,19 @@ export default {
   },
   vanCoupon: {
     unlimited: '入場ありません',
-    discount: discount => 10 - discount + "\u5272\u5F15",
-    condition: condition => condition + "\u5186\u4EE5\u4E0A\u3067\u5229\u7528\u53EF\u80FD"
+    discount: function discount(_discount) {
+      return "".concat(10 - _discount, "\u5272\u5F15");
+    },
+    condition: function condition(_condition) {
+      return "".concat(_condition, "\u5186\u4EE5\u4E0A\u3067\u5229\u7528\u53EF\u80FD");
+    }
   },
   vanCouponCell: {
     title: 'クーポン',
     tips: '利用可能なクーポンがありません',
-    count: count => count + "\u679A\u304C\u5229\u7528\u53EF\u80FD"
+    count: function count(_count) {
+      return "".concat(_count, "\u679A\u304C\u5229\u7528\u53EF\u80FD");
+    }
   },
   vanCouponList: {
     empty: 'クーポンはありません',

@@ -1,10 +1,10 @@
-import { createVNode as _createVNode } from "vue";
-
-/* eslint-disable no-use-before-define */
-import { ref, watch, reactive, defineComponent } from 'vue'; // Utils
+import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
+import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
+import { reactive, ref, watch, createVNode } from "vue";
+import { PICKER_KEY } from './shared'; // Utils
 
 import { deepClone } from '../utils/deep-clone';
-import { range, isObject, UnknownProp, preventDefault, createNamespace } from '../utils'; // Composables
+import { range, isObject, createNamespace, preventDefault } from '../utils'; // Composition
 
 import { useParent } from '@vant/use';
 import { useTouch } from '../composables/use-touch';
@@ -15,7 +15,11 @@ var DEFAULT_DURATION = 200; // 惯性滑动思路:
 
 var MOMENTUM_LIMIT_TIME = 300;
 var MOMENTUM_LIMIT_DISTANCE = 15;
-var [name, bem] = createNamespace('picker-column');
+
+var _createNamespace = createNamespace('picker-column'),
+    _createNamespace2 = _slicedToArray(_createNamespace, 2),
+    createComponent = _createNamespace2[0],
+    bem = _createNamespace2[1];
 
 function getElementTranslateY(element) {
   var style = window.getComputedStyle(element);
@@ -24,49 +28,31 @@ function getElementTranslateY(element) {
   return Number(translateY);
 }
 
-export var PICKER_KEY = Symbol(name);
-
 function isOptionDisabled(option) {
   return isObject(option) && option.disabled;
 }
 
-export default defineComponent({
-  name,
+export default createComponent({
   props: {
+    valueKey: String,
     readonly: Boolean,
     allowHtml: Boolean,
-    className: UnknownProp,
-    textKey: {
-      type: String,
-      required: true
-    },
-    itemHeight: {
-      type: Number,
-      required: true
-    },
-    swipeDuration: {
-      type: [Number, String],
-      required: true
-    },
-    visibleItemCount: {
-      type: [Number, String],
-      required: true
-    },
-    defaultIndex: {
-      type: Number,
-      default: 0
-    },
+    className: String,
+    itemHeight: Number,
+    defaultIndex: Number,
+    swipeDuration: [Number, String],
+    visibleItemCount: [Number, String],
     initialOptions: {
       type: Array,
-      default: () => []
+      default: function _default() {
+        return [];
+      }
     }
   },
   emits: ['change'],
-
-  setup(props, {
-    emit,
-    slots
-  }) {
+  setup: function setup(props, _ref) {
+    var emit = _ref.emit,
+        slots = _ref.slots;
     var moving;
     var startOffset;
     var touchStartTime;
@@ -81,11 +67,15 @@ export default defineComponent({
     });
     var touch = useTouch();
 
-    var count = () => state.options.length;
+    var count = function count() {
+      return state.options.length;
+    };
 
-    var baseOffset = () => props.itemHeight * (+props.visibleItemCount - 1) / 2;
+    var baseOffset = function baseOffset() {
+      return props.itemHeight * (props.visibleItemCount - 1) / 2;
+    };
 
-    var adjustIndex = index => {
+    var adjustIndex = function adjustIndex(index) {
       index = range(index, 0, count());
 
       for (var i = index; i < count(); i++) {
@@ -97,11 +87,11 @@ export default defineComponent({
       }
     };
 
-    var setIndex = (index, emitChange) => {
+    var setIndex = function setIndex(index, emitChange) {
       index = adjustIndex(index) || 0;
       var offset = -index * props.itemHeight;
 
-      var trigger = () => {
+      var trigger = function trigger() {
         if (index !== state.index) {
           state.index = index;
 
@@ -121,14 +111,14 @@ export default defineComponent({
       state.offset = offset;
     };
 
-    var setOptions = options => {
+    var setOptions = function setOptions(options) {
       if (JSON.stringify(options) !== JSON.stringify(state.options)) {
         state.options = deepClone(options);
         setIndex(props.defaultIndex);
       }
     };
 
-    var onClickItem = index => {
+    var onClickItem = function onClickItem(index) {
       if (moving || props.readonly) {
         return;
       }
@@ -138,17 +128,19 @@ export default defineComponent({
       setIndex(index, true);
     };
 
-    var getOptionText = option => {
-      if (isObject(option) && props.textKey in option) {
-        return option[props.textKey];
+    var getOptionText = function getOptionText(option) {
+      if (isObject(option) && props.valueKey in option) {
+        return option[props.valueKey];
       }
 
       return option;
     };
 
-    var getIndexByOffset = offset => range(Math.round(-offset / props.itemHeight), 0, count() - 1);
+    var getIndexByOffset = function getIndexByOffset(offset) {
+      return range(Math.round(-offset / props.itemHeight), 0, count() - 1);
+    };
 
-    var momentum = (distance, duration) => {
+    var momentum = function momentum(distance, duration) {
       var speed = Math.abs(distance / duration);
       distance = state.offset + speed / 0.003 * (distance < 0 ? -1 : 1);
       var index = getIndexByOffset(distance);
@@ -156,7 +148,7 @@ export default defineComponent({
       setIndex(index, true);
     };
 
-    var stopMomentum = () => {
+    var stopMomentum = function stopMomentum() {
       moving = false;
       state.duration = 0;
 
@@ -166,7 +158,7 @@ export default defineComponent({
       }
     };
 
-    var onTouchStart = event => {
+    var onTouchStart = function onTouchStart(event) {
       if (props.readonly) {
         return;
       }
@@ -187,7 +179,7 @@ export default defineComponent({
       transitionEndTrigger = null;
     };
 
-    var onTouchMove = event => {
+    var onTouchMove = function onTouchMove(event) {
       if (props.readonly) {
         return;
       }
@@ -208,7 +200,7 @@ export default defineComponent({
       }
     };
 
-    var onTouchEnd = () => {
+    var onTouchEnd = function onTouchEnd() {
       if (props.readonly) {
         return;
       }
@@ -227,16 +219,16 @@ export default defineComponent({
       setIndex(index, true); // compatible with desktop scenario
       // use setTimeout to skip the click event Emitted after touchstart
 
-      setTimeout(() => {
+      setTimeout(function () {
         moving = false;
       }, 0);
     };
 
-    var renderOptions = () => {
+    var renderOptions = function renderOptions() {
       var optionStyle = {
-        height: props.itemHeight + "px"
+        height: "".concat(props.itemHeight, "px")
       };
-      return state.options.map((option, index) => {
+      return state.options.map(function (option, index) {
         var text = getOptionText(option);
         var disabled = isOptionDisabled(option);
         var data = {
@@ -244,23 +236,24 @@ export default defineComponent({
           style: optionStyle,
           tabindex: disabled ? -1 : 0,
           class: bem('item', {
-            disabled,
+            disabled: disabled,
             selected: index === state.index
           }),
-          onClick: () => onClickItem(index)
+          onClick: function onClick() {
+            onClickItem(index);
+          }
         };
-        var childData = {
-          class: 'van-ellipsis',
-          [props.allowHtml ? 'innerHTML' : 'textContent']: text
-        };
-        return _createVNode("li", data, [slots.option ? slots.option(option) : _createVNode("div", childData, null)]);
+
+        var childData = _defineProperty({
+          class: 'van-ellipsis'
+        }, props.allowHtml ? 'innerHTML' : 'textContent', text);
+
+        return createVNode("li", data, [slots.option ? slots.option(option) : createVNode("div", childData, null)]);
       });
     };
 
-    var setValue = value => {
-      var {
-        options
-      } = state;
+    var setValue = function setValue(value) {
+      var options = state.options;
 
       for (var i = 0; i < options.length; i++) {
         if (getOptionText(options[i]) === value) {
@@ -269,35 +262,41 @@ export default defineComponent({
       }
     };
 
-    var getValue = () => state.options[state.index];
+    var getValue = function getValue() {
+      return state.options[state.index];
+    };
 
     setIndex(state.index);
     useParent(PICKER_KEY);
     useExpose({
-      state,
-      setIndex,
-      getValue,
-      setValue,
-      setOptions,
-      stopMomentum
+      state: state,
+      setIndex: setIndex,
+      getValue: getValue,
+      setValue: setValue,
+      setOptions: setOptions,
+      stopMomentum: stopMomentum
     });
-    watch(() => props.initialOptions, setOptions);
-    watch(() => props.defaultIndex, value => {
+    watch(function () {
+      return props.initialOptions;
+    }, setOptions);
+    watch(function () {
+      return props.defaultIndex;
+    }, function (value) {
       setIndex(value);
     });
-    return () => {
+    return function () {
       var wrapperStyle = {
-        transform: "translate3d(0, " + (state.offset + baseOffset()) + "px, 0)",
-        transitionDuration: state.duration + "ms",
+        transform: "translate3d(0, ".concat(state.offset + baseOffset(), "px, 0)"),
+        transitionDuration: "".concat(state.duration, "ms"),
         transitionProperty: state.duration ? 'all' : 'none'
       };
-      return _createVNode("div", {
+      return createVNode("div", {
         "class": [bem(), props.className],
         "onTouchstart": onTouchStart,
         "onTouchmove": onTouchMove,
         "onTouchend": onTouchEnd,
         "onTouchcancel": onTouchEnd
-      }, [_createVNode("ul", {
+      }, [createVNode("ul", {
         "ref": wrapper,
         "style": wrapperStyle,
         "class": bem('wrapper'),
@@ -305,5 +304,4 @@ export default defineComponent({
       }, [renderOptions()])]);
     };
   }
-
 });

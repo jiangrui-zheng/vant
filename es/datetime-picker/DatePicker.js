@@ -1,57 +1,68 @@
-import { createVNode as _createVNode } from "vue";
-import { mergeProps as _mergeProps } from "vue";
-import { resolveDirective as _resolveDirective } from "vue";
-import _extends from "@babel/runtime/helpers/esm/extends";
-import { ref, watch, computed, nextTick, onMounted, defineComponent } from 'vue'; // Utils
+import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
+import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
+import { ref, watch, computed, nextTick, onMounted, mergeProps, createVNode } from "vue";
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+// Utils
 import { isDate } from '../utils/validate/date';
-import { pick, range, padZero, createNamespace } from '../utils';
-import { times, pickerKeys, sharedProps, getTrueValue, getMonthEndDay } from './utils'; // Composables
+import { pick, padZero, createNamespace } from '../utils';
+import { times, sharedProps, getTrueValue, getMonthEndDay } from './utils'; // Composition
 
 import { useExpose } from '../composables/use-expose'; // Components
 
 import Picker from '../picker';
+import { pickerProps } from '../picker/shared';
 var currentYear = new Date().getFullYear();
-var [name] = createNamespace('date-picker');
-export default defineComponent({
-  name,
-  props: _extends({}, sharedProps, {
-    modelValue: Date,
+
+var _createNamespace = createNamespace('date-picker'),
+    _createNamespace2 = _slicedToArray(_createNamespace, 1),
+    createComponent = _createNamespace2[0];
+
+export default createComponent({
+  props: _objectSpread(_objectSpread({}, sharedProps), {}, {
     type: {
       type: String,
       default: 'datetime'
     },
     minDate: {
       type: Date,
-      default: () => new Date(currentYear - 10, 0, 1),
+      default: function _default() {
+        return new Date(currentYear - 10, 0, 1);
+      },
       validator: isDate
     },
     maxDate: {
       type: Date,
-      default: () => new Date(currentYear + 10, 11, 31),
+      default: function _default() {
+        return new Date(currentYear + 10, 11, 31);
+      },
       validator: isDate
     }
   }),
   emits: ['confirm', 'cancel', 'change', 'update:modelValue'],
+  setup: function setup(props, _ref) {
+    var emit = _ref.emit;
 
-  setup(props, {
-    emit,
-    slots
-  }) {
-    var formatValue = value => {
-      if (isDate(value)) {
-        var timestamp = range(value.getTime(), props.minDate.getTime(), props.maxDate.getTime());
-        return new Date(timestamp);
+    var formatValue = function formatValue(value) {
+      if (!isDate(value)) {
+        value = props.minDate;
       }
 
-      return undefined;
+      value = Math.max(value, props.minDate.getTime());
+      value = Math.min(value, props.maxDate.getTime());
+      return new Date(value);
     };
 
     var picker = ref();
     var currentDate = ref(formatValue(props.modelValue));
 
-    var getBoundary = (type, value) => {
-      var boundary = props[type + "Date"];
+    var getBoundary = function getBoundary(type, value) {
+      var _ref2;
+
+      var boundary = props["".concat(type, "Date")];
       var year = boundary.getFullYear();
       var month = 1;
       var date = 1;
@@ -81,30 +92,24 @@ export default defineComponent({
         }
       }
 
-      return {
-        [type + "Year"]: year,
-        [type + "Month"]: month,
-        [type + "Date"]: date,
-        [type + "Hour"]: hour,
-        [type + "Minute"]: minute
-      };
+      return _ref2 = {}, _defineProperty(_ref2, "".concat(type, "Year"), year), _defineProperty(_ref2, "".concat(type, "Month"), month), _defineProperty(_ref2, "".concat(type, "Date"), date), _defineProperty(_ref2, "".concat(type, "Hour"), hour), _defineProperty(_ref2, "".concat(type, "Minute"), minute), _ref2;
     };
 
-    var ranges = computed(() => {
-      var {
-        maxYear,
-        maxDate,
-        maxMonth,
-        maxHour,
-        maxMinute
-      } = getBoundary('max', currentDate.value || props.minDate);
-      var {
-        minYear,
-        minDate,
-        minMonth,
-        minHour,
-        minMinute
-      } = getBoundary('min', currentDate.value || props.minDate);
+    var ranges = computed(function () {
+      var _getBoundary = getBoundary('max', currentDate.value),
+          maxYear = _getBoundary.maxYear,
+          maxDate = _getBoundary.maxDate,
+          maxMonth = _getBoundary.maxMonth,
+          maxHour = _getBoundary.maxHour,
+          maxMinute = _getBoundary.maxMinute;
+
+      var _getBoundary2 = getBoundary('min', currentDate.value),
+          minYear = _getBoundary2.minYear,
+          minDate = _getBoundary2.minDate,
+          minMonth = _getBoundary2.minMonth,
+          minHour = _getBoundary2.minHour,
+          minMinute = _getBoundary2.minMinute;
+
       var result = [{
         type: 'year',
         range: [minYear, maxYear]
@@ -141,40 +146,52 @@ export default defineComponent({
       }
 
       if (props.columnsOrder) {
-        var columnsOrder = props.columnsOrder.concat(result.map(column => column.type));
-        result.sort((a, b) => columnsOrder.indexOf(a.type) - columnsOrder.indexOf(b.type));
+        var columnsOrder = props.columnsOrder.concat(result.map(function (column) {
+          return column.type;
+        }));
+        result.sort(function (a, b) {
+          return columnsOrder.indexOf(a.type) - columnsOrder.indexOf(b.type);
+        });
       }
 
       return result;
     });
-    var originColumns = computed(() => ranges.value.map(({
-      type,
-      range: rangeArr
-    }) => {
-      var values = times(rangeArr[1] - rangeArr[0] + 1, index => padZero(rangeArr[0] + index));
+    var originColumns = computed(function () {
+      return ranges.value.map(function (_ref3) {
+        var type = _ref3.type,
+            rangeArr = _ref3.range;
+        var values = times(rangeArr[1] - rangeArr[0] + 1, function (index) {
+          var value = padZero(rangeArr[0] + index);
+          return value;
+        });
 
-      if (props.filter) {
-        values = props.filter(type, values);
-      }
+        if (props.filter) {
+          values = props.filter(type, values);
+        }
 
-      return {
-        type,
-        values
-      };
-    }));
-    var columns = computed(() => originColumns.value.map(column => ({
-      values: column.values.map(value => props.formatter(column.type, value))
-    })));
+        return {
+          type: type,
+          values: values
+        };
+      });
+    });
+    var columns = computed(function () {
+      return originColumns.value.map(function (column) {
+        return {
+          values: column.values.map(function (value) {
+            return props.formatter(column.type, value);
+          })
+        };
+      });
+    });
 
-    var updateColumnValue = () => {
-      var value = currentDate.value || props.minDate;
-      var {
-        formatter
-      } = props;
-      var values = originColumns.value.map(column => {
+    var updateColumnValue = function updateColumnValue() {
+      var value = currentDate.value;
+      var formatter = props.formatter;
+      var values = originColumns.value.map(function (column) {
         switch (column.type) {
           case 'year':
-            return formatter('year', "" + value.getFullYear());
+            return formatter('year', "".concat(value.getFullYear()));
 
           case 'month':
             return formatter('month', padZero(value.getMonth() + 1));
@@ -193,27 +210,23 @@ export default defineComponent({
             return null;
         }
       });
-      nextTick(() => {
+      nextTick(function () {
         picker.value.setValues(values);
       });
     };
 
-    var updateInnerValue = () => {
-      var {
-        type
-      } = props;
+    var updateInnerValue = function updateInnerValue() {
+      var type = props.type;
       var indexes = picker.value.getIndexes();
 
-      var getValue = type => {
+      var getValue = function getValue(type) {
         var index = 0;
-        originColumns.value.forEach((column, columnIndex) => {
+        originColumns.value.forEach(function (column, columnIndex) {
           if (type === column.type) {
             index = columnIndex;
           }
         });
-        var {
-          values
-        } = originColumns.value[index];
+        var values = originColumns.value[index].values;
         return getTrueValue(values[indexes[index]]);
       };
 
@@ -222,7 +235,7 @@ export default defineComponent({
       var day;
 
       if (type === 'month-day') {
-        year = (currentDate.value || props.minDate).getFullYear();
+        year = currentDate.value.getFullYear();
         month = getValue('month');
         day = getValue('day');
       } else {
@@ -249,46 +262,61 @@ export default defineComponent({
       currentDate.value = formatValue(value);
     };
 
-    var onConfirm = () => {
-      emit('update:modelValue', currentDate.value);
+    var onConfirm = function onConfirm() {
       emit('confirm', currentDate.value);
     };
 
-    var onCancel = () => emit('cancel');
+    var onCancel = function onCancel() {
+      emit('cancel');
+    };
 
-    var onChange = () => {
+    var onChange = function onChange() {
       updateInnerValue();
-      nextTick(() => {
-        nextTick(() => emit('change', currentDate.value));
+      nextTick(function () {
+        nextTick(function () {
+          emit('change', currentDate.value);
+        });
       });
     };
 
-    onMounted(() => {
+    onMounted(function () {
       updateColumnValue();
       nextTick(updateInnerValue);
     });
     watch(columns, updateColumnValue);
-    watch(currentDate, (value, oldValue) => emit('update:modelValue', oldValue ? value : null));
-    watch(() => [props.filter, props.minDate, props.maxDate], updateInnerValue);
-    watch(() => props.modelValue, value => {
-      var _currentDate$value;
-
+    watch(currentDate, function (value) {
+      emit('update:modelValue', value);
+    });
+    watch([function () {
+      return props.filter;
+    }, function () {
+      return props.minDate;
+    }, function () {
+      return props.maxDate;
+    }], updateInnerValue);
+    watch(function () {
+      return props.modelValue;
+    }, function (value) {
       value = formatValue(value);
 
-      if (value && value.valueOf() !== ((_currentDate$value = currentDate.value) == null ? void 0 : _currentDate$value.valueOf())) {
+      if (value.valueOf() !== currentDate.value.valueOf()) {
         currentDate.value = value;
       }
     });
     useExpose({
-      getPicker: () => picker.value
+      getPicker: function getPicker() {
+        return picker.value;
+      }
     });
-    return () => _createVNode(Picker, _mergeProps({
-      "ref": picker,
-      "columns": columns.value,
-      "onChange": onChange,
-      "onCancel": onCancel,
-      "onConfirm": onConfirm
-    }, pick(props, pickerKeys)), _extends({}, slots));
+    return function () {
+      return createVNode(Picker, mergeProps({
+        "ref": picker,
+        "columns": columns.value,
+        "readonly": props.readonly,
+        "onChange": onChange,
+        "onCancel": onCancel,
+        "onConfirm": onConfirm
+      }, pick(props, Object.keys(pickerProps))), null);
+    };
   }
-
 });

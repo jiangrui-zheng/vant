@@ -1,10 +1,13 @@
+import _typeof from "@babel/runtime/helpers/esm/typeof";
 import { deepAssign } from './deep-assign';
 export function deepClone(obj) {
   if (Array.isArray(obj)) {
-    return obj.map(item => deepClone(item));
+    return obj.map(function (item) {
+      return deepClone(item);
+    });
   }
 
-  if (typeof obj === 'object') {
+  if (_typeof(obj) === 'object') {
     return deepAssign({}, obj);
   }
 

@@ -5,7 +5,7 @@ export function addUnit(value) {
     return undefined;
   }
 
-  return isNumeric(value) ? value + "px" : String(value);
+  return isNumeric(value) ? "".concat(value, "px") : String(value);
 }
 export function getSizeStyle(originSize) {
   if (isDef(originSize)) {
@@ -15,15 +15,6 @@ export function getSizeStyle(originSize) {
       height: size
     };
   }
-}
-export function getZIndexStyle(zIndex) {
-  var style = {};
-
-  if (zIndex !== undefined) {
-    style.zIndex = +zIndex;
-  }
-
-  return style;
 } // cache
 
 var rootFontSize;
@@ -59,15 +50,15 @@ export function unitToPx(value) {
   }
 
   if (inBrowser) {
-    if (value.includes('rem')) {
+    if (value.indexOf('rem') !== -1) {
       return convertRem(value);
     }
 
-    if (value.includes('vw')) {
+    if (value.indexOf('vw') !== -1) {
       return convertVw(value);
     }
 
-    if (value.includes('vh')) {
+    if (value.indexOf('vh') !== -1) {
       return convertVh(value);
     }
   }

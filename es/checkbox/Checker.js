@@ -1,13 +1,17 @@
-import { createVNode as _createVNode } from "vue";
-import _extends from "@babel/runtime/helpers/esm/extends";
-import { ref, computed, defineComponent } from 'vue';
-import { addUnit, UnknownProp } from '../utils';
+import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
+import { ref, computed, defineComponent, createVNode } from "vue";
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+import { addUnit } from '../utils';
 import Icon from '../icon';
 export var checkerProps = {
-  name: UnknownProp,
+  name: null,
   disabled: Boolean,
   iconSize: [Number, String],
-  modelValue: UnknownProp,
+  modelValue: null,
   checkedColor: String,
   labelPosition: String,
   labelDisabled: Boolean,
@@ -17,36 +21,37 @@ export var checkerProps = {
   }
 };
 export default defineComponent({
-  props: _extends({}, checkerProps, {
+  props: _objectSpread(_objectSpread({}, checkerProps), {}, {
     role: String,
     parent: Object,
     checked: Boolean,
-    bindGroup: {
-      type: Boolean,
-      default: true
-    },
+    bindGroup: Boolean,
     bem: {
       type: Function,
       required: true
     }
   }),
   emits: ['click', 'toggle'],
-
-  setup(props, {
-    emit,
-    slots
-  }) {
+  setup: function setup(props, _ref) {
+    var emit = _ref.emit,
+        slots = _ref.slots;
     var iconRef = ref();
 
-    var getParentProp = name => {
+    var getParentProp = function getParentProp(name) {
       if (props.parent && props.bindGroup) {
         return props.parent.props[name];
       }
+
+      return null;
     };
 
-    var disabled = computed(() => getParentProp('disabled') || props.disabled);
-    var direction = computed(() => getParentProp('direction'));
-    var iconStyle = computed(() => {
+    var disabled = computed(function () {
+      return getParentProp('disabled') || props.disabled;
+    });
+    var direction = computed(function () {
+      return getParentProp('direction') || null;
+    });
+    var iconStyle = computed(function () {
       var checkedColor = props.checkedColor || getParentProp('checkedColor');
 
       if (checkedColor && props.checked && !disabled.value) {
@@ -57,10 +62,8 @@ export default defineComponent({
       }
     });
 
-    var onClick = event => {
-      var {
-        target
-      } = event;
+    var onClick = function onClick(event) {
+      var target = event.target;
       var icon = iconRef.value;
       var iconClicked = icon === target || icon.contains(target);
 
@@ -71,33 +74,31 @@ export default defineComponent({
       emit('click', event);
     };
 
-    var renderIcon = () => {
-      var {
-        bem,
-        shape,
-        checked
-      } = props;
+    var renderIcon = function renderIcon() {
+      var bem = props.bem,
+          shape = props.shape,
+          checked = props.checked;
       var iconSize = props.iconSize || getParentProp('iconSize');
-      return _createVNode("div", {
+      return createVNode("div", {
         "ref": iconRef,
         "class": bem('icon', [shape, {
           disabled: disabled.value,
-          checked
+          checked: checked
         }]),
         "style": {
           fontSize: addUnit(iconSize)
         }
       }, [slots.icon ? slots.icon({
-        checked
-      }) : _createVNode(Icon, {
+        checked: checked
+      }) : createVNode(Icon, {
         "name": "success",
         "style": iconStyle.value
       }, null)]);
     };
 
-    var renderLabel = () => {
+    var renderLabel = function renderLabel() {
       if (slots.default) {
-        return _createVNode("span", {
+        return createVNode("span", {
           "class": props.bem('label', [props.labelPosition, {
             disabled: disabled.value
           }])
@@ -105,7 +106,7 @@ export default defineComponent({
       }
     };
 
-    return () => {
+    return function () {
       var nodes = [renderIcon()];
 
       if (props.labelPosition === 'left') {
@@ -114,7 +115,7 @@ export default defineComponent({
         nodes.push(renderLabel());
       }
 
-      return _createVNode("div", {
+      return createVNode("div", {
         "role": props.role,
         "class": props.bem([{
           disabled: disabled.value,
@@ -123,10 +124,7 @@ export default defineComponent({
         "tabindex": disabled.value ? -1 : 0,
         "aria-checked": props.checked,
         "onClick": onClick
-      }, {
-        default: () => [nodes]
-      });
+      }, [nodes]);
     };
   }
-
 });

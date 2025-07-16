@@ -9,11 +9,9 @@ export var routeProps = {
 };
 export function route(vm) {
   var router = vm.$router;
-  var {
-    to,
-    url,
-    replace
-  } = vm;
+  var to = vm.to,
+      url = vm.url,
+      replace = vm.replace;
 
   if (to && router) {
     router[replace ? 'replace' : 'push'](to);
@@ -23,7 +21,7 @@ export function route(vm) {
 }
 export function useRoute() {
   var vm = getCurrentInstance().proxy;
-  return () => {
+  return function () {
     route(vm);
   };
 }

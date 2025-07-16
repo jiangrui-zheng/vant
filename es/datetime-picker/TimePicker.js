@@ -1,20 +1,26 @@
-import { createVNode as _createVNode } from "vue";
-import { mergeProps as _mergeProps } from "vue";
-import { resolveDirective as _resolveDirective } from "vue";
-import _extends from "@babel/runtime/helpers/esm/extends";
-import { ref, watch, computed, nextTick, onMounted, defineComponent } from 'vue'; // Utils
+import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
+import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
+import { ref, watch, computed, nextTick, onMounted, mergeProps, createVNode } from "vue";
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+// Utils
 import { pick, range, padZero, createNamespace } from '../utils';
-import { times, sharedProps, pickerKeys } from './utils'; // Composables
+import { times, sharedProps } from './utils'; // Composition
 
 import { useExpose } from '../composables/use-expose'; // Components
 
 import Picker from '../picker';
-var [name] = createNamespace('time-picker');
-export default defineComponent({
-  name,
-  props: _extends({}, sharedProps, {
-    modelValue: String,
+import { pickerProps } from '../picker/shared';
+
+var _createNamespace = createNamespace('time-picker'),
+    _createNamespace2 = _slicedToArray(_createNamespace, 1),
+    createComponent = _createNamespace2[0];
+
+export default createComponent({
+  props: _objectSpread(_objectSpread({}, sharedProps), {}, {
     minHour: {
       type: [Number, String],
       default: 0
@@ -33,93 +39,131 @@ export default defineComponent({
     }
   }),
   emits: ['confirm', 'cancel', 'change', 'update:modelValue'],
+  setup: function setup(props, _ref) {
+    var emit = _ref.emit;
 
-  setup(props, {
-    emit,
-    slots
-  }) {
-    var formatValue = value => {
-      var {
-        minHour,
-        maxHour,
-        maxMinute,
-        minMinute
-      } = props;
+    var formatValue = function formatValue(value) {
+      var minHour = props.minHour,
+          maxHour = props.maxHour,
+          maxMinute = props.maxMinute,
+          minMinute = props.minMinute;
 
       if (!value) {
-        value = padZero(minHour) + ":" + padZero(minMinute);
+        value = "".concat(padZero(minHour), ":").concat(padZero(minMinute));
       }
 
-      var [hour, minute] = value.split(':');
-      hour = padZero(range(+hour, +minHour, +maxHour));
-      minute = padZero(range(+minute, +minMinute, +maxMinute));
-      return hour + ":" + minute;
+      var _value$split = value.split(':'),
+          _value$split2 = _slicedToArray(_value$split, 2),
+          hour = _value$split2[0],
+          minute = _value$split2[1];
+
+      hour = padZero(range(hour, minHour, maxHour));
+      minute = padZero(range(minute, minMinute, maxMinute));
+      return "".concat(hour, ":").concat(minute);
     };
 
     var picker = ref();
     var currentDate = ref(formatValue(props.modelValue));
-    var ranges = computed(() => [{
-      type: 'hour',
-      range: [+props.minHour, +props.maxHour]
-    }, {
-      type: 'minute',
-      range: [+props.minMinute, +props.maxMinute]
-    }]);
-    var originColumns = computed(() => ranges.value.map(({
-      type,
-      range: rangeArr
-    }) => {
-      var values = times(rangeArr[1] - rangeArr[0] + 1, index => padZero(rangeArr[0] + index));
+    var ranges = computed(function () {
+      return [{
+        type: 'hour',
+        range: [+props.minHour, +props.maxHour]
+      }, {
+        type: 'minute',
+        range: [+props.minMinute, +props.maxMinute]
+      }];
+    });
+    var originColumns = computed(function () {
+      return ranges.value.map(function (_ref2) {
+        var type = _ref2.type,
+            rangeArr = _ref2.range;
+        var values = times(rangeArr[1] - rangeArr[0] + 1, function (index) {
+          return padZero(rangeArr[0] + index);
+        });
 
-      if (props.filter) {
-        values = props.filter(type, values);
-      }
+        if (props.filter) {
+          values = props.filter(type, values);
+        }
 
-      return {
-        type,
-        values
-      };
-    }));
-    var columns = computed(() => originColumns.value.map(column => ({
-      values: column.values.map(value => props.formatter(column.type, value))
-    })));
+        return {
+          type: type,
+          values: values
+        };
+      });
+    });
+    var columns = computed(function () {
+      return originColumns.value.map(function (column) {
+        return {
+          values: column.values.map(function (value) {
+            return props.formatter(column.type, value);
+          })
+        };
+      });
+    });
 
-    var updateColumnValue = () => {
+    var updateColumnValue = function updateColumnValue() {
       var pair = currentDate.value.split(':');
       var values = [props.formatter('hour', pair[0]), props.formatter('minute', pair[1])];
-      nextTick(() => {
+      nextTick(function () {
         picker.value.setValues(values);
       });
     };
 
-    var updateInnerValue = () => {
-      var [hourIndex, minuteIndex] = picker.value.getIndexes();
-      var [hourColumn, minuteColumn] = originColumns.value;
+    var updateInnerValue = function updateInnerValue() {
+      var _picker$value$getInde = picker.value.getIndexes(),
+          _picker$value$getInde2 = _slicedToArray(_picker$value$getInde, 2),
+          hourIndex = _picker$value$getInde2[0],
+          minuteIndex = _picker$value$getInde2[1];
+
+      var _originColumns$value = _slicedToArray(originColumns.value, 2),
+          hourColumn = _originColumns$value[0],
+          minuteColumn = _originColumns$value[1];
+
       var hour = hourColumn.values[hourIndex] || hourColumn.values[0];
       var minute = minuteColumn.values[minuteIndex] || minuteColumn.values[0];
-      currentDate.value = formatValue(hour + ":" + minute);
+      currentDate.value = formatValue("".concat(hour, ":").concat(minute));
       updateColumnValue();
     };
 
-    var onConfirm = () => emit('confirm', currentDate.value);
+    var onConfirm = function onConfirm() {
+      emit('confirm', currentDate.value);
+    };
 
-    var onCancel = () => emit('cancel');
+    var onCancel = function onCancel() {
+      emit('cancel');
+    };
 
-    var onChange = () => {
+    var onChange = function onChange() {
       updateInnerValue();
-      nextTick(() => {
-        nextTick(() => emit('change', currentDate.value));
+      nextTick(function () {
+        nextTick(function () {
+          emit('change', currentDate.value);
+        });
       });
     };
 
-    onMounted(() => {
+    onMounted(function () {
       updateColumnValue();
       nextTick(updateInnerValue);
     });
     watch(columns, updateColumnValue);
-    watch(() => [props.filter, props.minHour, props.maxHour, props.minMinute, props.maxMinute], updateInnerValue);
-    watch(currentDate, value => emit('update:modelValue', value));
-    watch(() => props.modelValue, value => {
+    watch([function () {
+      return props.filter;
+    }, function () {
+      return props.minHour;
+    }, function () {
+      return props.maxHour;
+    }, function () {
+      return props.minMinute;
+    }, function () {
+      return props.maxMinute;
+    }], updateInnerValue);
+    watch(currentDate, function (value) {
+      emit('update:modelValue', value);
+    });
+    watch(function () {
+      return props.modelValue;
+    }, function (value) {
       value = formatValue(value);
 
       if (value !== currentDate.value) {
@@ -128,15 +172,19 @@ export default defineComponent({
       }
     });
     useExpose({
-      getPicker: () => picker.value
+      getPicker: function getPicker() {
+        return picker.value;
+      }
     });
-    return () => _createVNode(Picker, _mergeProps({
-      "ref": picker,
-      "columns": columns.value,
-      "onChange": onChange,
-      "onCancel": onCancel,
-      "onConfirm": onConfirm
-    }, pick(props, pickerKeys)), _extends({}, slots));
+    return function () {
+      return createVNode(Picker, mergeProps({
+        "ref": picker,
+        "columns": columns.value,
+        "readonly": props.readonly,
+        "onChange": onChange,
+        "onCancel": onCancel,
+        "onConfirm": onConfirm
+      }, pick(props, Object.keys(pickerProps))), null);
+    };
   }
-
 });

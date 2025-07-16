@@ -19,11 +19,12 @@ export default {
     confirm: '確定',
     startEnd: '開始/結束',
     weekdays: ['日', '壹', '二', '三', '四', '五', '六'],
-    monthTitle: (year, month) => year + "\u5E74" + month + "\u6708",
-    rangePrompt: maxRange => "\u9078\u64C7\u5929\u6578\u4E0D\u80FD\u8D85\u904E " + maxRange + " \u5929"
-  },
-  vanCascader: {
-    select: '請選擇'
+    monthTitle: function monthTitle(year, month) {
+      return "".concat(year, "\u5E74").concat(month, "\u6708");
+    },
+    rangePrompt: function rangePrompt(maxRange) {
+      return "\u9078\u64C7\u5929\u6578\u4E0D\u80FD\u8D85\u904E ".concat(maxRange, " \u5929");
+    }
   },
   vanContactCard: {
     addText: '添加聯系人'
@@ -44,13 +45,19 @@ export default {
   },
   vanCoupon: {
     unlimited: '無使用門檻',
-    discount: discount => discount + "\u6298",
-    condition: condition => "\u6EFF" + condition + "\u5143\u53EF\u7528"
+    discount: function discount(_discount) {
+      return "".concat(_discount, "\u6298");
+    },
+    condition: function condition(_condition) {
+      return "\u6EFF".concat(_condition, "\u5143\u53EF\u7528");
+    }
   },
   vanCouponCell: {
     title: '優惠券',
     tips: '暫無可用',
-    count: count => count + "\u5F35\u53EF\u7528"
+    count: function count(_count) {
+      return "".concat(_count, "\u5F35\u53EF\u7528");
+    }
   },
   vanCouponList: {
     empty: '暫無優惠券',

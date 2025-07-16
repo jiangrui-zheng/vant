@@ -2,6 +2,8 @@ import '../../style/base.css';
 import '../../badge/index.css';
 import '../../icon/index.css';
 import '../../image/index.css';
+import '../../cell/index.css';
+import '../../field/index.css';
 import '../../loading/index.css';
 import '../../overlay/index.css';
 import '../../popup/index.css';

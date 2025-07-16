@@ -1,10 +1,14 @@
-import { createVNode as _createVNode } from "vue";
-import { computed, defineComponent } from 'vue';
+import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
+import { computed, createVNode } from "vue";
 import { createNamespace, isDef } from '../utils';
 import Badge from '../badge';
-var [name, bem] = createNamespace('tab');
-export default defineComponent({
-  name,
+
+var _createNamespace = createNamespace('tab'),
+    _createNamespace2 = _slicedToArray(_createNamespace, 2),
+    createComponent = _createNamespace2[0],
+    bem = _createNamespace2[1];
+
+export default createComponent({
   props: {
     dot: Boolean,
     type: String,
@@ -18,18 +22,15 @@ export default defineComponent({
     renderTitle: Function,
     inactiveColor: String
   },
-
-  setup(props) {
-    var style = computed(() => {
+  setup: function setup(props) {
+    var style = computed(function () {
       var style = {};
-      var {
-        type,
-        color,
-        disabled,
-        isActive,
-        activeColor,
-        inactiveColor
-      } = props;
+      var type = props.type,
+          color = props.color,
+          disabled = props.disabled,
+          isActive = props.isActive,
+          activeColor = props.activeColor,
+          inactiveColor = props.inactiveColor;
       var isCard = type === 'card'; // card theme color
 
       if (color && isCard) {
@@ -53,34 +54,37 @@ export default defineComponent({
       return style;
     });
 
-    var renderText = () => {
-      var Text = _createVNode("span", {
+    var renderText = function renderText() {
+      var Text = createVNode("span", {
         "class": bem('text', {
           ellipsis: !props.scrollable
         })
       }, [props.renderTitle ? props.renderTitle() : props.title]);
 
       if (props.dot || isDef(props.badge) && props.badge !== '') {
-        return _createVNode(Badge, {
+        return createVNode(Badge, {
           "dot": props.dot,
           "content": props.badge
         }, {
-          default: () => [Text]
+          default: function _default() {
+            return [Text];
+          }
         });
       }
 
       return Text;
     };
 
-    return () => _createVNode("div", {
-      "role": "tab",
-      "class": [bem({
-        active: props.isActive,
-        disabled: props.disabled
-      })],
-      "style": style.value,
-      "aria-selected": props.isActive
-    }, [renderText()]);
+    return function () {
+      return createVNode("div", {
+        "role": "tab",
+        "class": [bem({
+          active: props.isActive,
+          disabled: props.disabled
+        })],
+        "style": style.value,
+        "aria-selected": props.isActive
+      }, [renderText()]);
+    };
   }
-
 });

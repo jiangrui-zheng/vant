@@ -1,4 +1,4 @@
-@import '../style/var.less';
+@import '../style/var';
 
 .van-popover {
   position: absolute;
@@ -34,7 +34,6 @@
     padding: 0 @padding-md;
     font-size: @popover-action-font-size;
     line-height: @line-height-md;
-    cursor: pointer;
 
     &:last-child {
       .van-popover__action-text::after {
@@ -213,7 +212,6 @@
 
       &--disabled {
         color: @popover-light-action-disabled-text-color;
-        cursor: not-allowed;
 
         &:active {
           background-color: transparent;

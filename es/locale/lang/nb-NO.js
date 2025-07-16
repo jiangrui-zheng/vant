@@ -18,11 +18,12 @@ export default {
     title: 'Kalendar',
     startEnd: 'Start/Slutt',
     weekdays: ['Søn', 'Man', 'Tir', 'Ons', 'Tor', 'Fre', 'Lør'],
-    monthTitle: (year, month) => year + "/" + month,
-    rangePrompt: maxRange => "Maks. " + maxRange + " dager"
-  },
-  vanCascader: {
-    select: 'Plukke ut'
+    monthTitle: function monthTitle(year, month) {
+      return "".concat(year, "/").concat(month);
+    },
+    rangePrompt: function rangePrompt(maxRange) {
+      return "Maks. ".concat(maxRange, " dager");
+    }
   },
   vanContactCard: {
     addText: 'Legg til kontakt info'
@@ -43,13 +44,19 @@ export default {
   },
   vanCoupon: {
     unlimited: 'Uendelig',
-    discount: discount => discount * 10 + "% avslag",
-    condition: condition => "Minst " + condition
+    discount: function discount(_discount) {
+      return "".concat(_discount * 10, "% avslag");
+    },
+    condition: function condition(_condition) {
+      return "Minst ".concat(_condition);
+    }
   },
   vanCouponCell: {
     title: 'Kupong',
     tips: 'Ingen kuponger',
-    count: count => "Du har " + count + " kuponger"
+    count: function count(_count) {
+      return "Du har ".concat(_count, " kuponger");
+    }
   },
   vanCouponList: {
     empty: 'Ingen kuponger',

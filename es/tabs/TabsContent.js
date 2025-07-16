@@ -1,10 +1,14 @@
-import { createVNode as _createVNode } from "vue";
-import { ref, watch, onMounted, defineComponent } from 'vue';
+import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
+import { ref, watch, onMounted, createVNode } from "vue";
 import { createNamespace } from '../utils';
 import Swipe from '../swipe';
-var [name, bem] = createNamespace('tabs');
-export default defineComponent({
-  name,
+
+var _createNamespace = createNamespace('tabs'),
+    _createNamespace2 = _slicedToArray(_createNamespace, 2),
+    createComponent = _createNamespace2[0],
+    bem = _createNamespace2[1];
+
+export default createComponent({
   props: {
     inited: Boolean,
     animated: Boolean,
@@ -24,20 +28,22 @@ export default defineComponent({
     }
   },
   emits: ['change'],
-
-  setup(props, {
-    emit,
-    slots
-  }) {
+  setup: function setup(props, _ref) {
+    var emit = _ref.emit,
+        slots = _ref.slots;
     var swipeRef = ref();
 
-    var onChange = index => emit('change', index);
+    var onChange = function onChange(index) {
+      emit('change', index);
+    };
 
-    var renderChildren = () => {
-      var Content = slots.default == null ? void 0 : slots.default();
+    var renderChildren = function renderChildren() {
+      var _slots$default;
+
+      var Content = (_slots$default = slots.default) === null || _slots$default === void 0 ? void 0 : _slots$default.call(slots);
 
       if (props.animated || props.swipeable) {
-        return _createVNode(Swipe, {
+        return createVNode(Swipe, {
           "ref": swipeRef,
           "loop": false,
           "class": bem('track'),
@@ -47,14 +53,16 @@ export default defineComponent({
           "showIndicators": false,
           "onChange": onChange
         }, {
-          default: () => [Content]
+          default: function _default() {
+            return [Content];
+          }
         });
       }
 
       return Content;
     };
 
-    var swipeToCurrentTab = index => {
+    var swipeToCurrentTab = function swipeToCurrentTab(index) {
       var swipe = swipeRef.value;
 
       if (swipe && swipe.state.active !== index) {
@@ -64,15 +72,18 @@ export default defineComponent({
       }
     };
 
-    watch(() => props.currentIndex, swipeToCurrentTab);
-    onMounted(() => {
+    watch(function () {
+      return props.currentIndex;
+    }, swipeToCurrentTab);
+    onMounted(function () {
       swipeToCurrentTab(props.currentIndex);
     });
-    return () => _createVNode("div", {
-      "class": bem('content', {
-        animated: props.animated || props.swipeable
-      })
-    }, [renderChildren()]);
+    return function () {
+      return createVNode("div", {
+        "class": bem('content', {
+          animated: props.animated || props.swipeable
+        })
+      }, [renderChildren()]);
+    };
   }
-
 });

@@ -1,6 +1,7 @@
 import { createBEM } from './bem';
-import { createTranslate } from './translate';
+import { createComponent } from './component';
+import { createI18N } from './i18n';
 export function createNamespace(name) {
-  var prefixedName = "van-" + name;
-  return [prefixedName, createBEM(prefixedName), createTranslate(prefixedName)];
+  name = 'van-' + name;
+  return [createComponent(name), createBEM(name), createI18N(name)];
 }

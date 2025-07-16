@@ -1,6 +1,13 @@
+import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import { createNamespace } from '../utils';
-var [name, bem, t] = createNamespace('calendar');
-export { name, bem, t };
+
+var _createNamespace = createNamespace('calendar'),
+    _createNamespace2 = _slicedToArray(_createNamespace, 3),
+    createComponent = _createNamespace2[0],
+    bem = _createNamespace2[1],
+    t = _createNamespace2[2];
+
+export { createComponent, bem, t };
 export function formatMonthTitle(date) {
   return t('monthTitle', date.getFullYear(), date.getMonth() + 1);
 }
@@ -48,7 +55,7 @@ export function copyDate(dates) {
 }
 export function copyDates(dates) {
   if (Array.isArray(dates)) {
-    return dates.map(date => {
+    return dates.map(function (date) {
       if (date === null) {
         return date;
       }

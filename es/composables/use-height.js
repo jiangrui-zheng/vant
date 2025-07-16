@@ -1,9 +1,9 @@
 import { useRect } from '@vant/use';
 import { ref, onMounted, nextTick } from 'vue';
-export var useHeight = element => {
+export var useHeight = function useHeight(element) {
   var height = ref();
-  onMounted(() => {
-    nextTick(() => {
+  onMounted(function () {
+    nextTick(function () {
       height.value = useRect(element).height;
     });
   });

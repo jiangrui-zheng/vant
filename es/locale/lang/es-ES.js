@@ -18,11 +18,12 @@ export default {
     title: 'Calendario',
     startEnd: 'Inicio/Fin',
     weekdays: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'],
-    monthTitle: (year, month) => year + "/" + month,
-    rangePrompt: maxRange => "Elija no m\xE1s de " + maxRange + " d\xEDas"
-  },
-  vanCascader: {
-    select: 'Seleccione'
+    monthTitle: function monthTitle(year, month) {
+      return "".concat(year, "/").concat(month);
+    },
+    rangePrompt: function rangePrompt(maxRange) {
+      return "Elija no m\xE1s de ".concat(maxRange, " d\xEDas");
+    }
   },
   vanContactCard: {
     addText: 'Añadir información de contacto'
@@ -43,13 +44,19 @@ export default {
   },
   vanCoupon: {
     unlimited: 'Ilimitado',
-    discount: discount => discount * 10 + "% de descuento",
-    condition: condition => "Al menos " + condition
+    discount: function discount(_discount) {
+      return "".concat(_discount * 10, "% de descuento");
+    },
+    condition: function condition(_condition) {
+      return "Al menos ".concat(_condition);
+    }
   },
   vanCouponCell: {
     title: 'Cupón',
     tips: 'Sin cupones',
-    count: count => "You have " + count + " coupons"
+    count: function count(_count) {
+      return "You have ".concat(_count, " coupons");
+    }
   },
   vanCouponList: {
     empty: 'Sin cupones',

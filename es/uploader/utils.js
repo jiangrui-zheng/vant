@@ -1,6 +1,3 @@
-import { createNamespace } from '../utils';
-var [name, bem] = createNamespace('uploader');
-export { name, bem };
 export function toArray(item) {
   if (Array.isArray(item)) {
     return item;
@@ -9,7 +6,7 @@ export function toArray(item) {
   return [item];
 }
 export function readFileContent(file, resultType) {
-  return new Promise(resolve => {
+  return new Promise(function (resolve) {
     if (resultType === 'file') {
       resolve();
       return;
@@ -17,7 +14,7 @@ export function readFileContent(file, resultType) {
 
     var reader = new FileReader();
 
-    reader.onload = event => {
+    reader.onload = function (event) {
       resolve(event.target.result);
     };
 
@@ -29,12 +26,14 @@ export function readFileContent(file, resultType) {
   });
 }
 export function isOversize(items, maxSize) {
-  return toArray(items).some(item => item.file && item.file.size > maxSize);
+  return toArray(items).some(function (item) {
+    return item.file && item.file.size > maxSize;
+  });
 }
 export function filterFiles(items, maxSize) {
   var valid = [];
   var invalid = [];
-  items.forEach(item => {
+  items.forEach(function (item) {
     if (item.file && item.file.size > maxSize) {
       invalid.push(item);
     } else {
@@ -42,8 +41,8 @@ export function filterFiles(items, maxSize) {
     }
   });
   return {
-    valid,
-    invalid
+    valid: valid,
+    invalid: invalid
   };
 }
 var IMAGE_REGEXP = /\.(jpeg|jpg|gif|png|svg|webp|jfif|bmp|dpg)/i;
@@ -65,7 +64,7 @@ export function isImageFile(item) {
     return isImageUrl(item.url);
   }
 
-  if (typeof item.content === 'string') {
+  if (item.content) {
     return item.content.indexOf('data:image') === 0;
   }
 

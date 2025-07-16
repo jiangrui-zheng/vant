@@ -1,6 +1,11 @@
-import { createVNode as _createVNode } from "vue";
-import _extends from "@babel/runtime/helpers/esm/extends";
-import { inBrowser, withInstall } from '../utils';
+import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
+import { createVNode } from "vue";
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+import { inBrowser } from '../utils';
 import { mountComponent, usePopupState } from '../utils/mount-component';
 import VanImagePreview from './ImagePreview';
 var instance;
@@ -9,48 +14,48 @@ var defaultConfig = {
   images: [],
   maxZoom: 3,
   minZoom: 1 / 3,
-  onScale: undefined,
-  onClose: undefined,
-  onChange: undefined,
+  onScale: null,
+  onClose: null,
+  onChange: null,
   teleport: 'body',
   className: '',
   showIndex: true,
   closeable: false,
   closeIcon: 'clear',
-  transition: undefined,
-  beforeClose: undefined,
-  overlayStyle: undefined,
+  beforeClose: null,
   startPosition: 0,
-  swipeDuration: 300,
+  swipeDuration: 500,
   showIndicators: false,
   closeOnPopstate: true,
   closeIconPosition: 'top-right'
 };
 
 function initInstance() {
-  ({
-    instance
-  } = mountComponent({
-    setup() {
-      var {
-        state,
-        toggle
-      } = usePopupState();
+  var _mountComponent = mountComponent({
+    setup: function setup() {
+      var _usePopupState = usePopupState(),
+          state = _usePopupState.state,
+          toggle = _usePopupState.toggle;
 
-      var onClosed = () => {
+      var onClosed = function onClosed() {
         state.images = [];
       };
 
-      return () => _createVNode(VanImagePreview, _extends({}, state, {
-        onClosed,
-        'onUpdate:show': toggle
-      }), null);
+      return function () {
+        return createVNode(VanImagePreview, _objectSpread(_objectSpread({}, state), {}, {
+          onClosed: onClosed,
+          'onUpdate:show': toggle
+        }), null);
+      };
     }
+  });
 
-  }));
+  instance = _mountComponent.instance;
 }
 
-var ImagePreview = (images, startPosition = 0) => {
+var ImagePreview = function ImagePreview(images) {
+  var startPosition = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
   /* istanbul ignore if */
   if (!inBrowser) {
     return;
@@ -61,17 +66,17 @@ var ImagePreview = (images, startPosition = 0) => {
   }
 
   var options = Array.isArray(images) ? {
-    images,
-    startPosition
+    images: images,
+    startPosition: startPosition
   } : images;
-  instance.open(_extends({}, defaultConfig, options));
+  instance.open(_objectSpread(_objectSpread({}, defaultConfig), options));
   return instance;
 };
 
-ImagePreview.Component = withInstall(VanImagePreview);
+ImagePreview.Component = VanImagePreview;
 
-ImagePreview.install = app => {
-  app.use(withInstall(VanImagePreview));
+ImagePreview.install = function (app) {
+  app.use(VanImagePreview);
 };
 
 export default ImagePreview;

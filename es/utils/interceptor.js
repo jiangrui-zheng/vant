@@ -1,18 +1,16 @@
+import _toConsumableArray from "@babel/runtime/helpers/esm/toConsumableArray";
 import { isPromise, noop } from '.';
 export function callInterceptor(options) {
-  var {
-    interceptor,
-    args,
-    done,
-    canceled
-  } = options;
+  var interceptor = options.interceptor,
+      args = options.args,
+      done = options.done,
+      canceled = options.canceled;
 
   if (interceptor) {
-    // eslint-disable-next-line prefer-spread
-    var returnVal = interceptor.apply(null, args || []);
+    var returnVal = interceptor.apply(void 0, _toConsumableArray(args));
 
     if (isPromise(returnVal)) {
-      returnVal.then(value => {
+      returnVal.then(function (value) {
         if (value) {
           done();
         } else if (canceled) {
