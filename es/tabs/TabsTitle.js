@@ -1,6 +1,6 @@
 import { createVNode as _createVNode } from "vue";
 import { computed, defineComponent } from 'vue';
-import { isDef, truthProp, numericProp, createNamespace } from '../utils';
+import { createNamespace, isDef } from '../utils';
 import { Badge } from '../badge';
 var [name, bem] = createNamespace('tab');
 export default defineComponent({
@@ -10,14 +10,13 @@ export default defineComponent({
     type: String,
     color: String,
     title: String,
-    badge: numericProp,
+    badge: [Number, String],
     isActive: Boolean,
     disabled: Boolean,
     scrollable: Boolean,
     activeColor: String,
     renderTitle: Function,
-    inactiveColor: String,
-    showZeroBadge: truthProp
+    inactiveColor: String
   },
 
   setup(props) {
@@ -64,8 +63,7 @@ export default defineComponent({
       if (props.dot || isDef(props.badge) && props.badge !== '') {
         return _createVNode(Badge, {
           "dot": props.dot,
-          "content": props.badge,
-          "showZero": props.showZeroBadge
+          "content": props.badge
         }, {
           default: () => [Text]
         });

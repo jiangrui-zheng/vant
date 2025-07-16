@@ -1,5 +1,4 @@
-import { FormProps } from './Form';
-export declare const Form: import("../utils").WithInstall<import("vue").DefineComponent<{
+declare const Form: import("../utils").WithInstall<import("vue").DefineComponent<{
     colon: BooleanConstructor;
     disabled: BooleanConstructor;
     readonly: BooleanConstructor;
@@ -13,15 +12,15 @@ export declare const Form: import("../utils").WithInstall<import("vue").DefineCo
         type: BooleanConstructor;
         default: true;
     };
-    validateTrigger: {
-        type: import("vue").PropType<import("..").FieldValidateTrigger>;
-        default: import("..").FieldValidateTrigger;
-    };
     showErrorMessage: {
         type: BooleanConstructor;
         default: true;
     };
     errorMessageAlign: import("vue").PropType<import("..").FieldTextAlign>;
+    validateTrigger: {
+        type: import("vue").PropType<import("..").FieldValidateTrigger>;
+        default: string;
+    };
 }, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("submit" | "failed")[], "submit" | "failed", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
     colon?: unknown;
     disabled?: unknown;
@@ -33,9 +32,9 @@ export declare const Form: import("../utils").WithInstall<import("vue").DefineCo
     scrollToError?: unknown;
     validateFirst?: unknown;
     submitOnEnter?: unknown;
-    validateTrigger?: unknown;
     showErrorMessage?: unknown;
     errorMessageAlign?: unknown;
+    validateTrigger?: unknown;
 } & {
     disabled: boolean;
     readonly: boolean;
@@ -44,17 +43,14 @@ export declare const Form: import("../utils").WithInstall<import("vue").DefineCo
     scrollToError: boolean;
     validateFirst: boolean;
     submitOnEnter: boolean;
-    validateTrigger: import("..").FieldValidateTrigger;
     showErrorMessage: boolean;
+    validateTrigger: import("..").FieldValidateTrigger;
 } & {
     inputAlign?: import("..").FieldTextAlign | undefined;
     labelWidth?: string | number | undefined;
     labelAlign?: import("..").FieldTextAlign | undefined;
     errorMessageAlign?: import("..").FieldTextAlign | undefined;
-}> & {
-    onSubmit?: ((...args: any[]) => any) | undefined;
-    onFailed?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     disabled: boolean;
     readonly: boolean;
     colon: boolean;
@@ -62,9 +58,8 @@ export declare const Form: import("../utils").WithInstall<import("vue").DefineCo
     scrollToError: boolean;
     validateFirst: boolean;
     submitOnEnter: boolean;
-    validateTrigger: import("..").FieldValidateTrigger;
     showErrorMessage: boolean;
+    validateTrigger: import("..").FieldValidateTrigger;
 }>>;
 export default Form;
-export type { FormProps };
-export type { FormInstance } from './types';
+export { Form };

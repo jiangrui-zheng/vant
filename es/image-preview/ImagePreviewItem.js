@@ -1,7 +1,7 @@
 import { resolveDirective as _resolveDirective, createVNode as _createVNode } from "vue";
 import { watch, computed, reactive, defineComponent } from 'vue'; // Utils
 
-import { clamp, numericProp, preventDefault, createNamespace, makeRequiredProp } from '../utils'; // Composables
+import { clamp, preventDefault, createNamespace } from '../utils'; // Composables
 
 import { useTouch } from '../composables/use-touch'; // Components
 
@@ -9,7 +9,9 @@ import { Image } from '../image';
 import { Loading } from '../loading';
 import { SwipeItem } from '../swipe-item';
 
-var getDistance = touches => Math.sqrt(Math.pow(touches[0].clientX - touches[1].clientX, 2) + Math.pow(touches[0].clientY - touches[1].clientY, 2));
+function getDistance(touches) {
+  return Math.sqrt(Math.pow(touches[0].clientX - touches[1].clientX, 2) + Math.pow(touches[0].clientY - touches[1].clientY, 2));
+}
 
 var bem = createNamespace('image-preview')[1];
 export default defineComponent({
@@ -17,17 +19,28 @@ export default defineComponent({
     src: String,
     show: Boolean,
     active: Number,
-    minZoom: makeRequiredProp(numericProp),
-    maxZoom: makeRequiredProp(numericProp),
-    rootWidth: makeRequiredProp(Number),
-    rootHeight: makeRequiredProp(Number)
+    minZoom: {
+      type: [Number, String],
+      required: true
+    },
+    maxZoom: {
+      type: [Number, String],
+      required: true
+    },
+    rootWidth: {
+      type: Number,
+      required: true
+    },
+    rootHeight: {
+      type: Number,
+      required: true
+    }
   },
   emits: ['scale', 'close'],
 
-  setup(props, _ref) {
-    var {
-      emit
-    } = _ref;
+  setup(props, {
+    emit
+  }) {
     var state = reactive({
       scale: 1,
       moveX: 0,

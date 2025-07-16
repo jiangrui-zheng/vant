@@ -1,14 +1,14 @@
-export declare const Empty: import("../utils").WithInstall<import("vue").DefineComponent<{
-    image: {
-        type: import("vue").PropType<string>;
-        default: string;
-    };
+declare const Empty: import("../utils").WithInstall<import("vue").DefineComponent<{
     imageSize: (NumberConstructor | StringConstructor)[];
     description: StringConstructor;
+    image: {
+        type: StringConstructor;
+        default: string;
+    };
 }, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    image?: unknown;
     imageSize?: unknown;
     description?: unknown;
+    image?: unknown;
 } & {
     image: string;
 } & {
@@ -18,4 +18,4 @@ export declare const Empty: import("../utils").WithInstall<import("vue").DefineC
     image: string;
 }>>;
 export default Empty;
-export type { EmptyProps } from './Empty';
+export { Empty };

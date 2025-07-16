@@ -1,7 +1,8 @@
-import { createVNode as _createVNode, resolveDirective as _resolveDirective } from "vue";
+import { createVNode as _createVNode } from "vue";
 import { computed, defineComponent } from 'vue'; // Utils
 
-import { BORDER, extend, addUnit, numericProp, createNamespace } from '../utils';
+import { createNamespace, addUnit, extend } from '../utils';
+import { BORDER } from '../utils/constant';
 import { GRID_KEY } from '../grid/Grid'; // Composables
 
 import { useParent } from '@vant/use';
@@ -10,22 +11,20 @@ import { useRoute, routeProps } from '../composables/use-route'; // Components
 import { Icon } from '../icon';
 import { Badge } from '../badge';
 var [name, bem] = createNamespace('grid-item');
-var gridItemProps = extend({}, routeProps, {
-  dot: Boolean,
-  text: String,
-  icon: String,
-  badge: numericProp,
-  iconColor: String,
-  iconPrefix: String
-});
 export default defineComponent({
   name,
-  props: gridItemProps,
+  props: extend({}, routeProps, {
+    dot: Boolean,
+    text: String,
+    icon: String,
+    badge: [Number, String],
+    iconPrefix: String,
+    iconColor: String
+  }),
 
-  setup(props, _ref) {
-    var {
-      slots
-    } = _ref;
+  setup(props, {
+    slots
+  }) {
     var {
       parent,
       index
@@ -86,7 +85,7 @@ export default defineComponent({
           "dot": props.dot,
           "content": props.badge
         }, {
-          default: slots.icon
+          default: () => [slots.icon()]
         });
       }
 

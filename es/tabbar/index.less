@@ -1,4 +1,5 @@
 @import './var.less';
+@import '../style/mixins/safe-area.less';
 
 :root {
   --van-tabbar-height: @tabbar-height;
@@ -12,11 +13,16 @@
   box-sizing: content-box;
   width: 100%;
   height: var(--van-tabbar-height);
-  background: var(--van-tabbar-background-color);
+  background-color: var(--van-tabbar-background-color);
+  .safe-area-inset-bottom();
 
   &--fixed {
     position: fixed;
     bottom: 0;
     left: 0;
+  }
+
+  &--unfit {
+    padding-bottom: 0;
   }
 }

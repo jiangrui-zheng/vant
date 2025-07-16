@@ -1,31 +1,31 @@
 import { createVNode as _createVNode } from "vue";
-import { watch, defineComponent } from 'vue'; // Utils
-
-import { numericProp, createNamespace, makeArrayProp } from '../utils'; // Composables
-
-import { useChildren, useCustomFieldValue } from '@vant/use';
-import { useExpose } from '../composables/use-expose'; // Types
-
+import { watch, defineComponent } from 'vue';
+import { createNamespace } from '../utils';
+import { useChildren } from '@vant/use';
+import { useExpose } from '../composables/use-expose';
+import { useLinkField } from '../composables/use-link-field';
 var [name, bem] = createNamespace('checkbox-group');
-var checkboxGroupProps = {
-  max: numericProp,
-  disabled: Boolean,
-  iconSize: numericProp,
-  direction: String,
-  modelValue: makeArrayProp(),
-  checkedColor: String
-};
 export var CHECKBOX_GROUP_KEY = Symbol(name);
+var props = {
+  max: [Number, String],
+  disabled: Boolean,
+  direction: String,
+  iconSize: [Number, String],
+  checkedColor: String,
+  modelValue: {
+    type: Array,
+    default: () => []
+  }
+};
 export default defineComponent({
   name,
-  props: checkboxGroupProps,
+  props,
   emits: ['change', 'update:modelValue'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var {
       children,
       linkChildren
@@ -33,11 +33,7 @@ export default defineComponent({
 
     var updateValue = value => emit('update:modelValue', value);
 
-    var toggleAll = function (options) {
-      if (options === void 0) {
-        options = {};
-      }
-
+    var toggleAll = (options = {}) => {
       if (typeof options === 'boolean') {
         options = {
           checked: options
@@ -67,7 +63,7 @@ export default defineComponent({
     useExpose({
       toggleAll
     });
-    useCustomFieldValue(() => props.modelValue);
+    useLinkField(() => props.modelValue);
     linkChildren({
       props,
       updateValue

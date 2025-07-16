@@ -1,13 +1,30 @@
-import { inBrowser } from './basic';
-export var isDef = val => val !== undefined && val !== null; // eslint-disable-next-line @typescript-eslint/ban-types
+import { inBrowser } from './base';
+export function isDef(val) {
+  return val !== undefined && val !== null;
+} // eslint-disable-next-line @typescript-eslint/ban-types
 
-export var isFunction = val => typeof val === 'function';
-export var isObject = val => val !== null && typeof val === 'object';
-export var isPromise = val => isObject(val) && isFunction(val.then) && isFunction(val.catch);
-export var isDate = val => Object.prototype.toString.call(val) === '[object Date]' && !Number.isNaN(val.getTime());
+export function isFunction(val) {
+  return typeof val === 'function';
+}
+export function isObject(val) {
+  return val !== null && typeof val === 'object';
+}
+export function isPromise(val) {
+  return isObject(val) && isFunction(val.then) && isFunction(val.catch);
+}
+export function isDate(val) {
+  return Object.prototype.toString.call(val) === '[object Date]' && !Number.isNaN(val.getTime());
+}
 export function isMobile(value) {
   value = value.replace(/[^-|\d]/g, '');
   return /^((\+86)|(86))?(1)\d{10}$/.test(value) || /^0[0-9-]{10,13}$/.test(value);
 }
-export var isNumeric = val => typeof val === 'number' || /^\d+(\.\d+)?$/.test(val);
-export var isIOS = () => inBrowser ? /ios|iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase()) : false;
+export function isNumeric(val) {
+  return typeof val === 'number' || /^\d+(\.\d+)?$/.test(val);
+}
+export function isAndroid() {
+  return inBrowser ? /android/.test(navigator.userAgent.toLowerCase()) : false;
+}
+export function isIOS() {
+  return inBrowser ? /ios|iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase()) : false;
+}

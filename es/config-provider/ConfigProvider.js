@@ -1,13 +1,10 @@
 import { createVNode as _createVNode } from "vue";
-import { provide, computed, defineComponent } from 'vue';
-import { kebabCase, makeStringProp, createNamespace } from '../utils';
+import { computed, defineComponent } from 'vue';
+import { createNamespace } from '../utils';
 var [name, bem] = createNamespace('config-provider');
-export var CONFIG_PROVIDER_KEY = Symbol(name);
-var configProviderProps = {
-  tag: makeStringProp('div'),
-  themeVars: Object,
-  iconPrefix: String
-};
+export function kebabCase(word) {
+  return word.replace(/([A-Z])/g, '-$1').toLowerCase().replace(/^-/, '');
+}
 
 function mapThemeVarsToCSSVars(themeVars) {
   var cssVars = {};
@@ -19,18 +16,22 @@ function mapThemeVarsToCSSVars(themeVars) {
 
 export default defineComponent({
   name,
-  props: configProviderProps,
+  props: {
+    themeVars: Object,
+    tag: {
+      type: String,
+      default: 'div'
+    }
+  },
 
-  setup(props, _ref) {
-    var {
-      slots
-    } = _ref;
+  setup(props, {
+    slots
+  }) {
     var style = computed(() => {
       if (props.themeVars) {
         return mapThemeVarsToCSSVars(props.themeVars);
       }
     });
-    provide(CONFIG_PROVIDER_KEY, props);
     return () => _createVNode(props.tag, {
       "class": bem(),
       "style": style.value

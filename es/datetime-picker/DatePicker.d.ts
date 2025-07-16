@@ -1,18 +1,18 @@
-import { DatetimePickerColumnType, DatetimePickerType } from './types';
+import { PropType } from 'vue';
+import { isDate } from '../utils';
+import { ColumnType, DatetimePickerType } from './utils';
 declare const _default: import("vue").DefineComponent<{
     title: StringConstructor;
     loading: BooleanConstructor;
     readonly: BooleanConstructor;
     allowHtml: BooleanConstructor;
-    itemHeight: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
-    };
     showToolbar: {
         type: BooleanConstructor;
         default: true;
     };
-    swipeDuration: {
+    cancelButtonText: StringConstructor;
+    confirmButtonText: StringConstructor;
+    itemHeight: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
@@ -20,83 +20,80 @@ declare const _default: import("vue").DefineComponent<{
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-    cancelButtonText: StringConstructor;
-    confirmButtonText: StringConstructor;
+    swipeDuration: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
 } & {
-    filter: import("vue").PropType<(type: string, values: string[]) => string[]>;
-    columnsOrder: import("vue").PropType<DatetimePickerColumnType[]>;
+    filter: PropType<(type: string, values: string[]) => string[]>;
+    columnsOrder: PropType<ColumnType[]>;
     formatter: {
-        type: import("vue").PropType<(type: string, value: string) => string>;
+        type: PropType<(type: string, value: string) => string>;
         default: (type: string, value: string) => string;
     };
 } & {
-    type: {
-        type: import("vue").PropType<DatetimePickerType>;
-        default: DatetimePickerType;
-    };
     modelValue: DateConstructor;
+    type: {
+        type: PropType<DatetimePickerType>;
+        default: string;
+    };
     minDate: {
         type: DateConstructor;
         default: () => Date;
-        validator: (val: unknown) => val is Date;
+        validator: typeof isDate;
     };
     maxDate: {
         type: DateConstructor;
         default: () => Date;
-        validator: (val: unknown) => val is Date;
+        validator: typeof isDate;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change" | "cancel" | "confirm")[], "update:modelValue" | "change" | "cancel" | "confirm", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("cancel" | "change" | "confirm" | "update:modelValue")[], "cancel" | "change" | "confirm" | "update:modelValue", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
     title?: unknown;
     loading?: unknown;
     readonly?: unknown;
     allowHtml?: unknown;
-    itemHeight?: unknown;
     showToolbar?: unknown;
-    swipeDuration?: unknown;
-    visibleItemCount?: unknown;
     cancelButtonText?: unknown;
     confirmButtonText?: unknown;
+    itemHeight?: unknown;
+    visibleItemCount?: unknown;
+    swipeDuration?: unknown;
     filter?: unknown;
     columnsOrder?: unknown;
     formatter?: unknown;
-    type?: unknown;
     modelValue?: unknown;
+    type?: unknown;
     minDate?: unknown;
     maxDate?: unknown;
 } & {
-    type: DatetimePickerType;
-    formatter: (type: string, value: string) => string;
-    readonly: boolean;
     loading: boolean;
+    type: DatetimePickerType;
+    readonly: boolean;
     allowHtml: boolean;
     itemHeight: string | number;
-    showToolbar: boolean;
     swipeDuration: string | number;
     visibleItemCount: string | number;
+    showToolbar: boolean;
+    formatter: (type: string, value: string) => string;
     minDate: Date;
     maxDate: Date;
 } & {
-    title?: string | undefined;
     filter?: ((type: string, values: string[]) => string[]) | undefined;
-    modelValue?: Date | undefined;
+    title?: string | undefined;
     cancelButtonText?: string | undefined;
     confirmButtonText?: string | undefined;
-    columnsOrder?: DatetimePickerColumnType[] | undefined;
-}> & {
-    onChange?: ((...args: any[]) => any) | undefined;
-    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
-    onCancel?: ((...args: any[]) => any) | undefined;
-    onConfirm?: ((...args: any[]) => any) | undefined;
-}, {
-    type: DatetimePickerType;
-    formatter: (type: string, value: string) => string;
-    readonly: boolean;
+    modelValue?: Date | undefined;
+    columnsOrder?: ColumnType[] | undefined;
+}>, {
     loading: boolean;
+    type: DatetimePickerType;
+    readonly: boolean;
     allowHtml: boolean;
     itemHeight: string | number;
-    showToolbar: boolean;
     swipeDuration: string | number;
     visibleItemCount: string | number;
+    showToolbar: boolean;
+    formatter: (type: string, value: string) => string;
     minDate: Date;
     maxDate: Date;
 }>;

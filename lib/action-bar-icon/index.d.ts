@@ -1,4 +1,4 @@
-export declare const ActionBarIcon: import("../utils").WithInstall<import("vue").DefineComponent<{
+declare const ActionBarIcon: import("../utils").WithInstall<import("vue").DefineComponent<{
     to: import("vue").PropType<import("vue-router").RouteLocationRaw>;
     url: StringConstructor;
     replace: BooleanConstructor;
@@ -26,16 +26,16 @@ export declare const ActionBarIcon: import("../utils").WithInstall<import("vue")
     dot: boolean;
 } & {
     text?: string | undefined;
-    url?: string | undefined;
     to?: import("vue-router").RouteLocationRaw | undefined;
+    url?: string | undefined;
     badge?: string | number | undefined;
     color?: string | undefined;
-    iconPrefix?: string | undefined;
     icon?: string | undefined;
+    iconPrefix?: string | undefined;
     iconClass?: unknown;
 }>, {
     replace: boolean;
     dot: boolean;
 }>>;
 export default ActionBarIcon;
-export type { ActionBarIconProps } from './ActionBarIcon';
+export { ActionBarIcon };

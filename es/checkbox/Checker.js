@@ -1,32 +1,37 @@
 import { createVNode as _createVNode } from "vue";
 import { ref, computed, defineComponent } from 'vue';
-import { extend, addUnit, truthProp, numericProp, unknownProp, makeStringProp, makeRequiredProp } from '../utils';
+import { addUnit, extend, unknownProp, truthProp } from '../utils';
 import { Icon } from '../icon';
 export var checkerProps = {
   name: unknownProp,
-  shape: makeStringProp('round'),
   disabled: Boolean,
-  iconSize: numericProp,
+  iconSize: [Number, String],
   modelValue: unknownProp,
   checkedColor: String,
   labelPosition: String,
-  labelDisabled: Boolean
+  labelDisabled: Boolean,
+  shape: {
+    type: String,
+    default: 'round'
+  }
 };
 export default defineComponent({
   props: extend({}, checkerProps, {
-    bem: makeRequiredProp(Function),
     role: String,
     parent: Object,
     checked: Boolean,
-    bindGroup: truthProp
+    bindGroup: truthProp,
+    bem: {
+      type: Function,
+      required: true
+    }
   }),
   emits: ['click', 'toggle'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var iconRef = ref();
 
     var getParentProp = name => {
@@ -53,7 +58,7 @@ export default defineComponent({
         target
       } = event;
       var icon = iconRef.value;
-      var iconClicked = icon === target || (icon == null ? void 0 : icon.contains(target));
+      var iconClicked = icon === target || icon.contains(target);
 
       if (!disabled.value && (iconClicked || !props.labelDisabled)) {
         emit('toggle');
@@ -98,7 +103,14 @@ export default defineComponent({
     };
 
     return () => {
-      var nodes = props.labelPosition === 'left' ? [renderLabel(), renderIcon()] : [renderIcon(), renderLabel()];
+      var nodes = [renderIcon()];
+
+      if (props.labelPosition === 'left') {
+        nodes.unshift(renderLabel());
+      } else {
+        nodes.push(renderLabel());
+      }
+
       return _createVNode("div", {
         "role": props.role,
         "class": props.bem([{

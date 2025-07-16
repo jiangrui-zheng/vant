@@ -1,35 +1,29 @@
 import { resolveDirective as _resolveDirective, createTextVNode as _createTextVNode, mergeProps as _mergeProps, createVNode as _createVNode } from "vue";
 import { ref, watch, provide, computed, nextTick, reactive, onMounted, defineComponent } from 'vue'; // Utils
 
-import { isDef, extend, addUnit, FORM_KEY, numericProp, unknownProp, resetScroll, formatNumber, preventDefault, makeStringProp, makeNumericProp, createNamespace } from '../utils';
+import { isDef, extend, addUnit, unknownProp, resetScroll, formatNumber, preventDefault, createNamespace } from '../utils';
 import { runSyncRule, endComposing, mapInputType, startComposing, getRuleMessage, resizeTextarea, runRuleValidator } from './utils';
-import { cellSharedProps } from '../cell/Cell'; // Composables
+import { cellProps } from '../cell/Cell'; // Composables
 
-import { CUSTOM_FIELD_INJECTION_KEY, useParent } from '@vant/use';
-import { useExpose } from '../composables/use-expose'; // Components
+import { useParent } from '@vant/use';
+import { useExpose } from '../composables/use-expose';
+import { FORM_KEY, FIELD_KEY } from '../composables/use-link-field'; // Components
 
 import { Icon } from '../icon';
 import { Cell } from '../cell'; // Types
 
 var [name, bem] = createNamespace('field'); // provide to Search component to inherit
 
-export var fieldSharedProps = {
-  id: String,
-  name: String,
+export var fieldProps = {
+  formatter: Function,
   leftIcon: String,
   rightIcon: String,
   autofocus: Boolean,
   clearable: Boolean,
-  maxlength: numericProp,
-  formatter: Function,
-  clearIcon: makeStringProp('clear'),
-  modelValue: makeNumericProp(''),
+  maxlength: [Number, String],
   inputAlign: String,
   placeholder: String,
-  autocomplete: String,
   errorMessage: String,
-  clearTrigger: makeStringProp('focus'),
-  formatTrigger: makeStringProp('onChange'),
   error: {
     type: Boolean,
     default: null
@@ -41,40 +35,59 @@ export var fieldSharedProps = {
   readonly: {
     type: Boolean,
     default: null
+  },
+  clearIcon: {
+    type: String,
+    default: 'clear'
+  },
+  modelValue: {
+    type: [Number, String],
+    default: ''
+  },
+  clearTrigger: {
+    type: String,
+    default: 'focus'
+  },
+  formatTrigger: {
+    type: String,
+    default: 'onChange'
   }
 };
-var fieldProps = extend({}, cellSharedProps, fieldSharedProps, {
-  rows: numericProp,
-  type: makeStringProp('text'),
-  rules: Array,
-  autosize: [Boolean, Object],
-  labelWidth: numericProp,
-  labelClass: unknownProp,
-  labelAlign: String,
-  showWordLimit: Boolean,
-  errorMessageAlign: String,
-  colon: {
-    type: Boolean,
-    default: null
-  }
-});
 export default defineComponent({
   name,
-  props: fieldProps,
+  props: extend({}, cellProps, fieldProps, {
+    rows: [Number, String],
+    name: String,
+    rules: Array,
+    autosize: [Boolean, Object],
+    labelWidth: [Number, String],
+    labelClass: unknownProp,
+    labelAlign: String,
+    autocomplete: String,
+    showWordLimit: Boolean,
+    errorMessageAlign: String,
+    type: {
+      type: String,
+      default: 'text'
+    },
+    colon: {
+      type: Boolean,
+      default: null
+    }
+  }),
   emits: ['blur', 'focus', 'clear', 'keypress', 'click-input', 'click-left-icon', 'click-right-icon', 'update:modelValue'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var state = reactive({
       focused: false,
       validateFailed: false,
       validateMessage: ''
     });
     var inputRef = ref();
-    var customValue = ref();
+    var childFieldValue = ref();
     var {
       parent: form
     } = useParent(FORM_KEY);
@@ -107,8 +120,8 @@ export default defineComponent({
       return false;
     });
     var formValue = computed(() => {
-      if (customValue.value && slots.input) {
-        return customValue.value();
+      if (childFieldValue.value && slots.input) {
+        return childFieldValue.value();
       }
 
       return props.modelValue;
@@ -153,30 +166,24 @@ export default defineComponent({
       }
     };
 
-    var validate = function (rules) {
-      if (rules === void 0) {
-        rules = props.rules;
+    var validate = (rules = props.rules) => new Promise(resolve => {
+      resetValidation();
+
+      if (rules) {
+        runRules(rules).then(() => {
+          if (state.validateFailed) {
+            resolve({
+              name: props.name,
+              message: state.validateMessage
+            });
+          } else {
+            resolve();
+          }
+        });
+      } else {
+        resolve();
       }
-
-      return new Promise(resolve => {
-        resetValidation();
-
-        if (rules) {
-          runRules(rules).then(() => {
-            if (state.validateFailed) {
-              resolve({
-                name: props.name,
-                message: state.validateMessage
-              });
-            } else {
-              resolve();
-            }
-          });
-        } else {
-          resolve();
-        }
-      });
-    };
+    });
 
     var validateWithTrigger = trigger => {
       if (form && props.rules) {
@@ -215,11 +222,7 @@ export default defineComponent({
       return value;
     };
 
-    var updateValue = function (value, trigger) {
-      if (trigger === void 0) {
-        trigger = 'onChange';
-      }
-
+    var updateValue = (value, trigger = 'onChange') => {
       value = limitValueLength(value);
 
       if (props.type === 'number' || props.type === 'digit') {
@@ -259,18 +262,9 @@ export default defineComponent({
       return (_inputRef$value2 = inputRef.value) == null ? void 0 : _inputRef$value2.focus();
     };
 
-    var adjustTextareaSize = () => {
-      var input = inputRef.value;
-
-      if (props.type === 'textarea' && props.autosize && input) {
-        resizeTextarea(input, props.autosize);
-      }
-    };
-
     var onFocus = event => {
       state.focused = true;
-      emit('focus', event);
-      nextTick(adjustTextareaSize); // readonly not work in legacy mobile safari
+      emit('focus', event); // readonly not work in legacy mobile safari
 
       var readonly = getProp('readonly');
 
@@ -284,7 +278,6 @@ export default defineComponent({
       updateValue(getModelValue(), 'onBlur');
       emit('blur', event);
       validateWithTrigger('onBlur');
-      nextTick(adjustTextareaSize);
       resetScroll();
     };
 
@@ -338,26 +331,29 @@ export default defineComponent({
       emit('keypress', event);
     };
 
+    var adjustTextareaSize = () => {
+      var input = inputRef.value;
+
+      if (props.type === 'textarea' && props.autosize && input) {
+        resizeTextarea(input, props.autosize);
+      }
+    };
+
     var renderInput = () => {
-      var controlClass = bem('control', [getProp('inputAlign'), {
-        error: showError.value,
-        custom: !!slots.input,
-        'min-height': props.type === 'textarea' && !props.autosize
-      }]);
+      var inputAlign = getProp('inputAlign');
 
       if (slots.input) {
         return _createVNode("div", {
-          "class": controlClass,
+          "class": bem('control', [inputAlign, 'custom']),
           "onClick": onClickInput
         }, [slots.input()]);
       }
 
       var inputAttrs = {
-        id: props.id,
         ref: inputRef,
         name: props.name,
         rows: props.rows !== undefined ? +props.rows : undefined,
-        class: controlClass,
+        class: bem('control', inputAlign),
         value: props.modelValue,
         disabled: getProp('disabled'),
         readonly: getProp('readonly'),
@@ -428,13 +424,10 @@ export default defineComponent({
       var message = props.errorMessage || state.validateMessage;
 
       if (message) {
-        var slot = slots['error-message'];
         var errorMessageAlign = getProp('errorMessageAlign');
         return _createVNode("div", {
           "class": bem('error-message', errorMessageAlign)
-        }, [slot ? slot({
-          message
-        }) : message]);
+        }, [message]);
       }
     };
 
@@ -446,9 +439,7 @@ export default defineComponent({
       }
 
       if (props.label) {
-        return _createVNode("label", {
-          "for": props.id
-        }, [props.label + colon]);
+        return _createVNode("span", null, [props.label + colon]);
       }
     };
 
@@ -469,8 +460,8 @@ export default defineComponent({
       formValue,
       resetValidation
     });
-    provide(CUSTOM_FIELD_INJECTION_KEY, {
-      customValue,
+    provide(FIELD_KEY, {
+      childFieldValue,
       resetValidation,
       validateWithTrigger
     });
@@ -495,17 +486,17 @@ export default defineComponent({
         "class": bem({
           error: showError.value,
           disabled,
-          ["label-" + labelAlign]: labelAlign
+          ["label-" + labelAlign]: labelAlign,
+          'min-height': props.type === 'textarea' && !props.autosize
         }),
         "center": props.center,
         "border": props.border,
         "isLink": props.isLink,
+        "required": props.required,
         "clickable": props.clickable,
         "titleStyle": labelStyle.value,
         "valueClass": bem('value'),
-        "titleClass": [bem('label', [labelAlign, {
-          required: props.required
-        }]), props.labelClass],
+        "titleClass": [bem('label', labelAlign), props.labelClass],
         "arrowDirection": props.arrowDirection
       }, {
         icon: LeftIcon ? () => LeftIcon : null,

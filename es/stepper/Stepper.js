@@ -1,49 +1,64 @@
 import { withDirectives as _withDirectives, createVNode as _createVNode, mergeProps as _mergeProps, vShow as _vShow } from "vue";
-import { ref, watch, computed, nextTick, defineComponent } from 'vue'; // Utils
+import { ref, watch, computed, defineComponent, nextTick } from 'vue'; // Utils
 
-import { isDef, addUnit, addNumber, truthProp, resetScroll, numericProp, formatNumber, getSizeStyle, preventDefault, createNamespace, callInterceptor, makeNumericProp, HAPTICS_FEEDBACK } from '../utils'; // Composables
+import { isDef, addUnit, addNumber, truthProp, resetScroll, formatNumber, getSizeStyle, preventDefault, createNamespace } from '../utils'; // Composables
 
-import { useCustomFieldValue } from '@vant/use';
+import { useLinkField } from '../composables/use-link-field';
+import { callInterceptor } from '../utils/interceptor';
 var [name, bem] = createNamespace('stepper');
 var LONG_PRESS_INTERVAL = 200;
 var LONG_PRESS_START_TIME = 600;
 
-var isEqual = (value1, value2) => String(value1) === String(value2);
+function equal(value1, value2) {
+  return String(value1) === String(value2);
+}
 
-var stepperProps = {
-  min: makeNumericProp(1),
-  max: makeNumericProp(Infinity),
-  name: makeNumericProp(''),
-  step: makeNumericProp(1),
-  theme: String,
-  integer: Boolean,
-  disabled: Boolean,
-  showPlus: truthProp,
-  showMinus: truthProp,
-  showInput: truthProp,
-  longPress: truthProp,
-  allowEmpty: Boolean,
-  modelValue: numericProp,
-  inputWidth: numericProp,
-  buttonSize: numericProp,
-  placeholder: String,
-  disablePlus: Boolean,
-  disableMinus: Boolean,
-  disableInput: Boolean,
-  beforeChange: Function,
-  defaultValue: makeNumericProp(1),
-  decimalLength: numericProp
-};
 export default defineComponent({
   name,
-  props: stepperProps,
+  props: {
+    theme: String,
+    integer: Boolean,
+    disabled: Boolean,
+    showPlus: truthProp,
+    showMinus: truthProp,
+    showInput: truthProp,
+    longPress: truthProp,
+    allowEmpty: Boolean,
+    modelValue: [Number, String],
+    inputWidth: [Number, String],
+    buttonSize: [Number, String],
+    placeholder: String,
+    disablePlus: Boolean,
+    disableMinus: Boolean,
+    disableInput: Boolean,
+    beforeChange: Function,
+    decimalLength: [Number, String],
+    name: {
+      type: [Number, String],
+      default: ''
+    },
+    min: {
+      type: [Number, String],
+      default: 1
+    },
+    max: {
+      type: [Number, String],
+      default: Infinity
+    },
+    step: {
+      type: [Number, String],
+      default: 1
+    },
+    defaultValue: {
+      type: [Number, String],
+      default: 1
+    }
+  },
   emits: ['plus', 'blur', 'minus', 'focus', 'change', 'overlimit', 'update:modelValue'],
 
-  setup(props, _ref) {
-    var {
-      emit
-    } = _ref;
-
+  setup(props, {
+    emit
+  }) {
     var format = value => {
       var {
         min,
@@ -74,7 +89,7 @@ export default defineComponent({
       var defaultValue = (_props$modelValue = props.modelValue) != null ? _props$modelValue : props.defaultValue;
       var value = format(defaultValue);
 
-      if (!isEqual(value, props.modelValue)) {
+      if (!equal(value, props.modelValue)) {
         emit('update:modelValue', value);
       }
 
@@ -95,15 +110,16 @@ export default defineComponent({
     var check = () => {
       var value = format(current.value);
 
-      if (!isEqual(value, current.value)) {
+      if (!equal(value, current.value)) {
         current.value = value;
       }
     };
 
     var setValue = value => {
       if (props.beforeChange) {
-        callInterceptor(props.beforeChange, {
+        callInterceptor({
           args: [value],
+          interceptor: props.beforeChange,
 
           done() {
             current.value = value;
@@ -144,7 +160,7 @@ export default defineComponent({
 
       if (props.beforeChange) {
         input.value = String(current.value);
-      } else if (!isEqual(value, formatted)) {
+      } else if (!equal(value, formatted)) {
         input.value = formatted;
       } // prefer number type
 
@@ -232,7 +248,7 @@ export default defineComponent({
 
     watch([() => props.max, () => props.min, () => props.integer, () => props.decimalLength], check);
     watch(() => props.modelValue, value => {
-      if (!isEqual(value, current.value)) {
+      if (!equal(value, current.value)) {
         current.value = format(value);
       }
     });
@@ -242,17 +258,15 @@ export default defineComponent({
         name: props.name
       });
     });
-    useCustomFieldValue(() => props.modelValue);
+    useLinkField(() => props.modelValue);
     return () => _createVNode("div", {
       "class": bem([props.theme])
     }, [_withDirectives(_createVNode("button", _mergeProps({
       "type": "button",
       "style": buttonStyle.value,
-      "class": [bem('minus', {
+      "class": bem('minus', {
         disabled: minusDisabled.value
-      }), {
-        [HAPTICS_FEEDBACK]: !minusDisabled.value
-      }]
+      })
     }, createListeners('minus')), null), [[_vShow, props.showMinus]]), _withDirectives(_createVNode("input", {
       "ref": inputRef,
       "type": props.integer ? 'tel' : 'text',
@@ -274,11 +288,9 @@ export default defineComponent({
     }, null), [[_vShow, props.showInput]]), _withDirectives(_createVNode("button", _mergeProps({
       "type": "button",
       "style": buttonStyle.value,
-      "class": [bem('plus', {
+      "class": bem('plus', {
         disabled: plusDisabled.value
-      }), {
-        [HAPTICS_FEEDBACK]: !plusDisabled.value
-      }]
+      })
     }, createListeners('plus')), null), [[_vShow, props.showPlus]])]);
   }
 

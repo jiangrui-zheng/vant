@@ -1,31 +1,32 @@
 import { createVNode as _createVNode } from "vue";
 import { ref, reactive, computed, defineComponent } from 'vue'; // Utils
 
-import { clamp, isDef, numericProp, preventDefault, callInterceptor, createNamespace, makeNumericProp } from '../utils'; // Composables
+import { clamp, isDef, createNamespace, preventDefault } from '../utils';
+import { callInterceptor } from '../utils/interceptor'; // Composables
 
 import { useRect, useClickAway } from '@vant/use';
 import { useTouch } from '../composables/use-touch';
-import { useExpose } from '../composables/use-expose'; // Types
-
+import { useExpose } from '../composables/use-expose';
 var [name, bem] = createNamespace('swipe-cell');
-var swipeCellProps = {
-  name: makeNumericProp(''),
-  disabled: Boolean,
-  leftWidth: numericProp,
-  rightWidth: numericProp,
-  beforeClose: Function,
-  stopPropagation: Boolean
-};
 export default defineComponent({
   name,
-  props: swipeCellProps,
+  props: {
+    disabled: Boolean,
+    leftWidth: [Number, String],
+    rightWidth: [Number, String],
+    beforeClose: Function,
+    stopPropagation: Boolean,
+    name: {
+      type: [Number, String],
+      default: ''
+    }
+  },
   emits: ['open', 'close', 'click'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var opened;
     var lockClick;
     var startOffset;
@@ -118,15 +119,12 @@ export default defineComponent({
       }
     };
 
-    var onClick = function (position) {
-      if (position === void 0) {
-        position = 'outside';
-      }
-
+    var onClick = (position = 'outside') => {
       emit('click', position);
 
       if (opened && !lockClick) {
-        callInterceptor(props.beforeClose, {
+        callInterceptor({
+          interceptor: props.beforeClose,
           args: [{
             name: props.name,
             position

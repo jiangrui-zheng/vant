@@ -1,37 +1,36 @@
 import { mergeProps as _mergeProps, createVNode as _createVNode } from "vue";
 import { nextTick, defineComponent } from 'vue'; // Utils
 
-import { pick, extend, truthProp, makeArrayProp, makeStringProp, createNamespace, HAPTICS_FEEDBACK } from '../utils'; // Components
+import { pick, extend, truthProp, createNamespace } from '../utils'; // Components
 
 import { Icon } from '../icon';
 import { Popup } from '../popup';
 import { Loading } from '../loading';
 import { popupSharedProps, popupSharedPropKeys } from '../popup/shared';
 var [name, bem] = createNamespace('action-sheet');
-var actionSheetProps = extend({}, popupSharedProps, {
-  title: String,
-  round: truthProp,
-  actions: makeArrayProp(),
-  closeIcon: makeStringProp('cross'),
-  closeable: truthProp,
-  cancelText: String,
-  description: String,
-  closeOnPopstate: truthProp,
-  closeOnClickAction: Boolean,
-  safeAreaInsetBottom: truthProp
-});
-var popupInheritKeys = [...popupSharedPropKeys, 'round', 'closeOnPopstate', 'safeAreaInsetBottom'];
 export default defineComponent({
   name,
-  props: actionSheetProps,
+  props: extend({}, popupSharedProps, {
+    title: String,
+    round: truthProp,
+    actions: Array,
+    closeable: truthProp,
+    cancelText: String,
+    description: String,
+    closeOnPopstate: Boolean,
+    closeOnClickAction: Boolean,
+    safeAreaInsetBottom: truthProp,
+    closeIcon: {
+      type: String,
+      default: 'cross'
+    }
+  }),
   emits: ['select', 'cancel', 'update:show'],
 
-  setup(props, _ref) {
-    var {
-      slots,
-      emit
-    } = _ref;
-
+  setup(props, {
+    slots,
+    emit
+  }) {
     var updateShow = show => emit('update:show', show);
 
     var onCancel = () => {
@@ -45,7 +44,7 @@ export default defineComponent({
           "class": bem('header')
         }, [props.title, props.closeable && _createVNode(Icon, {
           "name": props.closeIcon,
-          "class": [bem('close'), HAPTICS_FEEDBACK],
+          "class": bem('close'),
           "onClick": onCancel
         }, null)]);
       }
@@ -119,14 +118,23 @@ export default defineComponent({
       }
     };
 
+    var renderOptions = () => {
+      if (props.actions) {
+        return props.actions.map(renderOption);
+      }
+    };
+
     return () => _createVNode(Popup, _mergeProps({
       "class": bem(),
+      "round": props.round,
       "position": "bottom",
-      "onUpdate:show": updateShow
-    }, pick(props, popupInheritKeys)), {
+      "safeAreaInsetBottom": props.safeAreaInsetBottom
+    }, pick(props, popupSharedPropKeys), {
+      'onUpdate:show': updateShow
+    }), {
       default: () => [renderHeader(), renderDescription(), _createVNode("div", {
         "class": bem('content')
-      }, [props.actions.map(renderOption), slots.default == null ? void 0 : slots.default()]), renderCancel()]
+      }, [renderOptions(), slots.default == null ? void 0 : slots.default()]), renderCancel()]
     });
   }
 

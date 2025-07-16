@@ -14,13 +14,12 @@
   --van-field-clear-icon-color: @field-clear-icon-color;
   --van-field-right-icon-color: @field-right-icon-color;
   --van-field-error-message-color: @field-error-message-color;
-  --van-field-error-message-font-size: @field-error-message-font-size;
+  --van-field-error-message-text-color: @field-error-message-text-color;
   --van-field-text-area-min-height: @field-text-area-min-height;
   --van-field-word-limit-color: @field-word-limit-color;
   --van-field-word-limit-font-size: @field-word-limit-font-size;
   --van-field-word-limit-line-height: @field-word-limit-line-height;
   --van-field-disabled-text-color: @field-disabled-text-color;
-  --van-field-required-mark-color: @field-required-mark-color;
 }
 
 .van-field {
@@ -39,14 +38,6 @@
 
     &--right {
       text-align: right;
-    }
-
-    &--required {
-      &::before {
-        margin-right: 2px;
-        color: var(--van-field-required-mark-color);
-        content: '*';
-      }
     }
   }
 
@@ -78,8 +69,6 @@
     background-color: transparent;
     border: 0;
     resize: none;
-    // https://github.com/youzan/vant/pull/9418
-    user-select: auto;
 
     &::placeholder {
       color: var(--van-field-placeholder-text-color);
@@ -113,16 +102,6 @@
       min-height: var(--van-cell-line-height);
     }
 
-    &--error,
-    &--error::placeholder {
-      color: var(--van-field-input-error-text-color);
-      -webkit-text-fill-color: currentColor;
-    }
-
-    &--min-height {
-      min-height: var(--van-field-text-area-min-height);
-    }
-
     // for ios wechat
     &[type='date'],
     &[type='time'],
@@ -145,7 +124,7 @@
 
   &__clear,
   &__right-icon {
-    margin-right: calc(var(--van-padding-xs) * -1);
+    margin-right: -var(--van-padding-xs);
     padding: 0 var(--van-padding-xs);
     line-height: inherit;
   }
@@ -177,7 +156,7 @@
 
   &__error-message {
     color: var(--van-field-error-message-color);
-    font-size: var(--van-field-error-message-font-size);
+    font-size: var(--van-field-error-message-text-color);
     text-align: left;
 
     &--center {
@@ -195,5 +174,21 @@
     font-size: var(--van-field-word-limit-font-size);
     line-height: var(--van-field-word-limit-line-height);
     text-align: right;
+  }
+
+  &--error {
+    .van-field__control {
+      &,
+      &::placeholder {
+        color: var(--van-field-input-error-text-color);
+        -webkit-text-fill-color: currentColor;
+      }
+    }
+  }
+
+  &--min-height {
+    .van-field__control {
+      min-height: var(--van-field-text-area-min-height);
+    }
   }
 }

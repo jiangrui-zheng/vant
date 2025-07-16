@@ -1,44 +1,37 @@
-import { ExtractPropTypes } from 'vue';
-import { checkerProps, CheckerShape, CheckerLabelPosition } from '../checkbox/Checker';
-export declare type RadioShape = CheckerShape;
-export declare type RadioLabelPosition = CheckerLabelPosition;
-export declare type RadioProps = ExtractPropTypes<typeof checkerProps>;
 declare const _default: import("vue").DefineComponent<{
     name: import("vue").PropType<unknown>;
-    shape: {
-        type: import("vue").PropType<CheckerShape>;
-        default: CheckerShape;
-    };
     disabled: BooleanConstructor;
     iconSize: (NumberConstructor | StringConstructor)[];
     modelValue: import("vue").PropType<unknown>;
     checkedColor: StringConstructor;
-    labelPosition: import("vue").PropType<CheckerLabelPosition>;
+    labelPosition: import("vue").PropType<import("../checkbox/Checker").CheckerLabelPosition>;
     labelDisabled: BooleanConstructor;
+    shape: {
+        type: import("vue").PropType<import("../checkbox/Checker").CheckerShape>;
+        default: string;
+    };
 }, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
     name?: unknown;
-    shape?: unknown;
     disabled?: unknown;
     iconSize?: unknown;
     modelValue?: unknown;
     checkedColor?: unknown;
     labelPosition?: unknown;
     labelDisabled?: unknown;
+    shape?: unknown;
 } & {
     disabled: boolean;
-    shape: CheckerShape;
     labelDisabled: boolean;
+    shape: import("../checkbox/Checker").CheckerShape;
 } & {
     name?: unknown;
     modelValue?: unknown;
     iconSize?: string | number | undefined;
     checkedColor?: string | undefined;
-    labelPosition?: CheckerLabelPosition | undefined;
-}> & {
-    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
-}, {
+    labelPosition?: import("../checkbox/Checker").CheckerLabelPosition | undefined;
+}>, {
     disabled: boolean;
-    shape: CheckerShape;
     labelDisabled: boolean;
+    shape: import("../checkbox/Checker").CheckerShape;
 }>;
 export default _default;

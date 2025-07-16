@@ -1,19 +1,18 @@
 import { PropType } from 'vue';
-import type { DatetimePickerColumnType } from './types';
+export declare type ColumnType = 'year' | 'month' | 'day' | 'hour' | 'minute';
+export declare type DatetimePickerType = 'date' | 'time' | 'datetime' | 'datehour' | 'month-day' | 'year-month';
 export declare const sharedProps: {
     title: StringConstructor;
     loading: BooleanConstructor;
     readonly: BooleanConstructor;
     allowHtml: BooleanConstructor;
-    itemHeight: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
-    };
     showToolbar: {
         type: BooleanConstructor;
         default: true;
     };
-    swipeDuration: {
+    cancelButtonText: StringConstructor;
+    confirmButtonText: StringConstructor;
+    itemHeight: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
@@ -21,17 +20,19 @@ export declare const sharedProps: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-    cancelButtonText: StringConstructor;
-    confirmButtonText: StringConstructor;
+    swipeDuration: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
 } & {
     filter: PropType<(type: string, values: string[]) => string[]>;
-    columnsOrder: PropType<DatetimePickerColumnType[]>;
+    columnsOrder: PropType<ColumnType[]>;
     formatter: {
         type: PropType<(type: string, value: string) => string>;
         default: (type: string, value: string) => string;
     };
 };
-export declare const pickerInheritKeys: ("title" | "readonly" | "loading" | "allowHtml" | "itemHeight" | "showToolbar" | "swipeDuration" | "visibleItemCount" | "cancelButtonText" | "confirmButtonText")[];
+export declare const pickerKeys: ("title" | "loading" | "readonly" | "allowHtml" | "itemHeight" | "swipeDuration" | "visibleItemCount" | "showToolbar" | "cancelButtonText" | "confirmButtonText")[];
 export declare function times<T>(n: number, iteratee: (index: number) => T): T[];
 export declare function getTrueValue(value: string | undefined): number;
-export declare const getMonthEndDay: (year: number, month: number) => number;
+export declare function getMonthEndDay(year: number, month: number): number;

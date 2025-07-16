@@ -1,35 +1,32 @@
 import { createVNode as _createVNode } from "vue";
 import { defineComponent } from 'vue';
-import { addUnit, numericProp, unknownProp, createNamespace } from '../utils';
-import { useCustomFieldValue } from '@vant/use';
+import { createNamespace, addUnit, unknownProp } from '../utils';
+import { useLinkField } from '../composables/use-link-field';
 import { Loading } from '../loading';
 var [name, bem] = createNamespace('switch');
-var switchProps = {
-  size: numericProp,
-  loading: Boolean,
-  disabled: Boolean,
-  modelValue: unknownProp,
-  activeColor: String,
-  inactiveColor: String,
-  activeValue: {
-    type: unknownProp,
-    default: true
-  },
-  inactiveValue: {
-    type: unknownProp,
-    default: false
-  }
-};
 export default defineComponent({
   name,
-  props: switchProps,
+  props: {
+    size: [Number, String],
+    loading: Boolean,
+    disabled: Boolean,
+    modelValue: unknownProp,
+    activeColor: String,
+    inactiveColor: String,
+    activeValue: {
+      type: unknownProp,
+      default: true
+    },
+    inactiveValue: {
+      type: unknownProp,
+      default: false
+    }
+  },
   emits: ['change', 'update:modelValue'],
 
-  setup(props, _ref) {
-    var {
-      emit
-    } = _ref;
-
+  setup(props, {
+    emit
+  }) {
     var isChecked = () => props.modelValue === props.activeValue;
 
     var onClick = () => {
@@ -50,7 +47,7 @@ export default defineComponent({
       }
     };
 
-    useCustomFieldValue(() => props.modelValue);
+    useLinkField(() => props.modelValue);
     return () => {
       var {
         size,

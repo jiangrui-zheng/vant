@@ -1,44 +1,57 @@
 import { createVNode as _createVNode } from "vue";
 import { defineComponent } from 'vue'; // Utils
 
-import { extend, numericProp, makeStringProp, createNamespace, BORDER_SURROUND } from '../utils';
+import { createNamespace, extend } from '../utils';
+import { BORDER_SURROUND } from '../utils/constant';
 import { useRoute, routeProps } from '../composables/use-route'; // Components
 
 import { Icon } from '../icon';
-import { Loading } from '../loading'; // Types
-
+import { Loading } from '../loading';
 var [name, bem] = createNamespace('button');
-var buttonProps = extend({}, routeProps, {
-  tag: makeStringProp('button'),
-  text: String,
-  icon: String,
-  type: makeStringProp('default'),
-  size: makeStringProp('normal'),
-  color: String,
-  block: Boolean,
-  plain: Boolean,
-  round: Boolean,
-  square: Boolean,
-  loading: Boolean,
-  hairline: Boolean,
-  disabled: Boolean,
-  iconPrefix: String,
-  nativeType: makeStringProp('button'),
-  loadingSize: numericProp,
-  loadingText: String,
-  loadingType: String,
-  iconPosition: makeStringProp('left')
-});
 export default defineComponent({
   name,
-  props: buttonProps,
+  props: extend({}, routeProps, {
+    text: String,
+    icon: String,
+    color: String,
+    block: Boolean,
+    plain: Boolean,
+    round: Boolean,
+    square: Boolean,
+    loading: Boolean,
+    hairline: Boolean,
+    disabled: Boolean,
+    iconPrefix: String,
+    loadingSize: String,
+    loadingText: String,
+    loadingType: String,
+    tag: {
+      type: String,
+      default: 'button'
+    },
+    type: {
+      type: String,
+      default: 'default'
+    },
+    size: {
+      type: String,
+      default: 'normal'
+    },
+    nativeType: {
+      type: String,
+      default: 'button'
+    },
+    iconPosition: {
+      type: String,
+      default: 'left'
+    }
+  }),
   emits: ['click'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var route = useRoute();
 
     var renderLoadingIcon = () => {

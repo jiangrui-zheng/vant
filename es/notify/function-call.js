@@ -5,9 +5,11 @@ import VanNotify from './Notify';
 var timer;
 var instance;
 
-var parseOptions = message => isObject(message) ? message : {
-  message
-};
+function parseOptions(message) {
+  return isObject(message) ? message : {
+    message
+  };
+}
 
 function initInstance() {
   ({
@@ -19,7 +21,7 @@ function initInstance() {
         toggle
       } = usePopupState();
       return () => _createVNode(VanNotify, _mergeProps(state, {
-        "onUpdate:show": toggle
+        'onUpdate:show': toggle
       }), null);
     }
 
@@ -35,7 +37,7 @@ function Notify(options) {
     initInstance();
   }
 
-  options = extend({}, Notify.currentOptions, parseOptions(options));
+  options = extend(Notify.currentOptions, parseOptions(options));
   instance.open(options);
   clearTimeout(timer);
 
@@ -46,18 +48,20 @@ function Notify(options) {
   return instance;
 }
 
-var getDefaultOptions = () => ({
-  type: 'danger',
-  color: undefined,
-  message: '',
-  onClose: undefined,
-  onClick: undefined,
-  onOpened: undefined,
-  duration: 3000,
-  className: '',
-  lockScroll: false,
-  background: undefined
-});
+function defaultOptions() {
+  return {
+    type: 'danger',
+    color: undefined,
+    message: '',
+    onClose: undefined,
+    onClick: undefined,
+    onOpened: undefined,
+    duration: 3000,
+    className: '',
+    lockScroll: false,
+    background: undefined
+  };
+}
 
 Notify.clear = () => {
   if (instance) {
@@ -65,21 +69,20 @@ Notify.clear = () => {
   }
 };
 
-Notify.currentOptions = getDefaultOptions();
+Notify.currentOptions = defaultOptions();
 
 Notify.setDefaultOptions = options => {
   extend(Notify.currentOptions, options);
 };
 
 Notify.resetDefaultOptions = () => {
-  Notify.currentOptions = getDefaultOptions();
+  Notify.currentOptions = defaultOptions();
 };
 
-Notify.Component = withInstall(VanNotify);
-
 Notify.install = app => {
-  app.use(Notify.Component);
+  app.use(withInstall(VanNotify));
   app.config.globalProperties.$notify = Notify;
 };
 
+Notify.Component = withInstall(VanNotify);
 export { Notify };

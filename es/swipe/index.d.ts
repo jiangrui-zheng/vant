@@ -1,5 +1,4 @@
-import { SwipeProps } from './Swipe';
-export declare const Swipe: import("../utils").WithInstall<import("vue").DefineComponent<{
+declare const Swipe: import("../utils").WithInstall<import("vue").DefineComponent<{
     loop: {
         type: BooleanConstructor;
         default: true;
@@ -7,23 +6,11 @@ export declare const Swipe: import("../utils").WithInstall<import("vue").DefineC
     width: (NumberConstructor | StringConstructor)[];
     height: (NumberConstructor | StringConstructor)[];
     vertical: BooleanConstructor;
-    autoplay: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
-    };
-    duration: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
-    };
     touchable: {
         type: BooleanConstructor;
         default: true;
     };
     lazyRender: BooleanConstructor;
-    initialSwipe: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
-    };
     indicatorColor: StringConstructor;
     showIndicators: {
         type: BooleanConstructor;
@@ -33,46 +20,56 @@ export declare const Swipe: import("../utils").WithInstall<import("vue").DefineC
         type: BooleanConstructor;
         default: true;
     };
+    autoplay: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    duration: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    initialSwipe: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
 }, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "change"[], "change", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
     loop?: unknown;
     width?: unknown;
     height?: unknown;
     vertical?: unknown;
-    autoplay?: unknown;
-    duration?: unknown;
     touchable?: unknown;
     lazyRender?: unknown;
-    initialSwipe?: unknown;
     indicatorColor?: unknown;
     showIndicators?: unknown;
     stopPropagation?: unknown;
+    autoplay?: unknown;
+    duration?: unknown;
+    initialSwipe?: unknown;
 } & {
-    autoplay: string | number;
-    loop: boolean;
     vertical: boolean;
     duration: string | number;
     lazyRender: boolean;
+    loop: boolean;
     touchable: boolean;
-    initialSwipe: string | number;
     showIndicators: boolean;
     stopPropagation: boolean;
+    autoplay: string | number;
+    initialSwipe: string | number;
 } & {
     width?: string | number | undefined;
     height?: string | number | undefined;
     indicatorColor?: string | undefined;
-}> & {
-    onChange?: ((...args: any[]) => any) | undefined;
-}, {
-    autoplay: string | number;
-    loop: boolean;
+}>, {
     vertical: boolean;
     duration: string | number;
     lazyRender: boolean;
+    loop: boolean;
     touchable: boolean;
-    initialSwipe: string | number;
     showIndicators: boolean;
     stopPropagation: boolean;
+    autoplay: string | number;
+    initialSwipe: string | number;
 }>>;
 export default Swipe;
-export type { SwipeProps };
-export type { SwipeInstance, SwipeToOptions } from './types';
+export { Swipe };
+export type { SwipeToOptions } from './Swipe';

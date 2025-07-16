@@ -5,9 +5,12 @@ declare const _default: {
     confirm: string;
     cancel: string;
     delete: string;
+    complete: string;
     loading: string;
-    noCoupon: string;
+    telEmpty: string;
     nameEmpty: string;
+    nameInvalid: string;
+    confirmDelete: string;
     telInvalid: string;
     vanCalendar: {
         end: string;
@@ -45,9 +48,11 @@ declare const _default: {
     };
     vanCouponCell: {
         title: string;
+        tips: string;
         count: (count: number) => string;
     };
     vanCouponList: {
+        empty: string;
         exchange: string;
         close: string;
         enable: string;
@@ -61,6 +66,9 @@ declare const _default: {
         addressEmpty: string;
         postalEmpty: string;
         defaultAddress: string;
+        telPlaceholder: string;
+        namePlaceholder: string;
+        areaPlaceholder: string;
     };
     vanAddressEditDetail: {
         label: string;

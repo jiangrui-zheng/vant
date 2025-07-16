@@ -1,6 +1,6 @@
 import { createVNode as _createVNode } from "vue";
 import { ref, defineComponent } from 'vue';
-import { numericProp, createNamespace } from '../utils';
+import { createNamespace } from '../utils';
 import { useTouch } from '../composables/use-touch';
 import { Loading } from '../loading';
 var [name, bem] = createNamespace('key');
@@ -25,7 +25,7 @@ export default defineComponent({
   name,
   props: {
     type: String,
-    text: numericProp,
+    text: [Number, String],
     color: String,
     wider: Boolean,
     large: Boolean,
@@ -33,11 +33,10 @@ export default defineComponent({
   },
   emits: ['press'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var active = ref(false);
     var touch = useTouch();
 

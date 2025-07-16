@@ -33,12 +33,9 @@ declare const _default: import("vue").DefineComponent<{
     rootWidth: number;
     rootHeight: number;
 } & {
-    src?: string | undefined;
     active?: number | undefined;
-}> & {
-    onClose?: ((...args: any[]) => any) | undefined;
-    onScale?: ((...args: any[]) => any) | undefined;
-}, {
+    src?: string | undefined;
+}>, {
     show: boolean;
 }>;
 export default _default;

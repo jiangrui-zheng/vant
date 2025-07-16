@@ -1,32 +1,33 @@
-import { resolveDirective as _resolveDirective, createVNode as _createVNode } from "vue";
+import { createVNode as _createVNode } from "vue";
 import { defineComponent } from 'vue'; // Utils
 
 import { bem, isImageFile } from './utils';
-import { isDef, extend, numericProp, getSizeStyle, callInterceptor, makeRequiredProp } from '../utils'; // Components
+import { isDef, getSizeStyle, extend } from '../utils';
+import { callInterceptor } from '../utils/interceptor'; // Components
 
 import { Icon } from '../icon';
 import { Image } from '../image';
-import { Loading } from '../loading'; // Types
-
+import { Loading } from '../loading';
 export default defineComponent({
   props: {
-    name: numericProp,
-    item: makeRequiredProp(Object),
+    name: [Number, String],
     index: Number,
     imageFit: String,
     lazyLoad: Boolean,
     deletable: Boolean,
-    previewSize: numericProp,
-    beforeDelete: Function
+    previewSize: [Number, String],
+    beforeDelete: Function,
+    item: {
+      type: Object,
+      required: true
+    }
   },
   emits: ['delete', 'preview'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
-
+  setup(props, {
+    emit,
+    slots
+  }) {
     var renderMask = () => {
       var {
         status,
@@ -57,7 +58,8 @@ export default defineComponent({
         beforeDelete
       } = props;
       event.stopPropagation();
-      callInterceptor(beforeDelete, {
+      callInterceptor({
+        interceptor: beforeDelete,
         args: [item, {
           name,
           index
@@ -109,7 +111,7 @@ export default defineComponent({
           "lazyLoad": props.lazyLoad,
           "onClick": onPreview
         }, {
-          default: renderCover
+          default: () => [renderCover()]
         });
       }
 

@@ -41,19 +41,15 @@ function initInstance() {
       };
 
       return () => _createVNode(VanImagePreview, _mergeProps(state, {
-        "onClosed": onClosed,
-        "onUpdate:show": toggle
+        onClosed,
+        'onUpdate:show': toggle
       }), null);
     }
 
   }));
 }
 
-var ImagePreview = function (options, startPosition) {
-  if (startPosition === void 0) {
-    startPosition = 0;
-  }
-
+var ImagePreview = (images, startPosition = 0) => {
   /* istanbul ignore if */
   if (!inBrowser) {
     return;
@@ -63,10 +59,10 @@ var ImagePreview = function (options, startPosition) {
     initInstance();
   }
 
-  options = Array.isArray(options) ? {
-    images: options,
+  var options = Array.isArray(images) ? {
+    images,
     startPosition
-  } : options;
+  } : images;
   instance.open(extend({}, defaultConfig, options));
   return instance;
 };
@@ -74,7 +70,7 @@ var ImagePreview = function (options, startPosition) {
 ImagePreview.Component = withInstall(VanImagePreview);
 
 ImagePreview.install = app => {
-  app.use(ImagePreview.Component);
+  app.use(withInstall(VanImagePreview));
 };
 
 export { ImagePreview };

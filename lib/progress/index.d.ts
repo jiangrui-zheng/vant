@@ -1,5 +1,4 @@
-import { ProgressProps } from './Progress';
-export declare const Progress: import("../utils").WithInstall<import("vue").DefineComponent<{
+declare const Progress: import("../utils").WithInstall<import("vue").DefineComponent<{
     color: StringConstructor;
     inactive: BooleanConstructor;
     pivotText: StringConstructor;
@@ -13,7 +12,7 @@ export declare const Progress: import("../utils").WithInstall<import("vue").Defi
     strokeWidth: (NumberConstructor | StringConstructor)[];
     percentage: {
         type: (NumberConstructor | StringConstructor)[];
-        default: number;
+        required: true;
         validator: (value: string | number) => boolean;
     };
 }, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
@@ -40,8 +39,6 @@ export declare const Progress: import("../utils").WithInstall<import("vue").Defi
 }>, {
     inactive: boolean;
     showPivot: boolean;
-    percentage: string | number;
 }>>;
 export default Progress;
-export type { ProgressProps };
-export type { ProgressInstance } from './types';
+export { Progress };

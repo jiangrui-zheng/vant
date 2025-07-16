@@ -1,25 +1,30 @@
 import { createVNode as _createVNode } from "vue";
 import { defineComponent } from 'vue';
-import { addUnit, truthProp, numericProp, BORDER_LEFT, makeStringProp, BORDER_SURROUND, createNamespace, makeNumericProp } from '../utils';
+import { createNamespace, addUnit, truthProp } from '../utils';
+import { BORDER_LEFT, BORDER_SURROUND } from '../utils/constant';
 var [name, bem] = createNamespace('password-input');
 export default defineComponent({
   name,
   props: {
     info: String,
     mask: truthProp,
-    value: makeStringProp(''),
-    gutter: numericProp,
-    length: makeNumericProp(6),
+    gutter: [Number, String],
     focused: Boolean,
-    errorInfo: String
+    errorInfo: String,
+    value: {
+      type: String,
+      default: ''
+    },
+    length: {
+      type: [Number, String],
+      default: 6
+    }
   },
   emits: ['focus'],
 
-  setup(props, _ref) {
-    var {
-      emit
-    } = _ref;
-
+  setup(props, {
+    emit
+  }) {
     var onTouchStart = event => {
       event.stopPropagation();
       emit('focus', event);

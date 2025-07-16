@@ -1,15 +1,15 @@
-import { noop } from './basic';
-import { isPromise } from './validate';
-export function callInterceptor(interceptor, _ref) {
+import { isPromise, noop } from '.';
+export function callInterceptor(options) {
   var {
-    args = [],
+    interceptor,
+    args,
     done,
     canceled
-  } = _ref;
+  } = options;
 
   if (interceptor) {
     // eslint-disable-next-line prefer-spread
-    var returnVal = interceptor.apply(null, args);
+    var returnVal = interceptor.apply(null, args || []);
 
     if (isPromise(returnVal)) {
       returnVal.then(value => {

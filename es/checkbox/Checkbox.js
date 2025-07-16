@@ -1,28 +1,26 @@
 import { createVNode as _createVNode, mergeProps as _mergeProps, resolveDirective as _resolveDirective } from "vue";
-import { watch, computed, defineComponent } from 'vue'; // Utils
+import { computed, watch, defineComponent } from 'vue'; // Utils
 
 import { createNamespace, extend, pick, truthProp } from '../utils';
 import { CHECKBOX_GROUP_KEY } from '../checkbox-group/CheckboxGroup'; // Composables
 
-import { useParent, useCustomFieldValue } from '@vant/use';
-import { useExpose } from '../composables/use-expose'; // Components
+import { useParent } from '@vant/use';
+import { useExpose } from '../composables/use-expose';
+import { useLinkField } from '../composables/use-link-field'; // Components
 
-import Checker, { checkerProps } from './Checker'; // Types
-
+import Checker, { checkerProps } from './Checker';
 var [name, bem] = createNamespace('checkbox');
-var checkboxProps = extend({}, checkerProps, {
-  bindGroup: truthProp
-});
 export default defineComponent({
   name,
-  props: checkboxProps,
+  props: extend({}, checkerProps, {
+    bindGroup: truthProp
+  }),
   emits: ['change', 'update:modelValue'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var {
       parent
     } = useParent(CHECKBOX_GROUP_KEY);
@@ -68,11 +66,7 @@ export default defineComponent({
       return !!props.modelValue;
     });
 
-    var toggle = function (newValue) {
-      if (newValue === void 0) {
-        newValue = !checked.value;
-      }
-
+    var toggle = (newValue = !checked.value) => {
       if (parent && props.bindGroup) {
         setParentValue(newValue);
       } else {
@@ -86,7 +80,7 @@ export default defineComponent({
       props,
       checked
     });
-    useCustomFieldValue(() => props.modelValue);
+    useLinkField(() => props.modelValue);
     return () => _createVNode(Checker, _mergeProps({
       "bem": bem,
       "role": "checkbox",

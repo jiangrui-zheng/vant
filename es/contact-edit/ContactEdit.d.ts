@@ -1,26 +1,10 @@
-import { PropType, ExtractPropTypes } from 'vue';
+import { PropType } from 'vue';
 import { isMobile } from '../utils';
 export declare type ContactEditInfo = {
     tel: string;
     name: string;
     isDefault?: boolean;
 };
-declare const contactEditProps: {
-    isEdit: BooleanConstructor;
-    isSaving: BooleanConstructor;
-    isDeleting: BooleanConstructor;
-    showSetDefault: BooleanConstructor;
-    setDefaultLabel: StringConstructor;
-    contactInfo: {
-        type: PropType<ContactEditInfo>;
-        default: () => ContactEditInfo;
-    };
-    telValidator: {
-        type: PropType<(val: string) => boolean>;
-        default: typeof isMobile;
-    };
-};
-export declare type ContactEditProps = ExtractPropTypes<typeof contactEditProps>;
 declare const _default: import("vue").DefineComponent<{
     isEdit: BooleanConstructor;
     isSaving: BooleanConstructor;
@@ -52,11 +36,7 @@ declare const _default: import("vue").DefineComponent<{
     contactInfo: ContactEditInfo;
 } & {
     setDefaultLabel?: string | undefined;
-}> & {
-    onSave?: ((...args: any[]) => any) | undefined;
-    onDelete?: ((...args: any[]) => any) | undefined;
-    "onChange-default"?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     isSaving: boolean;
     isDeleting: boolean;
     showSetDefault: boolean;

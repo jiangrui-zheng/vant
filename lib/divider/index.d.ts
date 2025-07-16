@@ -1,4 +1,4 @@
-export declare const Divider: import("../utils").WithInstall<import("vue").DefineComponent<{
+declare const Divider: import("../utils").WithInstall<import("vue").DefineComponent<{
     dashed: BooleanConstructor;
     hairline: {
         type: BooleanConstructor;
@@ -6,7 +6,7 @@ export declare const Divider: import("../utils").WithInstall<import("vue").Defin
     };
     contentPosition: {
         type: import("vue").PropType<import("./Divider").DividerContentPosition>;
-        default: import("./Divider").DividerContentPosition;
+        default: string;
     };
 }, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
     dashed?: unknown;
@@ -22,4 +22,5 @@ export declare const Divider: import("../utils").WithInstall<import("vue").Defin
     contentPosition: import("./Divider").DividerContentPosition;
 }>>;
 export default Divider;
-export type { DividerProps, DividerContentPosition } from './Divider';
+export { Divider };
+export type { DividerContentPosition } from './Divider';

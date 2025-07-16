@@ -1,10 +1,8 @@
 import { createVNode as _createVNode } from "vue";
 import { computed, defineComponent } from 'vue';
-import { extend, addUnit, numericProp, getSizeStyle, makeStringProp, createNamespace } from '../utils';
+import { createNamespace, addUnit, getSizeStyle, extend } from '../utils';
 var [name, bem] = createNamespace('loading');
-var SpinIcon = Array(12).fill(null).map((_, index) => _createVNode("i", {
-  "class": bem('line', String(index + 1))
-}, null));
+var SpinIcon = Array(12).fill(_createVNode("i", null, null));
 
 var CircularIcon = _createVNode("svg", {
   "class": bem('circular'),
@@ -16,22 +14,23 @@ var CircularIcon = _createVNode("svg", {
   "fill": "none"
 }, null)]);
 
-var loadingProps = {
-  size: numericProp,
-  type: makeStringProp('circular'),
-  color: String,
-  vertical: Boolean,
-  textSize: numericProp,
-  textColor: String
-};
 export default defineComponent({
   name,
-  props: loadingProps,
+  props: {
+    size: [Number, String],
+    color: String,
+    vertical: Boolean,
+    textSize: [Number, String],
+    textColor: String,
+    type: {
+      type: String,
+      default: 'circular'
+    }
+  },
 
-  setup(props, _ref) {
-    var {
-      slots
-    } = _ref;
+  setup(props, {
+    slots
+  }) {
     var spinnerStyle = computed(() => extend({
       color: props.color
     }, getSizeStyle(props.size)));

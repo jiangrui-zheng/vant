@@ -1,24 +1,23 @@
 import { createVNode as _createVNode } from "vue";
 import { ref, reactive, computed, defineComponent } from 'vue'; // Utils
 
-import { extend, numericProp, BORDER_BOTTOM, getZIndexStyle, createNamespace } from '../utils';
+import { createNamespace, extend, getZIndexStyle } from '../utils';
+import { BORDER_BOTTOM } from '../utils/constant';
 import { INDEX_BAR_KEY } from '../index-bar/IndexBar';
-import { getScrollTop, getRootScrollTop } from '../utils/dom'; // Composables
+import { getScrollTop, getRootScrollTop } from '../utils/dom/scroll'; // Composables
 
 import { useRect, useParent } from '@vant/use';
 import { useExpose } from '../composables/use-expose';
 var [name, bem] = createNamespace('index-anchor');
-var indexAnchorProps = {
-  index: numericProp
-};
 export default defineComponent({
   name,
-  props: indexAnchorProps,
+  props: {
+    index: [Number, String]
+  },
 
-  setup(props, _ref) {
-    var {
-      slots
-    } = _ref;
+  setup(props, {
+    slots
+  }) {
     var state = reactive({
       top: 0,
       left: null,

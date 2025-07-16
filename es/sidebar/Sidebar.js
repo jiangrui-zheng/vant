@@ -1,22 +1,23 @@
 import { createVNode as _createVNode } from "vue";
 import { defineComponent } from 'vue';
-import { makeNumericProp, createNamespace } from '../utils';
+import { createNamespace } from '../utils';
 import { useChildren } from '@vant/use';
 var [name, bem] = createNamespace('sidebar');
 export var SIDEBAR_KEY = Symbol(name);
-var sidebarProps = {
-  modelValue: makeNumericProp(0)
-};
 export default defineComponent({
   name,
-  props: sidebarProps,
+  props: {
+    modelValue: {
+      type: [Number, String],
+      default: 0
+    }
+  },
   emits: ['change', 'update:modelValue'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var {
       linkChildren
     } = useChildren(SIDEBAR_KEY);

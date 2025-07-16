@@ -10,22 +10,19 @@ import { Radio } from '../radio';
 import { Button } from '../button';
 import { RadioGroup } from '../radio-group';
 var [name, bem, t] = createNamespace('contact-list');
-var contactListProps = {
-  list: Array,
-  addText: String,
-  modelValue: unknownProp,
-  defaultTagText: String
-};
 export default defineComponent({
   name,
-  props: contactListProps,
+  props: {
+    list: Array,
+    addText: String,
+    modelValue: unknownProp,
+    defaultTagText: String
+  },
   emits: ['add', 'edit', 'select', 'update:modelValue'],
 
-  setup(props, _ref) {
-    var {
-      emit
-    } = _ref;
-
+  setup(props, {
+    emit
+  }) {
     var renderItem = (item, index) => {
       var onClick = () => {
         emit('update:modelValue', item.id);
@@ -85,7 +82,7 @@ export default defineComponent({
     }, {
       default: () => [props.list && props.list.map(renderItem)]
     }), _createVNode("div", {
-      "class": [bem('bottom'), 'van-safe-area-bottom']
+      "class": bem('bottom')
     }, [_createVNode(Button, {
       "round": true,
       "block": true,

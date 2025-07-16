@@ -1,30 +1,29 @@
-import { Fragment as _Fragment, resolveDirective as _resolveDirective, createVNode as _createVNode } from "vue";
+import { mergeProps as _mergeProps, Fragment as _Fragment, resolveDirective as _resolveDirective, createVNode as _createVNode } from "vue";
 import { ref, defineComponent } from 'vue'; // Utils
 
-import { createNamespace, numericProp } from '../utils'; // Components
+import { isAndroid, createNamespace } from '../utils'; // Components
 
 import { Cell } from '../cell';
-import { Field } from '../field'; // Types
-
+import { Field } from '../field';
 var [name, bem, t] = createNamespace('address-edit-detail');
+var android = isAndroid();
 export default defineComponent({
   name,
   props: {
     show: Boolean,
     value: String,
     focused: Boolean,
-    detailRows: numericProp,
+    detailRows: [Number, String],
     searchResult: Array,
     errorMessage: String,
-    detailMaxlength: numericProp,
+    detailMaxlength: [Number, String],
     showSearchResult: Boolean
   },
   emits: ['blur', 'focus', 'input', 'select-search'],
 
-  setup(props, _ref) {
-    var {
-      emit
-    } = _ref;
+  setup(props, {
+    emit
+  }) {
     var field = ref();
 
     var showSearchResult = () => props.focused && props.searchResult && props.showSearchResult;
@@ -32,6 +31,19 @@ export default defineComponent({
     var onSelect = express => {
       emit('select-search', express);
       emit('input', ((express.address || '') + " " + (express.name || '')).trim());
+    };
+
+    var onFinish = () => {
+      field.value.blur();
+    };
+
+    var renderFinish = () => {
+      if (props.value && props.focused && android) {
+        return _createVNode("div", {
+          "class": bem('finish'),
+          "onClick": onFinish
+        }, [t('complete')]);
+      }
     };
 
     var renderSearchTitle = express => {
@@ -72,23 +84,26 @@ export default defineComponent({
 
     return () => {
       if (props.show) {
-        return _createVNode(_Fragment, null, [_createVNode(Field, {
+        return _createVNode(_Fragment, null, [_createVNode(Field, _mergeProps({
           "autosize": true,
-          "clearable": true,
           "ref": field,
           "class": bem(),
           "rows": props.detailRows,
           "type": "textarea",
           "label": t('label'),
           "border": !showSearchResult(),
+          "clearable": !android,
           "maxlength": props.detailMaxlength,
           "modelValue": props.value,
           "placeholder": t('placeholder'),
           "errorMessage": props.errorMessage,
           "onBlur": onBlur,
-          "onFocus": onFocus,
-          "onUpdate:modelValue": onInput
-        }, null), renderSearchResult()]);
+          "onFocus": onFocus
+        }, {
+          'onUpdate:modelValue': onInput
+        }), {
+          icon: renderFinish
+        }), renderSearchResult()]);
       }
     };
   }

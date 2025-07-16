@@ -1,28 +1,28 @@
-export declare const AddressList: import("../utils").WithInstall<import("vue").DefineComponent<{
-    list: {
-        type: import("vue").PropType<import("./AddressListItem").AddressListAddress[]>;
-        default: () => never[];
-    };
+declare const AddressList: import("../utils").WithInstall<import("vue").DefineComponent<{
     modelValue: (NumberConstructor | StringConstructor)[];
     switchable: {
         type: BooleanConstructor;
         default: true;
     };
     disabledText: StringConstructor;
+    addButtonText: StringConstructor;
+    defaultTagText: StringConstructor;
+    list: {
+        type: import("vue").PropType<import("./AddressListItem").AddressListAddress[]>;
+        default: () => never[];
+    };
     disabledList: {
         type: import("vue").PropType<import("./AddressListItem").AddressListAddress[]>;
         default: () => never[];
     };
-    addButtonText: StringConstructor;
-    defaultTagText: StringConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("select" | "update:modelValue" | "add" | "edit" | "click-item" | "edit-disabled" | "select-disabled")[], "select" | "update:modelValue" | "add" | "edit" | "click-item" | "edit-disabled" | "select-disabled", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    list?: unknown;
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("select" | "add" | "update:modelValue" | "edit" | "click-item" | "edit-disabled" | "select-disabled")[], "select" | "add" | "update:modelValue" | "edit" | "click-item" | "edit-disabled" | "select-disabled", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
     modelValue?: unknown;
     switchable?: unknown;
     disabledText?: unknown;
-    disabledList?: unknown;
     addButtonText?: unknown;
     defaultTagText?: unknown;
+    list?: unknown;
+    disabledList?: unknown;
 } & {
     switchable: boolean;
     list: import("./AddressListItem").AddressListAddress[];
@@ -32,19 +32,11 @@ export declare const AddressList: import("../utils").WithInstall<import("vue").D
     defaultTagText?: string | undefined;
     disabledText?: string | undefined;
     addButtonText?: string | undefined;
-}> & {
-    onSelect?: ((...args: any[]) => any) | undefined;
-    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
-    onEdit?: ((...args: any[]) => any) | undefined;
-    onAdd?: ((...args: any[]) => any) | undefined;
-    "onClick-item"?: ((...args: any[]) => any) | undefined;
-    "onEdit-disabled"?: ((...args: any[]) => any) | undefined;
-    "onSelect-disabled"?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     switchable: boolean;
     list: import("./AddressListItem").AddressListAddress[];
     disabledList: import("./AddressListItem").AddressListAddress[];
 }>>;
 export default AddressList;
-export type { AddressListProps } from './AddressList';
+export { AddressList };
 export type { AddressListAddress } from './AddressListItem';

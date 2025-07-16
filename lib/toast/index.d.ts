@@ -1,5 +1,5 @@
-import { Toast } from './function-call';
+import { Toast, ToastOptions } from './function-call';
+import type { ToastType, ToastPosition } from './Toast';
 export default Toast;
 export { Toast };
-export type { ToastProps } from './Toast';
-export type { ToastType, ToastOptions, ToastPosition } from './types';
+export type { ToastType, ToastOptions, ToastPosition };

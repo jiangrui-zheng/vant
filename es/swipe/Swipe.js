@@ -1,39 +1,46 @@
 import { createVNode as _createVNode } from "vue";
 import { ref, watch, reactive, computed, onMounted, onActivated, onDeactivated, onBeforeUnmount, defineComponent } from 'vue'; // Utils
 
-import { clamp, isHidden, truthProp, numericProp, preventDefault, createNamespace, makeNumericProp } from '../utils'; // Composables
+import { clamp, isHidden, truthProp, preventDefault, createNamespace } from '../utils'; // Composables
 
 import { doubleRaf, useChildren, useWindowSize, usePageVisibility } from '@vant/use';
 import { useTouch } from '../composables/use-touch';
 import { useExpose } from '../composables/use-expose';
-import { onPopupReopen } from '../composables/on-popup-reopen'; // Types
-
+import { onPopupReopen } from '../composables/on-popup-reopen';
 var [name, bem] = createNamespace('swipe');
-var swipeProps = {
+export var SWIPE_KEY = Symbol(name);
+var props = {
   loop: truthProp,
-  width: numericProp,
-  height: numericProp,
+  width: [Number, String],
+  height: [Number, String],
   vertical: Boolean,
-  autoplay: makeNumericProp(0),
-  duration: makeNumericProp(500),
   touchable: truthProp,
   lazyRender: Boolean,
-  initialSwipe: makeNumericProp(0),
   indicatorColor: String,
   showIndicators: truthProp,
-  stopPropagation: truthProp
+  stopPropagation: truthProp,
+  autoplay: {
+    type: [Number, String],
+    default: 0
+  },
+  duration: {
+    type: [Number, String],
+    default: 500
+  },
+  initialSwipe: {
+    type: [Number, String],
+    default: 0
+  }
 };
-export var SWIPE_KEY = Symbol(name);
 export default defineComponent({
   name,
-  props: swipeProps,
+  props,
   emits: ['change'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var root = ref();
     var state = reactive({
       rect: null,
@@ -99,11 +106,7 @@ export default defineComponent({
       return active;
     };
 
-    var getTargetOffset = function (targetActive, offset) {
-      if (offset === void 0) {
-        offset = 0;
-      }
-
+    var getTargetOffset = (targetActive, offset = 0) => {
       var currentPosition = targetActive * size.value;
 
       if (!props.loop) {
@@ -119,13 +122,11 @@ export default defineComponent({
       return targetOffset;
     };
 
-    var move = _ref2 => {
-      var {
-        pace = 0,
-        offset = 0,
-        emitChange
-      } = _ref2;
-
+    var move = ({
+      pace = 0,
+      offset = 0,
+      emitChange
+    }) => {
       if (count.value <= 1) {
         return;
       }
@@ -212,11 +213,7 @@ export default defineComponent({
     }; // initialize swipe position
 
 
-    var initialize = function (active) {
-      if (active === void 0) {
-        active = +props.initialSwipe;
-      }
-
+    var initialize = (active = +props.initialSwipe) => {
       if (!root.value) {
         return;
       }
@@ -243,7 +240,6 @@ export default defineComponent({
       children.forEach(swipe => {
         swipe.setOffset(0);
       });
-      autoplay();
     };
 
     var resize = () => initialize(state.active);
@@ -304,11 +300,7 @@ export default defineComponent({
       autoplay();
     };
 
-    var swipeTo = function (index, options) {
-      if (options === void 0) {
-        options = {};
-      }
-
+    var swipeTo = (index, options = {}) => {
       correctPosition();
       touch.reset();
       doubleRaf(() => {
@@ -379,7 +371,7 @@ export default defineComponent({
     });
     watch(() => props.initialSwipe, value => initialize(+value));
     watch(count, () => initialize(state.active));
-    watch(() => props.autoplay, autoplay);
+    watch([count, () => props.autoplay], autoplay);
     watch([windowSize.width, windowSize.height], resize);
     watch(usePageVisibility(), visible => {
       if (visible === 'visible') {

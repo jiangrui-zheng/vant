@@ -2,7 +2,7 @@ import { Fragment as _Fragment, withDirectives as _withDirectives, mergeProps as
 import { ref, watch, provide, Teleport, computed, onMounted, Transition, onActivated, onDeactivated, defineComponent } from 'vue'; // Utils
 
 import { popupSharedProps } from './shared';
-import { isDef, extend, makeStringProp, callInterceptor, createNamespace, HAPTICS_FEEDBACK } from '../utils'; // Composables
+import { createNamespace, extend, isDef } from '../utils'; // Composables
 
 import { useEventListener } from '@vant/use';
 import { useExpose } from '../composables/use-expose';
@@ -12,31 +12,38 @@ import { POPUP_TOGGLE_KEY } from '../composables/on-popup-reopen'; // Components
 
 import { Icon } from '../icon';
 import { Overlay } from '../overlay';
-var popupProps = extend({}, popupSharedProps, {
-  round: Boolean,
-  position: makeStringProp('center'),
-  closeIcon: makeStringProp('cross'),
-  closeable: Boolean,
-  transition: String,
-  iconPrefix: String,
-  closeOnPopstate: Boolean,
-  closeIconPosition: makeStringProp('top-right'),
-  safeAreaInsetBottom: Boolean
-});
 var [name, bem] = createNamespace('popup');
 var globalZIndex = 2000;
 export default defineComponent({
   name,
   inheritAttrs: false,
-  props: popupProps,
+  props: extend({}, popupSharedProps, {
+    round: Boolean,
+    closeable: Boolean,
+    transition: String,
+    iconPrefix: String,
+    closeOnPopstate: Boolean,
+    safeAreaInsetBottom: Boolean,
+    position: {
+      type: String,
+      default: 'center'
+    },
+    closeIcon: {
+      type: String,
+      default: 'cross'
+    },
+    closeIconPosition: {
+      type: String,
+      default: 'top-right'
+    }
+  }),
   emits: ['open', 'close', 'click', 'opened', 'closed', 'update:show', 'click-overlay', 'click-close-icon'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      attrs,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    attrs,
+    slots
+  }) {
     var opened;
     var shouldReopen;
     var zIndex = ref();
@@ -63,20 +70,13 @@ export default defineComponent({
 
         opened = true;
         zIndex.value = ++globalZIndex;
-        emit('open');
       }
     };
 
     var close = () => {
       if (opened) {
-        callInterceptor(props.beforeClose, {
-          done() {
-            opened = false;
-            emit('close');
-            emit('update:show', false);
-          }
-
-        });
+        opened = false;
+        emit('update:show', false);
       }
     };
 
@@ -114,7 +114,7 @@ export default defineComponent({
           "role": "button",
           "tabindex": 0,
           "name": props.closeIcon,
-          "class": [bem('close-icon', props.closeIconPosition), HAPTICS_FEEDBACK],
+          "class": bem('close-icon', props.closeIconPosition),
           "classPrefix": props.iconPrefix,
           "onClick": onClickCloseIcon
         }, null);
@@ -136,12 +136,11 @@ export default defineComponent({
       return _withDirectives(_createVNode("div", _mergeProps({
         "ref": popupRef,
         "style": style.value,
-        "class": [bem({
+        "class": bem({
           round,
-          [position]: position
-        }), {
-          'van-safe-area-bottom': safeAreaInsetBottom
-        }],
+          [position]: position,
+          'safe-area-inset-bottom': safeAreaInsetBottom
+        }),
         "onClick": onClick
       }, attrs), [slots.default == null ? void 0 : slots.default(), renderCloseIcon()]), [[_vShow, props.show]]);
     });
@@ -159,15 +158,16 @@ export default defineComponent({
         "onAfterEnter": onOpened,
         "onAfterLeave": onClosed
       }, {
-        default: renderPopup
+        default: () => [renderPopup()]
       });
     };
 
     watch(() => props.show, value => {
       if (value) {
         open();
+        emit('open');
       } else {
-        opened = false;
+        close();
         emit('close');
       }
     });

@@ -1,4 +1,5 @@
 @import './var.less';
+@import '../style/mixins/safe-area.less';
 
 :root {
   --van-action-bar-background-color: @action-bar-background-color;
@@ -14,5 +15,10 @@
   align-items: center;
   box-sizing: content-box;
   height: var(--van-action-bar-height);
-  background: var(--van-action-bar-background-color);
+  background-color: var(--van-action-bar-background-color);
+  .safe-area-inset-bottom();
+
+  &--unfit {
+    padding-bottom: 0;
+  }
 }

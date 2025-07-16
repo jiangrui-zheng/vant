@@ -3,15 +3,13 @@ declare const _default: import("vue").DefineComponent<{
     loading: BooleanConstructor;
     readonly: BooleanConstructor;
     allowHtml: BooleanConstructor;
-    itemHeight: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
-    };
     showToolbar: {
         type: BooleanConstructor;
         default: true;
     };
-    swipeDuration: {
+    cancelButtonText: StringConstructor;
+    confirmButtonText: StringConstructor;
+    itemHeight: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
@@ -19,16 +17,19 @@ declare const _default: import("vue").DefineComponent<{
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-    cancelButtonText: StringConstructor;
-    confirmButtonText: StringConstructor;
+    swipeDuration: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
 } & {
     filter: import("vue").PropType<(type: string, values: string[]) => string[]>;
-    columnsOrder: import("vue").PropType<import("./types").DatetimePickerColumnType[]>;
+    columnsOrder: import("vue").PropType<import("./utils").ColumnType[]>;
     formatter: {
         type: import("vue").PropType<(type: string, value: string) => string>;
         default: (type: string, value: string) => string;
     };
 } & {
+    modelValue: StringConstructor;
     minHour: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
@@ -45,60 +46,54 @@ declare const _default: import("vue").DefineComponent<{
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-    modelValue: StringConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change" | "cancel" | "confirm")[], "update:modelValue" | "change" | "cancel" | "confirm", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("cancel" | "change" | "confirm" | "update:modelValue")[], "cancel" | "change" | "confirm" | "update:modelValue", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
     title?: unknown;
     loading?: unknown;
     readonly?: unknown;
     allowHtml?: unknown;
-    itemHeight?: unknown;
     showToolbar?: unknown;
-    swipeDuration?: unknown;
-    visibleItemCount?: unknown;
     cancelButtonText?: unknown;
     confirmButtonText?: unknown;
+    itemHeight?: unknown;
+    visibleItemCount?: unknown;
+    swipeDuration?: unknown;
     filter?: unknown;
     columnsOrder?: unknown;
     formatter?: unknown;
+    modelValue?: unknown;
     minHour?: unknown;
     maxHour?: unknown;
     minMinute?: unknown;
     maxMinute?: unknown;
-    modelValue?: unknown;
 } & {
-    formatter: (type: string, value: string) => string;
-    readonly: boolean;
     loading: boolean;
+    readonly: boolean;
     allowHtml: boolean;
     itemHeight: string | number;
-    showToolbar: boolean;
     swipeDuration: string | number;
     visibleItemCount: string | number;
+    showToolbar: boolean;
+    formatter: (type: string, value: string) => string;
     minHour: string | number;
     maxHour: string | number;
     minMinute: string | number;
     maxMinute: string | number;
 } & {
-    title?: string | undefined;
     filter?: ((type: string, values: string[]) => string[]) | undefined;
-    modelValue?: string | undefined;
+    title?: string | undefined;
     cancelButtonText?: string | undefined;
     confirmButtonText?: string | undefined;
-    columnsOrder?: import("./types").DatetimePickerColumnType[] | undefined;
-}> & {
-    onChange?: ((...args: any[]) => any) | undefined;
-    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
-    onCancel?: ((...args: any[]) => any) | undefined;
-    onConfirm?: ((...args: any[]) => any) | undefined;
-}, {
-    formatter: (type: string, value: string) => string;
-    readonly: boolean;
+    modelValue?: string | undefined;
+    columnsOrder?: import("./utils").ColumnType[] | undefined;
+}>, {
     loading: boolean;
+    readonly: boolean;
     allowHtml: boolean;
     itemHeight: string | number;
-    showToolbar: boolean;
     swipeDuration: string | number;
     visibleItemCount: string | number;
+    showToolbar: boolean;
+    formatter: (type: string, value: string) => string;
     minHour: string | number;
     maxHour: string | number;
     minMinute: string | number;

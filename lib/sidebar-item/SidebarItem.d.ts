@@ -1,15 +1,3 @@
-import { ExtractPropTypes } from 'vue';
-declare const sidebarItemProps: {
-    to: import("vue").PropType<import("vue-router").RouteLocationRaw>;
-    url: StringConstructor;
-    replace: BooleanConstructor;
-} & {
-    dot: BooleanConstructor;
-    title: StringConstructor;
-    badge: (NumberConstructor | StringConstructor)[];
-    disabled: BooleanConstructor;
-};
-export declare type SidebarItemProps = ExtractPropTypes<typeof sidebarItemProps>;
 declare const _default: import("vue").DefineComponent<{
     to: import("vue").PropType<import("vue-router").RouteLocationRaw>;
     url: StringConstructor;
@@ -32,13 +20,11 @@ declare const _default: import("vue").DefineComponent<{
     dot: boolean;
     disabled: boolean;
 } & {
-    url?: string | undefined;
-    to?: import("vue-router").RouteLocationRaw | undefined;
-    badge?: string | number | undefined;
     title?: string | undefined;
-}> & {
-    onClick?: ((...args: any[]) => any) | undefined;
-}, {
+    to?: import("vue-router").RouteLocationRaw | undefined;
+    url?: string | undefined;
+    badge?: string | number | undefined;
+}>, {
     replace: boolean;
     dot: boolean;
     disabled: boolean;

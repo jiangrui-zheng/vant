@@ -1,12 +1,12 @@
 import { mergeProps as _mergeProps, createVNode as _createVNode } from "vue";
 import { defineComponent } from 'vue'; // Utils
 
-import { pick, extend, truthProp, makeArrayProp, createNamespace, HAPTICS_FEEDBACK } from '../utils';
+import { truthProp, createNamespace, extend, pick } from '../utils';
 import { popupSharedProps, popupSharedPropKeys } from '../popup/shared'; // Components
 
 import { Popup } from '../popup';
 var PRESET_ICONS = ['qq', 'link', 'weibo', 'wechat', 'poster', 'qrcode', 'weapp-qrcode', 'wechat-moments'];
-var popupInheritKeys = [...popupSharedPropKeys, 'round', 'closeOnPopstate', 'safeAreaInsetBottom'];
+var popupKeys = [...popupSharedPropKeys, 'closeOnPopstate', 'safeAreaInsetBottom'];
 
 function getIconURL(icon) {
   if (PRESET_ICONS.includes(icon)) {
@@ -17,26 +17,25 @@ function getIconURL(icon) {
 }
 
 var [name, bem, t] = createNamespace('share-sheet');
-var shareSheetProps = extend({}, popupSharedProps, {
-  title: String,
-  round: truthProp,
-  options: makeArrayProp(),
-  cancelText: String,
-  description: String,
-  closeOnPopstate: truthProp,
-  safeAreaInsetBottom: truthProp
-});
 export default defineComponent({
   name,
-  props: shareSheetProps,
+  props: extend({}, popupSharedProps, {
+    title: String,
+    cancelText: String,
+    description: String,
+    closeOnPopstate: truthProp,
+    safeAreaInsetBottom: truthProp,
+    options: {
+      type: Array,
+      default: () => []
+    }
+  }),
   emits: ['cancel', 'select', 'update:show'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
-
+  setup(props, {
+    emit,
+    slots
+  }) {
     var updateShow = value => emit('update:show', value);
 
     var onCancel = () => {
@@ -71,7 +70,7 @@ export default defineComponent({
       return _createVNode("div", {
         "role": "button",
         "tabindex": 0,
-        "class": [bem('option'), className, HAPTICS_FEEDBACK],
+        "class": [bem('option'), className],
         "onClick": () => onSelect(option, index)
       }, [_createVNode("img", {
         "src": getIconURL(icon),
@@ -116,10 +115,12 @@ export default defineComponent({
     };
 
     return () => _createVNode(Popup, _mergeProps({
+      "round": true,
       "class": bem(),
-      "position": "bottom",
-      "onUpdate:show": updateShow
-    }, pick(props, popupInheritKeys)), {
+      "position": "bottom"
+    }, pick(props, popupKeys), {
+      'onUpdate:show': updateShow
+    }), {
       default: () => [renderHeader(), renderRows(), renderCancelButton()]
     });
   }

@@ -1,69 +1,10 @@
-import { PropType, ExtractPropTypes } from 'vue';
+import { PropType } from 'vue';
 export declare type NumberKeyboardTheme = 'default' | 'custom';
-declare const numberKeyboardProps: {
-    show: BooleanConstructor;
-    title: StringConstructor;
-    theme: {
-        type: PropType<NumberKeyboardTheme>;
-        default: NumberKeyboardTheme;
-    };
-    zIndex: (NumberConstructor | StringConstructor)[];
-    teleport: PropType<string | import("vue").RendererElement | null | undefined>;
-    maxlength: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
-    };
-    modelValue: {
-        type: PropType<string>;
-        default: string;
-    };
-    transition: {
-        type: BooleanConstructor;
-        default: true;
-    };
-    blurOnClose: {
-        type: BooleanConstructor;
-        default: true;
-    };
-    showDeleteKey: {
-        type: BooleanConstructor;
-        default: true;
-    };
-    randomKeyOrder: BooleanConstructor;
-    closeButtonText: StringConstructor;
-    deleteButtonText: StringConstructor;
-    closeButtonLoading: BooleanConstructor;
-    hideOnClickOutside: {
-        type: BooleanConstructor;
-        default: true;
-    };
-    safeAreaInsetBottom: {
-        type: BooleanConstructor;
-        default: true;
-    };
-    extraKey: {
-        type: PropType<string | string[]>;
-        default: string;
-    };
-};
-export declare type NumberKeyboardProps = ExtractPropTypes<typeof numberKeyboardProps>;
 declare const _default: import("vue").DefineComponent<{
     show: BooleanConstructor;
     title: StringConstructor;
-    theme: {
-        type: PropType<NumberKeyboardTheme>;
-        default: NumberKeyboardTheme;
-    };
     zIndex: (NumberConstructor | StringConstructor)[];
     teleport: PropType<string | import("vue").RendererElement | null | undefined>;
-    maxlength: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
-    };
-    modelValue: {
-        type: PropType<string>;
-        default: string;
-    };
     transition: {
         type: BooleanConstructor;
         default: true;
@@ -88,18 +29,27 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: true;
     };
+    theme: {
+        type: PropType<NumberKeyboardTheme>;
+        default: string;
+    };
+    modelValue: {
+        type: StringConstructor;
+        default: string;
+    };
     extraKey: {
         type: PropType<string | string[]>;
         default: string;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("input" | "blur" | "update:modelValue" | "hide" | "show" | "close" | "delete")[], "input" | "blur" | "update:modelValue" | "hide" | "show" | "close" | "delete", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    maxlength: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("input" | "hide" | "show" | "blur" | "close" | "update:modelValue" | "delete")[], "input" | "hide" | "show" | "blur" | "close" | "update:modelValue" | "delete", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
     show?: unknown;
     title?: unknown;
-    theme?: unknown;
     zIndex?: unknown;
     teleport?: unknown;
-    maxlength?: unknown;
-    modelValue?: unknown;
     transition?: unknown;
     blurOnClose?: unknown;
     showDeleteKey?: unknown;
@@ -109,13 +59,16 @@ declare const _default: import("vue").DefineComponent<{
     closeButtonLoading?: unknown;
     hideOnClickOutside?: unknown;
     safeAreaInsetBottom?: unknown;
+    theme?: unknown;
+    modelValue?: unknown;
     extraKey?: unknown;
+    maxlength?: unknown;
 } & {
-    maxlength: string | number;
-    modelValue: string;
     safeAreaInsetBottom: boolean;
     show: boolean;
     transition: boolean;
+    maxlength: string | number;
+    modelValue: string;
     theme: NumberKeyboardTheme;
     blurOnClose: boolean;
     showDeleteKey: boolean;
@@ -129,20 +82,12 @@ declare const _default: import("vue").DefineComponent<{
     teleport?: string | import("vue").RendererElement | null | undefined;
     deleteButtonText?: string | undefined;
     closeButtonText?: string | undefined;
-}> & {
-    onBlur?: ((...args: any[]) => any) | undefined;
-    onInput?: ((...args: any[]) => any) | undefined;
-    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
-    onClose?: ((...args: any[]) => any) | undefined;
-    onDelete?: ((...args: any[]) => any) | undefined;
-    onHide?: ((...args: any[]) => any) | undefined;
-    onShow?: ((...args: any[]) => any) | undefined;
-}, {
-    maxlength: string | number;
-    modelValue: string;
+}>, {
     safeAreaInsetBottom: boolean;
     show: boolean;
     transition: boolean;
+    maxlength: string | number;
+    modelValue: string;
     theme: NumberKeyboardTheme;
     blurOnClose: boolean;
     showDeleteKey: boolean;

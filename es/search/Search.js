@@ -1,34 +1,37 @@
 import { mergeProps as _mergeProps, resolveDirective as _resolveDirective, createVNode as _createVNode } from "vue";
 import { ref, defineComponent } from 'vue'; // Utils
 
-import { pick, extend, truthProp, preventDefault, makeStringProp, createNamespace } from '../utils';
-import { fieldSharedProps } from '../field/Field'; // Composables
+import { pick, extend, truthProp, createNamespace, preventDefault } from '../utils';
+import { fieldProps } from '../field/Field'; // Composables
 
 import { useExpose } from '../composables/use-expose'; // Components
 
-import { Field } from '../field'; // Types
-
+import { Field } from '../field';
 var [name, bem, t] = createNamespace('search');
-var searchProps = extend({}, fieldSharedProps, {
-  label: String,
-  shape: makeStringProp('square'),
-  leftIcon: makeStringProp('search'),
-  clearable: truthProp,
-  actionText: String,
-  background: String,
-  showAction: Boolean
-});
 export default defineComponent({
   name,
-  props: searchProps,
+  props: extend({}, fieldProps, {
+    label: String,
+    clearable: truthProp,
+    actionText: String,
+    background: String,
+    showAction: Boolean,
+    shape: {
+      type: String,
+      default: 'square'
+    },
+    leftIcon: {
+      type: String,
+      default: 'search'
+    }
+  }),
   emits: ['search', 'cancel', 'update:modelValue'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots,
-      attrs
-    } = _ref;
+  setup(props, {
+    emit,
+    slots,
+    attrs
+  }) {
     var filedRef = ref();
 
     var onCancel = () => {
@@ -49,9 +52,8 @@ export default defineComponent({
 
     var renderLabel = () => {
       if (slots.label || props.label) {
-        return _createVNode("label", {
-          "class": bem('label'),
-          "for": props.id
+        return _createVNode("div", {
+          "class": bem('label')
         }, [slots.label ? slots.label() : props.label]);
       }
     };
@@ -80,7 +82,7 @@ export default defineComponent({
       return (_filedRef$value2 = filedRef.value) == null ? void 0 : _filedRef$value2.focus();
     };
 
-    var fieldPropNames = Object.keys(fieldSharedProps);
+    var fieldPropNames = Object.keys(fieldProps);
 
     var renderField = () => {
       var fieldAttrs = extend({}, attrs, pick(props, fieldPropNames));
@@ -90,11 +92,11 @@ export default defineComponent({
       return _createVNode(Field, _mergeProps({
         "ref": filedRef,
         "type": "search",
-        "class": bem('field'),
         "border": false,
-        "onKeypress": onKeypress,
-        "onUpdate:modelValue": onInput
-      }, fieldAttrs), pick(slots, ['left-icon', 'right-icon']));
+        "onKeypress": onKeypress
+      }, fieldAttrs, {
+        'onUpdate:modelValue': onInput
+      }), pick(slots, ['left-icon', 'right-icon']));
     };
 
     useExpose({

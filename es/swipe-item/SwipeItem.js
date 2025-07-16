@@ -10,10 +10,9 @@ var [name, bem] = createNamespace('swipe-item');
 export default defineComponent({
   name,
 
-  setup(props, _ref) {
-    var {
-      slots
-    } = _ref;
+  setup(props, {
+    slots
+  }) {
     var rendered;
     var state = reactive({
       offset: 0,

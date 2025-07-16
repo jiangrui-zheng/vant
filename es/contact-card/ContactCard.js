@@ -1,25 +1,25 @@
 import { resolveDirective as _resolveDirective, createVNode as _createVNode } from "vue";
 import { defineComponent } from 'vue';
-import { truthProp, makeStringProp, createNamespace } from '../utils';
+import { truthProp, createNamespace } from '../utils';
 import { Cell } from '../cell';
 var [name, bem, t] = createNamespace('contact-card');
-var contactCardProps = {
-  tel: String,
-  name: String,
-  type: makeStringProp('add'),
-  addText: String,
-  editable: truthProp
-};
 export default defineComponent({
   name,
-  props: contactCardProps,
+  props: {
+    tel: String,
+    name: String,
+    addText: String,
+    editable: truthProp,
+    type: {
+      type: String,
+      default: 'add'
+    }
+  },
   emits: ['click'],
 
-  setup(props, _ref) {
-    var {
-      emit
-    } = _ref;
-
+  setup(props, {
+    emit
+  }) {
     var onClick = event => {
       if (props.editable) {
         emit('click', event);

@@ -1,6 +1,6 @@
-export declare const CollapseItem: import("../utils").WithInstall<import("vue").DefineComponent<{
+declare const CollapseItem: import("../utils").WithInstall<import("vue").DefineComponent<{
     icon: StringConstructor;
-    size: import("vue").PropType<import("..").CellSize>;
+    size: import("vue").PropType<"large">;
     title: (NumberConstructor | StringConstructor)[];
     value: (NumberConstructor | StringConstructor)[];
     label: (NumberConstructor | StringConstructor)[];
@@ -51,20 +51,20 @@ export declare const CollapseItem: import("../utils").WithInstall<import("vue").
     readonly?: unknown;
 } & {
     center: boolean;
-    disabled: boolean;
-    isLink: boolean;
     border: boolean;
+    disabled: boolean;
+    readonly: boolean;
+    isLink: boolean;
     required: boolean;
     clickable: boolean | null;
-    readonly: boolean;
 } & {
     name?: string | number | undefined;
     label?: string | number | undefined;
     title?: string | number | undefined;
+    icon?: string | undefined;
+    size?: "large" | undefined;
     iconPrefix?: string | undefined;
     value?: string | number | undefined;
-    icon?: string | undefined;
-    size?: import("..").CellSize | undefined;
     valueClass?: unknown;
     labelClass?: unknown;
     titleClass?: unknown;
@@ -72,13 +72,12 @@ export declare const CollapseItem: import("../utils").WithInstall<import("vue").
     arrowDirection?: import("..").CellArrowDirection | undefined;
 }>, {
     center: boolean;
-    disabled: boolean;
-    isLink: boolean;
     border: boolean;
+    disabled: boolean;
+    readonly: boolean;
+    isLink: boolean;
     required: boolean;
     clickable: boolean | null;
-    readonly: boolean;
 }>>;
 export default CollapseItem;
-export type { CollapseItemProps } from './CollapseItem';
-export type { CollapseItemInstance } from './types';
+export { CollapseItem };

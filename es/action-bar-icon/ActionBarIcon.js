@@ -1,6 +1,6 @@
-import { createVNode as _createVNode, resolveDirective as _resolveDirective } from "vue";
+import { createVNode as _createVNode } from "vue";
 import { defineComponent } from 'vue';
-import { extend, createNamespace, unknownProp, numericProp } from '../utils';
+import { extend, createNamespace, unknownProp } from '../utils';
 import { ACTION_BAR_KEY } from '../action-bar/ActionBar'; // Composables
 
 import { useParent } from '@vant/use';
@@ -9,23 +9,21 @@ import { useRoute, routeProps } from '../composables/use-route'; // Components
 import { Icon } from '../icon';
 import { Badge } from '../badge';
 var [name, bem] = createNamespace('action-bar-icon');
-var actionBarIconProps = extend({}, routeProps, {
-  dot: Boolean,
-  text: String,
-  icon: String,
-  color: String,
-  badge: numericProp,
-  iconClass: unknownProp,
-  iconPrefix: String
-});
 export default defineComponent({
   name,
-  props: actionBarIconProps,
+  props: extend({}, routeProps, {
+    dot: Boolean,
+    text: String,
+    icon: String,
+    color: String,
+    badge: [Number, String],
+    iconClass: unknownProp,
+    iconPrefix: String
+  }),
 
-  setup(props, _ref) {
-    var {
-      slots
-    } = _ref;
+  setup(props, {
+    slots
+  }) {
     var route = useRoute();
     useParent(ACTION_BAR_KEY);
 
@@ -45,7 +43,7 @@ export default defineComponent({
           "content": badge,
           "class": bem('icon')
         }, {
-          default: slots.icon
+          default: () => [slots.icon()]
         });
       }
 

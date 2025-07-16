@@ -5,10 +5,13 @@ export default {
   confirm: '确认',
   cancel: '取消',
   delete: '删除',
+  complete: '完成',
   loading: '加载中...',
-  noCoupon: '暂无优惠券',
+  telEmpty: '请填写电话',
   nameEmpty: '请填写姓名',
-  telInvalid: '请填写正确的电话',
+  nameInvalid: '请输入正确的姓名',
+  confirmDelete: '确定要删除吗',
+  telInvalid: '请输入正确的手机号',
   vanCalendar: {
     end: '结束',
     start: '开始',
@@ -17,7 +20,7 @@ export default {
     startEnd: '开始/结束',
     weekdays: ['日', '一', '二', '三', '四', '五', '六'],
     monthTitle: (year, month) => year + "\u5E74" + month + "\u6708",
-    rangePrompt: maxRange => "\u6700\u591A\u9009\u62E9 " + maxRange + " \u5929"
+    rangePrompt: maxRange => "\u9009\u62E9\u5929\u6570\u4E0D\u80FD\u8D85\u8FC7 " + maxRange + " \u5929"
   },
   vanCascader: {
     select: '请选择'
@@ -46,9 +49,11 @@ export default {
   },
   vanCouponCell: {
     title: '优惠券',
+    tips: '暂无可用',
     count: count => count + "\u5F20\u53EF\u7528"
   },
   vanCouponList: {
+    empty: '暂无优惠券',
     exchange: '兑换',
     close: '不使用优惠券',
     enable: '可用',
@@ -60,12 +65,15 @@ export default {
     postal: '邮政编码',
     areaEmpty: '请选择地区',
     addressEmpty: '请填写详细地址',
-    postalEmpty: '邮政编码不正确',
-    defaultAddress: '设为默认收货地址'
+    postalEmpty: '邮政编码格式不正确',
+    defaultAddress: '设为默认收货地址',
+    telPlaceholder: '收货人手机号',
+    namePlaceholder: '收货人姓名',
+    areaPlaceholder: '选择省 / 市 / 区'
   },
   vanAddressEditDetail: {
     label: '详细地址',
-    placeholder: '街道门牌信息'
+    placeholder: '街道门牌、楼层房间号等信息'
   },
   vanAddressList: {
     add: '新增地址'

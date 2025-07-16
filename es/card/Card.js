@@ -1,35 +1,35 @@
 import { createTextVNode as _createTextVNode, createVNode as _createVNode } from "vue";
 import { defineComponent } from 'vue'; // Utils
 
-import { isDef, numericProp, makeStringProp, createNamespace } from '../utils'; // Components
+import { createNamespace, isDef } from '../utils'; // Components
 
 import { Tag } from '../tag';
 import { Image } from '../image';
 var [name, bem] = createNamespace('card');
-var cardProps = {
-  tag: String,
-  num: numericProp,
-  desc: String,
-  thumb: String,
-  title: String,
-  price: numericProp,
-  centered: Boolean,
-  lazyLoad: Boolean,
-  currency: makeStringProp('¥'),
-  thumbLink: String,
-  originPrice: numericProp
-};
 export default defineComponent({
   name,
-  props: cardProps,
+  props: {
+    tag: String,
+    num: [Number, String],
+    desc: String,
+    thumb: String,
+    title: String,
+    price: [Number, String],
+    centered: Boolean,
+    lazyLoad: Boolean,
+    thumbLink: String,
+    originPrice: [Number, String],
+    currency: {
+      type: String,
+      default: '¥'
+    }
+  },
   emits: ['click-thumb'],
 
-  setup(props, _ref) {
-    var {
-      slots,
-      emit
-    } = _ref;
-
+  setup(props, {
+    slots,
+    emit
+  }) {
     var renderTitle = () => {
       if (slots.title) {
         return slots.title();

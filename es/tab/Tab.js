@@ -1,7 +1,7 @@
 import { withDirectives as _withDirectives, vShow as _vShow, createVNode as _createVNode } from "vue";
 import { ref, watch, provide, computed, nextTick, defineComponent } from 'vue'; // Utils
 
-import { extend, truthProp, unknownProp, numericProp, createNamespace } from '../utils';
+import { createNamespace, extend, unknownProp } from '../utils';
 import { TABS_KEY } from '../tabs/Tabs'; // Composables
 
 import { useParent } from '@vant/use';
@@ -10,24 +10,21 @@ import { TAB_STATUS_KEY } from '../composables/use-tab-status'; // Components
 
 import { SwipeItem } from '../swipe-item';
 var [name, bem] = createNamespace('tab');
-var tabProps = extend({}, routeProps, {
-  dot: Boolean,
-  name: numericProp,
-  badge: numericProp,
-  title: String,
-  disabled: Boolean,
-  titleClass: unknownProp,
-  titleStyle: [String, Object],
-  showZeroBadge: truthProp
-});
 export default defineComponent({
   name,
-  props: tabProps,
+  props: extend({}, routeProps, {
+    dot: Boolean,
+    name: [Number, String],
+    badge: [Number, String],
+    title: String,
+    disabled: Boolean,
+    titleClass: unknownProp,
+    titleStyle: [String, Object]
+  }),
 
-  setup(props, _ref) {
-    var {
-      slots
-    } = _ref;
+  setup(props, {
+    slots
+  }) {
     var inited = ref(false);
     var {
       parent,

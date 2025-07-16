@@ -1,39 +1,42 @@
 import { withDirectives as _withDirectives, vShow as _vShow, createVNode as _createVNode } from "vue";
 import { ref, watch, reactive, defineComponent } from 'vue'; // Utils
 
-import { isDef, createNamespace, makeNumericProp } from '../utils'; // Composables
+import { isDef, createNamespace } from '../utils'; // Composables
 
 import { raf, useRect, doubleRaf, useEventListener, onMountedOrActivated } from '@vant/use';
 import { useExpose } from '../composables/use-expose';
 import { onPopupReopen } from '../composables/on-popup-reopen'; // Components
 
-import { Icon } from '../icon'; // Types
-
+import { Icon } from '../icon';
 var [name, bem] = createNamespace('notice-bar');
-var noticeBarProps = {
-  text: String,
-  mode: String,
-  color: String,
-  delay: makeNumericProp(1),
-  speed: makeNumericProp(60),
-  leftIcon: String,
-  wrapable: Boolean,
-  background: String,
-  scrollable: {
-    type: Boolean,
-    default: null
-  }
-};
 export default defineComponent({
   name,
-  props: noticeBarProps,
+  props: {
+    text: String,
+    mode: String,
+    color: String,
+    leftIcon: String,
+    wrapable: Boolean,
+    background: String,
+    scrollable: {
+      type: Boolean,
+      default: null
+    },
+    delay: {
+      type: [Number, String],
+      default: 1
+    },
+    speed: {
+      type: [Number, String],
+      default: 60
+    }
+  },
   emits: ['close', 'replay'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var wrapWidth = 0;
     var contentWidth = 0;
     var startTimer;

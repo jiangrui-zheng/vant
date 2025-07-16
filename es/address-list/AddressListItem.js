@@ -1,7 +1,7 @@
 import { resolveDirective as _resolveDirective, createVNode as _createVNode } from "vue";
 import { defineComponent } from 'vue'; // Utils
 
-import { createNamespace, extend, makeRequiredProp } from '../utils'; // Components
+import { createNamespace, extend } from '../utils'; // Components
 
 import { Tag } from '../tag';
 import { Icon } from '../icon';
@@ -11,19 +11,20 @@ var [name, bem] = createNamespace('address-item');
 export default defineComponent({
   name,
   props: {
-    address: makeRequiredProp(Object),
     disabled: Boolean,
     switchable: Boolean,
-    defaultTagText: String
+    defaultTagText: String,
+    address: {
+      type: Object,
+      required: true
+    }
   },
   emits: ['edit', 'click', 'select'],
 
-  setup(props, _ref) {
-    var {
-      slots,
-      emit
-    } = _ref;
-
+  setup(props, {
+    slots,
+    emit
+  }) {
     var onClick = () => {
       if (props.switchable) {
         emit('select');

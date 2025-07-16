@@ -1,8 +1,8 @@
 import { createVNode as _createVNode, mergeProps as _mergeProps, resolveDirective as _resolveDirective } from "vue";
 import { ref, watch, computed, nextTick, onMounted, defineComponent } from 'vue'; // Utils
 
-import { pick, clamp, extend, padZero, createNamespace, makeNumericProp } from '../utils';
-import { times, sharedProps, pickerInheritKeys } from './utils'; // Composables
+import { pick, clamp, extend, padZero, createNamespace } from '../utils';
+import { times, sharedProps, pickerKeys } from './utils'; // Composables
 
 import { useExpose } from '../composables/use-expose'; // Components
 
@@ -11,20 +11,30 @@ var [name] = createNamespace('time-picker');
 export default defineComponent({
   name,
   props: extend({}, sharedProps, {
-    minHour: makeNumericProp(0),
-    maxHour: makeNumericProp(23),
-    minMinute: makeNumericProp(0),
-    maxMinute: makeNumericProp(59),
-    modelValue: String
+    modelValue: String,
+    minHour: {
+      type: [Number, String],
+      default: 0
+    },
+    maxHour: {
+      type: [Number, String],
+      default: 23
+    },
+    minMinute: {
+      type: [Number, String],
+      default: 0
+    },
+    maxMinute: {
+      type: [Number, String],
+      default: 59
+    }
   }),
   emits: ['confirm', 'cancel', 'change', 'update:modelValue'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
-
+  setup(props, {
+    emit,
+    slots
+  }) {
     var formatValue = value => {
       var {
         minHour,
@@ -52,11 +62,10 @@ export default defineComponent({
       type: 'minute',
       range: [+props.minMinute, +props.maxMinute]
     }]);
-    var originColumns = computed(() => ranges.value.map(_ref2 => {
-      var {
-        type,
-        range: rangeArr
-      } = _ref2;
+    var originColumns = computed(() => ranges.value.map(({
+      type,
+      range: rangeArr
+    }) => {
       var values = times(rangeArr[1] - rangeArr[0] + 1, index => padZero(rangeArr[0] + index));
 
       if (props.filter) {
@@ -76,9 +85,7 @@ export default defineComponent({
       var pair = currentDate.value.split(':');
       var values = [props.formatter('hour', pair[0]), props.formatter('minute', pair[1])];
       nextTick(() => {
-        var _picker$value;
-
-        (_picker$value = picker.value) == null ? void 0 : _picker$value.setValues(values);
+        picker.value.setValues(values);
       });
     };
 
@@ -129,7 +136,7 @@ export default defineComponent({
       "onChange": onChange,
       "onCancel": onCancel,
       "onConfirm": onConfirm
-    }, pick(props, pickerInheritKeys)), slots);
+    }, pick(props, pickerKeys)), slots);
   }
 
 });

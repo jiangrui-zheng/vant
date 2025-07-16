@@ -1,7 +1,7 @@
 import { withDirectives as _withDirectives, vShow as _vShow, resolveDirective as _resolveDirective, createVNode as _createVNode } from "vue";
 import { reactive, Teleport, defineComponent } from 'vue'; // Utils
 
-import { truthProp, unknownProp, getZIndexStyle, createNamespace, makeArrayProp } from '../utils';
+import { truthProp, unknownProp, getZIndexStyle, createNamespace } from '../utils';
 import { DROPDOWN_KEY } from '../dropdown-menu/DropdownMenu'; // Composables
 
 import { useParent } from '@vant/use';
@@ -9,28 +9,28 @@ import { useExpose } from '../composables/use-expose'; // Components
 
 import { Cell } from '../cell';
 import { Icon } from '../icon';
-import { Popup } from '../popup'; // Types
-
+import { Popup } from '../popup';
 var [name, bem] = createNamespace('dropdown-item');
-var dropdownItemProps = {
-  title: String,
-  options: makeArrayProp(),
-  disabled: Boolean,
-  teleport: [String, Object],
-  lazyRender: truthProp,
-  modelValue: unknownProp,
-  titleClass: unknownProp
-};
 export default defineComponent({
   name,
-  props: dropdownItemProps,
+  props: {
+    title: String,
+    disabled: Boolean,
+    teleport: [String, Object],
+    lazyRender: truthProp,
+    modelValue: unknownProp,
+    titleClass: unknownProp,
+    options: {
+      type: Array,
+      default: () => []
+    }
+  },
   emits: ['open', 'opened', 'close', 'closed', 'change', 'update:modelValue'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var state = reactive({
       showPopup: false,
       transition: true,
@@ -66,15 +66,7 @@ export default defineComponent({
       }
     };
 
-    var toggle = function (show, options) {
-      if (show === void 0) {
-        show = !state.showPopup;
-      }
-
-      if (options === void 0) {
-        options = {};
-      }
-
+    var toggle = (show = !state.showPopup, options = {}) => {
       if (show === state.showPopup) {
         return;
       }
@@ -166,7 +158,7 @@ export default defineComponent({
         "class": bem([direction]),
         "onClick": onClickWrapper
       }, [_createVNode(Popup, {
-        "show": state.showPopup,
+        'show': state.showPopup,
         "onUpdate:show": $event => state.showPopup = $event,
         "class": bem('content'),
         "overlay": overlay,

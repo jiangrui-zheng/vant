@@ -1,10 +1,6 @@
-export declare const Badge: import("../utils").WithInstall<import("vue").DefineComponent<{
+declare const Badge: import("../utils").WithInstall<import("vue").DefineComponent<{
     dot: BooleanConstructor;
     max: (NumberConstructor | StringConstructor)[];
-    tag: {
-        type: import("vue").PropType<keyof HTMLElementTagNameMap>;
-        default: keyof HTMLElementTagNameMap;
-    };
     color: StringConstructor;
     offset: import("vue").PropType<[string | number, string | number]>;
     content: (NumberConstructor | StringConstructor)[];
@@ -12,18 +8,22 @@ export declare const Badge: import("../utils").WithInstall<import("vue").DefineC
         type: BooleanConstructor;
         default: true;
     };
+    tag: {
+        type: import("vue").PropType<keyof HTMLElementTagNameMap>;
+        default: string;
+    };
 }, () => JSX.Element | undefined, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
     dot?: unknown;
     max?: unknown;
-    tag?: unknown;
     color?: unknown;
     offset?: unknown;
     content?: unknown;
     showZero?: unknown;
+    tag?: unknown;
 } & {
     dot: boolean;
-    tag: keyof HTMLElementTagNameMap;
     showZero: boolean;
+    tag: keyof HTMLElementTagNameMap;
 } & {
     max?: string | number | undefined;
     color?: string | undefined;
@@ -31,8 +31,8 @@ export declare const Badge: import("../utils").WithInstall<import("vue").DefineC
     content?: string | number | undefined;
 }>, {
     dot: boolean;
-    tag: keyof HTMLElementTagNameMap;
     showZero: boolean;
+    tag: keyof HTMLElementTagNameMap;
 }>>;
 export default Badge;
-export type { BadgeProps } from './Badge';
+export { Badge };

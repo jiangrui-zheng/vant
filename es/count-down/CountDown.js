@@ -1,28 +1,32 @@
 import { createVNode as _createVNode } from "vue";
 import { watch, computed, defineComponent } from 'vue'; // Utils
 
-import { truthProp, makeStringProp, makeNumericProp, createNamespace } from '../utils';
+import { truthProp, createNamespace } from '../utils';
 import { parseFormat } from './utils'; // Composables
 
 import { useCountDown } from '@vant/use';
 import { useExpose } from '../composables/use-expose';
 var [name, bem] = createNamespace('count-down');
-var countDownProps = {
-  time: makeNumericProp(0),
-  format: makeStringProp('HH:mm:ss'),
-  autoStart: truthProp,
-  millisecond: Boolean
-};
 export default defineComponent({
   name,
-  props: countDownProps,
+  props: {
+    autoStart: truthProp,
+    millisecond: Boolean,
+    time: {
+      type: [Number, String],
+      default: 0
+    },
+    format: {
+      type: String,
+      default: 'HH:mm:ss'
+    }
+  },
   emits: ['change', 'finish'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var {
       start,
       pause,

@@ -1,35 +1,54 @@
 import { createVNode as _createVNode } from "vue";
 import { computed, watch, defineComponent } from 'vue';
-import { BORDER, makeStringProp, makeNumberProp, makeNumericProp, createNamespace } from '../utils';
+import { createNamespace } from '../utils';
+import { BORDER } from '../utils/constant';
 var [name, bem, t] = createNamespace('pagination');
 
-var makePage = (number, text, active) => ({
-  number,
-  text,
-  active
-});
+function makePage(number, text, active) {
+  return {
+    number,
+    text,
+    active
+  };
+}
 
-var paginationProps = {
-  mode: makeStringProp('multi'),
-  prevText: String,
-  nextText: String,
-  pageCount: makeNumericProp(0),
-  modelValue: makeNumberProp(0),
-  totalItems: makeNumericProp(0),
-  showPageSize: makeNumericProp(5),
-  itemsPerPage: makeNumericProp(10),
-  forceEllipses: Boolean
-};
 export default defineComponent({
   name,
-  props: paginationProps,
+  props: {
+    prevText: String,
+    nextText: String,
+    forceEllipses: Boolean,
+    mode: {
+      type: String,
+      default: 'multi'
+    },
+    modelValue: {
+      type: Number,
+      default: 0
+    },
+    pageCount: {
+      type: [Number, String],
+      default: 0
+    },
+    totalItems: {
+      type: [Number, String],
+      default: 0
+    },
+    itemsPerPage: {
+      type: [Number, String],
+      default: 10
+    },
+    showPageSize: {
+      type: [Number, String],
+      default: 5
+    }
+  },
   emits: ['change', 'update:modelValue'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var count = computed(() => {
       var {
         pageCount,

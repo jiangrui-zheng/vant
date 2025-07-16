@@ -31,41 +31,6 @@
       "replace"
     ]
   },
-  "van-action-sheet": {
-    "attributes": [
-      "v-model:show",
-      "actions",
-      "title",
-      "cancel-text",
-      "description",
-      "closeable",
-      "close-icon",
-      "duration",
-      "round",
-      "overlay",
-      "overlay-class",
-      "overlay-style",
-      "lock-scroll",
-      "lazy-render",
-      "close-on-popstate",
-      "close-on-click-action",
-      "close-on-click-overlay",
-      "safe-area-inset-bottom",
-      "teleport",
-      "before-close"
-    ]
-  },
-  "van-address-list": {
-    "attributes": [
-      "v-model",
-      "list",
-      "disabled-list",
-      "disabled-text",
-      "switchable",
-      "add-button-text",
-      "default-tag-text"
-    ]
-  },
   "van-address-edit": {
     "attributes": [
       "area-list",
@@ -90,6 +55,40 @@
       "tel-maxlength",
       "postal-validator",
       "validator"
+    ]
+  },
+  "van-action-sheet": {
+    "attributes": [
+      "v-model:show",
+      "actions",
+      "title",
+      "cancel-text",
+      "description",
+      "closeable",
+      "close-icon",
+      "duration",
+      "round",
+      "overlay",
+      "overlay-class",
+      "overlay-style",
+      "lock-scroll",
+      "lazy-render",
+      "close-on-popstate",
+      "close-on-click-action",
+      "close-on-click-overlay",
+      "safe-area-inset-bottom",
+      "teleport"
+    ]
+  },
+  "van-address-list": {
+    "attributes": [
+      "v-model",
+      "list",
+      "disabled-list",
+      "disabled-text",
+      "switchable",
+      "add-button-text",
+      "default-tag-text"
     ]
   },
   "van-area": {
@@ -273,8 +272,7 @@
       "text",
       "stroke-width",
       "stroke-linecap",
-      "clockwise",
-      "start-position"
+      "clockwise"
     ]
   },
   "van-row": {
@@ -320,8 +318,7 @@
   "van-config-provider": {
     "attributes": [
       "theme-vars",
-      "tag",
-      "icon-prefix"
+      "tag"
     ]
   },
   "van-contact-card": {
@@ -490,7 +487,6 @@
       "v-model",
       "label",
       "name",
-      "id",
       "type",
       "size",
       "maxlength",
@@ -600,7 +596,6 @@
   },
   "van-image-preview": {
     "attributes": [
-      "v-model:show",
       "images",
       "start-position",
       "swipe-duration",
@@ -648,16 +643,6 @@
       "direction"
     ]
   },
-  "van-loading": {
-    "attributes": [
-      "color",
-      "type",
-      "size",
-      "text-size",
-      "text-color",
-      "vertical"
-    ]
-  },
   "van-nav-bar": {
     "attributes": [
       "title",
@@ -682,6 +667,16 @@
       "speed",
       "scrollable",
       "wrapable"
+    ]
+  },
+  "van-loading": {
+    "attributes": [
+      "color",
+      "type",
+      "size",
+      "text-size",
+      "text-color",
+      "vertical"
     ]
   },
   "van-number-keyboard": {
@@ -746,6 +741,7 @@
       "title",
       "confirm-button-text",
       "cancel-button-text",
+      "value-key",
       "toolbar-position",
       "loading",
       "show-toolbar",
@@ -768,7 +764,6 @@
       "overlay",
       "overlay-class",
       "overlay-style",
-      "show-arrow",
       "close-on-click-action",
       "close-on-click-outside",
       "close-on-click-overlay",
@@ -792,7 +787,6 @@
       "closeable",
       "close-icon",
       "close-icon-position",
-      "before-close",
       "icon-prefix",
       "transition",
       "transition-appear",
@@ -867,11 +861,8 @@
   },
   "van-search": {
     "attributes": [
-      "v-model",
       "label",
-      "name",
       "shape",
-      "id",
       "background",
       "maxlength",
       "placeholder",
@@ -889,8 +880,7 @@
       "format-trigger",
       "input-align",
       "left-icon",
-      "right-icon",
-      "autocomplete"
+      "right-icon"
     ]
   },
   "van-share-sheet": {
@@ -901,7 +891,6 @@
       "cancel-text",
       "description",
       "duration",
-      "round",
       "overlay",
       "overlay-class",
       "overlay-style",
@@ -910,8 +899,7 @@
       "close-on-popstate",
       "close-on-click-overlay",
       "safe-area-inset-bottom",
-      "teleport",
-      "before-close"
+      "teleport"
     ]
   },
   "van-sidebar": {
@@ -955,7 +943,6 @@
       "active-color",
       "inactive-color",
       "range",
-      "reverse",
       "disabled",
       "readonly",
       "vertical"
@@ -1104,8 +1091,7 @@
       "to",
       "replace",
       "title-style",
-      "title-class",
-      "show-zero-badge"
+      "title-class"
     ]
   },
   "van-tabbar": {
@@ -1168,7 +1154,6 @@
       "preview-options",
       "multiple",
       "disabled",
-      "readonly",
       "deletable",
       "show-upload",
       "lazy-load",

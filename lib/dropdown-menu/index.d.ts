@@ -1,18 +1,9 @@
-import { DropdownMenuProps } from './DropdownMenu';
-export declare const DropdownMenu: import("../utils").WithInstall<import("vue").DefineComponent<{
+declare const DropdownMenu: import("../utils").WithInstall<import("vue").DefineComponent<{
     overlay: {
         type: BooleanConstructor;
         default: true;
     };
     zIndex: (NumberConstructor | StringConstructor)[];
-    duration: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
-    };
-    direction: {
-        type: import("vue").PropType<import("./types").DropdownMenuDirection>;
-        default: import("./types").DropdownMenuDirection;
-    };
     activeColor: StringConstructor;
     closeOnClickOutside: {
         type: BooleanConstructor;
@@ -22,19 +13,27 @@ export declare const DropdownMenu: import("../utils").WithInstall<import("vue").
         type: BooleanConstructor;
         default: true;
     };
+    duration: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    direction: {
+        type: import("vue").PropType<import("./DropdownMenu").DropdownMenuDirection>;
+        default: string;
+    };
 }, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
     overlay?: unknown;
     zIndex?: unknown;
-    duration?: unknown;
-    direction?: unknown;
     activeColor?: unknown;
     closeOnClickOutside?: unknown;
     closeOnClickOverlay?: unknown;
+    duration?: unknown;
+    direction?: unknown;
 } & {
     overlay: boolean;
     duration: string | number;
     closeOnClickOverlay: boolean;
-    direction: import("./types").DropdownMenuDirection;
+    direction: import("./DropdownMenu").DropdownMenuDirection;
     closeOnClickOutside: boolean;
 } & {
     zIndex?: string | number | undefined;
@@ -43,9 +42,9 @@ export declare const DropdownMenu: import("../utils").WithInstall<import("vue").
     overlay: boolean;
     duration: string | number;
     closeOnClickOverlay: boolean;
-    direction: import("./types").DropdownMenuDirection;
+    direction: import("./DropdownMenu").DropdownMenuDirection;
     closeOnClickOutside: boolean;
 }>>;
 export default DropdownMenu;
-export type { DropdownMenuProps };
-export type { DropdownMenuDirection } from './types';
+export { DropdownMenu };
+export type { DropdownMenuDirection } from './DropdownMenu';

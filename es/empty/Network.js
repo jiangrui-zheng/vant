@@ -13,24 +13,40 @@ export var Network = _createVNode("svg", {
   "id": prefix + "1",
   "x1": "64.022%",
   "y1": "100%",
-  "x2": "64.022%"
+  "x2": "64.022%",
+  "y2": "0%"
 }, [renderStop('#FFF', 0, 0.5), renderStop('#F2F3F5', 100)]), _createVNode("linearGradient", {
   "id": prefix + "2",
   "x1": "50%",
+  "y1": "0%",
   "x2": "50%",
   "y2": "84.459%"
 }, [renderStop('#EBEDF0', 0), renderStop('#DCDEE0', 100, 0)]), _createVNode("linearGradient", {
   "id": prefix + "3",
   "x1": "100%",
+  "y1": "0%",
   "x2": "100%",
   "y2": "100%"
 }, [renderStop('#EAEDF0', 0), renderStop('#DCDEE0', 100)]), _createVNode("linearGradient", {
   "id": prefix + "4",
   "x1": "100%",
   "y1": "100%",
-  "x2": "100%"
-}, [renderStop('#EAEDF0', 0), renderStop('#DCDEE0', 100)]), _createVNode("radialGradient", {
+  "x2": "100%",
+  "y2": "0%"
+}, [renderStop('#EAEDF0', 0), renderStop('#DCDEE0', 100)]), _createVNode("linearGradient", {
   "id": prefix + "5",
+  "x1": "0%",
+  "y1": "43.982%",
+  "x2": "100%",
+  "y2": "54.703%"
+}, [renderStop('#EAEDF0', 0), renderStop('#DCDEE0', 100)]), _createVNode("linearGradient", {
+  "id": prefix + "6",
+  "x1": "94.535%",
+  "y1": "43.837%",
+  "x2": "5.465%",
+  "y2": "54.948%"
+}, [renderStop('#EAEDF0', 0), renderStop('#DCDEE0', 100)]), _createVNode("radialGradient", {
+  "id": prefix + "7",
   "cx": "50%",
   "cy": "0%",
   "fx": "50%",
@@ -38,7 +54,8 @@ export var Network = _createVNode("svg", {
   "r": "100%",
   "gradientTransform": "matrix(0 1 -.54835 0 .5 -.5)"
 }, [renderStop('#EBEDF0', 0), renderStop('#FFF', 100, 0)])]), _createVNode("g", {
-  "fill": "none"
+  "fill": "none",
+  "fill-rule": "evenodd"
 }, [_createVNode("g", {
   "opacity": ".8"
 }, [_createVNode("path", {
@@ -50,11 +67,12 @@ export var Network = _createVNode("svg", {
   "fill": "url(#" + prefix + "1)",
   "transform": "translate(2 7)"
 }, null)]), _createVNode("path", {
-  "fill": "url(#" + prefix + "5)",
+  "fill": "url(#" + prefix + "7)",
   "d": "M0 139h160v21H0z"
 }, null), _createVNode("path", {
   "d": "M37 18a7 7 0 013 13.326v26.742c0 1.23-.997 2.227-2.227 2.227h-1.546A2.227 2.227 0 0134 58.068V31.326A7 7 0 0137 18z",
   "fill": "url(#" + prefix + "2)",
+  "fill-rule": "nonzero",
   "transform": "translate(43 36)"
 }, null), _createVNode("g", {
   "opacity": ".6",
@@ -77,9 +95,10 @@ export var Network = _createVNode("svg", {
   "stroke": "url(#" + prefix + "4)",
   "transform": "rotate(-180 89.791 42.146)"
 }, null)]), _createVNode("g", {
-  "transform": "translate(31 105)"
+  "transform": "translate(31 105)",
+  "fill-rule": "nonzero"
 }, [_createVNode("rect", {
-  "fill": "#EBEDF0",
+  "fill": "url(#" + prefix + "5)",
   "width": "98",
   "height": "34",
   "rx": "2"
@@ -91,7 +110,7 @@ export var Network = _createVNode("svg", {
   "height": "18",
   "rx": "1.114"
 }, null), _createVNode("rect", {
-  "fill": "#EBEDF0",
+  "fill": "url(#" + prefix + "6)",
   "x": "15",
   "y": "12",
   "width": "18",

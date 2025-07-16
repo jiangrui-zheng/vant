@@ -1,24 +1,28 @@
 import { createVNode as _createVNode } from "vue";
 import { computed, defineComponent } from 'vue';
-import { truthProp, makeStringProp, makeNumericProp, createNamespace } from '../utils';
+import { truthProp, createNamespace } from '../utils';
 import { useChildren } from '@vant/use';
 var [name, bem] = createNamespace('row');
 export var ROW_KEY = Symbol(name);
-var rowProps = {
-  tag: makeStringProp('div'),
-  wrap: truthProp,
-  align: String,
-  gutter: makeNumericProp(0),
-  justify: String
-};
 export default defineComponent({
   name,
-  props: rowProps,
+  props: {
+    wrap: truthProp,
+    align: String,
+    justify: String,
+    tag: {
+      type: String,
+      default: 'div'
+    },
+    gutter: {
+      type: [Number, String],
+      default: 0
+    }
+  },
 
-  setup(props, _ref) {
-    var {
-      slots
-    } = _ref;
+  setup(props, {
+    slots
+  }) {
     var {
       children,
       linkChildren

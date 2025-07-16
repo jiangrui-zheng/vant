@@ -1,4 +1,4 @@
-export declare const ActionBar: import("../utils").WithInstall<import("vue").DefineComponent<{
+declare const ActionBar: import("../utils").WithInstall<import("vue").DefineComponent<{
     safeAreaInsetBottom: {
         type: BooleanConstructor;
         default: true;
@@ -11,4 +11,4 @@ export declare const ActionBar: import("../utils").WithInstall<import("vue").Def
     safeAreaInsetBottom: boolean;
 }>>;
 export default ActionBar;
-export type { ActionBarProps } from './ActionBar';
+export { ActionBar };

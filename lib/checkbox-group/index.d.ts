@@ -1,20 +1,20 @@
-export declare const CheckboxGroup: import("../utils").WithInstall<import("vue").DefineComponent<{
+declare const CheckboxGroup: import("../utils").WithInstall<import("vue").DefineComponent<{
     max: (NumberConstructor | StringConstructor)[];
     disabled: BooleanConstructor;
-    iconSize: (NumberConstructor | StringConstructor)[];
     direction: import("vue").PropType<import("../checkbox/Checker").CheckerDirection>;
+    iconSize: (NumberConstructor | StringConstructor)[];
+    checkedColor: StringConstructor;
     modelValue: {
         type: import("vue").PropType<unknown[]>;
         default: () => never[];
     };
-    checkedColor: StringConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("change" | "update:modelValue")[], "change" | "update:modelValue", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
     max?: unknown;
     disabled?: unknown;
-    iconSize?: unknown;
     direction?: unknown;
-    modelValue?: unknown;
+    iconSize?: unknown;
     checkedColor?: unknown;
+    modelValue?: unknown;
 } & {
     disabled: boolean;
     modelValue: unknown[];
@@ -23,13 +23,10 @@ export declare const CheckboxGroup: import("../utils").WithInstall<import("vue")
     iconSize?: string | number | undefined;
     checkedColor?: string | undefined;
     direction?: import("../checkbox/Checker").CheckerDirection | undefined;
-}> & {
-    onChange?: ((...args: any[]) => any) | undefined;
-    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     disabled: boolean;
     modelValue: unknown[];
 }>>;
 export default CheckboxGroup;
-export type { CheckboxGroupProps } from './CheckboxGroup';
-export type { CheckboxGroupInstance, CheckboxGroupDirection, CheckboxGroupToggleAllOptions, } from './types';
+export { CheckboxGroup };
+export type { CheckboxGroupToggleAllOptions } from './CheckboxGroup';

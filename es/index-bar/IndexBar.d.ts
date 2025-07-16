@@ -1,7 +1,7 @@
-import { PropType, InjectionKey, ExtractPropTypes } from 'vue';
-import { IndexBarProvide } from './types';
+import { PropType, ExtractPropTypes } from 'vue';
 declare function genAlphabet(): string[];
-declare const indexBarProps: {
+export declare const INDEX_BAR_KEY: unique symbol;
+declare const props: {
     sticky: {
         type: BooleanConstructor;
         default: true;
@@ -18,8 +18,9 @@ declare const indexBarProps: {
         default: typeof genAlphabet;
     };
 };
-export declare type IndexBarProps = ExtractPropTypes<typeof indexBarProps>;
-export declare const INDEX_BAR_KEY: InjectionKey<IndexBarProvide>;
+export declare type IndexBarProvide = {
+    props: ExtractPropTypes<typeof props>;
+};
 declare const _default: import("vue").DefineComponent<{
     sticky: {
         type: BooleanConstructor;
@@ -51,10 +52,7 @@ declare const _default: import("vue").DefineComponent<{
     zIndex?: string | number | undefined;
     teleport?: string | import("vue").RendererElement | null | undefined;
     highlightColor?: string | undefined;
-}> & {
-    onChange?: ((...args: any[]) => any) | undefined;
-    onSelect?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     sticky: boolean;
     stickyOffsetTop: number;
     indexList: string[];

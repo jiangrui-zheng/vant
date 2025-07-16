@@ -1,59 +1,58 @@
 import { createVNode as _createVNode } from "vue";
 import { watch, computed, defineComponent } from 'vue';
 import { raf, cancelRaf } from '@vant/use';
-import { isObject, truthProp, numericProp, getSizeStyle, makeStringProp, makeNumberProp, makeNumericProp, createNamespace } from '../utils';
+import { isObject, getSizeStyle, truthProp, createNamespace } from '../utils';
 var [name, bem] = createNamespace('circle');
 var uid = 0;
 
-var format = rate => Math.min(Math.max(+rate, 0), 100);
+function format(rate) {
+  return Math.min(Math.max(+rate, 0), 100);
+}
 
 function getPath(clockwise, viewBoxSize) {
   var sweepFlag = clockwise ? 1 : 0;
   return "M " + viewBoxSize / 2 + " " + viewBoxSize / 2 + " m 0, -500 a 500, 500 0 1, " + sweepFlag + " 0, 1000 a 500, 500 0 1, " + sweepFlag + " 0, -1000";
 }
 
-var circleProps = {
-  text: String,
-  size: numericProp,
-  fill: makeStringProp('none'),
-  rate: makeNumericProp(100),
-  speed: makeNumericProp(0),
-  color: [String, Object],
-  clockwise: truthProp,
-  layerColor: String,
-  currentRate: makeNumberProp(0),
-  strokeWidth: makeNumericProp(40),
-  strokeLinecap: String,
-  startPosition: makeStringProp('top')
-};
 export default defineComponent({
   name,
-  props: circleProps,
+  props: {
+    text: String,
+    size: [Number, String],
+    color: [String, Object],
+    clockwise: truthProp,
+    layerColor: String,
+    strokeLinecap: String,
+    currentRate: {
+      type: Number,
+      default: 0
+    },
+    speed: {
+      type: [Number, String],
+      default: 0
+    },
+    fill: {
+      type: String,
+      default: 'none'
+    },
+    rate: {
+      type: [Number, String],
+      default: 100
+    },
+    strokeWidth: {
+      type: [Number, String],
+      default: 40
+    }
+  },
   emits: ['update:currentRate'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var id = "van-circle-" + uid++;
     var viewBoxSize = computed(() => +props.strokeWidth + 1000);
     var path = computed(() => getPath(props.clockwise, viewBoxSize.value));
-    var svgStyle = computed(() => {
-      var ROTATE_ANGLE_MAP = {
-        top: 0,
-        right: 90,
-        bottom: 180,
-        left: 270
-      };
-      var angleValue = ROTATE_ANGLE_MAP[props.startPosition];
-
-      if (angleValue) {
-        return {
-          transform: "rotate(" + angleValue + "deg)"
-        };
-      }
-    });
     watch(() => props.rate, rate => {
       var rafId;
       var startTime = Date.now();
@@ -160,8 +159,7 @@ export default defineComponent({
       "class": bem(),
       "style": getSizeStyle(props.size)
     }, [_createVNode("svg", {
-      "viewBox": "0 0 " + viewBoxSize.value + " " + viewBoxSize.value,
-      "style": svgStyle.value
+      "viewBox": "0 0 " + viewBoxSize.value + " " + viewBoxSize.value
     }, [renderGradient(), renderLayer(), renderHover()]), renderText()]);
   }
 

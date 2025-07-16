@@ -1,5 +1,5 @@
-import { Dialog } from './function-call';
+import { Dialog, DialogOptions } from './function-call';
+import type { DialogTheme, DialogMessage, DialogMessageAlign } from './Dialog';
 export default Dialog;
 export { Dialog };
-export type { DialogProps } from './Dialog';
-export type { DialogTheme, DialogMessage, DialogOptions, DialogMessageAlign, } from './types';
+export type { DialogTheme, DialogMessage, DialogOptions, DialogMessageAlign };

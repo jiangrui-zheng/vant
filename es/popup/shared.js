@@ -1,21 +1,19 @@
-import { truthProp, unknownProp, numericProp } from '../utils';
+import { truthProp, unknownProp } from '../utils';
 export var popupSharedProps = {
   // whether to show popup
   show: Boolean,
   // z-index
-  zIndex: numericProp,
+  zIndex: [Number, String],
   // whether to show overlay
   overlay: truthProp,
   // transition duration
-  duration: numericProp,
+  duration: [Number, String],
   // teleport
   teleport: [String, Object],
   // prevent body scroll
   lockScroll: truthProp,
   // whether to lazy render
   lazyRender: truthProp,
-  // callback function before close
-  beforeClose: Function,
   // overlay custom style
   overlayStyle: Object,
   // overlay custom class name

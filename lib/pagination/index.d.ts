@@ -1,23 +1,20 @@
-export declare const Pagination: import("../utils").WithInstall<import("vue").DefineComponent<{
-    mode: {
-        type: import("vue").PropType<import("./Pagination").PaginationMode>;
-        default: import("./Pagination").PaginationMode;
-    };
+declare const Pagination: import("../utils").WithInstall<import("vue").DefineComponent<{
     prevText: StringConstructor;
     nextText: StringConstructor;
-    pageCount: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
+    forceEllipses: BooleanConstructor;
+    mode: {
+        type: import("vue").PropType<import("./Pagination").PaginationMode>;
+        default: string;
     };
     modelValue: {
         type: NumberConstructor;
         default: number;
     };
-    totalItems: {
+    pageCount: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-    showPageSize: {
+    totalItems: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
@@ -25,39 +22,40 @@ export declare const Pagination: import("../utils").WithInstall<import("vue").De
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-    forceEllipses: BooleanConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    mode?: unknown;
+    showPageSize: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("change" | "update:modelValue")[], "change" | "update:modelValue", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
     prevText?: unknown;
     nextText?: unknown;
-    pageCount?: unknown;
-    modelValue?: unknown;
-    totalItems?: unknown;
-    showPageSize?: unknown;
-    itemsPerPage?: unknown;
     forceEllipses?: unknown;
+    mode?: unknown;
+    modelValue?: unknown;
+    pageCount?: unknown;
+    totalItems?: unknown;
+    itemsPerPage?: unknown;
+    showPageSize?: unknown;
 } & {
     modelValue: number;
     mode: import("./Pagination").PaginationMode;
+    forceEllipses: boolean;
     pageCount: string | number;
     totalItems: string | number;
-    showPageSize: string | number;
     itemsPerPage: string | number;
-    forceEllipses: boolean;
+    showPageSize: string | number;
 } & {
     prevText?: string | undefined;
     nextText?: string | undefined;
-}> & {
-    onChange?: ((...args: any[]) => any) | undefined;
-    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     modelValue: number;
     mode: import("./Pagination").PaginationMode;
+    forceEllipses: boolean;
     pageCount: string | number;
     totalItems: string | number;
-    showPageSize: string | number;
     itemsPerPage: string | number;
-    forceEllipses: boolean;
+    showPageSize: string | number;
 }>>;
 export default Pagination;
-export type { PaginationMode, PaginationProps } from './Pagination';
+export { Pagination };
+export type { PaginationMode } from './Pagination';

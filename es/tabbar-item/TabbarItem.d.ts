@@ -1,16 +1,3 @@
-import { ExtractPropTypes } from 'vue';
-declare const tabbarItemProps: {
-    to: import("vue").PropType<import("vue-router").RouteLocationRaw>;
-    url: StringConstructor;
-    replace: BooleanConstructor;
-} & {
-    dot: BooleanConstructor;
-    icon: StringConstructor;
-    name: (NumberConstructor | StringConstructor)[];
-    badge: (NumberConstructor | StringConstructor)[];
-    iconPrefix: StringConstructor;
-};
-export declare type TabbarItemProps = ExtractPropTypes<typeof tabbarItemProps>;
 declare const _default: import("vue").DefineComponent<{
     to: import("vue").PropType<import("vue-router").RouteLocationRaw>;
     url: StringConstructor;
@@ -34,15 +21,13 @@ declare const _default: import("vue").DefineComponent<{
     replace: boolean;
     dot: boolean;
 } & {
-    url?: string | undefined;
-    to?: import("vue-router").RouteLocationRaw | undefined;
     name?: string | number | undefined;
+    to?: import("vue-router").RouteLocationRaw | undefined;
+    url?: string | undefined;
     badge?: string | number | undefined;
-    iconPrefix?: string | undefined;
     icon?: string | undefined;
-}> & {
-    onClick?: ((...args: any[]) => any) | undefined;
-}, {
+    iconPrefix?: string | undefined;
+}>, {
     replace: boolean;
     dot: boolean;
 }>;

@@ -1,28 +1,28 @@
 import { PropType } from 'vue';
-import { Interceptor } from '../utils';
+import { UploaderFileListItem } from './utils';
+import { Interceptor } from '../utils/interceptor';
 import { ImageFit } from '../image';
-import type { UploaderFileListItem } from './types';
 declare const _default: import("vue").DefineComponent<{
     name: (NumberConstructor | StringConstructor)[];
-    item: {
-        type: PropType<UploaderFileListItem>;
-        required: true;
-    };
     index: NumberConstructor;
     imageFit: PropType<ImageFit>;
     lazyLoad: BooleanConstructor;
     deletable: BooleanConstructor;
     previewSize: (NumberConstructor | StringConstructor)[];
     beforeDelete: PropType<Interceptor>;
+    item: {
+        type: PropType<UploaderFileListItem>;
+        required: true;
+    };
 }, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("delete" | "preview")[], "delete" | "preview", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
     name?: unknown;
-    item?: unknown;
     index?: unknown;
     imageFit?: unknown;
     lazyLoad?: unknown;
     deletable?: unknown;
     previewSize?: unknown;
     beforeDelete?: unknown;
+    item?: unknown;
 } & {
     item: UploaderFileListItem;
     lazyLoad: boolean;
@@ -31,12 +31,9 @@ declare const _default: import("vue").DefineComponent<{
     name?: string | number | undefined;
     index?: number | undefined;
     imageFit?: ImageFit | undefined;
-    beforeDelete?: Interceptor | undefined;
     previewSize?: string | number | undefined;
-}> & {
-    onDelete?: ((...args: any[]) => any) | undefined;
-    onPreview?: ((...args: any[]) => any) | undefined;
-}, {
+    beforeDelete?: Interceptor | undefined;
+}>, {
     lazyLoad: boolean;
     deletable: boolean;
 }>;

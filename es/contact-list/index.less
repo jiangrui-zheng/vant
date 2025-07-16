@@ -1,4 +1,5 @@
 @import './var.less';
+@import '../style/mixins/safe-area.less';
 
 :root {
   --van-contact-list-edit-icon-size: @contact-list-edit-icon-size;
@@ -55,9 +56,9 @@
     bottom: 0;
     left: 0;
     z-index: var(--van-contact-list-add-button-z-index);
-    padding-left: var(--van-padding-md);
-    padding-right: var(--van-padding-md);
-    background-color: var(--van-background-color-light);
+    padding: 0 var(--van-padding-md);
+    background-color: var(--van-white);
+    .safe-area-inset-bottom();
   }
 
   &__add {

@@ -63,10 +63,10 @@
     .van-step__circle-container {
       position: absolute;
       top: 30px;
-      left: calc(var(--van-padding-xs) * -1);
+      left: -var(--van-padding-xs);
       z-index: 1;
       padding: 0 var(--van-padding-xs);
-      background-color: var(--van-background-color-light);
+      background-color: var(--van-white);
       transform: translateY(-50%);
     }
 
@@ -104,11 +104,24 @@
       border-bottom-width: 1px;
     }
 
+    &:first-child {
+      &::before {
+        position: absolute;
+        top: 0;
+        left: -15px;
+        z-index: 1;
+        width: 1px;
+        height: 20px;
+        background-color: var(--van-white);
+        content: '';
+      }
+    }
+
     .van-step__circle-container {
       position: absolute;
       top: 19px;
       left: -15px;
-      z-index: 1;
+      z-index: 2;
       font-size: var(--van-step-icon-size);
       line-height: 1;
       transform: translate(-50%, -50%);

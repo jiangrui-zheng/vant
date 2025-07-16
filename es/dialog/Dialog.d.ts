@@ -1,59 +1,9 @@
-import { PropType, ExtractPropTypes } from 'vue';
-import type { DialogTheme, DialogAction, DialogMessage, DialogMessageAlign } from './types';
-declare const dialogProps: {
-    show: BooleanConstructor;
-    zIndex: (NumberConstructor | StringConstructor)[];
-    overlay: {
-        type: BooleanConstructor;
-        default: true;
-    };
-    duration: (NumberConstructor | StringConstructor)[];
-    teleport: PropType<string | import("vue").RendererElement | null | undefined>;
-    lockScroll: {
-        type: BooleanConstructor;
-        default: true;
-    };
-    lazyRender: {
-        type: BooleanConstructor;
-        default: true;
-    };
-    beforeClose: PropType<import("../utils").Interceptor>;
-    overlayStyle: PropType<import("vue").CSSProperties>;
-    overlayClass: PropType<unknown>;
-    transitionAppear: BooleanConstructor;
-    closeOnClickOverlay: {
-        type: BooleanConstructor;
-        default: true;
-    };
-} & {
-    title: StringConstructor;
-    theme: PropType<DialogTheme>;
-    width: (NumberConstructor | StringConstructor)[];
-    message: PropType<DialogMessage>;
-    callback: PropType<(action?: DialogAction | undefined) => void>;
-    allowHtml: BooleanConstructor;
-    className: PropType<unknown>;
-    transition: {
-        type: PropType<string>;
-        default: string;
-    };
-    messageAlign: PropType<DialogMessageAlign>;
-    closeOnPopstate: {
-        type: BooleanConstructor;
-        default: true;
-    };
-    showCancelButton: BooleanConstructor;
-    cancelButtonText: StringConstructor;
-    cancelButtonColor: StringConstructor;
-    confirmButtonText: StringConstructor;
-    confirmButtonColor: StringConstructor;
-    showConfirmButton: {
-        type: BooleanConstructor;
-        default: true;
-    };
-    closeOnClickOverlay: BooleanConstructor;
-};
-export declare type DialogProps = ExtractPropTypes<typeof dialogProps>;
+import { PropType } from 'vue';
+import { Interceptor } from '../utils/interceptor';
+export declare type DialogTheme = 'default' | 'round-button';
+export declare type DialogAction = 'confirm' | 'cancel';
+export declare type DialogMessage = string | (() => JSX.Element);
+export declare type DialogMessageAlign = 'left' | 'center' | 'right';
 declare const _default: import("vue").DefineComponent<{
     show: BooleanConstructor;
     zIndex: (NumberConstructor | StringConstructor)[];
@@ -71,7 +21,6 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: true;
     };
-    beforeClose: PropType<import("../utils").Interceptor>;
     overlayStyle: PropType<import("vue").CSSProperties>;
     overlayClass: PropType<unknown>;
     transitionAppear: BooleanConstructor;
@@ -87,10 +36,7 @@ declare const _default: import("vue").DefineComponent<{
     callback: PropType<(action?: DialogAction | undefined) => void>;
     allowHtml: BooleanConstructor;
     className: PropType<unknown>;
-    transition: {
-        type: PropType<string>;
-        default: string;
-    };
+    beforeClose: PropType<Interceptor>;
     messageAlign: PropType<DialogMessageAlign>;
     closeOnPopstate: {
         type: BooleanConstructor;
@@ -106,7 +52,11 @@ declare const _default: import("vue").DefineComponent<{
         default: true;
     };
     closeOnClickOverlay: BooleanConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:show" | "cancel" | "confirm")[], "update:show" | "cancel" | "confirm", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    transition: {
+        type: StringConstructor;
+        default: string;
+    };
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("cancel" | "update:show" | "confirm")[], "cancel" | "update:show" | "confirm", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
     show?: unknown;
     zIndex?: unknown;
     overlay?: unknown;
@@ -114,7 +64,6 @@ declare const _default: import("vue").DefineComponent<{
     teleport?: unknown;
     lockScroll?: unknown;
     lazyRender?: unknown;
-    beforeClose?: unknown;
     overlayStyle?: unknown;
     overlayClass?: unknown;
     transitionAppear?: unknown;
@@ -126,7 +75,7 @@ declare const _default: import("vue").DefineComponent<{
     callback?: unknown;
     allowHtml?: unknown;
     className?: unknown;
-    transition?: unknown;
+    beforeClose?: unknown;
     messageAlign?: unknown;
     closeOnPopstate?: unknown;
     showCancelButton?: unknown;
@@ -135,6 +84,7 @@ declare const _default: import("vue").DefineComponent<{
     confirmButtonText?: unknown;
     confirmButtonColor?: unknown;
     showConfirmButton?: unknown;
+    transition?: unknown;
 } & {
     overlay: boolean;
     show: boolean;
@@ -148,28 +98,24 @@ declare const _default: import("vue").DefineComponent<{
     showCancelButton: boolean;
     showConfirmButton: boolean;
 } & {
-    width?: string | number | undefined;
-    message?: DialogMessage | undefined;
     title?: string | undefined;
     zIndex?: string | number | undefined;
     duration?: string | number | undefined;
     teleport?: string | import("vue").RendererElement | null | undefined;
-    beforeClose?: import("../utils").Interceptor | undefined;
     overlayStyle?: import("vue").CSSProperties | undefined;
     overlayClass?: unknown;
     className?: unknown;
     callback?: ((action?: DialogAction | undefined) => void) | undefined;
     cancelButtonText?: string | undefined;
     confirmButtonText?: string | undefined;
+    message?: DialogMessage | undefined;
     theme?: DialogTheme | undefined;
+    width?: string | number | undefined;
+    beforeClose?: Interceptor | undefined;
     messageAlign?: DialogMessageAlign | undefined;
     cancelButtonColor?: string | undefined;
     confirmButtonColor?: string | undefined;
-}> & {
-    "onUpdate:show"?: ((...args: any[]) => any) | undefined;
-    onCancel?: ((...args: any[]) => any) | undefined;
-    onConfirm?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     overlay: boolean;
     show: boolean;
     lockScroll: boolean;

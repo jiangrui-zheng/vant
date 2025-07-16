@@ -1,7 +1,8 @@
 import { createVNode as _createVNode } from "vue";
 import { computed, defineComponent } from 'vue'; // Utils
 
-import { BORDER, createNamespace } from '../utils';
+import { createNamespace } from '../utils';
+import { BORDER } from '../utils/constant';
 import { STEPS_KEY } from '../steps/Steps'; // Composables
 
 import { useParent } from '@vant/use'; // Components
@@ -11,10 +12,9 @@ var [name, bem] = createNamespace('step');
 export default defineComponent({
   name,
 
-  setup(props, _ref) {
-    var {
-      slots
-    } = _ref;
+  setup(props, {
+    slots
+  }) {
     var {
       parent,
       index

@@ -1,7 +1,7 @@
 import { createVNode as _createVNode } from "vue";
 import { defineComponent } from 'vue'; // Utils
 
-import { extend, numericProp, createNamespace } from '../utils';
+import { createNamespace, extend } from '../utils';
 import { SIDEBAR_KEY } from '../sidebar/Sidebar'; // Composables
 
 import { useParent } from '@vant/use';
@@ -9,22 +9,20 @@ import { useRoute, routeProps } from '../composables/use-route'; // Components
 
 import { Badge } from '../badge';
 var [name, bem] = createNamespace('sidebar-item');
-var sidebarItemProps = extend({}, routeProps, {
-  dot: Boolean,
-  title: String,
-  badge: numericProp,
-  disabled: Boolean
-});
 export default defineComponent({
   name,
-  props: sidebarItemProps,
+  props: extend({}, routeProps, {
+    dot: Boolean,
+    title: String,
+    badge: [Number, String],
+    disabled: Boolean
+  }),
   emits: ['click'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var route = useRoute();
     var {
       parent,

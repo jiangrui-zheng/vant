@@ -5,7 +5,7 @@ var lang = ref('zh-CN');
 var messages = reactive({
   'zh-CN': defaultMessages
 });
-export var Locale = {
+var Locale = {
   messages() {
     return messages[lang.value];
   },
@@ -17,13 +17,10 @@ export var Locale = {
     });
   },
 
-  add(newMessages) {
-    if (newMessages === void 0) {
-      newMessages = {};
-    }
-
+  add(newMessages = {}) {
     deepAssign(messages, newMessages);
   }
 
 };
 export default Locale;
+export { Locale };

@@ -1,9 +1,5 @@
-export declare const Sticky: import("../utils").WithInstall<import("vue").DefineComponent<{
+declare const Sticky: import("../utils").WithInstall<import("vue").DefineComponent<{
     zIndex: (NumberConstructor | StringConstructor)[];
-    position: {
-        type: import("vue").PropType<import("./Sticky").StickyPosition>;
-        default: import("./Sticky").StickyPosition;
-    };
     container: import("vue").PropType<Element>;
     offsetTop: {
         type: (NumberConstructor | StringConstructor)[];
@@ -13,12 +9,16 @@ export declare const Sticky: import("../utils").WithInstall<import("vue").Define
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
+    position: {
+        type: import("vue").PropType<import("./Sticky").StickyPosition>;
+        default: string;
+    };
 }, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("scroll" | "change")[], "scroll" | "change", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
     zIndex?: unknown;
-    position?: unknown;
     container?: unknown;
     offsetTop?: unknown;
     offsetBottom?: unknown;
+    position?: unknown;
 } & {
     position: import("./Sticky").StickyPosition;
     offsetTop: string | number;
@@ -26,13 +26,11 @@ export declare const Sticky: import("../utils").WithInstall<import("vue").Define
 } & {
     zIndex?: string | number | undefined;
     container?: Element | undefined;
-}> & {
-    onChange?: ((...args: any[]) => any) | undefined;
-    onScroll?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     position: import("./Sticky").StickyPosition;
     offsetTop: string | number;
     offsetBottom: string | number;
 }>>;
 export default Sticky;
-export type { StickyProps, StickyPosition } from './Sticky';
+export { Sticky };
+export type { StickyPosition } from './Sticky';

@@ -1,40 +1,6 @@
-import { ExtractPropTypes } from 'vue';
-declare const collapseItemProps: {
-    icon: StringConstructor;
-    size: import("vue").PropType<import("../cell").CellSize>;
-    title: (NumberConstructor | StringConstructor)[];
-    value: (NumberConstructor | StringConstructor)[];
-    label: (NumberConstructor | StringConstructor)[];
-    center: BooleanConstructor;
-    isLink: BooleanConstructor;
-    border: {
-        type: BooleanConstructor;
-        default: true;
-    };
-    required: BooleanConstructor;
-    iconPrefix: StringConstructor;
-    valueClass: import("vue").PropType<unknown>;
-    labelClass: import("vue").PropType<unknown>;
-    titleClass: import("vue").PropType<unknown>;
-    titleStyle: import("vue").PropType<string | import("vue").CSSProperties>;
-    arrowDirection: import("vue").PropType<import("../cell").CellArrowDirection>;
-    clickable: {
-        type: import("vue").PropType<boolean | null>;
-        default: null;
-    };
-} & {
-    name: (NumberConstructor | StringConstructor)[];
-    isLink: {
-        type: BooleanConstructor;
-        default: true;
-    };
-    disabled: BooleanConstructor;
-    readonly: BooleanConstructor;
-};
-export declare type CollapseItemProps = ExtractPropTypes<typeof collapseItemProps>;
 declare const _default: import("vue").DefineComponent<{
     icon: StringConstructor;
-    size: import("vue").PropType<import("../cell").CellSize>;
+    size: import("vue").PropType<"large">;
     title: (NumberConstructor | StringConstructor)[];
     value: (NumberConstructor | StringConstructor)[];
     label: (NumberConstructor | StringConstructor)[];
@@ -85,20 +51,20 @@ declare const _default: import("vue").DefineComponent<{
     readonly?: unknown;
 } & {
     center: boolean;
-    disabled: boolean;
-    isLink: boolean;
     border: boolean;
+    disabled: boolean;
+    readonly: boolean;
+    isLink: boolean;
     required: boolean;
     clickable: boolean | null;
-    readonly: boolean;
 } & {
     name?: string | number | undefined;
     label?: string | number | undefined;
     title?: string | number | undefined;
+    icon?: string | undefined;
+    size?: "large" | undefined;
     iconPrefix?: string | undefined;
     value?: string | number | undefined;
-    icon?: string | undefined;
-    size?: import("../cell").CellSize | undefined;
     valueClass?: unknown;
     labelClass?: unknown;
     titleClass?: unknown;
@@ -106,11 +72,11 @@ declare const _default: import("vue").DefineComponent<{
     arrowDirection?: import("../cell").CellArrowDirection | undefined;
 }>, {
     center: boolean;
-    disabled: boolean;
-    isLink: boolean;
     border: boolean;
+    disabled: boolean;
+    readonly: boolean;
+    isLink: boolean;
     required: boolean;
     clickable: boolean | null;
-    readonly: boolean;
 }>;
 export default _default;

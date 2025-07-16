@@ -1,8 +1,9 @@
-export declare const isDef: <T>(val: T) => val is NonNullable<T>;
-export declare const isFunction: (val: unknown) => val is Function;
-export declare const isObject: (val: unknown) => val is Record<any, any>;
-export declare const isPromise: <T = any>(val: unknown) => val is Promise<T>;
-export declare const isDate: (val: unknown) => val is Date;
+export declare function isDef<T>(val: T): val is NonNullable<T>;
+export declare function isFunction(val: unknown): val is Function;
+export declare function isObject(val: unknown): val is Record<any, any>;
+export declare function isPromise<T = any>(val: unknown): val is Promise<T>;
+export declare function isDate(val: unknown): val is Date;
 export declare function isMobile(value: string): boolean;
-export declare const isNumeric: (val: string | number) => val is string;
-export declare const isIOS: () => boolean;
+export declare function isNumeric(val: string | number): val is string;
+export declare function isAndroid(): boolean;
+export declare function isIOS(): boolean;

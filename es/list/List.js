@@ -1,36 +1,39 @@
 import { createVNode as _createVNode } from "vue";
 import { ref, watch, nextTick, onUpdated, onMounted, defineComponent } from 'vue'; // Utils
 
-import { isHidden, truthProp, makeStringProp, makeNumericProp, createNamespace } from '../utils'; // Composables
+import { isHidden, truthProp, createNamespace } from '../utils'; // Composables
 
 import { useRect, useScrollParent, useEventListener } from '@vant/use';
 import { useExpose } from '../composables/use-expose';
 import { useTabStatus } from '../composables/use-tab-status'; // Components
 
-import { Loading } from '../loading'; // Types
-
+import { Loading } from '../loading';
 var [name, bem, t] = createNamespace('list');
-var listProps = {
-  error: Boolean,
-  offset: makeNumericProp(300),
-  loading: Boolean,
-  finished: Boolean,
-  errorText: String,
-  direction: makeStringProp('down'),
-  loadingText: String,
-  finishedText: String,
-  immediateCheck: truthProp
-};
 export default defineComponent({
   name,
-  props: listProps,
+  props: {
+    error: Boolean,
+    loading: Boolean,
+    finished: Boolean,
+    errorText: String,
+    loadingText: String,
+    finishedText: String,
+    immediateCheck: truthProp,
+    offset: {
+      type: [Number, String],
+      default: 300
+    },
+    direction: {
+      type: String,
+      default: 'down'
+    }
+  },
   emits: ['load', 'update:error', 'update:loading'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     // use sync innerLoading state to avoid repeated loading in some edge cases
     var loading = ref(false);
     var root = ref();
@@ -115,15 +118,6 @@ export default defineComponent({
     };
 
     watch([() => props.loading, () => props.finished, () => props.error], check);
-
-    if (tabStatus) {
-      watch(tabStatus, tabActive => {
-        if (tabActive) {
-          check();
-        }
-      });
-    }
-
     onUpdated(() => {
       loading.value = props.loading;
     });

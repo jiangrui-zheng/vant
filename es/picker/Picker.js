@@ -1,55 +1,67 @@
 import { resolveDirective as _resolveDirective, createVNode as _createVNode } from "vue";
 import { ref, watch, computed, defineComponent } from 'vue'; // Utils
 
-import { extend, unitToPx, truthProp, makeArrayProp, preventDefault, makeStringProp, makeNumericProp, createNamespace, HAPTICS_FEEDBACK, BORDER_UNSET_TOP_BOTTOM } from '../utils'; // Composables
+import { extend, unitToPx, truthProp, preventDefault, createNamespace } from '../utils';
+import { BORDER_UNSET_TOP_BOTTOM } from '../utils/constant'; // Composables
 
 import { useChildren } from '@vant/use';
 import { useExpose } from '../composables/use-expose'; // Components
 
 import { Loading } from '../loading';
-import Column, { PICKER_KEY } from './PickerColumn'; // Types
-
+import Column, { PICKER_KEY } from './PickerColumn';
 var [name, bem, t] = createNamespace('picker');
-export var pickerSharedProps = {
+export var pickerProps = {
   title: String,
   loading: Boolean,
   readonly: Boolean,
   allowHtml: Boolean,
-  itemHeight: makeNumericProp(44),
   showToolbar: truthProp,
-  swipeDuration: makeNumericProp(1000),
-  visibleItemCount: makeNumericProp(6),
   cancelButtonText: String,
-  confirmButtonText: String
+  confirmButtonText: String,
+  itemHeight: {
+    type: [Number, String],
+    default: 44
+  },
+  visibleItemCount: {
+    type: [Number, String],
+    default: 6
+  },
+  swipeDuration: {
+    type: [Number, String],
+    default: 1000
+  }
 };
-var pickerProps = extend({}, pickerSharedProps, {
-  columns: makeArrayProp(),
-  // @deprecated
-  // should be removed in next major version
-  valueKey: String,
-  defaultIndex: makeNumericProp(0),
-  toolbarPosition: makeStringProp('top'),
-  columnsFieldNames: Object
-});
 export default defineComponent({
   name,
-  props: pickerProps,
+  props: extend({}, pickerProps, {
+    columnsFieldNames: Object,
+    columns: {
+      type: Array,
+      default: () => []
+    },
+    defaultIndex: {
+      type: [Number, String],
+      default: 0
+    },
+    toolbarPosition: {
+      type: String,
+      default: 'top'
+    },
+    // @deprecated
+    // should be removed in next major version
+    valueKey: {
+      type: String,
+      default: 'text'
+    }
+  }),
   emits: ['confirm', 'cancel', 'change'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
-
-    if (process.env.NODE_ENV !== 'production') {
-      if (slots.default) {
-        console.warn('[Vant] Picker: "default" slot is deprecated, please use "toolbar" slot instead.');
-      }
-
-      if (props.valueKey) {
-        console.warn('[Vant] Picker: "valueKey" prop is deprecated, please use "columnsFieldNames" prop instead.');
-      }
+  setup(props, {
+    emit,
+    slots
+  }) {
+    if (slots.default) {
+      console.warn('[Vant] Picker: "default" slot is deprecated, please use "toolbar" slot instead.');
     }
 
     var formattedColumns = ref([]);
@@ -59,7 +71,7 @@ export default defineComponent({
       children: childrenKey
     } = extend({
       // compatible with valueKey prop
-      text: props.valueKey || 'text',
+      text: props.valueKey,
       values: 'values',
       children: 'children'
     }, props.columnsFieldNames);
@@ -278,7 +290,7 @@ export default defineComponent({
       var text = props.cancelButtonText || t('cancel');
       return _createVNode("button", {
         "type": "button",
-        "class": [bem('cancel'), HAPTICS_FEEDBACK],
+        "class": bem('cancel'),
         "onClick": cancel
       }, [slots.cancel ? slots.cancel() : text]);
     };
@@ -287,7 +299,7 @@ export default defineComponent({
       var text = props.confirmButtonText || t('confirm');
       return _createVNode("button", {
         "type": "button",
-        "class": [bem('confirm'), HAPTICS_FEEDBACK],
+        "class": bem('confirm'),
         "onClick": confirm
       }, [slots.confirm ? slots.confirm() : text]);
     };

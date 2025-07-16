@@ -1,48 +1,66 @@
 import { mergeProps as _mergeProps, createVNode as _createVNode } from "vue";
 import { ref, watch, nextTick, reactive, onMounted, defineComponent } from 'vue'; // Utils
 
-import { pick, truthProp, unknownProp, makeArrayProp, makeStringProp, makeNumericProp, callInterceptor, createNamespace, HAPTICS_FEEDBACK } from '../utils'; // Composables
+import { pick, truthProp, unknownProp, createNamespace } from '../utils';
+import { callInterceptor } from '../utils/interceptor'; // Composables
 
-import { useRect, useWindowSize } from '@vant/use';
+import { useWindowSize } from '@vant/use';
 import { useExpose } from '../composables/use-expose'; // Components
 
 import { Icon } from '../icon';
 import { Swipe } from '../swipe';
 import { Popup } from '../popup';
-import ImagePreviewItem from './ImagePreviewItem'; // Types
-
+import ImagePreviewItem from './ImagePreviewItem';
 var [name, bem] = createNamespace('image-preview');
-var popupProps = ['show', 'transition', 'overlayStyle', 'closeOnPopstate'];
-var imagePreviewProps = {
-  show: Boolean,
-  loop: truthProp,
-  images: makeArrayProp(),
-  minZoom: makeNumericProp(1 / 3),
-  maxZoom: makeNumericProp(3),
-  overlay: truthProp,
-  closeable: Boolean,
-  showIndex: truthProp,
-  className: unknownProp,
-  closeIcon: makeStringProp('clear'),
-  transition: String,
-  beforeClose: Function,
-  overlayStyle: Object,
-  swipeDuration: makeNumericProp(300),
-  startPosition: makeNumericProp(0),
-  showIndicators: Boolean,
-  closeOnPopstate: truthProp,
-  closeIconPosition: makeStringProp('top-right')
-};
 export default defineComponent({
   name,
-  props: imagePreviewProps,
+  props: {
+    show: Boolean,
+    loop: truthProp,
+    overlay: truthProp,
+    closeable: Boolean,
+    showIndex: truthProp,
+    className: unknownProp,
+    transition: String,
+    beforeClose: Function,
+    overlayStyle: Object,
+    showIndicators: Boolean,
+    closeOnPopstate: truthProp,
+    images: {
+      type: Array,
+      default: () => []
+    },
+    minZoom: {
+      type: [Number, String],
+      default: 1 / 3
+    },
+    maxZoom: {
+      type: [Number, String],
+      default: 3
+    },
+    swipeDuration: {
+      type: [Number, String],
+      default: 300
+    },
+    startPosition: {
+      type: [Number, String],
+      default: 0
+    },
+    closeIcon: {
+      type: String,
+      default: 'clear'
+    },
+    closeIconPosition: {
+      type: String,
+      default: 'top-right'
+    }
+  },
   emits: ['scale', 'close', 'closed', 'change', 'update:show'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var swipeRef = ref();
     var windowSize = useWindowSize();
     var state = reactive({
@@ -53,7 +71,7 @@ export default defineComponent({
 
     var resize = () => {
       if (swipeRef.value) {
-        var rect = useRect(swipeRef.value.$el);
+        var rect = swipeRef.value.$el.getBoundingClientRect();
         state.rootWidth = rect.width;
         state.rootHeight = rect.height;
         swipeRef.value.resize();
@@ -65,7 +83,8 @@ export default defineComponent({
     var updateShow = show => emit('update:show', show);
 
     var emitClose = () => {
-      callInterceptor(props.beforeClose, {
+      callInterceptor({
+        interceptor: props.beforeClose,
         args: [state.active],
         done: () => updateShow(false)
       });
@@ -125,7 +144,7 @@ export default defineComponent({
         return _createVNode(Icon, {
           "role": "button",
           "name": props.closeIcon,
-          "class": [bem('close-icon', props.closeIconPosition), HAPTICS_FEEDBACK],
+          "class": bem('close-icon', props.closeIconPosition),
           "onClick": emitClose
         }, null);
       }
@@ -169,9 +188,10 @@ export default defineComponent({
     return () => _createVNode(Popup, _mergeProps({
       "class": [bem(), props.className],
       "overlayClass": bem('overlay'),
-      "onClosed": onClosed,
-      "onUpdate:show": updateShow
-    }, pick(props, popupProps)), {
+      "onClosed": onClosed
+    }, pick(props, ['show', 'transition', 'overlayStyle', 'closeOnPopstate']), {
+      'onUpdate:show': updateShow
+    }), {
       default: () => [renderClose(), renderImages(), renderIndex(), renderCover()]
     });
   }

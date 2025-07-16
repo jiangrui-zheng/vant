@@ -1,4 +1,4 @@
-export declare const Switch: import("../utils").WithInstall<import("vue").DefineComponent<{
+declare const Switch: import("../utils").WithInstall<import("vue").DefineComponent<{
     size: (NumberConstructor | StringConstructor)[];
     loading: BooleanConstructor;
     disabled: BooleanConstructor;
@@ -13,7 +13,7 @@ export declare const Switch: import("../utils").WithInstall<import("vue").Define
         type: import("vue").PropType<unknown>;
         default: unknown;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("change" | "update:modelValue")[], "change" | "update:modelValue", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
     size?: unknown;
     loading?: unknown;
     disabled?: unknown;
@@ -23,8 +23,8 @@ export declare const Switch: import("../utils").WithInstall<import("vue").Define
     activeValue?: unknown;
     inactiveValue?: unknown;
 } & {
-    disabled: boolean;
     loading: boolean;
+    disabled: boolean;
     activeValue: unknown;
     inactiveValue: unknown;
 } & {
@@ -32,14 +32,11 @@ export declare const Switch: import("../utils").WithInstall<import("vue").Define
     modelValue?: unknown;
     activeColor?: string | undefined;
     inactiveColor?: string | undefined;
-}> & {
-    onChange?: ((...args: any[]) => any) | undefined;
-    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
-}, {
-    disabled: boolean;
+}>, {
     loading: boolean;
+    disabled: boolean;
     activeValue: unknown;
     inactiveValue: unknown;
 }>>;
 export default Switch;
-export type { SwitchProps } from './Switch';
+export { Switch };

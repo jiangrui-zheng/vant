@@ -1,24 +1,22 @@
 import { createVNode as _createVNode, mergeProps as _mergeProps, resolveDirective as _resolveDirective } from "vue";
 import { ref, defineComponent } from 'vue';
-import { pick, extend, createNamespace } from '../utils';
+import { pick, createNamespace, extend } from '../utils';
 import { useExpose } from '../composables/use-expose';
 import TimePicker from './TimePicker';
 import DatePicker from './DatePicker';
 var [name, bem] = createNamespace('datetime-picker');
-var timePickerPropKeys = Object.keys(TimePicker.props);
-var datePickerPropKeys = Object.keys(DatePicker.props);
-var datetimePickerProps = extend({}, TimePicker.props, DatePicker.props, {
-  modelValue: [String, Date]
-});
+var timePickerProps = Object.keys(TimePicker.props);
+var datePickerProps = Object.keys(DatePicker.props);
 export default defineComponent({
   name,
-  props: datetimePickerProps,
+  props: extend({}, TimePicker.props, DatePicker.props, {
+    modelValue: [String, Date]
+  }),
 
-  setup(props, _ref) {
-    var {
-      attrs,
-      slots
-    } = _ref;
+  setup(props, {
+    attrs,
+    slots
+  }) {
     var root = ref();
     useExpose({
       getPicker: () => {
@@ -30,7 +28,7 @@ export default defineComponent({
     return () => {
       var isTimePicker = props.type === 'time';
       var Component = isTimePicker ? TimePicker : DatePicker;
-      var inheritProps = pick(props, isTimePicker ? timePickerPropKeys : datePickerPropKeys);
+      var inheritProps = pick(props, isTimePicker ? timePickerProps : datePickerProps);
       return _createVNode(Component, _mergeProps({
         "ref": root,
         "class": bem()

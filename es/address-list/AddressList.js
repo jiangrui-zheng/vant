@@ -1,39 +1,46 @@
 import { createVNode as _createVNode, resolveDirective as _resolveDirective } from "vue";
 import { defineComponent } from 'vue'; // Utils
 
-import { truthProp, numericProp, makeArrayProp, createNamespace } from '../utils'; // Components
+import { truthProp, createNamespace } from '../utils'; // Components
 
 import { Button } from '../button';
 import { RadioGroup } from '../radio-group';
 import AddressListItem from './AddressListItem';
 var [name, bem, t] = createNamespace('address-list');
-var addressListProps = {
-  list: makeArrayProp(),
-  modelValue: numericProp,
-  switchable: truthProp,
-  disabledText: String,
-  disabledList: makeArrayProp(),
-  addButtonText: String,
-  defaultTagText: String
-};
 export default defineComponent({
   name,
-  props: addressListProps,
+  props: {
+    modelValue: [Number, String],
+    switchable: truthProp,
+    disabledText: String,
+    addButtonText: String,
+    defaultTagText: String,
+    list: {
+      type: Array,
+      default: () => []
+    },
+    disabledList: {
+      type: Array,
+      default: () => []
+    }
+  },
   emits: ['add', 'edit', 'select', 'click-item', 'edit-disabled', 'select-disabled', 'update:modelValue'],
 
-  setup(props, _ref) {
-    var {
-      slots,
-      emit
-    } = _ref;
-
+  setup(props, {
+    slots,
+    emit
+  }) {
     var renderItem = (item, index, disabled) => {
-      var onEdit = () => emit(disabled ? 'edit-disabled' : 'edit', item, index);
+      var onEdit = () => {
+        var name = disabled ? 'edit-disabled' : 'edit';
+        emit(name, item, index);
+      };
 
       var onClick = () => emit('click-item', item, index);
 
       var onSelect = () => {
-        emit(disabled ? 'select-disabled' : 'select', item, index);
+        var name = disabled ? 'select-disabled' : 'select';
+        emit(name, item, index);
 
         if (!disabled) {
           emit('update:modelValue', item.id);
@@ -62,7 +69,7 @@ export default defineComponent({
     };
 
     var renderBottom = () => _createVNode("div", {
-      "class": [bem('bottom'), 'van-safe-area-bottom']
+      "class": bem('bottom')
     }, [_createVNode(Button, {
       "round": true,
       "block": true,

@@ -1,33 +1,32 @@
 import { createVNode as _createVNode } from "vue";
 import { ref, defineComponent } from 'vue'; // Utils
 
-import { truthProp, numericProp, BORDER_BOTTOM, getZIndexStyle, createNamespace, HAPTICS_FEEDBACK } from '../utils'; // Composables
+import { truthProp, createNamespace, getZIndexStyle } from '../utils';
+import { BORDER_BOTTOM } from '../utils/constant'; // Composables
 
 import { usePlaceholder } from '../composables/use-placeholder'; // Components
 
 import { Icon } from '../icon';
 var [name, bem] = createNamespace('nav-bar');
-var navBarProps = {
-  title: String,
-  fixed: Boolean,
-  zIndex: numericProp,
-  border: truthProp,
-  leftText: String,
-  rightText: String,
-  leftArrow: Boolean,
-  placeholder: Boolean,
-  safeAreaInsetTop: Boolean
-};
 export default defineComponent({
   name,
-  props: navBarProps,
+  props: {
+    title: String,
+    fixed: Boolean,
+    zIndex: [Number, String],
+    border: truthProp,
+    leftText: String,
+    rightText: String,
+    leftArrow: Boolean,
+    placeholder: Boolean,
+    safeAreaInsetTop: Boolean
+  },
   emits: ['click-left', 'click-right'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var navBarRef = ref();
     var renderPlaceholder = usePlaceholder(navBarRef, bem);
 
@@ -80,12 +79,12 @@ export default defineComponent({
       }, [_createVNode("div", {
         "class": bem('content')
       }, [hasLeft && _createVNode("div", {
-        "class": [bem('left'), HAPTICS_FEEDBACK],
+        "class": bem('left'),
         "onClick": onClickLeft
       }, [renderLeft()]), _createVNode("div", {
         "class": [bem('title'), 'van-ellipsis']
       }, [slots.title ? slots.title() : title]), hasRight && _createVNode("div", {
-        "class": [bem('right'), HAPTICS_FEEDBACK],
+        "class": bem('right'),
         "onClick": onClickRight
       }, [renderRight()])])]);
     };

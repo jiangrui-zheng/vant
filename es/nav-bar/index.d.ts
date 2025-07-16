@@ -1,4 +1,4 @@
-export declare const NavBar: import("../utils").WithInstall<import("vue").DefineComponent<{
+declare const NavBar: import("../utils").WithInstall<import("vue").DefineComponent<{
     title: StringConstructor;
     fixed: BooleanConstructor;
     zIndex: (NumberConstructor | StringConstructor)[];
@@ -32,10 +32,7 @@ export declare const NavBar: import("../utils").WithInstall<import("vue").Define
     zIndex?: string | number | undefined;
     leftText?: string | undefined;
     rightText?: string | undefined;
-}> & {
-    "onClick-left"?: ((...args: any[]) => any) | undefined;
-    "onClick-right"?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     fixed: boolean;
     border: boolean;
     placeholder: boolean;
@@ -43,4 +40,4 @@ export declare const NavBar: import("../utils").WithInstall<import("vue").Define
     safeAreaInsetTop: boolean;
 }>>;
 export default NavBar;
-export type { NavbarProps } from './NavBar';
+export { NavBar };

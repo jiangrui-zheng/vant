@@ -1,9 +1,8 @@
-import { PropType, CSSProperties, ExtractPropTypes } from 'vue';
-export declare type CellSize = 'normal' | 'large';
+import { PropType, CSSProperties } from 'vue';
 export declare type CellArrowDirection = 'up' | 'down' | 'left' | 'right';
-export declare const cellSharedProps: {
+export declare const cellProps: {
     icon: StringConstructor;
-    size: PropType<CellSize>;
+    size: PropType<"large">;
     title: (NumberConstructor | StringConstructor)[];
     value: (NumberConstructor | StringConstructor)[];
     label: (NumberConstructor | StringConstructor)[];
@@ -25,38 +24,9 @@ export declare const cellSharedProps: {
         default: null;
     };
 };
-declare const cellProps: {
-    icon: StringConstructor;
-    size: PropType<CellSize>;
-    title: (NumberConstructor | StringConstructor)[];
-    value: (NumberConstructor | StringConstructor)[];
-    label: (NumberConstructor | StringConstructor)[];
-    center: BooleanConstructor;
-    isLink: BooleanConstructor;
-    border: {
-        type: BooleanConstructor;
-        default: true;
-    };
-    required: BooleanConstructor;
-    iconPrefix: StringConstructor;
-    valueClass: PropType<unknown>;
-    labelClass: PropType<unknown>;
-    titleClass: PropType<unknown>;
-    titleStyle: PropType<string | CSSProperties>;
-    arrowDirection: PropType<CellArrowDirection>;
-    clickable: {
-        type: PropType<boolean | null>;
-        default: null;
-    };
-} & {
-    to: PropType<import("vue-router").RouteLocationRaw>;
-    url: StringConstructor;
-    replace: BooleanConstructor;
-};
-export declare type CellProps = ExtractPropTypes<typeof cellProps>;
 declare const _default: import("vue").DefineComponent<{
     icon: StringConstructor;
-    size: PropType<CellSize>;
+    size: PropType<"large">;
     title: (NumberConstructor | StringConstructor)[];
     value: (NumberConstructor | StringConstructor)[];
     label: (NumberConstructor | StringConstructor)[];
@@ -104,19 +74,19 @@ declare const _default: import("vue").DefineComponent<{
 } & {
     replace: boolean;
     center: boolean;
-    isLink: boolean;
     border: boolean;
+    isLink: boolean;
     required: boolean;
     clickable: boolean | null;
 } & {
-    url?: string | undefined;
-    to?: import("vue-router").RouteLocationRaw | undefined;
     label?: string | number | undefined;
     title?: string | number | undefined;
+    to?: import("vue-router").RouteLocationRaw | undefined;
+    url?: string | undefined;
+    icon?: string | undefined;
+    size?: "large" | undefined;
     iconPrefix?: string | undefined;
     value?: string | number | undefined;
-    icon?: string | undefined;
-    size?: CellSize | undefined;
     valueClass?: unknown;
     labelClass?: unknown;
     titleClass?: unknown;
@@ -125,8 +95,8 @@ declare const _default: import("vue").DefineComponent<{
 }>, {
     replace: boolean;
     center: boolean;
-    isLink: boolean;
     border: boolean;
+    isLink: boolean;
     required: boolean;
     clickable: boolean | null;
 }>;

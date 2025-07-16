@@ -1,23 +1,23 @@
 import { createVNode as _createVNode } from "vue";
 import { defineComponent } from 'vue';
-import { numericProp, getSizeStyle, makeStringProp, createNamespace } from '../utils';
+import { createNamespace, getSizeStyle } from '../utils';
 import { Network } from './Network';
 var [name, bem] = createNamespace('empty');
 var PRESET_IMAGES = ['error', 'search', 'default'];
-var emptyProps = {
-  image: makeStringProp('default'),
-  imageSize: numericProp,
-  description: String
-};
 export default defineComponent({
   name,
-  props: emptyProps,
+  props: {
+    imageSize: [Number, String],
+    description: String,
+    image: {
+      type: String,
+      default: 'default'
+    }
+  },
 
-  setup(props, _ref) {
-    var {
-      slots
-    } = _ref;
-
+  setup(props, {
+    slots
+  }) {
     var renderImage = () => {
       if (slots.image) {
         return slots.image();

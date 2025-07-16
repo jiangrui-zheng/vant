@@ -5,9 +5,12 @@ export default {
   confirm: '確認',
   cancel: 'キャンセル',
   delete: '削除',
+  complete: '完了',
   loading: '読み込み中...',
-  noCoupon: 'クーポンはありません',
+  telEmpty: '電話番号を入力してください',
   nameEmpty: '名前を入力してください',
+  nameInvalid: '正しい名前を入力してください',
+  confirmDelete: '本当に削除しますか',
   telInvalid: '正しい電話番号を入力してください',
   vanCalendar: {
     end: '終了',
@@ -17,7 +20,7 @@ export default {
     startEnd: '開始/終了',
     weekdays: ['日', '月', '火', '水', '木', '金', '土'],
     monthTitle: (year, month) => year + "\u5E74" + month + "\u6708",
-    rangePrompt: maxRange => maxRange + "\u65E5\u307E\u3067\u9078\u629E"
+    rangePrompt: maxRange => maxRange + "\u65E5\u4EE5\u5185\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044"
   },
   vanCascader: {
     select: '選択する'
@@ -46,9 +49,11 @@ export default {
   },
   vanCouponCell: {
     title: 'クーポン',
+    tips: '利用可能なクーポンがありません',
     count: count => count + "\u679A\u304C\u5229\u7528\u53EF\u80FD"
   },
   vanCouponList: {
+    empty: 'クーポンはありません',
     exchange: '両替',
     close: 'クーポンを使用しません',
     enable: '利用可能',
@@ -60,8 +65,11 @@ export default {
     postal: '郵便番号',
     areaEmpty: '地域を選択してください',
     addressEmpty: '詳しい住所を入力してください',
-    postalEmpty: '間違った郵便番号',
-    defaultAddress: 'デフォルトの住所に設定'
+    postalEmpty: '邮政编码格式不正确',
+    defaultAddress: 'デフォルトの住所に設定',
+    telPlaceholder: '荷受人の携帯番号',
+    namePlaceholder: '荷受人の名前',
+    areaPlaceholder: '县 / 市 / 町を選択'
   },
   vanAddressEditDetail: {
     label: '詳しい住所',

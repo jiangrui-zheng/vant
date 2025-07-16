@@ -1,37 +1,39 @@
 import { createVNode as _createVNode } from "vue";
 import { defineComponent } from 'vue'; // Utils
 
-import { FORM_KEY, truthProp, numericProp, makeStringProp, createNamespace } from '../utils'; // Composables
+import { truthProp, createNamespace } from '../utils'; // Composables
 
 import { useChildren } from '@vant/use';
+import { FORM_KEY } from '../composables/use-link-field';
 import { useExpose } from '../composables/use-expose'; // Types
 
 var [name, bem] = createNamespace('form');
-var formProps = {
-  colon: Boolean,
-  disabled: Boolean,
-  readonly: Boolean,
-  showError: Boolean,
-  labelWidth: numericProp,
-  labelAlign: String,
-  inputAlign: String,
-  scrollToError: Boolean,
-  validateFirst: Boolean,
-  submitOnEnter: truthProp,
-  validateTrigger: makeStringProp('onBlur'),
-  showErrorMessage: truthProp,
-  errorMessageAlign: String
-};
 export default defineComponent({
   name,
-  props: formProps,
+  props: {
+    colon: Boolean,
+    disabled: Boolean,
+    readonly: Boolean,
+    showError: Boolean,
+    labelWidth: [Number, String],
+    labelAlign: String,
+    inputAlign: String,
+    scrollToError: Boolean,
+    validateFirst: Boolean,
+    submitOnEnter: truthProp,
+    showErrorMessage: truthProp,
+    errorMessageAlign: String,
+    validateTrigger: {
+      type: String,
+      default: 'onBlur'
+    }
+  },
   emits: ['submit', 'failed'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var {
       children,
       linkChildren

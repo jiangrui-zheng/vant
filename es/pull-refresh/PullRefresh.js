@@ -1,7 +1,7 @@
-import { resolveDirective as _resolveDirective, createVNode as _createVNode } from "vue";
+import { createVNode as _createVNode } from "vue";
 import { ref, watch, reactive, nextTick, defineComponent } from 'vue'; // Utils
 
-import { numericProp, getScrollTop, preventDefault, createNamespace, makeNumericProp } from '../utils'; // Composables
+import { preventDefault, getScrollTop, createNamespace } from '../utils'; // Composables
 
 import { useScrollParent } from '@vant/use';
 import { useTouch } from '../composables/use-touch'; // Components
@@ -10,28 +10,38 @@ import { Loading } from '../loading';
 var [name, bem, t] = createNamespace('pull-refresh');
 var DEFAULT_HEAD_HEIGHT = 50;
 var TEXT_STATUS = ['pulling', 'loosing', 'success'];
-var pullRefreshProps = {
-  disabled: Boolean,
-  modelValue: Boolean,
-  headHeight: makeNumericProp(DEFAULT_HEAD_HEIGHT),
-  successText: String,
-  pullingText: String,
-  loosingText: String,
-  loadingText: String,
-  pullDistance: numericProp,
-  successDuration: makeNumericProp(500),
-  animationDuration: makeNumericProp(300)
-};
 export default defineComponent({
   name,
-  props: pullRefreshProps,
+  props: {
+    disabled: Boolean,
+    successText: String,
+    pullingText: String,
+    loosingText: String,
+    loadingText: String,
+    pullDistance: [Number, String],
+    modelValue: {
+      type: Boolean,
+      default: false
+    },
+    successDuration: {
+      type: [Number, String],
+      default: 500
+    },
+    animationDuration: {
+      type: [Number, String],
+      default: 300
+    },
+    headHeight: {
+      type: [Number, String],
+      default: DEFAULT_HEAD_HEIGHT
+    }
+  },
   emits: ['refresh', 'update:modelValue'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var reachTop;
     var root = ref();
     var scrollParent = useScrollParent(root);
@@ -117,7 +127,7 @@ export default defineComponent({
         nodes.push(_createVNode(Loading, {
           "class": bem('loading')
         }, {
-          default: getStatusText
+          default: () => [getStatusText()]
         }));
       }
 

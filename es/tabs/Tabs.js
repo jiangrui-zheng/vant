@@ -1,10 +1,12 @@
-import { createVNode as _createVNode, mergeProps as _mergeProps } from "vue";
-import { ref, watch, computed, reactive, nextTick, onActivated, defineComponent, getCurrentInstance } from 'vue'; // Utils
+import { createVNode as _createVNode } from "vue";
+import { ref, watch, computed, reactive, nextTick, onActivated, defineComponent } from 'vue'; // Utils
 
-import { pick, isDef, addUnit, isHidden, unitToPx, truthProp, numericProp, getElementTop, makeStringProp, callInterceptor, createNamespace, makeNumericProp, setRootScrollTop, BORDER_TOP_BOTTOM } from '../utils';
-import { scrollLeftTo, scrollTopTo } from './utils'; // Composables
+import { isDef, addUnit, isHidden, unitToPx, truthProp, getVisibleTop, getElementTop, createNamespace, getVisibleHeight, setRootScrollTop } from '../utils';
+import { scrollLeftTo, scrollTopTo } from './utils';
+import { BORDER_TOP_BOTTOM } from '../utils/constant';
+import { callInterceptor } from '../utils/interceptor'; // Composables
 
-import { useRect, useChildren, useWindowSize, useScrollParent, useEventListener, onMountedOrActivated } from '@vant/use';
+import { useChildren, useWindowSize, useScrollParent, useEventListener, onMountedOrActivated } from '@vant/use';
 import { route } from '../composables/use-route';
 import { useRefs } from '../composables/use-refs';
 import { useExpose } from '../composables/use-expose';
@@ -12,56 +14,54 @@ import { onPopupReopen } from '../composables/on-popup-reopen'; // Components
 
 import { Sticky } from '../sticky';
 import TabsTitle from './TabsTitle';
-import TabsContent from './TabsContent'; // Types
-
+import TabsContent from './TabsContent';
 var [name, bem] = createNamespace('tabs');
-var tabsProps = {
-  type: makeStringProp('line'),
+export var TABS_KEY = Symbol(name);
+var props = {
   color: String,
   border: Boolean,
   sticky: Boolean,
-  active: makeNumericProp(0),
-  duration: makeNumericProp(0.3),
   animated: Boolean,
   ellipsis: truthProp,
   swipeable: Boolean,
   scrollspy: Boolean,
-  offsetTop: makeNumericProp(0),
   background: String,
   lazyRender: truthProp,
-  lineWidth: numericProp,
-  lineHeight: numericProp,
+  lineWidth: [Number, String],
+  lineHeight: [Number, String],
   beforeChange: Function,
-  swipeThreshold: makeNumericProp(5),
   titleActiveColor: String,
-  titleInactiveColor: String
+  titleInactiveColor: String,
+  type: {
+    type: String,
+    default: 'line'
+  },
+  active: {
+    type: [Number, String],
+    default: 0
+  },
+  duration: {
+    type: [Number, String],
+    default: 0.3
+  },
+  offsetTop: {
+    type: [Number, String],
+    default: 0
+  },
+  swipeThreshold: {
+    type: [Number, String],
+    default: 5
+  }
 };
-export var TABS_KEY = Symbol(name);
 export default defineComponent({
   name,
-  props: tabsProps,
-  emits: ['click', 'change', 'scroll', 'disabled', 'rendered', 'click-tab', 'update:active'],
+  props,
+  emits: ['click', 'change', 'scroll', 'disabled', 'rendered', 'update:active'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
-
-    if (process.env.NODE_ENV !== 'production') {
-      var _getCurrentInstance, _getCurrentInstance$v;
-
-      var _props = (_getCurrentInstance = getCurrentInstance()) == null ? void 0 : (_getCurrentInstance$v = _getCurrentInstance.vnode) == null ? void 0 : _getCurrentInstance$v.props;
-
-      if (_props && 'onClick' in _props) {
-        console.warn('[Vant] Tabs: "click" event is deprecated, using "click-tab" instead.');
-      }
-
-      if (_props && 'onDisabled' in _props) {
-        console.warn('[Vant] Tabs: "disabled" event is deprecated, using "click-tab" instead.');
-      }
-    }
-
+  setup(props, {
+    emit,
+    slots
+  }) {
     var tabHeight;
     var lockScroll;
     var stickyFixed;
@@ -199,11 +199,7 @@ export default defineComponent({
       setCurrentIndex(index);
     };
 
-    var scrollToCurrentContent = function (immediate) {
-      if (immediate === void 0) {
-        immediate = false;
-      }
-
+    var scrollToCurrentContent = (immediate = false) => {
       if (props.scrollspy) {
         var target = children[state.currentIndex].$el;
 
@@ -218,33 +214,24 @@ export default defineComponent({
     }; // emit event when clicked
 
 
-    var onClickTab = (item, index, event) => {
+    var onClick = (item, index) => {
       var {
         title,
         disabled
       } = children[index];
       var name = getTabName(children[index], index);
-      emit('click-tab', {
-        name,
-        title,
-        event,
-        disabled
-      });
 
       if (disabled) {
-        // @deprecated
-        // should be removed in next major version
         emit('disabled', name, title);
       } else {
-        callInterceptor(props.beforeChange, {
+        callInterceptor({
+          interceptor: props.beforeChange,
           args: [name],
           done: () => {
             setCurrentIndex(index);
             scrollToCurrentContent();
           }
-        }); // @deprecated
-        // should be removed in next major version
-
+        });
         emit('click', name, title);
         route(item);
       }
@@ -264,9 +251,7 @@ export default defineComponent({
 
     var getCurrentIndexOnScroll = () => {
       for (var index = 0; index < children.length; index++) {
-        var {
-          top
-        } = useRect(children[index].$el);
+        var top = getVisibleTop(children[index].$el);
 
         if (top > scrollOffset.value) {
           return index === 0 ? 0 : index - 1;
@@ -283,19 +268,25 @@ export default defineComponent({
       }
     };
 
-    var renderNav = () => children.map((item, index) => _createVNode(TabsTitle, _mergeProps({
+    var renderNav = () => children.map((item, index) => _createVNode(TabsTitle, {
       "ref": setTitleRefs(index),
+      "dot": item.dot,
       "type": props.type,
+      "badge": item.badge,
+      "title": item.title,
       "color": props.color,
       "style": item.titleStyle,
       "class": item.titleClass,
       "isActive": index === state.currentIndex,
+      "disabled": item.disabled,
       "scrollable": scrollable.value,
       "renderTitle": item.$slots.title,
       "activeColor": props.titleActiveColor,
       "inactiveColor": props.titleInactiveColor,
-      "onClick": event => onClickTab(item, index, event)
-    }, pick(item, ['dot', 'badge', 'title', 'disabled', 'showZeroBadge'])), null));
+      "onClick": () => {
+        onClick(item, index);
+      }
+    }, null));
 
     var renderHeader = () => {
       var _slots$navLeft, _slots$navRight;
@@ -352,11 +343,7 @@ export default defineComponent({
       setCurrentIndexByName(props.active);
       nextTick(() => {
         state.inited = true;
-
-        if (wrapRef.value) {
-          tabHeight = useRect(wrapRef.value).height;
-        }
-
+        tabHeight = getVisibleHeight(wrapRef.value);
         scrollIntoView(true);
       });
     };

@@ -1,4 +1,5 @@
 @import './var.less';
+@import '../style/mixins/safe-area.less';
 
 :root {
   --van-calendar-background-color: @calendar-background-color;
@@ -32,7 +33,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: var(--van-calendar-background-color);
+  background-color: var(--van-calendar-background-color);
 
   &__popup {
     &.van-popup--top,
@@ -132,7 +133,7 @@
     &--multiple-middle,
     &--multiple-selected {
       color: var(--van-calendar-range-edge-color);
-      background: var(--van-calendar-range-edge-background-color);
+      background-color: var(--van-calendar-range-edge-background-color);
     }
 
     &--start {
@@ -194,14 +195,18 @@
     width: var(--van-calendar-selected-day-size);
     height: var(--van-calendar-selected-day-size);
     color: var(--van-calendar-selected-day-color);
-    background: var(--van-calendar-selected-day-background-color);
+    background-color: var(--van-calendar-selected-day-background-color);
     border-radius: var(--van-border-radius-md);
   }
 
   &__footer {
     flex-shrink: 0;
-    padding-left: var(--van-padding-md);
-    padding-right: var(--van-padding-md);
+    padding: 0 var(--van-padding-md);
+    .safe-area-inset-bottom();
+
+    &--unfit {
+      padding-bottom: 0;
+    }
   }
 
   &__confirm {

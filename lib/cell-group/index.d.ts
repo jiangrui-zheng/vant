@@ -1,4 +1,4 @@
-export declare const CellGroup: import("../utils").WithInstall<import("vue").DefineComponent<{
+declare const CellGroup: import("../utils").WithInstall<import("vue").DefineComponent<{
     title: StringConstructor;
     inset: BooleanConstructor;
     border: {
@@ -10,13 +10,13 @@ export declare const CellGroup: import("../utils").WithInstall<import("vue").Def
     inset?: unknown;
     border?: unknown;
 } & {
-    border: boolean;
     inset: boolean;
+    border: boolean;
 } & {
     title?: string | undefined;
 }>, {
-    border: boolean;
     inset: boolean;
+    border: boolean;
 }>>;
 export default CellGroup;
-export type { CellGroupProps } from './CellGroup';
+export { CellGroup };

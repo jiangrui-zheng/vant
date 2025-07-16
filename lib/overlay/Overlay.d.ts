@@ -1,16 +1,4 @@
-import { PropType, CSSProperties, ExtractPropTypes } from 'vue';
-declare const overlayProps: {
-    show: BooleanConstructor;
-    zIndex: (NumberConstructor | StringConstructor)[];
-    duration: (NumberConstructor | StringConstructor)[];
-    className: PropType<unknown>;
-    lockScroll: {
-        type: BooleanConstructor;
-        default: true;
-    };
-    customStyle: PropType<CSSProperties>;
-};
-export declare type OverlayProps = ExtractPropTypes<typeof overlayProps>;
+import { PropType, CSSProperties } from 'vue';
 declare const _default: import("vue").DefineComponent<{
     show: BooleanConstructor;
     zIndex: (NumberConstructor | StringConstructor)[];

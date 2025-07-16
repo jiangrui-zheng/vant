@@ -1,16 +1,35 @@
 import { createVNode as _createVNode } from "vue";
 import { computed, defineComponent } from 'vue';
-import { makeStringProp, createNamespace, makeRequiredProp } from '../utils';
-import { getDate, formatAmount, formatDiscount } from './utils';
+import { padZero, createNamespace } from '../utils';
 import { Checkbox } from '../checkbox';
 var [name, bem, t] = createNamespace('coupon');
+
+function getDate(timeStamp) {
+  var date = new Date(timeStamp * 1000);
+  return date.getFullYear() + "." + padZero(date.getMonth() + 1) + "." + padZero(date.getDate());
+}
+
+function formatDiscount(discount) {
+  return (discount / 10).toFixed(discount % 10 === 0 ? 0 : 1);
+}
+
+function formatAmount(amount) {
+  return (amount / 100).toFixed(amount % 100 === 0 ? 0 : amount % 10 === 0 ? 1 : 2);
+}
+
 export default defineComponent({
   name,
   props: {
     chosen: Boolean,
-    coupon: makeRequiredProp(Object),
     disabled: Boolean,
-    currency: makeStringProp('¥')
+    coupon: {
+      type: Object,
+      required: true
+    },
+    currency: {
+      type: String,
+      default: '¥'
+    }
   },
 
   setup(props) {

@@ -1,6 +1,7 @@
-import { PropType, InjectionKey, ExtractPropTypes } from 'vue';
-import { Interceptor } from '../utils';
-declare const tabbarProps: {
+import { PropType, ExtractPropTypes } from 'vue';
+import { Interceptor } from '../utils/interceptor';
+export declare const TABBAR_KEY: unique symbol;
+declare const props: {
     route: BooleanConstructor;
     fixed: {
         type: BooleanConstructor;
@@ -24,12 +25,10 @@ declare const tabbarProps: {
         default: null;
     };
 };
-export declare type TabbarProps = ExtractPropTypes<typeof tabbarProps>;
 export declare type TabbarProvide = {
-    props: TabbarProps;
+    props: ExtractPropTypes<typeof props>;
     setActive: (active: number | string) => void;
 };
-export declare const TABBAR_KEY: InjectionKey<TabbarProvide>;
 declare const _default: import("vue").DefineComponent<{
     route: BooleanConstructor;
     fixed: {
@@ -53,7 +52,7 @@ declare const _default: import("vue").DefineComponent<{
         type: PropType<boolean | null>;
         default: null;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("change" | "update:modelValue")[], "change" | "update:modelValue", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
     route?: unknown;
     fixed?: unknown;
     border?: unknown;
@@ -66,25 +65,22 @@ declare const _default: import("vue").DefineComponent<{
     safeAreaInsetBottom?: unknown;
 } & {
     fixed: boolean;
-    border: boolean;
-    modelValue: string | number;
-    placeholder: boolean;
     safeAreaInsetBottom: boolean | null;
+    border: boolean;
+    placeholder: boolean;
+    modelValue: string | number;
     route: boolean;
 } & {
     zIndex?: string | number | undefined;
     activeColor?: string | undefined;
     inactiveColor?: string | undefined;
     beforeChange?: Interceptor | undefined;
-}> & {
-    onChange?: ((...args: any[]) => any) | undefined;
-    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     fixed: boolean;
-    border: boolean;
-    modelValue: string | number;
-    placeholder: boolean;
     safeAreaInsetBottom: boolean | null;
+    border: boolean;
+    placeholder: boolean;
+    modelValue: string | number;
     route: boolean;
 }>;
 export default _default;

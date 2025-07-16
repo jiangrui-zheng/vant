@@ -1,7 +1,7 @@
-import { resolveDirective as _resolveDirective, createVNode as _createVNode } from "vue";
-import { computed, defineComponent, getCurrentInstance } from 'vue'; // Utils
+import { createVNode as _createVNode } from "vue";
+import { computed, getCurrentInstance, defineComponent } from 'vue'; // Utils
 
-import { createNamespace, extend, isObject, numericProp } from '../utils';
+import { createNamespace, extend, isObject } from '../utils';
 import { TABBAR_KEY } from '../tabbar/Tabbar'; // Composables
 
 import { useParent } from '@vant/use';
@@ -10,23 +10,21 @@ import { routeProps, useRoute } from '../composables/use-route'; // Components
 import { Icon } from '../icon';
 import { Badge } from '../badge';
 var [name, bem] = createNamespace('tabbar-item');
-var tabbarItemProps = extend({}, routeProps, {
-  dot: Boolean,
-  icon: String,
-  name: numericProp,
-  badge: numericProp,
-  iconPrefix: String
-});
 export default defineComponent({
   name,
-  props: tabbarItemProps,
+  props: extend({}, routeProps, {
+    dot: Boolean,
+    icon: String,
+    name: [Number, String],
+    badge: [Number, String],
+    iconPrefix: String
+  }),
   emits: ['click'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var route = useRoute();
     var vm = getCurrentInstance().proxy;
     var {
@@ -112,7 +110,7 @@ export default defineComponent({
         "content": badge,
         "class": bem('icon')
       }, {
-        default: renderIcon
+        default: () => [renderIcon()]
       }), _createVNode("div", {
         "class": bem('text')
       }, [slots.default == null ? void 0 : slots.default({

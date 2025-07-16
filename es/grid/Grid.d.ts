@@ -1,6 +1,7 @@
-import { PropType, ExtractPropTypes, InjectionKey } from 'vue';
+import { PropType, ExtractPropTypes } from 'vue';
+export declare const GRID_KEY: unique symbol;
 export declare type GridDirection = 'horizontal' | 'vertical';
-declare const gridProps: {
+declare const props: {
     square: BooleanConstructor;
     center: {
         type: BooleanConstructor;
@@ -20,11 +21,9 @@ declare const gridProps: {
         default: number;
     };
 };
-export declare type GridProps = ExtractPropTypes<typeof gridProps>;
 export declare type GridProvide = {
-    props: GridProps;
+    props: ExtractPropTypes<typeof props>;
 };
-export declare const GRID_KEY: InjectionKey<GridProvide>;
 declare const _default: import("vue").DefineComponent<{
     square: BooleanConstructor;
     center: {
@@ -55,22 +54,22 @@ declare const _default: import("vue").DefineComponent<{
     clickable?: unknown;
     columnNum?: unknown;
 } & {
-    reverse: boolean;
     center: boolean;
+    reverse: boolean;
     border: boolean;
-    clickable: boolean;
     square: boolean;
+    clickable: boolean;
     columnNum: string | number;
 } & {
     iconSize?: string | number | undefined;
     direction?: GridDirection | undefined;
     gutter?: string | number | undefined;
 }>, {
-    reverse: boolean;
     center: boolean;
+    reverse: boolean;
     border: boolean;
-    clickable: boolean;
     square: boolean;
+    clickable: boolean;
     columnNum: string | number;
 }>;
 export default _default;

@@ -5,9 +5,12 @@ export default {
   confirm: '確認',
   cancel: '取消',
   delete: '刪除',
+  complete: '完成',
   loading: '載入中...',
-  noCoupon: '暫無優惠券',
+  telEmpty: '請填寫電話',
   nameEmpty: '請填寫姓名',
+  nameInvalid: '請輸入正確的姓名',
+  confirmDelete: '確定要刪除嗎',
   telInvalid: '請填寫正確的電話',
   vanCalendar: {
     end: '結束',
@@ -17,7 +20,7 @@ export default {
     startEnd: '開始/結束',
     weekdays: ['日', '一', '二', '三', '四', '五', '六'],
     monthTitle: (year, month) => year + "\u5E74" + month + "\u6708",
-    rangePrompt: maxRange => "\u6700\u591A\u9078\u64C7 " + maxRange + " \u5929"
+    rangePrompt: maxRange => "\u9078\u64C7\u5929\u6578\u4E0D\u80FD\u8D85\u904E " + maxRange + " \u5929"
   },
   vanCascader: {
     select: '請選擇'
@@ -46,9 +49,11 @@ export default {
   },
   vanCouponCell: {
     title: '優惠券',
+    tips: '暫無可用',
     count: count => count + "\u5F35\u53EF\u7528"
   },
   vanCouponList: {
+    empty: '暫無優惠券',
     exchange: '兌換',
     close: '不使用優惠',
     enable: '可使用優惠券',
@@ -60,12 +65,15 @@ export default {
     postal: '郵遞區號',
     areaEmpty: '請選擇地區',
     addressEmpty: '請填寫詳細地址',
-    postalEmpty: '郵遞區號不正確',
-    defaultAddress: '設為預設收貨地址'
+    postalEmpty: '郵遞區號格式不正確',
+    defaultAddress: '設為預設收貨地址',
+    telPlaceholder: '收貨人手機號碼',
+    namePlaceholder: '收貨人姓名',
+    areaPlaceholder: '選擇縣 / 市'
   },
   vanAddressEditDetail: {
     label: '詳細地址',
-    placeholder: '街道門牌資訊'
+    placeholder: '街道門牌、樓層房號等資訊'
   },
   vanAddressList: {
     add: '新增地址'

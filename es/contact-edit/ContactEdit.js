@@ -7,36 +7,35 @@ import { Cell } from '../cell';
 import { Form } from '../form';
 import { Field } from '../field';
 import { Button } from '../button';
+import { Dialog } from '../dialog';
 import { Switch } from '../switch';
 var [name, bem, t] = createNamespace('contact-edit');
 var DEFAULT_CONTACT = {
   tel: '',
   name: ''
 };
-var contactEditProps = {
-  isEdit: Boolean,
-  isSaving: Boolean,
-  isDeleting: Boolean,
-  showSetDefault: Boolean,
-  setDefaultLabel: String,
-  contactInfo: {
-    type: Object,
-    default: () => extend({}, DEFAULT_CONTACT)
-  },
-  telValidator: {
-    type: Function,
-    default: isMobile
-  }
-};
 export default defineComponent({
   name,
-  props: contactEditProps,
+  props: {
+    isEdit: Boolean,
+    isSaving: Boolean,
+    isDeleting: Boolean,
+    showSetDefault: Boolean,
+    setDefaultLabel: String,
+    contactInfo: {
+      type: Object,
+      default: () => extend({}, DEFAULT_CONTACT)
+    },
+    telValidator: {
+      type: Function,
+      default: isMobile
+    }
+  },
   emits: ['save', 'delete', 'change-default'],
 
-  setup(props, _ref) {
-    var {
-      emit
-    } = _ref;
+  setup(props, {
+    emit
+  }) {
     var contact = reactive(extend({}, DEFAULT_CONTACT, props.contactInfo));
 
     var onSave = () => {
@@ -45,7 +44,11 @@ export default defineComponent({
       }
     };
 
-    var onDelete = () => emit('delete', contact);
+    var onDelete = () => {
+      Dialog.confirm({
+        title: t('confirmDelete')
+      }).then(() => emit('delete', contact));
+    };
 
     var renderButtons = () => _createVNode("div", {
       "class": bem('buttons')
@@ -54,14 +57,12 @@ export default defineComponent({
       "round": true,
       "type": "danger",
       "text": t('save'),
-      "class": bem('button'),
       "loading": props.isSaving,
       "nativeType": "submit"
     }, null), props.isEdit && _createVNode(Button, {
       "block": true,
       "round": true,
       "text": t('delete'),
-      "class": bem('button'),
       "loading": props.isDeleting,
       "onClick": onDelete
     }, null)]);
@@ -99,10 +100,10 @@ export default defineComponent({
         "label": t('name'),
         "rules": [{
           required: true,
-          message: t('nameEmpty')
+          message: t('nameInvalid')
         }],
         "maxlength": "30",
-        "placeholder": t('name')
+        "placeholder": t('nameEmpty')
       }, null), _createVNode(Field, {
         "modelValue": contact.tel,
         "onUpdate:modelValue": $event => contact.tel = $event,
@@ -113,7 +114,7 @@ export default defineComponent({
           validator: props.telValidator,
           message: t('telInvalid')
         }],
-        "placeholder": t('tel')
+        "placeholder": t('telEmpty')
       }, null)]), renderSetDefault(), renderButtons()]
     });
   }

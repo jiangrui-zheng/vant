@@ -1,54 +1,9 @@
-import { ExtractPropTypes } from 'vue';
-declare const rateProps: {
-    size: (NumberConstructor | StringConstructor)[];
-    icon: {
-        type: import("vue").PropType<string>;
-        default: string;
-    };
-    color: StringConstructor;
-    count: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
-    };
-    gutter: (NumberConstructor | StringConstructor)[];
-    readonly: BooleanConstructor;
-    disabled: BooleanConstructor;
-    voidIcon: {
-        type: import("vue").PropType<string>;
-        default: string;
-    };
-    allowHalf: BooleanConstructor;
-    voidColor: StringConstructor;
-    touchable: {
-        type: BooleanConstructor;
-        default: true;
-    };
-    iconPrefix: StringConstructor;
-    modelValue: {
-        type: NumberConstructor;
-        default: number;
-    };
-    disabledColor: StringConstructor;
-};
-export declare type RateProps = ExtractPropTypes<typeof rateProps>;
 declare const _default: import("vue").DefineComponent<{
     size: (NumberConstructor | StringConstructor)[];
-    icon: {
-        type: import("vue").PropType<string>;
-        default: string;
-    };
     color: StringConstructor;
-    count: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
-    };
     gutter: (NumberConstructor | StringConstructor)[];
     readonly: BooleanConstructor;
     disabled: BooleanConstructor;
-    voidIcon: {
-        type: import("vue").PropType<string>;
-        default: string;
-    };
     allowHalf: BooleanConstructor;
     voidColor: StringConstructor;
     touchable: {
@@ -56,53 +11,62 @@ declare const _default: import("vue").DefineComponent<{
         default: true;
     };
     iconPrefix: StringConstructor;
+    disabledColor: StringConstructor;
     modelValue: {
         type: NumberConstructor;
         default: number;
     };
-    disabledColor: StringConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    icon: {
+        type: StringConstructor;
+        default: string;
+    };
+    voidIcon: {
+        type: StringConstructor;
+        default: string;
+    };
+    count: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("change" | "update:modelValue")[], "change" | "update:modelValue", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
     size?: unknown;
-    icon?: unknown;
     color?: unknown;
-    count?: unknown;
     gutter?: unknown;
     readonly?: unknown;
     disabled?: unknown;
-    voidIcon?: unknown;
     allowHalf?: unknown;
     voidColor?: unknown;
     touchable?: unknown;
     iconPrefix?: unknown;
-    modelValue?: unknown;
     disabledColor?: unknown;
+    modelValue?: unknown;
+    icon?: unknown;
+    voidIcon?: unknown;
+    count?: unknown;
 } & {
-    disabled: boolean;
     icon: string;
-    modelValue: number;
+    disabled: boolean;
     readonly: boolean;
+    modelValue: number;
     touchable: boolean;
     count: string | number;
-    voidIcon: string;
     allowHalf: boolean;
+    voidIcon: string;
 } & {
     color?: string | undefined;
-    iconPrefix?: string | undefined;
     size?: string | number | undefined;
+    iconPrefix?: string | undefined;
     gutter?: string | number | undefined;
     voidColor?: string | undefined;
     disabledColor?: string | undefined;
-}> & {
-    onChange?: ((...args: any[]) => any) | undefined;
-    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
-}, {
-    disabled: boolean;
+}>, {
     icon: string;
-    modelValue: number;
+    disabled: boolean;
     readonly: boolean;
+    modelValue: number;
     touchable: boolean;
     count: string | number;
-    voidIcon: string;
     allowHalf: boolean;
+    voidIcon: string;
 }>;
 export default _default;

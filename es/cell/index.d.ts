@@ -1,6 +1,6 @@
-export declare const Cell: import("../utils").WithInstall<import("vue").DefineComponent<{
+declare const Cell: import("../utils").WithInstall<import("vue").DefineComponent<{
     icon: StringConstructor;
-    size: import("vue").PropType<import("./Cell").CellSize>;
+    size: import("vue").PropType<"large">;
     title: (NumberConstructor | StringConstructor)[];
     value: (NumberConstructor | StringConstructor)[];
     label: (NumberConstructor | StringConstructor)[];
@@ -48,19 +48,19 @@ export declare const Cell: import("../utils").WithInstall<import("vue").DefineCo
 } & {
     replace: boolean;
     center: boolean;
-    isLink: boolean;
     border: boolean;
+    isLink: boolean;
     required: boolean;
     clickable: boolean | null;
 } & {
-    url?: string | undefined;
-    to?: import("vue-router").RouteLocationRaw | undefined;
     label?: string | number | undefined;
     title?: string | number | undefined;
+    to?: import("vue-router").RouteLocationRaw | undefined;
+    url?: string | undefined;
+    icon?: string | undefined;
+    size?: "large" | undefined;
     iconPrefix?: string | undefined;
     value?: string | number | undefined;
-    icon?: string | undefined;
-    size?: import("./Cell").CellSize | undefined;
     valueClass?: unknown;
     labelClass?: unknown;
     titleClass?: unknown;
@@ -69,10 +69,11 @@ export declare const Cell: import("../utils").WithInstall<import("vue").DefineCo
 }>, {
     replace: boolean;
     center: boolean;
-    isLink: boolean;
     border: boolean;
+    isLink: boolean;
     required: boolean;
     clickable: boolean | null;
 }>>;
 export default Cell;
-export type { CellSize, CellProps, CellArrowDirection } from './Cell';
+export { Cell };
+export type { CellArrowDirection } from './Cell';

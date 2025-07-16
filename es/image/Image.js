@@ -1,39 +1,44 @@
 import { withDirectives as _withDirectives, mergeProps as _mergeProps, resolveDirective as _resolveDirective, createVNode as _createVNode } from "vue";
 import { ref, watch, computed, onBeforeUnmount, defineComponent, getCurrentInstance } from 'vue'; // Utils
 
-import { isDef, addUnit, inBrowser, truthProp, numericProp, makeStringProp, createNamespace } from '../utils'; // Components
+import { isDef, addUnit, inBrowser, truthProp, createNamespace } from '../utils'; // Components
 
 import { Icon } from '../icon';
 var [name, bem] = createNamespace('image');
-var imageProps = {
-  src: String,
-  alt: String,
-  fit: String,
-  round: Boolean,
-  width: numericProp,
-  height: numericProp,
-  radius: numericProp,
-  lazyLoad: Boolean,
-  iconSize: numericProp,
-  showError: truthProp,
-  errorIcon: makeStringProp('photo-fail'),
-  iconPrefix: String,
-  showLoading: truthProp,
-  loadingIcon: makeStringProp('photo')
-};
 export default defineComponent({
   name,
-  props: imageProps,
+  props: {
+    src: String,
+    alt: String,
+    fit: String,
+    round: Boolean,
+    width: [Number, String],
+    height: [Number, String],
+    radius: [Number, String],
+    lazyLoad: Boolean,
+    iconSize: [Number, String],
+    showError: truthProp,
+    iconPrefix: String,
+    showLoading: truthProp,
+    errorIcon: {
+      type: String,
+      default: 'photo-fail'
+    },
+    loadingIcon: {
+      type: String,
+      default: 'photo'
+    }
+  },
   emits: ['load', 'error'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var error = ref(false);
     var loading = ref(true);
-    var imageRef = ref();
+    var imageRef = ref(); // TODO: types
+
     var {
       $Lazyload
     } = getCurrentInstance().proxy;
@@ -71,15 +76,28 @@ export default defineComponent({
       emit('error', event);
     };
 
-    var renderIcon = (name, className, slot) => {
-      if (slot) {
-        return slot();
+    var renderLoadingIcon = () => {
+      if (slots.loading) {
+        return slots.loading();
       }
 
       return _createVNode(Icon, {
-        "name": name,
         "size": props.iconSize,
-        "class": className,
+        "name": props.loadingIcon,
+        "class": bem('loading-icon'),
+        "classPrefix": props.iconPrefix
+      }, null);
+    };
+
+    var renderErrorIcon = () => {
+      if (slots.error) {
+        return slots.error();
+      }
+
+      return _createVNode(Icon, {
+        "size": props.iconSize,
+        "name": props.errorIcon,
+        "class": bem('error-icon'),
         "classPrefix": props.iconPrefix
       }, null);
     };
@@ -88,13 +106,13 @@ export default defineComponent({
       if (loading.value && props.showLoading) {
         return _createVNode("div", {
           "class": bem('loading')
-        }, [renderIcon(props.loadingIcon, bem('loading-icon'), slots.loading)]);
+        }, [renderLoadingIcon()]);
       }
 
       if (error.value && props.showError) {
         return _createVNode("div", {
           "class": bem('error')
-        }, [renderIcon(props.errorIcon, bem('error-icon'), slots.error)]);
+        }, [renderErrorIcon()]);
       }
     };
 
@@ -124,21 +142,17 @@ export default defineComponent({
       }, attrs), null);
     };
 
-    var onLazyLoaded = _ref2 => {
-      var {
-        el
-      } = _ref2;
-
+    var onLazyLoaded = ({
+      el
+    }) => {
       if (el === imageRef.value && loading.value) {
         onLoad();
       }
     };
 
-    var onLazyLoadError = _ref3 => {
-      var {
-        el
-      } = _ref3;
-
+    var onLazyLoadError = ({
+      el
+    }) => {
       if (el === imageRef.value && !error.value) {
         onError();
       }

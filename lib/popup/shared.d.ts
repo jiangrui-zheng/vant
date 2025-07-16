@@ -1,5 +1,4 @@
 import { PropType, CSSProperties } from 'vue';
-import { Interceptor } from '../utils';
 export declare const popupSharedProps: {
     show: BooleanConstructor;
     zIndex: (NumberConstructor | StringConstructor)[];
@@ -17,7 +16,6 @@ export declare const popupSharedProps: {
         type: BooleanConstructor;
         default: true;
     };
-    beforeClose: PropType<Interceptor>;
     overlayStyle: PropType<CSSProperties>;
     overlayClass: PropType<unknown>;
     transitionAppear: BooleanConstructor;

@@ -1,35 +1,14 @@
-import { PropType, ExtractPropTypes } from 'vue';
-declare type NumberRange = [number, number];
-declare type SliderValue = number | NumberRange;
-declare const sliderProps: {
-    min: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
-    };
-    max: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
-    };
-    step: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
-    };
-    range: BooleanConstructor;
-    reverse: BooleanConstructor;
-    disabled: BooleanConstructor;
-    readonly: BooleanConstructor;
-    vertical: BooleanConstructor;
-    barHeight: (NumberConstructor | StringConstructor)[];
-    buttonSize: (NumberConstructor | StringConstructor)[];
-    activeColor: StringConstructor;
-    inactiveColor: StringConstructor;
-    modelValue: {
-        type: PropType<SliderValue>;
-        default: number;
-    };
-};
-export declare type SliderProps = ExtractPropTypes<typeof sliderProps>;
+import { PropType } from 'vue';
+declare type SliderValue = number | number[];
 declare const _default: import("vue").DefineComponent<{
+    range: BooleanConstructor;
+    disabled: BooleanConstructor;
+    readonly: BooleanConstructor;
+    vertical: BooleanConstructor;
+    barHeight: (NumberConstructor | StringConstructor)[];
+    buttonSize: (NumberConstructor | StringConstructor)[];
+    activeColor: StringConstructor;
+    inactiveColor: StringConstructor;
     min: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
@@ -42,25 +21,12 @@ declare const _default: import("vue").DefineComponent<{
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-    range: BooleanConstructor;
-    reverse: BooleanConstructor;
-    disabled: BooleanConstructor;
-    readonly: BooleanConstructor;
-    vertical: BooleanConstructor;
-    barHeight: (NumberConstructor | StringConstructor)[];
-    buttonSize: (NumberConstructor | StringConstructor)[];
-    activeColor: StringConstructor;
-    inactiveColor: StringConstructor;
     modelValue: {
         type: PropType<SliderValue>;
         default: number;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change" | "drag-end" | "drag-start")[], "update:modelValue" | "change" | "drag-end" | "drag-start", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    min?: unknown;
-    max?: unknown;
-    step?: unknown;
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("change" | "update:modelValue" | "drag-end" | "drag-start")[], "change" | "update:modelValue" | "drag-end" | "drag-start", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
     range?: unknown;
-    reverse?: unknown;
     disabled?: unknown;
     readonly?: unknown;
     vertical?: unknown;
@@ -68,15 +34,17 @@ declare const _default: import("vue").DefineComponent<{
     buttonSize?: unknown;
     activeColor?: unknown;
     inactiveColor?: unknown;
+    min?: unknown;
+    max?: unknown;
+    step?: unknown;
     modelValue?: unknown;
 } & {
     max: string | number;
-    reverse: boolean;
-    disabled: boolean;
-    modelValue: SliderValue;
-    readonly: boolean;
     vertical: boolean;
     range: boolean;
+    disabled: boolean;
+    readonly: boolean;
+    modelValue: SliderValue;
     min: string | number;
     step: string | number;
 } & {
@@ -84,19 +52,13 @@ declare const _default: import("vue").DefineComponent<{
     inactiveColor?: string | undefined;
     barHeight?: string | number | undefined;
     buttonSize?: string | number | undefined;
-}> & {
-    onChange?: ((...args: any[]) => any) | undefined;
-    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
-    "onDrag-end"?: ((...args: any[]) => any) | undefined;
-    "onDrag-start"?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     max: string | number;
-    reverse: boolean;
-    disabled: boolean;
-    modelValue: SliderValue;
-    readonly: boolean;
     vertical: boolean;
     range: boolean;
+    disabled: boolean;
+    readonly: boolean;
+    modelValue: SliderValue;
     min: string | number;
     step: string | number;
 }>;

@@ -1,26 +1,26 @@
 import { createVNode as _createVNode } from "vue";
 import { watch, defineComponent } from 'vue';
-import { unknownProp, numericProp, createNamespace } from '../utils';
-import { useChildren, useCustomFieldValue } from '@vant/use';
+import { unknownProp, createNamespace } from '../utils';
+import { useChildren } from '@vant/use';
+import { useLinkField } from '../composables/use-link-field';
 var [name, bem] = createNamespace('radio-group');
-var radioGroupProps = {
+export var RADIO_KEY = Symbol(name);
+var props = {
   disabled: Boolean,
-  iconSize: numericProp,
+  iconSize: [Number, String],
   direction: String,
   modelValue: unknownProp,
   checkedColor: String
 };
-export var RADIO_KEY = Symbol(name);
 export default defineComponent({
   name,
-  props: radioGroupProps,
+  props,
   emits: ['change', 'update:modelValue'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var {
       linkChildren
     } = useChildren(RADIO_KEY);
@@ -32,7 +32,7 @@ export default defineComponent({
       props,
       updateValue
     });
-    useCustomFieldValue(() => props.modelValue);
+    useLinkField(() => props.modelValue);
     return () => _createVNode("div", {
       "class": bem([props.direction]),
       "role": "radiogroup"

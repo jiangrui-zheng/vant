@@ -1,44 +1,51 @@
 import { withDirectives as _withDirectives, vShow as _vShow, resolveDirective as _resolveDirective, createVNode as _createVNode } from "vue";
 import { ref, watch, computed, Teleport, Transition, defineComponent } from 'vue'; // Utils
 
-import { truthProp, numericProp, getZIndexStyle, makeStringProp, makeNumericProp, stopPropagation, createNamespace, HAPTICS_FEEDBACK } from '../utils'; // Composables
+import { truthProp, getZIndexStyle, stopPropagation, createNamespace } from '../utils'; // Composables
 
 import { useClickAway } from '@vant/use'; // Components
 
 import NumberKeyboardKey from './NumberKeyboardKey';
 var [name, bem] = createNamespace('number-keyboard');
-var numberKeyboardProps = {
-  show: Boolean,
-  title: String,
-  theme: makeStringProp('default'),
-  zIndex: numericProp,
-  teleport: [String, Object],
-  maxlength: makeNumericProp(Infinity),
-  modelValue: makeStringProp(''),
-  transition: truthProp,
-  blurOnClose: truthProp,
-  showDeleteKey: truthProp,
-  randomKeyOrder: Boolean,
-  closeButtonText: String,
-  deleteButtonText: String,
-  closeButtonLoading: Boolean,
-  hideOnClickOutside: truthProp,
-  safeAreaInsetBottom: truthProp,
-  extraKey: {
-    type: [String, Array],
-    default: ''
-  }
-};
 export default defineComponent({
   name,
-  props: numberKeyboardProps,
+  props: {
+    show: Boolean,
+    title: String,
+    zIndex: [Number, String],
+    teleport: [String, Object],
+    transition: truthProp,
+    blurOnClose: truthProp,
+    showDeleteKey: truthProp,
+    randomKeyOrder: Boolean,
+    closeButtonText: String,
+    deleteButtonText: String,
+    closeButtonLoading: Boolean,
+    hideOnClickOutside: truthProp,
+    safeAreaInsetBottom: truthProp,
+    theme: {
+      type: String,
+      default: 'default'
+    },
+    modelValue: {
+      type: String,
+      default: ''
+    },
+    extraKey: {
+      type: [String, Array],
+      default: ''
+    },
+    maxlength: {
+      type: [Number, String],
+      default: Number.MAX_VALUE
+    }
+  },
   emits: ['show', 'hide', 'blur', 'input', 'close', 'delete', 'update:modelValue'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var root = ref();
 
     var genBasicKeys = () => {
@@ -155,31 +162,33 @@ export default defineComponent({
         "class": bem('title')
       }, [title]), showClose && _createVNode("button", {
         "type": "button",
-        "class": [bem('close'), HAPTICS_FEEDBACK],
+        "class": bem('close'),
         "onClick": onClose
       }, [closeButtonText])]);
     };
 
-    var renderKeys = () => keys.value.map(key => {
-      var keySlots = {};
+    var renderKeys = () => {
+      return keys.value.map(key => {
+        var keySlots = {};
 
-      if (key.type === 'delete') {
-        keySlots.default = slots.delete;
-      }
+        if (key.type === 'delete') {
+          keySlots.default = slots.delete;
+        }
 
-      if (key.type === 'extra') {
-        keySlots.default = slots['extra-key'];
-      }
+        if (key.type === 'extra') {
+          keySlots.default = slots['extra-key'];
+        }
 
-      return _createVNode(NumberKeyboardKey, {
-        "key": key.text,
-        "text": key.text,
-        "type": key.type,
-        "wider": key.wider,
-        "color": key.color,
-        "onPress": onPress
-      }, keySlots);
-    });
+        return _createVNode(NumberKeyboardKey, {
+          "key": key.text,
+          "text": key.text,
+          "type": key.type,
+          "wider": key.wider,
+          "color": key.color,
+          "onPress": onPress
+        }, keySlots);
+      });
+    };
 
     var renderSidebar = () => {
       if (props.theme === 'custom') {
@@ -210,7 +219,7 @@ export default defineComponent({
     });
 
     if (props.hideOnClickOutside) {
-      useClickAway(root, onBlur, {
+      useClickAway(root, onClose, {
         eventName: 'touchstart'
       });
     }

@@ -1,5 +1,5 @@
 import { createVNode as _createVNode, mergeProps as _mergeProps } from "vue";
-import { ref, getCurrentInstance, watch } from 'vue';
+import { ref, getCurrentInstance } from 'vue';
 import { extend, isObject, inBrowser, withInstall } from '../utils';
 import { mountComponent, usePopupState } from '../utils/mount-component';
 import VanToast from './Toast';
@@ -28,7 +28,7 @@ var queue = [];
 var allowMultiple = false;
 var currentOptions = extend({}, defaultOptions); // default options of specific type
 
-var defaultOptionsMap = new Map();
+var defaultOptionsMap = {};
 
 function parseOptions(message) {
   if (isObject(message)) {
@@ -66,13 +66,14 @@ function createInstance() {
           onClosed,
           'onUpdate:show': toggle
         };
+
+        if (message.value) {
+          attrs.message = message.value;
+        }
+
         return _createVNode(VanToast, _mergeProps(state, attrs), null);
-      }; // support dynamic modification of message
+      }; // rewrite render function
 
-
-      watch(message, val => {
-        state.message = val;
-      }); // rewrite render function
 
       getCurrentInstance().render = render;
       return {
@@ -95,18 +96,14 @@ function getInstance() {
   return queue[queue.length - 1];
 }
 
-function Toast(options) {
-  if (options === void 0) {
-    options = {};
-  }
-
+function Toast(options = {}) {
   if (!inBrowser) {
     return {};
   }
 
   var toast = getInstance();
   var parsedOptions = parseOptions(options);
-  toast.open(extend({}, currentOptions, defaultOptionsMap.get(parsedOptions.type || currentOptions.type), parsedOptions));
+  toast.open(extend({}, currentOptions, defaultOptionsMap[parsedOptions.type || currentOptions.type], parsedOptions));
   return toast;
 }
 
@@ -128,16 +125,14 @@ Toast.clear = all => {
     } else if (!allowMultiple) {
       queue[0].clear();
     } else {
-      var _queue$shift;
-
-      (_queue$shift = queue.shift()) == null ? void 0 : _queue$shift.clear();
+      queue.shift().clear();
     }
   }
 };
 
 function setDefaultOptions(type, options) {
   if (typeof type === 'string') {
-    defaultOptionsMap.set(type, options);
+    defaultOptionsMap[type] = options;
   } else {
     extend(currentOptions, type);
   }
@@ -147,18 +142,14 @@ Toast.setDefaultOptions = setDefaultOptions;
 
 Toast.resetDefaultOptions = type => {
   if (typeof type === 'string') {
-    defaultOptionsMap.delete(type);
+    defaultOptionsMap[type] = null;
   } else {
     currentOptions = extend({}, defaultOptions);
-    defaultOptionsMap.clear();
+    defaultOptionsMap = {};
   }
 };
 
-Toast.allowMultiple = function (value) {
-  if (value === void 0) {
-    value = true;
-  }
-
+Toast.allowMultiple = (value = true) => {
   allowMultiple = value;
 };
 

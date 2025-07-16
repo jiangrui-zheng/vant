@@ -1,5 +1,5 @@
 import { createVNode as _createVNode, mergeProps as _mergeProps } from "vue";
-import { extend, inBrowser, withInstall } from '../utils';
+import { inBrowser, withInstall, extend } from '../utils';
 import { mountComponent, usePopupState } from '../utils/mount-component';
 import VanDialog from './Dialog';
 var instance;
@@ -12,7 +12,7 @@ function initInstance() {
         toggle
       } = usePopupState();
       return () => _createVNode(VanDialog, _mergeProps(state, {
-        "onUpdate:show": toggle
+        'onUpdate:show': toggle
       }), null);
     }
 
@@ -52,7 +52,7 @@ Dialog.defaultOptions = {
   className: '',
   allowHtml: false,
   lockScroll: true,
-  transition: undefined,
+  transition: 'van-dialog-bounce',
   beforeClose: null,
   overlayClass: '',
   overlayStyle: undefined,
@@ -87,11 +87,10 @@ Dialog.resetDefaultOptions = () => {
   Dialog.currentOptions = extend({}, Dialog.defaultOptions);
 };
 
-Dialog.Component = withInstall(VanDialog);
-
 Dialog.install = app => {
-  app.use(Dialog.Component);
+  app.use(withInstall(VanDialog));
   app.config.globalProperties.$dialog = Dialog;
 };
 
+Dialog.Component = withInstall(VanDialog);
 export { Dialog };

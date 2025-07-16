@@ -1,42 +1,49 @@
 import { createVNode as _createVNode } from "vue";
 import { ref, computed, defineComponent } from 'vue'; // Utils
 
-import { clamp, addUnit, addNumber, numericProp, getSizeStyle, preventDefault, stopPropagation, createNamespace, makeNumericProp } from '../utils'; // Composables
+import { clamp, addUnit, addNumber, getSizeStyle, preventDefault, stopPropagation, createNamespace } from '../utils'; // Composables
 
-import { useRect, useCustomFieldValue } from '@vant/use';
+import { useRect } from '@vant/use';
 import { useTouch } from '../composables/use-touch';
+import { useLinkField } from '../composables/use-link-field';
 var [name, bem] = createNamespace('slider');
-var sliderProps = {
-  min: makeNumericProp(0),
-  max: makeNumericProp(100),
-  step: makeNumericProp(1),
-  range: Boolean,
-  reverse: Boolean,
-  disabled: Boolean,
-  readonly: Boolean,
-  vertical: Boolean,
-  barHeight: numericProp,
-  buttonSize: numericProp,
-  activeColor: String,
-  inactiveColor: String,
-  modelValue: {
-    type: [Number, Array],
-    default: 0
-  }
-};
 export default defineComponent({
   name,
-  props: sliderProps,
+  props: {
+    range: Boolean,
+    disabled: Boolean,
+    readonly: Boolean,
+    vertical: Boolean,
+    barHeight: [Number, String],
+    buttonSize: [Number, String],
+    activeColor: String,
+    inactiveColor: String,
+    min: {
+      type: [Number, String],
+      default: 0
+    },
+    max: {
+      type: [Number, String],
+      default: 100
+    },
+    step: {
+      type: [Number, String],
+      default: 1
+    },
+    modelValue: {
+      type: [Number, Array],
+      default: 0
+    }
+  },
   emits: ['change', 'drag-end', 'drag-start', 'update:modelValue'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var buttonIndex;
-    var current;
     var startValue;
+    var currentValue;
     var root = ref();
     var dragStatus = ref();
     var touch = useTouch();
@@ -49,7 +56,7 @@ export default defineComponent({
       };
     });
 
-    var isRange = val => props.range && Array.isArray(val); // 计算选中条的长度百分比
+    var isRange = val => !!props.range && Array.isArray(val); // 计算选中条的长度百分比
 
 
     var calcMainAxis = () => {
@@ -81,25 +88,13 @@ export default defineComponent({
 
     var barStyle = computed(() => {
       var mainAxis = props.vertical ? 'height' : 'width';
-      var style = {
+      return {
         [mainAxis]: calcMainAxis(),
-        background: props.activeColor
+        left: props.vertical ? undefined : calcOffset(),
+        top: props.vertical ? calcOffset() : undefined,
+        background: props.activeColor,
+        transition: dragStatus.value ? 'none' : undefined
       };
-
-      if (dragStatus.value) {
-        style.transition = 'none';
-      }
-
-      var getPositionKey = () => {
-        if (props.vertical) {
-          return props.reverse ? 'bottom' : 'top';
-        }
-
-        return props.reverse ? 'right' : 'left';
-      };
-
-      style[getPositionKey()] = calcOffset();
-      return style;
     });
 
     var format = value => {
@@ -111,21 +106,20 @@ export default defineComponent({
       return addNumber(min, diff);
     };
 
-    var isSameValue = (newValue, oldValue) => JSON.stringify(newValue) === JSON.stringify(oldValue);
+    var isSameValue = (newValue, oldValue) => JSON.stringify(newValue) === JSON.stringify(oldValue); // 处理两个滑块重叠之后的情况
 
-    var handleRangeValue = value => {
-      var _value$, _value$2;
 
-      // 设置默认值
-      var left = (_value$ = value[0]) != null ? _value$ : Number(props.min);
-      var right = (_value$2 = value[1]) != null ? _value$2 : Number(props.max); // 处理两个滑块重叠之后的情况
+    var handleOverlap = value => {
+      if (value[0] > value[1]) {
+        return value.slice(0).reverse();
+      }
 
-      return left > right ? [right, left] : [left, right];
+      return value;
     };
 
     var updateValue = (value, end) => {
       if (isRange(value)) {
-        value = handleRangeValue(value).map(format);
+        value = handleOverlap(value).map(format);
       } else {
         value = format(value);
       }
@@ -148,30 +142,13 @@ export default defineComponent({
 
       var {
         min,
-        reverse,
         vertical,
         modelValue
       } = props;
       var rect = useRect(root);
-
-      var getDelta = () => {
-        if (vertical) {
-          if (reverse) {
-            return rect.bottom - event.clientY;
-          }
-
-          return event.clientY - rect.top;
-        }
-
-        if (reverse) {
-          return rect.right - event.clientX;
-        }
-
-        return event.clientX - rect.left;
-      };
-
+      var delta = vertical ? event.clientY - rect.top : event.clientX - rect.left;
       var total = vertical ? rect.height : rect.width;
-      var value = Number(min) + getDelta() / total * scope.value;
+      var value = Number(min) + delta / total * scope.value;
 
       if (isRange(modelValue)) {
         var [left, right] = modelValue;
@@ -193,12 +170,12 @@ export default defineComponent({
       }
 
       touch.start(event);
-      current = props.modelValue;
+      currentValue = props.modelValue;
 
-      if (isRange(current)) {
-        startValue = current.map(format);
+      if (isRange(currentValue)) {
+        startValue = currentValue.map(format);
       } else {
-        startValue = format(current);
+        startValue = format(currentValue);
       }
 
       dragStatus.value = 'start';
@@ -210,104 +187,79 @@ export default defineComponent({
       }
 
       if (dragStatus.value === 'start') {
-        emit('drag-start', event);
+        emit('drag-start');
       }
 
       preventDefault(event, true);
       touch.move(event);
-      dragStatus.value = 'dragging';
+      dragStatus.value = 'draging';
       var rect = useRect(root);
       var delta = props.vertical ? touch.deltaY.value : touch.deltaX.value;
       var total = props.vertical ? rect.height : rect.width;
       var diff = delta / total * scope.value;
 
-      if (props.reverse) {
-        diff = -diff;
-      }
-
       if (isRange(startValue)) {
-        var index = props.reverse ? 1 - buttonIndex : buttonIndex;
-        current[index] = startValue[index] + diff;
+        currentValue[buttonIndex] = startValue[buttonIndex] + diff;
       } else {
-        current = startValue + diff;
+        currentValue = startValue + diff;
       }
 
-      updateValue(current);
+      updateValue(currentValue);
     };
 
-    var onTouchEnd = event => {
+    var onTouchEnd = () => {
       if (props.disabled || props.readonly) {
         return;
       }
 
-      if (dragStatus.value === 'dragging') {
-        updateValue(current, true);
-        emit('drag-end', event);
+      if (dragStatus.value === 'draging') {
+        updateValue(currentValue, true);
+        emit('drag-end');
       }
 
       dragStatus.value = '';
     };
 
-    var getButtonClassName = index => {
-      if (typeof index === 'number') {
-        var position = ['left', 'right'];
-        return bem("button-wrapper", position[index]);
-      }
-
-      return bem('button-wrapper', props.reverse ? 'left' : 'right');
-    };
-
-    var renderButtonContent = (value, index) => {
-      if (typeof index === 'number') {
-        var slot = slots[index === 0 ? 'left-button' : 'right-button'];
-
-        if (slot) {
-          return slot({
-            value
-          });
-        }
-      }
-
-      if (slots.button) {
-        return slots.button({
-          value
-        });
-      }
-
-      return _createVNode("div", {
-        "class": bem('button'),
-        "style": getSizeStyle(props.buttonSize)
-      }, null);
-    };
-
     var renderButton = index => {
-      var current = typeof index === 'number' ? props.modelValue[index] : props.modelValue;
+      var getClassName = () => {
+        if (typeof index === 'number') {
+          var position = ['left', 'right'];
+          return "button-wrapper-" + position[index];
+        }
+
+        return "button-wrapper";
+      };
+
+      var currentValue = typeof index === 'number' ? props.modelValue[index] : props.modelValue;
       return _createVNode("div", {
         "role": "slider",
-        "class": getButtonClassName(index),
+        "class": bem(getClassName()),
         "tabindex": props.disabled || props.readonly ? -1 : 0,
         "aria-valuemin": +props.min,
-        "aria-valuenow": current,
+        "aria-valuenow": currentValue,
         "aria-valuemax": +props.max,
         "aria-orientation": props.vertical ? 'vertical' : 'horizontal',
-        "onTouchstart": event => {
+        "onTouchstart": e => {
           if (typeof index === 'number') {
             // save index of current button
             buttonIndex = index;
           }
 
-          onTouchStart(event);
+          onTouchStart(e);
         },
         "onTouchmove": onTouchMove,
         "onTouchend": onTouchEnd,
         "onTouchcancel": onTouchEnd,
         "onClick": stopPropagation
-      }, [renderButtonContent(current, index)]);
+      }, [slots.button ? slots.button() : _createVNode("div", {
+        "class": bem('button'),
+        "style": getSizeStyle(props.buttonSize)
+      }, null)]);
     }; // format initial value
 
 
     updateValue(props.modelValue);
-    useCustomFieldValue(() => props.modelValue);
+    useLinkField(() => props.modelValue);
     return () => _createVNode("div", {
       "ref": root,
       "style": wrapperStyle.value,

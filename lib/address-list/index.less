@@ -1,4 +1,5 @@
 @import './var.less';
+@import '../style/mixins/safe-area.less';
 
 :root {
   --van-address-list-padding: @address-list-padding;
@@ -28,9 +29,9 @@
     z-index: var(--van-address-list-add-button-z-index);
     box-sizing: border-box;
     width: 100%;
-    padding-left: var(--van-padding-md);
-    padding-right: var(--van-padding-md);
-    background-color: var(--van-background-color-light);
+    padding: 0 var(--van-padding-md);
+    background-color: var(--van-white);
+    .safe-area-inset-bottom();
   }
 
   &__add {
@@ -48,7 +49,7 @@
 
 .van-address-item {
   padding: var(--van-address-list-item-padding);
-  background-color: var(--van-background-color-light);
+  background-color: var(--van-white);
   border-radius: var(--van-border-radius-lg);
 
   &:not(:last-child) {

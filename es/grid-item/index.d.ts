@@ -1,4 +1,4 @@
-export declare const GridItem: import("../utils").WithInstall<import("vue").DefineComponent<{
+declare const GridItem: import("../utils").WithInstall<import("vue").DefineComponent<{
     to: import("vue").PropType<import("vue-router").RouteLocationRaw>;
     url: StringConstructor;
     replace: BooleanConstructor;
@@ -7,8 +7,8 @@ export declare const GridItem: import("../utils").WithInstall<import("vue").Defi
     text: StringConstructor;
     icon: StringConstructor;
     badge: (NumberConstructor | StringConstructor)[];
-    iconColor: StringConstructor;
     iconPrefix: StringConstructor;
+    iconColor: StringConstructor;
 }, (() => JSX.Element) | undefined, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
     to?: unknown;
     url?: unknown;
@@ -17,22 +17,22 @@ export declare const GridItem: import("../utils").WithInstall<import("vue").Defi
     text?: unknown;
     icon?: unknown;
     badge?: unknown;
-    iconColor?: unknown;
     iconPrefix?: unknown;
+    iconColor?: unknown;
 } & {
     replace: boolean;
     dot: boolean;
 } & {
     text?: string | undefined;
-    url?: string | undefined;
     to?: import("vue-router").RouteLocationRaw | undefined;
+    url?: string | undefined;
     badge?: string | number | undefined;
-    iconPrefix?: string | undefined;
     icon?: string | undefined;
+    iconPrefix?: string | undefined;
     iconColor?: string | undefined;
 }>, {
     replace: boolean;
     dot: boolean;
 }>>;
 export default GridItem;
-export type { GridItemProps } from './GridItem';
+export { GridItem };

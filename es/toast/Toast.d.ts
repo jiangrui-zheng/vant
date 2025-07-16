@@ -1,115 +1,82 @@
-import { PropType, CSSProperties, ExtractPropTypes } from 'vue';
+import { PropType, CSSProperties } from 'vue';
 import { LoadingType } from '../loading';
-import type { ToastType, ToastPosition } from './types';
-declare const toastProps: {
-    icon: StringConstructor;
-    show: BooleanConstructor;
-    type: {
-        type: PropType<ToastType>;
-        default: ToastType;
-    };
-    overlay: BooleanConstructor;
-    message: (NumberConstructor | StringConstructor)[];
-    iconSize: (NumberConstructor | StringConstructor)[];
-    duration: {
-        type: NumberConstructor;
-        default: number;
-    };
-    position: {
-        type: PropType<ToastPosition>;
-        default: ToastPosition;
-    };
-    className: PropType<unknown>;
-    iconPrefix: StringConstructor;
-    transition: {
-        type: PropType<string>;
-        default: string;
-    };
-    loadingType: PropType<LoadingType>;
-    forbidClick: BooleanConstructor;
-    overlayClass: PropType<unknown>;
-    overlayStyle: PropType<CSSProperties>;
-    closeOnClick: BooleanConstructor;
-    closeOnClickOverlay: BooleanConstructor;
-};
-export declare type ToastProps = ExtractPropTypes<typeof toastProps>;
+export declare type ToastType = 'text' | 'loading' | 'success' | 'fail' | 'html';
+export declare type ToastPosition = 'top' | 'middle' | 'bottom';
 declare const _default: import("vue").DefineComponent<{
     icon: StringConstructor;
     show: BooleanConstructor;
-    type: {
-        type: PropType<ToastType>;
-        default: ToastType;
-    };
     overlay: BooleanConstructor;
     message: (NumberConstructor | StringConstructor)[];
     iconSize: (NumberConstructor | StringConstructor)[];
-    duration: {
-        type: NumberConstructor;
-        default: number;
-    };
-    position: {
-        type: PropType<ToastPosition>;
-        default: ToastPosition;
-    };
     className: PropType<unknown>;
     iconPrefix: StringConstructor;
-    transition: {
-        type: PropType<string>;
-        default: string;
-    };
     loadingType: PropType<LoadingType>;
     forbidClick: BooleanConstructor;
     overlayClass: PropType<unknown>;
     overlayStyle: PropType<CSSProperties>;
     closeOnClick: BooleanConstructor;
     closeOnClickOverlay: BooleanConstructor;
+    type: {
+        type: PropType<ToastType>;
+        default: string;
+    };
+    duration: {
+        type: NumberConstructor;
+        default: number;
+    };
+    position: {
+        type: PropType<ToastPosition>;
+        default: string;
+    };
+    transition: {
+        type: StringConstructor;
+        default: string;
+    };
 }, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:show"[], "update:show", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
     icon?: unknown;
     show?: unknown;
-    type?: unknown;
     overlay?: unknown;
     message?: unknown;
     iconSize?: unknown;
-    duration?: unknown;
-    position?: unknown;
     className?: unknown;
     iconPrefix?: unknown;
-    transition?: unknown;
     loadingType?: unknown;
     forbidClick?: unknown;
     overlayClass?: unknown;
     overlayStyle?: unknown;
     closeOnClick?: unknown;
     closeOnClickOverlay?: unknown;
+    type?: unknown;
+    duration?: unknown;
+    position?: unknown;
+    transition?: unknown;
 } & {
     type: ToastType;
     overlay: boolean;
     show: boolean;
     duration: number;
     closeOnClickOverlay: boolean;
-    position: ToastPosition;
     transition: string;
+    position: ToastPosition;
     forbidClick: boolean;
     closeOnClick: boolean;
 } & {
-    message?: string | number | undefined;
-    iconPrefix?: string | undefined;
     icon?: string | undefined;
+    iconPrefix?: string | undefined;
     loadingType?: LoadingType | undefined;
     overlayStyle?: CSSProperties | undefined;
     overlayClass?: unknown;
     className?: unknown;
+    message?: string | number | undefined;
     iconSize?: string | number | undefined;
-}> & {
-    "onUpdate:show"?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     type: ToastType;
     overlay: boolean;
     show: boolean;
     duration: number;
     closeOnClickOverlay: boolean;
-    position: ToastPosition;
     transition: string;
+    position: ToastPosition;
     forbidClick: boolean;
     closeOnClick: boolean;
 }>;

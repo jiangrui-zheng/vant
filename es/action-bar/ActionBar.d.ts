@@ -1,12 +1,4 @@
-import { ExtractPropTypes } from 'vue';
 export declare const ACTION_BAR_KEY: unique symbol;
-declare const actionBarProps: {
-    safeAreaInsetBottom: {
-        type: BooleanConstructor;
-        default: true;
-    };
-};
-export declare type ActionBarProps = ExtractPropTypes<typeof actionBarProps>;
 declare const _default: import("vue").DefineComponent<{
     safeAreaInsetBottom: {
         type: BooleanConstructor;

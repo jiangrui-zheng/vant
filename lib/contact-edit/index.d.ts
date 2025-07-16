@@ -1,4 +1,4 @@
-export declare const ContactEdit: import("../utils").WithInstall<import("vue").DefineComponent<{
+declare const ContactEdit: import("../utils").WithInstall<import("vue").DefineComponent<{
     isEdit: BooleanConstructor;
     isSaving: BooleanConstructor;
     isDeleting: BooleanConstructor;
@@ -29,11 +29,7 @@ export declare const ContactEdit: import("../utils").WithInstall<import("vue").D
     contactInfo: import("./ContactEdit").ContactEditInfo;
 } & {
     setDefaultLabel?: string | undefined;
-}> & {
-    onSave?: ((...args: any[]) => any) | undefined;
-    onDelete?: ((...args: any[]) => any) | undefined;
-    "onChange-default"?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     isSaving: boolean;
     isDeleting: boolean;
     showSetDefault: boolean;
@@ -42,4 +38,5 @@ export declare const ContactEdit: import("../utils").WithInstall<import("vue").D
     contactInfo: import("./ContactEdit").ContactEditInfo;
 }>>;
 export default ContactEdit;
-export type { ContactEditInfo, ContactEditProps } from './ContactEdit';
+export { ContactEdit };
+export type { ContactEditInfo } from './ContactEdit';

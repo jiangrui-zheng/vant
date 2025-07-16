@@ -1,13 +1,14 @@
 import { createVNode as _createVNode } from "vue";
+
+/* eslint-disable no-use-before-define */
 import { ref, watch, reactive, defineComponent } from 'vue'; // Utils
 
 import { deepClone } from '../utils/deep-clone';
-import { clamp, isObject, unknownProp, numericProp, makeArrayProp, makeNumberProp, preventDefault, createNamespace, makeRequiredProp } from '../utils'; // Composables
+import { clamp, isObject, unknownProp, preventDefault, createNamespace } from '../utils'; // Composables
 
 import { useParent } from '@vant/use';
 import { useTouch } from '../composables/use-touch';
-import { useExpose } from '../composables/use-expose'; // Types
-
+import { useExpose } from '../composables/use-expose';
 var DEFAULT_DURATION = 200; // 惯性滑动思路:
 // 在手指离开屏幕时，如果和上一次 move 时的间隔小于 `MOMENTUM_LIMIT_TIME` 且 move
 // 距离大于 `MOMENTUM_LIMIT_DISTANCE` 时，执行惯性滑动
@@ -17,37 +18,55 @@ var MOMENTUM_LIMIT_DISTANCE = 15;
 var [name, bem] = createNamespace('picker-column');
 
 function getElementTranslateY(element) {
-  var {
-    transform
-  } = window.getComputedStyle(element);
+  var style = window.getComputedStyle(element);
+  var transform = style.transform || style.webkitTransform;
   var translateY = transform.slice(7, transform.length - 1).split(', ')[5];
   return Number(translateY);
 }
 
 export var PICKER_KEY = Symbol(name);
 
-var isOptionDisabled = option => isObject(option) && option.disabled;
+function isOptionDisabled(option) {
+  return isObject(option) && option.disabled;
+}
 
 export default defineComponent({
   name,
   props: {
-    textKey: makeRequiredProp(String),
     readonly: Boolean,
     allowHtml: Boolean,
     className: unknownProp,
-    itemHeight: makeRequiredProp(Number),
-    defaultIndex: makeNumberProp(0),
-    swipeDuration: makeRequiredProp(numericProp),
-    initialOptions: makeArrayProp(),
-    visibleItemCount: makeRequiredProp(numericProp)
+    textKey: {
+      type: String,
+      required: true
+    },
+    itemHeight: {
+      type: Number,
+      required: true
+    },
+    swipeDuration: {
+      type: [Number, String],
+      required: true
+    },
+    visibleItemCount: {
+      type: [Number, String],
+      required: true
+    },
+    defaultIndex: {
+      type: Number,
+      default: 0
+    },
+    initialOptions: {
+      type: Array,
+      default: () => []
+    }
   },
   emits: ['change'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var moving;
     var startOffset;
     var touchStartTime;
@@ -263,23 +282,28 @@ export default defineComponent({
       stopMomentum
     });
     watch(() => props.initialOptions, setOptions);
-    watch(() => props.defaultIndex, value => setIndex(value));
-    return () => _createVNode("div", {
-      "class": [bem(), props.className],
-      "onTouchstart": onTouchStart,
-      "onTouchmove": onTouchMove,
-      "onTouchend": onTouchEnd,
-      "onTouchcancel": onTouchEnd
-    }, [_createVNode("ul", {
-      "ref": wrapper,
-      "style": {
+    watch(() => props.defaultIndex, value => {
+      setIndex(value);
+    });
+    return () => {
+      var wrapperStyle = {
         transform: "translate3d(0, " + (state.offset + baseOffset()) + "px, 0)",
         transitionDuration: state.duration + "ms",
         transitionProperty: state.duration ? 'all' : 'none'
-      },
-      "class": bem('wrapper'),
-      "onTransitionend": stopMomentum
-    }, [renderOptions()])]);
+      };
+      return _createVNode("div", {
+        "class": [bem(), props.className],
+        "onTouchstart": onTouchStart,
+        "onTouchmove": onTouchMove,
+        "onTouchend": onTouchEnd,
+        "onTouchcancel": onTouchEnd
+      }, [_createVNode("ul", {
+        "ref": wrapper,
+        "style": wrapperStyle,
+        "class": bem('wrapper'),
+        "onTransitionend": stopMomentum
+      }, [renderOptions()])]);
+    };
   }
 
 });

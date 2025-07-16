@@ -12,34 +12,30 @@ export declare type CheckerParent = {
 };
 export declare const checkerProps: {
     name: PropType<unknown>;
-    shape: {
-        type: PropType<CheckerShape>;
-        default: CheckerShape;
-    };
     disabled: BooleanConstructor;
     iconSize: (NumberConstructor | StringConstructor)[];
     modelValue: PropType<unknown>;
     checkedColor: StringConstructor;
     labelPosition: PropType<CheckerLabelPosition>;
     labelDisabled: BooleanConstructor;
+    shape: {
+        type: PropType<CheckerShape>;
+        default: string;
+    };
 };
 declare const _default: import("vue").DefineComponent<{
     name: PropType<unknown>;
-    shape: {
-        type: PropType<CheckerShape>;
-        default: CheckerShape;
-    };
     disabled: BooleanConstructor;
     iconSize: (NumberConstructor | StringConstructor)[];
     modelValue: PropType<unknown>;
     checkedColor: StringConstructor;
     labelPosition: PropType<CheckerLabelPosition>;
     labelDisabled: BooleanConstructor;
-} & {
-    bem: {
-        type: FunctionConstructor;
-        required: true;
+    shape: {
+        type: PropType<CheckerShape>;
+        default: string;
     };
+} & {
     role: StringConstructor;
     parent: PropType<CheckerParent | null>;
     checked: BooleanConstructor;
@@ -47,43 +43,44 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: true;
     };
+    bem: {
+        type: FunctionConstructor;
+        required: true;
+    };
 }, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("click" | "toggle")[], "click" | "toggle", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
     name?: unknown;
-    shape?: unknown;
     disabled?: unknown;
     iconSize?: unknown;
     modelValue?: unknown;
     checkedColor?: unknown;
     labelPosition?: unknown;
     labelDisabled?: unknown;
-    bem?: unknown;
+    shape?: unknown;
     role?: unknown;
     parent?: unknown;
     checked?: unknown;
     bindGroup?: unknown;
+    bem?: unknown;
 } & {
     bem: Function;
-    checked: boolean;
     disabled: boolean;
-    shape: CheckerShape;
     labelDisabled: boolean;
+    shape: CheckerShape;
+    checked: boolean;
     bindGroup: boolean;
 } & {
     name?: unknown;
     role?: string | undefined;
-    modelValue?: unknown;
     parent?: CheckerParent | null | undefined;
+    modelValue?: unknown;
     iconSize?: string | number | undefined;
     checkedColor?: string | undefined;
     labelPosition?: CheckerLabelPosition | undefined;
-}> & {
-    onClick?: ((...args: any[]) => any) | undefined;
-    onToggle?: ((...args: any[]) => any) | undefined;
-}, {
-    checked: boolean;
+}>, {
     disabled: boolean;
-    shape: CheckerShape;
     labelDisabled: boolean;
+    shape: CheckerShape;
+    checked: boolean;
     bindGroup: boolean;
 }>;
 export default _default;

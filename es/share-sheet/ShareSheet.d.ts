@@ -1,4 +1,4 @@
-import { ExtractPropTypes } from 'vue';
+import { PropType } from 'vue';
 export declare type ShareSheetOption = {
     name: string;
     icon: string;
@@ -6,53 +6,6 @@ export declare type ShareSheetOption = {
     description?: string;
 };
 export declare type ShareSheetOptions = ShareSheetOption[] | ShareSheetOption[][];
-declare const shareSheetProps: {
-    show: BooleanConstructor;
-    zIndex: (NumberConstructor | StringConstructor)[];
-    overlay: {
-        type: BooleanConstructor;
-        default: true;
-    };
-    duration: (NumberConstructor | StringConstructor)[];
-    teleport: import("vue").PropType<string | import("vue").RendererElement | null | undefined>;
-    lockScroll: {
-        type: BooleanConstructor;
-        default: true;
-    };
-    lazyRender: {
-        type: BooleanConstructor;
-        default: true;
-    };
-    beforeClose: import("vue").PropType<import("../utils").Interceptor>;
-    overlayStyle: import("vue").PropType<import("vue").CSSProperties>;
-    overlayClass: import("vue").PropType<unknown>;
-    transitionAppear: BooleanConstructor;
-    closeOnClickOverlay: {
-        type: BooleanConstructor;
-        default: true;
-    };
-} & {
-    title: StringConstructor;
-    round: {
-        type: BooleanConstructor;
-        default: true;
-    };
-    options: {
-        type: import("vue").PropType<(ShareSheetOption | ShareSheetOption[])[]>;
-        default: () => never[];
-    };
-    cancelText: StringConstructor;
-    description: StringConstructor;
-    closeOnPopstate: {
-        type: BooleanConstructor;
-        default: true;
-    };
-    safeAreaInsetBottom: {
-        type: BooleanConstructor;
-        default: true;
-    };
-};
-export declare type ShareSheetProps = ExtractPropTypes<typeof shareSheetProps>;
 declare const _default: import("vue").DefineComponent<{
     show: BooleanConstructor;
     zIndex: (NumberConstructor | StringConstructor)[];
@@ -61,7 +14,7 @@ declare const _default: import("vue").DefineComponent<{
         default: true;
     };
     duration: (NumberConstructor | StringConstructor)[];
-    teleport: import("vue").PropType<string | import("vue").RendererElement | null | undefined>;
+    teleport: PropType<string | import("vue").RendererElement | null | undefined>;
     lockScroll: {
         type: BooleanConstructor;
         default: true;
@@ -70,9 +23,8 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: true;
     };
-    beforeClose: import("vue").PropType<import("../utils").Interceptor>;
-    overlayStyle: import("vue").PropType<import("vue").CSSProperties>;
-    overlayClass: import("vue").PropType<unknown>;
+    overlayStyle: PropType<import("vue").CSSProperties>;
+    overlayClass: PropType<unknown>;
     transitionAppear: BooleanConstructor;
     closeOnClickOverlay: {
         type: BooleanConstructor;
@@ -80,14 +32,6 @@ declare const _default: import("vue").DefineComponent<{
     };
 } & {
     title: StringConstructor;
-    round: {
-        type: BooleanConstructor;
-        default: true;
-    };
-    options: {
-        type: import("vue").PropType<(ShareSheetOption | ShareSheetOption[])[]>;
-        default: () => never[];
-    };
     cancelText: StringConstructor;
     description: StringConstructor;
     closeOnPopstate: {
@@ -98,7 +42,11 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: true;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("select" | "update:show" | "cancel")[], "select" | "update:show" | "cancel", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    options: {
+        type: PropType<ShareSheetOptions>;
+        default: () => never[];
+    };
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("select" | "cancel" | "update:show")[], "select" | "cancel" | "update:show", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
     show?: unknown;
     zIndex?: unknown;
     overlay?: unknown;
@@ -106,20 +54,17 @@ declare const _default: import("vue").DefineComponent<{
     teleport?: unknown;
     lockScroll?: unknown;
     lazyRender?: unknown;
-    beforeClose?: unknown;
     overlayStyle?: unknown;
     overlayClass?: unknown;
     transitionAppear?: unknown;
     closeOnClickOverlay?: unknown;
     title?: unknown;
-    round?: unknown;
-    options?: unknown;
     cancelText?: unknown;
     description?: unknown;
     closeOnPopstate?: unknown;
     safeAreaInsetBottom?: unknown;
+    options?: unknown;
 } & {
-    round: boolean;
     safeAreaInsetBottom: boolean;
     overlay: boolean;
     show: boolean;
@@ -128,23 +73,17 @@ declare const _default: import("vue").DefineComponent<{
     transitionAppear: boolean;
     closeOnClickOverlay: boolean;
     closeOnPopstate: boolean;
-    options: (ShareSheetOption | ShareSheetOption[])[];
+    options: ShareSheetOptions;
 } & {
     description?: string | undefined;
     title?: string | undefined;
     zIndex?: string | number | undefined;
     duration?: string | number | undefined;
     teleport?: string | import("vue").RendererElement | null | undefined;
-    beforeClose?: import("../utils").Interceptor | undefined;
     overlayStyle?: import("vue").CSSProperties | undefined;
     overlayClass?: unknown;
     cancelText?: string | undefined;
-}> & {
-    onSelect?: ((...args: any[]) => any) | undefined;
-    "onUpdate:show"?: ((...args: any[]) => any) | undefined;
-    onCancel?: ((...args: any[]) => any) | undefined;
-}, {
-    round: boolean;
+}>, {
     safeAreaInsetBottom: boolean;
     overlay: boolean;
     show: boolean;
@@ -153,6 +92,6 @@ declare const _default: import("vue").DefineComponent<{
     transitionAppear: boolean;
     closeOnClickOverlay: boolean;
     closeOnPopstate: boolean;
-    options: (ShareSheetOption | ShareSheetOption[])[];
+    options: ShareSheetOptions;
 }>;
 export default _default;

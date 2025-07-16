@@ -1,23 +1,21 @@
 import { Fragment as _Fragment, createVNode as _createVNode, mergeProps as _mergeProps } from "vue";
 import { defineComponent } from 'vue';
-import { truthProp, createNamespace, BORDER_TOP_BOTTOM } from '../utils';
+import { truthProp, createNamespace } from '../utils';
+import { BORDER_TOP_BOTTOM } from '../utils/constant';
 var [name, bem] = createNamespace('cell-group');
-var cellGroupProps = {
-  title: String,
-  inset: Boolean,
-  border: truthProp
-};
 export default defineComponent({
   name,
   inheritAttrs: false,
-  props: cellGroupProps,
+  props: {
+    title: String,
+    inset: Boolean,
+    border: truthProp
+  },
 
-  setup(props, _ref) {
-    var {
-      slots,
-      attrs
-    } = _ref;
-
+  setup(props, {
+    slots,
+    attrs
+  }) {
     var renderGroup = () => _createVNode("div", _mergeProps({
       "class": [bem({
         inset: props.inset

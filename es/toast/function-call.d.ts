@@ -1,6 +1,29 @@
-import { App } from 'vue';
+import { App, TeleportProps } from 'vue';
 import { ComponentInstance } from '../utils';
-import type { ToastType, ToastOptions } from './types';
+import { ToastType, ToastPosition } from './Toast';
+import type { LoadingType } from '../loading';
+export declare type ToastOptions = {
+    icon?: string;
+    type?: ToastType;
+    mask?: boolean;
+    message?: string | number;
+    onClose?: () => void;
+    onOpened?: () => void;
+    overlay?: boolean;
+    duration?: number;
+    teleport?: TeleportProps['to'];
+    iconSize?: number | string;
+    position?: ToastPosition;
+    className?: unknown;
+    transition?: string;
+    iconPrefix?: string;
+    loadingType?: LoadingType;
+    forbidClick?: boolean;
+    closeOnClick?: boolean;
+    overlayClass?: unknown;
+    overlayStyle?: Record<string, any>;
+    closeOnClickOverlay?: boolean;
+};
 declare function Toast(options?: string | ToastOptions): ComponentInstance;
 declare namespace Toast {
     var loading: (options: string | ToastOptions) => ComponentInstance;

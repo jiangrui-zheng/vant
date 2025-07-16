@@ -5,9 +5,12 @@ export default {
   confirm: 'Bekreft',
   cancel: 'Avbryt',
   delete: 'Slett',
+  complete: 'Fullfør',
   loading: 'Laster...',
-  noCoupon: 'Ingen kuponger',
+  telEmpty: 'Vennligst fyll inn telefonnummer',
   nameEmpty: 'Vennligst fyll inn navn',
+  nameInvalid: 'Ugyldig navn',
+  confirmDelete: 'Er du sikker på at du vil slette?',
   telInvalid: 'Ugyldig telefonnummer',
   vanCalendar: {
     end: 'Slutt',
@@ -45,9 +48,11 @@ export default {
   },
   vanCouponCell: {
     title: 'Kupong',
+    tips: 'Ingen kuponger',
     count: count => "Du har " + count + " kuponger"
   },
   vanCouponList: {
+    empty: 'Ingen kuponger',
     exchange: 'Bytte',
     close: 'Lukk',
     enable: 'Tilgjengelig',
@@ -60,7 +65,10 @@ export default {
     areaEmpty: 'Vennligst fyll inn område',
     addressEmpty: 'Addresse kan ikke være tomt',
     postalEmpty: 'Feil postkode',
-    defaultAddress: 'Sett som standard adresse'
+    defaultAddress: 'Sett som standard adresse',
+    telPlaceholder: 'Telefon',
+    namePlaceholder: 'Navn',
+    areaPlaceholder: 'Område'
   },
   vanAddressEditDetail: {
     label: 'Adresse',

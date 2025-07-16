@@ -1,20 +1,22 @@
 import { createVNode as _createVNode, mergeProps as _mergeProps, resolveDirective as _resolveDirective } from "vue";
 import { ref, watch, computed, nextTick, onMounted, defineComponent } from 'vue'; // Utils
 
-import { pick, clamp, extend, isDate, padZero, makeStringProp, createNamespace } from '../utils';
-import { times, sharedProps, getTrueValue, getMonthEndDay, pickerInheritKeys } from './utils'; // Composables
+import { pick, clamp, extend, isDate, padZero, createNamespace } from '../utils';
+import { times, pickerKeys, sharedProps, getTrueValue, getMonthEndDay } from './utils'; // Composables
 
 import { useExpose } from '../composables/use-expose'; // Components
 
-import { Picker } from '../picker'; // Types
-
+import { Picker } from '../picker';
 var currentYear = new Date().getFullYear();
 var [name] = createNamespace('date-picker');
 export default defineComponent({
   name,
   props: extend({}, sharedProps, {
-    type: makeStringProp('datetime'),
     modelValue: Date,
+    type: {
+      type: String,
+      default: 'datetime'
+    },
     minDate: {
       type: Date,
       default: () => new Date(currentYear - 10, 0, 1),
@@ -28,12 +30,10 @@ export default defineComponent({
   }),
   emits: ['confirm', 'cancel', 'change', 'update:modelValue'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
-
+  setup(props, {
+    emit,
+    slots
+  }) {
     var formatValue = value => {
       if (isDate(value)) {
         var timestamp = clamp(value.getTime(), props.minDate.getTime(), props.maxDate.getTime());
@@ -143,11 +143,10 @@ export default defineComponent({
 
       return result;
     });
-    var originColumns = computed(() => ranges.value.map(_ref2 => {
-      var {
-        type,
-        range: rangeArr
-      } = _ref2;
+    var originColumns = computed(() => ranges.value.map(({
+      type,
+      range: rangeArr
+    }) => {
       var values = times(rangeArr[1] - rangeArr[0] + 1, index => padZero(rangeArr[0] + index));
 
       if (props.filter) {
@@ -186,13 +185,12 @@ export default defineComponent({
             return formatter('minute', padZero(value.getMinutes()));
 
           default:
-            return '';
+            // no default
+            return null;
         }
       });
       nextTick(() => {
-        var _picker$value;
-
-        (_picker$value = picker.value) == null ? void 0 : _picker$value.setValues(values);
+        picker.value.setValues(values);
       });
     };
 
@@ -289,7 +287,7 @@ export default defineComponent({
       "onChange": onChange,
       "onCancel": onCancel,
       "onConfirm": onConfirm
-    }, pick(props, pickerInheritKeys)), slots);
+    }, pick(props, pickerKeys)), slots);
   }
 
 });

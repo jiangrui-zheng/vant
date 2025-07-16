@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/JetBrains/web-types/master/schema/web-types.json",
   "framework": "vue",
   "name": "vant",
-  "version": "3.2.7",
+  "version": "3.1.2",
   "contributions": {
     "html": {
       "tags": [
@@ -82,7 +82,7 @@
             {
               "name": "icon-prefix",
               "default": "`van-icon`",
-              "description": "图标类名前缀，等同于 Icon 组件的 [class-prefix 属性](#/zh-CN/icon#props)",
+              "description": "图标类名前缀，同 Icon 组件的 [class-prefix 属性](#/zh-CN/icon#props)",
               "options": [],
               "value": {
                 "type": "string",
@@ -122,7 +122,7 @@
             {
               "name": "to",
               "default": "-",
-              "description": "点击后跳转的目标路由对象，等同于 vue-router 的 [to 属性](https://router.vuejs.org/zh/api/#to)",
+              "description": "点击后跳转的目标路由对象，同 vue-router 的 [to 属性](https://router.vuejs.org/zh/api/#to)",
               "options": [],
               "value": {
                 "type": "string | object",
@@ -195,7 +195,9 @@
               "name": "disabled",
               "default": "`false`",
               "description": "是否禁用按钮",
-              "options": [],
+              "options": [
+                "-"
+              ],
               "value": {
                 "type": "boolean",
                 "kind": "expression"
@@ -205,7 +207,9 @@
               "name": "loading",
               "default": "`false`",
               "description": "是否显示为加载状态",
-              "options": [],
+              "options": [
+                "-"
+              ],
               "value": {
                 "type": "boolean",
                 "kind": "expression"
@@ -224,7 +228,7 @@
             {
               "name": "to",
               "default": "-",
-              "description": "点击后跳转的目标路由对象，等同于 vue-router 的 [to 属性](https://router.vuejs.org/zh/api/#to)",
+              "description": "点击后跳转的目标路由对象，同 vue-router 的 [to 属性](https://router.vuejs.org/zh/api/#to)",
               "options": [],
               "value": {
                 "type": "string | object",
@@ -238,376 +242,6 @@
               "options": [],
               "value": {
                 "type": "boolean",
-                "kind": "expression"
-              }
-            }
-          ]
-        },
-        {
-          "name": "van-action-sheet",
-          "slots": [
-            {
-              "name": "default",
-              "description": "自定义面板的展示内容"
-            },
-            {
-              "name": "description",
-              "description": "自定义描述文案"
-            },
-            {
-              "name": "cancel",
-              "description": "自定义取消按钮内容"
-            }
-          ],
-          "events": [
-            {
-              "name": "select",
-              "description": "点击选项时触发，禁用或加载状态下不会触发"
-            },
-            {
-              "name": "cancel",
-              "description": "点击取消按钮时触发"
-            },
-            {
-              "name": "open",
-              "description": "打开面板时触发"
-            },
-            {
-              "name": "close",
-              "description": "关闭面板时触发"
-            },
-            {
-              "name": "opened",
-              "description": "打开面板且动画结束后触发"
-            },
-            {
-              "name": "closed",
-              "description": "关闭面板且动画结束后触发"
-            },
-            {
-              "name": "click-overlay",
-              "description": "点击遮罩层时触发"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "v-model:show",
-              "default": "`false`",
-              "description": "是否显示动作面板",
-              "options": [],
-              "value": {
-                "type": "boolean",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "actions",
-              "default": "`[]`",
-              "description": "面板选项列表",
-              "options": [],
-              "value": {
-                "type": "ActionSheetAction[]",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "title",
-              "default": "-",
-              "description": "顶部标题",
-              "options": [],
-              "value": {
-                "type": "string",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "cancel-text",
-              "default": "-",
-              "description": "取消按钮文字",
-              "options": [],
-              "value": {
-                "type": "string",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "description",
-              "default": "-",
-              "description": "选项上方的描述信息",
-              "options": [],
-              "value": {
-                "type": "string",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "closeable",
-              "default": "`true`",
-              "description": "是否显示关闭图标",
-              "options": [],
-              "value": {
-                "type": "boolean",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "close-icon",
-              "default": "`cross`",
-              "description": "关闭[图标名称](#/zh-CN/icon)或图片链接",
-              "options": [],
-              "value": {
-                "type": "string",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "duration",
-              "default": "`0.3`",
-              "description": "动画时长，单位秒，设置为 0 可以禁用动画",
-              "options": [],
-              "value": {
-                "type": "number | string",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "round",
-              "default": "`true`",
-              "description": "是否显示圆角",
-              "options": [],
-              "value": {
-                "type": "boolean",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "overlay",
-              "default": "`true`",
-              "description": "是否显示遮罩层",
-              "options": [],
-              "value": {
-                "type": "boolean",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "overlay-class",
-              "default": "object_",
-              "description": "自定义遮罩层类名",
-              "options": [
-                "-"
-              ],
-              "value": {
-                "type": "string | Array \\",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "overlay-style",
-              "default": "-",
-              "description": "自定义遮罩层样式",
-              "options": [],
-              "value": {
-                "type": "object",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "lock-scroll",
-              "default": "`true`",
-              "description": "是否锁定背景滚动",
-              "options": [],
-              "value": {
-                "type": "boolean",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "lazy-render",
-              "default": "`true`",
-              "description": "是否在显示弹层时才渲染节点",
-              "options": [],
-              "value": {
-                "type": "boolean",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "close-on-popstate",
-              "default": "`true`",
-              "description": "是否在页面回退时自动关闭",
-              "options": [],
-              "value": {
-                "type": "boolean",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "close-on-click-action",
-              "default": "`false`",
-              "description": "是否在点击选项后关闭",
-              "options": [],
-              "value": {
-                "type": "boolean",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "close-on-click-overlay",
-              "default": "`true`",
-              "description": "是否在点击遮罩层后关闭",
-              "options": [],
-              "value": {
-                "type": "boolean",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "safe-area-inset-bottom",
-              "default": "`true`",
-              "description": "是否开启[底部安全区适配](#/zh-CN/advanced-usage#di-bu-an-quan-qu-gua-pei)",
-              "options": [],
-              "value": {
-                "type": "boolean",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "teleport",
-              "default": "-",
-              "description": "指定挂载的节点，等同于 Teleport 组件的 [to 属性](https://v3.cn.vuejs.org/api/built-in-components.html#teleport)",
-              "options": [],
-              "value": {
-                "type": "string | Element",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "before-close",
-              "default": "-",
-              "description": "关闭前的回调函数，返回 `false` 可阻止关闭，支持返回 Promise",
-              "options": [],
-              "value": {
-                "type": "(action: string) => boolean | Promise\\<boolean\\>",
-                "kind": "expression"
-              }
-            }
-          ]
-        },
-        {
-          "name": "van-address-list",
-          "slots": [
-            {
-              "name": "default",
-              "description": "在列表下方插入内容"
-            },
-            {
-              "name": "top",
-              "description": "在顶部插入内容"
-            },
-            {
-              "name": "item-bottom",
-              "description": "在列表项底部插入内容"
-            },
-            {
-              "name": "tag",
-              "description": "自定义列表项标签内容"
-            }
-          ],
-          "events": [
-            {
-              "name": "add",
-              "description": "点击新增按钮时触发"
-            },
-            {
-              "name": "edit",
-              "description": "点击编辑按钮时触发"
-            },
-            {
-              "name": "select",
-              "description": "切换选中的地址时触发"
-            },
-            {
-              "name": "edit-disabled",
-              "description": "编辑不可配送的地址时触发"
-            },
-            {
-              "name": "select-disabled",
-              "description": "选中不可配送的地址时触发"
-            },
-            {
-              "name": "click-item",
-              "description": "点击任意地址时触发"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "v-model",
-              "default": "-",
-              "description": "当前选中地址的 id",
-              "options": [],
-              "value": {
-                "type": "string",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "list",
-              "default": "`[]`",
-              "description": "地址列表",
-              "options": [],
-              "value": {
-                "type": "AddressListAddress[]",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "disabled-list",
-              "default": "`[]`",
-              "description": "不可配送地址列表",
-              "options": [],
-              "value": {
-                "type": "AddressListAddress[]",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "disabled-text",
-              "default": "-",
-              "description": "不可配送提示文案",
-              "options": [],
-              "value": {
-                "type": "string",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "switchable",
-              "default": "`true`",
-              "description": "是否允许切换地址",
-              "options": [],
-              "value": {
-                "type": "boolean",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "add-button-text",
-              "default": "`新增地址`",
-              "description": "底部按钮文字",
-              "options": [],
-              "value": {
-                "type": "string",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "default-tag-text",
-              "default": "-",
-              "description": "默认地址标签文字",
-              "options": [],
-              "value": {
-                "type": "string",
                 "kind": "expression"
               }
             }
@@ -633,6 +267,10 @@
             {
               "name": "delete",
               "description": "确认删除地址时触发"
+            },
+            {
+              "name": "cancel-delete",
+              "description": "取消删除地址时触发"
             },
             {
               "name": "select-search",
@@ -689,10 +327,10 @@
             {
               "name": "address-info",
               "default": "`{}`",
-              "description": "地址信息初始值",
+              "description": "收货人信息初始值",
               "options": [],
               "value": {
-                "type": "AddressEditInfo",
+                "type": "AddressInfo",
                 "kind": "expression"
               }
             },
@@ -702,7 +340,7 @@
               "description": "详细地址搜索结果",
               "options": [],
               "value": {
-                "type": "AddressEditSearchItem[]",
+                "type": "SearchResult[]",
                 "kind": "expression"
               }
             },
@@ -879,6 +517,366 @@
           ]
         },
         {
+          "name": "van-action-sheet",
+          "slots": [
+            {
+              "name": "default",
+              "description": "自定义面板的展示内容"
+            },
+            {
+              "name": "description",
+              "description": "自定义描述文案"
+            },
+            {
+              "name": "cancel",
+              "description": "自定义取消按钮内容"
+            }
+          ],
+          "events": [
+            {
+              "name": "select",
+              "description": "点击选项时触发，禁用或加载状态下不会触发"
+            },
+            {
+              "name": "cancel",
+              "description": "点击取消按钮时触发"
+            },
+            {
+              "name": "open",
+              "description": "打开面板时触发"
+            },
+            {
+              "name": "close",
+              "description": "关闭面板时触发"
+            },
+            {
+              "name": "opened",
+              "description": "打开面板且动画结束后触发"
+            },
+            {
+              "name": "closed",
+              "description": "关闭面板且动画结束后触发"
+            },
+            {
+              "name": "click-overlay",
+              "description": "点击遮罩层时触发"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "v-model:show",
+              "default": "`false`",
+              "description": "是否显示动作面板",
+              "options": [],
+              "value": {
+                "type": "boolean",
+                "kind": "expression"
+              }
+            },
+            {
+              "name": "actions",
+              "default": "`[]`",
+              "description": "面板选项列表",
+              "options": [],
+              "value": {
+                "type": "Action[]",
+                "kind": "expression"
+              }
+            },
+            {
+              "name": "title",
+              "default": "-",
+              "description": "顶部标题",
+              "options": [],
+              "value": {
+                "type": "string",
+                "kind": "expression"
+              }
+            },
+            {
+              "name": "cancel-text",
+              "default": "-",
+              "description": "取消按钮文字",
+              "options": [],
+              "value": {
+                "type": "string",
+                "kind": "expression"
+              }
+            },
+            {
+              "name": "description",
+              "default": "-",
+              "description": "选项上方的描述信息",
+              "options": [],
+              "value": {
+                "type": "string",
+                "kind": "expression"
+              }
+            },
+            {
+              "name": "closeable",
+              "default": "`true`",
+              "description": "是否显示关闭图标",
+              "options": [],
+              "value": {
+                "type": "boolean",
+                "kind": "expression"
+              }
+            },
+            {
+              "name": "close-icon",
+              "default": "`cross`",
+              "description": "关闭[图标名称](#/zh-CN/icon)或图片链接",
+              "options": [],
+              "value": {
+                "type": "string",
+                "kind": "expression"
+              }
+            },
+            {
+              "name": "duration",
+              "default": "`0.3`",
+              "description": "动画时长，单位秒",
+              "options": [],
+              "value": {
+                "type": "number | string",
+                "kind": "expression"
+              }
+            },
+            {
+              "name": "round",
+              "default": "`true`",
+              "description": "是否显示圆角",
+              "options": [],
+              "value": {
+                "type": "boolean",
+                "kind": "expression"
+              }
+            },
+            {
+              "name": "overlay",
+              "default": "`true`",
+              "description": "是否显示遮罩层",
+              "options": [],
+              "value": {
+                "type": "boolean",
+                "kind": "expression"
+              }
+            },
+            {
+              "name": "overlay-class",
+              "default": "object_",
+              "description": "自定义遮罩层类名",
+              "options": [
+                "-"
+              ],
+              "value": {
+                "type": "string | Array \\",
+                "kind": "expression"
+              }
+            },
+            {
+              "name": "overlay-style",
+              "default": "-",
+              "description": "自定义遮罩层样式",
+              "options": [],
+              "value": {
+                "type": "object",
+                "kind": "expression"
+              }
+            },
+            {
+              "name": "lock-scroll",
+              "default": "`true`",
+              "description": "是否锁定背景滚动",
+              "options": [],
+              "value": {
+                "type": "boolean",
+                "kind": "expression"
+              }
+            },
+            {
+              "name": "lazy-render",
+              "default": "`true`",
+              "description": "是否在显示弹层时才渲染节点",
+              "options": [],
+              "value": {
+                "type": "boolean",
+                "kind": "expression"
+              }
+            },
+            {
+              "name": "close-on-popstate",
+              "default": "`false`",
+              "description": "是否在页面回退时自动关闭",
+              "options": [],
+              "value": {
+                "type": "boolean",
+                "kind": "expression"
+              }
+            },
+            {
+              "name": "close-on-click-action",
+              "default": "`false`",
+              "description": "是否在点击选项后关闭",
+              "options": [],
+              "value": {
+                "type": "boolean",
+                "kind": "expression"
+              }
+            },
+            {
+              "name": "close-on-click-overlay",
+              "default": "`true`",
+              "description": "是否在点击遮罩层后关闭",
+              "options": [],
+              "value": {
+                "type": "boolean",
+                "kind": "expression"
+              }
+            },
+            {
+              "name": "safe-area-inset-bottom",
+              "default": "`true`",
+              "description": "是否开启[底部安全区适配](#/zh-CN/advanced-usage#di-bu-an-quan-qu-gua-pei)",
+              "options": [],
+              "value": {
+                "type": "boolean",
+                "kind": "expression"
+              }
+            },
+            {
+              "name": "teleport",
+              "default": "-",
+              "description": "指定挂载的节点，[用法示例](#/zh-CN/popup#zhi-ding-gua-zai-wei-zhi)",
+              "options": [],
+              "value": {
+                "type": "string | Element",
+                "kind": "expression"
+              }
+            }
+          ]
+        },
+        {
+          "name": "van-address-list",
+          "slots": [
+            {
+              "name": "default",
+              "description": "在列表下方插入内容"
+            },
+            {
+              "name": "top",
+              "description": "在顶部插入内容"
+            },
+            {
+              "name": "item-bottom",
+              "description": "在列表项底部插入内容"
+            },
+            {
+              "name": "tag",
+              "description": "自定义列表项标签内容"
+            }
+          ],
+          "events": [
+            {
+              "name": "add",
+              "description": "点击新增按钮时触发"
+            },
+            {
+              "name": "edit",
+              "description": "点击编辑按钮时触发"
+            },
+            {
+              "name": "select",
+              "description": "切换选中的地址时触发"
+            },
+            {
+              "name": "edit-disabled",
+              "description": "编辑不可配送的地址时触发"
+            },
+            {
+              "name": "select-disabled",
+              "description": "选中不可配送的地址时触发"
+            },
+            {
+              "name": "click-item",
+              "description": "点击任意地址时触发"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "v-model",
+              "default": "-",
+              "description": "当前选中地址的 id",
+              "options": [],
+              "value": {
+                "type": "string",
+                "kind": "expression"
+              }
+            },
+            {
+              "name": "list",
+              "default": "`[]`",
+              "description": "地址列表",
+              "options": [],
+              "value": {
+                "type": "Address[]",
+                "kind": "expression"
+              }
+            },
+            {
+              "name": "disabled-list",
+              "default": "`[]`",
+              "description": "不可配送地址列表",
+              "options": [],
+              "value": {
+                "type": "Address[]",
+                "kind": "expression"
+              }
+            },
+            {
+              "name": "disabled-text",
+              "default": "-",
+              "description": "不可配送提示文案",
+              "options": [],
+              "value": {
+                "type": "string",
+                "kind": "expression"
+              }
+            },
+            {
+              "name": "switchable",
+              "default": "`true`",
+              "description": "是否允许切换地址",
+              "options": [],
+              "value": {
+                "type": "boolean",
+                "kind": "expression"
+              }
+            },
+            {
+              "name": "add-button-text",
+              "default": "`新增地址`",
+              "description": "底部按钮文字",
+              "options": [],
+              "value": {
+                "type": "string",
+                "kind": "expression"
+              }
+            },
+            {
+              "name": "default-tag-text",
+              "default": "-",
+              "description": "默认地址标签文字",
+              "options": [],
+              "value": {
+                "type": "string",
+                "kind": "expression"
+              }
+            }
+          ]
+        },
+        {
           "name": "van-area",
           "slots": [
             {
@@ -909,11 +907,11 @@
           "events": [
             {
               "name": "confirm",
-              "description": "点击完成按钮时触发"
+              "description": "点击右上方完成按钮"
             },
             {
               "name": "cancel",
-              "description": "点击取消按钮时触发"
+              "description": "点击取消按钮时"
             },
             {
               "name": "change",
@@ -1211,7 +1209,7 @@
             {
               "name": "icon-prefix",
               "default": "`van-icon`",
-              "description": "图标类名前缀，等同于 Icon 组件的 [class-prefix 属性](#/zh-CN/icon#props)",
+              "description": "图标类名前缀，同 Icon 组件的 [class-prefix 属性](#/zh-CN/icon#props)",
               "options": [],
               "value": {
                 "type": "string",
@@ -1341,10 +1339,10 @@
             {
               "name": "loading-size",
               "default": "`20px`",
-              "description": "加载图标大小，默认单位为 `px`",
+              "description": "加载图标大小",
               "options": [],
               "value": {
-                "type": "number | string",
+                "type": "string",
                 "kind": "expression"
               }
             },
@@ -1361,7 +1359,7 @@
             {
               "name": "to",
               "default": "-",
-              "description": "点击后跳转的目标路由对象，等同于 vue-router 的 [to 属性](https://router.vuejs.org/zh/api/#to)",
+              "description": "点击后跳转的目标路由对象，同 vue-router 的 [to 属性](https://router.vuejs.org/zh/api/#to)",
               "options": [],
               "value": {
                 "type": "string | object",
@@ -1388,16 +1386,8 @@
               "description": "自定义标题"
             },
             {
-              "name": "subtitle",
-              "description": "自定义日历副标题"
-            },
-            {
               "name": "footer",
               "description": "自定义底部区域内容"
-            },
-            {
-              "name": "confirm-text",
-              "description": "自定义确认按钮的内容"
             },
             {
               "name": "top-info",
@@ -1444,10 +1434,6 @@
             {
               "name": "over-range",
               "description": "范围选择超过最多可选天数时触发"
-            },
-            {
-              "name": "click-subtitle",
-              "description": "点击日历副标题时触发"
             }
           ],
           "attributes": [
@@ -1696,7 +1682,7 @@
             {
               "name": "teleport",
               "default": "-",
-              "description": "指定挂载的节点，等同于 Teleport 组件的 [to 属性](https://v3.cn.vuejs.org/api/built-in-components.html#teleport)",
+              "description": "指定挂载的节点，[用法示例](#/zh-CN/popup#zhi-ding-gua-zai-wei-zhi)",
               "options": [],
               "value": {
                 "type": "string | Element",
@@ -1715,7 +1701,7 @@
             },
             {
               "name": "range-prompt",
-              "default": "`最多选择 xx 天`",
+              "default": "`选择天数不能超过 xx 天`",
               "description": "范围选择超过最多可选天数时的提示文案",
               "options": [],
               "value": {
@@ -1755,7 +1741,7 @@
             },
             {
               "name": "range-prompt",
-              "default": "`最多选择 xx 天`",
+              "default": "`选择天数不能超过 xx 天`",
               "description": "选择超过最多可选天数时的提示文案",
               "options": [],
               "value": {
@@ -1942,14 +1928,6 @@
             {
               "name": "title",
               "description": "自定义顶部标题"
-            },
-            {
-              "name": "option",
-              "description": "自定义选项文字"
-            },
-            {
-              "name": "options-top",
-              "description": "自定义选项上方的内容"
             }
           ],
           "events": [
@@ -2197,7 +2175,7 @@
             {
               "name": "icon-prefix",
               "default": "`van-icon`",
-              "description": "图标类名前缀，等同于 Icon 组件的 [class-prefix 属性](#/zh-CN/icon#props)",
+              "description": "图标类名前缀，同 Icon 组件的 [class-prefix 属性](#/zh-CN/icon#props)",
               "options": [],
               "value": {
                 "type": "string",
@@ -2217,7 +2195,7 @@
             {
               "name": "to",
               "default": "-",
-              "description": "点击后跳转的目标路由对象，等同于 vue-router 的 [to 属性](https://router.vuejs.org/zh/api/#to)",
+              "description": "点击后跳转的目标路由对象，同 vue-router 的 [to 属性](https://router.vuejs.org/zh/api/#to)",
               "options": [],
               "value": {
                 "type": "string | object",
@@ -2634,7 +2612,7 @@
             {
               "name": "stroke-linecap",
               "default": "`round`",
-              "description": "进度条端点的形状，可选值为 `square` `butt`",
+              "description": "进度条端点的形状，可选值为 `sqaure` `butt`",
               "options": [],
               "value": {
                 "type": "string",
@@ -2648,16 +2626,6 @@
               "options": [],
               "value": {
                 "type": "boolean",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "start-position",
-              "default": "`top`",
-              "description": "进度起始位置，可选值为 `left`、`right`、`bottom`",
-              "options": [],
-              "value": {
-                "type": "CircleStartPosition",
                 "kind": "expression"
               }
             }
@@ -2992,16 +2960,6 @@
               "name": "tag",
               "default": "`div`",
               "description": "根节点对应的 HTML 标签名",
-              "options": [],
-              "value": {
-                "type": "string",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "icon-prefix",
-              "default": "`van-icon`",
-              "description": "所有图标的类名前缀，等同于 Icon 组件的 [class-prefix 属性](#/zh-CN/icon#props)",
               "options": [],
               "value": {
                 "type": "string",
@@ -4043,7 +4001,7 @@
               "description": "关闭前的回调函数，返回 `false` 可阻止关闭，支持返回 Promise",
               "options": [],
               "value": {
-                "type": "(action: string) => boolean | Promise\\<boolean\\>",
+                "type": "(action) => boolean | Promise",
                 "kind": "expression"
               }
             },
@@ -4060,7 +4018,7 @@
             {
               "name": "teleport",
               "default": "-",
-              "description": "指定挂载的节点，等同于 Teleport 组件的 [to 属性](https://v3.cn.vuejs.org/api/built-in-components.html#teleport)",
+              "description": "指定挂载的节点，[用法示例](#/zh-CN/popup#zhi-ding-gua-zai-wei-zhi)",
               "options": [],
               "value": {
                 "type": "string | Element",
@@ -4149,7 +4107,7 @@
             {
               "name": "duration",
               "default": "`0.2`",
-              "description": "动画时长，单位秒，设置为 0 可以禁用动画",
+              "description": "动画时长，单位秒",
               "options": [],
               "value": {
                 "type": "number | string",
@@ -4288,7 +4246,7 @@
             {
               "name": "teleport",
               "default": "-",
-              "description": "指定挂载的节点，等同于 Teleport 组件的 [to 属性](https://v3.cn.vuejs.org/api/built-in-components.html#teleport)",
+              "description": "指定挂载的节点，[用法示例](#/zh-CN/popup#zhi-ding-gua-zai-wei-zhi)",
               "options": [],
               "value": {
                 "type": "string | Element",
@@ -4356,7 +4314,7 @@
             },
             {
               "name": "input",
-              "description": "自定义输入框，使用此插槽后，与输入框相关的属性和事件将失效"
+              "description": "自定义输入框，使用此插槽后，与输入框相关的属性和事件将失效。<br>在 Form 组件进行表单校验时，会使用 input 插槽中子组件的 `value`，而不是 Field 组件的 `value`。"
             },
             {
               "name": "left-icon",
@@ -4369,10 +4327,6 @@
             {
               "name": "button",
               "description": "自定义输入框尾部按钮"
-            },
-            {
-              "name": "error-message",
-              "description": "自定义底部错误提示文案"
             },
             {
               "name": "extra",
@@ -4437,17 +4391,7 @@
             {
               "name": "name",
               "default": "-",
-              "description": "名称，作为提交表单时的标识符",
-              "options": [],
-              "value": {
-                "type": "string",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "id",
-              "default": "-",
-              "description": "输入框 id，同时会设置 label 的 for 属性",
+              "description": "名称，提交表单的标识符",
               "options": [],
               "value": {
                 "type": "string",
@@ -4759,7 +4703,7 @@
             {
               "name": "icon-prefix",
               "default": "`van-icon`",
-              "description": "图标类名前缀，等同于 Icon 组件的 [class-prefix 属性](#/zh-CN/icon#props)",
+              "description": "图标类名前缀，同 Icon 组件的 [class-prefix 属性](#/zh-CN/icon#props)",
               "options": [],
               "value": {
                 "type": "string",
@@ -5072,7 +5016,7 @@
             {
               "name": "icon-prefix",
               "default": "`van-icon`",
-              "description": "图标类名前缀，等同于 Icon 组件的 [class-prefix 属性](#/zh-CN/icon#props)",
+              "description": "图标类名前缀，同 Icon 组件的 [class-prefix 属性](#/zh-CN/icon#props)",
               "options": [],
               "value": {
                 "type": "string",
@@ -5082,7 +5026,7 @@
             {
               "name": "icon-color",
               "default": "-",
-              "description": "图标颜色，等同于 Icon 组件的 [color 属性](#/zh-CN/icon#props)",
+              "description": "图标颜色，同 Icon 组件的 [color 属性](#/zh-CN/icon#props)",
               "options": [],
               "value": {
                 "type": "string",
@@ -5132,7 +5076,7 @@
             {
               "name": "to",
               "default": "-",
-              "description": "点击后跳转的目标路由对象，等同于 vue-router 的 [to 属性](https://router.vuejs.org/zh/api/#to)",
+              "description": "点击后跳转的目标路由对象，同 vue-router 的 [to 属性](https://router.vuejs.org/zh/api/#to)",
               "options": [],
               "value": {
                 "type": "string | object",
@@ -5397,7 +5341,7 @@
             {
               "name": "icon-prefix",
               "default": "`van-icon`",
-              "description": "图标类名前缀，等同于 Icon 组件的 [class-prefix 属性](#/zh-CN/icon#props)",
+              "description": "图标类名前缀，同 Icon 组件的 [class-prefix 属性](#/zh-CN/icon#props)",
               "options": [],
               "value": {
                 "type": "string",
@@ -5437,16 +5381,6 @@
             }
           ],
           "attributes": [
-            {
-              "name": "v-model:show",
-              "default": "`false`",
-              "description": "是否展示图片预览",
-              "options": [],
-              "value": {
-                "type": "boolean",
-                "kind": "expression"
-              }
-            },
             {
               "name": "images",
               "default": "`[]`",
@@ -5513,7 +5447,7 @@
               "description": "关闭前的回调函数，返回 `false` 可阻止关闭，支持返回 Promise",
               "options": [],
               "value": {
-                "type": "(active: number) => boolean | Promise\\<boolean\\>",
+                "type": "(active) => boolean | Promise",
                 "kind": "expression"
               }
             },
@@ -5612,7 +5546,7 @@
             {
               "name": "teleport",
               "default": "-",
-              "description": "指定挂载的节点，等同于 Teleport 组件的 [to 属性](https://v3.cn.vuejs.org/api/built-in-components.html#teleport)",
+              "description": "指定挂载的节点，[用法示例](#/zh-CN/popup#zhi-ding-gua-zai-wei-zhi)",
               "options": [],
               "value": {
                 "type": "string | Element",
@@ -5833,78 +5767,6 @@
               "options": [],
               "value": {
                 "type": "string",
-                "kind": "expression"
-              }
-            }
-          ]
-        },
-        {
-          "name": "van-loading",
-          "slots": [
-            {
-              "name": "default",
-              "description": "加载文案"
-            }
-          ],
-          "events": [],
-          "attributes": [
-            {
-              "name": "color",
-              "default": "`#c9c9c9`",
-              "description": "颜色",
-              "options": [],
-              "value": {
-                "type": "string",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "type",
-              "default": "`circular`",
-              "description": "类型，可选值为 `spinner`",
-              "options": [],
-              "value": {
-                "type": "string",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "size",
-              "default": "`30px`",
-              "description": "加载图标大小，默认单位为 `px`",
-              "options": [],
-              "value": {
-                "type": "number | string",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "text-size",
-              "default": "`14px`",
-              "description": "文字大小，默认单位为 `px`",
-              "options": [],
-              "value": {
-                "type": "number | string",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "text-color",
-              "default": "`#c9c9c9`",
-              "description": "文字颜色",
-              "options": [],
-              "value": {
-                "type": "string",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "vertical",
-              "default": "`false`",
-              "description": "是否垂直排列图标和文字内容",
-              "options": [],
-              "value": {
-                "type": "boolean",
                 "kind": "expression"
               }
             }
@@ -6153,6 +6015,78 @@
           ]
         },
         {
+          "name": "van-loading",
+          "slots": [
+            {
+              "name": "default",
+              "description": "加载文案"
+            }
+          ],
+          "events": [],
+          "attributes": [
+            {
+              "name": "color",
+              "default": "`#c9c9c9`",
+              "description": "颜色",
+              "options": [],
+              "value": {
+                "type": "string",
+                "kind": "expression"
+              }
+            },
+            {
+              "name": "type",
+              "default": "`circular`",
+              "description": "类型，可选值为 `spinner`",
+              "options": [],
+              "value": {
+                "type": "string",
+                "kind": "expression"
+              }
+            },
+            {
+              "name": "size",
+              "default": "`30px`",
+              "description": "加载图标大小，默认单位为 `px`",
+              "options": [],
+              "value": {
+                "type": "number | string",
+                "kind": "expression"
+              }
+            },
+            {
+              "name": "text-size",
+              "default": "`14px`",
+              "description": "文字大小，默认单位为 `px`",
+              "options": [],
+              "value": {
+                "type": "number | string",
+                "kind": "expression"
+              }
+            },
+            {
+              "name": "text-color",
+              "default": "`#c9c9c9`",
+              "description": "文字颜色",
+              "options": [],
+              "value": {
+                "type": "string",
+                "kind": "expression"
+              }
+            },
+            {
+              "name": "vertical",
+              "default": "`false`",
+              "description": "是否垂直排列图标和文字内容",
+              "options": [],
+              "value": {
+                "type": "boolean",
+                "kind": "expression"
+              }
+            }
+          ]
+        },
+        {
           "name": "van-number-keyboard",
           "slots": [
             {
@@ -6237,7 +6171,7 @@
             },
             {
               "name": "maxlength",
-              "default": "`Infinity`",
+              "default": "-",
               "description": "输入值最大长度",
               "options": [],
               "value": {
@@ -6338,7 +6272,7 @@
             {
               "name": "teleport",
               "default": "-",
-              "description": "指定挂载的节点，等同于 Teleport 组件的 [to 属性](https://v3.cn.vuejs.org/api/built-in-components.html#teleport)",
+              "description": "指定挂载的节点，[用法示例](#/zh-CN/popup#zhi-ding-gua-zai-wei-zhi)",
               "options": [],
               "value": {
                 "type": "string | Element",
@@ -6405,7 +6339,7 @@
             {
               "name": "duration",
               "default": "`0.3`",
-              "description": "动画时长，单位秒，设置为 0 可以禁用动画",
+              "description": "动画时长，单位秒",
               "options": [],
               "value": {
                 "type": "number | string",
@@ -6739,6 +6673,16 @@
               }
             },
             {
+              "name": "value-key",
+              "default": "`text`",
+              "description": "选项对象中，选项文字对应的键名",
+              "options": [],
+              "value": {
+                "type": "string",
+                "kind": "expression"
+              }
+            },
+            {
               "name": "toolbar-position",
               "default": "`top`",
               "description": "顶部栏位置，可选值为 `bottom`",
@@ -6875,7 +6819,7 @@
               "description": "选项列表",
               "options": [],
               "value": {
-                "type": "PopoverAction[]",
+                "type": "Action[]",
                 "kind": "expression"
               }
             },
@@ -6885,7 +6829,7 @@
               "description": "弹出位置",
               "options": [],
               "value": {
-                "type": "PopoverPlacement",
+                "type": "string",
                 "kind": "expression"
               }
             },
@@ -6895,24 +6839,23 @@
               "description": "主题风格，可选值为 `dark`",
               "options": [],
               "value": {
-                "type": "PopoverTheme",
+                "type": "string",
                 "kind": "expression"
               }
             },
             {
               "name": "trigger",
-              "default": "`click`",
               "description": "触发方式，可选值为 `manual`",
               "options": [],
               "value": {
-                "type": "PopoverTrigger",
+                "type": "`click`",
                 "kind": "expression"
               }
             },
             {
               "name": "duration",
               "default": "`0.3`",
-              "description": "动画时长，单位秒，设置为 0 可以禁用动画",
+              "description": "动画时长，单位秒",
               "options": [],
               "value": {
                 "type": "number | string",
@@ -6962,16 +6905,6 @@
               }
             },
             {
-              "name": "show-arrow",
-              "default": "`true`",
-              "description": "是否展示小箭头",
-              "options": [],
-              "value": {
-                "type": "boolean",
-                "kind": "expression"
-              }
-            },
-            {
               "name": "close-on-click-action",
               "default": "`true`",
               "description": "是否在点击选项后关闭",
@@ -7004,7 +6937,7 @@
             {
               "name": "teleport",
               "default": "`body`",
-              "description": "指定挂载的节点，等同于 Teleport 组件的 [to 属性](https://v3.cn.vuejs.org/api/built-in-components.html#teleport)",
+              "description": "指定挂载的节点，[用法示例](#/zh-CN/popup#zhi-ding-gua-zai-wei-zhi)",
               "options": [],
               "value": {
                 "type": "string | Element",
@@ -7014,7 +6947,7 @@
             {
               "name": "icon-prefix",
               "default": "`van-icon`",
-              "description": "图标类名前缀，等同于 Icon 组件的 [class-prefix 属性](#/zh-CN/icon#props)",
+              "description": "图标类名前缀，同 Icon 组件的 [class-prefix 属性](#/zh-CN/icon#props)",
               "options": [],
               "value": {
                 "type": "string",
@@ -7121,7 +7054,7 @@
             {
               "name": "duration",
               "default": "`0.3`",
-              "description": "动画时长，单位秒，设置为 0 可以禁用动画",
+              "description": "动画时长，单位秒",
               "options": [],
               "value": {
                 "type": "number | string",
@@ -7209,19 +7142,9 @@
               }
             },
             {
-              "name": "before-close",
-              "default": "-",
-              "description": "关闭前的回调函数，返回 `false` 可阻止关闭，支持返回 Promise",
-              "options": [],
-              "value": {
-                "type": "(action: string) => boolean | Promise\\<boolean\\>",
-                "kind": "expression"
-              }
-            },
-            {
               "name": "icon-prefix",
               "default": "`van-icon`",
-              "description": "图标类名前缀，等同于 Icon 组件的 [class-prefix 属性](#/zh-CN/icon#props)",
+              "description": "图标类名前缀，同 Icon 组件的 [class-prefix 属性](#/zh-CN/icon#props)",
               "options": [],
               "value": {
                 "type": "string",
@@ -7251,7 +7174,7 @@
             {
               "name": "teleport",
               "default": "-",
-              "description": "指定挂载的节点，等同于 Teleport 组件的 [to 属性](https://v3.cn.vuejs.org/api/built-in-components.html#teleport)",
+              "description": "指定挂载的节点",
               "options": [],
               "value": {
                 "type": "string | Element",
@@ -7576,7 +7499,7 @@
             {
               "name": "icon-size",
               "default": "`20px`",
-              "description": "图标大小，默认单位为 `px`",
+              "description": "图标大小，默认单位为`px`",
               "options": [],
               "value": {
                 "type": "number | string",
@@ -7628,7 +7551,7 @@
             {
               "name": "direction",
               "default": "`vertical`",
-              "description": "排列方向，可选值为 `horizontal`",
+              "description": "排列方向，可选值为`horizontal`",
               "options": [],
               "value": {
                 "type": "string",
@@ -7638,7 +7561,7 @@
             {
               "name": "icon-size",
               "default": "`20px`",
-              "description": "所有单选框的图标大小，默认单位为 `px`",
+              "description": "所有单选框的图标大小，默认单位为`px`",
               "options": [],
               "value": {
                 "type": "number | string",
@@ -7760,7 +7683,7 @@
             {
               "name": "icon-prefix",
               "default": "`van-icon`",
-              "description": "图标类名前缀，等同于 Icon 组件的 [class-prefix 属性](#/zh-CN/icon#props)",
+              "description": "图标类名前缀，同 Icon 组件的 [class-prefix 属性](#/zh-CN/icon#props)",
               "options": [],
               "value": {
                 "type": "string",
@@ -7818,7 +7741,7 @@
             },
             {
               "name": "action",
-              "description": "自定义右侧内容（搜索框外），设置 `show-action` 属性后展示"
+              "description": "自定义右侧内容（搜索框外），设置`show-action`属性后展示"
             },
             {
               "name": "label",
@@ -7851,10 +7774,6 @@
               "description": "输入框失去焦点时触发"
             },
             {
-              "name": "click-input",
-              "description": "点击输入区域时触发"
-            },
-            {
               "name": "clear",
               "description": "点击清除按钮后触发"
             },
@@ -7864,16 +7783,6 @@
             }
           ],
           "attributes": [
-            {
-              "name": "v-model",
-              "default": "-",
-              "description": "当前输入的值",
-              "options": [],
-              "value": {
-                "type": "number | string",
-                "kind": "expression"
-              }
-            },
             {
               "name": "label",
               "default": "-",
@@ -7885,29 +7794,9 @@
               }
             },
             {
-              "name": "name",
-              "default": "-",
-              "description": "名称，作为提交表单时的标识符",
-              "options": [],
-              "value": {
-                "type": "string",
-                "kind": "expression"
-              }
-            },
-            {
               "name": "shape",
               "default": "`square`",
               "description": "搜索框形状，可选值为 `round`",
-              "options": [],
-              "value": {
-                "type": "string",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "id",
-              "default": "-",
-              "description": "搜索框 id，同时会设置 label 的 for 属性",
               "options": [],
               "value": {
                 "type": "string",
@@ -8093,16 +7982,6 @@
                 "type": "string",
                 "kind": "expression"
               }
-            },
-            {
-              "name": "autocomplete",
-              "default": "-",
-              "description": "input 标签原生的[自动完成属性](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete)",
-              "options": [],
-              "value": {
-                "type": "string",
-                "kind": "expression"
-              }
             }
           ]
         },
@@ -8206,20 +8085,10 @@
             {
               "name": "duration",
               "default": "`0.3`",
-              "description": "动画时长，单位秒，设置为 0 可以禁用动画",
+              "description": "动画时长，单位秒",
               "options": [],
               "value": {
                 "type": "number | string",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "round",
-              "default": "`true`",
-              "description": "是否显示圆角",
-              "options": [],
-              "value": {
-                "type": "boolean",
                 "kind": "expression"
               }
             },
@@ -8308,20 +8177,10 @@
             {
               "name": "teleport",
               "default": "-",
-              "description": "指定挂载的节点，等同于 Teleport 组件的 [to 属性](https://v3.cn.vuejs.org/api/built-in-components.html#teleport)",
+              "description": "指定挂载的节点，[用法示例](#/zh-CN/popup#zhi-ding-gua-zai-wei-zhi)",
               "options": [],
               "value": {
                 "type": "string | Element",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "before-close",
-              "default": "-",
-              "description": "关闭前的回调函数，返回 `false` 可阻止关闭，支持返回 Promise",
-              "options": [],
-              "value": {
-                "type": "(action: string) => boolean | Promise\\<boolean\\>",
                 "kind": "expression"
               }
             }
@@ -8417,7 +8276,7 @@
             {
               "name": "to",
               "default": "-",
-              "description": "点击后跳转的目标路由对象，等同于 vue-router 的 [to 属性](https://router.vuejs.org/zh/api/#to)",
+              "description": "点击后跳转的目标路由对象，同 vue-router 的 [to 属性](https://router.vuejs.org/zh/api/#to)",
               "options": [],
               "value": {
                 "type": "string | object",
@@ -8550,15 +8409,7 @@
           "slots": [
             {
               "name": "button",
-              "description": "自定义滑块按钮"
-            },
-            {
-              "name": "left-button",
-              "description": "自定义左侧滑块按钮（双滑块模式下）"
-            },
-            {
-              "name": "right-button",
-              "description": "自定义右侧滑块按钮（双滑块模式下）"
+              "description": "自定义滑动按钮"
             }
           ],
           "events": [
@@ -8583,10 +8434,10 @@
             {
               "name": "v-model",
               "default": "`0`",
-              "description": "当前进度百分比，在双滑块模式下为数组格式",
+              "description": "当前进度百分比",
               "options": [],
               "value": {
-                "type": "number | [number, number]",
+                "type": "number | number[]",
                 "kind": "expression"
               }
             },
@@ -8623,7 +8474,7 @@
             {
               "name": "bar-height",
               "default": "`2px`",
-              "description": "进度条高度，默认单位为 `px`",
+              "description": "进度条高度，默认单位为`px`",
               "options": [],
               "value": {
                 "type": "number | string",
@@ -8633,7 +8484,7 @@
             {
               "name": "button-size",
               "default": "`24px`",
-              "description": "滑块按钮大小，默认单位为 `px`",
+              "description": "滑块按钮大小，默认单位为`px`",
               "options": [],
               "value": {
                 "type": "number | string",
@@ -8667,15 +8518,6 @@
               "options": [],
               "value": {
                 "type": "boolean",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "reverse",
-              "description": "是否将进度条反转",
-              "options": [],
-              "value": {
-                "type": "`false`",
                 "kind": "expression"
               }
             },
@@ -8903,13 +8745,11 @@
             },
             {
               "name": "before-change",
-              "default": "Promise\\<boolean\\>_",
+              "default": "`false`",
               "description": "输入值变化前的回调函数，返回 `false` 可阻止输入，支持返回 Promise",
-              "options": [
-                "false"
-              ],
+              "options": [],
               "value": {
-                "type": "(value: number | string) => boolean \\",
+                "type": "(value) => boolean | Promise",
                 "kind": "expression"
               }
             },
@@ -9048,7 +8888,7 @@
             {
               "name": "icon-prefix",
               "default": "`van-icon`",
-              "description": "图标类名前缀，等同于 Icon 组件的 [class-prefix 属性](#/zh-CN/icon#props)",
+              "description": "图标类名前缀，同 Icon 组件的 [class-prefix 属性](#/zh-CN/icon#props)",
               "options": [],
               "value": {
                 "type": "string",
@@ -9060,10 +8900,6 @@
         {
           "name": "van-step",
           "slots": [
-            {
-              "name": "default",
-              "description": "步骤内容"
-            },
             {
               "name": "active-icon",
               "description": "自定义激活状态图标"
@@ -9534,7 +9370,7 @@
               "description": "关闭前的回调函数，返回 `false` 可阻止关闭，支持返回 Promise",
               "options": [],
               "value": {
-                "type": "(args) => boolean | Promise\\<boolean\\>",
+                "type": "(args) => boolean | Promise",
                 "kind": "expression"
               }
             },
@@ -9674,12 +9510,16 @@
           ],
           "events": [
             {
-              "name": "click-tab",
+              "name": "click",
               "description": "点击标签时触发"
             },
             {
               "name": "change",
               "description": "当前激活的标签改变时触发"
+            },
+            {
+              "name": "disabled",
+              "description": "点击被禁用的标签时触发"
             },
             {
               "name": "rendered",
@@ -9734,7 +9574,7 @@
             {
               "name": "duration",
               "default": "`0.3`",
-              "description": "动画时间，单位秒，设置为 0 可以禁用动画",
+              "description": "动画时间，单位秒",
               "options": [],
               "value": {
                 "type": "number | string",
@@ -9794,7 +9634,7 @@
             {
               "name": "sticky",
               "default": "`false`",
-              "description": "是否使用粘性布局",
+              "description": "是否使用粘性定位布局",
               "options": [],
               "value": {
                 "type": "boolean",
@@ -9834,7 +9674,7 @@
             {
               "name": "offset-top",
               "default": "`0`",
-              "description": "粘性布局下吸顶时与顶部的距离，支持 `px` `vw` `vh` `rem` 单位，默认 `px`",
+              "description": "粘性定位布局下与顶部的最小距离，支持 `px` `vw` `vh` `rem` 单位，默认 `px`",
               "options": [],
               "value": {
                 "type": "number | string",
@@ -9873,13 +9713,11 @@
             },
             {
               "name": "before-change",
-              "default": "Promise\\<boolean\\>_",
+              "default": "-",
               "description": "切换标签前的回调函数，返回 `false` 可阻止切换，支持返回 Promise",
-              "options": [
-                "-"
-              ],
+              "options": [],
               "value": {
-                "type": "(name: number | string) => boolean \\",
+                "type": "(name) => boolean | Promise",
                 "kind": "expression"
               }
             }
@@ -9962,7 +9800,7 @@
             {
               "name": "to",
               "default": "-",
-              "description": "点击后跳转的目标路由对象，等同于 vue-router 的 [to 属性](https://router.vuejs.org/zh/api/#to)",
+              "description": "点击后跳转的目标路由对象，同 vue-router 的 [to 属性](https://router.vuejs.org/zh/api/#to)",
               "options": [],
               "value": {
                 "type": "string | object",
@@ -10000,16 +9838,6 @@
               ],
               "value": {
                 "type": "string | Array \\",
-                "kind": "expression"
-              }
-            },
-            {
-              "name": "show-zero-badge",
-              "default": "`true`",
-              "description": "当 badge 为数字 0 时，是否展示徽标",
-              "options": [],
-              "value": {
-                "type": "boolean",
                 "kind": "expression"
               }
             }
@@ -10117,13 +9945,11 @@
             },
             {
               "name": "before-change",
-              "default": "Promise\\<boolean\\>_",
+              "default": "-",
               "description": "切换标签前的回调函数，返回 `false` 可阻止切换，支持返回 Promise",
-              "options": [
-                "-"
-              ],
+              "options": [],
               "value": {
-                "type": "(name: number | string) => boolean \\",
+                "type": "(name) => boolean | Promise",
                 "kind": "expression"
               }
             }
@@ -10162,7 +9988,7 @@
             {
               "name": "icon-prefix",
               "default": "`van-icon`",
-              "description": "图标类名前缀，等同于 Icon 组件的 [class-prefix 属性](#/zh-CN/icon#props)",
+              "description": "图标类名前缀，同 Icon 组件的 [class-prefix 属性](#/zh-CN/icon#props)",
               "options": [],
               "value": {
                 "type": "string",
@@ -10202,7 +10028,7 @@
             {
               "name": "to",
               "default": "-",
-              "description": "点击后跳转的目标路由对象，等同于 vue-router 的 [to 属性](https://router.vuejs.org/zh/api/#to)",
+              "description": "点击后跳转的目标路由对象，同 vue-router 的 [to 属性](https://router.vuejs.org/zh/api/#to)",
               "options": [],
               "value": {
                 "type": "string | object",
@@ -10357,7 +10183,7 @@
               "description": "分类显示所需的数据",
               "options": [],
               "value": {
-                "type": "TreeSelectItem[]",
+                "type": "Item[]",
                 "kind": "expression"
               }
             },
@@ -10431,10 +10257,6 @@
             {
               "name": "oversize",
               "description": "文件大小超过限制时触发"
-            },
-            {
-              "name": "click-upload",
-              "description": "点击上传区域时触发"
             },
             {
               "name": "click-preview",
@@ -10541,16 +10363,6 @@
               }
             },
             {
-              "name": "readonly",
-              "default": "`false`",
-              "description": "是否将上传区域设置为只读状态",
-              "options": [],
-              "value": {
-                "type": "boolean",
-                "kind": "expression"
-              }
-            },
-            {
               "name": "deletable",
               "default": "`true`",
               "description": "是否展示删除按钮",
@@ -10625,7 +10437,7 @@
               "default": "(file: File) => boolean_",
               "description": "文件大小限制，单位为 `byte`",
               "options": [
-                "Infinity"
+                "-"
               ],
               "value": {
                 "type": "number | string \\",
@@ -10634,7 +10446,7 @@
             },
             {
               "name": "max-count",
-              "default": "`Infinity`",
+              "default": "-",
               "description": "文件上传数量限制",
               "options": [],
               "value": {

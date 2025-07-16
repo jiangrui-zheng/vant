@@ -5,9 +5,12 @@ export default {
   confirm: 'Onayla',
   cancel: 'İptal',
   delete: 'Sil',
+  complete: 'Tamamla',
   loading: 'Yükleniyor...',
-  noCoupon: 'Kupon yok',
+  telEmpty: 'Lütfen tel. no giriniz',
   nameEmpty: 'Lütfen isim giriniz',
+  nameInvalid: 'Geçersiz isim',
+  confirmDelete: 'Silmek istediğinize emin misiniz?',
   telInvalid: 'Geçersiz tel. numarası',
   vanCalendar: {
     end: 'Son',
@@ -45,9 +48,11 @@ export default {
   },
   vanCouponCell: {
     title: 'Kupon',
+    tips: 'Kupon yok',
     count: count => count + " adet teklif var"
   },
   vanCouponList: {
+    empty: 'Kupon yok',
     exchange: 'Takas',
     close: 'Kapat',
     enable: 'Mevcut',
@@ -60,7 +65,10 @@ export default {
     areaEmpty: 'Lütfen alıcı alanını seçin',
     addressEmpty: 'Adres boş olamaz!',
     postalEmpty: 'Yanlış posta kodu',
-    defaultAddress: 'Varsayılan adres olarak ayarla'
+    defaultAddress: 'Varsayılan adres olarak ayarla',
+    telPlaceholder: 'Telefone',
+    namePlaceholder: 'İsim',
+    areaPlaceholder: 'Alan'
   },
   vanAddressEditDetail: {
     label: 'Adres',

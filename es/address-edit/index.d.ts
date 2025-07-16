@@ -1,5 +1,4 @@
-import { AddressEditProps } from './AddressEdit';
-export declare const AddressEdit: import("../utils").WithInstall<import("vue").DefineComponent<{
+declare const AddressEdit: import("../utils").WithInstall<import("vue").DefineComponent<{
     areaList: import("vue").PropType<import("..").AreaList>;
     isSaving: BooleanConstructor;
     isDeleting: BooleanConstructor;
@@ -15,7 +14,7 @@ export declare const AddressEdit: import("../utils").WithInstall<import("vue").D
     showDelete: BooleanConstructor;
     showPostal: BooleanConstructor;
     disableArea: BooleanConstructor;
-    searchResult: import("vue").PropType<import("./types").AddressEditSearchItem[]>;
+    searchResult: import("vue").PropType<import("./AddressEditDetail").AddressEditSearchItem[]>;
     telMaxlength: (NumberConstructor | StringConstructor)[];
     showSetDefault: BooleanConstructor;
     saveButtonText: StringConstructor;
@@ -30,13 +29,9 @@ export declare const AddressEdit: import("../utils").WithInstall<import("vue").D
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-    areaColumnsPlaceholder: {
-        type: import("vue").PropType<string[]>;
-        default: () => never[];
-    };
     addressInfo: {
-        type: import("vue").PropType<Partial<import("./types").AddressEditInfo>>;
-        default: () => import("./types").AddressEditInfo;
+        type: import("vue").PropType<Partial<import("./AddressEdit").AddressEditInfo>>;
+        default: () => import("./AddressEdit").AddressEditInfo;
     };
     telValidator: {
         type: import("vue").PropType<(val: string) => boolean>;
@@ -46,7 +41,11 @@ export declare const AddressEdit: import("../utils").WithInstall<import("vue").D
         type: import("vue").PropType<(val: string) => boolean>;
         default: (value: string) => boolean;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("focus" | "select-search" | "save" | "delete" | "click-area" | "change-area" | "change-detail" | "change-default")[], "focus" | "select-search" | "save" | "delete" | "click-area" | "change-area" | "change-detail" | "change-default", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    areaColumnsPlaceholder: {
+        type: import("vue").PropType<string[]>;
+        default: () => never[];
+    };
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("focus" | "select-search" | "save" | "delete" | "click-area" | "change-area" | "change-detail" | "cancel-delete" | "change-default")[], "focus" | "select-search" | "save" | "delete" | "click-area" | "change-area" | "change-detail" | "cancel-delete" | "change-default", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
     areaList?: unknown;
     isSaving?: unknown;
     isDeleting?: unknown;
@@ -65,11 +64,14 @@ export declare const AddressEdit: import("../utils").WithInstall<import("vue").D
     showSearchResult?: unknown;
     detailRows?: unknown;
     detailMaxlength?: unknown;
-    areaColumnsPlaceholder?: unknown;
     addressInfo?: unknown;
     telValidator?: unknown;
     postalValidator?: unknown;
+    areaColumnsPlaceholder?: unknown;
 } & {
+    detailRows: string | number;
+    detailMaxlength: string | number;
+    showSearchResult: boolean;
     isSaving: boolean;
     isDeleting: boolean;
     showArea: boolean;
@@ -78,31 +80,22 @@ export declare const AddressEdit: import("../utils").WithInstall<import("vue").D
     showPostal: boolean;
     disableArea: boolean;
     showSetDefault: boolean;
-    showSearchResult: boolean;
-    detailRows: string | number;
-    detailMaxlength: string | number;
-    areaColumnsPlaceholder: string[];
-    addressInfo: Partial<import("./types").AddressEditInfo>;
+    addressInfo: Partial<import("./AddressEdit").AddressEditInfo>;
     telValidator: (val: string) => boolean;
     postalValidator: (val: string) => boolean;
+    areaColumnsPlaceholder: string[];
 } & {
     areaList?: import("..").AreaList | undefined;
+    searchResult?: import("./AddressEditDetail").AddressEditSearchItem[] | undefined;
     validator?: ((key: string, value: string) => string | undefined) | undefined;
-    searchResult?: import("./types").AddressEditSearchItem[] | undefined;
     telMaxlength?: string | number | undefined;
     saveButtonText?: string | undefined;
     areaPlaceholder?: string | undefined;
     deleteButtonText?: string | undefined;
-}> & {
-    onFocus?: ((...args: any[]) => any) | undefined;
-    "onSelect-search"?: ((...args: any[]) => any) | undefined;
-    onSave?: ((...args: any[]) => any) | undefined;
-    onDelete?: ((...args: any[]) => any) | undefined;
-    "onClick-area"?: ((...args: any[]) => any) | undefined;
-    "onChange-area"?: ((...args: any[]) => any) | undefined;
-    "onChange-detail"?: ((...args: any[]) => any) | undefined;
-    "onChange-default"?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
+    detailRows: string | number;
+    detailMaxlength: string | number;
+    showSearchResult: boolean;
     isSaving: boolean;
     isDeleting: boolean;
     showArea: boolean;
@@ -111,14 +104,12 @@ export declare const AddressEdit: import("../utils").WithInstall<import("vue").D
     showPostal: boolean;
     disableArea: boolean;
     showSetDefault: boolean;
-    showSearchResult: boolean;
-    detailRows: string | number;
-    detailMaxlength: string | number;
-    areaColumnsPlaceholder: string[];
-    addressInfo: Partial<import("./types").AddressEditInfo>;
+    addressInfo: Partial<import("./AddressEdit").AddressEditInfo>;
     telValidator: (val: string) => boolean;
     postalValidator: (val: string) => boolean;
+    areaColumnsPlaceholder: string[];
 }>>;
 export default AddressEdit;
-export type { AddressEditProps };
-export type { AddressEditInfo, AddressEditInstance, AddressEditSearchItem, } from './types';
+export { AddressEdit };
+export type { AddressEditInfo } from './AddressEdit';
+export type { AddressEditSearchItem } from './AddressEditDetail';

@@ -1,7 +1,7 @@
 import { withDirectives as _withDirectives, vShow as _vShow, resolveDirective as _resolveDirective, createVNode as _createVNode } from "vue";
 import { ref, watch, computed, nextTick, reactive, defineComponent } from 'vue'; // Utils
 
-import { extend, isObject, isMobile, truthProp, numericProp, makeArrayProp, makeNumericProp, createNamespace } from '../utils'; // Composables
+import { extend, isObject, isMobile, truthProp, createNamespace } from '../utils'; // Composables
 
 import { useExpose } from '../composables/use-expose'; // Components
 
@@ -11,11 +11,11 @@ import { Field } from '../field';
 import { Popup } from '../popup';
 import { Toast } from '../toast';
 import { Button } from '../button';
+import { Dialog } from '../dialog';
 import { Switch } from '../switch';
-import AddressEditDetail from './AddressEditDetail'; // Types
-
+import AddressEditDetail from './AddressEditDetail';
 var [name, bem, t] = createNamespace('address-edit');
-var DEFAULT_DATA = {
+var defaultData = {
   name: '',
   tel: '',
   city: '',
@@ -28,51 +28,60 @@ var DEFAULT_DATA = {
   addressDetail: ''
 };
 
-var isPostal = value => /^\d{6}$/.test(value);
+function isPostal(value) {
+  return /^\d{6}$/.test(value);
+}
 
-var addressEditProps = {
-  areaList: Object,
-  isSaving: Boolean,
-  isDeleting: Boolean,
-  validator: Function,
-  showArea: truthProp,
-  showDetail: truthProp,
-  showDelete: Boolean,
-  showPostal: Boolean,
-  disableArea: Boolean,
-  searchResult: Array,
-  telMaxlength: numericProp,
-  showSetDefault: Boolean,
-  saveButtonText: String,
-  areaPlaceholder: String,
-  deleteButtonText: String,
-  showSearchResult: Boolean,
-  detailRows: makeNumericProp(1),
-  detailMaxlength: makeNumericProp(200),
-  areaColumnsPlaceholder: makeArrayProp(),
-  addressInfo: {
-    type: Object,
-    default: () => extend({}, DEFAULT_DATA)
-  },
-  telValidator: {
-    type: Function,
-    default: isMobile
-  },
-  postalValidator: {
-    type: Function,
-    default: isPostal
-  }
-};
 export default defineComponent({
   name,
-  props: addressEditProps,
-  emits: ['save', 'focus', 'delete', 'click-area', 'change-area', 'change-detail', 'select-search', 'change-default'],
+  props: {
+    areaList: Object,
+    isSaving: Boolean,
+    isDeleting: Boolean,
+    validator: Function,
+    showArea: truthProp,
+    showDetail: truthProp,
+    showDelete: Boolean,
+    showPostal: Boolean,
+    disableArea: Boolean,
+    searchResult: Array,
+    telMaxlength: [Number, String],
+    showSetDefault: Boolean,
+    saveButtonText: String,
+    areaPlaceholder: String,
+    deleteButtonText: String,
+    showSearchResult: Boolean,
+    detailRows: {
+      type: [Number, String],
+      default: 1
+    },
+    detailMaxlength: {
+      type: [Number, String],
+      default: 200
+    },
+    addressInfo: {
+      type: Object,
+      default: () => extend({}, defaultData)
+    },
+    telValidator: {
+      type: Function,
+      default: isMobile
+    },
+    postalValidator: {
+      type: Function,
+      default: isPostal
+    },
+    areaColumnsPlaceholder: {
+      type: Array,
+      default: () => []
+    }
+  },
+  emits: ['save', 'focus', 'delete', 'click-area', 'change-area', 'change-detail', 'cancel-delete', 'select-search', 'change-default'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var areaRef = ref();
     var state = reactive({
       data: {},
@@ -207,7 +216,11 @@ export default defineComponent({
       emit('change-area', values);
     };
 
-    var onDelete = () => emit('delete', state.data); // get values of area component
+    var onDelete = () => {
+      Dialog.confirm({
+        title: t('confirmDelete')
+      }).then(() => emit('delete', state.data)).catch(() => emit('cancel-delete', state.data));
+    }; // get values of area component
 
 
     var getArea = () => areaRef.value ? areaRef.value.getValues() : []; // set area code to area component
@@ -259,7 +272,7 @@ export default defineComponent({
     });
     watch(() => props.areaList, () => setAreaCode(state.data.areaCode));
     watch(() => props.addressInfo, value => {
-      state.data = extend({}, DEFAULT_DATA, value);
+      state.data = extend({}, defaultData, value);
       setAreaCode(value.areaCode);
     }, {
       deep: true,
@@ -282,7 +295,7 @@ export default defineComponent({
         "onUpdate:modelValue": $event => data.name = $event,
         "clearable": true,
         "label": t('name'),
-        "placeholder": t('name'),
+        "placeholder": t('namePlaceholder'),
         "errorMessage": errorInfo.name,
         "onFocus": () => onFocus('name')
       }, null), _createVNode(Field, {
@@ -292,15 +305,16 @@ export default defineComponent({
         "type": "tel",
         "label": t('tel'),
         "maxlength": props.telMaxlength,
-        "placeholder": t('tel'),
+        "placeholder": t('telPlaceholder'),
         "errorMessage": errorInfo.tel,
         "onFocus": () => onFocus('tel')
       }, null), _withDirectives(_createVNode(Field, {
         "readonly": true,
         "label": t('area'),
-        "is-link": !disableArea,
+        "clickable": !disableArea,
+        "rightIcon": !disableArea ? 'arrow' : undefined,
         "modelValue": areaText.value,
-        "placeholder": props.areaPlaceholder || t('area'),
+        "placeholder": props.areaPlaceholder || t('areaPlaceholder'),
         "errorMessage": errorInfo.areaCode,
         "onFocus": () => onFocus('areaCode'),
         "onClick": () => {
@@ -319,7 +333,7 @@ export default defineComponent({
         "onBlur": onDetailBlur,
         "onFocus": () => onFocus('addressDetail'),
         "onInput": onChangeDetail,
-        "onSelect-search": event => emit('select-search', event)
+        "onSelectSearch": event => emit('select-search', event)
       }, null), props.showPostal && _withDirectives(_createVNode(Field, {
         "modelValue": data.postalCode,
         "onUpdate:modelValue": $event => data.postalCode = $event,
@@ -336,18 +350,16 @@ export default defineComponent({
         "round": true,
         "type": "danger",
         "text": props.saveButtonText || t('save'),
-        "class": bem('button'),
         "loading": props.isSaving,
         "onClick": onSave
       }, null), props.showDelete && _createVNode(Button, {
         "block": true,
         "round": true,
-        "class": bem('button'),
         "loading": props.isDeleting,
         "text": props.deleteButtonText || t('delete'),
         "onClick": onDelete
       }, null)]), [[_vShow, !hideBottomFields.value]]), _createVNode(Popup, {
-        "show": state.showAreaPopup,
+        'show': state.showAreaPopup,
         "onUpdate:show": $event => state.showAreaPopup = $event,
         "round": true,
         "teleport": "body",

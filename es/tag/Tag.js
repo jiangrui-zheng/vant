@@ -1,30 +1,30 @@
 import { createVNode as _createVNode } from "vue";
 import { Transition, defineComponent } from 'vue';
-import { truthProp, makeStringProp, createNamespace } from '../utils';
+import { truthProp, createNamespace } from '../utils';
 import { Icon } from '../icon';
 var [name, bem] = createNamespace('tag');
-var tagProps = {
-  size: String,
-  mark: Boolean,
-  show: truthProp,
-  type: makeStringProp('default'),
-  color: String,
-  plain: Boolean,
-  round: Boolean,
-  textColor: String,
-  closeable: Boolean
-};
 export default defineComponent({
   name,
-  props: tagProps,
+  props: {
+    size: String,
+    mark: Boolean,
+    show: truthProp,
+    color: String,
+    plain: Boolean,
+    round: Boolean,
+    textColor: String,
+    closeable: Boolean,
+    type: {
+      type: String,
+      default: 'default'
+    }
+  },
   emits: ['close'],
 
-  setup(props, _ref) {
-    var {
-      slots,
-      emit
-    } = _ref;
-
+  setup(props, {
+    slots,
+    emit
+  }) {
     var onClose = event => {
       event.stopPropagation();
       emit('close', event);

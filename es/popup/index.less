@@ -1,4 +1,5 @@
 @import './var.less';
+@import '../style/mixins/safe-area.less';
 
 :root {
   --van-popup-background-color: @popup-background-color;
@@ -6,6 +7,7 @@
   --van-popup-round-border-radius: @popup-round-border-radius;
   --van-popup-close-icon-size: @popup-close-icon-size;
   --van-popup-close-icon-color: @popup-close-icon-color;
+  --van-popup-close-icon-active-color: @popup-close-icon-active-color;
   --van-popup-close-icon-margin: @popup-close-icon-margin;
   --van-popup-close-icon-z-index: @popup-close-icon-z-index;
 }
@@ -19,7 +21,7 @@
     position: fixed;
     max-height: 100%;
     overflow-y: auto;
-    background: var(--van-popup-background-color);
+    background-color: var(--van-popup-background-color);
     transition: var(--van-popup-transition);
     -webkit-overflow-scrolling: touch;
 
@@ -77,6 +79,10 @@
       }
     }
 
+    &--safe-area-inset-bottom {
+      .safe-area-inset-bottom();
+    }
+
     &-slide-top-enter-active,
     &-slide-left-enter-active,
     &-slide-right-enter-active,
@@ -117,6 +123,10 @@
       color: var(--van-popup-close-icon-color);
       font-size: var(--van-popup-close-icon-size);
       cursor: pointer;
+
+      &:active {
+        color: var(--van-popup-close-icon-active-color);
+      }
 
       &--top-left {
         top: var(--van-popup-close-icon-margin);

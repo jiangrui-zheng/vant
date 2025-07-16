@@ -1,4 +1,4 @@
-export declare const SidebarItem: import("../utils").WithInstall<import("vue").DefineComponent<{
+declare const SidebarItem: import("../utils").WithInstall<import("vue").DefineComponent<{
     to: import("vue").PropType<import("vue-router").RouteLocationRaw>;
     url: StringConstructor;
     replace: BooleanConstructor;
@@ -20,16 +20,14 @@ export declare const SidebarItem: import("../utils").WithInstall<import("vue").D
     dot: boolean;
     disabled: boolean;
 } & {
-    url?: string | undefined;
-    to?: import("vue-router").RouteLocationRaw | undefined;
-    badge?: string | number | undefined;
     title?: string | undefined;
-}> & {
-    onClick?: ((...args: any[]) => any) | undefined;
-}, {
+    to?: import("vue-router").RouteLocationRaw | undefined;
+    url?: string | undefined;
+    badge?: string | number | undefined;
+}>, {
     replace: boolean;
     dot: boolean;
     disabled: boolean;
 }>>;
 export default SidebarItem;
-export type { SidebarItemProps } from './SidebarItem';
+export { SidebarItem };

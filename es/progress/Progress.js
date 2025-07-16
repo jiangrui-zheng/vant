@@ -1,30 +1,47 @@
 import { createVNode as _createVNode } from "vue";
-import { computed, defineComponent } from 'vue';
-import { addUnit, truthProp, numericProp, createNamespace } from '../utils';
+import { ref, watch, computed, nextTick, reactive, onMounted, defineComponent } from 'vue';
+import { truthProp, createNamespace, addUnit } from '../utils';
+import { useExpose } from '../composables/use-expose';
 var [name, bem] = createNamespace('progress');
-var progressProps = {
-  color: String,
-  inactive: Boolean,
-  pivotText: String,
-  textColor: String,
-  showPivot: truthProp,
-  pivotColor: String,
-  trackColor: String,
-  strokeWidth: numericProp,
-  percentage: {
-    type: numericProp,
-    default: 0,
-    validator: value => value >= 0 && value <= 100
-  }
-};
 export default defineComponent({
   name,
-  props: progressProps,
+  props: {
+    color: String,
+    inactive: Boolean,
+    pivotText: String,
+    textColor: String,
+    showPivot: truthProp,
+    pivotColor: String,
+    trackColor: String,
+    strokeWidth: [Number, String],
+    percentage: {
+      type: [Number, String],
+      required: true,
+      validator: value => value >= 0 && value <= 100
+    }
+  },
 
   setup(props) {
-    var background = computed(() => props.inactive ? undefined : props.color);
+    var root = ref();
+    var pivotRef = ref();
+    var state = reactive({
+      rootWidth: 0,
+      pivotWidth: 0
+    });
+    var background = computed(() => props.inactive ? '#cacaca' : props.color);
+
+    var resize = () => {
+      nextTick(() => {
+        state.rootWidth = root.value ? root.value.offsetWidth : 0;
+        state.pivotWidth = pivotRef.value ? pivotRef.value.offsetWidth : 0;
+      });
+    };
 
     var renderPivot = () => {
+      var {
+        rootWidth,
+        pivotWidth
+      } = state;
       var {
         textColor,
         pivotText,
@@ -32,23 +49,28 @@ export default defineComponent({
         percentage
       } = props;
       var text = pivotText != null ? pivotText : percentage + "%";
+      var show = props.showPivot && text;
 
-      if (props.showPivot && text) {
+      if (show) {
+        var left = (rootWidth - pivotWidth) * +percentage / 100;
         var style = {
           color: textColor,
-          left: +percentage + "%",
-          transform: "translate(-" + +percentage + "%,-50%)",
+          left: left + "px",
           background: pivotColor || background.value
         };
         return _createVNode("span", {
+          "ref": pivotRef,
           "style": style,
-          "class": bem('pivot', {
-            inactive: props.inactive
-          })
+          "class": bem('pivot')
         }, [text]);
       }
     };
 
+    watch(() => [props.showPivot, props.pivotText], resize);
+    onMounted(resize);
+    useExpose({
+      resize
+    });
     return () => {
       var {
         trackColor,
@@ -61,17 +83,16 @@ export default defineComponent({
       };
       var portionStyle = {
         background: background.value,
-        transform: "scaleX(" + +percentage / 100 + ")"
+        width: state.rootWidth * +percentage / 100 + 'px'
       };
       return _createVNode("div", {
+        "ref": root,
         "class": bem(),
         "style": rootStyle
       }, [_createVNode("span", {
-        "class": bem('portion', {
-          inactive: props.inactive
-        }),
+        "class": bem('portion'),
         "style": portionStyle
-      }, null), renderPivot()]);
+      }, [renderPivot()])]);
     };
   }
 

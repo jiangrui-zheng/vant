@@ -1,7 +1,9 @@
 import { createNamespace } from '../utils';
 var [name, bem, t] = createNamespace('calendar');
 export { name, bem, t };
-export var formatMonthTitle = date => t('monthTitle', date.getFullYear(), date.getMonth() + 1);
+export function formatMonthTitle(date) {
+  return t('monthTitle', date.getFullYear(), date.getMonth() + 1);
+}
 export function compareMonth(date1, date2) {
   var year1 = date1.getFullYear();
   var year2 = date2.getFullYear();

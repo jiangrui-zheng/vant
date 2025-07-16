@@ -5,9 +5,12 @@ export default {
   confirm: 'Confirmă',
   cancel: 'Anulează',
   delete: 'Șterge',
+  complete: 'Finalizează',
   loading: 'Încărcare...',
-  noCoupon: 'Fără cupoane',
+  telEmpty: 'Te rugăm să completezi telefonul',
   nameEmpty: 'Te rugăm să completezi numele',
+  nameInvalid: 'Nume incorect',
+  confirmDelete: 'Ești sigur ca vrei sa stergi?',
   telInvalid: 'Număr de telefon invalid',
   vanCalendar: {
     end: 'Sfârșit',
@@ -45,9 +48,11 @@ export default {
   },
   vanCouponCell: {
     title: 'Cupon',
+    tips: 'Fără cupoane',
     count: count => "Ai " + count + " cupoane"
   },
   vanCouponList: {
+    empty: 'Fără cupoane',
     exchange: 'Schimbă',
     close: 'Închide',
     enable: 'Disponibil',
@@ -60,7 +65,10 @@ export default {
     areaEmpty: 'Te rugăm sa selectezi o zona de primire',
     addressEmpty: 'Adresa nu poate fi goală',
     postalEmpty: 'Cod postal invalid',
-    defaultAddress: 'Setează ca adresă de pornire'
+    defaultAddress: 'Setează ca adresă de pornire',
+    telPlaceholder: 'Telefon',
+    namePlaceholder: 'Nume',
+    areaPlaceholder: 'Zonă'
   },
   vanAddressEditDetail: {
     label: 'Adresă',

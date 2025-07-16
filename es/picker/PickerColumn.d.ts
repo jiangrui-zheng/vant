@@ -1,60 +1,72 @@
-import type { PickerOption } from './types';
+import { PropType } from 'vue';
 export declare const PICKER_KEY: unique symbol;
+export declare type PickerObjectOption = {
+    text?: string | number;
+    disabled?: boolean;
+    [key: string]: any;
+};
+export declare type PickerOption = string | number | PickerObjectOption;
+export declare type PickerObjectColumn = {
+    values?: PickerOption[];
+    children?: PickerColumn;
+    className?: unknown;
+    defaultIndex?: number;
+    [key: string]: any;
+};
+export declare type PickerColumn = PickerOption[] | PickerObjectColumn;
 declare const _default: import("vue").DefineComponent<{
+    readonly: BooleanConstructor;
+    allowHtml: BooleanConstructor;
+    className: PropType<unknown>;
     textKey: {
         type: StringConstructor;
         required: true;
     };
-    readonly: BooleanConstructor;
-    allowHtml: BooleanConstructor;
-    className: import("vue").PropType<unknown>;
     itemHeight: {
         type: NumberConstructor;
+        required: true;
+    };
+    swipeDuration: {
+        type: (NumberConstructor | StringConstructor)[];
+        required: true;
+    };
+    visibleItemCount: {
+        type: (NumberConstructor | StringConstructor)[];
         required: true;
     };
     defaultIndex: {
         type: NumberConstructor;
         default: number;
     };
-    swipeDuration: {
-        type: (NumberConstructor | StringConstructor)[];
-        required: true;
-    };
     initialOptions: {
-        type: import("vue").PropType<PickerOption[]>;
+        type: PropType<PickerOption[]>;
         default: () => never[];
     };
-    visibleItemCount: {
-        type: (NumberConstructor | StringConstructor)[];
-        required: true;
-    };
 }, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "change"[], "change", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    textKey?: unknown;
     readonly?: unknown;
     allowHtml?: unknown;
     className?: unknown;
+    textKey?: unknown;
     itemHeight?: unknown;
-    defaultIndex?: unknown;
     swipeDuration?: unknown;
-    initialOptions?: unknown;
     visibleItemCount?: unknown;
+    defaultIndex?: unknown;
+    initialOptions?: unknown;
 } & {
     readonly: boolean;
-    defaultIndex: number;
     allowHtml: boolean;
+    textKey: string;
     itemHeight: number;
     swipeDuration: string | number;
     visibleItemCount: string | number;
-    textKey: string;
+    defaultIndex: number;
     initialOptions: PickerOption[];
 } & {
     className?: unknown;
-}> & {
-    onChange?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     readonly: boolean;
-    defaultIndex: number;
     allowHtml: boolean;
+    defaultIndex: number;
     initialOptions: PickerOption[];
 }>;
 export default _default;

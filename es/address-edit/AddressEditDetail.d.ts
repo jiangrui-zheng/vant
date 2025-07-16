@@ -1,5 +1,8 @@
 import { PropType } from 'vue';
-import type { AddressEditSearchItem } from './types';
+export declare type AddressEditSearchItem = {
+    name: string;
+    address: string;
+};
 declare const _default: import("vue").DefineComponent<{
     show: BooleanConstructor;
     value: StringConstructor;
@@ -9,7 +12,7 @@ declare const _default: import("vue").DefineComponent<{
     errorMessage: StringConstructor;
     detailMaxlength: (NumberConstructor | StringConstructor)[];
     showSearchResult: BooleanConstructor;
-}, () => JSX.Element | undefined, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("input" | "focus" | "blur" | "select-search")[], "input" | "focus" | "blur" | "select-search", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+}, () => JSX.Element | undefined, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("input" | "blur" | "focus" | "select-search")[], "input" | "blur" | "focus" | "select-search", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
     show?: unknown;
     value?: unknown;
     focused?: unknown;
@@ -19,23 +22,18 @@ declare const _default: import("vue").DefineComponent<{
     detailMaxlength?: unknown;
     showSearchResult?: unknown;
 } & {
-    focused: boolean;
     show: boolean;
+    focused: boolean;
     showSearchResult: boolean;
 } & {
     value?: string | undefined;
     errorMessage?: string | undefined;
-    searchResult?: AddressEditSearchItem[] | undefined;
     detailRows?: string | number | undefined;
+    searchResult?: AddressEditSearchItem[] | undefined;
     detailMaxlength?: string | number | undefined;
-}> & {
-    onFocus?: ((...args: any[]) => any) | undefined;
-    onBlur?: ((...args: any[]) => any) | undefined;
-    onInput?: ((...args: any[]) => any) | undefined;
-    "onSelect-search"?: ((...args: any[]) => any) | undefined;
-}, {
-    focused: boolean;
+}>, {
     show: boolean;
+    focused: boolean;
     showSearchResult: boolean;
 }>;
 export default _default;

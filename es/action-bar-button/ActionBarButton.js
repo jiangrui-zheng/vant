@@ -9,22 +9,20 @@ import { useRoute, routeProps } from '../composables/use-route'; // Components
 
 import { Button } from '../button';
 var [name, bem] = createNamespace('action-bar-button');
-var actionBarButtonProps = extend({}, routeProps, {
-  type: String,
-  text: String,
-  icon: String,
-  color: String,
-  loading: Boolean,
-  disabled: Boolean
-});
 export default defineComponent({
   name,
-  props: actionBarButtonProps,
+  props: extend({}, routeProps, {
+    type: String,
+    text: String,
+    icon: String,
+    color: String,
+    loading: Boolean,
+    disabled: Boolean
+  }),
 
-  setup(props, _ref) {
-    var {
-      slots
-    } = _ref;
+  setup(props, {
+    slots
+  }) {
     var route = useRoute();
     var {
       parent,

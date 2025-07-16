@@ -1,35 +1,49 @@
 import { createVNode as _createVNode } from "vue";
 import { defineComponent } from 'vue'; // Utils
 
-import { addUnit, makeArrayProp, makeStringProp, makeNumericProp, createNamespace } from '../utils'; // Components
+import { createNamespace, addUnit } from '../utils'; // Components
 
 import { Icon } from '../icon';
 import { Sidebar } from '../sidebar';
 import { SidebarItem } from '../sidebar-item';
 var [name, bem] = createNamespace('tree-select');
-var treeSelectProps = {
-  max: makeNumericProp(Infinity),
-  items: makeArrayProp(),
-  height: makeNumericProp(300),
-  selectedIcon: makeStringProp('success'),
-  mainActiveIndex: makeNumericProp(0),
-  activeId: {
-    type: [Number, String, Array],
-    default: 0
-  }
-};
 export default defineComponent({
   name,
-  props: treeSelectProps,
+  props: {
+    max: {
+      type: [Number, String],
+      default: Infinity
+    },
+    items: {
+      type: Array,
+      default: () => []
+    },
+    height: {
+      type: [Number, String],
+      default: 300
+    },
+    activeId: {
+      type: [Number, String, Array],
+      default: 0
+    },
+    selectedIcon: {
+      type: String,
+      default: 'success'
+    },
+    mainActiveIndex: {
+      type: [Number, String],
+      default: 0
+    }
+  },
   emits: ['click-nav', 'click-item', 'update:activeId', 'update:mainActiveIndex'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
-
-    var isActiveItem = id => Array.isArray(props.activeId) ? props.activeId.includes(id) : props.activeId === id;
+  setup(props, {
+    emit,
+    slots
+  }) {
+    var isActiveItem = id => {
+      return Array.isArray(props.activeId) ? props.activeId.includes(id) : props.activeId === id;
+    };
 
     var renderSubItem = item => {
       var onClick = () => {

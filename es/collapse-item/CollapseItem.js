@@ -1,8 +1,8 @@
 import { withDirectives as _withDirectives, vShow as _vShow, createVNode as _createVNode, mergeProps as _mergeProps, resolveDirective as _resolveDirective } from "vue";
 import { ref, watch, computed, nextTick, defineComponent } from 'vue'; // Utils
 
-import { cellSharedProps } from '../cell/Cell';
-import { pick, extend, truthProp, numericProp, createNamespace } from '../utils';
+import { cellProps } from '../cell/Cell';
+import { createNamespace, extend, pick, truthProp } from '../utils';
 import { COLLAPSE_KEY } from '../collapse/Collapse'; // Composables
 
 import { raf, doubleRaf, useParent } from '@vant/use';
@@ -12,20 +12,18 @@ import { useLazyRender } from '../composables/use-lazy-render'; // Components
 import { Cell } from '../cell';
 var [name, bem] = createNamespace('collapse-item');
 var CELL_SLOTS = ['icon', 'title', 'value', 'label', 'right-icon'];
-var collapseItemProps = extend({}, cellSharedProps, {
-  name: numericProp,
-  isLink: truthProp,
-  disabled: Boolean,
-  readonly: Boolean
-});
 export default defineComponent({
   name,
-  props: collapseItemProps,
+  props: extend({}, cellProps, {
+    name: [Number, String],
+    isLink: truthProp,
+    disabled: Boolean,
+    readonly: Boolean
+  }),
 
-  setup(props, _ref) {
-    var {
-      slots
-    } = _ref;
+  setup(props, {
+    slots
+  }) {
     var wrapperRef = ref();
     var contentRef = ref();
     var {
@@ -53,7 +51,7 @@ export default defineComponent({
     var onTransitionEnd = () => {
       if (!expanded.value) {
         show.value = false;
-      } else if (wrapperRef.value) {
+      } else {
         wrapperRef.value.style.height = '';
       }
     };
@@ -84,9 +82,7 @@ export default defineComponent({
           wrapperRef.value.style.height = value ? '0' : contentHeight; // use double raf to ensure animation can start
 
           doubleRaf(() => {
-            if (wrapperRef.value) {
-              wrapperRef.value.style.height = value ? contentHeight : '0';
-            }
+            wrapperRef.value.style.height = value ? contentHeight : '0';
           });
         } else {
           onTransitionEnd();
@@ -94,11 +90,7 @@ export default defineComponent({
       });
     });
 
-    var toggle = function (newValue) {
-      if (newValue === void 0) {
-        newValue = !expanded.value;
-      }
-
+    var toggle = (newValue = !expanded.value) => {
       parent.toggle(name.value, newValue);
     };
 
@@ -114,7 +106,7 @@ export default defineComponent({
         disabled,
         readonly
       } = props;
-      var attrs = pick(props, Object.keys(cellSharedProps));
+      var attrs = pick(props, Object.keys(cellProps));
 
       if (readonly) {
         attrs.isLink = false;

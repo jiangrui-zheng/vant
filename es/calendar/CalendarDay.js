@@ -1,24 +1,29 @@
 import { createVNode as _createVNode } from "vue";
 import { computed, defineComponent } from 'vue';
-import { makeNumberProp, createNamespace, makeRequiredProp } from '../utils';
+import { createNamespace } from '../utils';
 import { bem } from './utils';
 var [name] = createNamespace('calendar-day');
 export default defineComponent({
   name,
   props: {
-    item: makeRequiredProp(Object),
     color: String,
     index: Number,
-    offset: makeNumberProp(0),
-    rowHeight: String
+    rowHeight: String,
+    offset: {
+      type: Number,
+      default: 0
+    },
+    item: {
+      type: Object,
+      required: true
+    }
   },
   emits: ['click'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var style = computed(() => {
       var {
         item,

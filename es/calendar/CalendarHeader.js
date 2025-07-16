@@ -12,14 +12,10 @@ export default defineComponent({
     showSubtitle: Boolean,
     firstDayOfWeek: Number
   },
-  emits: ['click-subtitle'],
 
-  setup(props, _ref) {
-    var {
-      slots,
-      emit
-    } = _ref;
-
+  setup(props, {
+    slots
+  }) {
     var renderTitle = () => {
       if (props.showTitle) {
         var text = props.title || t('title');
@@ -30,17 +26,11 @@ export default defineComponent({
       }
     };
 
-    var onClickSubtitle = event => {
-      emit('click-subtitle', event);
-    };
-
     var renderSubtitle = () => {
       if (props.showSubtitle) {
-        var title = slots.subtitle ? slots.subtitle() : props.subtitle;
         return _createVNode("div", {
-          "class": bem('header-subtitle'),
-          "onClick": onClickSubtitle
-        }, [title]);
+          "class": bem('header-subtitle')
+        }, [props.subtitle]);
       }
     };
 

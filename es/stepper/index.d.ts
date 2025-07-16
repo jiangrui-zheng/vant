@@ -1,21 +1,6 @@
-export declare const Stepper: import("../utils").WithInstall<import("vue").DefineComponent<{
-    min: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
-    };
-    max: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
-    };
-    name: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: string;
-    };
-    step: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
-    };
-    theme: import("vue").PropType<import("./Stepper").StepperTheme>;
+import { StepperTheme } from './Stepper';
+declare const Stepper: import("../utils").WithInstall<import("vue").DefineComponent<{
+    theme: import("vue").PropType<StepperTheme>;
     integer: BooleanConstructor;
     disabled: BooleanConstructor;
     showPlus: {
@@ -42,17 +27,29 @@ export declare const Stepper: import("../utils").WithInstall<import("vue").Defin
     disablePlus: BooleanConstructor;
     disableMinus: BooleanConstructor;
     disableInput: BooleanConstructor;
-    beforeChange: import("vue").PropType<import("../utils").Interceptor>;
+    beforeChange: import("vue").PropType<import("../utils/interceptor").Interceptor>;
+    decimalLength: (NumberConstructor | StringConstructor)[];
+    name: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: string;
+    };
+    min: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    max: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    step: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
     defaultValue: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-    decimalLength: (NumberConstructor | StringConstructor)[];
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("focus" | "blur" | "update:modelValue" | "change" | "plus" | "minus" | "overlimit")[], "focus" | "blur" | "update:modelValue" | "change" | "plus" | "minus" | "overlimit", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    min?: unknown;
-    max?: unknown;
-    name?: unknown;
-    step?: unknown;
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("blur" | "change" | "focus" | "update:modelValue" | "plus" | "minus" | "overlimit")[], "blur" | "change" | "focus" | "update:modelValue" | "plus" | "minus" | "overlimit", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
     theme?: unknown;
     integer?: unknown;
     disabled?: unknown;
@@ -69,8 +66,12 @@ export declare const Stepper: import("../utils").WithInstall<import("vue").Defin
     disableMinus?: unknown;
     disableInput?: unknown;
     beforeChange?: unknown;
-    defaultValue?: unknown;
     decimalLength?: unknown;
+    name?: unknown;
+    min?: unknown;
+    max?: unknown;
+    step?: unknown;
+    defaultValue?: unknown;
 } & {
     name: string | number;
     max: string | number;
@@ -88,22 +89,14 @@ export declare const Stepper: import("../utils").WithInstall<import("vue").Defin
     disableInput: boolean;
     defaultValue: string | number;
 } & {
-    modelValue?: string | number | undefined;
     placeholder?: string | undefined;
-    beforeChange?: import("../utils").Interceptor | undefined;
-    theme?: import("./Stepper").StepperTheme | undefined;
+    modelValue?: string | number | undefined;
+    theme?: StepperTheme | undefined;
+    beforeChange?: import("../utils/interceptor").Interceptor | undefined;
     buttonSize?: string | number | undefined;
     inputWidth?: string | number | undefined;
     decimalLength?: string | number | undefined;
-}> & {
-    onFocus?: ((...args: any[]) => any) | undefined;
-    onBlur?: ((...args: any[]) => any) | undefined;
-    onChange?: ((...args: any[]) => any) | undefined;
-    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
-    onPlus?: ((...args: any[]) => any) | undefined;
-    onMinus?: ((...args: any[]) => any) | undefined;
-    onOverlimit?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     name: string | number;
     max: string | number;
     disabled: boolean;
@@ -121,4 +114,5 @@ export declare const Stepper: import("../utils").WithInstall<import("vue").Defin
     defaultValue: string | number;
 }>>;
 export default Stepper;
-export type { StepperTheme, StepperProps } from './Stepper';
+export { Stepper };
+export type { StepperTheme };

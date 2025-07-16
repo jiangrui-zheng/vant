@@ -1,18 +1,18 @@
 import { createVNode as _createVNode } from "vue";
 import { defineComponent } from 'vue'; // Utils
 
-import { isDef, extend, truthProp, unknownProp, numericProp, createNamespace } from '../utils'; // Composables
+import { createNamespace, extend, isDef, truthProp, unknownProp } from '../utils'; // Composables
 
 import { useRoute, routeProps } from '../composables/use-route'; // Components
 
 import { Icon } from '../icon';
 var [name, bem] = createNamespace('cell');
-export var cellSharedProps = {
+export var cellProps = {
   icon: String,
   size: String,
-  title: numericProp,
-  value: numericProp,
-  label: numericProp,
+  title: [Number, String],
+  value: [Number, String],
+  label: [Number, String],
   center: Boolean,
   isLink: Boolean,
   border: truthProp,
@@ -28,15 +28,19 @@ export var cellSharedProps = {
     default: null
   }
 };
-var cellProps = extend({}, cellSharedProps, routeProps);
 export default defineComponent({
   name,
-  props: cellProps,
+  props: extend({}, cellProps, routeProps),
 
-  setup(props, _ref) {
-    var {
-      slots
-    } = _ref;
+  setup(props, {
+    slots
+  }) {
+    if (process.env.NODE_ENV !== 'production') {
+      if (slots.default) {
+        console.warn('[Vant] Cell: "default" slot is deprecated, please use "value" slot instead.');
+      }
+    }
+
     var route = useRoute();
 
     var renderLabel = () => {
@@ -59,7 +63,8 @@ export default defineComponent({
     };
 
     var renderValue = () => {
-      // slots.default is an alias of slots.value
+      // default slot is deprecated
+      // should be removed in next major version
       var slot = slots.value || slots.default;
       var hasValue = slot || isDef(props.value);
 

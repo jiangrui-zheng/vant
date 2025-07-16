@@ -1,4 +1,4 @@
-export declare const Overlay: import("../utils").WithInstall<import("vue").DefineComponent<{
+declare const Overlay: import("../utils").WithInstall<import("vue").DefineComponent<{
     show: BooleanConstructor;
     zIndex: (NumberConstructor | StringConstructor)[];
     duration: (NumberConstructor | StringConstructor)[];
@@ -28,4 +28,4 @@ export declare const Overlay: import("../utils").WithInstall<import("vue").Defin
     lockScroll: boolean;
 }>>;
 export default Overlay;
-export type { OverlayProps } from './Overlay';
+export { Overlay };

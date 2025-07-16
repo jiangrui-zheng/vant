@@ -5,9 +5,12 @@ export default {
   confirm: 'Confirmar',
   cancel: 'Cancelar',
   delete: 'Eliminar',
+  complete: 'Completado',
   loading: 'Cargando...',
-  noCoupon: 'Sin cupones',
+  telEmpty: 'Por favor rellena el teléfono',
   nameEmpty: 'Por favor rellena el nombre',
+  nameInvalid: 'nombre inválido',
+  confirmDelete: 'Estás seguro de eliminarlo?',
   telInvalid: 'Teléfono inválido',
   vanCalendar: {
     end: 'Fin',
@@ -45,9 +48,11 @@ export default {
   },
   vanCouponCell: {
     title: 'Cupón',
+    tips: 'Sin cupones',
     count: count => "You have " + count + " coupons"
   },
   vanCouponList: {
+    empty: 'Sin cupones',
     exchange: 'Intercambio',
     close: 'Cerrar',
     enable: 'Disponible',
@@ -60,7 +65,10 @@ export default {
     areaEmpty: 'Por favor selecciona una área de recogida',
     addressEmpty: 'La dirección no puede estar vacia',
     postalEmpty: 'Código postal inválido',
-    defaultAddress: 'Establecer como dirección por defecto'
+    defaultAddress: 'Establecer como dirección por defecto',
+    telPlaceholder: 'Teléfono',
+    namePlaceholder: 'Nombre',
+    areaPlaceholder: 'Área'
   },
   vanAddressEditDetail: {
     label: 'Dirección',

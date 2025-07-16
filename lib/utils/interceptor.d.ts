@@ -1,6 +1,7 @@
-export declare type Interceptor = (...args: any[]) => Promise<boolean> | boolean | undefined;
-export declare function callInterceptor(interceptor: Interceptor | undefined, { args, done, canceled, }: {
-    args?: unknown[];
+export declare type Interceptor = (...args: any[]) => Promise<boolean> | boolean;
+export declare function callInterceptor(options: {
+    interceptor?: Interceptor;
+    args?: any[];
     done: () => void;
     canceled?: () => void;
 }): void;

@@ -1,18 +1,5 @@
-import { PropType, ExtractPropTypes } from 'vue';
+import { PropType } from 'vue';
 import { ButtonType } from '../button';
-declare const actionBarButtonProps: {
-    to: PropType<import("vue-router").RouteLocationRaw>;
-    url: StringConstructor;
-    replace: BooleanConstructor;
-} & {
-    type: PropType<ButtonType>;
-    text: StringConstructor;
-    icon: StringConstructor;
-    color: StringConstructor;
-    loading: BooleanConstructor;
-    disabled: BooleanConstructor;
-};
-export declare type ActionBarButtonProps = ExtractPropTypes<typeof actionBarButtonProps>;
 declare const _default: import("vue").DefineComponent<{
     to: PropType<import("vue-router").RouteLocationRaw>;
     url: StringConstructor;
@@ -36,18 +23,18 @@ declare const _default: import("vue").DefineComponent<{
     disabled?: unknown;
 } & {
     replace: boolean;
-    disabled: boolean;
     loading: boolean;
+    disabled: boolean;
 } & {
     text?: string | undefined;
-    type?: ButtonType | undefined;
-    url?: string | undefined;
     to?: import("vue-router").RouteLocationRaw | undefined;
+    url?: string | undefined;
     color?: string | undefined;
     icon?: string | undefined;
+    type?: ButtonType | undefined;
 }>, {
     replace: boolean;
-    disabled: boolean;
     loading: boolean;
+    disabled: boolean;
 }>;
 export default _default;

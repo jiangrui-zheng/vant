@@ -1,43 +1,51 @@
 import { mergeProps as _mergeProps, createVNode as _createVNode } from "vue";
 import { watch, onMounted, onUnmounted, defineComponent } from 'vue'; // Utils
 
-import { pick, isDef, unknownProp, numericProp, makeStringProp, makeNumberProp, createNamespace } from '../utils';
+import { createNamespace, isDef, unknownProp } from '../utils';
 import { lockClick } from './lock-click'; // Components
 
 import { Icon } from '../icon';
 import { Popup } from '../popup';
-import { Loading } from '../loading'; // Types
-
+import { Loading } from '../loading';
 var [name, bem] = createNamespace('toast');
-var popupInheritProps = ['show', 'overlay', 'transition', 'overlayClass', 'overlayStyle', 'closeOnClickOverlay'];
-var toastProps = {
-  icon: String,
-  show: Boolean,
-  type: makeStringProp('text'),
-  overlay: Boolean,
-  message: numericProp,
-  iconSize: numericProp,
-  duration: makeNumberProp(2000),
-  position: makeStringProp('middle'),
-  className: unknownProp,
-  iconPrefix: String,
-  transition: makeStringProp('van-fade'),
-  loadingType: String,
-  forbidClick: Boolean,
-  overlayClass: unknownProp,
-  overlayStyle: Object,
-  closeOnClick: Boolean,
-  closeOnClickOverlay: Boolean
-};
 export default defineComponent({
   name,
-  props: toastProps,
+  props: {
+    icon: String,
+    show: Boolean,
+    overlay: Boolean,
+    message: [Number, String],
+    iconSize: [Number, String],
+    className: unknownProp,
+    iconPrefix: String,
+    loadingType: String,
+    forbidClick: Boolean,
+    overlayClass: unknownProp,
+    overlayStyle: Object,
+    closeOnClick: Boolean,
+    closeOnClickOverlay: Boolean,
+    type: {
+      type: String,
+      default: 'text'
+    },
+    duration: {
+      type: Number,
+      default: 2000
+    },
+    position: {
+      type: String,
+      default: 'middle'
+    },
+    transition: {
+      type: String,
+      default: 'van-fade'
+    }
+  },
   emits: ['update:show'],
 
-  setup(props, _ref) {
-    var {
-      emit
-    } = _ref;
+  setup(props, {
+    emit
+  }) {
     var timer;
     var clickable = false;
 
@@ -58,7 +66,9 @@ export default defineComponent({
       }
     };
 
-    var clearTimer = () => clearTimeout(timer);
+    var clearTimer = () => {
+      clearTimeout(timer);
+    };
 
     var renderIcon = () => {
       var {
@@ -117,14 +127,21 @@ export default defineComponent({
     onMounted(toggleClickable);
     onUnmounted(toggleClickable);
     return () => _createVNode(Popup, _mergeProps({
+      "show": props.show,
       "class": [bem([props.position, {
         [props.type]: !props.icon
       }]), props.className],
+      "overlay": props.overlay,
       "lockScroll": false,
+      "transition": props.transition,
+      "overlayClass": props.overlayClass,
+      "overlayStyle": props.overlayStyle,
+      "closeOnClickOverlay": props.closeOnClickOverlay,
       "onClick": onClick,
-      "onClosed": clearTimer,
-      "onUpdate:show": updateShow
-    }, pick(props, popupInheritProps)), {
+      "onClosed": clearTimer
+    }, {
+      'onUpdate:show': updateShow
+    }), {
       default: () => [renderIcon(), renderMessage()]
     });
   }

@@ -1,7 +1,13 @@
 import { createNamespace, isFunction } from '../utils';
 var [name, bem] = createNamespace('uploader');
 export { name, bem };
-export var toArray = item => Array.isArray(item) ? item : [item];
+export function toArray(item) {
+  if (Array.isArray(item)) {
+    return item;
+  }
+
+  return [item];
+}
 export function readFileContent(file, resultType) {
   return new Promise(resolve => {
     if (resultType === 'file') {
@@ -51,7 +57,9 @@ export function filterFiles(items, maxSize) {
   };
 }
 var IMAGE_REGEXP = /\.(jpeg|jpg|gif|png|svg|webp|jfif|bmp|dpg)/i;
-export var isImageUrl = url => IMAGE_REGEXP.test(url);
+export function isImageUrl(url) {
+  return IMAGE_REGEXP.test(url);
+}
 export function isImageFile(item) {
   // some special urls cannot be recognized
   // user can add `isImage` flag to mark it as an image url

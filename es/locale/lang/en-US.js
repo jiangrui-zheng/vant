@@ -5,9 +5,12 @@ export default {
   confirm: 'Confirm',
   cancel: 'Cancel',
   delete: 'Delete',
+  complete: 'Complete',
   loading: 'Loading...',
-  noCoupon: 'No coupons',
+  telEmpty: 'Please fill in the tel',
   nameEmpty: 'Please fill in the name',
+  nameInvalid: 'Malformed name',
+  confirmDelete: 'Are you sure you want to delete?',
   telInvalid: 'Malformed phone number',
   vanCalendar: {
     end: 'End',
@@ -45,9 +48,11 @@ export default {
   },
   vanCouponCell: {
     title: 'Coupon',
+    tips: 'No coupons',
     count: count => "You have " + count + " coupons"
   },
   vanCouponList: {
+    empty: 'No coupons',
     exchange: 'Exchange',
     close: 'Close',
     enable: 'Available',
@@ -60,7 +65,10 @@ export default {
     areaEmpty: 'Please select a receiving area',
     addressEmpty: 'Address can not be empty',
     postalEmpty: 'Wrong postal code',
-    defaultAddress: 'Set as the default address'
+    defaultAddress: 'Set as the default address',
+    telPlaceholder: 'Phone',
+    namePlaceholder: 'Name',
+    areaPlaceholder: 'Area'
   },
   vanAddressEditDetail: {
     label: 'Address',

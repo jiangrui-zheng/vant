@@ -15,18 +15,16 @@ declare const _default: import("vue").DefineComponent<{
     large?: unknown;
     loading?: unknown;
 } & {
-    large: boolean;
     loading: boolean;
+    large: boolean;
     wider: boolean;
 } & {
     text?: string | number | undefined;
-    type?: KeyType | undefined;
     color?: string | undefined;
-}> & {
-    onPress?: ((...args: any[]) => any) | undefined;
-}, {
-    large: boolean;
+    type?: KeyType | undefined;
+}>, {
     loading: boolean;
+    large: boolean;
     wider: boolean;
 }>;
 export default _default;

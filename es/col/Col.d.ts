@@ -1,30 +1,18 @@
-import { ExtractPropTypes } from 'vue';
-declare const colProps: {
-    tag: {
-        type: import("vue").PropType<keyof HTMLElementTagNameMap>;
-        default: keyof HTMLElementTagNameMap;
-    };
-    span: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
-    };
-    offset: (NumberConstructor | StringConstructor)[];
-};
-export declare type ColProps = ExtractPropTypes<typeof colProps>;
+import { PropType } from 'vue';
 declare const _default: import("vue").DefineComponent<{
+    offset: (NumberConstructor | StringConstructor)[];
     tag: {
-        type: import("vue").PropType<keyof HTMLElementTagNameMap>;
-        default: keyof HTMLElementTagNameMap;
+        type: PropType<keyof HTMLElementTagNameMap>;
+        default: string;
     };
     span: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-    offset: (NumberConstructor | StringConstructor)[];
 }, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    offset?: unknown;
     tag?: unknown;
     span?: unknown;
-    offset?: unknown;
 } & {
     span: string | number;
     tag: keyof HTMLElementTagNameMap;

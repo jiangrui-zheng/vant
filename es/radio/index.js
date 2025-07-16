@@ -1,4 +1,5 @@
 import { withInstall } from '../utils';
 import _Radio from './Radio';
-export var Radio = withInstall(_Radio);
+var Radio = withInstall(_Radio);
 export default Radio;
+export { Radio };

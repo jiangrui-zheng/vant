@@ -1,21 +1,18 @@
-export declare const ConfigProvider: import("../utils").WithInstall<import("vue").DefineComponent<{
+declare const ConfigProvider: import("../utils").WithInstall<import("vue").DefineComponent<{
+    themeVars: import("vue").PropType<Record<string, string | number>>;
     tag: {
         type: import("vue").PropType<keyof HTMLElementTagNameMap>;
-        default: keyof HTMLElementTagNameMap;
+        default: string;
     };
-    themeVars: import("vue").PropType<Record<string, string | number>>;
-    iconPrefix: StringConstructor;
 }, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    tag?: unknown;
     themeVars?: unknown;
-    iconPrefix?: unknown;
+    tag?: unknown;
 } & {
     tag: keyof HTMLElementTagNameMap;
 } & {
     themeVars?: Record<string, string | number> | undefined;
-    iconPrefix?: string | undefined;
 }>, {
     tag: keyof HTMLElementTagNameMap;
 }>>;
 export default ConfigProvider;
-export type { ConfigProviderProps } from './ConfigProvider';
+export { ConfigProvider };

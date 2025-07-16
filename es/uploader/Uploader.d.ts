@@ -1,100 +1,22 @@
-import { PropType, ExtractPropTypes } from 'vue';
-import { Interceptor } from '../utils';
+import { PropType } from 'vue';
+import { UploaderMaxSize, UploaderResultType, UploaderFileListItem } from './utils';
 import { ImagePreviewOptions } from '../image-preview';
 import type { ImageFit } from '../image';
-import type { UploaderMaxSize, UploaderAfterRead, UploaderBeforeRead, UploaderResultType, UploaderFileListItem } from './types';
-declare const uploaderProps: {
-    name: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: string;
-    };
-    accept: {
-        type: PropType<string>;
-        default: string;
-    };
-    capture: StringConstructor;
-    multiple: BooleanConstructor;
-    disabled: BooleanConstructor;
-    readonly: BooleanConstructor;
-    lazyLoad: BooleanConstructor;
-    maxCount: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
-    };
-    imageFit: {
-        type: PropType<ImageFit>;
-        default: ImageFit;
-    };
-    resultType: {
-        type: PropType<UploaderResultType>;
-        default: UploaderResultType;
-    };
-    uploadIcon: {
-        type: PropType<string>;
-        default: string;
-    };
-    uploadText: StringConstructor;
-    deletable: {
-        type: BooleanConstructor;
-        default: true;
-    };
-    afterRead: PropType<UploaderAfterRead>;
-    showUpload: {
-        type: BooleanConstructor;
-        default: true;
-    };
-    modelValue: {
-        type: PropType<UploaderFileListItem[]>;
-        default: () => never[];
-    };
-    beforeRead: PropType<UploaderBeforeRead>;
-    beforeDelete: PropType<Interceptor>;
-    previewSize: (NumberConstructor | StringConstructor)[];
-    previewImage: {
-        type: BooleanConstructor;
-        default: true;
-    };
-    previewOptions: PropType<ImagePreviewOptions>;
-    previewFullImage: {
-        type: BooleanConstructor;
-        default: true;
-    };
-    maxSize: {
-        type: PropType<UploaderMaxSize>;
-        default: number;
-    };
-};
-export declare type UploaderProps = ExtractPropTypes<typeof uploaderProps>;
+import type { Interceptor } from '../utils/interceptor';
+declare type PromiseOrNot<T> = T | Promise<T>;
+export declare type UploaderBeforeRead = (file: File | File[], detail: {
+    name: string | number;
+    index: number;
+}) => PromiseOrNot<File | File[] | undefined>;
+export declare type UploaderAfterRead = (items: UploaderFileListItem | UploaderFileListItem[], detail: {
+    name: string | number;
+    index: number;
+}) => void;
 declare const _default: import("vue").DefineComponent<{
-    name: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: string;
-    };
-    accept: {
-        type: PropType<string>;
-        default: string;
-    };
     capture: StringConstructor;
     multiple: BooleanConstructor;
     disabled: BooleanConstructor;
-    readonly: BooleanConstructor;
     lazyLoad: BooleanConstructor;
-    maxCount: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
-    };
-    imageFit: {
-        type: PropType<ImageFit>;
-        default: ImageFit;
-    };
-    resultType: {
-        type: PropType<UploaderResultType>;
-        default: UploaderResultType;
-    };
-    uploadIcon: {
-        type: PropType<string>;
-        default: string;
-    };
     uploadText: StringConstructor;
     deletable: {
         type: BooleanConstructor;
@@ -104,10 +26,6 @@ declare const _default: import("vue").DefineComponent<{
     showUpload: {
         type: BooleanConstructor;
         default: true;
-    };
-    modelValue: {
-        type: PropType<UploaderFileListItem[]>;
-        default: () => never[];
     };
     beforeRead: PropType<UploaderBeforeRead>;
     beforeDelete: PropType<Interceptor>;
@@ -121,82 +39,100 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: true;
     };
+    name: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: string;
+    };
+    accept: {
+        type: StringConstructor;
+        default: string;
+    };
+    modelValue: {
+        type: PropType<UploaderFileListItem[]>;
+        default: () => never[];
+    };
     maxSize: {
         type: PropType<UploaderMaxSize>;
         default: number;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "delete" | "oversize" | "click-upload" | "close-preview" | "click-preview")[], "update:modelValue" | "delete" | "oversize" | "click-upload" | "close-preview" | "click-preview", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    name?: unknown;
-    accept?: unknown;
+    maxCount: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    imageFit: {
+        type: PropType<ImageFit>;
+        default: string;
+    };
+    resultType: {
+        type: PropType<UploaderResultType>;
+        default: string;
+    };
+    uploadIcon: {
+        type: StringConstructor;
+        default: string;
+    };
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "delete" | "oversize" | "close-preview" | "click-preview")[], "update:modelValue" | "delete" | "oversize" | "close-preview" | "click-preview", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
     capture?: unknown;
     multiple?: unknown;
     disabled?: unknown;
-    readonly?: unknown;
     lazyLoad?: unknown;
-    maxCount?: unknown;
-    imageFit?: unknown;
-    resultType?: unknown;
-    uploadIcon?: unknown;
     uploadText?: unknown;
     deletable?: unknown;
     afterRead?: unknown;
     showUpload?: unknown;
-    modelValue?: unknown;
     beforeRead?: unknown;
     beforeDelete?: unknown;
     previewSize?: unknown;
     previewImage?: unknown;
     previewOptions?: unknown;
     previewFullImage?: unknown;
+    name?: unknown;
+    accept?: unknown;
+    modelValue?: unknown;
     maxSize?: unknown;
+    maxCount?: unknown;
+    imageFit?: unknown;
+    resultType?: unknown;
+    uploadIcon?: unknown;
 } & {
     name: string | number;
-    accept: string;
+    multiple: boolean;
     disabled: boolean;
     modelValue: UploaderFileListItem[];
-    readonly: boolean;
-    multiple: boolean;
     lazyLoad: boolean;
-    maxCount: string | number;
     imageFit: ImageFit;
-    resultType: UploaderResultType;
-    uploadIcon: string;
     deletable: boolean;
     showUpload: boolean;
     previewImage: boolean;
     previewFullImage: boolean;
+    accept: string;
     maxSize: UploaderMaxSize;
+    maxCount: string | number;
+    resultType: UploaderResultType;
+    uploadIcon: string;
 } & {
-    capture?: string | undefined;
     beforeRead?: UploaderBeforeRead | undefined;
     afterRead?: UploaderAfterRead | undefined;
-    uploadText?: string | undefined;
-    beforeDelete?: Interceptor | undefined;
     previewSize?: string | number | undefined;
+    beforeDelete?: Interceptor | undefined;
+    capture?: string | undefined;
+    uploadText?: string | undefined;
     previewOptions?: ImagePreviewOptions | undefined;
-}> & {
-    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
-    onDelete?: ((...args: any[]) => any) | undefined;
-    onOversize?: ((...args: any[]) => any) | undefined;
-    "onClick-upload"?: ((...args: any[]) => any) | undefined;
-    "onClose-preview"?: ((...args: any[]) => any) | undefined;
-    "onClick-preview"?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     name: string | number;
-    accept: string;
+    multiple: boolean;
     disabled: boolean;
     modelValue: UploaderFileListItem[];
-    readonly: boolean;
-    multiple: boolean;
     lazyLoad: boolean;
-    maxCount: string | number;
     imageFit: ImageFit;
-    resultType: UploaderResultType;
-    uploadIcon: string;
     deletable: boolean;
     showUpload: boolean;
     previewImage: boolean;
     previewFullImage: boolean;
+    accept: string;
     maxSize: UploaderMaxSize;
+    maxCount: string | number;
+    resultType: UploaderResultType;
+    uploadIcon: string;
 }>;
 export default _default;

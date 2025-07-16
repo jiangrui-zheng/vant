@@ -1,4 +1,4 @@
-export declare const CouponCell: import("../utils").WithInstall<import("vue").DefineComponent<{
+declare const CouponCell: import("../utils").WithInstall<import("vue").DefineComponent<{
     title: StringConstructor;
     border: {
         type: BooleanConstructor;
@@ -13,7 +13,7 @@ export declare const CouponCell: import("../utils").WithInstall<import("vue").De
         default: () => never[];
     };
     currency: {
-        type: import("vue").PropType<string>;
+        type: StringConstructor;
         default: string;
     };
     chosenCoupon: {
@@ -43,4 +43,4 @@ export declare const CouponCell: import("../utils").WithInstall<import("vue").De
     chosenCoupon: string | number;
 }>>;
 export default CouponCell;
-export type { CouponCellProps } from './CouponCell';
+export { CouponCell };

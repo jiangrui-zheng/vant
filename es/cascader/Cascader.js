@@ -1,35 +1,40 @@
 import { createVNode as _createVNode } from "vue";
-import { ref, watch, nextTick, defineComponent } from 'vue';
-import { extend, truthProp, numericProp, makeArrayProp, makeStringProp, createNamespace, HAPTICS_FEEDBACK } from '../utils'; // Components
+import { nextTick, reactive, watch, defineComponent } from 'vue';
+import { createNamespace, truthProp, extend } from '../utils'; // Components
 
 import { Tab } from '../tab';
 import { Tabs } from '../tabs';
-import { Icon } from '../icon'; // Types
-
+import { Icon } from '../icon';
 var [name, bem, t] = createNamespace('cascader');
-var cascaderProps = {
-  title: String,
-  options: makeArrayProp(),
-  closeable: truthProp,
-  swipeable: truthProp,
-  closeIcon: makeStringProp('cross'),
-  modelValue: numericProp,
-  fieldNames: Object,
-  placeholder: String,
-  activeColor: String
-};
 export default defineComponent({
   name,
-  props: cascaderProps,
-  emits: ['close', 'change', 'finish', 'click-tab', 'update:modelValue'],
+  props: {
+    title: String,
+    closeable: truthProp,
+    swipeable: truthProp,
+    modelValue: [Number, String],
+    fieldNames: Object,
+    placeholder: String,
+    activeColor: String,
+    options: {
+      type: Array,
+      default: () => []
+    },
+    closeIcon: {
+      type: String,
+      default: 'cross'
+    }
+  },
+  emits: ['close', 'change', 'finish', 'update:modelValue', 'click-tab'],
 
-  setup(props, _ref) {
-    var {
-      slots,
-      emit
-    } = _ref;
-    var tabs = ref([]);
-    var activeTab = ref(0);
+  setup(props, {
+    slots,
+    emit
+  }) {
+    var state = reactive({
+      tabs: [],
+      activeTab: 0
+    });
     var {
       text: textKey,
       value: valueKey,
@@ -41,7 +46,9 @@ export default defineComponent({
     }, props.fieldNames);
 
     var getSelectedOptionsByValue = (options, value) => {
-      for (var option of options) {
+      for (var i = 0; i < options.length; i++) {
+        var option = options[i];
+
         if (option[valueKey] === value) {
           return [option];
         }
@@ -57,20 +64,15 @@ export default defineComponent({
     };
 
     var updateTabs = () => {
-      var {
-        options,
-        modelValue
-      } = props;
-
-      if (modelValue !== undefined) {
-        var selectedOptions = getSelectedOptionsByValue(options, modelValue);
+      if (props.modelValue || props.modelValue === 0) {
+        var selectedOptions = getSelectedOptionsByValue(props.options, props.modelValue);
 
         if (selectedOptions) {
-          var optionsCursor = options;
-          tabs.value = selectedOptions.map(option => {
+          var optionsCursor = props.options;
+          state.tabs = selectedOptions.map(option => {
             var tab = {
               options: optionsCursor,
-              selected: option
+              selectedOption: option
             };
             var next = optionsCursor.find(item => item[valueKey] === option[valueKey]);
 
@@ -82,22 +84,22 @@ export default defineComponent({
           });
 
           if (optionsCursor) {
-            tabs.value.push({
+            state.tabs.push({
               options: optionsCursor,
-              selected: null
+              selectedOption: null
             });
           }
 
           nextTick(() => {
-            activeTab.value = tabs.value.length - 1;
+            state.activeTab = state.tabs.length - 1;
           });
           return;
         }
       }
 
-      tabs.value = [{
-        options,
-        selected: null
+      state.tabs = [{
+        options: props.options,
+        selectedOption: null
       }];
     };
 
@@ -106,51 +108,47 @@ export default defineComponent({
         return;
       }
 
-      tabs.value[tabIndex].selected = option;
+      state.tabs[tabIndex].selectedOption = option;
 
-      if (tabs.value.length > tabIndex + 1) {
-        tabs.value = tabs.value.slice(0, tabIndex + 1);
+      if (state.tabs.length > tabIndex + 1) {
+        state.tabs = state.tabs.slice(0, tabIndex + 1);
       }
 
       if (option[childrenKey]) {
         var nextTab = {
           options: option[childrenKey],
-          selected: null
+          selectedOption: null
         };
 
-        if (tabs.value[tabIndex + 1]) {
-          tabs.value[tabIndex + 1] = nextTab;
+        if (state.tabs[tabIndex + 1]) {
+          state.tabs[tabIndex + 1] = nextTab;
         } else {
-          tabs.value.push(nextTab);
+          state.tabs.push(nextTab);
         }
 
         nextTick(() => {
-          activeTab.value++;
+          state.activeTab++;
         });
       }
 
-      var selectedOptions = tabs.value.map(tab => tab.selected).filter(Boolean);
-      emit('update:modelValue', option[valueKey]);
-      var params = {
+      var selectedOptions = state.tabs.map(tab => tab.selectedOption).filter(Boolean);
+      var eventParams = {
         value: option[valueKey],
         tabIndex,
         selectedOptions
       };
-      emit('change', params);
+      emit('update:modelValue', option[valueKey]);
+      emit('change', eventParams);
 
       if (!option[childrenKey]) {
-        emit('finish', params);
+        emit('finish', eventParams);
       }
     };
 
     var onClose = () => emit('close');
 
-    var onClickTab = _ref2 => {
-      var {
-        name,
-        title
-      } = _ref2;
-      return emit('click-tab', name, title);
+    var onClickTab = (tabIndex, title) => {
+      emit('click-tab', tabIndex, title);
     };
 
     var renderHeader = () => _createVNode("div", {
@@ -159,66 +157,61 @@ export default defineComponent({
       "class": bem('title')
     }, [slots.title ? slots.title() : props.title]), props.closeable ? _createVNode(Icon, {
       "name": props.closeIcon,
-      "class": [bem('close-icon'), HAPTICS_FEEDBACK],
+      "class": bem('close-icon'),
       "onClick": onClose
     }, null) : null]);
 
-    var renderOption = (option, selectedOption, tabIndex) => {
-      var selected = selectedOption && option[valueKey] === selectedOption[valueKey];
-      var color = option.color || (selected ? props.activeColor : undefined);
-      var Text = slots.option ? slots.option({
-        option,
-        selected
-      }) : _createVNode("span", null, [option[textKey]]);
-      return _createVNode("li", {
-        "class": [bem('option', {
-          selected,
-          disabled: option.disabled
-        }), option.className],
-        "style": {
-          color
-        },
-        "onClick": () => onSelect(option, tabIndex)
-      }, [Text, selected ? _createVNode(Icon, {
-        "name": "success",
-        "class": bem('selected-icon')
-      }, null) : null]);
-    };
+    var renderOptions = (options, selectedOption, tabIndex) => {
+      var renderOption = option => {
+        var isSelected = selectedOption && option[valueKey] === selectedOption[valueKey];
+        var color = option.color || (isSelected ? props.activeColor : undefined);
+        return _createVNode("li", {
+          "class": [bem('option', {
+            selected: isSelected,
+            disabled: option.disabled
+          }), option.className],
+          "style": {
+            color
+          },
+          "onClick": () => onSelect(option, tabIndex)
+        }, [_createVNode("span", null, [option[textKey]]), isSelected ? _createVNode(Icon, {
+          "name": "success",
+          "class": bem('selected-icon')
+        }, null) : null]);
+      };
 
-    var renderOptions = (options, selectedOption, tabIndex) => _createVNode("ul", {
-      "class": bem('options')
-    }, [options.map(option => renderOption(option, selectedOption, tabIndex))]);
+      return _createVNode("ul", {
+        "class": bem('options')
+      }, [options.map(renderOption)]);
+    };
 
     var renderTab = (tab, tabIndex) => {
       var {
         options,
-        selected
+        selectedOption
       } = tab;
-      var placeholder = props.placeholder || t('select');
-      var title = selected ? selected[textKey] : placeholder;
+      var title = selectedOption ? selectedOption[textKey] : props.placeholder || t('select');
       return _createVNode(Tab, {
         "title": title,
         "titleClass": bem('tab', {
-          unselected: !selected
+          unselected: !selectedOption
         })
       }, {
-        default: () => [slots['options-top'] ? slots['options-top']({
-          tabIndex: activeTab.value
-        }) : null, renderOptions(options, selected, tabIndex)]
+        default: () => [renderOptions(options, selectedOption, tabIndex)]
       });
     };
 
     var renderTabs = () => _createVNode(Tabs, {
-      "active": activeTab.value,
-      "onUpdate:active": $event => activeTab.value = $event,
+      'active': state.activeTab,
+      "onUpdate:active": $event => state.activeTab = $event,
       "animated": true,
       "class": bem('tabs'),
       "color": props.activeColor,
       "swipeThreshold": 0,
       "swipeable": props.swipeable,
-      "onClick-tab": onClickTab
+      "onClick": onClickTab
     }, {
-      default: () => [tabs.value.map(renderTab)]
+      default: () => [state.tabs.map(renderTab)]
     });
 
     updateTabs();
@@ -226,11 +219,11 @@ export default defineComponent({
       deep: true
     });
     watch(() => props.modelValue, value => {
-      if (value !== undefined) {
-        var values = tabs.value.map(tab => {
-          var _tab$selected;
+      if (value || value === 0) {
+        var values = state.tabs.map(tab => {
+          var _tab$selectedOption;
 
-          return (_tab$selected = tab.selected) == null ? void 0 : _tab$selected[valueKey];
+          return (_tab$selectedOption = tab.selectedOption) == null ? void 0 : _tab$selectedOption[valueKey];
         });
 
         if (values.includes(value)) {

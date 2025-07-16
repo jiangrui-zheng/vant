@@ -1,43 +1,49 @@
 import { resolveDirective as _resolveDirective, createVNode as _createVNode } from "vue";
 import { ref, computed, defineComponent } from 'vue'; // Utils
 
-import { pick, addUnit, numericProp, setScrollTop, createNamespace, makeRequiredProp } from '../utils';
+import { addUnit, setScrollTop, createNamespace, pick } from '../utils';
 import { getMonthEndDay } from '../datetime-picker/utils';
 import { t, bem, compareDay, getPrevDay, getNextDay, formatMonthTitle } from './utils'; // Composables
 
-import { useRect, useToggle } from '@vant/use';
+import { useToggle } from '@vant/use';
 import { useExpose } from '../composables/use-expose';
 import { useHeight } from '../composables/use-height'; // Components
 
-import CalendarDay from './CalendarDay'; // Types
-
+import CalendarDay from './CalendarDay';
 var [name] = createNamespace('calendar-month');
-var calendarMonthProps = {
-  date: makeRequiredProp(Date),
-  type: String,
-  color: String,
-  minDate: makeRequiredProp(Date),
-  maxDate: makeRequiredProp(Date),
-  showMark: Boolean,
-  rowHeight: numericProp,
-  formatter: Function,
-  lazyRender: Boolean,
-  currentDate: [Date, Array],
-  allowSameDay: Boolean,
-  showSubtitle: Boolean,
-  showMonthTitle: Boolean,
-  firstDayOfWeek: Number
-};
 export default defineComponent({
   name,
-  props: calendarMonthProps,
+  props: {
+    type: String,
+    color: String,
+    showMark: Boolean,
+    rowHeight: [Number, String],
+    formatter: Function,
+    lazyRender: Boolean,
+    currentDate: [Date, Array],
+    allowSameDay: Boolean,
+    showSubtitle: Boolean,
+    showMonthTitle: Boolean,
+    firstDayOfWeek: Number,
+    date: {
+      type: Date,
+      required: true
+    },
+    minDate: {
+      type: Date,
+      required: true
+    },
+    maxDate: {
+      type: Date,
+      required: true
+    }
+  },
   emits: ['click', 'update-height'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var [visible, setVisible] = useToggle();
     var daysRef = ref();
     var monthRef = ref();
@@ -60,11 +66,8 @@ export default defineComponent({
 
     var scrollIntoView = body => {
       var el = props.showSubtitle ? daysRef.value : monthRef.value;
-
-      if (el) {
-        var scrollTop = useRect(el).top - useRect(body).top + body.scrollTop;
-        setScrollTop(body, scrollTop);
-      }
+      var scrollTop = el.getBoundingClientRect().top - body.getBoundingClientRect().top + body.scrollTop;
+      setScrollTop(body, scrollTop);
     };
 
     var getMultipleDayType = day => {
@@ -217,7 +220,6 @@ export default defineComponent({
 
       return days;
     });
-    var disabledDays = computed(() => days.value.filter(day => day.type === 'disabled'));
 
     var renderDay = (item, index) => _createVNode(CalendarDay, {
       "item": item,
@@ -228,18 +230,19 @@ export default defineComponent({
       "onClick": item => emit('click', item)
     }, pick(slots, ['top-info', 'bottom-info']));
 
-    var renderDays = () => _createVNode("div", {
-      "ref": daysRef,
-      "role": "grid",
-      "class": bem('days')
-    }, [renderMark(), (shouldRender.value ? days : placeholders).value.map(renderDay)]);
+    var renderDays = () => {
+      return _createVNode("div", {
+        "ref": daysRef,
+        "role": "grid",
+        "class": bem('days')
+      }, [renderMark(), (shouldRender.value ? days : placeholders).value.map(renderDay)]);
+    };
 
     useExpose({
       getTitle,
       getHeight: () => height.value,
       setVisible,
-      scrollIntoView,
-      disabledDays
+      scrollIntoView
     });
     return () => _createVNode("div", {
       "class": bem('month'),

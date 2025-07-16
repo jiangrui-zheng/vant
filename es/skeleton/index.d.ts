@@ -1,8 +1,4 @@
-export declare const Skeleton: import("../utils").WithInstall<import("vue").DefineComponent<{
-    row: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
-    };
+declare const Skeleton: import("../utils").WithInstall<import("vue").DefineComponent<{
     title: BooleanConstructor;
     round: BooleanConstructor;
     avatar: BooleanConstructor;
@@ -16,9 +12,13 @@ export declare const Skeleton: import("../utils").WithInstall<import("vue").Defi
     };
     avatarSize: (NumberConstructor | StringConstructor)[];
     titleWidth: (NumberConstructor | StringConstructor)[];
+    row: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
     avatarShape: {
-        type: import("vue").PropType<import("./Skeleton").SkeletonAvatarShape>;
-        default: import("./Skeleton").SkeletonAvatarShape;
+        type: import("vue").PropType<"round" | "square">;
+        default: string;
     };
     rowWidth: {
         type: import("vue").PropType<string | number | (string | number)[]>;
@@ -27,7 +27,6 @@ export declare const Skeleton: import("../utils").WithInstall<import("vue").Defi
 }, () => JSX.Element | import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
     [key: string]: any;
 }>[] | undefined, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    row?: unknown;
     title?: unknown;
     round?: unknown;
     avatar?: unknown;
@@ -35,6 +34,7 @@ export declare const Skeleton: import("../utils").WithInstall<import("vue").Defi
     animate?: unknown;
     avatarSize?: unknown;
     titleWidth?: unknown;
+    row?: unknown;
     avatarShape?: unknown;
     rowWidth?: unknown;
 } & {
@@ -44,7 +44,7 @@ export declare const Skeleton: import("../utils").WithInstall<import("vue").Defi
     loading: boolean;
     row: string | number;
     avatar: boolean;
-    avatarShape: import("./Skeleton").SkeletonAvatarShape;
+    avatarShape: "round" | "square";
     rowWidth: string | number | (string | number)[];
 } & {
     avatarSize?: string | number | undefined;
@@ -56,8 +56,8 @@ export declare const Skeleton: import("../utils").WithInstall<import("vue").Defi
     loading: boolean;
     row: string | number;
     avatar: boolean;
-    avatarShape: import("./Skeleton").SkeletonAvatarShape;
+    avatarShape: "round" | "square";
     rowWidth: string | number | (string | number)[];
 }>>;
 export default Skeleton;
-export type { SkeletonProps, SkeletonAvatarShape } from './Skeleton';
+export { Skeleton };

@@ -1,11 +1,11 @@
 import { createVNode as _createVNode } from "vue";
 import { ref, watch, computed, nextTick, Teleport, onMounted, defineComponent } from 'vue'; // Utils
 
-import { isDef, isHidden, truthProp, numericProp, getScrollTop, preventDefault, makeNumberProp, createNamespace, getRootScrollTop, setRootScrollTop } from '../utils'; // Composables
+import { isDef, isHidden, truthProp, getScrollTop, preventDefault, createNamespace, getRootScrollTop, setRootScrollTop } from '../utils'; // Composables
 
 import { useRect, useChildren, useScrollParent, useEventListener } from '@vant/use';
 import { useTouch } from '../composables/use-touch';
-import { useExpose } from '../composables/use-expose'; // Types
+import { useExpose } from '../composables/use-expose';
 
 function genAlphabet() {
   var charCodeOfA = 'A'.charCodeAt(0);
@@ -14,28 +14,30 @@ function genAlphabet() {
 }
 
 var [name, bem] = createNamespace('index-bar');
-var indexBarProps = {
+export var INDEX_BAR_KEY = Symbol(name);
+var props = {
   sticky: truthProp,
-  zIndex: numericProp,
+  zIndex: [Number, String],
   teleport: [String, Object],
   highlightColor: String,
-  stickyOffsetTop: makeNumberProp(0),
+  stickyOffsetTop: {
+    type: Number,
+    default: 0
+  },
   indexList: {
     type: Array,
     default: genAlphabet
   }
 };
-export var INDEX_BAR_KEY = Symbol(name);
 export default defineComponent({
   name,
-  props: indexBarProps,
+  props,
   emits: ['select', 'change'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var root = ref();
     var activeAnchor = ref('');
     var touch = useTouch();
@@ -62,6 +64,17 @@ export default defineComponent({
       }
     });
 
+    var getScrollerRect = () => {
+      if ('getBoundingClientRect' in scrollParent.value) {
+        return useRect(scrollParent);
+      }
+
+      return {
+        top: 0,
+        left: 0
+      };
+    };
+
     var getActiveAnchor = (scrollTop, rects) => {
       for (var i = children.length - 1; i >= 0; i--) {
         var prevHeight = i > 0 ? rects[i - 1].height : 0;
@@ -85,7 +98,7 @@ export default defineComponent({
         indexList
       } = props;
       var scrollTop = getScrollTop(scrollParent.value);
-      var scrollParentRect = useRect(scrollParent);
+      var scrollParentRect = getScrollerRect();
       var rects = children.map(item => item.getRect(scrollParent.value, scrollParentRect));
       var active = getActiveAnchor(scrollTop, rects);
       activeAnchor.value = indexList[active];
@@ -145,7 +158,10 @@ export default defineComponent({
     });
 
     var scrollTo = index => {
-      index = String(index);
+      if (!index) {
+        return;
+      }
+
       var match = children.find(item => String(item.index) === index);
 
       if (match) {

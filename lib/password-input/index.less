@@ -11,7 +11,6 @@
   --van-password-input-error-info-color: @password-input-error-info-color;
   --van-password-input-dot-size: @password-input-dot-size;
   --van-password-input-dot-color: @password-input-dot-color;
-  --van-password-input-text-color: @password-input-text-color;
   --van-password-input-cursor-color: @password-input-cursor-color;
   --van-password-input-cursor-width: @password-input-cursor-width;
   --van-password-input-cursor-height: @password-input-cursor-height;
@@ -55,10 +54,9 @@
       align-items: center;
       justify-content: center;
       height: 100%;
-      color: var(--van-password-input-text-color);
       font-size: var(--van-password-input-font-size);
       line-height: 1.2;
-      background: var(--van-password-input-background-color);
+      background-color: var(--van-password-input-background-color);
     }
 
     i {
@@ -67,7 +65,7 @@
       left: 50%;
       width: var(--van-password-input-dot-size);
       height: var(--van-password-input-dot-size);
-      background: var(--van-password-input-dot-color);
+      background-color: var(--van-password-input-dot-color);
       border-radius: 100%;
       transform: translate(-50%, -50%);
       visibility: hidden;
@@ -80,7 +78,7 @@
     left: 50%;
     width: var(--van-password-input-cursor-width);
     height: var(--van-password-input-cursor-height);
-    background: var(--van-password-input-cursor-color);
+    background-color: var(--van-password-input-cursor-color);
     transform: translate(-50%, -50%);
     animation: var(--van-password-input-cursor-animation-duration)
       van-cursor-flicker infinite;

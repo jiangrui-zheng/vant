@@ -1,22 +1,26 @@
 import { createVNode as _createVNode } from "vue";
 import { computed, defineComponent } from 'vue';
-import { numericProp, createNamespace, makeNumericProp, makeStringProp } from '../utils';
+import { createNamespace } from '../utils';
 import { useParent } from '@vant/use';
 import { ROW_KEY } from '../row/Row';
 var [name, bem] = createNamespace('col');
-var colProps = {
-  tag: makeStringProp('div'),
-  span: makeNumericProp(0),
-  offset: numericProp
-};
 export default defineComponent({
   name,
-  props: colProps,
+  props: {
+    offset: [Number, String],
+    tag: {
+      type: String,
+      default: 'div'
+    },
+    span: {
+      type: [Number, String],
+      default: 0
+    }
+  },
 
-  setup(props, _ref) {
-    var {
-      slots
-    } = _ref;
+  setup(props, {
+    slots
+  }) {
     var {
       parent,
       index

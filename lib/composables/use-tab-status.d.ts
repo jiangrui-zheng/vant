@@ -1,3 +1,3 @@
-import { ComputedRef, InjectionKey } from 'vue';
-export declare const TAB_STATUS_KEY: InjectionKey<ComputedRef<boolean>>;
-export declare const useTabStatus: () => ComputedRef<boolean> | null;
+import { ComputedRef } from 'vue';
+export declare const TAB_STATUS_KEY: unique symbol;
+export declare function useTabStatus(): ComputedRef<boolean> | null;

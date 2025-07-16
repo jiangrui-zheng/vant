@@ -1,24 +1,22 @@
-import { resolveDirective as _resolveDirective, withDirectives as _withDirectives, createVNode as _createVNode, vShow as _vShow } from "vue";
+import { withDirectives as _withDirectives, createVNode as _createVNode, vShow as _vShow } from "vue";
 import { Transition, defineComponent } from 'vue';
-import { noop, isDef, extend, truthProp, numericProp, unknownProp, preventDefault, createNamespace, getZIndexStyle } from '../utils';
+import { noop, isDef, extend, truthProp, unknownProp, preventDefault, createNamespace, getZIndexStyle } from '../utils';
 import { useLazyRender } from '../composables/use-lazy-render';
 var [name, bem] = createNamespace('overlay');
-var overlayProps = {
-  show: Boolean,
-  zIndex: numericProp,
-  duration: numericProp,
-  className: unknownProp,
-  lockScroll: truthProp,
-  customStyle: Object
-};
 export default defineComponent({
   name,
-  props: overlayProps,
+  props: {
+    show: Boolean,
+    zIndex: [Number, String],
+    duration: [Number, String],
+    className: unknownProp,
+    lockScroll: truthProp,
+    customStyle: Object
+  },
 
-  setup(props, _ref) {
-    var {
-      slots
-    } = _ref;
+  setup(props, {
+    slots
+  }) {
     var lazyRender = useLazyRender(() => props.show);
 
     var preventTouchMove = event => {
@@ -39,10 +37,9 @@ export default defineComponent({
       }, [slots.default == null ? void 0 : slots.default()]), [[_vShow, props.show]]);
     });
     return () => _createVNode(Transition, {
-      "name": "van-fade",
-      "appear": true
+      "name": "van-fade"
     }, {
-      default: renderOverlay
+      default: () => [renderOverlay()]
     });
   }
 

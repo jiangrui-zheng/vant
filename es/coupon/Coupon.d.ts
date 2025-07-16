@@ -16,19 +16,19 @@ export declare type CouponInfo = {
 };
 declare const _default: import("vue").DefineComponent<{
     chosen: BooleanConstructor;
+    disabled: BooleanConstructor;
     coupon: {
         type: PropType<CouponInfo>;
         required: true;
     };
-    disabled: BooleanConstructor;
     currency: {
-        type: PropType<string>;
+        type: StringConstructor;
         default: string;
     };
 }, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
     chosen?: unknown;
-    coupon?: unknown;
     disabled?: unknown;
+    coupon?: unknown;
     currency?: unknown;
 } & {
     disabled: boolean;

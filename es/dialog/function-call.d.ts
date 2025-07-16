@@ -1,5 +1,30 @@
-import { App } from 'vue';
-import type { DialogAction, DialogOptions } from './types';
+import { App, CSSProperties, TeleportProps } from 'vue';
+import { Interceptor } from '../utils/interceptor';
+import { DialogTheme, DialogAction, DialogMessage, DialogMessageAlign } from './Dialog';
+export declare type DialogOptions = {
+    title?: string;
+    width?: string | number;
+    theme?: DialogTheme;
+    message?: DialogMessage;
+    overlay?: boolean;
+    teleport?: TeleportProps['to'];
+    className?: unknown;
+    allowHtml?: boolean;
+    lockScroll?: boolean;
+    transition?: string;
+    beforeClose?: Interceptor;
+    messageAlign?: DialogMessageAlign;
+    overlayClass?: string;
+    overlayStyle?: CSSProperties;
+    closeOnPopstate?: boolean;
+    cancelButtonText?: string;
+    showCancelButton?: boolean;
+    showConfirmButton?: boolean;
+    cancelButtonColor?: string;
+    confirmButtonText?: string;
+    confirmButtonColor?: string;
+    closeOnClickOverlay?: boolean;
+};
 declare function Dialog(options: DialogOptions): Promise<unknown>;
 declare namespace Dialog {
     var defaultOptions: {
@@ -13,7 +38,7 @@ declare namespace Dialog {
         className: string;
         allowHtml: boolean;
         lockScroll: boolean;
-        transition: undefined;
+        transition: string;
         beforeClose: null;
         overlayClass: string;
         overlayStyle: undefined;
@@ -38,7 +63,7 @@ declare namespace Dialog {
         className: string;
         allowHtml: boolean;
         lockScroll: boolean;
-        transition: undefined;
+        transition: string;
         beforeClose: null;
         overlayClass: string;
         overlayStyle: undefined;
@@ -57,6 +82,7 @@ declare namespace Dialog {
     var close: () => void;
     var setDefaultOptions: (options: DialogOptions) => void;
     var resetDefaultOptions: () => void;
+    var install: (app: App<any>) => void;
     var Component: import("../utils").WithInstall<import("vue").DefineComponent<{
         show: BooleanConstructor;
         zIndex: (NumberConstructor | StringConstructor)[];
@@ -74,8 +100,7 @@ declare namespace Dialog {
             type: BooleanConstructor;
             default: true;
         };
-        beforeClose: import("vue").PropType<import("../utils").Interceptor>;
-        overlayStyle: import("vue").PropType<import("vue").CSSProperties>;
+        overlayStyle: import("vue").PropType<CSSProperties>;
         overlayClass: import("vue").PropType<unknown>;
         transitionAppear: BooleanConstructor;
         closeOnClickOverlay: {
@@ -84,17 +109,14 @@ declare namespace Dialog {
         };
     } & {
         title: StringConstructor;
-        theme: import("vue").PropType<import("./types").DialogTheme>;
+        theme: import("vue").PropType<DialogTheme>;
         width: (NumberConstructor | StringConstructor)[];
-        message: import("vue").PropType<import("./types").DialogMessage>;
+        message: import("vue").PropType<DialogMessage>;
         callback: import("vue").PropType<(action?: DialogAction | undefined) => void>;
         allowHtml: BooleanConstructor;
         className: import("vue").PropType<unknown>;
-        transition: {
-            type: import("vue").PropType<string>;
-            default: string;
-        };
-        messageAlign: import("vue").PropType<import("./types").DialogMessageAlign>;
+        beforeClose: import("vue").PropType<Interceptor>;
+        messageAlign: import("vue").PropType<DialogMessageAlign>;
         closeOnPopstate: {
             type: BooleanConstructor;
             default: true;
@@ -109,7 +131,11 @@ declare namespace Dialog {
             default: true;
         };
         closeOnClickOverlay: BooleanConstructor;
-    }, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:show" | "cancel" | "confirm")[], "update:show" | "cancel" | "confirm", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+        transition: {
+            type: StringConstructor;
+            default: string;
+        };
+    }, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("cancel" | "update:show" | "confirm")[], "cancel" | "update:show" | "confirm", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
         show?: unknown;
         zIndex?: unknown;
         overlay?: unknown;
@@ -117,7 +143,6 @@ declare namespace Dialog {
         teleport?: unknown;
         lockScroll?: unknown;
         lazyRender?: unknown;
-        beforeClose?: unknown;
         overlayStyle?: unknown;
         overlayClass?: unknown;
         transitionAppear?: unknown;
@@ -129,7 +154,7 @@ declare namespace Dialog {
         callback?: unknown;
         allowHtml?: unknown;
         className?: unknown;
-        transition?: unknown;
+        beforeClose?: unknown;
         messageAlign?: unknown;
         closeOnPopstate?: unknown;
         showCancelButton?: unknown;
@@ -138,6 +163,7 @@ declare namespace Dialog {
         confirmButtonText?: unknown;
         confirmButtonColor?: unknown;
         showConfirmButton?: unknown;
+        transition?: unknown;
     } & {
         overlay: boolean;
         show: boolean;
@@ -151,28 +177,24 @@ declare namespace Dialog {
         showCancelButton: boolean;
         showConfirmButton: boolean;
     } & {
-        width?: string | number | undefined;
-        message?: import("./types").DialogMessage | undefined;
         title?: string | undefined;
         zIndex?: string | number | undefined;
         duration?: string | number | undefined;
         teleport?: string | import("vue").RendererElement | null | undefined;
-        beforeClose?: import("../utils").Interceptor | undefined;
-        overlayStyle?: import("vue").CSSProperties | undefined;
+        overlayStyle?: CSSProperties | undefined;
         overlayClass?: unknown;
         className?: unknown;
         callback?: ((action?: DialogAction | undefined) => void) | undefined;
         cancelButtonText?: string | undefined;
         confirmButtonText?: string | undefined;
-        theme?: import("./types").DialogTheme | undefined;
-        messageAlign?: import("./types").DialogMessageAlign | undefined;
+        message?: DialogMessage | undefined;
+        theme?: DialogTheme | undefined;
+        width?: string | number | undefined;
+        beforeClose?: Interceptor | undefined;
+        messageAlign?: DialogMessageAlign | undefined;
         cancelButtonColor?: string | undefined;
         confirmButtonColor?: string | undefined;
-    }> & {
-        "onUpdate:show"?: ((...args: any[]) => any) | undefined;
-        onCancel?: ((...args: any[]) => any) | undefined;
-        onConfirm?: ((...args: any[]) => any) | undefined;
-    }, {
+    }>, {
         overlay: boolean;
         show: boolean;
         lockScroll: boolean;
@@ -185,6 +207,5 @@ declare namespace Dialog {
         showCancelButton: boolean;
         showConfirmButton: boolean;
     }>>;
-    var install: (app: App<any>) => void;
 }
 export { Dialog };

@@ -1,45 +1,48 @@
 import { mergeProps as _mergeProps, createVNode as _createVNode } from "vue";
 import { reactive, defineComponent } from 'vue'; // Utils
 
-import { pick, extend, addUnit, truthProp, isFunction, BORDER_TOP, BORDER_LEFT, unknownProp, numericProp, makeStringProp, callInterceptor, createNamespace } from '../utils';
+import { callInterceptor } from '../utils/interceptor';
+import { pick, extend, addUnit, truthProp, isFunction, unknownProp, createNamespace } from '../utils';
+import { BORDER_TOP, BORDER_LEFT } from '../utils/constant';
 import { popupSharedProps, popupSharedPropKeys } from '../popup/shared'; // Components
 
 import { Popup } from '../popup';
 import { Button } from '../button';
 import { ActionBar } from '../action-bar';
-import { ActionBarButton } from '../action-bar-button'; // Types
-
+import { ActionBarButton } from '../action-bar-button';
 var [name, bem, t] = createNamespace('dialog');
-var dialogProps = extend({}, popupSharedProps, {
-  title: String,
-  theme: String,
-  width: numericProp,
-  message: [String, Function],
-  callback: Function,
-  allowHtml: Boolean,
-  className: unknownProp,
-  transition: makeStringProp('van-dialog-bounce'),
-  messageAlign: String,
-  closeOnPopstate: truthProp,
-  showCancelButton: Boolean,
-  cancelButtonText: String,
-  cancelButtonColor: String,
-  confirmButtonText: String,
-  confirmButtonColor: String,
-  showConfirmButton: truthProp,
-  closeOnClickOverlay: Boolean
-});
-var popupInheritKeys = [...popupSharedPropKeys, 'transition', 'closeOnPopstate'];
+var popupKeys = [...popupSharedPropKeys, 'transition', 'closeOnPopstate'];
 export default defineComponent({
   name,
-  props: dialogProps,
+  props: extend({}, popupSharedProps, {
+    title: String,
+    theme: String,
+    width: [Number, String],
+    message: [String, Function],
+    callback: Function,
+    allowHtml: Boolean,
+    className: unknownProp,
+    beforeClose: Function,
+    messageAlign: String,
+    closeOnPopstate: truthProp,
+    showCancelButton: Boolean,
+    cancelButtonText: String,
+    cancelButtonColor: String,
+    confirmButtonText: String,
+    confirmButtonColor: String,
+    showConfirmButton: truthProp,
+    closeOnClickOverlay: Boolean,
+    transition: {
+      type: String,
+      default: 'van-dialog-bounce'
+    }
+  }),
   emits: ['confirm', 'cancel', 'update:show'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var loading = reactive({
       confirm: false,
       cancel: false
@@ -49,7 +52,10 @@ export default defineComponent({
 
     var close = action => {
       updateShow(false);
-      props.callback == null ? void 0 : props.callback(action);
+
+      if (props.callback) {
+        props.callback(action);
+      }
     };
 
     var getActionHandler = action => () => {
@@ -62,7 +68,8 @@ export default defineComponent({
 
       if (props.beforeClose) {
         loading[action] = true;
-        callInterceptor(props.beforeClose, {
+        callInterceptor({
+          interceptor: props.beforeClose,
           args: [action],
 
           done() {
@@ -209,9 +216,10 @@ export default defineComponent({
         "style": {
           width: addUnit(width)
         },
-        "aria-labelledby": title || message,
-        "onUpdate:show": updateShow
-      }, pick(props, popupInheritKeys)), {
+        "aria-labelledby": title || message
+      }, pick(props, popupKeys), {
+        'onUpdate:show': updateShow
+      }), {
         default: () => [renderTitle(), renderContent(), renderFooter()]
       });
     };

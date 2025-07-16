@@ -1,4 +1,4 @@
-export declare const Grid: import("../utils").WithInstall<import("vue").DefineComponent<{
+declare const Grid: import("../utils").WithInstall<import("vue").DefineComponent<{
     square: BooleanConstructor;
     center: {
         type: BooleanConstructor;
@@ -28,23 +28,24 @@ export declare const Grid: import("../utils").WithInstall<import("vue").DefineCo
     clickable?: unknown;
     columnNum?: unknown;
 } & {
-    reverse: boolean;
     center: boolean;
+    reverse: boolean;
     border: boolean;
-    clickable: boolean;
     square: boolean;
+    clickable: boolean;
     columnNum: string | number;
 } & {
     iconSize?: string | number | undefined;
     direction?: import("./Grid").GridDirection | undefined;
     gutter?: string | number | undefined;
 }>, {
-    reverse: boolean;
     center: boolean;
+    reverse: boolean;
     border: boolean;
-    clickable: boolean;
     square: boolean;
+    clickable: boolean;
     columnNum: string | number;
 }>>;
 export default Grid;
-export type { GridProps, GridDirection } from './Grid';
+export { Grid };
+export type { GridDirection } from './Grid';

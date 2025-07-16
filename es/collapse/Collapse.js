@@ -1,17 +1,10 @@
 import { createVNode as _createVNode } from "vue";
 import { defineComponent } from 'vue';
-import { truthProp, createNamespace, BORDER_TOP_BOTTOM } from '../utils';
+import { truthProp, createNamespace } from '../utils';
+import { BORDER_TOP_BOTTOM } from '../utils/constant';
 import { useChildren } from '@vant/use';
 var [name, bem] = createNamespace('collapse');
 export var COLLAPSE_KEY = Symbol(name);
-var collapseProps = {
-  border: truthProp,
-  accordion: Boolean,
-  modelValue: {
-    type: [String, Number, Array],
-    default: ''
-  }
-};
 
 function validateModelValue(modelValue, accordion) {
   if (accordion && Array.isArray(modelValue)) {
@@ -29,14 +22,20 @@ function validateModelValue(modelValue, accordion) {
 
 export default defineComponent({
   name,
-  props: collapseProps,
+  props: {
+    border: truthProp,
+    accordion: Boolean,
+    modelValue: {
+      type: [String, Number, Array],
+      default: ''
+    }
+  },
   emits: ['change', 'update:modelValue'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var {
       linkChildren
     } = useChildren(COLLAPSE_KEY);

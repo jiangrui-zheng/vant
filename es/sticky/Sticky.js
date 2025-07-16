@@ -1,28 +1,35 @@
 import { createVNode as _createVNode } from "vue";
 import { ref, watch, computed, reactive, defineComponent } from 'vue'; // Utils
 
-import { extend, isHidden, unitToPx, numericProp, getScrollTop, getZIndexStyle, makeStringProp, makeNumericProp, createNamespace } from '../utils'; // Composables
+import { extend, isHidden, unitToPx, getScrollTop, getZIndexStyle, createNamespace } from '../utils'; // Composables
 
 import { useRect, useEventListener, useScrollParent } from '@vant/use';
 import { useVisibilityChange } from '../composables/use-visibility-change';
 var [name, bem] = createNamespace('sticky');
-var stickyProps = {
-  zIndex: numericProp,
-  position: makeStringProp('top'),
-  container: Object,
-  offsetTop: makeNumericProp(0),
-  offsetBottom: makeNumericProp(0)
-};
 export default defineComponent({
   name,
-  props: stickyProps,
+  props: {
+    zIndex: [Number, String],
+    container: Object,
+    offsetTop: {
+      type: [Number, String],
+      default: 0
+    },
+    offsetBottom: {
+      type: [Number, String],
+      default: 0
+    },
+    position: {
+      type: String,
+      default: 'top'
+    }
+  },
   emits: ['scroll', 'change'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var root = ref();
     var scrollParent = useScrollParent(root);
     var state = reactive({

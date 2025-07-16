@@ -1,66 +1,78 @@
 import { createVNode as _createVNode, mergeProps as _mergeProps, resolveDirective as _resolveDirective } from "vue";
 import { ref, reactive, defineComponent } from 'vue'; // Utils
 
-import { pick, extend, isPromise, truthProp, numericProp, getSizeStyle, makeArrayProp, makeStringProp, makeNumericProp } from '../utils';
+import { pick, extend, isPromise, truthProp, getSizeStyle } from '../utils';
 import { bem, name, toArray, isOversize, filterFiles, isImageFile, readFileContent } from './utils'; // Composables
 
-import { useCustomFieldValue } from '@vant/use';
-import { useExpose } from '../composables/use-expose'; // Components
+import { useExpose } from '../composables/use-expose';
+import { useLinkField } from '../composables/use-link-field'; // Components
 
 import { Icon } from '../icon';
 import { ImagePreview } from '../image-preview';
 import UploaderPreviewItem from './UploaderPreviewItem'; // Types
 
-var uploaderProps = {
-  name: makeNumericProp(''),
-  accept: makeStringProp('image/*'),
-  capture: String,
-  multiple: Boolean,
-  disabled: Boolean,
-  readonly: Boolean,
-  lazyLoad: Boolean,
-  maxCount: makeNumericProp(Infinity),
-  imageFit: makeStringProp('cover'),
-  resultType: makeStringProp('dataUrl'),
-  uploadIcon: makeStringProp('photograph'),
-  uploadText: String,
-  deletable: truthProp,
-  afterRead: Function,
-  showUpload: truthProp,
-  modelValue: makeArrayProp(),
-  beforeRead: Function,
-  beforeDelete: Function,
-  previewSize: numericProp,
-  previewImage: truthProp,
-  previewOptions: Object,
-  previewFullImage: truthProp,
-  maxSize: {
-    type: [Number, String, Function],
-    default: Infinity
-  }
-};
 export default defineComponent({
   name,
-  props: uploaderProps,
-  emits: ['delete', 'oversize', 'click-upload', 'close-preview', 'click-preview', 'update:modelValue'],
+  props: {
+    capture: String,
+    multiple: Boolean,
+    disabled: Boolean,
+    lazyLoad: Boolean,
+    uploadText: String,
+    deletable: truthProp,
+    afterRead: Function,
+    showUpload: truthProp,
+    beforeRead: Function,
+    beforeDelete: Function,
+    previewSize: [Number, String],
+    previewImage: truthProp,
+    previewOptions: Object,
+    previewFullImage: truthProp,
+    name: {
+      type: [Number, String],
+      default: ''
+    },
+    accept: {
+      type: String,
+      default: 'image/*'
+    },
+    modelValue: {
+      type: Array,
+      default: () => []
+    },
+    maxSize: {
+      type: [Number, String, Function],
+      default: Number.MAX_VALUE
+    },
+    maxCount: {
+      type: [Number, String],
+      default: Number.MAX_VALUE
+    },
+    imageFit: {
+      type: String,
+      default: 'cover'
+    },
+    resultType: {
+      type: String,
+      default: 'dataUrl'
+    },
+    uploadIcon: {
+      type: String,
+      default: 'photograph'
+    }
+  },
+  emits: ['delete', 'oversize', 'close-preview', 'click-preview', 'update:modelValue'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var inputRef = ref();
 
-    var getDetail = function (index) {
-      if (index === void 0) {
-        index = props.modelValue.length;
-      }
-
-      return {
-        name: props.name,
-        index
-      };
-    };
+    var getDetail = (index = props.modelValue.length) => ({
+      name: props.name,
+      index
+    });
 
     var resetInput = () => {
       if (inputRef.value) {
@@ -224,14 +236,12 @@ export default defineComponent({
       }
     };
 
-    var onClickUpload = event => emit('click-upload', event);
-
     var renderUpload = () => {
       if (props.modelValue.length >= props.maxCount || !props.showUpload) {
         return;
       }
 
-      var Input = props.readonly ? null : _createVNode("input", {
+      var Input = _createVNode("input", {
         "ref": inputRef,
         "type": "file",
         "class": bem('input'),
@@ -244,17 +254,13 @@ export default defineComponent({
 
       if (slots.default) {
         return _createVNode("div", {
-          "class": bem('input-wrapper'),
-          "onClick": onClickUpload
+          "class": bem('input-wrapper')
         }, [slots.default(), Input]);
       }
 
       return _createVNode("div", {
-        "class": bem('upload', {
-          readonly: props.readonly
-        }),
-        "style": getSizeStyle(props.previewSize),
-        "onClick": onClickUpload
+        "class": bem('upload'),
+        "style": getSizeStyle(props.previewSize)
       }, [_createVNode(Icon, {
         "name": props.uploadIcon,
         "class": bem('upload-icon')
@@ -273,7 +279,7 @@ export default defineComponent({
       chooseFile,
       closeImagePreview
     });
-    useCustomFieldValue(() => props.modelValue);
+    useLinkField(() => props.modelValue);
     return () => _createVNode("div", {
       "class": bem()
     }, [_createVNode("div", {

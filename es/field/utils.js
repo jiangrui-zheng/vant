@@ -1,4 +1,4 @@
-import { isObject, isPromise, isFunction, getRootScrollTop, setRootScrollTop } from '../utils';
+import { trigger, isObject, isPromise, isFunction } from '../utils';
 
 function isEmptyValue(value) {
   if (Array.isArray(value)) {
@@ -45,24 +45,20 @@ export function getRuleMessage(value, rule) {
 
   return message || '';
 }
-export function startComposing(_ref) {
-  var {
-    target
-  } = _ref;
-  target.composing = true;
+export function startComposing(event) {
+  event.target.composing = true;
 }
-export function endComposing(_ref2) {
+export function endComposing(event) {
   var {
     target
-  } = _ref2;
+  } = event;
 
   if (target.composing) {
     target.composing = false;
-    target.dispatchEvent(new Event('input'));
+    trigger(target, 'input');
   }
 }
 export function resizeTextarea(input, autosize) {
-  var scrollTop = getRootScrollTop();
   input.style.height = 'auto';
   var height = input.scrollHeight;
 
@@ -82,9 +78,7 @@ export function resizeTextarea(input, autosize) {
   }
 
   if (height) {
-    input.style.height = height + "px"; // https://github.com/youzan/vant/issues/9178
-
-    setRootScrollTop(scrollTop);
+    input.style.height = height + "px";
   }
 }
 export function mapInputType(type) {

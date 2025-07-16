@@ -1,19 +1,3 @@
-import { ExtractPropTypes } from 'vue';
-declare const navBarProps: {
-    title: StringConstructor;
-    fixed: BooleanConstructor;
-    zIndex: (NumberConstructor | StringConstructor)[];
-    border: {
-        type: BooleanConstructor;
-        default: true;
-    };
-    leftText: StringConstructor;
-    rightText: StringConstructor;
-    leftArrow: BooleanConstructor;
-    placeholder: BooleanConstructor;
-    safeAreaInsetTop: BooleanConstructor;
-};
-export declare type NavbarProps = ExtractPropTypes<typeof navBarProps>;
 declare const _default: import("vue").DefineComponent<{
     title: StringConstructor;
     fixed: BooleanConstructor;
@@ -48,10 +32,7 @@ declare const _default: import("vue").DefineComponent<{
     zIndex?: string | number | undefined;
     leftText?: string | undefined;
     rightText?: string | undefined;
-}> & {
-    "onClick-left"?: ((...args: any[]) => any) | undefined;
-    "onClick-right"?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     fixed: boolean;
     border: boolean;
     placeholder: boolean;

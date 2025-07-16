@@ -13,11 +13,10 @@ export default defineComponent({
   props: checkerProps,
   emits: ['update:modelValue'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var {
       parent
     } = useParent(RADIO_KEY);

@@ -1,37 +1,43 @@
 import { createVNode as _createVNode } from "vue";
 import { defineComponent } from 'vue';
-import { truthProp, makeStringProp, makeNumericProp, createNamespace } from '../utils'; // Components
+import { truthProp, createNamespace } from '../utils'; // Components
 
 import { Icon } from '../icon';
 import { Button } from '../button';
 var [name, bem, t] = createNamespace('submit-bar');
-var submitBarProps = {
-  tip: String,
-  label: String,
-  price: Number,
-  tipIcon: String,
-  loading: Boolean,
-  currency: makeStringProp('¥'),
-  disabled: Boolean,
-  textAlign: String,
-  buttonText: String,
-  buttonType: makeStringProp('danger'),
-  buttonColor: String,
-  suffixLabel: String,
-  decimalLength: makeNumericProp(2),
-  safeAreaInsetBottom: truthProp
-};
 export default defineComponent({
   name,
-  props: submitBarProps,
+  props: {
+    tip: String,
+    label: String,
+    price: Number,
+    tipIcon: String,
+    loading: Boolean,
+    disabled: Boolean,
+    textAlign: String,
+    buttonText: String,
+    buttonColor: String,
+    suffixLabel: String,
+    safeAreaInsetBottom: truthProp,
+    decimalLength: {
+      type: [Number, String],
+      default: 2
+    },
+    currency: {
+      type: String,
+      default: '¥'
+    },
+    buttonType: {
+      type: String,
+      default: 'danger'
+    }
+  },
   emits: ['submit'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
-
+  setup(props, {
+    emit,
+    slots
+  }) {
     var renderText = () => {
       var {
         price,
@@ -98,9 +104,9 @@ export default defineComponent({
     };
 
     return () => _createVNode("div", {
-      "class": [bem(), {
-        'van-safe-area-bottom': props.safeAreaInsetBottom
-      }]
+      "class": bem({
+        unfit: !props.safeAreaInsetBottom
+      })
     }, [slots.top == null ? void 0 : slots.top(), renderTip(), _createVNode("div", {
       "class": bem('bar')
     }, [slots.default == null ? void 0 : slots.default(), renderText(), renderButton()])]);

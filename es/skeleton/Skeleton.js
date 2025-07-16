@@ -1,33 +1,36 @@
 import { createVNode as _createVNode } from "vue";
 import { defineComponent } from 'vue';
-import { addUnit, truthProp, numericProp, getSizeStyle, makeStringProp, makeNumericProp, createNamespace } from '../utils';
+import { addUnit, truthProp, getSizeStyle, createNamespace } from '../utils';
 var [name, bem] = createNamespace('skeleton');
 var DEFAULT_ROW_WIDTH = '100%';
 var DEFAULT_LAST_ROW_WIDTH = '60%';
-var skeletonProps = {
-  row: makeNumericProp(0),
-  title: Boolean,
-  round: Boolean,
-  avatar: Boolean,
-  loading: truthProp,
-  animate: truthProp,
-  avatarSize: numericProp,
-  titleWidth: numericProp,
-  avatarShape: makeStringProp('round'),
-  rowWidth: {
-    type: [Number, String, Array],
-    default: DEFAULT_ROW_WIDTH
-  }
-};
 export default defineComponent({
   name,
-  props: skeletonProps,
+  props: {
+    title: Boolean,
+    round: Boolean,
+    avatar: Boolean,
+    loading: truthProp,
+    animate: truthProp,
+    avatarSize: [Number, String],
+    titleWidth: [Number, String],
+    row: {
+      type: [Number, String],
+      default: 0
+    },
+    avatarShape: {
+      type: String,
+      default: 'round'
+    },
+    rowWidth: {
+      type: [Number, String, Array],
+      default: DEFAULT_ROW_WIDTH
+    }
+  },
 
-  setup(props, _ref) {
-    var {
-      slots
-    } = _ref;
-
+  setup(props, {
+    slots
+  }) {
     var renderAvatar = () => {
       if (props.avatar) {
         return _createVNode("div", {

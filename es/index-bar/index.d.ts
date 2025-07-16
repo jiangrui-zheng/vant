@@ -1,5 +1,4 @@
-import { IndexBarProps } from './IndexBar';
-export declare const IndexBar: import("../utils").WithInstall<import("vue").DefineComponent<{
+declare const IndexBar: import("../utils").WithInstall<import("vue").DefineComponent<{
     sticky: {
         type: BooleanConstructor;
         default: true;
@@ -30,14 +29,10 @@ export declare const IndexBar: import("../utils").WithInstall<import("vue").Defi
     zIndex?: string | number | undefined;
     teleport?: string | import("vue").RendererElement | null | undefined;
     highlightColor?: string | undefined;
-}> & {
-    onChange?: ((...args: any[]) => any) | undefined;
-    onSelect?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     sticky: boolean;
     stickyOffsetTop: number;
     indexList: string[];
 }>>;
 export default IndexBar;
-export type { IndexBarProps };
-export type { IndexBarInstance } from './types';
+export { IndexBar };

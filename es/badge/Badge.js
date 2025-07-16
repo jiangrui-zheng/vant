@@ -1,25 +1,25 @@
 import { createVNode as _createVNode } from "vue";
-import { computed, defineComponent } from 'vue';
-import { isDef, addUnit, isNumeric, truthProp, numericProp, makeStringProp, createNamespace } from '../utils';
+import { defineComponent } from 'vue';
+import { isDef, addUnit, isNumeric, truthProp, createNamespace } from '../utils';
 var [name, bem] = createNamespace('badge');
-var badgeProps = {
-  dot: Boolean,
-  max: numericProp,
-  tag: makeStringProp('div'),
-  color: String,
-  offset: Array,
-  content: numericProp,
-  showZero: truthProp
-};
 export default defineComponent({
   name,
-  props: badgeProps,
+  props: {
+    dot: Boolean,
+    max: [Number, String],
+    color: String,
+    offset: Array,
+    content: [Number, String],
+    showZero: truthProp,
+    tag: {
+      type: String,
+      default: 'div'
+    }
+  },
 
-  setup(props, _ref) {
-    var {
-      slots
-    } = _ref;
-
+  setup(props, {
+    slots
+  }) {
     var hasContent = () => {
       if (slots.content) {
         return true;
@@ -52,39 +52,30 @@ export default defineComponent({
       }
     };
 
-    var style = computed(() => {
-      var style = {
-        background: props.color
-      };
-
-      if (props.offset) {
-        var [x, y] = props.offset;
-
-        if (slots.default) {
-          style.top = addUnit(y);
-
-          if (typeof x === 'number') {
-            style.right = addUnit(-x);
-          } else {
-            style.right = x.startsWith('-') ? x.replace('-', '') : "-" + x;
-          }
-        } else {
-          style.marginTop = addUnit(y);
-          style.marginLeft = addUnit(x);
-        }
-      }
-
-      return style;
-    });
-
     var renderBadge = () => {
       if (hasContent() || props.dot) {
+        var style = {
+          background: props.color
+        };
+
+        if (props.offset) {
+          var [x, y] = props.offset;
+
+          if (slots.default) {
+            style.top = addUnit(y);
+            style.right = "-" + addUnit(x);
+          } else {
+            style.marginTop = addUnit(y);
+            style.marginLeft = addUnit(x);
+          }
+        }
+
         return _createVNode("div", {
           "class": bem({
             dot: props.dot,
             fixed: !!slots.default
           }),
-          "style": style.value
+          "style": style
         }, [renderContent()]);
       }
     };

@@ -1,6 +1,6 @@
 import { extend } from '../utils';
-import { pickerSharedProps } from '../picker/Picker';
-export var sharedProps = extend({}, pickerSharedProps, {
+import { pickerProps } from '../picker/Picker';
+export var sharedProps = extend({}, pickerProps, {
   filter: Function,
   columnsOrder: Array,
   formatter: {
@@ -8,7 +8,7 @@ export var sharedProps = extend({}, pickerSharedProps, {
     default: (type, value) => value
   }
 });
-export var pickerInheritKeys = Object.keys(pickerSharedProps);
+export var pickerKeys = Object.keys(pickerProps);
 export function times(n, iteratee) {
   var index = -1;
   var result = Array(n);
@@ -34,4 +34,6 @@ export function getTrueValue(value) {
 
   return parseInt(value, 10);
 }
-export var getMonthEndDay = (year, month) => 32 - new Date(year, month - 1, 32).getDate();
+export function getMonthEndDay(year, month) {
+  return 32 - new Date(year, month - 1, 32).getDate();
+}

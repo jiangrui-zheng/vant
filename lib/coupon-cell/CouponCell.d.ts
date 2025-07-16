@@ -1,29 +1,5 @@
-import { ExtractPropTypes } from 'vue';
+import { PropType } from 'vue';
 import type { CouponInfo } from '../coupon';
-declare const couponCellProps: {
-    title: StringConstructor;
-    border: {
-        type: BooleanConstructor;
-        default: true;
-    };
-    editable: {
-        type: BooleanConstructor;
-        default: true;
-    };
-    coupons: {
-        type: import("vue").PropType<CouponInfo[]>;
-        default: () => never[];
-    };
-    currency: {
-        type: import("vue").PropType<string>;
-        default: string;
-    };
-    chosenCoupon: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
-    };
-};
-export declare type CouponCellProps = ExtractPropTypes<typeof couponCellProps>;
 declare const _default: import("vue").DefineComponent<{
     title: StringConstructor;
     border: {
@@ -35,11 +11,11 @@ declare const _default: import("vue").DefineComponent<{
         default: true;
     };
     coupons: {
-        type: import("vue").PropType<CouponInfo[]>;
+        type: PropType<CouponInfo[]>;
         default: () => never[];
     };
     currency: {
-        type: import("vue").PropType<string>;
+        type: StringConstructor;
         default: string;
     };
     chosenCoupon: {

@@ -9,5 +9,5 @@ declare type EventShim = {
 export declare type WithInstall<T> = T & {
     install(app: App): void;
 } & EventShim;
-export declare function withInstall<T>(options: T): WithInstall<T>;
+export declare function withInstall<T>(options: any): WithInstall<T>;
 export {};

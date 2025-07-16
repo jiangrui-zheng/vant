@@ -1,8 +1,9 @@
 import { withDirectives as _withDirectives, vShow as _vShow, createVNode as _createVNode } from "vue";
 import { watch, computed, nextTick, reactive, onMounted, defineComponent } from 'vue'; // Utils
 
-import { truthProp, makeArrayProp, makeStringProp, makeNumberProp, createNamespace } from '../utils'; // Composables
+import { truthProp, createNamespace } from '../utils'; // Composables
 
+import { useWindowSize } from '@vant/use';
 import { useRefs } from '../composables/use-refs'; // Components
 
 import { Tab } from '../tab';
@@ -12,42 +13,70 @@ import { Button } from '../button';
 import { Coupon } from '../coupon';
 var [name, bem, t] = createNamespace('coupon-list');
 var EMPTY_IMAGE = 'https://img.yzcdn.cn/vant/coupon-empty.png';
-var couponListProps = {
-  code: makeStringProp(''),
-  coupons: makeArrayProp(),
-  currency: makeStringProp('¥'),
-  showCount: truthProp,
-  emptyImage: makeStringProp(EMPTY_IMAGE),
-  chosenCoupon: makeNumberProp(-1),
-  enabledTitle: String,
-  disabledTitle: String,
-  disabledCoupons: makeArrayProp(),
-  showExchangeBar: truthProp,
-  showCloseButton: truthProp,
-  closeButtonText: String,
-  inputPlaceholder: String,
-  exchangeMinLength: makeNumberProp(1),
-  exchangeButtonText: String,
-  displayedCouponIndex: makeNumberProp(-1),
-  exchangeButtonLoading: Boolean,
-  exchangeButtonDisabled: Boolean
-};
 export default defineComponent({
   name,
-  props: couponListProps,
+  props: {
+    showCount: truthProp,
+    enabledTitle: String,
+    disabledTitle: String,
+    showExchangeBar: truthProp,
+    showCloseButton: truthProp,
+    closeButtonText: String,
+    inputPlaceholder: String,
+    exchangeButtonText: String,
+    exchangeButtonLoading: Boolean,
+    exchangeButtonDisabled: Boolean,
+    code: {
+      type: String,
+      default: ''
+    },
+    exchangeMinLength: {
+      type: Number,
+      default: 1
+    },
+    chosenCoupon: {
+      type: Number,
+      default: -1
+    },
+    coupons: {
+      type: Array,
+      default: () => []
+    },
+    disabledCoupons: {
+      type: Array,
+      default: () => []
+    },
+    displayedCouponIndex: {
+      type: Number,
+      default: -1
+    },
+    currency: {
+      type: String,
+      default: '¥'
+    },
+    emptyImage: {
+      type: String,
+      default: EMPTY_IMAGE
+    }
+  },
   emits: ['change', 'exchange', 'update:code'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var [couponRefs, setCouponRefs] = useRefs();
     var state = reactive({
       tab: 0,
       code: props.code
     });
+    var {
+      height: windowHeight
+    } = useWindowSize();
     var buttonDisabled = computed(() => !props.exchangeButtonLoading && (props.exchangeButtonDisabled || !state.code || state.code.length < props.exchangeMinLength));
+    var listStyle = computed(() => ({
+      height: windowHeight.value - (props.showExchangeBar ? 140 : 94) + 'px'
+    }));
 
     var onExchange = () => {
       emit('exchange', state.code); // auto clear currentCode when not use v-model
@@ -69,7 +98,7 @@ export default defineComponent({
       "class": bem('empty')
     }, [_createVNode("img", {
       "src": props.emptyImage
-    }, null), _createVNode("p", null, [t('noCoupon')])]);
+    }, null), _createVNode("p", null, [t('empty')])]);
 
     var renderExchangeBar = () => {
       if (props.showExchangeBar) {
@@ -108,9 +137,9 @@ export default defineComponent({
       }, {
         default: () => [_createVNode("div", {
           "class": bem('list', {
-            'with-bar': props.showExchangeBar,
             'with-bottom': props.showCloseButton
-          })
+          }),
+          "style": listStyle.value
         }, [coupons.map((coupon, index) => _createVNode(Coupon, {
           "key": coupon.id,
           "ref": setCouponRefs(index),
@@ -135,9 +164,9 @@ export default defineComponent({
       }, {
         default: () => [_createVNode("div", {
           "class": bem('list', {
-            'with-bar': props.showExchangeBar,
             'with-bottom': props.showCloseButton
-          })
+          }),
+          "style": listStyle.value
         }, [disabledCoupons.map(coupon => _createVNode(Coupon, {
           "disabled": true,
           "key": coupon.id,
@@ -158,8 +187,8 @@ export default defineComponent({
     return () => _createVNode("div", {
       "class": bem()
     }, [renderExchangeBar(), _createVNode(Tabs, {
-      "active": state.tab,
-      "onUpdate:active": $event => state.tab = $event,
+      "modelValue": state.tab,
+      "onUpdate:modelValue": $event => state.tab = $event,
       "class": bem('tab'),
       "border": false
     }, {

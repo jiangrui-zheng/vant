@@ -10,10 +10,6 @@ declare const _default: import("vue").DefineComponent<{
     activeColor: StringConstructor;
     renderTitle: FunctionConstructor;
     inactiveColor: StringConstructor;
-    showZeroBadge: {
-        type: BooleanConstructor;
-        default: true;
-    };
 }, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
     dot?: unknown;
     type?: unknown;
@@ -26,18 +22,16 @@ declare const _default: import("vue").DefineComponent<{
     activeColor?: unknown;
     renderTitle?: unknown;
     inactiveColor?: unknown;
-    showZeroBadge?: unknown;
 } & {
     dot: boolean;
     disabled: boolean;
     isActive: boolean;
     scrollable: boolean;
-    showZeroBadge: boolean;
 } & {
-    type?: string | undefined;
-    badge?: string | number | undefined;
     title?: string | undefined;
+    badge?: string | number | undefined;
     color?: string | undefined;
+    type?: string | undefined;
     activeColor?: string | undefined;
     inactiveColor?: string | undefined;
     renderTitle?: Function | undefined;
@@ -46,6 +40,5 @@ declare const _default: import("vue").DefineComponent<{
     disabled: boolean;
     isActive: boolean;
     scrollable: boolean;
-    showZeroBadge: boolean;
 }>;
 export default _default;

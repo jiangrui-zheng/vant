@@ -1,4 +1,4 @@
-export declare const ActionBarButton: import("../utils").WithInstall<import("vue").DefineComponent<{
+declare const ActionBarButton: import("../utils").WithInstall<import("vue").DefineComponent<{
     to: import("vue").PropType<import("vue-router").RouteLocationRaw>;
     url: StringConstructor;
     replace: BooleanConstructor;
@@ -21,19 +21,19 @@ export declare const ActionBarButton: import("../utils").WithInstall<import("vue
     disabled?: unknown;
 } & {
     replace: boolean;
-    disabled: boolean;
     loading: boolean;
+    disabled: boolean;
 } & {
     text?: string | undefined;
-    type?: import("..").ButtonType | undefined;
-    url?: string | undefined;
     to?: import("vue-router").RouteLocationRaw | undefined;
+    url?: string | undefined;
     color?: string | undefined;
     icon?: string | undefined;
+    type?: import("..").ButtonType | undefined;
 }>, {
     replace: boolean;
-    disabled: boolean;
     loading: boolean;
+    disabled: boolean;
 }>>;
 export default ActionBarButton;
-export type { ActionBarButtonProps } from './ActionBarButton';
+export { ActionBarButton };

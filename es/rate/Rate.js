@@ -1,11 +1,11 @@
 import { createVNode as _createVNode } from "vue";
 import { computed, defineComponent } from 'vue'; // Utils
 
-import { addUnit, truthProp, numericProp, preventDefault, makeStringProp, makeNumberProp, makeNumericProp, createNamespace } from '../utils'; // Composables
+import { addUnit, truthProp, createNamespace, preventDefault } from '../utils'; // Composables
 
-import { useRect, useCustomFieldValue } from '@vant/use';
 import { useRefs } from '../composables/use-refs';
-import { useTouch } from '../composables/use-touch'; // Components
+import { useTouch } from '../composables/use-touch';
+import { useLinkField } from '../composables/use-link-field'; // Components
 
 import { Icon } from '../icon';
 var [name, bem] = createNamespace('rate');
@@ -39,41 +39,51 @@ function getRateStatus(value, index, allowHalf, readonly) {
   };
 }
 
-var rateProps = {
-  size: numericProp,
-  icon: makeStringProp('star'),
-  color: String,
-  count: makeNumericProp(5),
-  gutter: numericProp,
-  readonly: Boolean,
-  disabled: Boolean,
-  voidIcon: makeStringProp('star-o'),
-  allowHalf: Boolean,
-  voidColor: String,
-  touchable: truthProp,
-  iconPrefix: String,
-  modelValue: makeNumberProp(0),
-  disabledColor: String
-};
 export default defineComponent({
   name,
-  props: rateProps,
+  props: {
+    size: [Number, String],
+    color: String,
+    gutter: [Number, String],
+    readonly: Boolean,
+    disabled: Boolean,
+    allowHalf: Boolean,
+    voidColor: String,
+    touchable: truthProp,
+    iconPrefix: String,
+    disabledColor: String,
+    modelValue: {
+      type: Number,
+      default: 0
+    },
+    icon: {
+      type: String,
+      default: 'star'
+    },
+    voidIcon: {
+      type: String,
+      default: 'star-o'
+    },
+    count: {
+      type: [Number, String],
+      default: 5
+    }
+  },
   emits: ['change', 'update:modelValue'],
 
-  setup(props, _ref) {
-    var {
-      emit
-    } = _ref;
+  setup(props, {
+    emit
+  }) {
     var touch = useTouch();
     var [itemRefs, setItemRefs] = useRefs();
 
     var untouchable = () => props.readonly || props.disabled || !props.touchable;
 
-    var list = computed(() => Array(+props.count).fill('').map((_, i) => getRateStatus(props.modelValue, i + 1, props.allowHalf, props.readonly)));
+    var list = computed(() => Array(props.count).fill('').map((_, i) => getRateStatus(props.modelValue, i + 1, props.allowHalf, props.readonly)));
     var ranges;
 
     var updateRanges = () => {
-      var rects = itemRefs.value.map(useRect);
+      var rects = itemRefs.value.map(item => item.getBoundingClientRect());
       ranges = [];
       rects.forEach((rect, index) => {
         if (props.allowHalf) {
@@ -201,7 +211,7 @@ export default defineComponent({
       }, null)]);
     };
 
-    useCustomFieldValue(() => props.modelValue);
+    useLinkField(() => props.modelValue);
     return () => _createVNode("div", {
       "role": "radiogroup",
       "class": bem({

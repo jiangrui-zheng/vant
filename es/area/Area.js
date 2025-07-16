@@ -1,44 +1,51 @@
 import { createVNode as _createVNode, mergeProps as _mergeProps, resolveDirective as _resolveDirective } from "vue";
+
+/* eslint-disable camelcase */
 import { ref, watch, computed, reactive, nextTick, onMounted, defineComponent } from 'vue'; // Utils
 
 import { deepClone } from '../utils/deep-clone';
-import { pick, extend, makeArrayProp, makeNumericProp, createNamespace } from '../utils';
-import { pickerSharedProps } from '../picker/Picker'; // Composables
+import { pick, createNamespace, extend } from '../utils';
+import { pickerProps } from '../picker/Picker'; // Composables
 
 import { useExpose } from '../composables/use-expose'; // Components
 
-import { Picker } from '../picker'; // Types
-
+import { Picker } from '../picker';
 var [name, bem] = createNamespace('area');
 var EMPTY_CODE = '000000';
 var INHERIT_SLOTS = ['title', 'cancel', 'confirm', 'toolbar', 'columns-top', 'columns-bottom'];
 var INHERIT_PROPS = ['title', 'loading', 'readonly', 'itemHeight', 'swipeDuration', 'visibleItemCount', 'cancelButtonText', 'confirmButtonText'];
 
-var isOverseaCode = code => code[0] === '9';
+function isOverseaCode(code) {
+  return code[0] === '9';
+}
 
-var areaProps = extend({}, pickerSharedProps, {
-  value: String,
-  columnsNum: makeNumericProp(3),
-  columnsPlaceholder: makeArrayProp(),
-  areaList: {
-    type: Object,
-    default: () => ({})
-  },
-  isOverseaCode: {
-    type: Function,
-    default: isOverseaCode
-  }
-});
 export default defineComponent({
   name,
-  props: areaProps,
-  emits: ['change', 'confirm', 'cancel'],
+  props: extend({}, pickerProps, {
+    value: String,
+    areaList: {
+      type: Object,
+      default: () => ({})
+    },
+    columnsNum: {
+      type: [Number, String],
+      default: 3
+    },
+    isOverseaCode: {
+      type: Function,
+      default: isOverseaCode
+    },
+    columnsPlaceholder: {
+      type: Array,
+      default: () => []
+    }
+  }),
+  emits: ['change', 'confirm'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var pickerRef = ref();
     var state = reactive({
       code: props.value,
@@ -184,18 +191,20 @@ export default defineComponent({
     }; // parse output columns data
 
 
-    var parseValues = values => values.map((value, index) => {
-      if (value) {
-        value = deepClone(value);
+    var parseValues = values => {
+      return values.map((value, index) => {
+        if (value) {
+          value = deepClone(value);
 
-        if (!value.code || value.name === props.columnsPlaceholder[index]) {
-          value.code = '';
-          value.name = '';
+          if (!value.code || value.name === props.columnsPlaceholder[index]) {
+            value.code = '';
+            value.name = '';
+          }
         }
-      }
 
-      return value;
-    });
+        return value;
+      });
+    };
 
     var getValues = () => {
       if (pickerRef.value) {
@@ -236,11 +245,7 @@ export default defineComponent({
       return area;
     };
 
-    var reset = function (newCode) {
-      if (newCode === void 0) {
-        newCode = '';
-      }
-
+    var reset = (newCode = '') => {
       state.code = newCode;
       setValues();
     };
@@ -248,24 +253,13 @@ export default defineComponent({
     var onChange = (values, index) => {
       state.code = values[index].code;
       setValues();
-
-      if (pickerRef.value) {
-        var parsedValues = parseValues(pickerRef.value.getValues());
-        emit('change', parsedValues, index);
-      }
+      var parsedValues = parseValues(pickerRef.value.getValues());
+      emit('change', parsedValues, index);
     };
 
     var onConfirm = (values, index) => {
       setValues();
       emit('confirm', parseValues(values), index);
-    };
-
-    var onCancel = function () {
-      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-        args[_key] = arguments[_key];
-      }
-
-      return emit('cancel', ...args);
     };
 
     onMounted(setValues);
@@ -288,11 +282,8 @@ export default defineComponent({
         "ref": pickerRef,
         "class": bem(),
         "columns": columns,
-        "columnsFieldNames": {
-          text: 'name'
-        },
+        "valueKey": "name",
         "onChange": onChange,
-        "onCancel": onCancel,
         "onConfirm": onConfirm
       }, pick(props, INHERIT_PROPS)), pick(slots, INHERIT_SLOTS));
     };

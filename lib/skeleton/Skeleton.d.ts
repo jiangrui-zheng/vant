@@ -1,38 +1,5 @@
-import { PropType, ExtractPropTypes } from 'vue';
-export declare type SkeletonAvatarShape = 'square' | 'round';
-declare const skeletonProps: {
-    row: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
-    };
-    title: BooleanConstructor;
-    round: BooleanConstructor;
-    avatar: BooleanConstructor;
-    loading: {
-        type: BooleanConstructor;
-        default: true;
-    };
-    animate: {
-        type: BooleanConstructor;
-        default: true;
-    };
-    avatarSize: (NumberConstructor | StringConstructor)[];
-    titleWidth: (NumberConstructor | StringConstructor)[];
-    avatarShape: {
-        type: PropType<SkeletonAvatarShape>;
-        default: SkeletonAvatarShape;
-    };
-    rowWidth: {
-        type: PropType<string | number | (string | number)[]>;
-        default: string;
-    };
-};
-export declare type SkeletonProps = ExtractPropTypes<typeof skeletonProps>;
+import { PropType } from 'vue';
 declare const _default: import("vue").DefineComponent<{
-    row: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
-    };
     title: BooleanConstructor;
     round: BooleanConstructor;
     avatar: BooleanConstructor;
@@ -46,9 +13,13 @@ declare const _default: import("vue").DefineComponent<{
     };
     avatarSize: (NumberConstructor | StringConstructor)[];
     titleWidth: (NumberConstructor | StringConstructor)[];
+    row: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
     avatarShape: {
-        type: PropType<SkeletonAvatarShape>;
-        default: SkeletonAvatarShape;
+        type: PropType<"round" | "square">;
+        default: string;
     };
     rowWidth: {
         type: PropType<string | number | (string | number)[]>;
@@ -57,7 +28,6 @@ declare const _default: import("vue").DefineComponent<{
 }, () => JSX.Element | import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
     [key: string]: any;
 }>[] | undefined, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    row?: unknown;
     title?: unknown;
     round?: unknown;
     avatar?: unknown;
@@ -65,6 +35,7 @@ declare const _default: import("vue").DefineComponent<{
     animate?: unknown;
     avatarSize?: unknown;
     titleWidth?: unknown;
+    row?: unknown;
     avatarShape?: unknown;
     rowWidth?: unknown;
 } & {
@@ -74,7 +45,7 @@ declare const _default: import("vue").DefineComponent<{
     loading: boolean;
     row: string | number;
     avatar: boolean;
-    avatarShape: SkeletonAvatarShape;
+    avatarShape: "round" | "square";
     rowWidth: string | number | (string | number)[];
 } & {
     avatarSize?: string | number | undefined;
@@ -86,7 +57,7 @@ declare const _default: import("vue").DefineComponent<{
     loading: boolean;
     row: string | number;
     avatar: boolean;
-    avatarShape: SkeletonAvatarShape;
+    avatarShape: "round" | "square";
     rowWidth: string | number | (string | number)[];
 }>;
 export default _default;

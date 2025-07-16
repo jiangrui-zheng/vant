@@ -1,31 +1,34 @@
 import { createVNode as _createVNode } from "vue";
-import { defineComponent, inject, computed } from 'vue';
-import { addUnit, numericProp, makeStringProp, createNamespace } from '../utils';
+import { defineComponent } from 'vue';
+import { addUnit, createNamespace } from '../utils';
 import { Badge } from '../badge';
-import { CONFIG_PROVIDER_KEY } from '../config-provider/ConfigProvider';
 var [name, bem] = createNamespace('icon');
 
-var isImage = name => name == null ? void 0 : name.includes('/');
+function isImage(name) {
+  return name ? name.includes('/') : false;
+}
 
-var iconProps = {
-  dot: Boolean,
-  tag: makeStringProp('i'),
-  name: String,
-  size: numericProp,
-  badge: numericProp,
-  color: String,
-  classPrefix: String
-};
 export default defineComponent({
   name,
-  props: iconProps,
+  props: {
+    dot: Boolean,
+    name: String,
+    size: [Number, String],
+    badge: [Number, String],
+    color: String,
+    tag: {
+      type: String,
+      default: 'i'
+    },
+    classPrefix: {
+      type: String,
+      default: bem()
+    }
+  },
 
-  setup(props, _ref) {
-    var {
-      slots
-    } = _ref;
-    var config = inject(CONFIG_PROVIDER_KEY, null);
-    var classPrefix = computed(() => props.classPrefix || (config == null ? void 0 : config.iconPrefix) || bem());
+  setup(props, {
+    slots
+  }) {
     return () => {
       var {
         tag,
@@ -33,14 +36,15 @@ export default defineComponent({
         name,
         size,
         badge,
-        color
+        color,
+        classPrefix
       } = props;
       var isImageIcon = isImage(name);
       return _createVNode(Badge, {
         "dot": dot,
         "tag": tag,
         "content": badge,
-        "class": [classPrefix.value, isImageIcon ? '' : classPrefix.value + "-" + name],
+        "class": [classPrefix, isImageIcon ? '' : classPrefix + "-" + name],
         "style": {
           color,
           fontSize: addUnit(size)

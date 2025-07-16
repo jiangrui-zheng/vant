@@ -1,29 +1,31 @@
 import { createVNode as _createVNode } from "vue";
 import { defineComponent } from 'vue';
-import { createNamespace, addUnit, truthProp, numericProp, makeNumericProp } from '../utils';
+import { createNamespace, addUnit, truthProp } from '../utils';
 import { BORDER_TOP } from '../utils/constant';
 import { useChildren } from '@vant/use';
 var [name, bem] = createNamespace('grid');
-var gridProps = {
+export var GRID_KEY = Symbol(name);
+var props = {
   square: Boolean,
   center: truthProp,
   border: truthProp,
-  gutter: numericProp,
+  gutter: [Number, String],
   reverse: Boolean,
-  iconSize: numericProp,
+  iconSize: [Number, String],
   direction: String,
   clickable: Boolean,
-  columnNum: makeNumericProp(4)
+  columnNum: {
+    type: [Number, String],
+    default: 4
+  }
 };
-export var GRID_KEY = Symbol(name);
 export default defineComponent({
   name,
-  props: gridProps,
+  props,
 
-  setup(props, _ref) {
-    var {
-      slots
-    } = _ref;
+  setup(props, {
+    slots
+  }) {
     var {
       linkChildren
     } = useChildren(GRID_KEY);

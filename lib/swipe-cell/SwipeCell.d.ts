@@ -1,34 +1,24 @@
-import { PropType, ExtractPropTypes } from 'vue';
-import { Interceptor } from '../utils';
-declare const swipeCellProps: {
-    name: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: string;
-    };
-    disabled: BooleanConstructor;
-    leftWidth: (NumberConstructor | StringConstructor)[];
-    rightWidth: (NumberConstructor | StringConstructor)[];
-    beforeClose: PropType<Interceptor>;
-    stopPropagation: BooleanConstructor;
-};
-export declare type SwipeCellProps = ExtractPropTypes<typeof swipeCellProps>;
+import { PropType } from 'vue';
+import { Interceptor } from '../utils/interceptor';
+export declare type SwipeCellSide = 'left' | 'right';
+export declare type SwipeCellPosition = SwipeCellSide | 'cell' | 'outside';
 declare const _default: import("vue").DefineComponent<{
-    name: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: string;
-    };
     disabled: BooleanConstructor;
     leftWidth: (NumberConstructor | StringConstructor)[];
     rightWidth: (NumberConstructor | StringConstructor)[];
     beforeClose: PropType<Interceptor>;
     stopPropagation: BooleanConstructor;
+    name: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: string;
+    };
 }, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("open" | "click" | "close")[], "open" | "click" | "close", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    name?: unknown;
     disabled?: unknown;
     leftWidth?: unknown;
     rightWidth?: unknown;
     beforeClose?: unknown;
     stopPropagation?: unknown;
+    name?: unknown;
 } & {
     name: string | number;
     disabled: boolean;
@@ -37,11 +27,7 @@ declare const _default: import("vue").DefineComponent<{
     beforeClose?: Interceptor | undefined;
     leftWidth?: string | number | undefined;
     rightWidth?: string | number | undefined;
-}> & {
-    onClick?: ((...args: any[]) => any) | undefined;
-    onOpen?: ((...args: any[]) => any) | undefined;
-    onClose?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     name: string | number;
     disabled: boolean;
     stopPropagation: boolean;

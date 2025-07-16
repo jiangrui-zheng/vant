@@ -1,28 +1,7 @@
-import { PropType, ExtractPropTypes } from 'vue';
+import { PropType } from 'vue';
 export declare type StickyPosition = 'top' | 'bottom';
-declare const stickyProps: {
-    zIndex: (NumberConstructor | StringConstructor)[];
-    position: {
-        type: PropType<StickyPosition>;
-        default: StickyPosition;
-    };
-    container: PropType<Element>;
-    offsetTop: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
-    };
-    offsetBottom: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
-    };
-};
-export declare type StickyProps = ExtractPropTypes<typeof stickyProps>;
 declare const _default: import("vue").DefineComponent<{
     zIndex: (NumberConstructor | StringConstructor)[];
-    position: {
-        type: PropType<StickyPosition>;
-        default: StickyPosition;
-    };
     container: PropType<Element>;
     offsetTop: {
         type: (NumberConstructor | StringConstructor)[];
@@ -31,13 +10,17 @@ declare const _default: import("vue").DefineComponent<{
     offsetBottom: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
+    };
+    position: {
+        type: PropType<StickyPosition>;
+        default: string;
     };
 }, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("scroll" | "change")[], "scroll" | "change", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
     zIndex?: unknown;
-    position?: unknown;
     container?: unknown;
     offsetTop?: unknown;
     offsetBottom?: unknown;
+    position?: unknown;
 } & {
     position: StickyPosition;
     offsetTop: string | number;
@@ -45,10 +28,7 @@ declare const _default: import("vue").DefineComponent<{
 } & {
     zIndex?: string | number | undefined;
     container?: Element | undefined;
-}> & {
-    onChange?: ((...args: any[]) => any) | undefined;
-    onScroll?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     position: StickyPosition;
     offsetTop: string | number;
     offsetBottom: string | number;

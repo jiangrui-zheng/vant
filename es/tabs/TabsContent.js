@@ -1,26 +1,34 @@
 import { createVNode as _createVNode } from "vue";
 import { ref, watch, onMounted, defineComponent } from 'vue';
-import { numericProp, makeRequiredProp, createNamespace } from '../utils';
+import { createNamespace } from '../utils';
 import { Swipe } from '../swipe';
 var [name, bem] = createNamespace('tabs');
 export default defineComponent({
   name,
   props: {
-    count: makeRequiredProp(Number),
     inited: Boolean,
     animated: Boolean,
-    duration: makeRequiredProp(numericProp),
     swipeable: Boolean,
     lazyRender: Boolean,
-    currentIndex: makeRequiredProp(Number)
+    count: {
+      type: Number,
+      required: true
+    },
+    duration: {
+      type: [Number, String],
+      required: true
+    },
+    currentIndex: {
+      type: Number,
+      required: true
+    }
   },
   emits: ['change'],
 
-  setup(props, _ref) {
-    var {
-      emit,
-      slots
-    } = _ref;
+  setup(props, {
+    emit,
+    slots
+  }) {
     var swipeRef = ref();
 
     var onChange = index => emit('change', index);

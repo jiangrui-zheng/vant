@@ -1,20 +1,21 @@
 import { createVNode as _createVNode } from "vue";
 import { defineComponent } from 'vue';
-import { truthProp, makeStringProp, createNamespace } from '../utils';
+import { truthProp, createNamespace } from '../utils';
 var [name, bem] = createNamespace('divider');
-var dividerProps = {
-  dashed: Boolean,
-  hairline: truthProp,
-  contentPosition: makeStringProp('center')
-};
 export default defineComponent({
   name,
-  props: dividerProps,
+  props: {
+    dashed: Boolean,
+    hairline: truthProp,
+    contentPosition: {
+      type: String,
+      default: 'center'
+    }
+  },
 
-  setup(props, _ref) {
-    var {
-      slots
-    } = _ref;
+  setup(props, {
+    slots
+  }) {
     return () => _createVNode("div", {
       "role": "separator",
       "class": bem({

@@ -1,4 +1,4 @@
-export declare const TabbarItem: import("../utils").WithInstall<import("vue").DefineComponent<{
+declare const TabbarItem: import("../utils").WithInstall<import("vue").DefineComponent<{
     to: import("vue").PropType<import("vue-router").RouteLocationRaw>;
     url: StringConstructor;
     replace: BooleanConstructor;
@@ -21,17 +21,15 @@ export declare const TabbarItem: import("../utils").WithInstall<import("vue").De
     replace: boolean;
     dot: boolean;
 } & {
-    url?: string | undefined;
-    to?: import("vue-router").RouteLocationRaw | undefined;
     name?: string | number | undefined;
+    to?: import("vue-router").RouteLocationRaw | undefined;
+    url?: string | undefined;
     badge?: string | number | undefined;
-    iconPrefix?: string | undefined;
     icon?: string | undefined;
-}> & {
-    onClick?: ((...args: any[]) => any) | undefined;
-}, {
+    iconPrefix?: string | undefined;
+}>, {
     replace: boolean;
     dot: boolean;
 }>>;
 export default TabbarItem;
-export type { TabbarItemProps } from './TabbarItem';
+export { TabbarItem };

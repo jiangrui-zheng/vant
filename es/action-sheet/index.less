@@ -18,6 +18,7 @@
   --van-action-sheet-subname-line-height: @action-sheet-subname-line-height;
   --van-action-sheet-close-icon-size: @action-sheet-close-icon-size;
   --van-action-sheet-close-icon-color: @action-sheet-close-icon-color;
+  --van-action-sheet-close-icon-active-color: @action-sheet-close-icon-active-color;
   --van-action-sheet-close-icon-padding: @action-sheet-close-icon-padding;
   --van-action-sheet-cancel-text-color: @action-sheet-cancel-text-color;
   --van-action-sheet-cancel-padding-top: @action-sheet-cancel-padding-top;
@@ -44,7 +45,7 @@
     width: 100%;
     padding: 14px var(--van-padding-md);
     font-size: var(--van-action-sheet-item-font-size);
-    background: var(--van-action-sheet-item-background);
+    background-color: var(--van-action-sheet-item-background);
     border: none;
     cursor: pointer;
 
@@ -90,7 +91,7 @@
   &__gap {
     display: block;
     height: var(--van-action-sheet-cancel-padding-top);
-    background: var(--van-action-sheet-cancel-padding-color);
+    background-color: var(--van-action-sheet-cancel-padding-color);
   }
 
   &__header {
@@ -128,5 +129,9 @@
     color: var(--van-action-sheet-close-icon-color);
     font-size: var(--van-action-sheet-close-icon-size);
     line-height: inherit;
+
+    &:active {
+      color: var(--van-action-sheet-close-icon-active-color);
+    }
   }
 }

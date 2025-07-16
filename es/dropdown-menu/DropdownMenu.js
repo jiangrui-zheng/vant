@@ -1,29 +1,33 @@
 import { createVNode as _createVNode } from "vue";
 import { ref, computed, defineComponent } from 'vue'; // Utils
 
-import { isDef, truthProp, numericProp, makeStringProp, makeNumericProp, createNamespace, HAPTICS_FEEDBACK } from '../utils'; // Composables
+import { isDef, truthProp, createNamespace } from '../utils'; // Composables
 
-import { useRect, useChildren, useClickAway, useScrollParent, useEventListener } from '@vant/use'; // Types
-
+import { useRect, useChildren, useClickAway, useScrollParent, useEventListener } from '@vant/use';
 var [name, bem] = createNamespace('dropdown-menu');
-var dropdownMenuProps = {
+export var DROPDOWN_KEY = Symbol(name);
+var props = {
   overlay: truthProp,
-  zIndex: numericProp,
-  duration: makeNumericProp(0.2),
-  direction: makeStringProp('down'),
+  zIndex: [Number, String],
   activeColor: String,
   closeOnClickOutside: truthProp,
-  closeOnClickOverlay: truthProp
+  closeOnClickOverlay: truthProp,
+  duration: {
+    type: [Number, String],
+    default: 0.2
+  },
+  direction: {
+    type: String,
+    default: 'down'
+  }
 };
-export var DROPDOWN_KEY = Symbol(name);
 export default defineComponent({
   name,
-  props: dropdownMenuProps,
+  props,
 
-  setup(props, _ref) {
-    var {
-      slots
-    } = _ref;
+  setup(props, {
+    slots
+  }) {
     var root = ref();
     var barRef = ref();
     var offset = ref(0);
@@ -91,11 +95,9 @@ export default defineComponent({
       return _createVNode("div", {
         "role": "button",
         "tabindex": disabled ? -1 : 0,
-        "class": [bem('item', {
+        "class": bem('item', {
           disabled
-        }), {
-          [HAPTICS_FEEDBACK]: !disabled
-        }],
+        }),
         "onClick": () => {
           if (!disabled) {
             toggleItem(index);

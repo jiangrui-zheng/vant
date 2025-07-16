@@ -3,7 +3,6 @@ export declare function usePopupState(): {
     open: (props: Record<string, any>) => void;
     close: () => void;
     state: {
-        [x: string]: any;
         show: boolean;
     };
     toggle: (show: boolean) => void;
