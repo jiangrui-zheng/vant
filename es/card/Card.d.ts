@@ -1,4 +1,4 @@
-import { type ExtractPropTypes } from 'vue';
+import { ExtractPropTypes } from 'vue';
 declare const cardProps: {
     tag: StringConstructor;
     num: (NumberConstructor | StringConstructor)[];
@@ -31,22 +31,32 @@ declare const _default: import("vue").DefineComponent<{
     };
     thumbLink: StringConstructor;
     originPrice: (NumberConstructor | StringConstructor)[];
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "click-thumb"[], "click-thumb", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
-    tag: StringConstructor;
-    num: (NumberConstructor | StringConstructor)[];
-    desc: StringConstructor;
-    thumb: StringConstructor;
-    title: StringConstructor;
-    price: (NumberConstructor | StringConstructor)[];
-    centered: BooleanConstructor;
-    lazyLoad: BooleanConstructor;
-    currency: {
-        type: import("vue").PropType<string>;
-        default: string;
-    };
-    thumbLink: StringConstructor;
-    originPrice: (NumberConstructor | StringConstructor)[];
-}>> & {
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "click-thumb"[], "click-thumb", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    tag?: unknown;
+    num?: unknown;
+    desc?: unknown;
+    thumb?: unknown;
+    title?: unknown;
+    price?: unknown;
+    centered?: unknown;
+    lazyLoad?: unknown;
+    currency?: unknown;
+    thumbLink?: unknown;
+    originPrice?: unknown;
+} & {
+    lazyLoad: boolean;
+    centered: boolean;
+    currency: string;
+} & {
+    title?: string | undefined;
+    tag?: string | undefined;
+    desc?: string | undefined;
+    num?: string | number | undefined;
+    thumb?: string | undefined;
+    price?: string | number | undefined;
+    thumbLink?: string | undefined;
+    originPrice?: string | number | undefined;
+}> & {
     "onClick-thumb"?: ((...args: any[]) => any) | undefined;
 }, {
     lazyLoad: boolean;

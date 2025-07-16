@@ -1,5 +1,5 @@
-import { type PropType } from 'vue';
-import { type Numeric, type Interceptor } from '../utils';
+import { PropType } from 'vue';
+import { Interceptor } from '../utils';
 import { ImageFit } from '../image';
 import type { UploaderFileListItem } from './types';
 declare const _default: import("vue").DefineComponent<{
@@ -12,21 +12,28 @@ declare const _default: import("vue").DefineComponent<{
     imageFit: PropType<ImageFit>;
     lazyLoad: BooleanConstructor;
     deletable: BooleanConstructor;
-    previewSize: PropType<Numeric | [Numeric, Numeric]>;
+    previewSize: (NumberConstructor | StringConstructor)[];
     beforeDelete: PropType<Interceptor>;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("delete" | "preview")[], "delete" | "preview", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
-    name: (NumberConstructor | StringConstructor)[];
-    item: {
-        type: PropType<UploaderFileListItem>;
-        required: true;
-    };
-    index: NumberConstructor;
-    imageFit: PropType<ImageFit>;
-    lazyLoad: BooleanConstructor;
-    deletable: BooleanConstructor;
-    previewSize: PropType<Numeric | [Numeric, Numeric]>;
-    beforeDelete: PropType<Interceptor>;
-}>> & {
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("delete" | "preview")[], "delete" | "preview", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    name?: unknown;
+    item?: unknown;
+    index?: unknown;
+    imageFit?: unknown;
+    lazyLoad?: unknown;
+    deletable?: unknown;
+    previewSize?: unknown;
+    beforeDelete?: unknown;
+} & {
+    item: UploaderFileListItem;
+    lazyLoad: boolean;
+    deletable: boolean;
+} & {
+    name?: string | number | undefined;
+    index?: number | undefined;
+    imageFit?: ImageFit | undefined;
+    beforeDelete?: Interceptor | undefined;
+    previewSize?: string | number | undefined;
+}> & {
     onDelete?: ((...args: any[]) => any) | undefined;
     onPreview?: ((...args: any[]) => any) | undefined;
 }, {

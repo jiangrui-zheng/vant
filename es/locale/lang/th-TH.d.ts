@@ -8,18 +8,25 @@ declare const _default: {
     loading: string;
     noCoupon: string;
     nameEmpty: string;
-    addContact: string;
     telInvalid: string;
     vanCalendar: {
         end: string;
         start: string;
         title: string;
+        confirm: string;
+        startEnd: string;
         weekdays: string[];
         monthTitle: (year: number, month: number) => string;
         rangePrompt: (maxRange: number) => string;
     };
     vanCascader: {
         select: string;
+    };
+    vanContactCard: {
+        addText: string;
+    };
+    vanContactList: {
+        addText: string;
     };
     vanPagination: {
         prev: string;
@@ -54,8 +61,11 @@ declare const _default: {
         areaEmpty: string;
         addressEmpty: string;
         postalEmpty: string;
-        addressDetail: string;
         defaultAddress: string;
+    };
+    vanAddressEditDetail: {
+        label: string;
+        placeholder: string;
     };
     vanAddressList: {
         add: string;

@@ -1,5 +1,4 @@
-import type { PropType } from 'vue';
-import type { PickerInstance } from '../picker';
+import { PropType } from 'vue';
 import type { DatetimePickerColumnType } from './types';
 export declare const sharedProps: {
     title: StringConstructor;
@@ -36,4 +35,3 @@ export declare const pickerInheritKeys: ("title" | "readonly" | "loading" | "all
 export declare function times<T>(n: number, iteratee: (index: number) => T): T[];
 export declare function getTrueValue(value: string | undefined): number;
 export declare const getMonthEndDay: (year: number, month: number) => number;
-export declare const proxyPickerMethods: (picker: PickerInstance, callback: () => void) => PickerInstance;

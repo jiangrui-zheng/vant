@@ -1,13 +1,13 @@
 import { Dialog } from './function-call';
 import type { CSSProperties, TeleportProps } from 'vue';
-import type { Interceptor, Numeric } from '../utils';
+import type { Interceptor } from '../utils';
 export declare type DialogTheme = 'default' | 'round-button';
 export declare type DialogAction = 'confirm' | 'cancel';
 export declare type DialogMessage = string | (() => JSX.Element);
 export declare type DialogMessageAlign = 'left' | 'center' | 'right';
 export declare type DialogOptions = {
     title?: string;
-    width?: Numeric;
+    width?: string | number;
     theme?: DialogTheme;
     message?: DialogMessage;
     overlay?: boolean;
@@ -21,14 +21,12 @@ export declare type DialogOptions = {
     overlayClass?: string;
     overlayStyle?: CSSProperties;
     closeOnPopstate?: boolean;
+    cancelButtonText?: string;
     showCancelButton?: boolean;
     showConfirmButton?: boolean;
-    cancelButtonText?: string;
     cancelButtonColor?: string;
-    cancelButtonDisabled?: boolean;
     confirmButtonText?: string;
     confirmButtonColor?: string;
-    confirmButtonDisabled?: boolean;
     closeOnClickOverlay?: boolean;
 };
 declare module '@vue/runtime-core' {

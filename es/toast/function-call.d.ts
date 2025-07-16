@@ -1,10 +1,11 @@
-import { type App } from 'vue';
-import type { ToastType, ToastOptions, ToastWrapperInstance } from './types';
-declare function Toast(options?: string | ToastOptions): ToastWrapperInstance;
+import { App } from 'vue';
+import { ComponentInstance } from '../utils';
+import type { ToastType, ToastOptions } from './types';
+declare function Toast(options?: string | ToastOptions): ComponentInstance;
 declare namespace Toast {
-    var loading: (options: string | ToastOptions) => ToastWrapperInstance;
-    var success: (options: string | ToastOptions) => ToastWrapperInstance;
-    var fail: (options: string | ToastOptions) => ToastWrapperInstance;
+    var loading: (options: string | ToastOptions) => ComponentInstance;
+    var success: (options: string | ToastOptions) => ComponentInstance;
+    var fail: (options: string | ToastOptions) => ComponentInstance;
     var clear: (all?: boolean | undefined) => void;
     var setDefaultOptions: {
         (options: ToastOptions): void;

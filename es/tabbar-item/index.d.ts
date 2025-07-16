@@ -7,20 +7,27 @@ export declare const TabbarItem: import("../utils").WithInstall<import("vue").De
     icon: StringConstructor;
     name: (NumberConstructor | StringConstructor)[];
     badge: (NumberConstructor | StringConstructor)[];
-    badgeProps: import("vue").PropType<Partial<import("..").BadgeProps>>;
     iconPrefix: StringConstructor;
-}, (() => JSX.Element) | undefined, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "click"[], "click", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
-    to: import("vue").PropType<import("vue-router").RouteLocationRaw>;
-    url: StringConstructor;
-    replace: BooleanConstructor;
+}, (() => JSX.Element) | undefined, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "click"[], "click", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    to?: unknown;
+    url?: unknown;
+    replace?: unknown;
+    dot?: unknown;
+    icon?: unknown;
+    name?: unknown;
+    badge?: unknown;
+    iconPrefix?: unknown;
 } & {
-    dot: BooleanConstructor;
-    icon: StringConstructor;
-    name: (NumberConstructor | StringConstructor)[];
-    badge: (NumberConstructor | StringConstructor)[];
-    badgeProps: import("vue").PropType<Partial<import("..").BadgeProps>>;
-    iconPrefix: StringConstructor;
-}>> & {
+    replace: boolean;
+    dot: boolean;
+} & {
+    url?: string | undefined;
+    to?: import("vue-router").RouteLocationRaw | undefined;
+    name?: string | number | undefined;
+    badge?: string | number | undefined;
+    iconPrefix?: string | undefined;
+    icon?: string | undefined;
+}> & {
     onClick?: ((...args: any[]) => any) | undefined;
 }, {
     replace: boolean;
@@ -28,8 +35,3 @@ export declare const TabbarItem: import("../utils").WithInstall<import("vue").De
 }>>;
 export default TabbarItem;
 export type { TabbarItemProps } from './TabbarItem';
-declare module 'vue' {
-    interface GlobalComponents {
-        VanTabbarItem: typeof TabbarItem;
-    }
-}

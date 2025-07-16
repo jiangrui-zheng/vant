@@ -1,4 +1,4 @@
-import { type InjectionKey, type ExtractPropTypes } from 'vue';
+import { InjectionKey, ExtractPropTypes } from 'vue';
 export declare type SidebarProvide = {
     getActive: () => number;
     setActive: (value: number) => void;
@@ -16,12 +16,11 @@ declare const _default: import("vue").DefineComponent<{
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
-    modelValue: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
-    };
-}>> & {
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    modelValue?: unknown;
+} & {
+    modelValue: string | number;
+} & {}> & {
     onChange?: ((...args: any[]) => any) | undefined;
     "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
 }, {

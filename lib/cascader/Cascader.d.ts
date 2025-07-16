@@ -1,4 +1,4 @@
-import { type PropType, type ExtractPropTypes } from 'vue';
+import { PropType, ExtractPropTypes } from 'vue';
 import type { CascaderOption, CascaderFieldNames } from './types';
 declare const cascaderProps: {
     title: StringConstructor;
@@ -17,10 +17,6 @@ declare const cascaderProps: {
     closeIcon: {
         type: PropType<string>;
         default: string;
-    };
-    showHeader: {
-        type: BooleanConstructor;
-        default: true;
     };
     modelValue: (NumberConstructor | StringConstructor)[];
     fieldNames: PropType<CascaderFieldNames>;
@@ -46,41 +42,32 @@ declare const _default: import("vue").DefineComponent<{
         type: PropType<string>;
         default: string;
     };
-    showHeader: {
-        type: BooleanConstructor;
-        default: true;
-    };
     modelValue: (NumberConstructor | StringConstructor)[];
     fieldNames: PropType<CascaderFieldNames>;
     placeholder: StringConstructor;
     activeColor: StringConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change" | "close" | "click-tab" | "finish")[], "update:modelValue" | "change" | "close" | "click-tab" | "finish", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
-    title: StringConstructor;
-    options: {
-        type: PropType<CascaderOption[]>;
-        default: () => never[];
-    };
-    closeable: {
-        type: BooleanConstructor;
-        default: true;
-    };
-    swipeable: {
-        type: BooleanConstructor;
-        default: true;
-    };
-    closeIcon: {
-        type: PropType<string>;
-        default: string;
-    };
-    showHeader: {
-        type: BooleanConstructor;
-        default: true;
-    };
-    modelValue: (NumberConstructor | StringConstructor)[];
-    fieldNames: PropType<CascaderFieldNames>;
-    placeholder: StringConstructor;
-    activeColor: StringConstructor;
-}>> & {
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change" | "close" | "click-tab" | "finish")[], "update:modelValue" | "change" | "close" | "click-tab" | "finish", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    title?: unknown;
+    options?: unknown;
+    closeable?: unknown;
+    swipeable?: unknown;
+    closeIcon?: unknown;
+    modelValue?: unknown;
+    fieldNames?: unknown;
+    placeholder?: unknown;
+    activeColor?: unknown;
+} & {
+    closeIcon: string;
+    closeable: boolean;
+    options: CascaderOption[];
+    swipeable: boolean;
+} & {
+    title?: string | undefined;
+    modelValue?: string | number | undefined;
+    placeholder?: string | undefined;
+    activeColor?: string | undefined;
+    fieldNames?: CascaderFieldNames | undefined;
+}> & {
     onChange?: ((...args: any[]) => any) | undefined;
     "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
     onClose?: ((...args: any[]) => any) | undefined;
@@ -91,6 +78,5 @@ declare const _default: import("vue").DefineComponent<{
     closeable: boolean;
     options: CascaderOption[];
     swipeable: boolean;
-    showHeader: boolean;
 }>;
 export default _default;

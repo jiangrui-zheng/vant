@@ -1,5 +1,4 @@
-import { type PropType, type InjectionKey, type ExtractPropTypes } from 'vue';
-import { type Numeric } from '../utils';
+import { PropType, InjectionKey, ExtractPropTypes } from 'vue';
 import { IndexBarProvide } from './types';
 declare function genAlphabet(): string[];
 declare const indexBarProps: {
@@ -15,7 +14,7 @@ declare const indexBarProps: {
         default: number;
     };
     indexList: {
-        type: PropType<Numeric[]>;
+        type: PropType<string[]>;
         default: typeof genAlphabet;
     };
 };
@@ -34,31 +33,30 @@ declare const _default: import("vue").DefineComponent<{
         default: number;
     };
     indexList: {
-        type: PropType<Numeric[]>;
+        type: PropType<string[]>;
         default: typeof genAlphabet;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("select" | "change")[], "select" | "change", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
-    sticky: {
-        type: BooleanConstructor;
-        default: true;
-    };
-    zIndex: (NumberConstructor | StringConstructor)[];
-    teleport: PropType<string | import("vue").RendererElement | null | undefined>;
-    highlightColor: StringConstructor;
-    stickyOffsetTop: {
-        type: NumberConstructor;
-        default: number;
-    };
-    indexList: {
-        type: PropType<Numeric[]>;
-        default: typeof genAlphabet;
-    };
-}>> & {
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("select" | "change")[], "select" | "change", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    sticky?: unknown;
+    zIndex?: unknown;
+    teleport?: unknown;
+    highlightColor?: unknown;
+    stickyOffsetTop?: unknown;
+    indexList?: unknown;
+} & {
+    sticky: boolean;
+    stickyOffsetTop: number;
+    indexList: string[];
+} & {
+    zIndex?: string | number | undefined;
+    teleport?: string | import("vue").RendererElement | null | undefined;
+    highlightColor?: string | undefined;
+}> & {
     onChange?: ((...args: any[]) => any) | undefined;
     onSelect?: ((...args: any[]) => any) | undefined;
 }, {
     sticky: boolean;
     stickyOffsetTop: number;
-    indexList: Numeric[];
+    indexList: string[];
 }>;
 export default _default;

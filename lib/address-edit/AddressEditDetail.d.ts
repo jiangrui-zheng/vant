@@ -1,25 +1,34 @@
-import { type PropType } from 'vue';
+import { PropType } from 'vue';
 import type { AddressEditSearchItem } from './types';
-import type { FieldRule } from '../field/types';
 declare const _default: import("vue").DefineComponent<{
     show: BooleanConstructor;
-    rows: (NumberConstructor | StringConstructor)[];
     value: StringConstructor;
-    rules: PropType<FieldRule[]>;
     focused: BooleanConstructor;
-    maxlength: (NumberConstructor | StringConstructor)[];
+    detailRows: (NumberConstructor | StringConstructor)[];
     searchResult: PropType<AddressEditSearchItem[]>;
+    errorMessage: StringConstructor;
+    detailMaxlength: (NumberConstructor | StringConstructor)[];
     showSearchResult: BooleanConstructor;
-}, () => JSX.Element | undefined, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("input" | "focus" | "blur" | "select-search")[], "input" | "focus" | "blur" | "select-search", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
-    show: BooleanConstructor;
-    rows: (NumberConstructor | StringConstructor)[];
-    value: StringConstructor;
-    rules: PropType<FieldRule[]>;
-    focused: BooleanConstructor;
-    maxlength: (NumberConstructor | StringConstructor)[];
-    searchResult: PropType<AddressEditSearchItem[]>;
-    showSearchResult: BooleanConstructor;
-}>> & {
+}, () => JSX.Element | undefined, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("input" | "focus" | "blur" | "select-search")[], "input" | "focus" | "blur" | "select-search", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    show?: unknown;
+    value?: unknown;
+    focused?: unknown;
+    detailRows?: unknown;
+    searchResult?: unknown;
+    errorMessage?: unknown;
+    detailMaxlength?: unknown;
+    showSearchResult?: unknown;
+} & {
+    focused: boolean;
+    show: boolean;
+    showSearchResult: boolean;
+} & {
+    value?: string | undefined;
+    errorMessage?: string | undefined;
+    searchResult?: AddressEditSearchItem[] | undefined;
+    detailRows?: string | number | undefined;
+    detailMaxlength?: string | number | undefined;
+}> & {
     onFocus?: ((...args: any[]) => any) | undefined;
     onBlur?: ((...args: any[]) => any) | undefined;
     onInput?: ((...args: any[]) => any) | undefined;

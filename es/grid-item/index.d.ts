@@ -9,27 +9,30 @@ export declare const GridItem: import("../utils").WithInstall<import("vue").Defi
     badge: (NumberConstructor | StringConstructor)[];
     iconColor: StringConstructor;
     iconPrefix: StringConstructor;
-    badgeProps: import("vue").PropType<Partial<import("..").BadgeProps>>;
-}, (() => JSX.Element) | undefined, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
-    to: import("vue").PropType<import("vue-router").RouteLocationRaw>;
-    url: StringConstructor;
-    replace: BooleanConstructor;
+}, (() => JSX.Element) | undefined, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    to?: unknown;
+    url?: unknown;
+    replace?: unknown;
+    dot?: unknown;
+    text?: unknown;
+    icon?: unknown;
+    badge?: unknown;
+    iconColor?: unknown;
+    iconPrefix?: unknown;
 } & {
-    dot: BooleanConstructor;
-    text: StringConstructor;
-    icon: StringConstructor;
-    badge: (NumberConstructor | StringConstructor)[];
-    iconColor: StringConstructor;
-    iconPrefix: StringConstructor;
-    badgeProps: import("vue").PropType<Partial<import("..").BadgeProps>>;
-}>>, {
+    replace: boolean;
+    dot: boolean;
+} & {
+    text?: string | undefined;
+    url?: string | undefined;
+    to?: import("vue-router").RouteLocationRaw | undefined;
+    badge?: string | number | undefined;
+    iconPrefix?: string | undefined;
+    icon?: string | undefined;
+    iconColor?: string | undefined;
+}>, {
     replace: boolean;
     dot: boolean;
 }>>;
 export default GridItem;
 export type { GridItemProps } from './GridItem';
-declare module 'vue' {
-    interface GlobalComponents {
-        VanGridItem: typeof GridItem;
-    }
-}

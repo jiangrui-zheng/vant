@@ -1,7 +1,6 @@
-import type { Numeric } from '../utils';
 export declare type CascaderOption = {
     text?: string;
-    value?: Numeric;
+    value?: string | number;
     color?: string;
     disabled?: boolean;
     children?: CascaderOption[];

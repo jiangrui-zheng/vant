@@ -1,12 +1,11 @@
 import type { ComponentPublicInstance, ComputedRef, Ref } from 'vue';
-import type { Numeric } from '../utils';
 import type { CalendarProps } from './Calendar';
 import type { CalendarMonthProps } from './CalendarMonth';
 export declare type CalendarType = 'single' | 'range' | 'multiple';
 export declare type CalendarDayType = '' | 'start' | 'start-end' | 'middle' | 'end' | 'selected' | 'multiple-middle' | 'multiple-selected' | 'disabled' | 'placeholder';
 export declare type CalendarDayItem = {
     date?: Date;
-    text?: Numeric;
+    text?: string | number;
     type?: CalendarDayType;
     topInfo?: string;
     className?: unknown;
@@ -15,7 +14,6 @@ export declare type CalendarDayItem = {
 export declare type CalendarExpose = {
     reset: (date?: Date | Date[]) => void;
     scrollToDate: (targetDate: Date) => void;
-    getSelectedDate: () => Date | Date[] | null;
 };
 export declare type CalendarInstance = ComponentPublicInstance<CalendarProps, CalendarExpose>;
 export declare type CalendarMonthInstance = ComponentPublicInstance<CalendarMonthProps, {
@@ -23,6 +21,6 @@ export declare type CalendarMonthInstance = ComponentPublicInstance<CalendarMont
     getTitle: () => string;
     getHeight: () => number;
     setVisible: (value?: boolean | undefined) => void;
-    scrollToDate: (body: Element, targetDate: Date) => void;
+    scrollIntoView: (body: Element) => void;
     disabledDays: Ref<ComputedRef<CalendarDayItem[]>>;
 }>;

@@ -5,9 +5,13 @@ export declare type CheckboxShape = CheckerShape;
 export declare type CheckboxLabelPosition = CheckerLabelPosition;
 export declare type CheckboxExpose = {
     toggle: (newValue?: boolean) => void;
-    /** @private */
+    /**
+     * @private
+     */
     props: CheckboxProps;
-    /** @private */
+    /**
+     * @private
+     */
     checked: ComputedRef<boolean>;
 };
 export declare type CheckboxInstance = ComponentPublicInstance<CheckboxProps, CheckboxExpose>;

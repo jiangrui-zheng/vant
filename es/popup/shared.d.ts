@@ -1,5 +1,5 @@
+import { PropType, CSSProperties } from 'vue';
 import { Interceptor } from '../utils';
-import type { PropType, CSSProperties } from 'vue';
 export declare const popupSharedProps: {
     show: BooleanConstructor;
     zIndex: (NumberConstructor | StringConstructor)[];

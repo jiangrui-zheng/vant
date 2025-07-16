@@ -1,4 +1,4 @@
-import { type PropType, type InjectionKey, type ExtractPropTypes } from 'vue';
+import { PropType, InjectionKey, ExtractPropTypes } from 'vue';
 import type { CheckerDirection } from '../checkbox/Checker';
 export declare type RadioGroupDirection = CheckerDirection;
 declare const radioGroupProps: {
@@ -20,13 +20,20 @@ declare const _default: import("vue").DefineComponent<{
     direction: PropType<CheckerDirection>;
     modelValue: PropType<unknown>;
     checkedColor: StringConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
-    disabled: BooleanConstructor;
-    iconSize: (NumberConstructor | StringConstructor)[];
-    direction: PropType<CheckerDirection>;
-    modelValue: PropType<unknown>;
-    checkedColor: StringConstructor;
-}>> & {
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    disabled?: unknown;
+    iconSize?: unknown;
+    direction?: unknown;
+    modelValue?: unknown;
+    checkedColor?: unknown;
+} & {
+    disabled: boolean;
+} & {
+    modelValue?: unknown;
+    iconSize?: string | number | undefined;
+    checkedColor?: string | undefined;
+    direction?: CheckerDirection | undefined;
+}> & {
     onChange?: ((...args: any[]) => any) | undefined;
     "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
 }, {

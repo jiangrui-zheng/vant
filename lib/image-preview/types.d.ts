@@ -16,7 +16,6 @@ export declare type ImagePreviewOptions = {
     transition?: string;
     beforeClose?: Interceptor;
     overlayStyle?: CSSProperties;
-    overlayClass?: unknown;
     swipeDuration?: number;
     startPosition?: number;
     showIndicators?: boolean;

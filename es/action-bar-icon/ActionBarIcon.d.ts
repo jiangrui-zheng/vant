@@ -1,7 +1,6 @@
-import { type PropType, type ExtractPropTypes } from 'vue';
-import { type BadgeProps } from '../badge';
+import { ExtractPropTypes } from 'vue';
 declare const actionBarIconProps: {
-    to: PropType<import("vue-router").RouteLocationRaw>;
+    to: import("vue").PropType<import("vue-router").RouteLocationRaw>;
     url: StringConstructor;
     replace: BooleanConstructor;
 } & {
@@ -10,13 +9,12 @@ declare const actionBarIconProps: {
     icon: StringConstructor;
     color: StringConstructor;
     badge: (NumberConstructor | StringConstructor)[];
-    iconClass: PropType<unknown>;
-    badgeProps: PropType<Partial<BadgeProps>>;
+    iconClass: import("vue").PropType<unknown>;
     iconPrefix: StringConstructor;
 };
 export declare type ActionBarIconProps = ExtractPropTypes<typeof actionBarIconProps>;
 declare const _default: import("vue").DefineComponent<{
-    to: PropType<import("vue-router").RouteLocationRaw>;
+    to: import("vue").PropType<import("vue-router").RouteLocationRaw>;
     url: StringConstructor;
     replace: BooleanConstructor;
 } & {
@@ -25,23 +23,32 @@ declare const _default: import("vue").DefineComponent<{
     icon: StringConstructor;
     color: StringConstructor;
     badge: (NumberConstructor | StringConstructor)[];
-    iconClass: PropType<unknown>;
-    badgeProps: PropType<Partial<BadgeProps>>;
+    iconClass: import("vue").PropType<unknown>;
     iconPrefix: StringConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
-    to: PropType<import("vue-router").RouteLocationRaw>;
-    url: StringConstructor;
-    replace: BooleanConstructor;
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    to?: unknown;
+    url?: unknown;
+    replace?: unknown;
+    dot?: unknown;
+    text?: unknown;
+    icon?: unknown;
+    color?: unknown;
+    badge?: unknown;
+    iconClass?: unknown;
+    iconPrefix?: unknown;
 } & {
-    dot: BooleanConstructor;
-    text: StringConstructor;
-    icon: StringConstructor;
-    color: StringConstructor;
-    badge: (NumberConstructor | StringConstructor)[];
-    iconClass: PropType<unknown>;
-    badgeProps: PropType<Partial<BadgeProps>>;
-    iconPrefix: StringConstructor;
-}>>, {
+    replace: boolean;
+    dot: boolean;
+} & {
+    text?: string | undefined;
+    url?: string | undefined;
+    to?: import("vue-router").RouteLocationRaw | undefined;
+    badge?: string | number | undefined;
+    color?: string | undefined;
+    iconPrefix?: string | undefined;
+    icon?: string | undefined;
+    iconClass?: unknown;
+}>, {
     replace: boolean;
     dot: boolean;
 }>;

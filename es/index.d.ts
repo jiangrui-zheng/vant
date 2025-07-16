@@ -67,7 +67,6 @@ export * from "./sidebar";
 export * from "./sidebar-item";
 export * from "./skeleton";
 export * from "./slider";
-export * from "./space";
 export * from "./step";
 export * from "./stepper";
 export * from "./steps";
@@ -91,4 +90,4 @@ declare namespace _default {
 }
 export default _default;
 export function install(app: any): void;
-export const version: "3.6.0";
+export const version: "3.2.7";

@@ -1,4 +1,4 @@
-import { type PropType, type ExtractPropTypes } from 'vue';
+import { PropType, ExtractPropTypes } from 'vue';
 import { ButtonType } from '../button';
 declare const actionBarButtonProps: {
     to: PropType<import("vue-router").RouteLocationRaw>;
@@ -24,18 +24,28 @@ declare const _default: import("vue").DefineComponent<{
     color: StringConstructor;
     loading: BooleanConstructor;
     disabled: BooleanConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
-    to: PropType<import("vue-router").RouteLocationRaw>;
-    url: StringConstructor;
-    replace: BooleanConstructor;
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    to?: unknown;
+    url?: unknown;
+    replace?: unknown;
+    type?: unknown;
+    text?: unknown;
+    icon?: unknown;
+    color?: unknown;
+    loading?: unknown;
+    disabled?: unknown;
 } & {
-    type: PropType<ButtonType>;
-    text: StringConstructor;
-    icon: StringConstructor;
-    color: StringConstructor;
-    loading: BooleanConstructor;
-    disabled: BooleanConstructor;
-}>>, {
+    replace: boolean;
+    disabled: boolean;
+    loading: boolean;
+} & {
+    text?: string | undefined;
+    type?: ButtonType | undefined;
+    url?: string | undefined;
+    to?: import("vue-router").RouteLocationRaw | undefined;
+    color?: string | undefined;
+    icon?: string | undefined;
+}>, {
     replace: boolean;
     disabled: boolean;
     loading: boolean;

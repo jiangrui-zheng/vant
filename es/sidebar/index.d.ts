@@ -3,12 +3,11 @@ export declare const Sidebar: import("../utils").WithInstall<import("vue").Defin
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
-    modelValue: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
-    };
-}>> & {
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    modelValue?: unknown;
+} & {
+    modelValue: string | number;
+} & {}> & {
     onChange?: ((...args: any[]) => any) | undefined;
     "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
 }, {
@@ -16,8 +15,3 @@ export declare const Sidebar: import("../utils").WithInstall<import("vue").Defin
 }>>;
 export default Sidebar;
 export type { SidebarProps } from './Sidebar';
-declare module 'vue' {
-    interface GlobalComponents {
-        VanSidebar: typeof Sidebar;
-    }
-}

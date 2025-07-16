@@ -1,39 +1,37 @@
 {
   "name": "vant",
-  "version": "3.6.0",
-  "description": "Lightweight Mobile UI Components built on Vue",
-  "main": "lib/vant.cjs.js",
-  "module": "es/index.mjs",
+  "version": "3.2.7",
+  "description": "Mobile UI Components built on Vue",
+  "main": "lib/index.js",
+  "module": "es/index.js",
   "style": "lib/index.css",
   "typings": "lib/index.d.ts",
-  "unpkg": "lib/vant.min.js",
-  "jsdelivr": "lib/vant.min.js",
   "files": [
     "es",
-    "lib"
+    "lib",
+    "vetur"
   ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "scripts": {
     "dev": "vant-cli dev",
     "lint": "vant-cli lint",
     "test": "vant-cli test",
     "build": "vant-cli build",
     "build:site": "vant-cli build-site",
-    "release": "cp ../../README.md ./ && vant-cli release && rm ./README.md",
-    "release:site": "pnpm build:site && npx gh-pages -d site-dist --add",
+    "release": "vant-cli release --tag next",
+    "release:site": "yarn build:site && gh-pages -d site-dist --add --dest v3",
     "test:watch": "vant-cli test --watch",
     "test:coverage": "open test/coverage/index.html"
   },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+  "npm": {
+    "tag": "next"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/vant-ui/vant.git",
-    "directory": "packages/vant"
+    "url": "git@github.com:youzan/vant.git"
   },
-  "bugs": "https://github.com/vant-ui/vant/issues",
-  "author": "chenjiahan",
-  "license": "MIT",
   "keywords": [
     "ui",
     "vue",
@@ -43,24 +41,22 @@
     "component",
     "components"
   ],
+  "author": "youzanfe",
+  "license": "MIT",
   "dependencies": {
-    "@vant/icons": "^1.8.0",
-    "@vant/popperjs": "^1.2.1",
-    "@vant/use": "^1.4.2"
+    "@vant/icons": "^1.7.1",
+    "@vant/lazyload": "^1.4.0",
+    "@vant/popperjs": "^1.1.0",
+    "@vant/use": "^1.3.2"
   },
   "peerDependencies": {
     "vue": "^3.0.0"
   },
   "devDependencies": {
-    "@types/node": "^16",
-    "@vant/area-data": "workspace:*",
-    "@vant/cli": "workspace:*",
-    "@vant/eslint-config": "workspace:*",
-    "@vue/runtime-core": "^3.2.27",
-    "@vue/test-utils": "^2.0.1",
-    "typescript": "^4.7.4",
-    "vue": "^3.2.27",
-    "vue-router": "^4.0.12"
+    "@vant/area-data": "^1.1.3",
+    "@vant/cli": "^4.0.0-beta.5",
+    "@vue/compiler-sfc": "^3.2.19",
+    "vue": "^3.2.20"
   },
   "sideEffects": [
     "es/**/style/*",
@@ -68,5 +64,11 @@
     "*.css",
     "*.less"
   ],
-  "web-types": "lib/web-types.json"
+  "vetur": {
+    "tags": "vetur/tags.json",
+    "attributes": "vetur/attributes.json"
+  },
+  "web-types": "vetur/web-types.json",
+  "unpkg": "lib/vant.min.js",
+  "jsdelivr": "lib/vant.min.js"
 }

@@ -1,20 +1,19 @@
 import { Toast } from './function-call';
-import type { ComponentPublicInstance, TeleportProps } from 'vue';
+import type { TeleportProps } from 'vue';
 import type { LoadingType } from '../loading';
-import type { Numeric } from '../utils';
 export declare type ToastType = 'text' | 'loading' | 'success' | 'fail' | 'html';
 export declare type ToastPosition = 'top' | 'middle' | 'bottom';
 export declare type ToastOptions = {
     icon?: string;
     type?: ToastType;
     mask?: boolean;
-    message?: Numeric;
+    message?: string | number;
     onClose?: () => void;
     onOpened?: () => void;
     overlay?: boolean;
     duration?: number;
     teleport?: TeleportProps['to'];
-    iconSize?: Numeric;
+    iconSize?: number | string;
     position?: ToastPosition;
     className?: unknown;
     transition?: string;
@@ -31,12 +30,3 @@ declare module '@vue/runtime-core' {
         $toast: typeof Toast;
     }
 }
-export declare type ToastWrapperInstance = ComponentPublicInstance<{
-    message: Numeric;
-}, {
-    clear: () => void;
-    /**
-     * @private
-     */
-    open: (props: Record<string, any>) => void;
-}>;
