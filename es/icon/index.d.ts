@@ -1,7 +1,7 @@
-export declare const Icon: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const Icon: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     dot: BooleanConstructor;
     tag: {
-        type: import("vue").PropType<keyof HTMLElementTagNameMap>;
+        type: import("vue").PropType<T>;
         default: keyof HTMLElementTagNameMap;
     };
     name: StringConstructor;
@@ -10,10 +10,10 @@ export declare const Icon: import("../utils").WithInstall<import("vue").DefineCo
     color: StringConstructor;
     badgeProps: import("vue").PropType<Partial<import("..").BadgeProps>>;
     classPrefix: StringConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
     dot: BooleanConstructor;
     tag: {
-        type: import("vue").PropType<keyof HTMLElementTagNameMap>;
+        type: import("vue").PropType<T>;
         default: keyof HTMLElementTagNameMap;
     };
     name: StringConstructor;
@@ -22,11 +22,12 @@ export declare const Icon: import("../utils").WithInstall<import("vue").DefineCo
     color: StringConstructor;
     badgeProps: import("vue").PropType<Partial<import("..").BadgeProps>>;
     classPrefix: StringConstructor;
-}>>, {
+}>> & Readonly<{}>, {
     dot: boolean;
     tag: keyof HTMLElementTagNameMap;
-}>>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default Icon;
+export { iconProps } from './Icon';
 export type { IconProps } from './Icon';
 declare module 'vue' {
     interface GlobalComponents {

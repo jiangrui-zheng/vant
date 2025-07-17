@@ -1,5 +1,4 @@
-import { createVNode as _createVNode } from "vue";
-import { watch, computed, defineComponent } from "vue";
+import { watch, computed, defineComponent, createVNode as _createVNode } from "vue";
 import { raf, cancelRaf } from "@vant/use";
 import { isObject, truthProp, numericProp, getSizeStyle, makeStringProp, makeNumberProp, makeNumericProp, createNamespace } from "../utils/index.mjs";
 const [name, bem] = createNamespace("circle");
@@ -148,5 +147,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
+  circleProps,
   stdin_default as default
 };

@@ -1,5 +1,4 @@
-import { createVNode as _createVNode } from "vue";
-import { defineComponent } from "vue";
+import { defineComponent, createVNode as _createVNode } from "vue";
 import { addUnit, numericProp, unknownProp, createNamespace } from "../utils/index.mjs";
 import { useCustomFieldValue } from "@vant/use";
 import { Loading } from "../loading/index.mjs";
@@ -81,5 +80,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  switchProps
 };

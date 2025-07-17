@@ -1,5 +1,4 @@
-import { createVNode as _createVNode } from "vue";
-import { defineComponent } from "vue";
+import { defineComponent, createVNode as _createVNode } from "vue";
 import { t, bem, isImageFile } from "./utils.mjs";
 import { isDef, extend, numericProp, getSizeStyle, callInterceptor, makeRequiredProp } from "../utils/index.mjs";
 import { Icon } from "../icon/index.mjs";
@@ -13,10 +12,11 @@ var stdin_default = defineComponent({
     imageFit: String,
     lazyLoad: Boolean,
     deletable: Boolean,
+    reupload: Boolean,
     previewSize: [Number, String, Array],
     beforeDelete: Function
   },
-  emits: ["delete", "preview"],
+  emits: ["delete", "preview", "reupload"],
   setup(props, {
     emit,
     slots
@@ -58,6 +58,7 @@ var stdin_default = defineComponent({
       });
     };
     const onPreview = () => emit("preview");
+    const onReupload = () => emit("reupload");
     const renderDeleteIcon = () => {
       if (props.deletable && props.item.status !== "uploading") {
         const slot = slots["preview-delete"];
@@ -93,7 +94,8 @@ var stdin_default = defineComponent({
         item,
         lazyLoad,
         imageFit,
-        previewSize
+        previewSize,
+        reupload
       } = props;
       if (isImageFile(item)) {
         return _createVNode(Image, {
@@ -103,7 +105,7 @@ var stdin_default = defineComponent({
           "width": Array.isArray(previewSize) ? previewSize[0] : previewSize,
           "height": Array.isArray(previewSize) ? previewSize[1] : previewSize,
           "lazyLoad": lazyLoad,
-          "onClick": onPreview
+          "onClick": reupload ? onReupload : onPreview
         }, {
           default: renderCover
         });

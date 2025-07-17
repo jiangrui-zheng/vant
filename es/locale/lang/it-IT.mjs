@@ -2,27 +2,20 @@ var stdin_default = {
   name: "Nome",
   tel: "Telefono",
   save: "Salva",
-  confirm: "Conferma",
+  clear: "Chiaro",
   cancel: "Annulla",
+  confirm: "Conferma",
   delete: "Elimina",
   loading: "Caricamento in corso...",
   noCoupon: "Nessun coupon",
   nameEmpty: "Inserisci il nome",
   addContact: "Aggiungi contatto",
-  telInvalid: "Numero di telefono errato",
+  telInvalid: "Numero di telefono non valido",
   vanCalendar: {
     end: "Fine",
     start: "Inizio",
     title: "Calendario",
-    weekdays: [
-      "domenica",
-      "Lunedi",
-      "Marted\xEC",
-      "mercoled\xEC",
-      "gioved\xEC",
-      "venerd\xEC",
-      "Sabato"
-    ],
+    weekdays: ["dom", "lun", "mar", "mer", "gio", "ven", "sab"],
     monthTitle: (year, month) => `${year}/${month}`,
     rangePrompt: (maxRange) => `Scegli non pi\xF9 di ${maxRange} giorni`
   },
@@ -31,11 +24,11 @@ var stdin_default = {
   },
   vanPagination: {
     prev: "Precedente",
-    next: "Avanti"
+    next: "Successivo"
   },
   vanPullRefresh: {
-    pulling: "Tiri per aggiornare...",
-    loosing: "Largo per rinfrescare..."
+    pulling: "Tira per aggiornare...",
+    loosing: "Rilascia per aggiornare..."
   },
   vanSubmitBar: {
     label: "Totale:"
@@ -46,7 +39,7 @@ var stdin_default = {
     condition: (condition) => `Almeno ${condition}`
   },
   vanCouponCell: {
-    title: "Buono",
+    title: "Coupon",
     count: (count) => `Hai ${count} coupon`
   },
   vanCouponList: {
@@ -58,10 +51,8 @@ var stdin_default = {
   },
   vanAddressEdit: {
     area: "Area",
-    postal: "Postale",
     areaEmpty: "Seleziona un'area di ricezione",
     addressEmpty: "L'indirizzo non pu\xF2 essere vuoto",
-    postalEmpty: "Codice postale errato",
     addressDetail: "Indirizzo",
     defaultAddress: "Imposta come indirizzo predefinito"
   },

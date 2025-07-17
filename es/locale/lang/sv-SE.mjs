@@ -2,8 +2,9 @@ var stdin_default = {
   name: "Namn",
   tel: "Telefon",
   save: "Spara",
-  confirm: "Bekr\xE4fta",
+  clear: "Klar",
   cancel: "Avbryt",
+  confirm: "Bekr\xE4fta",
   delete: "Radera",
   loading: "Laddar...",
   noCoupon: "Inga kuponger",
@@ -50,10 +51,8 @@ var stdin_default = {
   },
   vanAddressEdit: {
     area: "Omr\xE5de",
-    postal: "Post",
     areaEmpty: "V\xE4lj ett mottagningsomr\xE5de",
     addressEmpty: "Adressen f\xE5r inte vara tom",
-    postalEmpty: "Fel postnummer",
     addressDetail: "Adress",
     defaultAddress: "Ange som standardadress"
   },

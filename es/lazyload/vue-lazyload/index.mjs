@@ -3,6 +3,11 @@ import LazyComponent from "./lazy-component.mjs";
 import LazyContainer from "./lazy-container.mjs";
 import LazyImage from "./lazy-image.mjs";
 const Lazyload = {
+  /*
+   * install function
+   * @param  {App} app
+   * @param  {object} options lazyload options
+   */
   install(app, options = {}) {
     const LazyClass = Lazy();
     const lazy = new LazyClass(options);

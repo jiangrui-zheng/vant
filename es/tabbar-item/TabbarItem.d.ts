@@ -1,6 +1,6 @@
 import { type PropType, type ExtractPropTypes } from 'vue';
 import { type BadgeProps } from '../badge';
-declare const tabbarItemProps: {
+export declare const tabbarItemProps: {
     to: PropType<import("vue-router").RouteLocationRaw>;
     url: StringConstructor;
     replace: BooleanConstructor;
@@ -12,8 +12,8 @@ declare const tabbarItemProps: {
     badgeProps: PropType<Partial<BadgeProps>>;
     iconPrefix: StringConstructor;
 };
-export declare type TabbarItemProps = ExtractPropTypes<typeof tabbarItemProps>;
-declare const _default: import("vue").DefineComponent<{
+export type TabbarItemProps = ExtractPropTypes<typeof tabbarItemProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     to: PropType<import("vue-router").RouteLocationRaw>;
     url: StringConstructor;
     replace: BooleanConstructor;
@@ -24,7 +24,7 @@ declare const _default: import("vue").DefineComponent<{
     badge: (NumberConstructor | StringConstructor)[];
     badgeProps: PropType<Partial<BadgeProps>>;
     iconPrefix: StringConstructor;
-}, (() => JSX.Element) | undefined, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "click"[], "click", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, (() => import("vue/jsx-runtime").JSX.Element) | undefined, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "click"[], "click", import("vue").PublicProps, Readonly<ExtractPropTypes<{
     to: PropType<import("vue-router").RouteLocationRaw>;
     url: StringConstructor;
     replace: BooleanConstructor;
@@ -35,10 +35,10 @@ declare const _default: import("vue").DefineComponent<{
     badge: (NumberConstructor | StringConstructor)[];
     badgeProps: PropType<Partial<BadgeProps>>;
     iconPrefix: StringConstructor;
-}>> & {
+}>> & Readonly<{
     onClick?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     replace: boolean;
     dot: boolean;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

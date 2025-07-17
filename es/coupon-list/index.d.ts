@@ -1,14 +1,14 @@
-export declare const CouponList: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const CouponList: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     code: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T>;
         default: string;
     };
     coupons: {
-        type: import("vue").PropType<import("..").CouponInfo[]>;
+        type: import("vue").PropType<T_1[]>;
         default: () => never[];
     };
     currency: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T>;
         default: string;
     };
     showCount: {
@@ -16,14 +16,10 @@ export declare const CouponList: import("../utils").WithInstall<import("vue").De
         default: true;
     };
     emptyImage: StringConstructor;
-    chosenCoupon: {
-        type: NumberConstructor;
-        default: number;
-    };
     enabledTitle: StringConstructor;
     disabledTitle: StringConstructor;
     disabledCoupons: {
-        type: import("vue").PropType<import("..").CouponInfo[]>;
+        type: import("vue").PropType<T_1[]>;
         default: () => never[];
     };
     showExchangeBar: {
@@ -47,17 +43,21 @@ export declare const CouponList: import("../utils").WithInstall<import("vue").De
     };
     exchangeButtonLoading: BooleanConstructor;
     exchangeButtonDisabled: BooleanConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("change" | "exchange" | "update:code")[], "change" | "exchange" | "update:code", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+    chosenCoupon: {
+        type: import("vue").PropType<number | number[]>;
+        default: number;
+    };
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("change" | "exchange" | "update:code")[], "change" | "exchange" | "update:code", import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
     code: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T>;
         default: string;
     };
     coupons: {
-        type: import("vue").PropType<import("..").CouponInfo[]>;
+        type: import("vue").PropType<T_1[]>;
         default: () => never[];
     };
     currency: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T>;
         default: string;
     };
     showCount: {
@@ -65,14 +65,10 @@ export declare const CouponList: import("../utils").WithInstall<import("vue").De
         default: true;
     };
     emptyImage: StringConstructor;
-    chosenCoupon: {
-        type: NumberConstructor;
-        default: number;
-    };
     enabledTitle: StringConstructor;
     disabledTitle: StringConstructor;
     disabledCoupons: {
-        type: import("vue").PropType<import("..").CouponInfo[]>;
+        type: import("vue").PropType<T_1[]>;
         default: () => never[];
     };
     showExchangeBar: {
@@ -96,15 +92,19 @@ export declare const CouponList: import("../utils").WithInstall<import("vue").De
     };
     exchangeButtonLoading: BooleanConstructor;
     exchangeButtonDisabled: BooleanConstructor;
-}>> & {
+    chosenCoupon: {
+        type: import("vue").PropType<number | number[]>;
+        default: number;
+    };
+}>> & Readonly<{
     onChange?: ((...args: any[]) => any) | undefined;
     onExchange?: ((...args: any[]) => any) | undefined;
     "onUpdate:code"?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     code: string;
     currency: string;
     coupons: import("..").CouponInfo[];
-    chosenCoupon: number;
+    chosenCoupon: number | number[];
     showCount: boolean;
     disabledCoupons: import("..").CouponInfo[];
     showExchangeBar: boolean;
@@ -113,9 +113,11 @@ export declare const CouponList: import("../utils").WithInstall<import("vue").De
     displayedCouponIndex: number;
     exchangeButtonLoading: boolean;
     exchangeButtonDisabled: boolean;
-}>>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default CouponList;
+export { couponListProps } from './CouponList';
 export type { CouponListProps } from './CouponList';
+export type { CouponListThemeVars } from './types';
 declare module 'vue' {
     interface GlobalComponents {
         VanCouponList: typeof CouponList;

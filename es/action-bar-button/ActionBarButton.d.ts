@@ -1,6 +1,6 @@
 import { type PropType, type ExtractPropTypes } from 'vue';
 import { ButtonType } from '../button';
-declare const actionBarButtonProps: {
+export declare const actionBarButtonProps: {
     to: PropType<import("vue-router").RouteLocationRaw>;
     url: StringConstructor;
     replace: BooleanConstructor;
@@ -12,8 +12,8 @@ declare const actionBarButtonProps: {
     loading: BooleanConstructor;
     disabled: BooleanConstructor;
 };
-export declare type ActionBarButtonProps = ExtractPropTypes<typeof actionBarButtonProps>;
-declare const _default: import("vue").DefineComponent<{
+export type ActionBarButtonProps = ExtractPropTypes<typeof actionBarButtonProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     to: PropType<import("vue-router").RouteLocationRaw>;
     url: StringConstructor;
     replace: BooleanConstructor;
@@ -24,7 +24,7 @@ declare const _default: import("vue").DefineComponent<{
     color: StringConstructor;
     loading: BooleanConstructor;
     disabled: BooleanConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<ExtractPropTypes<{
     to: PropType<import("vue-router").RouteLocationRaw>;
     url: StringConstructor;
     replace: BooleanConstructor;
@@ -35,9 +35,9 @@ declare const _default: import("vue").DefineComponent<{
     color: StringConstructor;
     loading: BooleanConstructor;
     disabled: BooleanConstructor;
-}>>, {
+}>> & Readonly<{}>, {
     replace: boolean;
     disabled: boolean;
     loading: boolean;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

@@ -1,36 +1,71 @@
 import { type PropType, type InjectionKey, type ExtractPropTypes } from 'vue';
 import { type Numeric } from '../utils';
-export declare type ConfigProviderProvide = {
+export type ConfigProviderTheme = 'light' | 'dark';
+export type ConfigProviderThemeVarsScope = 'local' | 'global';
+export type ConfigProviderProvide = {
     iconPrefix?: string;
 };
 export declare const CONFIG_PROVIDER_KEY: InjectionKey<ConfigProviderProvide>;
-declare const configProviderProps: {
+export type ThemeVars = PropType<Record<string, Numeric>>;
+export declare const configProviderProps: {
     tag: {
-        type: PropType<keyof HTMLElementTagNameMap>;
+        type: PropType<T>;
         default: keyof HTMLElementTagNameMap;
     };
+    theme: {
+        type: PropType<T>;
+        default: ConfigProviderTheme;
+    };
     zIndex: NumberConstructor;
-    themeVars: PropType<Record<string, Numeric>>;
+    themeVars: ThemeVars;
+    themeVarsDark: ThemeVars;
+    themeVarsLight: ThemeVars;
+    themeVarsScope: {
+        type: PropType<T>;
+        default: ConfigProviderThemeVarsScope;
+    };
     iconPrefix: StringConstructor;
 };
-export declare type ConfigProviderProps = ExtractPropTypes<typeof configProviderProps>;
-declare const _default: import("vue").DefineComponent<{
+export type ConfigProviderProps = ExtractPropTypes<typeof configProviderProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     tag: {
-        type: PropType<keyof HTMLElementTagNameMap>;
+        type: PropType<T>;
         default: keyof HTMLElementTagNameMap;
     };
-    zIndex: NumberConstructor;
-    themeVars: PropType<Record<string, Numeric>>;
-    iconPrefix: StringConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
-    tag: {
-        type: PropType<keyof HTMLElementTagNameMap>;
-        default: keyof HTMLElementTagNameMap;
+    theme: {
+        type: PropType<T>;
+        default: ConfigProviderTheme;
     };
     zIndex: NumberConstructor;
-    themeVars: PropType<Record<string, Numeric>>;
+    themeVars: ThemeVars;
+    themeVarsDark: ThemeVars;
+    themeVarsLight: ThemeVars;
+    themeVarsScope: {
+        type: PropType<T>;
+        default: ConfigProviderThemeVarsScope;
+    };
     iconPrefix: StringConstructor;
-}>>, {
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<ExtractPropTypes<{
+    tag: {
+        type: PropType<T>;
+        default: keyof HTMLElementTagNameMap;
+    };
+    theme: {
+        type: PropType<T>;
+        default: ConfigProviderTheme;
+    };
+    zIndex: NumberConstructor;
+    themeVars: ThemeVars;
+    themeVarsDark: ThemeVars;
+    themeVarsLight: ThemeVars;
+    themeVarsScope: {
+        type: PropType<T>;
+        default: ConfigProviderThemeVarsScope;
+    };
+    iconPrefix: StringConstructor;
+}>> & Readonly<{}>, {
     tag: keyof HTMLElementTagNameMap;
-}>;
+    theme: ConfigProviderTheme;
+    themeVarsScope: ConfigProviderThemeVarsScope;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

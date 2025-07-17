@@ -1,5 +1,4 @@
-import { withDirectives as _withDirectives, vShow as _vShow, createVNode as _createVNode } from "vue";
-import { ref, watch, computed, nextTick, onMounted, defineComponent } from "vue";
+import { ref, watch, computed, nextTick, onMounted, defineComponent, createVNode as _createVNode, vShow as _vShow, withDirectives as _withDirectives } from "vue";
 import { truthProp, windowHeight, makeArrayProp, makeStringProp, makeNumberProp, createNamespace } from "../utils/index.mjs";
 import { useRefs } from "../composables/use-refs.mjs";
 import { Tab } from "../tab/index.mjs";
@@ -16,7 +15,6 @@ const couponListProps = {
   currency: makeStringProp("\xA5"),
   showCount: truthProp,
   emptyImage: String,
-  chosenCoupon: makeNumberProp(-1),
   enabledTitle: String,
   disabledTitle: String,
   disabledCoupons: makeArrayProp(),
@@ -28,7 +26,11 @@ const couponListProps = {
   exchangeButtonText: String,
   displayedCouponIndex: makeNumberProp(-1),
   exchangeButtonLoading: Boolean,
-  exchangeButtonDisabled: Boolean
+  exchangeButtonDisabled: Boolean,
+  chosenCoupon: {
+    type: [Number, Array],
+    default: -1
+  }
 };
 var stdin_default = defineComponent({
   name,
@@ -85,7 +87,7 @@ var stdin_default = defineComponent({
           "maxlength": "20"
         }, null), _createVNode(Button, {
           "plain": true,
-          "type": "danger",
+          "type": "primary",
           "class": bem("exchange"),
           "text": props.exchangeButtonText || t("exchange"),
           "loading": props.exchangeButtonLoading,
@@ -96,10 +98,17 @@ var stdin_default = defineComponent({
     };
     const renderCouponTab = () => {
       const {
-        coupons
+        coupons,
+        chosenCoupon
       } = props;
       const count = props.showCount ? ` (${coupons.length})` : "";
       const title = (props.enabledTitle || t("enable")) + count;
+      const updateChosenCoupon = (currentValues = [], value = 0) => {
+        if (currentValues.includes(value)) {
+          return currentValues.filter((item) => item !== value);
+        }
+        return [...currentValues, value];
+      };
       return _createVNode(Tab, {
         "title": title
       }, {
@@ -116,9 +125,9 @@ var stdin_default = defineComponent({
             "key": coupon.id,
             "ref": setCouponRefs(index),
             "coupon": coupon,
-            "chosen": index === props.chosenCoupon,
+            "chosen": Array.isArray(chosenCoupon) ? chosenCoupon.includes(index) : index === chosenCoupon,
             "currency": props.currency,
-            "onClick": () => emit("change", index)
+            "onClick": () => emit("change", Array.isArray(chosenCoupon) ? updateChosenCoupon(chosenCoupon, index) : index)
           }, null)), !coupons.length && renderEmpty(), (_a = slots["list-footer"]) == null ? void 0 : _a.call(slots)])];
         }
       });
@@ -171,16 +180,17 @@ var stdin_default = defineComponent({
       default: () => [renderCouponTab(), renderDisabledTab()]
     }), _createVNode("div", {
       "class": bem("bottom")
-    }, [_withDirectives(_createVNode(Button, {
+    }, [slots["list-button"] ? slots["list-button"]() : _withDirectives(_createVNode(Button, {
       "round": true,
       "block": true,
-      "type": "danger",
+      "type": "primary",
       "class": bem("close"),
       "text": props.closeButtonText || t("close"),
-      "onClick": () => emit("change", -1)
+      "onClick": () => emit("change", Array.isArray(props.chosenCoupon) ? [] : -1)
     }, null), [[_vShow, props.showCloseButton]])])]);
   }
 });
 export {
+  couponListProps,
   stdin_default as default
 };

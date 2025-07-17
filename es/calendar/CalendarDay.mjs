@@ -1,5 +1,4 @@
-import { createVNode as _createVNode } from "vue";
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, createVNode as _createVNode } from "vue";
 import { makeNumberProp, createNamespace, makeRequiredProp } from "../utils/index.mjs";
 import { bem } from "./utils.mjs";
 const [name] = createNamespace("calendar-day");
@@ -12,7 +11,7 @@ var stdin_default = defineComponent({
     offset: makeNumberProp(0),
     rowHeight: String
   },
-  emits: ["click"],
+  emits: ["click", "clickDisabledDate"],
   setup(props, {
     emit,
     slots
@@ -58,6 +57,8 @@ var stdin_default = defineComponent({
     const onClick = () => {
       if (props.item.type !== "disabled") {
         emit("click", props.item);
+      } else {
+        emit("clickDisabledDate", props.item);
       }
     };
     const renderTopInfo = () => {
@@ -80,6 +81,9 @@ var stdin_default = defineComponent({
         }, [slots["bottom-info"] ? slots["bottom-info"](props.item) : bottomInfo]);
       }
     };
+    const renderText = () => {
+      return slots.text ? slots.text(props.item) : props.item.text;
+    };
     const renderContent = () => {
       const {
         item,
@@ -87,10 +91,9 @@ var stdin_default = defineComponent({
         rowHeight
       } = props;
       const {
-        type,
-        text
+        type
       } = item;
-      const Nodes = [renderTopInfo(), text, renderBottomInfo()];
+      const Nodes = [renderTopInfo(), renderText(), renderBottomInfo()];
       if (type === "selected") {
         return _createVNode("div", {
           "class": bem("selected-day"),

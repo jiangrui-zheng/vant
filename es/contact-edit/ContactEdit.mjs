@@ -1,5 +1,4 @@
-import { createVNode as _createVNode } from "vue";
-import { watch, reactive, defineComponent } from "vue";
+import { watch, reactive, defineComponent, createVNode as _createVNode } from "vue";
 import { isMobile, createNamespace, extend } from "../utils/index.mjs";
 import { Cell } from "../cell/index.mjs";
 import { Form } from "../form/index.mjs";
@@ -29,7 +28,7 @@ const contactEditProps = {
 var stdin_default = defineComponent({
   name,
   props: contactEditProps,
-  emits: ["save", "delete", "change-default"],
+  emits: ["save", "delete", "changeDefault"],
   setup(props, {
     emit
   }) {
@@ -45,7 +44,7 @@ var stdin_default = defineComponent({
     }, [_createVNode(Button, {
       "block": true,
       "round": true,
-      "type": "danger",
+      "type": "primary",
       "text": t("save"),
       "class": bem("button"),
       "loading": props.isSaving,
@@ -61,8 +60,7 @@ var stdin_default = defineComponent({
     const renderSwitch = () => _createVNode(Switch, {
       "modelValue": contact.isDefault,
       "onUpdate:modelValue": ($event) => contact.isDefault = $event,
-      "size": 24,
-      "onChange": (checked) => emit("change-default", checked)
+      "onChange": (checked) => emit("changeDefault", checked)
     }, null);
     const renderSetDefault = () => {
       if (props.showSetDefault) {
@@ -109,5 +107,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
+  contactEditProps,
   stdin_default as default
 };

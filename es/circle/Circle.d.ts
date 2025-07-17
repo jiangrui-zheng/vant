@@ -1,10 +1,10 @@
 import { type PropType, type ExtractPropTypes } from 'vue';
-export declare type CircleStartPosition = 'top' | 'right' | 'bottom' | 'left';
-declare const circleProps: {
+export type CircleStartPosition = 'top' | 'right' | 'bottom' | 'left';
+export declare const circleProps: {
     text: StringConstructor;
     size: (NumberConstructor | StringConstructor)[];
     fill: {
-        type: PropType<string>;
+        type: PropType<T>;
         default: string;
     };
     rate: {
@@ -31,16 +31,16 @@ declare const circleProps: {
     };
     strokeLinecap: PropType<CanvasLineCap>;
     startPosition: {
-        type: PropType<CircleStartPosition>;
+        type: PropType<T>;
         default: CircleStartPosition;
     };
 };
-export declare type CircleProps = ExtractPropTypes<typeof circleProps>;
-declare const _default: import("vue").DefineComponent<{
+export type CircleProps = ExtractPropTypes<typeof circleProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     text: StringConstructor;
     size: (NumberConstructor | StringConstructor)[];
     fill: {
-        type: PropType<string>;
+        type: PropType<T>;
         default: string;
     };
     rate: {
@@ -67,14 +67,14 @@ declare const _default: import("vue").DefineComponent<{
     };
     strokeLinecap: PropType<CanvasLineCap>;
     startPosition: {
-        type: PropType<CircleStartPosition>;
+        type: PropType<T>;
         default: CircleStartPosition;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:currentRate"[], "update:currentRate", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:currentRate"[], "update:currentRate", import("vue").PublicProps, Readonly<ExtractPropTypes<{
     text: StringConstructor;
     size: (NumberConstructor | StringConstructor)[];
     fill: {
-        type: PropType<string>;
+        type: PropType<T>;
         default: string;
     };
     rate: {
@@ -101,12 +101,12 @@ declare const _default: import("vue").DefineComponent<{
     };
     strokeLinecap: PropType<CanvasLineCap>;
     startPosition: {
-        type: PropType<CircleStartPosition>;
+        type: PropType<T>;
         default: CircleStartPosition;
     };
-}>> & {
+}>> & Readonly<{
     "onUpdate:currentRate"?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     fill: string;
     strokeWidth: string | number;
     rate: string | number;
@@ -114,5 +114,5 @@ declare const _default: import("vue").DefineComponent<{
     clockwise: boolean;
     currentRate: number;
     startPosition: CircleStartPosition;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

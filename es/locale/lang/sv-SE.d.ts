@@ -2,8 +2,9 @@ declare const _default: {
     name: string;
     tel: string;
     save: string;
-    confirm: string;
+    clear: string;
     cancel: string;
+    confirm: string;
     delete: string;
     loading: string;
     noCoupon: string;
@@ -50,10 +51,8 @@ declare const _default: {
     };
     vanAddressEdit: {
         area: string;
-        postal: string;
         areaEmpty: string;
         addressEmpty: string;
-        postalEmpty: string;
         addressDetail: string;
         defaultAddress: string;
     };

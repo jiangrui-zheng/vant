@@ -1,5 +1,4 @@
-import { createVNode as _createVNode } from "vue";
-import { computed, nextTick, reactive, onMounted, defineComponent } from "vue";
+import { computed, nextTick, reactive, onMounted, defineComponent, createVNode as _createVNode } from "vue";
 import { createNamespace } from "../utils/index.mjs";
 import { SWIPE_KEY } from "../swipe/Swipe.mjs";
 import { useParent } from "@vant/use";

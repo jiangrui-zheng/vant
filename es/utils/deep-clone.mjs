@@ -1,4 +1,4 @@
-import { isDef, isObject } from "./validate.mjs";
+import { isDef, isObject } from "./basic.mjs";
 function deepClone(obj) {
   if (!isDef(obj)) {
     return obj;

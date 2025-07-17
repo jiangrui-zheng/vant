@@ -1,8 +1,8 @@
-export declare const Circle: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const Circle: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     text: StringConstructor;
     size: (NumberConstructor | StringConstructor)[];
     fill: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T>;
         default: string;
     };
     rate: {
@@ -29,14 +29,14 @@ export declare const Circle: import("../utils").WithInstall<import("vue").Define
     };
     strokeLinecap: import("vue").PropType<CanvasLineCap>;
     startPosition: {
-        type: import("vue").PropType<import("./Circle").CircleStartPosition>;
+        type: import("vue").PropType<T>;
         default: import("./Circle").CircleStartPosition;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:currentRate"[], "update:currentRate", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:currentRate"[], "update:currentRate", import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
     text: StringConstructor;
     size: (NumberConstructor | StringConstructor)[];
     fill: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T>;
         default: string;
     };
     rate: {
@@ -63,12 +63,12 @@ export declare const Circle: import("../utils").WithInstall<import("vue").Define
     };
     strokeLinecap: import("vue").PropType<CanvasLineCap>;
     startPosition: {
-        type: import("vue").PropType<import("./Circle").CircleStartPosition>;
+        type: import("vue").PropType<T>;
         default: import("./Circle").CircleStartPosition;
     };
-}>> & {
+}>> & Readonly<{
     "onUpdate:currentRate"?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     fill: string;
     strokeWidth: string | number;
     rate: string | number;
@@ -76,9 +76,11 @@ export declare const Circle: import("../utils").WithInstall<import("vue").Define
     clockwise: boolean;
     currentRate: number;
     startPosition: import("./Circle").CircleStartPosition;
-}>>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default Circle;
+export { circleProps } from './Circle';
 export type { CircleProps, CircleStartPosition } from './Circle';
+export type { CircleThemeVars } from './types';
 declare module 'vue' {
     interface GlobalComponents {
         VanCircle: typeof Circle;

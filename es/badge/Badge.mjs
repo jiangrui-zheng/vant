@@ -1,5 +1,4 @@
-import { createVNode as _createVNode } from "vue";
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, createVNode as _createVNode } from "vue";
 import { isDef, addUnit, isNumeric, truthProp, numericProp, makeStringProp, createNamespace } from "../utils/index.mjs";
 const [name, bem] = createNamespace("badge");
 const badgeProps = {
@@ -38,24 +37,33 @@ var stdin_default = defineComponent({
         if (slots.content) {
           return slots.content();
         }
-        if (isDef(max) && isNumeric(content) && +content > max) {
+        if (isDef(max) && isNumeric(content) && +content > +max) {
           return `${max}+`;
         }
         return content;
       }
     };
+    const getOffsetWithMinusString = (val) => val.startsWith("-") ? val.replace("-", "") : `-${val}`;
     const style = computed(() => {
       const style2 = {
         background: props.color
       };
       if (props.offset) {
         const [x, y] = props.offset;
+        const {
+          position
+        } = props;
+        const [offsetY, offsetX] = position.split("-");
         if (slots.default) {
-          style2.top = addUnit(y);
-          if (typeof x === "number") {
-            style2.right = addUnit(-x);
+          if (typeof y === "number") {
+            style2[offsetY] = addUnit(offsetY === "top" ? y : -y);
           } else {
-            style2.right = x.startsWith("-") ? x.replace("-", "") : `-${x}`;
+            style2[offsetY] = offsetY === "top" ? addUnit(y) : getOffsetWithMinusString(y);
+          }
+          if (typeof x === "number") {
+            style2[offsetX] = addUnit(offsetX === "left" ? x : -x);
+          } else {
+            style2[offsetX] = offsetX === "left" ? addUnit(x) : getOffsetWithMinusString(x);
           }
         } else {
           style2.marginTop = addUnit(y);
@@ -91,5 +99,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
+  badgeProps,
   stdin_default as default
 };

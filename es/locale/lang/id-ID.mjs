@@ -2,8 +2,9 @@ var stdin_default = {
   name: "Nama",
   tel: "Telepon",
   save: "Simpan",
-  confirm: "Konfirmasi",
+  clear: "Jernih",
   cancel: "Batal",
+  confirm: "Konfirmasi",
   delete: "Hapus",
   loading: "Memuat...",
   noCoupon: "Tidak ada kupon",
@@ -50,10 +51,8 @@ var stdin_default = {
   },
   vanAddressEdit: {
     area: "Daerah",
-    postal: "pos",
     areaEmpty: "Silakan pilih area penerima",
     addressEmpty: "Alamat tidak boleh kosong",
-    postalEmpty: "Kode pos salah",
     addressDetail: "Alamat",
     defaultAddress: "Tetapkan sebagai alamat default"
   },

@@ -1,11 +1,10 @@
-import { createVNode as _createVNode, mergeProps as _mergeProps } from "vue";
-import { ref, reactive, defineComponent, onBeforeUnmount } from "vue";
+import { ref, reactive, defineComponent, onBeforeUnmount, nextTick, mergeProps as _mergeProps, createVNode as _createVNode, vShow as _vShow, withDirectives as _withDirectives } from "vue";
 import { pick, extend, toArray, isPromise, truthProp, getSizeStyle, makeArrayProp, makeStringProp, makeNumericProp } from "../utils/index.mjs";
 import { bem, name, isOversize, filterFiles, isImageFile, readFileContent } from "./utils.mjs";
 import { useCustomFieldValue } from "@vant/use";
 import { useExpose } from "../composables/use-expose.mjs";
 import { Icon } from "../icon/index.mjs";
-import { ImagePreview } from "../image-preview/index.mjs";
+import { showImagePreview } from "../image-preview/index.mjs";
 import UploaderPreviewItem from "./UploaderPreviewItem.mjs";
 const uploaderProps = {
   name: makeNumericProp(""),
@@ -21,6 +20,7 @@ const uploaderProps = {
   uploadIcon: makeStringProp("photograph"),
   uploadText: String,
   deletable: truthProp,
+  reupload: Boolean,
   afterRead: Function,
   showUpload: truthProp,
   modelValue: makeArrayProp(),
@@ -38,13 +38,15 @@ const uploaderProps = {
 var stdin_default = defineComponent({
   name,
   props: uploaderProps,
-  emits: ["delete", "oversize", "click-upload", "close-preview", "click-preview", "update:modelValue"],
+  emits: ["delete", "oversize", "clickUpload", "closePreview", "clickPreview", "clickReupload", "update:modelValue"],
   setup(props, {
     emit,
     slots
   }) {
     const inputRef = ref();
     const urls = [];
+    const reuploadIndex = ref(-1);
+    const isReuploading = ref(false);
     const getDetail = (index = props.modelValue.length) => ({
       name: props.name,
       index
@@ -70,7 +72,14 @@ var stdin_default = defineComponent({
         }
       }
       items = reactive(items);
-      emit("update:modelValue", [...props.modelValue, ...toArray(items)]);
+      if (reuploadIndex.value > -1) {
+        const arr = [...props.modelValue];
+        arr.splice(reuploadIndex.value, 1, items);
+        emit("update:modelValue", arr);
+        reuploadIndex.value = -1;
+      } else {
+        emit("update:modelValue", [...props.modelValue, ...toArray(items)]);
+      }
       if (props.afterRead) {
         props.afterRead(items, getDetail());
       }
@@ -144,7 +153,7 @@ var stdin_default = defineComponent({
       readFile(file);
     };
     let imagePreview;
-    const onClosePreview = () => emit("close-preview");
+    const onClosePreview = () => emit("closePreview");
     const previewImage = (item) => {
       if (props.previewFullImage) {
         const imageFiles = props.modelValue.filter(isImageFile);
@@ -155,7 +164,7 @@ var stdin_default = defineComponent({
           }
           return item2.url;
         }).filter(Boolean);
-        imagePreview = ImagePreview(extend({
+        imagePreview = showImagePreview(extend({
           images,
           startPosition: imageFiles.indexOf(item),
           onClose: onClosePreview
@@ -173,15 +182,27 @@ var stdin_default = defineComponent({
       emit("update:modelValue", fileList);
       emit("delete", item, getDetail(index));
     };
+    const reuploadFile = (index) => {
+      isReuploading.value = true;
+      reuploadIndex.value = index;
+      nextTick(() => chooseFile());
+    };
+    const onInputClick = () => {
+      if (!isReuploading.value) {
+        reuploadIndex.value = -1;
+      }
+      isReuploading.value = false;
+    };
     const renderPreviewItem = (item, index) => {
-      const needPickData = ["imageFit", "deletable", "previewSize", "beforeDelete"];
+      const needPickData = ["imageFit", "deletable", "reupload", "previewSize", "beforeDelete"];
       const previewData = extend(pick(props, needPickData), pick(item, needPickData, true));
       return _createVNode(UploaderPreviewItem, _mergeProps({
         "item": item,
         "index": index,
-        "onClick": () => emit("click-preview", item, getDetail(index)),
+        "onClick": () => emit(props.reupload ? "clickReupload" : "clickPreview", item, getDetail(index)),
         "onDelete": () => deleteFile(item, index),
-        "onPreview": () => previewImage(item)
+        "onPreview": () => previewImage(item),
+        "onReupload": () => reuploadFile(index)
       }, pick(props, ["name", "lazyLoad"]), previewData), pick(slots, ["preview-cover", "preview-delete"]));
     };
     const renderPreviewList = () => {
@@ -189,28 +210,27 @@ var stdin_default = defineComponent({
         return props.modelValue.map(renderPreviewItem);
       }
     };
-    const onClickUpload = (event) => emit("click-upload", event);
+    const onClickUpload = (event) => emit("clickUpload", event);
     const renderUpload = () => {
-      if (props.modelValue.length >= props.maxCount || !props.showUpload) {
-        return;
-      }
+      const lessThanMax = props.modelValue.length < +props.maxCount;
       const Input = props.readonly ? null : _createVNode("input", {
         "ref": inputRef,
         "type": "file",
         "class": bem("input"),
         "accept": props.accept,
         "capture": props.capture,
-        "multiple": props.multiple,
+        "multiple": props.multiple && reuploadIndex.value === -1,
         "disabled": props.disabled,
-        "onChange": onChange
+        "onChange": onChange,
+        "onClick": onInputClick
       }, null);
       if (slots.default) {
-        return _createVNode("div", {
+        return _withDirectives(_createVNode("div", {
           "class": bem("input-wrapper"),
           "onClick": onClickUpload
-        }, [slots.default(), Input]);
+        }, [slots.default(), Input]), [[_vShow, lessThanMax]]);
       }
-      return _createVNode("div", {
+      return _withDirectives(_createVNode("div", {
         "class": bem("upload", {
           readonly: props.readonly
         }),
@@ -221,7 +241,7 @@ var stdin_default = defineComponent({
         "class": bem("upload-icon")
       }, null), props.uploadText && _createVNode("span", {
         "class": bem("upload-text")
-      }, [props.uploadText]), Input]);
+      }, [props.uploadText]), Input]), [[_vShow, props.showUpload && lessThanMax]]);
     };
     const chooseFile = () => {
       if (inputRef.value && !props.disabled) {
@@ -233,6 +253,7 @@ var stdin_default = defineComponent({
     });
     useExpose({
       chooseFile,
+      reuploadFile,
       closeImagePreview
     });
     useCustomFieldValue(() => props.modelValue);
@@ -246,5 +267,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  uploaderProps
 };

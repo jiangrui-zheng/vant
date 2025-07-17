@@ -1,22 +1,24 @@
-export declare const Empty: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const Empty: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     image: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T>;
         default: string;
     };
     imageSize: import("vue").PropType<import("../utils").Numeric | [import("../utils").Numeric, import("../utils").Numeric]>;
     description: StringConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
     image: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T>;
         default: string;
     };
     imageSize: import("vue").PropType<import("../utils").Numeric | [import("../utils").Numeric, import("../utils").Numeric]>;
     description: StringConstructor;
-}>>, {
+}>> & Readonly<{}>, {
     image: string;
-}>>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default Empty;
+export { emptyProps } from './Empty';
 export type { EmptyProps } from './Empty';
+export type { EmptyThemeVars } from './types';
 declare module 'vue' {
     interface GlobalComponents {
         VanEmpty: typeof Empty;

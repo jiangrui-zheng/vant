@@ -1,5 +1,4 @@
-import { createVNode as _createVNode } from "vue";
-import { ref, watch, nextTick, onUpdated, onMounted, defineComponent } from "vue";
+import { ref, watch, computed, nextTick, onUpdated, onMounted, defineComponent, createVNode as _createVNode } from "vue";
 import { isHidden, truthProp, makeStringProp, makeNumericProp, createNamespace } from "../utils/index.mjs";
 import { useRect, useScrollParent, useEventListener } from "@vant/use";
 import { useExpose } from "../composables/use-expose.mjs";
@@ -10,7 +9,9 @@ const listProps = {
   error: Boolean,
   offset: makeNumericProp(300),
   loading: Boolean,
+  disabled: Boolean,
   finished: Boolean,
+  scroller: Object,
   errorText: String,
   direction: makeStringProp("down"),
   loadingText: String,
@@ -30,16 +31,18 @@ var stdin_default = defineComponent({
     const placeholder = ref();
     const tabStatus = useTabStatus();
     const scrollParent = useScrollParent(root);
+    const scroller = computed(() => props.scroller || scrollParent.value);
     const check = () => {
       nextTick(() => {
-        if (loading.value || props.finished || props.error || (tabStatus == null ? void 0 : tabStatus.value) === false) {
+        if (loading.value || props.finished || props.disabled || props.error || // skip check when inside an inactive tab
+        (tabStatus == null ? void 0 : tabStatus.value) === false) {
           return;
         }
         const {
-          offset,
           direction
         } = props;
-        const scrollParentRect = useRect(scrollParent);
+        const offset = +props.offset;
+        const scrollParentRect = useRect(scroller);
         if (!scrollParentRect.height || isHidden(root)) {
           return;
         }
@@ -85,7 +88,7 @@ var stdin_default = defineComponent({
       }
     };
     const renderLoading = () => {
-      if (loading.value && !props.finished) {
+      if (loading.value && !props.finished && !props.disabled) {
         return _createVNode("div", {
           "class": bem("loading")
         }, [slots.loading ? slots.loading() : _createVNode(Loading, {
@@ -115,7 +118,7 @@ var stdin_default = defineComponent({
       check
     });
     useEventListener("scroll", check, {
-      target: scrollParent,
+      target: scroller,
       passive: true
     });
     return () => {
@@ -135,5 +138,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  listProps
 };

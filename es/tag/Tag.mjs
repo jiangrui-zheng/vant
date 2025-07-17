@@ -1,5 +1,4 @@
-import { createVNode as _createVNode } from "vue";
-import { Transition, defineComponent } from "vue";
+import { Transition, defineComponent, createVNode as _createVNode } from "vue";
 import { truthProp, makeStringProp, createNamespace, HAPTICS_FEEDBACK } from "../utils/index.mjs";
 import { Icon } from "../icon/index.mjs";
 const [name, bem] = createNamespace("tag");
@@ -74,5 +73,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  tagProps
 };

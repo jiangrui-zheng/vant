@@ -1,11 +1,11 @@
 import { type PropType, type ExtractPropTypes } from 'vue';
 import { type Numeric } from '../utils';
-export declare type TreeSelectChild = {
+export type TreeSelectChild = {
     id: Numeric;
     text: string;
     disabled?: boolean;
 };
-export declare type TreeSelectItem = {
+export type TreeSelectItem = {
     dot?: boolean;
     text: string;
     badge?: Numeric;
@@ -13,13 +13,13 @@ export declare type TreeSelectItem = {
     disabled?: boolean;
     className?: unknown;
 };
-declare const treeSelectProps: {
+export declare const treeSelectProps: {
     max: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
     items: {
-        type: PropType<TreeSelectItem[]>;
+        type: PropType<T[]>;
         default: () => never[];
     };
     height: {
@@ -27,7 +27,7 @@ declare const treeSelectProps: {
         default: number;
     };
     selectedIcon: {
-        type: PropType<string>;
+        type: PropType<T_1>;
         default: string;
     };
     mainActiveIndex: {
@@ -39,14 +39,14 @@ declare const treeSelectProps: {
         default: number;
     };
 };
-export declare type TreeSelectProps = ExtractPropTypes<typeof treeSelectProps>;
-declare const _default: import("vue").DefineComponent<{
+export type TreeSelectProps = ExtractPropTypes<typeof treeSelectProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     max: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
     items: {
-        type: PropType<TreeSelectItem[]>;
+        type: PropType<T[]>;
         default: () => never[];
     };
     height: {
@@ -54,7 +54,7 @@ declare const _default: import("vue").DefineComponent<{
         default: number;
     };
     selectedIcon: {
-        type: PropType<string>;
+        type: PropType<T_1>;
         default: string;
     };
     mainActiveIndex: {
@@ -65,13 +65,13 @@ declare const _default: import("vue").DefineComponent<{
         type: PropType<Numeric | Numeric[]>;
         default: number;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("click-item" | "click-nav" | "update:activeId" | "update:mainActiveIndex")[], "click-item" | "click-nav" | "update:activeId" | "update:mainActiveIndex", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("clickItem" | "clickNav" | "update:activeId" | "update:mainActiveIndex")[], "clickItem" | "clickNav" | "update:activeId" | "update:mainActiveIndex", import("vue").PublicProps, Readonly<ExtractPropTypes<{
     max: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
     items: {
-        type: PropType<TreeSelectItem[]>;
+        type: PropType<T[]>;
         default: () => never[];
     };
     height: {
@@ -79,7 +79,7 @@ declare const _default: import("vue").DefineComponent<{
         default: number;
     };
     selectedIcon: {
-        type: PropType<string>;
+        type: PropType<T_1>;
         default: string;
     };
     mainActiveIndex: {
@@ -90,17 +90,17 @@ declare const _default: import("vue").DefineComponent<{
         type: PropType<Numeric | Numeric[]>;
         default: number;
     };
-}>> & {
-    "onClick-item"?: ((...args: any[]) => any) | undefined;
-    "onClick-nav"?: ((...args: any[]) => any) | undefined;
+}>> & Readonly<{
+    onClickItem?: ((...args: any[]) => any) | undefined;
+    onClickNav?: ((...args: any[]) => any) | undefined;
     "onUpdate:activeId"?: ((...args: any[]) => any) | undefined;
     "onUpdate:mainActiveIndex"?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     height: string | number;
     max: string | number;
     items: TreeSelectItem[];
     selectedIcon: string;
     mainActiveIndex: string | number;
     activeId: Numeric | Numeric[];
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

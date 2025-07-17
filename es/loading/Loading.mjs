@@ -1,5 +1,4 @@
-import { createVNode as _createVNode } from "vue";
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, createVNode as _createVNode } from "vue";
 import { extend, addUnit, numericProp, getSizeStyle, makeStringProp, createNamespace } from "../utils/index.mjs";
 const [name, bem] = createNamespace("loading");
 const SpinIcon = Array(12).fill(null).map((_, index) => _createVNode("i", {
@@ -31,6 +30,13 @@ var stdin_default = defineComponent({
     const spinnerStyle = computed(() => extend({
       color: props.color
     }, getSizeStyle(props.size)));
+    const renderIcon = () => {
+      const DefaultIcon = props.type === "spinner" ? SpinIcon : CircularIcon;
+      return _createVNode("span", {
+        "class": bem("spinner", props.type),
+        "style": spinnerStyle.value
+      }, [slots.icon ? slots.icon() : DefaultIcon]);
+    };
     const renderText = () => {
       var _a;
       if (slots.default) {
@@ -54,13 +60,11 @@ var stdin_default = defineComponent({
         }]),
         "aria-live": "polite",
         "aria-busy": true
-      }, [_createVNode("span", {
-        "class": bem("spinner", type),
-        "style": spinnerStyle.value
-      }, [type === "spinner" ? SpinIcon : CircularIcon]), renderText()]);
+      }, [renderIcon(), renderText()]);
     };
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  loadingProps
 };

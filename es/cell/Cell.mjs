@@ -1,10 +1,10 @@
-import { createVNode as _createVNode } from "vue";
-import { defineComponent } from "vue";
-import { isDef, extend, truthProp, unknownProp, numericProp, createNamespace } from "../utils/index.mjs";
+import { defineComponent, createVNode as _createVNode } from "vue";
+import { isDef, extend, truthProp, unknownProp, numericProp, makeStringProp, createNamespace } from "../utils/index.mjs";
 import { useRoute, routeProps } from "../composables/use-route.mjs";
 import { Icon } from "../icon/index.mjs";
 const [name, bem] = createNamespace("cell");
 const cellSharedProps = {
+  tag: makeStringProp("div"),
   icon: String,
   size: String,
   title: numericProp,
@@ -13,13 +13,16 @@ const cellSharedProps = {
   center: Boolean,
   isLink: Boolean,
   border: truthProp,
-  required: Boolean,
   iconPrefix: String,
   valueClass: unknownProp,
   labelClass: unknownProp,
   titleClass: unknownProp,
   titleStyle: null,
   arrowDirection: String,
+  required: {
+    type: [Boolean, String],
+    default: null
+  },
   clickable: {
     type: Boolean,
     default: null
@@ -42,22 +45,24 @@ var stdin_default = defineComponent({
       }
     };
     const renderTitle = () => {
+      var _a;
       if (slots.title || isDef(props.title)) {
+        const titleSlot = (_a = slots.title) == null ? void 0 : _a.call(slots);
+        if (Array.isArray(titleSlot) && titleSlot.length === 0) {
+          return;
+        }
         return _createVNode("div", {
           "class": [bem("title"), props.titleClass],
           "style": props.titleStyle
-        }, [slots.title ? slots.title() : _createVNode("span", null, [props.title]), renderLabel()]);
+        }, [titleSlot || _createVNode("span", null, [props.title]), renderLabel()]);
       }
     };
     const renderValue = () => {
       const slot = slots.value || slots.default;
       const hasValue = slot || isDef(props.value);
       if (hasValue) {
-        const hasTitle = slots.title || isDef(props.title);
         return _createVNode("div", {
-          "class": [bem("value", {
-            alone: !hasTitle
-          }), props.valueClass]
+          "class": [bem("value"), props.valueClass]
         }, [slot ? slot() : _createVNode("span", null, [props.value])]);
       }
     };
@@ -86,8 +91,9 @@ var stdin_default = defineComponent({
       }
     };
     return () => {
-      var _a, _b;
+      var _a;
       const {
+        tag,
         size,
         center,
         border,
@@ -97,23 +103,29 @@ var stdin_default = defineComponent({
       const clickable = (_a = props.clickable) != null ? _a : isLink;
       const classes = {
         center,
-        required,
+        required: !!required,
         clickable,
         borderless: !border
       };
       if (size) {
         classes[size] = !!size;
       }
-      return _createVNode("div", {
+      return _createVNode(tag, {
         "class": bem(classes),
         "role": clickable ? "button" : void 0,
         "tabindex": clickable ? 0 : void 0,
         "onClick": route
-      }, [renderLeftIcon(), renderTitle(), renderValue(), renderRightIcon(), (_b = slots.extra) == null ? void 0 : _b.call(slots)]);
+      }, {
+        default: () => {
+          var _a2;
+          return [renderLeftIcon(), renderTitle(), renderValue(), renderRightIcon(), (_a2 = slots.extra) == null ? void 0 : _a2.call(slots)];
+        }
+      });
     };
   }
 });
 export {
+  cellProps,
   cellSharedProps,
   stdin_default as default
 };

@@ -1,9 +1,9 @@
 import { type PropType, type ExtractPropTypes } from 'vue';
 import { type BadgeProps } from '../badge';
-declare const iconProps: {
+export declare const iconProps: {
     dot: BooleanConstructor;
     tag: {
-        type: PropType<keyof HTMLElementTagNameMap>;
+        type: PropType<T>;
         default: keyof HTMLElementTagNameMap;
     };
     name: StringConstructor;
@@ -13,11 +13,11 @@ declare const iconProps: {
     badgeProps: PropType<Partial<BadgeProps>>;
     classPrefix: StringConstructor;
 };
-export declare type IconProps = ExtractPropTypes<typeof iconProps>;
-declare const _default: import("vue").DefineComponent<{
+export type IconProps = ExtractPropTypes<typeof iconProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     dot: BooleanConstructor;
     tag: {
-        type: PropType<keyof HTMLElementTagNameMap>;
+        type: PropType<T>;
         default: keyof HTMLElementTagNameMap;
     };
     name: StringConstructor;
@@ -26,10 +26,10 @@ declare const _default: import("vue").DefineComponent<{
     color: StringConstructor;
     badgeProps: PropType<Partial<BadgeProps>>;
     classPrefix: StringConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<ExtractPropTypes<{
     dot: BooleanConstructor;
     tag: {
-        type: PropType<keyof HTMLElementTagNameMap>;
+        type: PropType<T>;
         default: keyof HTMLElementTagNameMap;
     };
     name: StringConstructor;
@@ -38,8 +38,8 @@ declare const _default: import("vue").DefineComponent<{
     color: StringConstructor;
     badgeProps: PropType<Partial<BadgeProps>>;
     classPrefix: StringConstructor;
-}>>, {
+}>> & Readonly<{}>, {
     dot: boolean;
     tag: keyof HTMLElementTagNameMap;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

@@ -1,5 +1,4 @@
-import { createVNode as _createVNode } from "vue";
-import { ref, defineComponent } from "vue";
+import { ref, defineComponent, createVNode as _createVNode } from "vue";
 import { truthProp, makeStringProp, makeNumericProp, createNamespace } from "../utils/index.mjs";
 import { Icon } from "../icon/index.mjs";
 import { Button } from "../button/index.mjs";
@@ -111,5 +110,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  submitBarProps
 };

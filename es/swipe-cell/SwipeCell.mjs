@@ -1,5 +1,4 @@
-import { createVNode as _createVNode } from "vue";
-import { ref, reactive, computed, defineComponent } from "vue";
+import { ref, reactive, computed, defineComponent, createVNode as _createVNode } from "vue";
 import { clamp, isDef, numericProp, preventDefault, callInterceptor, createNamespace, makeNumericProp } from "../utils/index.mjs";
 import { useRect, useClickAway, useEventListener } from "@vant/use";
 import { useTouch } from "../composables/use-touch.mjs";
@@ -24,6 +23,7 @@ var stdin_default = defineComponent({
     let opened;
     let lockClick;
     let startOffset;
+    let isInBeforeClosing;
     const root = ref();
     const leftRef = ref();
     const rightRef = ref();
@@ -99,15 +99,23 @@ var stdin_default = defineComponent({
         }, 0);
       }
     };
-    const onClick = (position = "outside") => {
+    const onClick = (position = "outside", event) => {
+      if (isInBeforeClosing) return;
       emit("click", position);
       if (opened && !lockClick) {
+        isInBeforeClosing = true;
         callInterceptor(props.beforeClose, {
           args: [{
+            event,
             name: props.name,
             position
           }],
-          done: () => close(position)
+          done: () => {
+            isInBeforeClosing = false;
+            close(position);
+          },
+          canceled: () => isInBeforeClosing = false,
+          error: () => isInBeforeClosing = false
         });
       }
     };
@@ -115,7 +123,10 @@ var stdin_default = defineComponent({
       if (stop) {
         event.stopPropagation();
       }
-      onClick(position);
+      if (lockClick) {
+        return;
+      }
+      onClick(position, event);
     };
     const renderSideContent = (side, ref2) => {
       const contentSlot = slots[side];
@@ -131,7 +142,7 @@ var stdin_default = defineComponent({
       open,
       close
     });
-    useClickAway(root, () => onClick("outside"), {
+    useClickAway(root, (event) => onClick("outside", event), {
       eventName: "touchstart"
     });
     useEventListener("touchmove", onTouchMove, {
@@ -158,5 +169,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  swipeCellProps
 };

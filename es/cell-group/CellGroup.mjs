@@ -1,6 +1,6 @@
-import { Fragment as _Fragment, createVNode as _createVNode, mergeProps as _mergeProps } from "vue";
-import { defineComponent } from "vue";
+import { defineComponent, mergeProps as _mergeProps, createVNode as _createVNode, Fragment as _Fragment } from "vue";
 import { truthProp, createNamespace, BORDER_TOP_BOTTOM } from "../utils/index.mjs";
+import { useScopeId } from "../composables/use-scope-id.mjs";
 const [name, bem] = createNamespace("cell-group");
 const cellGroupProps = {
   title: String,
@@ -23,7 +23,7 @@ var stdin_default = defineComponent({
         }), {
           [BORDER_TOP_BOTTOM]: props.border && !props.inset
         }]
-      }, attrs), [(_a = slots.default) == null ? void 0 : _a.call(slots)]);
+      }, attrs, useScopeId()), [(_a = slots.default) == null ? void 0 : _a.call(slots)]);
     };
     const renderTitle = () => _createVNode("div", {
       "class": bem("title", {
@@ -39,5 +39,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
+  cellGroupProps,
   stdin_default as default
 };

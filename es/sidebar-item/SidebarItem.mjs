@@ -1,5 +1,4 @@
-import { createVNode as _createVNode, mergeProps as _mergeProps } from "vue";
-import { defineComponent } from "vue";
+import { defineComponent, mergeProps as _mergeProps, createVNode as _createVNode } from "vue";
 import { extend, numericProp, createNamespace } from "../utils/index.mjs";
 import { SIDEBAR_KEY } from "../sidebar/Sidebar.mjs";
 import { useParent } from "@vant/use";
@@ -68,5 +67,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  sidebarItemProps
 };

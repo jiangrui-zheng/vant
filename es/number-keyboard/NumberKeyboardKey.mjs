@@ -1,5 +1,4 @@
-import { createVNode as _createVNode } from "vue";
-import { ref, defineComponent } from "vue";
+import { ref, defineComponent, createVNode as _createVNode } from "vue";
 import { numericProp, createNamespace, preventDefault } from "../utils/index.mjs";
 import { useTouch } from "../composables/use-touch.mjs";
 import { Loading } from "../loading/index.mjs";

@@ -1,5 +1,5 @@
 import { ProgressProps } from './Progress';
-export declare const Progress: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const Progress: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     color: StringConstructor;
     inactive: BooleanConstructor;
     pivotText: StringConstructor;
@@ -16,7 +16,7 @@ export declare const Progress: import("../utils").WithInstall<import("vue").Defi
         default: number;
         validator: (value: import("../utils").Numeric) => boolean;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
     color: StringConstructor;
     inactive: BooleanConstructor;
     pivotText: StringConstructor;
@@ -33,14 +33,15 @@ export declare const Progress: import("../utils").WithInstall<import("vue").Defi
         default: number;
         validator: (value: import("../utils").Numeric) => boolean;
     };
-}>>, {
+}>> & Readonly<{}>, {
     inactive: boolean;
     showPivot: boolean;
     percentage: string | number;
-}>>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default Progress;
+export { progressProps } from './Progress';
 export type { ProgressProps };
-export type { ProgressInstance } from './types';
+export type { ProgressInstance, ProgressThemeVars } from './types';
 declare module 'vue' {
     interface GlobalComponents {
         VanProgress: typeof Progress;

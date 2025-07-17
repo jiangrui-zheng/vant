@@ -1,12 +1,12 @@
 import { type ExtractPropTypes } from 'vue';
-declare const passwordInputProps: {
+export declare const passwordInputProps: {
     info: StringConstructor;
     mask: {
         type: BooleanConstructor;
         default: true;
     };
     value: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T>;
         default: string;
     };
     gutter: (NumberConstructor | StringConstructor)[];
@@ -17,15 +17,15 @@ declare const passwordInputProps: {
     focused: BooleanConstructor;
     errorInfo: StringConstructor;
 };
-export declare type PasswordInputProps = ExtractPropTypes<typeof passwordInputProps>;
-declare const _default: import("vue").DefineComponent<{
+export type PasswordInputProps = ExtractPropTypes<typeof passwordInputProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     info: StringConstructor;
     mask: {
         type: BooleanConstructor;
         default: true;
     };
     value: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T>;
         default: string;
     };
     gutter: (NumberConstructor | StringConstructor)[];
@@ -35,14 +35,14 @@ declare const _default: import("vue").DefineComponent<{
     };
     focused: BooleanConstructor;
     errorInfo: StringConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "focus"[], "focus", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "focus"[], "focus", import("vue").PublicProps, Readonly<ExtractPropTypes<{
     info: StringConstructor;
     mask: {
         type: BooleanConstructor;
         default: true;
     };
     value: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T>;
         default: string;
     };
     gutter: (NumberConstructor | StringConstructor)[];
@@ -52,12 +52,12 @@ declare const _default: import("vue").DefineComponent<{
     };
     focused: BooleanConstructor;
     errorInfo: StringConstructor;
-}>> & {
+}>> & Readonly<{
     onFocus?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     length: string | number;
     mask: boolean;
     value: string;
     focused: boolean;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

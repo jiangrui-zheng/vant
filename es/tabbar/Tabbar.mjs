@@ -1,5 +1,4 @@
-import { createVNode as _createVNode } from "vue";
-import { ref, defineComponent } from "vue";
+import { ref, defineComponent, createVNode as _createVNode } from "vue";
 import { truthProp, numericProp, getZIndexStyle, createNamespace, callInterceptor, makeNumericProp, BORDER_TOP_BOTTOM } from "../utils/index.mjs";
 import { useChildren } from "@vant/use";
 import { usePlaceholder } from "../composables/use-placeholder.mjs";
@@ -80,5 +79,6 @@ var stdin_default = defineComponent({
 });
 export {
   TABBAR_KEY,
-  stdin_default as default
+  stdin_default as default,
+  tabbarProps
 };

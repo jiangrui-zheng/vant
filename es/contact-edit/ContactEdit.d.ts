@@ -1,11 +1,11 @@
 import { type PropType, type ExtractPropTypes } from 'vue';
 import { isMobile } from '../utils';
-export declare type ContactEditInfo = {
+export type ContactEditInfo = {
     tel: string;
     name: string;
     isDefault?: boolean;
 };
-declare const contactEditProps: {
+export declare const contactEditProps: {
     isEdit: BooleanConstructor;
     isSaving: BooleanConstructor;
     isDeleting: BooleanConstructor;
@@ -20,8 +20,8 @@ declare const contactEditProps: {
         default: typeof isMobile;
     };
 };
-export declare type ContactEditProps = ExtractPropTypes<typeof contactEditProps>;
-declare const _default: import("vue").DefineComponent<{
+export type ContactEditProps = ExtractPropTypes<typeof contactEditProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     isEdit: BooleanConstructor;
     isSaving: BooleanConstructor;
     isDeleting: BooleanConstructor;
@@ -35,7 +35,7 @@ declare const _default: import("vue").DefineComponent<{
         type: PropType<(val: string) => boolean>;
         default: typeof isMobile;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("save" | "delete" | "change-default")[], "save" | "delete" | "change-default", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("delete" | "save" | "changeDefault")[], "delete" | "save" | "changeDefault", import("vue").PublicProps, Readonly<ExtractPropTypes<{
     isEdit: BooleanConstructor;
     isSaving: BooleanConstructor;
     isDeleting: BooleanConstructor;
@@ -49,16 +49,16 @@ declare const _default: import("vue").DefineComponent<{
         type: PropType<(val: string) => boolean>;
         default: typeof isMobile;
     };
-}>> & {
-    onSave?: ((...args: any[]) => any) | undefined;
+}>> & Readonly<{
     onDelete?: ((...args: any[]) => any) | undefined;
-    "onChange-default"?: ((...args: any[]) => any) | undefined;
-}, {
+    onSave?: ((...args: any[]) => any) | undefined;
+    onChangeDefault?: ((...args: any[]) => any) | undefined;
+}>, {
     isSaving: boolean;
     isDeleting: boolean;
     showSetDefault: boolean;
     telValidator: (val: string) => boolean;
     isEdit: boolean;
     contactInfo: ContactEditInfo;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

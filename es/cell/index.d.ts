@@ -1,4 +1,8 @@
-export declare const Cell: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const Cell: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
+    tag: {
+        type: import("vue").PropType<T>;
+        default: keyof HTMLElementTagNameMap;
+    };
     icon: StringConstructor;
     size: import("vue").PropType<import("./Cell").CellSize>;
     title: (NumberConstructor | StringConstructor)[];
@@ -10,13 +14,16 @@ export declare const Cell: import("../utils").WithInstall<import("vue").DefineCo
         type: BooleanConstructor;
         default: true;
     };
-    required: BooleanConstructor;
     iconPrefix: StringConstructor;
     valueClass: import("vue").PropType<unknown>;
     labelClass: import("vue").PropType<unknown>;
     titleClass: import("vue").PropType<unknown>;
     titleStyle: import("vue").PropType<string | import("vue").CSSProperties>;
     arrowDirection: import("vue").PropType<import("./Cell").CellArrowDirection>;
+    required: {
+        type: import("vue").PropType<boolean | "auto">;
+        default: null;
+    };
     clickable: {
         type: import("vue").PropType<boolean | null>;
         default: null;
@@ -25,7 +32,11 @@ export declare const Cell: import("../utils").WithInstall<import("vue").DefineCo
     to: import("vue").PropType<import("vue-router").RouteLocationRaw>;
     url: StringConstructor;
     replace: BooleanConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    tag: {
+        type: import("vue").PropType<T>;
+        default: keyof HTMLElementTagNameMap;
+    };
     icon: StringConstructor;
     size: import("vue").PropType<import("./Cell").CellSize>;
     title: (NumberConstructor | StringConstructor)[];
@@ -37,13 +48,16 @@ export declare const Cell: import("../utils").WithInstall<import("vue").DefineCo
         type: BooleanConstructor;
         default: true;
     };
-    required: BooleanConstructor;
     iconPrefix: StringConstructor;
     valueClass: import("vue").PropType<unknown>;
     labelClass: import("vue").PropType<unknown>;
     titleClass: import("vue").PropType<unknown>;
     titleStyle: import("vue").PropType<string | import("vue").CSSProperties>;
     arrowDirection: import("vue").PropType<import("./Cell").CellArrowDirection>;
+    required: {
+        type: import("vue").PropType<boolean | "auto">;
+        default: null;
+    };
     clickable: {
         type: import("vue").PropType<boolean | null>;
         default: null;
@@ -52,16 +66,19 @@ export declare const Cell: import("../utils").WithInstall<import("vue").DefineCo
     to: import("vue").PropType<import("vue-router").RouteLocationRaw>;
     url: StringConstructor;
     replace: BooleanConstructor;
-}>>, {
+}>> & Readonly<{}>, {
     replace: boolean;
-    required: boolean;
+    tag: keyof HTMLElementTagNameMap;
     center: boolean;
-    isLink: boolean;
     border: boolean;
+    isLink: boolean;
+    required: boolean | "auto";
     clickable: boolean | null;
-}>>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default Cell;
+export { cellProps } from './Cell';
 export type { CellSize, CellProps, CellArrowDirection } from './Cell';
+export type { CellThemeVars } from './types';
 declare module 'vue' {
     interface GlobalComponents {
         VanCell: typeof Cell;
