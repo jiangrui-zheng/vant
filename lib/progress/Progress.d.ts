@@ -1,6 +1,6 @@
 import { type ExtractPropTypes } from 'vue';
 import { type Numeric } from '../utils';
-declare const progressProps: {
+export declare const progressProps: {
     color: StringConstructor;
     inactive: BooleanConstructor;
     pivotText: StringConstructor;
@@ -18,8 +18,8 @@ declare const progressProps: {
         validator: (value: Numeric) => boolean;
     };
 };
-export declare type ProgressProps = ExtractPropTypes<typeof progressProps>;
-declare const _default: import("vue").DefineComponent<{
+export type ProgressProps = ExtractPropTypes<typeof progressProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     color: StringConstructor;
     inactive: BooleanConstructor;
     pivotText: StringConstructor;
@@ -36,7 +36,7 @@ declare const _default: import("vue").DefineComponent<{
         default: number;
         validator: (value: Numeric) => boolean;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<ExtractPropTypes<{
     color: StringConstructor;
     inactive: BooleanConstructor;
     pivotText: StringConstructor;
@@ -53,9 +53,9 @@ declare const _default: import("vue").DefineComponent<{
         default: number;
         validator: (value: Numeric) => boolean;
     };
-}>>, {
+}>> & Readonly<{}>, {
     inactive: boolean;
     showPivot: boolean;
     percentage: string | number;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

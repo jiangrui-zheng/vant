@@ -1,8 +1,12 @@
-export declare const Calendar: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const Calendar: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     show: BooleanConstructor;
     type: {
-        type: import("vue").PropType<import("./types").CalendarType>;
+        type: import("vue").PropType<T>;
         default: import("./types").CalendarType;
+    };
+    switchMode: {
+        type: import("vue").PropType<T>;
+        default: import("./types").CalendarSwitchMode;
     };
     title: StringConstructor;
     color: StringConstructor;
@@ -20,10 +24,10 @@ export declare const Calendar: import("../utils").WithInstall<import("vue").Defi
         default: null;
     };
     position: {
-        type: import("vue").PropType<import("..").PopupPosition>;
+        type: import("vue").PropType<T>;
         default: import("..").PopupPosition;
     };
-    teleport: import("vue").PropType<string | import("vue").RendererElement | null | undefined>;
+    teleport: import("vue").PropType<import("vue").TeleportProps["to"]>;
     showMark: {
         type: BooleanConstructor;
         default: true;
@@ -71,23 +75,25 @@ export declare const Calendar: import("../utils").WithInstall<import("vue").Defi
     minDate: {
         type: DateConstructor;
         validator: (val: unknown) => val is Date;
-        default: () => Date;
     };
     maxDate: {
         type: DateConstructor;
         validator: (val: unknown) => val is Date;
-        default: () => Date;
     };
     firstDayOfWeek: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
         validator: (val: number) => boolean;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("select" | "update:show" | "confirm" | "click-subtitle" | "unselect" | "month-show" | "over-range")[], "select" | "update:show" | "confirm" | "click-subtitle" | "unselect" | "month-show" | "over-range", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("select" | "update:show" | "confirm" | "clickDisabledDate" | "clickSubtitle" | "panelChange" | "unselect" | "monthShow" | "overRange")[], "select" | "update:show" | "confirm" | "clickDisabledDate" | "clickSubtitle" | "panelChange" | "unselect" | "monthShow" | "overRange", import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
     show: BooleanConstructor;
     type: {
-        type: import("vue").PropType<import("./types").CalendarType>;
+        type: import("vue").PropType<T>;
         default: import("./types").CalendarType;
+    };
+    switchMode: {
+        type: import("vue").PropType<T>;
+        default: import("./types").CalendarSwitchMode;
     };
     title: StringConstructor;
     color: StringConstructor;
@@ -105,10 +111,10 @@ export declare const Calendar: import("../utils").WithInstall<import("vue").Defi
         default: null;
     };
     position: {
-        type: import("vue").PropType<import("..").PopupPosition>;
+        type: import("vue").PropType<T>;
         default: import("..").PopupPosition;
     };
-    teleport: import("vue").PropType<string | import("vue").RendererElement | null | undefined>;
+    teleport: import("vue").PropType<import("vue").TeleportProps["to"]>;
     showMark: {
         type: BooleanConstructor;
         default: true;
@@ -156,39 +162,38 @@ export declare const Calendar: import("../utils").WithInstall<import("vue").Defi
     minDate: {
         type: DateConstructor;
         validator: (val: unknown) => val is Date;
-        default: () => Date;
     };
     maxDate: {
         type: DateConstructor;
         validator: (val: unknown) => val is Date;
-        default: () => Date;
     };
     firstDayOfWeek: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
         validator: (val: number) => boolean;
     };
-}>> & {
+}>> & Readonly<{
     onSelect?: ((...args: any[]) => any) | undefined;
     "onUpdate:show"?: ((...args: any[]) => any) | undefined;
     onConfirm?: ((...args: any[]) => any) | undefined;
-    "onClick-subtitle"?: ((...args: any[]) => any) | undefined;
+    onClickDisabledDate?: ((...args: any[]) => any) | undefined;
+    onClickSubtitle?: ((...args: any[]) => any) | undefined;
+    onPanelChange?: ((...args: any[]) => any) | undefined;
     onUnselect?: ((...args: any[]) => any) | undefined;
-    "onMonth-show"?: ((...args: any[]) => any) | undefined;
-    "onOver-range"?: ((...args: any[]) => any) | undefined;
-}, {
+    onMonthShow?: ((...args: any[]) => any) | undefined;
+    onOverRange?: ((...args: any[]) => any) | undefined;
+}>, {
     type: import("./types").CalendarType;
     position: import("..").PopupPosition;
     round: boolean;
+    show: boolean;
     readonly: boolean;
     safeAreaInsetBottom: boolean;
-    show: boolean;
     lazyRender: boolean;
     closeOnClickOverlay: boolean;
     closeOnPopstate: boolean;
     safeAreaInsetTop: boolean;
-    minDate: Date;
-    maxDate: Date;
+    switchMode: import("./types").CalendarSwitchMode;
     poppable: boolean;
     maxRange: string | number;
     showMark: boolean;
@@ -198,10 +203,11 @@ export declare const Calendar: import("../utils").WithInstall<import("vue").Defi
     showSubtitle: boolean;
     showRangePrompt: boolean;
     firstDayOfWeek: string | number;
-}>>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default Calendar;
+export { calendarProps } from './Calendar';
 export type { CalendarProps } from './Calendar';
-export type { CalendarType, CalendarDayItem, CalendarDayType, CalendarInstance, } from './types';
+export type { CalendarType, CalendarDayItem, CalendarDayType, CalendarInstance, CalendarThemeVars, } from './types';
 declare module 'vue' {
     interface GlobalComponents {
         VanCalendar: typeof Calendar;

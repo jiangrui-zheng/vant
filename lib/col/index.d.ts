@@ -1,6 +1,6 @@
-export declare const Col: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const Col: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     tag: {
-        type: import("vue").PropType<keyof HTMLElementTagNameMap>;
+        type: import("vue").PropType<T>;
         default: keyof HTMLElementTagNameMap;
     };
     span: {
@@ -8,9 +8,9 @@ export declare const Col: import("../utils").WithInstall<import("vue").DefineCom
         default: number;
     };
     offset: (NumberConstructor | StringConstructor)[];
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
     tag: {
-        type: import("vue").PropType<keyof HTMLElementTagNameMap>;
+        type: import("vue").PropType<T>;
         default: keyof HTMLElementTagNameMap;
     };
     span: {
@@ -18,11 +18,12 @@ export declare const Col: import("../utils").WithInstall<import("vue").DefineCom
         default: number;
     };
     offset: (NumberConstructor | StringConstructor)[];
-}>>, {
+}>> & Readonly<{}>, {
     span: string | number;
     tag: keyof HTMLElementTagNameMap;
-}>>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default Col;
+export { colProps } from './Col';
 export type { ColProps } from './Col';
 declare module 'vue' {
     interface GlobalComponents {

@@ -1,18 +1,18 @@
-export declare const NumberKeyboard: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const NumberKeyboard: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     show: BooleanConstructor;
     title: StringConstructor;
     theme: {
-        type: import("vue").PropType<import("./NumberKeyboard").NumberKeyboardTheme>;
+        type: import("vue").PropType<T>;
         default: import("./NumberKeyboard").NumberKeyboardTheme;
     };
     zIndex: (NumberConstructor | StringConstructor)[];
-    teleport: import("vue").PropType<string | import("vue").RendererElement | null | undefined>;
+    teleport: import("vue").PropType<import("vue").TeleportProps["to"]>;
     maxlength: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
     modelValue: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T>;
         default: string;
     };
     transition: {
@@ -43,21 +43,21 @@ export declare const NumberKeyboard: import("../utils").WithInstall<import("vue"
         type: import("vue").PropType<string | string[]>;
         default: string;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("input" | "blur" | "update:modelValue" | "close" | "hide" | "show" | "delete")[], "input" | "blur" | "update:modelValue" | "close" | "hide" | "show" | "delete", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("input" | "delete" | "hide" | "show" | "blur" | "update:modelValue" | "close")[], "input" | "delete" | "hide" | "show" | "blur" | "update:modelValue" | "close", import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
     show: BooleanConstructor;
     title: StringConstructor;
     theme: {
-        type: import("vue").PropType<import("./NumberKeyboard").NumberKeyboardTheme>;
+        type: import("vue").PropType<T>;
         default: import("./NumberKeyboard").NumberKeyboardTheme;
     };
     zIndex: (NumberConstructor | StringConstructor)[];
-    teleport: import("vue").PropType<string | import("vue").RendererElement | null | undefined>;
+    teleport: import("vue").PropType<import("vue").TeleportProps["to"]>;
     maxlength: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
     modelValue: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T>;
         default: string;
     };
     transition: {
@@ -88,30 +88,32 @@ export declare const NumberKeyboard: import("../utils").WithInstall<import("vue"
         type: import("vue").PropType<string | string[]>;
         default: string;
     };
-}>> & {
+}>> & Readonly<{
     onBlur?: ((...args: any[]) => any) | undefined;
     onInput?: ((...args: any[]) => any) | undefined;
-    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
     onClose?: ((...args: any[]) => any) | undefined;
+    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
     onDelete?: ((...args: any[]) => any) | undefined;
     onHide?: ((...args: any[]) => any) | undefined;
     onShow?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
+    theme: import("./NumberKeyboard").NumberKeyboardTheme;
+    show: boolean;
     maxlength: string | number;
     modelValue: string;
     safeAreaInsetBottom: boolean;
-    show: boolean;
     transition: boolean;
-    theme: import("./NumberKeyboard").NumberKeyboardTheme;
     blurOnClose: boolean;
     showDeleteKey: boolean;
     randomKeyOrder: boolean;
     closeButtonLoading: boolean;
     hideOnClickOutside: boolean;
     extraKey: string | string[];
-}>>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default NumberKeyboard;
+export { numberKeyboardProps } from './NumberKeyboard';
 export type { NumberKeyboardProps, NumberKeyboardTheme, } from './NumberKeyboard';
+export type { NumberKeyboardThemeVars } from './types';
 declare module 'vue' {
     interface GlobalComponents {
         VanNumberKeyboard: typeof NumberKeyboard;

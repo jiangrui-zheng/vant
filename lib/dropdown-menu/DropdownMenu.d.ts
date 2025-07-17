@@ -1,6 +1,6 @@
 import { type InjectionKey, type ExtractPropTypes } from 'vue';
 import type { DropdownMenuProvide, DropdownMenuDirection } from './types';
-declare const dropdownMenuProps: {
+export declare const dropdownMenuProps: {
     overlay: {
         type: BooleanConstructor;
         default: true;
@@ -11,10 +11,11 @@ declare const dropdownMenuProps: {
         default: number;
     };
     direction: {
-        type: import("vue").PropType<DropdownMenuDirection>;
+        type: import("vue").PropType<T>;
         default: DropdownMenuDirection;
     };
     activeColor: StringConstructor;
+    autoLocate: BooleanConstructor;
     closeOnClickOutside: {
         type: BooleanConstructor;
         default: true;
@@ -23,10 +24,11 @@ declare const dropdownMenuProps: {
         type: BooleanConstructor;
         default: true;
     };
+    swipeThreshold: (NumberConstructor | StringConstructor)[];
 };
-export declare type DropdownMenuProps = ExtractPropTypes<typeof dropdownMenuProps>;
+export type DropdownMenuProps = ExtractPropTypes<typeof dropdownMenuProps>;
 export declare const DROPDOWN_KEY: InjectionKey<DropdownMenuProvide>;
-declare const _default: import("vue").DefineComponent<{
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     overlay: {
         type: BooleanConstructor;
         default: true;
@@ -37,10 +39,11 @@ declare const _default: import("vue").DefineComponent<{
         default: number;
     };
     direction: {
-        type: import("vue").PropType<DropdownMenuDirection>;
+        type: import("vue").PropType<T>;
         default: DropdownMenuDirection;
     };
     activeColor: StringConstructor;
+    autoLocate: BooleanConstructor;
     closeOnClickOutside: {
         type: BooleanConstructor;
         default: true;
@@ -49,7 +52,8 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: true;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+    swipeThreshold: (NumberConstructor | StringConstructor)[];
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<ExtractPropTypes<{
     overlay: {
         type: BooleanConstructor;
         default: true;
@@ -60,10 +64,11 @@ declare const _default: import("vue").DefineComponent<{
         default: number;
     };
     direction: {
-        type: import("vue").PropType<DropdownMenuDirection>;
+        type: import("vue").PropType<T>;
         default: DropdownMenuDirection;
     };
     activeColor: StringConstructor;
+    autoLocate: BooleanConstructor;
     closeOnClickOutside: {
         type: BooleanConstructor;
         default: true;
@@ -72,11 +77,13 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: true;
     };
-}>>, {
+    swipeThreshold: (NumberConstructor | StringConstructor)[];
+}>> & Readonly<{}>, {
     overlay: boolean;
     duration: string | number;
     closeOnClickOverlay: boolean;
     direction: DropdownMenuDirection;
+    autoLocate: boolean;
     closeOnClickOutside: boolean;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

@@ -1,7 +1,7 @@
 import { type ExtractPropTypes } from 'vue';
-declare const colProps: {
+export declare const colProps: {
     tag: {
-        type: import("vue").PropType<keyof HTMLElementTagNameMap>;
+        type: import("vue").PropType<T>;
         default: keyof HTMLElementTagNameMap;
     };
     span: {
@@ -10,10 +10,10 @@ declare const colProps: {
     };
     offset: (NumberConstructor | StringConstructor)[];
 };
-export declare type ColProps = ExtractPropTypes<typeof colProps>;
-declare const _default: import("vue").DefineComponent<{
+export type ColProps = ExtractPropTypes<typeof colProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     tag: {
-        type: import("vue").PropType<keyof HTMLElementTagNameMap>;
+        type: import("vue").PropType<T>;
         default: keyof HTMLElementTagNameMap;
     };
     span: {
@@ -21,9 +21,9 @@ declare const _default: import("vue").DefineComponent<{
         default: number;
     };
     offset: (NumberConstructor | StringConstructor)[];
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<ExtractPropTypes<{
     tag: {
-        type: import("vue").PropType<keyof HTMLElementTagNameMap>;
+        type: import("vue").PropType<T>;
         default: keyof HTMLElementTagNameMap;
     };
     span: {
@@ -31,8 +31,8 @@ declare const _default: import("vue").DefineComponent<{
         default: number;
     };
     offset: (NumberConstructor | StringConstructor)[];
-}>>, {
+}>> & Readonly<{}>, {
     span: string | number;
     tag: keyof HTMLElementTagNameMap;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

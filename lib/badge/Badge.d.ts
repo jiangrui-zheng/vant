@@ -1,11 +1,11 @@
 import { type PropType, type ExtractPropTypes } from 'vue';
 import { type Numeric } from '../utils';
-export declare type BadgePosition = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
-declare const badgeProps: {
+export type BadgePosition = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
+export declare const badgeProps: {
     dot: BooleanConstructor;
     max: (NumberConstructor | StringConstructor)[];
     tag: {
-        type: PropType<keyof HTMLElementTagNameMap>;
+        type: PropType<T>;
         default: keyof HTMLElementTagNameMap;
     };
     color: StringConstructor;
@@ -16,16 +16,16 @@ declare const badgeProps: {
         default: true;
     };
     position: {
-        type: PropType<BadgePosition>;
+        type: PropType<T>;
         default: BadgePosition;
     };
 };
-export declare type BadgeProps = ExtractPropTypes<typeof badgeProps>;
-declare const _default: import("vue").DefineComponent<{
+export type BadgeProps = ExtractPropTypes<typeof badgeProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     dot: BooleanConstructor;
     max: (NumberConstructor | StringConstructor)[];
     tag: {
-        type: PropType<keyof HTMLElementTagNameMap>;
+        type: PropType<T>;
         default: keyof HTMLElementTagNameMap;
     };
     color: StringConstructor;
@@ -36,14 +36,14 @@ declare const _default: import("vue").DefineComponent<{
         default: true;
     };
     position: {
-        type: PropType<BadgePosition>;
+        type: PropType<T>;
         default: BadgePosition;
     };
-}, () => JSX.Element | undefined, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element | undefined, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<ExtractPropTypes<{
     dot: BooleanConstructor;
     max: (NumberConstructor | StringConstructor)[];
     tag: {
-        type: PropType<keyof HTMLElementTagNameMap>;
+        type: PropType<T>;
         default: keyof HTMLElementTagNameMap;
     };
     color: StringConstructor;
@@ -54,13 +54,13 @@ declare const _default: import("vue").DefineComponent<{
         default: true;
     };
     position: {
-        type: PropType<BadgePosition>;
+        type: PropType<T>;
         default: BadgePosition;
     };
-}>>, {
+}>> & Readonly<{}>, {
     dot: boolean;
     tag: keyof HTMLElementTagNameMap;
     showZero: boolean;
     position: BadgePosition;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

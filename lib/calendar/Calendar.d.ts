@@ -1,11 +1,15 @@
-import { type PropType, type ExtractPropTypes } from 'vue';
+import { type PropType, type TeleportProps, type ExtractPropTypes } from 'vue';
 import { PopupPosition } from '../popup';
-import type { CalendarType, CalendarDayItem } from './types';
-declare const calendarProps: {
+import type { CalendarType, CalendarSwitchMode, CalendarDayItem } from './types';
+export declare const calendarProps: {
     show: BooleanConstructor;
     type: {
-        type: PropType<CalendarType>;
+        type: PropType<T>;
         default: CalendarType;
+    };
+    switchMode: {
+        type: PropType<T>;
+        default: CalendarSwitchMode;
     };
     title: StringConstructor;
     color: StringConstructor;
@@ -23,10 +27,10 @@ declare const calendarProps: {
         default: null;
     };
     position: {
-        type: PropType<PopupPosition>;
+        type: PropType<T>;
         default: PopupPosition;
     };
-    teleport: PropType<string | import("vue").RendererElement | null | undefined>;
+    teleport: PropType<TeleportProps["to"]>;
     showMark: {
         type: BooleanConstructor;
         default: true;
@@ -74,12 +78,10 @@ declare const calendarProps: {
     minDate: {
         type: DateConstructor;
         validator: (val: unknown) => val is Date;
-        default: () => Date;
     };
     maxDate: {
         type: DateConstructor;
         validator: (val: unknown) => val is Date;
-        default: () => Date;
     };
     firstDayOfWeek: {
         type: (NumberConstructor | StringConstructor)[];
@@ -87,12 +89,16 @@ declare const calendarProps: {
         validator: (val: number) => boolean;
     };
 };
-export declare type CalendarProps = ExtractPropTypes<typeof calendarProps>;
-declare const _default: import("vue").DefineComponent<{
+export type CalendarProps = ExtractPropTypes<typeof calendarProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     show: BooleanConstructor;
     type: {
-        type: PropType<CalendarType>;
+        type: PropType<T>;
         default: CalendarType;
+    };
+    switchMode: {
+        type: PropType<T>;
+        default: CalendarSwitchMode;
     };
     title: StringConstructor;
     color: StringConstructor;
@@ -110,10 +116,10 @@ declare const _default: import("vue").DefineComponent<{
         default: null;
     };
     position: {
-        type: PropType<PopupPosition>;
+        type: PropType<T>;
         default: PopupPosition;
     };
-    teleport: PropType<string | import("vue").RendererElement | null | undefined>;
+    teleport: PropType<TeleportProps["to"]>;
     showMark: {
         type: BooleanConstructor;
         default: true;
@@ -161,23 +167,25 @@ declare const _default: import("vue").DefineComponent<{
     minDate: {
         type: DateConstructor;
         validator: (val: unknown) => val is Date;
-        default: () => Date;
     };
     maxDate: {
         type: DateConstructor;
         validator: (val: unknown) => val is Date;
-        default: () => Date;
     };
     firstDayOfWeek: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
         validator: (val: number) => boolean;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("select" | "update:show" | "confirm" | "click-subtitle" | "unselect" | "month-show" | "over-range")[], "select" | "update:show" | "confirm" | "click-subtitle" | "unselect" | "month-show" | "over-range", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("select" | "update:show" | "confirm" | "clickDisabledDate" | "clickSubtitle" | "panelChange" | "unselect" | "monthShow" | "overRange")[], "select" | "update:show" | "confirm" | "clickDisabledDate" | "clickSubtitle" | "panelChange" | "unselect" | "monthShow" | "overRange", import("vue").PublicProps, Readonly<ExtractPropTypes<{
     show: BooleanConstructor;
     type: {
-        type: PropType<CalendarType>;
+        type: PropType<T>;
         default: CalendarType;
+    };
+    switchMode: {
+        type: PropType<T>;
+        default: CalendarSwitchMode;
     };
     title: StringConstructor;
     color: StringConstructor;
@@ -195,10 +203,10 @@ declare const _default: import("vue").DefineComponent<{
         default: null;
     };
     position: {
-        type: PropType<PopupPosition>;
+        type: PropType<T>;
         default: PopupPosition;
     };
-    teleport: PropType<string | import("vue").RendererElement | null | undefined>;
+    teleport: PropType<TeleportProps["to"]>;
     showMark: {
         type: BooleanConstructor;
         default: true;
@@ -246,39 +254,38 @@ declare const _default: import("vue").DefineComponent<{
     minDate: {
         type: DateConstructor;
         validator: (val: unknown) => val is Date;
-        default: () => Date;
     };
     maxDate: {
         type: DateConstructor;
         validator: (val: unknown) => val is Date;
-        default: () => Date;
     };
     firstDayOfWeek: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
         validator: (val: number) => boolean;
     };
-}>> & {
+}>> & Readonly<{
     onSelect?: ((...args: any[]) => any) | undefined;
     "onUpdate:show"?: ((...args: any[]) => any) | undefined;
     onConfirm?: ((...args: any[]) => any) | undefined;
-    "onClick-subtitle"?: ((...args: any[]) => any) | undefined;
+    onClickDisabledDate?: ((...args: any[]) => any) | undefined;
+    onClickSubtitle?: ((...args: any[]) => any) | undefined;
+    onPanelChange?: ((...args: any[]) => any) | undefined;
     onUnselect?: ((...args: any[]) => any) | undefined;
-    "onMonth-show"?: ((...args: any[]) => any) | undefined;
-    "onOver-range"?: ((...args: any[]) => any) | undefined;
-}, {
+    onMonthShow?: ((...args: any[]) => any) | undefined;
+    onOverRange?: ((...args: any[]) => any) | undefined;
+}>, {
     type: CalendarType;
     position: PopupPosition;
     round: boolean;
+    show: boolean;
     readonly: boolean;
     safeAreaInsetBottom: boolean;
-    show: boolean;
     lazyRender: boolean;
     closeOnClickOverlay: boolean;
     closeOnPopstate: boolean;
     safeAreaInsetTop: boolean;
-    minDate: Date;
-    maxDate: Date;
+    switchMode: CalendarSwitchMode;
     poppable: boolean;
     maxRange: string | number;
     showMark: boolean;
@@ -288,5 +295,5 @@ declare const _default: import("vue").DefineComponent<{
     showSubtitle: boolean;
     showRangePrompt: boolean;
     firstDayOfWeek: string | number;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

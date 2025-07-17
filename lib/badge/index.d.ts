@@ -1,8 +1,8 @@
-export declare const Badge: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const Badge: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     dot: BooleanConstructor;
     max: (NumberConstructor | StringConstructor)[];
     tag: {
-        type: import("vue").PropType<keyof HTMLElementTagNameMap>;
+        type: import("vue").PropType<T>;
         default: keyof HTMLElementTagNameMap;
     };
     color: StringConstructor;
@@ -13,14 +13,14 @@ export declare const Badge: import("../utils").WithInstall<import("vue").DefineC
         default: true;
     };
     position: {
-        type: import("vue").PropType<import("./Badge").BadgePosition>;
+        type: import("vue").PropType<T>;
         default: import("./Badge").BadgePosition;
     };
-}, () => JSX.Element | undefined, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element | undefined, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
     dot: BooleanConstructor;
     max: (NumberConstructor | StringConstructor)[];
     tag: {
-        type: import("vue").PropType<keyof HTMLElementTagNameMap>;
+        type: import("vue").PropType<T>;
         default: keyof HTMLElementTagNameMap;
     };
     color: StringConstructor;
@@ -31,17 +31,19 @@ export declare const Badge: import("../utils").WithInstall<import("vue").DefineC
         default: true;
     };
     position: {
-        type: import("vue").PropType<import("./Badge").BadgePosition>;
+        type: import("vue").PropType<T>;
         default: import("./Badge").BadgePosition;
     };
-}>>, {
+}>> & Readonly<{}>, {
     dot: boolean;
     tag: keyof HTMLElementTagNameMap;
     showZero: boolean;
     position: import("./Badge").BadgePosition;
-}>>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default Badge;
+export { badgeProps } from './Badge';
 export type { BadgeProps, BadgePosition } from './Badge';
+export type { BadgeThemeVars } from './types';
 declare module 'vue' {
     interface GlobalComponents {
         VanBadge: typeof Badge;

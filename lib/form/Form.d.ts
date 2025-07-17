@@ -1,14 +1,16 @@
 import { type PropType, type ExtractPropTypes } from 'vue';
 import type { FieldTextAlign, FieldValidateTrigger } from '../field/types';
-declare const formProps: {
+export declare const formProps: {
     colon: BooleanConstructor;
     disabled: BooleanConstructor;
     readonly: BooleanConstructor;
+    required: PropType<boolean | "auto">;
     showError: BooleanConstructor;
     labelWidth: (NumberConstructor | StringConstructor)[];
     labelAlign: PropType<FieldTextAlign>;
     inputAlign: PropType<FieldTextAlign>;
     scrollToError: BooleanConstructor;
+    scrollToErrorPosition: PropType<ScrollLogicalPosition>;
     validateFirst: BooleanConstructor;
     submitOnEnter: {
         type: BooleanConstructor;
@@ -24,16 +26,18 @@ declare const formProps: {
         default: string;
     };
 };
-export declare type FormProps = ExtractPropTypes<typeof formProps>;
-declare const _default: import("vue").DefineComponent<{
+export type FormProps = ExtractPropTypes<typeof formProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     colon: BooleanConstructor;
     disabled: BooleanConstructor;
     readonly: BooleanConstructor;
+    required: PropType<boolean | "auto">;
     showError: BooleanConstructor;
     labelWidth: (NumberConstructor | StringConstructor)[];
     labelAlign: PropType<FieldTextAlign>;
     inputAlign: PropType<FieldTextAlign>;
     scrollToError: BooleanConstructor;
+    scrollToErrorPosition: PropType<ScrollLogicalPosition>;
     validateFirst: BooleanConstructor;
     submitOnEnter: {
         type: BooleanConstructor;
@@ -48,15 +52,17 @@ declare const _default: import("vue").DefineComponent<{
         type: PropType<FieldValidateTrigger | FieldValidateTrigger[]>;
         default: string;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("submit" | "failed")[], "submit" | "failed", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("submit" | "failed")[], "submit" | "failed", import("vue").PublicProps, Readonly<ExtractPropTypes<{
     colon: BooleanConstructor;
     disabled: BooleanConstructor;
     readonly: BooleanConstructor;
+    required: PropType<boolean | "auto">;
     showError: BooleanConstructor;
     labelWidth: (NumberConstructor | StringConstructor)[];
     labelAlign: PropType<FieldTextAlign>;
     inputAlign: PropType<FieldTextAlign>;
     scrollToError: BooleanConstructor;
+    scrollToErrorPosition: PropType<ScrollLogicalPosition>;
     validateFirst: BooleanConstructor;
     submitOnEnter: {
         type: BooleanConstructor;
@@ -71,10 +77,10 @@ declare const _default: import("vue").DefineComponent<{
         type: PropType<FieldValidateTrigger | FieldValidateTrigger[]>;
         default: string;
     };
-}>> & {
+}>> & Readonly<{
     onSubmit?: ((...args: any[]) => any) | undefined;
     onFailed?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     disabled: boolean;
     readonly: boolean;
     colon: boolean;
@@ -84,5 +90,5 @@ declare const _default: import("vue").DefineComponent<{
     submitOnEnter: boolean;
     showErrorMessage: boolean;
     validateTrigger: FieldValidateTrigger | FieldValidateTrigger[];
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;
