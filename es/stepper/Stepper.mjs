@@ -1,10 +1,8 @@
-import { withDirectives as _withDirectives, createVNode as _createVNode, mergeProps as _mergeProps, vShow as _vShow } from "vue";
-import { ref, watch, computed, nextTick, defineComponent } from "vue";
-import { isDef, addUnit, addNumber, truthProp, resetScroll, numericProp, formatNumber, getSizeStyle, preventDefault, createNamespace, callInterceptor, makeNumericProp, HAPTICS_FEEDBACK } from "../utils/index.mjs";
+import { ref, watch, computed, nextTick, defineComponent, vShow as _vShow, mergeProps as _mergeProps, createVNode as _createVNode, withDirectives as _withDirectives } from "vue";
+import { isDef, addUnit, addNumber, truthProp, resetScroll, numericProp, formatNumber, getSizeStyle, preventDefault, createNamespace, callInterceptor, makeNumericProp, HAPTICS_FEEDBACK, LONG_PRESS_START_TIME } from "../utils/index.mjs";
 import { useCustomFieldValue } from "@vant/use";
 const [name, bem] = createNamespace("stepper");
 const LONG_PRESS_INTERVAL = 200;
-const LONG_PRESS_START_TIME = 600;
 const isEqual = (value1, value2) => String(value1) === String(value2);
 const stepperProps = {
   min: makeNumericProp(1),
@@ -18,6 +16,7 @@ const stepperProps = {
   showMinus: truthProp,
   showInput: truthProp,
   longPress: truthProp,
+  autoFixed: truthProp,
   allowEmpty: Boolean,
   modelValue: numericProp,
   inputWidth: numericProp,
@@ -37,7 +36,7 @@ var stdin_default = defineComponent({
   setup(props, {
     emit
   }) {
-    const format = (value) => {
+    const format = (value, autoFixed = true) => {
       const {
         min,
         max,
@@ -50,7 +49,7 @@ var stdin_default = defineComponent({
       value = formatNumber(String(value), !props.integer);
       value = value === "" ? 0 : +value;
       value = Number.isNaN(value) ? +min : value;
-      value = Math.max(Math.min(+max, value), +min);
+      value = autoFixed ? Math.max(Math.min(+max, value), +min) : value;
       if (isDef(decimalLength)) {
         value = value.toFixed(+decimalLength);
       }
@@ -68,8 +67,8 @@ var stdin_default = defineComponent({
     let actionType;
     const inputRef = ref();
     const current = ref(getInitialValue());
-    const minusDisabled = computed(() => props.disabled || props.disableMinus || current.value <= +props.min);
-    const plusDisabled = computed(() => props.disabled || props.disablePlus || current.value >= +props.max);
+    const minusDisabled = computed(() => props.disabled || props.disableMinus || +current.value <= +props.min);
+    const plusDisabled = computed(() => props.disabled || props.disablePlus || +current.value >= +props.max);
     const inputStyle = computed(() => ({
       width: addUnit(props.inputWidth),
       height: addUnit(props.buttonSize)
@@ -134,7 +133,7 @@ var stdin_default = defineComponent({
     };
     const onBlur = (event) => {
       const input = event.target;
-      const value = format(input.value);
+      const value = format(input.value, props.autoFixed);
       input.value = String(value);
       current.value = value;
       nextTick(() => {
@@ -223,6 +222,7 @@ var stdin_default = defineComponent({
       "readonly": props.disableInput,
       "inputmode": props.integer ? "numeric" : "decimal",
       "placeholder": props.placeholder,
+      "autocomplete": "off",
       "aria-valuemax": props.max,
       "aria-valuemin": props.min,
       "aria-valuenow": current.value,
@@ -243,5 +243,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  stepperProps
 };

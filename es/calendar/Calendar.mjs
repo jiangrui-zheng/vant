@@ -1,18 +1,18 @@
-import { createVNode as _createVNode, mergeProps as _mergeProps } from "vue";
-import { ref, watch, computed, defineComponent } from "vue";
+import { ref, watch, computed, defineComponent, mergeProps as _mergeProps, createVNode as _createVNode } from "vue";
 import { pick, isDate, truthProp, numericProp, getScrollTop, makeStringProp, makeNumericProp } from "../utils/index.mjs";
-import { t, bem, name, getToday, cloneDate, cloneDates, getPrevDay, getNextDay, compareDay, calcDateNum, compareMonth, getDayByOffset } from "./utils.mjs";
+import { t, bem, name, getToday, cloneDate, cloneDates, getPrevDay, getNextDay, compareDay, calcDateNum, compareMonth, getDayByOffset, getMonthByOffset } from "./utils.mjs";
 import { raf, useRect, onMountedOrActivated } from "@vant/use";
 import { useRefs } from "../composables/use-refs.mjs";
 import { useExpose } from "../composables/use-expose.mjs";
 import { Popup } from "../popup/index.mjs";
 import { Button } from "../button/index.mjs";
-import { Toast } from "../toast/index.mjs";
+import { showToast } from "../toast/index.mjs";
 import CalendarMonth from "./CalendarMonth.mjs";
 import CalendarHeader from "./CalendarHeader.mjs";
 const calendarProps = {
   show: Boolean,
   type: makeStringProp("single"),
+  switchMode: makeStringProp("none"),
   title: String,
   color: String,
   round: truthProp,
@@ -40,16 +40,11 @@ const calendarProps = {
   safeAreaInsetBottom: truthProp,
   minDate: {
     type: Date,
-    validator: isDate,
-    default: getToday
+    validator: isDate
   },
   maxDate: {
     type: Date,
-    validator: isDate,
-    default: () => {
-      const now = getToday();
-      return new Date(now.getFullYear(), now.getMonth() + 6, now.getDate());
-    }
+    validator: isDate
   },
   firstDayOfWeek: {
     type: numericProp,
@@ -60,25 +55,36 @@ const calendarProps = {
 var stdin_default = defineComponent({
   name,
   props: calendarProps,
-  emits: ["select", "confirm", "unselect", "month-show", "over-range", "update:show", "click-subtitle"],
+  emits: ["select", "confirm", "unselect", "monthShow", "overRange", "update:show", "clickSubtitle", "clickDisabledDate", "panelChange"],
   setup(props, {
     emit,
     slots
   }) {
-    const limitDateRange = (date, minDate = props.minDate, maxDate = props.maxDate) => {
-      if (compareDay(date, minDate) === -1) {
-        return minDate;
+    const canSwitch = computed(() => props.switchMode !== "none");
+    const minDate = computed(() => {
+      if (!props.minDate && !canSwitch.value) {
+        return getToday();
       }
-      if (compareDay(date, maxDate) === 1) {
-        return maxDate;
+      return props.minDate;
+    });
+    const maxDate = computed(() => {
+      if (!props.maxDate && !canSwitch.value) {
+        return getMonthByOffset(getToday(), 6);
+      }
+      return props.maxDate;
+    });
+    const limitDateRange = (date, min = minDate.value, max = maxDate.value) => {
+      if (min && compareDay(date, min) === -1) {
+        return min;
+      }
+      if (max && compareDay(date, max) === 1) {
+        return max;
       }
       return date;
     };
     const getInitialDate = (defaultDate = props.defaultDate) => {
       const {
         type,
-        minDate,
-        maxDate,
         allowSameDay
       } = props;
       if (defaultDate === null) {
@@ -89,8 +95,13 @@ var stdin_default = defineComponent({
         if (!Array.isArray(defaultDate)) {
           defaultDate = [];
         }
-        const start = limitDateRange(defaultDate[0] || now, minDate, allowSameDay ? maxDate : getPrevDay(maxDate));
-        const end = limitDateRange(defaultDate[1] || now, allowSameDay ? minDate : getNextDay(minDate));
+        if (defaultDate.length === 1 && compareDay(defaultDate[0], now) === 1) {
+          defaultDate = [];
+        }
+        const min = minDate.value;
+        const max = maxDate.value;
+        const start = limitDateRange(defaultDate[0] || now, min, max ? allowSameDay ? max : getPrevDay(max) : void 0);
+        const end = limitDateRange(defaultDate[1] || (allowSameDay ? now : getNextDay(now)), min ? allowSameDay ? min : getNextDay(min) : void 0);
         return [start, end];
       }
       if (type === "multiple") {
@@ -104,20 +115,28 @@ var stdin_default = defineComponent({
       }
       return limitDateRange(defaultDate);
     };
+    const getInitialPanelDate = () => {
+      const date = Array.isArray(currentDate.value) ? currentDate.value[0] : currentDate.value;
+      return date ? date : limitDateRange(getToday());
+    };
     let bodyHeight;
     const bodyRef = ref();
-    const subtitle = ref("");
     const currentDate = ref(getInitialDate());
+    const currentPanelDate = ref(getInitialPanelDate());
+    const currentMonthRef = ref();
     const [monthRefs, setMonthRefs] = useRefs();
     const dayOffset = computed(() => props.firstDayOfWeek ? +props.firstDayOfWeek % 7 : 0);
     const months = computed(() => {
       const months2 = [];
-      const cursor = new Date(props.minDate);
+      if (!minDate.value || !maxDate.value) {
+        return months2;
+      }
+      const cursor = new Date(minDate.value);
       cursor.setDate(1);
       do {
         months2.push(new Date(cursor));
         cursor.setMonth(cursor.getMonth() + 1);
-      } while (compareMonth(cursor, props.maxDate) !== 1);
+      } while (compareMonth(cursor, maxDate.value) !== 1);
       return months2;
     });
     const buttonDisabled = computed(() => {
@@ -154,7 +173,7 @@ var stdin_default = defineComponent({
           }
           if (!monthRefs.value[i].showed) {
             monthRefs.value[i].showed = true;
-            emit("month-show", {
+            emit("monthShow", {
               date: month.date,
               title: month.getTitle()
             });
@@ -167,22 +186,26 @@ var stdin_default = defineComponent({
         monthRefs.value[index].setVisible(visible);
       });
       if (currentMonth) {
-        subtitle.value = currentMonth.getTitle();
+        currentMonthRef.value = currentMonth;
       }
     };
     const scrollToDate = (targetDate) => {
-      raf(() => {
-        months.value.some((month, index) => {
-          if (compareMonth(month, targetDate) === 0) {
-            if (bodyRef.value) {
-              monthRefs.value[index].scrollToDate(bodyRef.value, targetDate);
+      if (canSwitch.value) {
+        currentPanelDate.value = targetDate;
+      } else {
+        raf(() => {
+          months.value.some((month, index) => {
+            if (compareMonth(month, targetDate) === 0) {
+              if (bodyRef.value) {
+                monthRefs.value[index].scrollToDate(bodyRef.value, targetDate);
+              }
+              return true;
             }
-            return true;
-          }
-          return false;
+            return false;
+          });
+          onScroll();
         });
-        onScroll();
-      });
+      }
     };
     const scrollToCurrentDate = () => {
       if (props.poppable && !props.show) {
@@ -193,7 +216,7 @@ var stdin_default = defineComponent({
         if (isDate(targetDate)) {
           scrollToDate(targetDate);
         }
-      } else {
+      } else if (!canSwitch.value) {
         raf(onScroll);
       }
     };
@@ -201,9 +224,11 @@ var stdin_default = defineComponent({
       if (props.poppable && !props.show) {
         return;
       }
-      raf(() => {
-        bodyHeight = Math.floor(useRect(bodyRef).height);
-      });
+      if (!canSwitch.value) {
+        raf(() => {
+          bodyHeight = Math.floor(useRect(bodyRef).height);
+        });
+      }
       scrollToCurrentDate();
     };
     const reset = (date = getInitialDate()) => {
@@ -216,14 +241,20 @@ var stdin_default = defineComponent({
         rangePrompt,
         showRangePrompt
       } = props;
-      if (maxRange && calcDateNum(date) > maxRange) {
+      if (maxRange && calcDateNum(date) > +maxRange) {
         if (showRangePrompt) {
-          Toast(rangePrompt || t("rangePrompt", maxRange));
+          showToast(rangePrompt || t("rangePrompt", maxRange));
         }
-        emit("over-range");
+        emit("overRange");
         return false;
       }
       return true;
+    };
+    const onPanelChange = (date) => {
+      currentPanelDate.value = date;
+      emit("panelChange", {
+        date
+      });
     };
     const onConfirm = () => {
       var _a;
@@ -303,8 +334,8 @@ var stdin_default = defineComponent({
         if (selectedIndex !== -1) {
           const [unselectedDate] = dates.splice(selectedIndex, 1);
           emit("unselect", cloneDate(unselectedDate));
-        } else if (props.maxRange && dates.length >= props.maxRange) {
-          Toast(props.rangePrompt || t("rangePrompt", props.maxRange));
+        } else if (props.maxRange && dates.length >= +props.maxRange) {
+          showToast(props.rangePrompt || t("rangePrompt", props.maxRange));
         } else {
           select([...dates, date]);
         }
@@ -316,14 +347,18 @@ var stdin_default = defineComponent({
     const renderMonth = (date, index) => {
       const showMonthTitle = index !== 0 || !props.showSubtitle;
       return _createVNode(CalendarMonth, _mergeProps({
-        "ref": setMonthRefs(index),
+        "ref": canSwitch.value ? currentMonthRef : setMonthRefs(index),
         "date": date,
         "currentDate": currentDate.value,
         "showMonthTitle": showMonthTitle,
-        "firstDayOfWeek": dayOffset.value
-      }, pick(props, ["type", "color", "minDate", "maxDate", "showMark", "formatter", "rowHeight", "lazyRender", "showSubtitle", "allowSameDay"]), {
-        "onClick": onClickDay
-      }), pick(slots, ["top-info", "bottom-info"]));
+        "firstDayOfWeek": dayOffset.value,
+        "lazyRender": canSwitch.value ? false : props.lazyRender,
+        "maxDate": maxDate.value,
+        "minDate": minDate.value
+      }, pick(props, ["type", "color", "showMark", "formatter", "rowHeight", "showSubtitle", "allowSameDay"]), {
+        "onClick": onClickDay,
+        "onClickDisabledDate": (item) => emit("clickDisabledDate", item)
+      }), pick(slots, ["top-info", "bottom-info", "month-title", "text"]));
     };
     const renderFooterButton = () => {
       if (slots.footer) {
@@ -336,7 +371,7 @@ var stdin_default = defineComponent({
         return _createVNode(Button, {
           "round": true,
           "block": true,
-          "type": "danger",
+          "type": "primary",
           "color": props.color,
           "class": bem("confirm"),
           "disabled": disabled,
@@ -354,25 +389,32 @@ var stdin_default = defineComponent({
         "van-safe-area-bottom": props.safeAreaInsetBottom
       }]
     }, [renderFooterButton()]);
-    const renderCalendar = () => _createVNode("div", {
-      "class": bem()
-    }, [_createVNode(CalendarHeader, {
-      "title": props.title,
-      "subtitle": subtitle.value,
-      "showTitle": props.showTitle,
-      "showSubtitle": props.showSubtitle,
-      "firstDayOfWeek": dayOffset.value,
-      "onClick-subtitle": (event) => emit("click-subtitle", event)
-    }, pick(slots, ["title", "subtitle"])), _createVNode("div", {
-      "ref": bodyRef,
-      "class": bem("body"),
-      "onScroll": onScroll
-    }, [months.value.map(renderMonth)]), renderFooter()]);
+    const renderCalendar = () => {
+      var _a, _b;
+      return _createVNode("div", {
+        "class": bem()
+      }, [_createVNode(CalendarHeader, {
+        "date": (_a = currentMonthRef.value) == null ? void 0 : _a.date,
+        "maxDate": maxDate.value,
+        "minDate": minDate.value,
+        "title": props.title,
+        "subtitle": (_b = currentMonthRef.value) == null ? void 0 : _b.getTitle(),
+        "showTitle": props.showTitle,
+        "showSubtitle": props.showSubtitle,
+        "switchMode": props.switchMode,
+        "firstDayOfWeek": dayOffset.value,
+        "onClickSubtitle": (event) => emit("clickSubtitle", event),
+        "onPanelChange": onPanelChange
+      }, pick(slots, ["title", "subtitle", "prev-month", "prev-year", "next-month", "next-year"])), _createVNode("div", {
+        "ref": bodyRef,
+        "class": bem("body"),
+        "onScroll": canSwitch.value ? void 0 : onScroll
+      }, [canSwitch.value ? renderMonth(currentPanelDate.value, 0) : months.value.map(renderMonth)]), renderFooter()]);
+    };
     watch(() => props.show, init);
-    watch(() => [props.type, props.minDate, props.maxDate], () => reset(getInitialDate(currentDate.value)));
-    watch(() => props.defaultDate, (value = null) => {
-      currentDate.value = value;
-      scrollToCurrentDate();
+    watch(() => [props.type, props.minDate, props.maxDate, props.switchMode], () => reset(getInitialDate(currentDate.value)));
+    watch(() => props.defaultDate, (value) => {
+      reset(value);
     });
     useExpose({
       reset,
@@ -402,5 +444,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
+  calendarProps,
   stdin_default as default
 };

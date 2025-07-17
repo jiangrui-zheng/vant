@@ -1,15 +1,15 @@
 import { type PropType, type InjectionKey, type ExtractPropTypes, type ComponentPublicInstance } from 'vue';
 import { type Numeric } from '../utils';
-export declare type CollapseProvide = {
+export type CollapseProvide = {
     toggle: (name: Numeric, expanded: boolean) => void;
     isExpanded: (name: Numeric) => boolean;
 };
-export declare type CollapseToggleAllOptions = boolean | {
+export type CollapseToggleAllOptions = boolean | {
     expanded?: boolean;
     skipDisabled?: boolean;
 };
 export declare const COLLAPSE_KEY: InjectionKey<CollapseProvide>;
-declare const collapseProps: {
+export declare const collapseProps: {
     border: {
         type: BooleanConstructor;
         default: true;
@@ -20,11 +20,11 @@ declare const collapseProps: {
         default: string;
     };
 };
-export declare type CollapseProps = ExtractPropTypes<typeof collapseProps>;
-export declare type CollapseInstance = ComponentPublicInstance<{
+export type CollapseProps = ExtractPropTypes<typeof collapseProps>;
+export type CollapseInstance = ComponentPublicInstance<{
     toggleAll: (options?: boolean | CollapseToggleAllOptions) => void;
 }>;
-declare const _default: import("vue").DefineComponent<{
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     border: {
         type: BooleanConstructor;
         default: true;
@@ -34,7 +34,7 @@ declare const _default: import("vue").DefineComponent<{
         type: PropType<Numeric | Numeric[]>;
         default: string;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", import("vue").PublicProps, Readonly<ExtractPropTypes<{
     border: {
         type: BooleanConstructor;
         default: true;
@@ -44,12 +44,12 @@ declare const _default: import("vue").DefineComponent<{
         type: PropType<Numeric | Numeric[]>;
         default: string;
     };
-}>> & {
+}>> & Readonly<{
     onChange?: ((...args: any[]) => any) | undefined;
     "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     border: boolean;
     modelValue: Numeric | Numeric[];
     accordion: boolean;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

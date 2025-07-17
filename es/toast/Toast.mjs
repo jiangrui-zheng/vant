@@ -1,12 +1,11 @@
-import { mergeProps as _mergeProps, createVNode as _createVNode } from "vue";
-import { watch, onMounted, onUnmounted, defineComponent } from "vue";
+import { watch, onMounted, onUnmounted, defineComponent, createVNode as _createVNode, mergeProps as _mergeProps } from "vue";
 import { pick, isDef, unknownProp, numericProp, makeStringProp, makeNumberProp, createNamespace } from "../utils/index.mjs";
 import { lockClick } from "./lock-click.mjs";
 import { Icon } from "../icon/index.mjs";
 import { Popup } from "../popup/index.mjs";
 import { Loading } from "../loading/index.mjs";
 const [name, bem] = createNamespace("toast");
-const popupInheritProps = ["show", "overlay", "teleport", "transition", "overlayClass", "overlayStyle", "closeOnClickOverlay"];
+const popupInheritProps = ["show", "overlay", "teleport", "transition", "overlayClass", "overlayStyle", "closeOnClickOverlay", "zIndex"];
 const toastProps = {
   icon: String,
   show: Boolean,
@@ -17,6 +16,7 @@ const toastProps = {
   duration: makeNumberProp(2e3),
   position: makeStringProp("middle"),
   teleport: [String, Object],
+  wordBreak: String,
   className: unknownProp,
   iconPrefix: String,
   transition: makeStringProp("van-fade"),
@@ -25,14 +25,16 @@ const toastProps = {
   overlayClass: unknownProp,
   overlayStyle: Object,
   closeOnClick: Boolean,
-  closeOnClickOverlay: Boolean
+  closeOnClickOverlay: Boolean,
+  zIndex: numericProp
 };
 var stdin_default = defineComponent({
   name,
   props: toastProps,
   emits: ["update:show"],
   setup(props, {
-    emit
+    emit,
+    slots
   }) {
     let timer;
     let clickable = false;
@@ -80,6 +82,11 @@ var stdin_default = defineComponent({
         type,
         message
       } = props;
+      if (slots.message) {
+        return _createVNode("div", {
+          "class": bem("text")
+        }, [slots.message()]);
+      }
       if (isDef(message) && message !== "") {
         return type === "html" ? _createVNode("div", {
           "key": 0,
@@ -102,7 +109,7 @@ var stdin_default = defineComponent({
     onMounted(toggleClickable);
     onUnmounted(toggleClickable);
     return () => _createVNode(Popup, _mergeProps({
-      "class": [bem([props.position, {
+      "class": [bem([props.position, props.wordBreak === "normal" ? "break-normal" : props.wordBreak, {
         [props.type]: !props.icon
       }]), props.className],
       "lockScroll": false,
@@ -115,5 +122,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  toastProps
 };

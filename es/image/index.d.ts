@@ -1,8 +1,8 @@
-export declare const Image: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const Image: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     src: StringConstructor;
     alt: StringConstructor;
-    fit: import("vue").PropType<import("./Image").ImageFit>;
-    position: import("vue").PropType<string>;
+    fit: import("vue").PropType<import("./types").ImageFit>;
+    position: import("vue").PropType<import("./types").ImagePosition>;
     round: BooleanConstructor;
     block: BooleanConstructor;
     width: (NumberConstructor | StringConstructor)[];
@@ -15,7 +15,7 @@ export declare const Image: import("../utils").WithInstall<import("vue").DefineC
         default: true;
     };
     errorIcon: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T>;
         default: string;
     };
     iconPrefix: StringConstructor;
@@ -24,14 +24,16 @@ export declare const Image: import("../utils").WithInstall<import("vue").DefineC
         default: true;
     };
     loadingIcon: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T>;
         default: string;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("error" | "load")[], "error" | "load", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+    crossorigin: import("vue").PropType<import("vue").ImgHTMLAttributes["crossorigin"]>;
+    referrerpolicy: import("vue").PropType<import("vue").ImgHTMLAttributes["referrerpolicy"]>;
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("error" | "load")[], "error" | "load", import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
     src: StringConstructor;
     alt: StringConstructor;
-    fit: import("vue").PropType<import("./Image").ImageFit>;
-    position: import("vue").PropType<string>;
+    fit: import("vue").PropType<import("./types").ImageFit>;
+    position: import("vue").PropType<import("./types").ImagePosition>;
     round: BooleanConstructor;
     block: BooleanConstructor;
     width: (NumberConstructor | StringConstructor)[];
@@ -44,7 +46,7 @@ export declare const Image: import("../utils").WithInstall<import("vue").DefineC
         default: true;
     };
     errorIcon: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T>;
         default: string;
     };
     iconPrefix: StringConstructor;
@@ -53,23 +55,27 @@ export declare const Image: import("../utils").WithInstall<import("vue").DefineC
         default: true;
     };
     loadingIcon: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T>;
         default: string;
     };
-}>> & {
+    crossorigin: import("vue").PropType<import("vue").ImgHTMLAttributes["crossorigin"]>;
+    referrerpolicy: import("vue").PropType<import("vue").ImgHTMLAttributes["referrerpolicy"]>;
+}>> & Readonly<{
     onLoad?: ((...args: any[]) => any) | undefined;
     onError?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     round: boolean;
-    showError: boolean;
     block: boolean;
+    showError: boolean;
     lazyLoad: boolean;
     errorIcon: string;
     showLoading: boolean;
     loadingIcon: string;
-}>>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default Image;
-export type { ImageFit, ImageProps } from './Image';
+export { imageProps } from './Image';
+export type { ImageProps } from './Image';
+export type { ImageFit, ImagePosition, ImageThemeVars } from './types';
 declare module 'vue' {
     interface GlobalComponents {
         VanImage: typeof Image;

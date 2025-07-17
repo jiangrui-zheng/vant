@@ -1,6 +1,6 @@
 import { useRect, useWindowSize } from "@vant/use";
 import { unref } from "vue";
-import { isIOS as checkIsIOS } from "./validate.mjs";
+import { isIOS as checkIsIOS } from "./basic.mjs";
 function getScrollTop(el) {
   const top = "scrollTop" in el ? el.scrollTop : el.pageYOffset;
   return Math.max(top, 0);
@@ -52,7 +52,24 @@ function isHidden(elementRef) {
   return hidden || parentHidden;
 }
 const { width: windowWidth, height: windowHeight } = useWindowSize();
+function isContainingBlock(el) {
+  const css = window.getComputedStyle(el);
+  return css.transform !== "none" || css.perspective !== "none" || ["transform", "perspective", "filter"].some(
+    (value) => (css.willChange || "").includes(value)
+  );
+}
+function getContainingBlock(el) {
+  let node = el.parentElement;
+  while (node) {
+    if (node && node.tagName !== "HTML" && node.tagName !== "BODY" && isContainingBlock(node)) {
+      return node;
+    }
+    node = node.parentElement;
+  }
+  return null;
+}
 export {
+  getContainingBlock,
   getElementTop,
   getRootScrollTop,
   getScrollTop,

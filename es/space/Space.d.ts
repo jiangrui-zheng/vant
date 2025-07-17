@@ -1,48 +1,48 @@
 import { ExtractPropTypes, PropType } from 'vue';
-export declare type SpaceSize = number | string;
-export declare type SpaceAlign = 'start' | 'end' | 'center' | 'baseline';
-declare const spaceProps: {
+export type SpaceSize = number | string;
+export type SpaceAlign = 'start' | 'end' | 'center' | 'baseline';
+export declare const spaceProps: {
     align: PropType<SpaceAlign>;
     direction: {
         type: PropType<"vertical" | "horizontal">;
         default: string;
     };
     size: {
-        type: PropType<string | number | [SpaceSize, SpaceSize]>;
+        type: PropType<number | string | [SpaceSize, SpaceSize]>;
         default: number;
     };
     wrap: BooleanConstructor;
     fill: BooleanConstructor;
 };
-export declare type SpaceProps = ExtractPropTypes<typeof spaceProps>;
-declare const _default: import("vue").DefineComponent<{
+export type SpaceProps = ExtractPropTypes<typeof spaceProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     align: PropType<SpaceAlign>;
     direction: {
         type: PropType<"vertical" | "horizontal">;
         default: string;
     };
     size: {
-        type: PropType<string | number | [SpaceSize, SpaceSize]>;
+        type: PropType<number | string | [SpaceSize, SpaceSize]>;
         default: number;
     };
     wrap: BooleanConstructor;
     fill: BooleanConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<ExtractPropTypes<{
     align: PropType<SpaceAlign>;
     direction: {
         type: PropType<"vertical" | "horizontal">;
         default: string;
     };
     size: {
-        type: PropType<string | number | [SpaceSize, SpaceSize]>;
+        type: PropType<number | string | [SpaceSize, SpaceSize]>;
         default: number;
     };
     wrap: BooleanConstructor;
     fill: BooleanConstructor;
-}>>, {
+}>> & Readonly<{}>, {
     fill: boolean;
     size: string | number | [SpaceSize, SpaceSize];
     wrap: boolean;
-    direction: "vertical" | "horizontal";
-}>;
+    direction: "horizontal" | "vertical";
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

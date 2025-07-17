@@ -1,6 +1,6 @@
 import { type ExtractPropTypes } from 'vue';
 import type { NotifyType, NotifyPosition } from './types';
-declare const notifyProps: {
+export declare const notifyProps: {
     show: BooleanConstructor;
     zIndex: (NumberConstructor | StringConstructor)[];
     overlay: {
@@ -8,7 +8,7 @@ declare const notifyProps: {
         default: true;
     };
     duration: (NumberConstructor | StringConstructor)[];
-    teleport: import("vue").PropType<string | import("vue").RendererElement | null | undefined>;
+    teleport: import("vue").PropType<import("vue").TeleportProps["to"]>;
     lockScroll: {
         type: BooleanConstructor;
         default: true;
@@ -27,21 +27,21 @@ declare const notifyProps: {
     };
 } & {
     type: {
-        type: import("vue").PropType<NotifyType>;
+        type: import("vue").PropType<T>;
         default: NotifyType;
     };
     color: StringConstructor;
     message: (NumberConstructor | StringConstructor)[];
     position: {
-        type: import("vue").PropType<NotifyPosition>;
+        type: import("vue").PropType<T>;
         default: NotifyPosition;
     };
     className: import("vue").PropType<unknown>;
     background: StringConstructor;
     lockScroll: BooleanConstructor;
 };
-export declare type NotifyProps = ExtractPropTypes<typeof notifyProps>;
-declare const _default: import("vue").DefineComponent<{
+export type NotifyProps = ExtractPropTypes<typeof notifyProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     show: BooleanConstructor;
     zIndex: (NumberConstructor | StringConstructor)[];
     overlay: {
@@ -49,7 +49,7 @@ declare const _default: import("vue").DefineComponent<{
         default: true;
     };
     duration: (NumberConstructor | StringConstructor)[];
-    teleport: import("vue").PropType<string | import("vue").RendererElement | null | undefined>;
+    teleport: import("vue").PropType<import("vue").TeleportProps["to"]>;
     lockScroll: {
         type: BooleanConstructor;
         default: true;
@@ -68,19 +68,19 @@ declare const _default: import("vue").DefineComponent<{
     };
 } & {
     type: {
-        type: import("vue").PropType<NotifyType>;
+        type: import("vue").PropType<T>;
         default: NotifyType;
     };
     color: StringConstructor;
     message: (NumberConstructor | StringConstructor)[];
     position: {
-        type: import("vue").PropType<NotifyPosition>;
+        type: import("vue").PropType<T>;
         default: NotifyPosition;
     };
     className: import("vue").PropType<unknown>;
     background: StringConstructor;
     lockScroll: BooleanConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:show"[], "update:show", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:show"[], "update:show", import("vue").PublicProps, Readonly<ExtractPropTypes<{
     show: BooleanConstructor;
     zIndex: (NumberConstructor | StringConstructor)[];
     overlay: {
@@ -88,7 +88,7 @@ declare const _default: import("vue").DefineComponent<{
         default: true;
     };
     duration: (NumberConstructor | StringConstructor)[];
-    teleport: import("vue").PropType<string | import("vue").RendererElement | null | undefined>;
+    teleport: import("vue").PropType<import("vue").TeleportProps["to"]>;
     lockScroll: {
         type: BooleanConstructor;
         default: true;
@@ -107,21 +107,21 @@ declare const _default: import("vue").DefineComponent<{
     };
 } & {
     type: {
-        type: import("vue").PropType<NotifyType>;
+        type: import("vue").PropType<T>;
         default: NotifyType;
     };
     color: StringConstructor;
     message: (NumberConstructor | StringConstructor)[];
     position: {
-        type: import("vue").PropType<NotifyPosition>;
+        type: import("vue").PropType<T>;
         default: NotifyPosition;
     };
     className: import("vue").PropType<unknown>;
     background: StringConstructor;
     lockScroll: BooleanConstructor;
-}>> & {
+}>> & Readonly<{
     "onUpdate:show"?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     type: NotifyType;
     position: NotifyPosition;
     overlay: boolean;
@@ -130,5 +130,5 @@ declare const _default: import("vue").DefineComponent<{
     lazyRender: boolean;
     transitionAppear: boolean;
     closeOnClickOverlay: boolean;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

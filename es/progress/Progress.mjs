@@ -1,5 +1,4 @@
-import { createVNode as _createVNode } from "vue";
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, createVNode as _createVNode } from "vue";
 import { addUnit, truthProp, numericProp, createNamespace } from "../utils/index.mjs";
 const [name, bem] = createNamespace("progress");
 const progressProps = {
@@ -14,7 +13,7 @@ const progressProps = {
   percentage: {
     type: numericProp,
     default: 0,
-    validator: (value) => value >= 0 && value <= 100
+    validator: (value) => +value >= 0 && +value <= 100
   }
 };
 var stdin_default = defineComponent({
@@ -72,5 +71,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  progressProps
 };

@@ -2,8 +2,9 @@ var stdin_default = {
   name: "\u304A\u540D\u524D",
   tel: "\u96FB\u8A71\u756A\u53F7",
   save: "\u30BB\u30FC\u30D6",
-  confirm: "\u78BA\u8A8D",
+  clear: "\u30AF\u30EA\u30A2",
   cancel: "\u30AD\u30E3\u30F3\u30BB\u30EB",
+  confirm: "\u78BA\u8A8D",
   delete: "\u524A\u9664",
   loading: "\u8AAD\u307F\u8FBC\u307F\u4E2D...",
   noCoupon: "\u30AF\u30FC\u30DD\u30F3\u306F\u3042\u308A\u307E\u305B\u3093",
@@ -50,10 +51,8 @@ var stdin_default = {
   },
   vanAddressEdit: {
     area: "\u5730\u57DF",
-    postal: "\u90F5\u4FBF\u756A\u53F7",
     areaEmpty: "\u5730\u57DF\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044",
     addressEmpty: "\u8A73\u3057\u3044\u4F4F\u6240\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044",
-    postalEmpty: "\u9593\u9055\u3063\u305F\u90F5\u4FBF\u756A\u53F7",
     addressDetail: "\u8A73\u3057\u3044\u4F4F\u6240",
     defaultAddress: "\u30C7\u30D5\u30A9\u30EB\u30C8\u306E\u4F4F\u6240\u306B\u8A2D\u5B9A"
   },

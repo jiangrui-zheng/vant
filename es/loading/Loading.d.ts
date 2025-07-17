@@ -1,9 +1,9 @@
 import { type ExtractPropTypes } from 'vue';
-export declare type LoadingType = 'circular' | 'spinner';
-declare const loadingProps: {
+export type LoadingType = 'circular' | 'spinner';
+export declare const loadingProps: {
     size: (NumberConstructor | StringConstructor)[];
     type: {
-        type: import("vue").PropType<LoadingType>;
+        type: import("vue").PropType<T>;
         default: LoadingType;
     };
     color: StringConstructor;
@@ -11,29 +11,29 @@ declare const loadingProps: {
     textSize: (NumberConstructor | StringConstructor)[];
     textColor: StringConstructor;
 };
-export declare type LoadingProps = ExtractPropTypes<typeof loadingProps>;
-declare const _default: import("vue").DefineComponent<{
+export type LoadingProps = ExtractPropTypes<typeof loadingProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     size: (NumberConstructor | StringConstructor)[];
     type: {
-        type: import("vue").PropType<LoadingType>;
+        type: import("vue").PropType<T>;
         default: LoadingType;
     };
     color: StringConstructor;
     vertical: BooleanConstructor;
     textSize: (NumberConstructor | StringConstructor)[];
     textColor: StringConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<ExtractPropTypes<{
     size: (NumberConstructor | StringConstructor)[];
     type: {
-        type: import("vue").PropType<LoadingType>;
+        type: import("vue").PropType<T>;
         default: LoadingType;
     };
     color: StringConstructor;
     vertical: BooleanConstructor;
     textSize: (NumberConstructor | StringConstructor)[];
     textColor: StringConstructor;
-}>>, {
+}>> & Readonly<{}>, {
     type: LoadingType;
     vertical: boolean;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

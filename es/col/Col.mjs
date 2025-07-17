@@ -1,6 +1,5 @@
-import { createVNode as _createVNode } from "vue";
-import { computed, defineComponent } from "vue";
-import { numericProp, createNamespace, makeNumericProp, makeStringProp } from "../utils/index.mjs";
+import { computed, defineComponent, createVNode as _createVNode } from "vue";
+import { numericProp, createNamespace, makeNumericProp, makeStringProp, extend } from "../utils/index.mjs";
 import { useParent } from "@vant/use";
 import { ROW_KEY } from "../row/Row.mjs";
 const [name, bem] = createNamespace("col");
@@ -24,18 +23,26 @@ var stdin_default = defineComponent({
         return;
       }
       const {
-        spaces
+        spaces,
+        verticalSpaces
       } = parent;
+      let styles = {};
       if (spaces && spaces.value && spaces.value[index.value]) {
         const {
           left,
           right
         } = spaces.value[index.value];
-        return {
+        styles = {
           paddingLeft: left ? `${left}px` : null,
           paddingRight: right ? `${right}px` : null
         };
       }
+      const {
+        bottom
+      } = verticalSpaces.value[index.value] || {};
+      return extend(styles, {
+        marginBottom: bottom ? `${bottom}px` : null
+      });
     });
     return () => {
       const {
@@ -59,5 +66,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
+  colProps,
   stdin_default as default
 };

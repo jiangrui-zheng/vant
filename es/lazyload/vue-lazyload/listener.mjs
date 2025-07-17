@@ -35,6 +35,10 @@ class ReactiveListener {
     this.initState();
     this.render("loading", false);
   }
+  /*
+   * init listener state
+   * @return
+   */
   initState() {
     if ("dataset" in this.el) {
       this.el.dataset.src = this.src;
@@ -48,9 +52,20 @@ class ReactiveListener {
       rendered: false
     };
   }
+  /*
+   * record performance
+   * @return
+   */
   record(event) {
     this.performanceData[event] = Date.now();
   }
+  /*
+   * update image listener data
+   * @param  {String} image uri
+   * @param  {String} loading image uri
+   * @param  {String} error image uri
+   * @return
+   */
   update({ src, loading, error }) {
     const oldSrc = this.src;
     this.src = src;
@@ -62,15 +77,27 @@ class ReactiveListener {
       this.initState();
     }
   }
+  /*
+   *  check el is in view
+   * @return {Boolean} el is in view
+   */
   checkInView() {
     const rect = useRect(this.el);
     return rect.top < window.innerHeight * this.options.preLoad && rect.bottom > this.options.preLoadTop && rect.left < window.innerWidth * this.options.preLoad && rect.right > 0;
   }
+  /*
+   * listener filter
+   */
   filter() {
     Object.keys(this.options.filter).forEach((key) => {
       this.options.filter[key](this, this.options);
     });
   }
+  /*
+   * render loading first
+   * @params cb:Function
+   * @return
+   */
   renderLoading(cb) {
     this.state.loading = true;
     loadImageAsync(
@@ -93,6 +120,10 @@ class ReactiveListener {
       }
     );
   }
+  /*
+   * try load image and  render it
+   * @return
+   */
   load(onFinish = noop) {
     if (this.attempt > this.options.attempt - 1 && this.state.error) {
       if (process.env.NODE_ENV !== "production" && !this.options.silent) {
@@ -103,8 +134,7 @@ class ReactiveListener {
       onFinish();
       return;
     }
-    if (this.state.rendered && this.state.loaded)
-      return;
+    if (this.state.rendered && this.state.loaded) return;
     if (this.imageCache.has(this.src)) {
       this.state.loaded = true;
       this.render("loaded", true);
@@ -141,9 +171,19 @@ class ReactiveListener {
       );
     });
   }
+  /*
+   * render image
+   * @param  {String} state to render // ['loading', 'src', 'error']
+   * @param  {String} is form cache
+   * @return
+   */
   render(state, cache) {
     this.elRenderer(this, state, cache);
   }
+  /*
+   * output performance data
+   * @return {Object} performance data
+   */
   performance() {
     let state = "loading";
     let time = 0;
@@ -151,14 +191,17 @@ class ReactiveListener {
       state = "loaded";
       time = (this.performanceData.loadEnd - this.performanceData.loadStart) / 1e3;
     }
-    if (this.state.error)
-      state = "error";
+    if (this.state.error) state = "error";
     return {
       src: this.src,
       state,
       time
     };
   }
+  /*
+   * $destroy
+   * @return
+   */
   $destroy() {
     this.el = null;
     this.src = null;

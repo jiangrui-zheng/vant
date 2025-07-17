@@ -1,5 +1,4 @@
-import { Fragment as _Fragment, createVNode as _createVNode } from "vue";
-import { ref, defineComponent } from "vue";
+import { ref, defineComponent, createVNode as _createVNode, Fragment as _Fragment } from "vue";
 import { createNamespace, numericProp } from "../utils/index.mjs";
 import { Cell } from "../cell/index.mjs";
 import { Field } from "../field/index.mjs";
@@ -17,23 +16,15 @@ var stdin_default = defineComponent({
     searchResult: Array,
     showSearchResult: Boolean
   },
-  emits: ["blur", "focus", "input", "select-search"],
+  emits: ["blur", "focus", "input", "selectSearch"],
   setup(props, {
     emit
   }) {
     const field = ref();
     const showSearchResult = () => props.focused && props.searchResult && props.showSearchResult;
     const onSelect = (express) => {
-      emit("select-search", express);
+      emit("selectSearch", express);
       emit("input", `${express.address || ""} ${express.name || ""}`.trim());
-    };
-    const renderSearchTitle = (express) => {
-      if (express.name) {
-        const text = express.name.replace(props.value, `<span class=${bem("keyword")}>${props.value}</span>`);
-        return _createVNode("div", {
-          "innerHTML": text
-        }, null);
-      }
     };
     const renderSearchResult = () => {
       if (!showSearchResult()) {
@@ -44,15 +35,14 @@ var stdin_default = defineComponent({
       } = props;
       return searchResult.map((express) => _createVNode(Cell, {
         "clickable": true,
-        "key": express.name + express.address,
+        "key": (express.name || "") + (express.address || ""),
         "icon": "location-o",
+        "title": express.name,
         "label": express.address,
         "class": bem("search-item"),
         "border": false,
         "onClick": () => onSelect(express)
-      }, {
-        title: () => renderSearchTitle(express)
-      }));
+      }, null));
     };
     const onBlur = (event) => emit("blur", event);
     const onFocus = (event) => emit("focus", event);

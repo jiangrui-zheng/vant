@@ -1,5 +1,4 @@
-import { createVNode as _createVNode } from "vue";
-import { defineComponent } from "vue";
+import { defineComponent, createVNode as _createVNode } from "vue";
 import { makeStringProp, makeNumericProp, createNamespace } from "../utils/index.mjs";
 import { useChildren } from "@vant/use";
 const [name, bem] = createNamespace("steps");
@@ -17,7 +16,7 @@ const STEPS_KEY = Symbol(name);
 var stdin_default = defineComponent({
   name,
   props: stepsProps,
-  emits: ["click-step"],
+  emits: ["clickStep"],
   setup(props, {
     emit,
     slots
@@ -25,7 +24,7 @@ var stdin_default = defineComponent({
     const {
       linkChildren
     } = useChildren(STEPS_KEY);
-    const onClickStep = (index) => emit("click-step", index);
+    const onClickStep = (index) => emit("clickStep", index);
     linkChildren({
       props,
       onClickStep
@@ -42,5 +41,6 @@ var stdin_default = defineComponent({
 });
 export {
   STEPS_KEY,
-  stdin_default as default
+  stdin_default as default,
+  stepsProps
 };

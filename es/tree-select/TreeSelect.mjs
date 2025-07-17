@@ -1,5 +1,4 @@
-import { createVNode as _createVNode } from "vue";
-import { defineComponent } from "vue";
+import { defineComponent, createVNode as _createVNode } from "vue";
 import { addUnit, makeArrayProp, makeStringProp, makeNumericProp, createNamespace } from "../utils/index.mjs";
 import { Icon } from "../icon/index.mjs";
 import { Sidebar } from "../sidebar/index.mjs";
@@ -19,7 +18,7 @@ const treeSelectProps = {
 var stdin_default = defineComponent({
   name,
   props: treeSelectProps,
-  emits: ["click-nav", "click-item", "update:activeId", "update:mainActiveIndex"],
+  emits: ["clickNav", "clickItem", "update:activeId", "update:mainActiveIndex"],
   setup(props, {
     emit,
     slots
@@ -36,14 +35,14 @@ var stdin_default = defineComponent({
           const index = activeId.indexOf(item.id);
           if (index !== -1) {
             activeId.splice(index, 1);
-          } else if (activeId.length < props.max) {
+          } else if (activeId.length < +props.max) {
             activeId.push(item.id);
           }
         } else {
           activeId = item.id;
         }
         emit("update:activeId", activeId);
-        emit("click-item", item);
+        emit("clickItem", item);
       };
       return _createVNode("div", {
         "key": item.id,
@@ -60,16 +59,17 @@ var stdin_default = defineComponent({
     const onSidebarChange = (index) => {
       emit("update:mainActiveIndex", index);
     };
-    const onClickSidebarItem = (index) => emit("click-nav", index);
+    const onClickSidebarItem = (index) => emit("clickNav", index);
     const renderSidebar = () => {
       const Items = props.items.map((item) => _createVNode(SidebarItem, {
         "dot": item.dot,
-        "title": item.text,
         "badge": item.badge,
         "class": [bem("nav-item"), item.className],
         "disabled": item.disabled,
         "onClick": onClickSidebarItem
-      }, null));
+      }, {
+        title: () => slots["nav-text"] ? slots["nav-text"](item) : item.text
+      }));
       return _createVNode(Sidebar, {
         "class": bem("nav"),
         "modelValue": props.mainActiveIndex,
@@ -98,5 +98,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  treeSelectProps
 };

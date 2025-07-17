@@ -1,5 +1,5 @@
-import { type PropType, type CSSProperties, type ExtractPropTypes } from 'vue';
-declare const overlayProps: {
+import { type PropType, type CSSProperties, type ExtractPropTypes, type TeleportProps } from 'vue';
+export declare const overlayProps: {
     show: BooleanConstructor;
     zIndex: (NumberConstructor | StringConstructor)[];
     duration: (NumberConstructor | StringConstructor)[];
@@ -13,9 +13,10 @@ declare const overlayProps: {
         default: true;
     };
     customStyle: PropType<CSSProperties>;
+    teleport: PropType<TeleportProps["to"]>;
 };
-export declare type OverlayProps = ExtractPropTypes<typeof overlayProps>;
-declare const _default: import("vue").DefineComponent<{
+export type OverlayProps = ExtractPropTypes<typeof overlayProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     show: BooleanConstructor;
     zIndex: (NumberConstructor | StringConstructor)[];
     duration: (NumberConstructor | StringConstructor)[];
@@ -29,7 +30,8 @@ declare const _default: import("vue").DefineComponent<{
         default: true;
     };
     customStyle: PropType<CSSProperties>;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+    teleport: PropType<TeleportProps["to"]>;
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<ExtractPropTypes<{
     show: BooleanConstructor;
     zIndex: (NumberConstructor | StringConstructor)[];
     duration: (NumberConstructor | StringConstructor)[];
@@ -43,9 +45,10 @@ declare const _default: import("vue").DefineComponent<{
         default: true;
     };
     customStyle: PropType<CSSProperties>;
-}>>, {
+    teleport: PropType<TeleportProps["to"]>;
+}>> & Readonly<{}>, {
     show: boolean;
     lockScroll: boolean;
     lazyRender: boolean;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

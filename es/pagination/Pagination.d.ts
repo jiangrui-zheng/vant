@@ -1,8 +1,8 @@
 import { type ExtractPropTypes } from 'vue';
-export declare type PaginationMode = 'simple' | 'multi';
-declare const paginationProps: {
+export type PaginationMode = 'simple' | 'multi';
+export declare const paginationProps: {
     mode: {
-        type: import("vue").PropType<PaginationMode>;
+        type: import("vue").PropType<T>;
         default: PaginationMode;
     };
     prevText: StringConstructor;
@@ -28,11 +28,19 @@ declare const paginationProps: {
         default: number;
     };
     forceEllipses: BooleanConstructor;
+    showPrevButton: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    showNextButton: {
+        type: BooleanConstructor;
+        default: true;
+    };
 };
-export declare type PaginationProps = ExtractPropTypes<typeof paginationProps>;
-declare const _default: import("vue").DefineComponent<{
+export type PaginationProps = ExtractPropTypes<typeof paginationProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     mode: {
-        type: import("vue").PropType<PaginationMode>;
+        type: import("vue").PropType<T>;
         default: PaginationMode;
     };
     prevText: StringConstructor;
@@ -58,9 +66,17 @@ declare const _default: import("vue").DefineComponent<{
         default: number;
     };
     forceEllipses: BooleanConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+    showPrevButton: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    showNextButton: {
+        type: BooleanConstructor;
+        default: true;
+    };
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", import("vue").PublicProps, Readonly<ExtractPropTypes<{
     mode: {
-        type: import("vue").PropType<PaginationMode>;
+        type: import("vue").PropType<T>;
         default: PaginationMode;
     };
     prevText: StringConstructor;
@@ -86,10 +102,18 @@ declare const _default: import("vue").DefineComponent<{
         default: number;
     };
     forceEllipses: BooleanConstructor;
-}>> & {
+    showPrevButton: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    showNextButton: {
+        type: BooleanConstructor;
+        default: true;
+    };
+}>> & Readonly<{
     onChange?: ((...args: any[]) => any) | undefined;
     "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     modelValue: number;
     mode: PaginationMode;
     pageCount: string | number;
@@ -97,5 +121,7 @@ declare const _default: import("vue").DefineComponent<{
     showPageSize: string | number;
     itemsPerPage: string | number;
     forceEllipses: boolean;
-}>;
+    showPrevButton: boolean;
+    showNextButton: boolean;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

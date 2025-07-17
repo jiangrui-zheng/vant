@@ -1,11 +1,10 @@
 import { type PropType, type ExtractPropTypes } from 'vue';
 import type { AreaList } from './types';
-declare const areaProps: {
-    title: StringConstructor;
+export declare const areaProps: import("../utils").Writeable<Pick<{
     loading: BooleanConstructor;
     readonly: BooleanConstructor;
     allowHtml: BooleanConstructor;
-    itemHeight: {
+    optionHeight: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
@@ -17,38 +16,35 @@ declare const areaProps: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-    visibleItemCount: {
+    visibleOptionNum: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
+} & {
+    title: StringConstructor;
     cancelButtonText: StringConstructor;
     confirmButtonText: StringConstructor;
-} & {
-    value: StringConstructor;
+}, "title" | "readonly" | "loading" | "optionHeight" | "swipeDuration" | "visibleOptionNum" | "cancelButtonText" | "confirmButtonText">> & {
+    modelValue: StringConstructor;
     columnsNum: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
     columnsPlaceholder: {
-        type: PropType<string[]>;
+        type: PropType<T[]>;
         default: () => never[];
     };
     areaList: {
         type: PropType<AreaList>;
         default: () => {};
-    };
-    isOverseaCode: {
-        type: PropType<(code: string) => boolean>;
-        default: (code: string) => boolean;
     };
 };
-export declare type AreaProps = ExtractPropTypes<typeof areaProps>;
-declare const _default: import("vue").DefineComponent<{
-    title: StringConstructor;
+export type AreaProps = ExtractPropTypes<typeof areaProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<import("../utils").Writeable<Pick<{
     loading: BooleanConstructor;
     readonly: BooleanConstructor;
     allowHtml: BooleanConstructor;
-    itemHeight: {
+    optionHeight: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
@@ -60,36 +56,33 @@ declare const _default: import("vue").DefineComponent<{
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-    visibleItemCount: {
+    visibleOptionNum: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
+} & {
+    title: StringConstructor;
     cancelButtonText: StringConstructor;
     confirmButtonText: StringConstructor;
-} & {
-    value: StringConstructor;
+}, "title" | "readonly" | "loading" | "optionHeight" | "swipeDuration" | "visibleOptionNum" | "cancelButtonText" | "confirmButtonText">> & {
+    modelValue: StringConstructor;
     columnsNum: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
     columnsPlaceholder: {
-        type: PropType<string[]>;
+        type: PropType<T[]>;
         default: () => never[];
     };
     areaList: {
         type: PropType<AreaList>;
         default: () => {};
     };
-    isOverseaCode: {
-        type: PropType<(code: string) => boolean>;
-        default: (code: string) => boolean;
-    };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("change" | "cancel" | "confirm")[], "change" | "cancel" | "confirm", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
-    title: StringConstructor;
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "cancel" | "change" | "confirm")[], "update:modelValue" | "cancel" | "change" | "confirm", import("vue").PublicProps, Readonly<ExtractPropTypes<import("../utils").Writeable<Pick<{
     loading: BooleanConstructor;
     readonly: BooleanConstructor;
     allowHtml: BooleanConstructor;
-    itemHeight: {
+    optionHeight: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
@@ -101,45 +94,41 @@ declare const _default: import("vue").DefineComponent<{
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-    visibleItemCount: {
+    visibleOptionNum: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
+} & {
+    title: StringConstructor;
     cancelButtonText: StringConstructor;
     confirmButtonText: StringConstructor;
-} & {
-    value: StringConstructor;
+}, "title" | "readonly" | "loading" | "optionHeight" | "swipeDuration" | "visibleOptionNum" | "cancelButtonText" | "confirmButtonText">> & {
+    modelValue: StringConstructor;
     columnsNum: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
     columnsPlaceholder: {
-        type: PropType<string[]>;
+        type: PropType<T[]>;
         default: () => never[];
     };
     areaList: {
         type: PropType<AreaList>;
         default: () => {};
     };
-    isOverseaCode: {
-        type: PropType<(code: string) => boolean>;
-        default: (code: string) => boolean;
-    };
-}>> & {
+}>> & Readonly<{
     onChange?: ((...args: any[]) => any) | undefined;
+    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
     onCancel?: ((...args: any[]) => any) | undefined;
     onConfirm?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     readonly: boolean;
     loading: boolean;
-    allowHtml: boolean;
-    itemHeight: string | number;
-    showToolbar: boolean;
+    optionHeight: string | number;
     swipeDuration: string | number;
-    visibleItemCount: string | number;
+    visibleOptionNum: string | number;
     columnsNum: string | number;
     columnsPlaceholder: string[];
     areaList: AreaList;
-    isOverseaCode: (code: string) => boolean;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

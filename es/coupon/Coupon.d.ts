@@ -1,6 +1,6 @@
 import { type PropType } from 'vue';
 import { type Numeric } from '../utils';
-export declare type CouponInfo = {
+export type CouponInfo = {
     id: Numeric;
     name: string;
     endAt: number;
@@ -15,7 +15,7 @@ export declare type CouponInfo = {
     denominations?: number;
     originCondition?: number;
 };
-declare const _default: import("vue").DefineComponent<{
+declare const _default: import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     chosen: BooleanConstructor;
     coupon: {
         type: PropType<CouponInfo>;
@@ -23,10 +23,10 @@ declare const _default: import("vue").DefineComponent<{
     };
     disabled: BooleanConstructor;
     currency: {
-        type: PropType<string>;
+        type: PropType<T>;
         default: string;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
     chosen: BooleanConstructor;
     coupon: {
         type: PropType<CouponInfo>;
@@ -34,12 +34,12 @@ declare const _default: import("vue").DefineComponent<{
     };
     disabled: BooleanConstructor;
     currency: {
-        type: PropType<string>;
+        type: PropType<T>;
         default: string;
     };
-}>>, {
+}>> & Readonly<{}>, {
     disabled: boolean;
     currency: string;
     chosen: boolean;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

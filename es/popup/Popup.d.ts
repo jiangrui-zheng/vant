@@ -1,6 +1,6 @@
 import { type CSSProperties, type ExtractPropTypes } from 'vue';
 import type { PopupPosition, PopupCloseIconPosition } from './types';
-declare const popupProps: {
+export declare const popupProps: {
     show: BooleanConstructor;
     zIndex: (NumberConstructor | StringConstructor)[];
     overlay: {
@@ -8,7 +8,7 @@ declare const popupProps: {
         default: true;
     };
     duration: (NumberConstructor | StringConstructor)[];
-    teleport: import("vue").PropType<string | import("vue").RendererElement | null | undefined>;
+    teleport: import("vue").PropType<import("vue").TeleportProps["to"]>;
     lockScroll: {
         type: BooleanConstructor;
         default: true;
@@ -28,11 +28,11 @@ declare const popupProps: {
 } & {
     round: BooleanConstructor;
     position: {
-        type: import("vue").PropType<PopupPosition>;
+        type: import("vue").PropType<T>;
         default: PopupPosition;
     };
     closeIcon: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T>;
         default: string;
     };
     closeable: BooleanConstructor;
@@ -40,14 +40,15 @@ declare const popupProps: {
     iconPrefix: StringConstructor;
     closeOnPopstate: BooleanConstructor;
     closeIconPosition: {
-        type: import("vue").PropType<PopupCloseIconPosition>;
+        type: import("vue").PropType<T>;
         default: PopupCloseIconPosition;
     };
+    destroyOnClose: BooleanConstructor;
     safeAreaInsetTop: BooleanConstructor;
     safeAreaInsetBottom: BooleanConstructor;
 };
-export declare type PopupProps = ExtractPropTypes<typeof popupProps>;
-declare const _default: import("vue").DefineComponent<{
+export type PopupProps = ExtractPropTypes<typeof popupProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     show: BooleanConstructor;
     zIndex: (NumberConstructor | StringConstructor)[];
     overlay: {
@@ -55,7 +56,7 @@ declare const _default: import("vue").DefineComponent<{
         default: true;
     };
     duration: (NumberConstructor | StringConstructor)[];
-    teleport: import("vue").PropType<string | import("vue").RendererElement | null | undefined>;
+    teleport: import("vue").PropType<import("vue").TeleportProps["to"]>;
     lockScroll: {
         type: BooleanConstructor;
         default: true;
@@ -75,11 +76,11 @@ declare const _default: import("vue").DefineComponent<{
 } & {
     round: BooleanConstructor;
     position: {
-        type: import("vue").PropType<PopupPosition>;
+        type: import("vue").PropType<T>;
         default: PopupPosition;
     };
     closeIcon: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T>;
         default: string;
     };
     closeable: BooleanConstructor;
@@ -87,12 +88,13 @@ declare const _default: import("vue").DefineComponent<{
     iconPrefix: StringConstructor;
     closeOnPopstate: BooleanConstructor;
     closeIconPosition: {
-        type: import("vue").PropType<PopupCloseIconPosition>;
+        type: import("vue").PropType<T>;
         default: PopupCloseIconPosition;
     };
+    destroyOnClose: BooleanConstructor;
     safeAreaInsetTop: BooleanConstructor;
     safeAreaInsetBottom: BooleanConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("close" | "keydown" | "open" | "opened" | "closed" | "update:show" | "click-overlay" | "click-close-icon")[], "open" | "close" | "keydown" | "opened" | "closed" | "update:show" | "click-overlay" | "click-close-icon", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("open" | "close" | "keydown" | "opened" | "closed" | "update:show" | "clickOverlay" | "clickCloseIcon")[], "open" | "close" | "keydown" | "opened" | "closed" | "update:show" | "clickOverlay" | "clickCloseIcon", import("vue").PublicProps, Readonly<ExtractPropTypes<{
     show: BooleanConstructor;
     zIndex: (NumberConstructor | StringConstructor)[];
     overlay: {
@@ -100,7 +102,7 @@ declare const _default: import("vue").DefineComponent<{
         default: true;
     };
     duration: (NumberConstructor | StringConstructor)[];
-    teleport: import("vue").PropType<string | import("vue").RendererElement | null | undefined>;
+    teleport: import("vue").PropType<import("vue").TeleportProps["to"]>;
     lockScroll: {
         type: BooleanConstructor;
         default: true;
@@ -120,11 +122,11 @@ declare const _default: import("vue").DefineComponent<{
 } & {
     round: BooleanConstructor;
     position: {
-        type: import("vue").PropType<PopupPosition>;
+        type: import("vue").PropType<T>;
         default: PopupPosition;
     };
     closeIcon: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T>;
         default: string;
     };
     closeable: BooleanConstructor;
@@ -132,26 +134,27 @@ declare const _default: import("vue").DefineComponent<{
     iconPrefix: StringConstructor;
     closeOnPopstate: BooleanConstructor;
     closeIconPosition: {
-        type: import("vue").PropType<PopupCloseIconPosition>;
+        type: import("vue").PropType<T>;
         default: PopupCloseIconPosition;
     };
+    destroyOnClose: BooleanConstructor;
     safeAreaInsetTop: BooleanConstructor;
     safeAreaInsetBottom: BooleanConstructor;
-}>> & {
+}>> & Readonly<{
     onKeydown?: ((...args: any[]) => any) | undefined;
     onClose?: ((...args: any[]) => any) | undefined;
     onOpen?: ((...args: any[]) => any) | undefined;
     onOpened?: ((...args: any[]) => any) | undefined;
     onClosed?: ((...args: any[]) => any) | undefined;
     "onUpdate:show"?: ((...args: any[]) => any) | undefined;
-    "onClick-overlay"?: ((...args: any[]) => any) | undefined;
-    "onClick-close-icon"?: ((...args: any[]) => any) | undefined;
-}, {
+    onClickOverlay?: ((...args: any[]) => any) | undefined;
+    onClickCloseIcon?: ((...args: any[]) => any) | undefined;
+}>, {
     position: PopupPosition;
     round: boolean;
-    safeAreaInsetBottom: boolean;
     overlay: boolean;
     show: boolean;
+    safeAreaInsetBottom: boolean;
     lockScroll: boolean;
     lazyRender: boolean;
     transitionAppear: boolean;
@@ -160,6 +163,7 @@ declare const _default: import("vue").DefineComponent<{
     closeable: boolean;
     closeOnPopstate: boolean;
     closeIconPosition: PopupCloseIconPosition;
+    destroyOnClose: boolean;
     safeAreaInsetTop: boolean;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

@@ -1,5 +1,4 @@
-import { createVNode as _createVNode } from "vue";
-import { computed, defineComponent, Fragment } from "vue";
+import { computed, Comment, defineComponent, Fragment, Text, createVNode as _createVNode } from "vue";
 import { createNamespace } from "../utils/index.mjs";
 const [name, bem] = createNamespace("space");
 const spaceProps = {
@@ -28,7 +27,7 @@ function filterEmpty(children = []) {
   });
   return nodes.filter((c) => {
     var _a;
-    return !(c && (typeof Comment !== "undefined" && c.type === Comment || c.type === Fragment && ((_a = c.children) == null ? void 0 : _a.length) === 0 || c.type === Text && c.children.trim() === ""));
+    return !(c && (c.type === Comment || c.type === Fragment && ((_a = c.children) == null ? void 0 : _a.length) === 0 || c.type === Text && c.children.trim() === ""));
   });
 }
 var stdin_default = defineComponent({
@@ -83,5 +82,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  spaceProps
 };

@@ -75,12 +75,26 @@ function stdin_default() {
       );
       this.setMode(this.options.observer ? modeType.observer : modeType.event);
     }
+    /**
+     * update config
+     * @param  {Object} config params
+     * @return
+     */
     config(options = {}) {
       Object.assign(this.options, options);
     }
+    /**
+     * output listener's load performance
+     * @return {Array}
+     */
     performance() {
       return this.listeners.map((item) => item.performance());
     }
+    /*
+     * add lazy component to queue
+     * @param  {Vue} vm lazy component instance
+     * @return
+     */
     addLazyBox(vm) {
       this.listeners.push(vm);
       if (inBrowser) {
@@ -91,6 +105,13 @@ function stdin_default() {
         }
       }
     }
+    /*
+     * add image listener to queue
+     * @param  {DOM} el
+     * @param  {object} binding vue directive binding
+     * @param  {vnode} vnode vue directive vnode
+     * @return
+     */
     add(el, binding, vnode) {
       if (this.listeners.some((item) => item.el === el)) {
         this.update(el, binding);
@@ -131,6 +152,12 @@ function stdin_default() {
         nextTick(() => this.lazyLoadHandler());
       });
     }
+    /**
+     * update image src
+     * @param  {DOM} el
+     * @param  {object} vue directive binding
+     * @return
+     */
     update(el, binding, vnode) {
       const value = this.valueFormatter(binding.value);
       let { src } = value;
@@ -152,9 +179,13 @@ function stdin_default() {
       this.lazyLoadHandler();
       nextTick(() => this.lazyLoadHandler());
     }
+    /**
+     * remove listener form list
+     * @param  {DOM} el
+     * @return
+     */
     remove(el) {
-      if (!el)
-        return;
+      if (!el) return;
       this.observer && this.observer.unobserve(el);
       const existItem = this.listeners.find((item) => item.el === el);
       if (existItem) {
@@ -164,9 +195,13 @@ function stdin_default() {
         existItem.$destroy();
       }
     }
+    /*
+     * remove lazy components form list
+     * @param  {Vue} vm Vue instance
+     * @return
+     */
     removeComponent(vm) {
-      if (!vm)
-        return;
+      if (!vm) return;
       remove(this.listeners, vm);
       this.observer && this.observer.unobserve(vm.el);
       if (vm.$parent && vm.$el.parentNode) {
@@ -196,9 +231,16 @@ function stdin_default() {
         this.initIntersectionObserver();
       }
     }
+    /*
+     *** Private functions ***
+     */
+    /*
+     * add listener target
+     * @param  {DOM} el listener target
+     * @return
+     */
     addListenerTarget(el) {
-      if (!el)
-        return;
+      if (!el) return;
       let target = this.targets.find((target2) => target2.el === el);
       if (!target) {
         target = {
@@ -214,6 +256,11 @@ function stdin_default() {
       }
       return this.targetIndex;
     }
+    /*
+     * remove listener target or reduce target childrenCount
+     * @param  {DOM} el or window
+     * @return
+     */
     removeListenerTarget(el) {
       this.targets.forEach((target, index) => {
         if (target.el === el) {
@@ -226,6 +273,12 @@ function stdin_default() {
         }
       });
     }
+    /*
+     * add or remove eventlistener
+     * @param  {DOM} el DOM or Window
+     * @param  {boolean} start flag
+     * @return
+     */
     initListen(el, start) {
       this.options.ListenEvents.forEach(
         (evt) => (start ? on : off)(el, evt, this.lazyLoadHandler)
@@ -240,8 +293,7 @@ function stdin_default() {
         }
       };
       this.$on = (event, func) => {
-        if (!this.Event.listeners[event])
-          this.Event.listeners[event] = [];
+        if (!this.Event.listeners[event]) this.Event.listeners[event] = [];
         this.Event.listeners[event].push(func);
       };
       this.$once = (event, func) => {
@@ -253,19 +305,21 @@ function stdin_default() {
       };
       this.$off = (event, func) => {
         if (!func) {
-          if (!this.Event.listeners[event])
-            return;
+          if (!this.Event.listeners[event]) return;
           this.Event.listeners[event].length = 0;
           return;
         }
         remove(this.Event.listeners[event], func);
       };
       this.$emit = (event, context, inCache) => {
-        if (!this.Event.listeners[event])
-          return;
+        if (!this.Event.listeners[event]) return;
         this.Event.listeners[event].forEach((func) => func(context, inCache));
       };
     }
+    /**
+     * find nodes which in viewport and trigger load
+     * @return
+     */
     lazyLoadHandler() {
       const freeList = [];
       this.listeners.forEach((listener) => {
@@ -273,8 +327,7 @@ function stdin_default() {
           freeList.push(listener);
         }
         const catIn = listener.checkInView();
-        if (!catIn)
-          return;
+        if (!catIn) return;
         listener.load();
       });
       freeList.forEach((item) => {
@@ -282,6 +335,11 @@ function stdin_default() {
         item.$destroy();
       });
     }
+    /**
+     * init IntersectionObserver
+     * set mode to observer
+     * @return
+     */
     initIntersectionObserver() {
       if (!hasIntersectionObserver) {
         return;
@@ -296,6 +354,10 @@ function stdin_default() {
         });
       }
     }
+    /**
+     * init IntersectionObserver
+     * @return
+     */
     observerHandler(entries) {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -309,9 +371,15 @@ function stdin_default() {
         }
       });
     }
+    /**
+     * set element attribute with image'url and state
+     * @param  {object} lazyload listener object
+     * @param  {string} state will be rendered
+     * @param  {bool} inCache  is rendered from cache
+     * @return
+     */
     elRenderer(listener, state, cache) {
-      if (!listener.el)
-        return;
+      if (!listener.el) return;
       const { el, bindType } = listener;
       let src;
       switch (state) {
@@ -340,6 +408,11 @@ function stdin_default() {
         el.dispatchEvent(event);
       }
     }
+    /**
+     * generate loading loaded error image url
+     * @param {string} image's src
+     * @return {object} image's loading, loaded, error url
+     */
     valueFormatter(value) {
       let src = value;
       let { loading, error } = this.options;

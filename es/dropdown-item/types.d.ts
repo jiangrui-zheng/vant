@@ -1,12 +1,14 @@
 import type { DropdownItemProps } from './DropdownItem';
 import type { VNode, ComponentPublicInstance } from 'vue';
 import type { Numeric } from '../utils';
-export declare type DropdownItemOption = {
+export type DropdownItemOptionValue = Numeric | boolean;
+export type DropdownItemOption = {
+    disabled?: boolean;
     text: string;
     icon?: string;
-    value: Numeric;
+    value: DropdownItemOptionValue;
 };
-export declare type DropdownItemExpose = {
+export type DropdownItemExpose = {
     toggle: (show?: boolean, options?: {
         immediate?: boolean;
     }) => void;
@@ -19,4 +21,7 @@ export declare type DropdownItemExpose = {
     /** @private */
     renderTitle: () => string | VNode[];
 };
-export declare type DropdownItemInstance = ComponentPublicInstance<DropdownItemProps, DropdownItemExpose>;
+export type DropdownItemInstance = ComponentPublicInstance<DropdownItemProps, DropdownItemExpose>;
+export type DropdownItemThemeVars = {
+    dropdownItemZIndex?: number | string;
+};

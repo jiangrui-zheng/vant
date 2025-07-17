@@ -1,5 +1,4 @@
-import { createVNode as _createVNode } from "vue";
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, createVNode as _createVNode } from "vue";
 import { truthProp, createNamespace } from "../utils/index.mjs";
 import { useChildren } from "@vant/use";
 import { usePlaceholder } from "../composables/use-placeholder.mjs";
@@ -40,5 +39,6 @@ var stdin_default = defineComponent({
 });
 export {
   ACTION_BAR_KEY,
+  actionBarProps,
   stdin_default as default
 };

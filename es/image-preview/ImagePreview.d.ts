@@ -1,14 +1,14 @@
-import { type PropType, type CSSProperties, type ExtractPropTypes } from 'vue';
+import { type PropType, type CSSProperties, type ExtractPropTypes, type TeleportProps } from 'vue';
 import { Interceptor } from '../utils';
 import { PopupCloseIconPosition } from '../popup';
-declare const imagePreviewProps: {
+export declare const imagePreviewProps: {
     show: BooleanConstructor;
     loop: {
         type: BooleanConstructor;
         default: true;
     };
     images: {
-        type: PropType<string[]>;
+        type: PropType<T[]>;
         default: () => never[];
     };
     minZoom: {
@@ -23,6 +23,7 @@ declare const imagePreviewProps: {
         type: BooleanConstructor;
         default: true;
     };
+    vertical: BooleanConstructor;
     closeable: BooleanConstructor;
     showIndex: {
         type: BooleanConstructor;
@@ -30,11 +31,15 @@ declare const imagePreviewProps: {
     };
     className: PropType<unknown>;
     closeIcon: {
-        type: PropType<string>;
+        type: PropType<T_1>;
         default: string;
     };
     transition: StringConstructor;
     beforeClose: PropType<Interceptor>;
+    doubleScale: {
+        type: BooleanConstructor;
+        default: true;
+    };
     overlayClass: PropType<unknown>;
     overlayStyle: PropType<CSSProperties>;
     swipeDuration: {
@@ -50,20 +55,29 @@ declare const imagePreviewProps: {
         type: BooleanConstructor;
         default: true;
     };
+    closeOnClickImage: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    closeOnClickOverlay: {
+        type: BooleanConstructor;
+        default: true;
+    };
     closeIconPosition: {
-        type: PropType<PopupCloseIconPosition>;
+        type: PropType<T_1>;
         default: PopupCloseIconPosition;
     };
+    teleport: PropType<TeleportProps["to"]>;
 };
-export declare type ImagePreviewProps = ExtractPropTypes<typeof imagePreviewProps>;
-declare const _default: import("vue").DefineComponent<{
+export type ImagePreviewProps = ExtractPropTypes<typeof imagePreviewProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     show: BooleanConstructor;
     loop: {
         type: BooleanConstructor;
         default: true;
     };
     images: {
-        type: PropType<string[]>;
+        type: PropType<T[]>;
         default: () => never[];
     };
     minZoom: {
@@ -78,6 +92,7 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: true;
     };
+    vertical: BooleanConstructor;
     closeable: BooleanConstructor;
     showIndex: {
         type: BooleanConstructor;
@@ -85,11 +100,15 @@ declare const _default: import("vue").DefineComponent<{
     };
     className: PropType<unknown>;
     closeIcon: {
-        type: PropType<string>;
+        type: PropType<T_1>;
         default: string;
     };
     transition: StringConstructor;
     beforeClose: PropType<Interceptor>;
+    doubleScale: {
+        type: BooleanConstructor;
+        default: true;
+    };
     overlayClass: PropType<unknown>;
     overlayStyle: PropType<CSSProperties>;
     swipeDuration: {
@@ -105,18 +124,27 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: true;
     };
+    closeOnClickImage: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    closeOnClickOverlay: {
+        type: BooleanConstructor;
+        default: true;
+    };
     closeIconPosition: {
-        type: PropType<PopupCloseIconPosition>;
+        type: PropType<T_1>;
         default: PopupCloseIconPosition;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("change" | "close" | "closed" | "update:show" | "scale")[], "change" | "close" | "closed" | "update:show" | "scale", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+    teleport: PropType<TeleportProps["to"]>;
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("change" | "close" | "closed" | "update:show" | "scale" | "longPress")[], "change" | "close" | "closed" | "update:show" | "scale" | "longPress", import("vue").PublicProps, Readonly<ExtractPropTypes<{
     show: BooleanConstructor;
     loop: {
         type: BooleanConstructor;
         default: true;
     };
     images: {
-        type: PropType<string[]>;
+        type: PropType<T[]>;
         default: () => never[];
     };
     minZoom: {
@@ -131,6 +159,7 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: true;
     };
+    vertical: BooleanConstructor;
     closeable: BooleanConstructor;
     showIndex: {
         type: BooleanConstructor;
@@ -138,11 +167,15 @@ declare const _default: import("vue").DefineComponent<{
     };
     className: PropType<unknown>;
     closeIcon: {
-        type: PropType<string>;
+        type: PropType<T_1>;
         default: string;
     };
     transition: StringConstructor;
     beforeClose: PropType<Interceptor>;
+    doubleScale: {
+        type: BooleanConstructor;
+        default: true;
+    };
     overlayClass: PropType<unknown>;
     overlayStyle: PropType<CSSProperties>;
     swipeDuration: {
@@ -158,20 +191,32 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: true;
     };
+    closeOnClickImage: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    closeOnClickOverlay: {
+        type: BooleanConstructor;
+        default: true;
+    };
     closeIconPosition: {
-        type: PropType<PopupCloseIconPosition>;
+        type: PropType<T_1>;
         default: PopupCloseIconPosition;
     };
-}>> & {
+    teleport: PropType<TeleportProps["to"]>;
+}>> & Readonly<{
     onChange?: ((...args: any[]) => any) | undefined;
     onClose?: ((...args: any[]) => any) | undefined;
     onClosed?: ((...args: any[]) => any) | undefined;
     "onUpdate:show"?: ((...args: any[]) => any) | undefined;
     onScale?: ((...args: any[]) => any) | undefined;
-}, {
+    onLongPress?: ((...args: any[]) => any) | undefined;
+}>, {
     loop: boolean;
     overlay: boolean;
     show: boolean;
+    vertical: boolean;
+    closeOnClickOverlay: boolean;
     closeIcon: string;
     closeable: boolean;
     closeOnPopstate: boolean;
@@ -181,7 +226,9 @@ declare const _default: import("vue").DefineComponent<{
     startPosition: string | number;
     minZoom: string | number;
     maxZoom: string | number;
+    doubleScale: boolean;
+    closeOnClickImage: boolean;
     images: string[];
     showIndex: boolean;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

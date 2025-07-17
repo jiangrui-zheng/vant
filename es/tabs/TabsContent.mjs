@@ -1,5 +1,4 @@
-import { createVNode as _createVNode } from "vue";
-import { ref, watch, onMounted, defineComponent } from "vue";
+import { ref, watch, onMounted, defineComponent, createVNode as _createVNode } from "vue";
 import { numericProp, makeRequiredProp, createNamespace } from "../utils/index.mjs";
 import { Swipe } from "../swipe/index.mjs";
 import { useExpose } from "../composables/use-expose.mjs";

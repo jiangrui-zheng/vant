@@ -1,6 +1,5 @@
-import { createTextVNode as _createTextVNode, mergeProps as _mergeProps, createVNode as _createVNode } from "vue";
-import { ref, watch, provide, computed, nextTick, reactive, onMounted, defineComponent } from "vue";
-import { isDef, extend, addUnit, toArray, FORM_KEY, numericProp, unknownProp, resetScroll, formatNumber, preventDefault, makeStringProp, makeNumericProp, createNamespace } from "../utils/index.mjs";
+import { ref, watch, provide, computed, nextTick, reactive, onMounted, defineComponent, createVNode as _createVNode, mergeProps as _mergeProps, createTextVNode as _createTextVNode } from "vue";
+import { isDef, extend, addUnit, toArray, FORM_KEY, numericProp, unknownProp, resetScroll, formatNumber, preventDefault, makeStringProp, makeNumericProp, createNamespace, clamp } from "../utils/index.mjs";
 import { cutString, runSyncRule, endComposing, mapInputType, isEmptyValue, startComposing, getRuleMessage, resizeTextarea, getStringLength, runRuleValidator } from "./utils.mjs";
 import { cellSharedProps } from "../cell/Cell.mjs";
 import { useParent, useEventListener, CUSTOM_FIELD_INJECTION_KEY } from "@vant/use";
@@ -17,16 +16,24 @@ const fieldSharedProps = {
   autofocus: Boolean,
   clearable: Boolean,
   maxlength: numericProp,
+  max: Number,
+  min: Number,
   formatter: Function,
   clearIcon: makeStringProp("clear"),
   modelValue: makeNumericProp(""),
   inputAlign: String,
   placeholder: String,
   autocomplete: String,
+  autocapitalize: String,
+  autocorrect: String,
   errorMessage: String,
   enterkeyhint: String,
   clearTrigger: makeStringProp("focus"),
   formatTrigger: makeStringProp("onChange"),
+  spellcheck: {
+    type: Boolean,
+    default: null
+  },
   error: {
     type: Boolean,
     default: null
@@ -38,7 +45,8 @@ const fieldSharedProps = {
   readonly: {
     type: Boolean,
     default: null
-  }
+  },
+  inputmode: String
 };
 const fieldProps = extend({}, cellSharedProps, fieldSharedProps, {
   rows: numericProp,
@@ -58,7 +66,7 @@ const fieldProps = extend({}, cellSharedProps, fieldSharedProps, {
 var stdin_default = defineComponent({
   name,
   props: fieldProps,
-  emits: ["blur", "focus", "clear", "keypress", "click-input", "end-validate", "start-validate", "click-left-icon", "click-right-icon", "update:modelValue"],
+  emits: ["blur", "focus", "clear", "keypress", "clickInput", "endValidate", "startValidate", "clickLeftIcon", "clickRightIcon", "update:modelValue"],
   setup(props, {
     emit,
     slots
@@ -102,6 +110,14 @@ var stdin_default = defineComponent({
       }
       return props.modelValue;
     });
+    const showRequiredMark = computed(() => {
+      var _a;
+      const required = getProp("required");
+      if (required === "auto") {
+        return (_a = props.rules) == null ? void 0 : _a.some((rule) => rule.required);
+      }
+      return required;
+    });
     const runRules = (rules) => rules.reduce((promise, rule) => promise.then(() => {
       if (state.status === "failed") {
         return;
@@ -136,13 +152,14 @@ var stdin_default = defineComponent({
       state.status = "unvalidated";
       state.validateMessage = "";
     };
-    const endValidate = () => emit("end-validate", {
-      status: state.status
+    const endValidate = () => emit("endValidate", {
+      status: state.status,
+      message: state.validateMessage
     });
     const validate = (rules = props.rules) => new Promise((resolve) => {
       resetValidation();
       if (rules) {
-        emit("start-validate");
+        emit("startValidate");
         runRules(rules).then(() => {
           if (state.status === "failed") {
             resolve({
@@ -182,7 +199,7 @@ var stdin_default = defineComponent({
       const {
         maxlength
       } = props;
-      if (isDef(maxlength) && getStringLength(value) > maxlength) {
+      if (isDef(maxlength) && getStringLength(value) > +maxlength) {
         const modelValue = getModelValue();
         if (modelValue && getStringLength(modelValue) === +maxlength) {
           return modelValue;
@@ -199,12 +216,17 @@ var stdin_default = defineComponent({
       return value;
     };
     const updateValue = (value, trigger = "onChange") => {
+      var _a, _b;
       const originalValue = value;
       value = limitValueLength(value);
       const limitDiffLen = getStringLength(originalValue) - getStringLength(value);
       if (props.type === "number" || props.type === "digit") {
         const isNumber = props.type === "number";
         value = formatNumber(value, isNumber, isNumber);
+        if (trigger === "onBlur" && value !== "" && (props.min !== void 0 || props.max !== void 0)) {
+          const adjustedValue = clamp(+value, (_a = props.min) != null ? _a : -Infinity, (_b = props.max) != null ? _b : Infinity);
+          value = adjustedValue.toString();
+        }
       }
       let formatterDiffLen = 0;
       if (props.formatter && trigger === props.formatTrigger) {
@@ -213,7 +235,7 @@ var stdin_default = defineComponent({
           maxlength
         } = props;
         value = formatter(value);
-        if (isDef(maxlength) && getStringLength(value) > maxlength) {
+        if (isDef(maxlength) && getStringLength(value) > +maxlength) {
           value = cutString(value, +maxlength);
         }
         if (inputRef.value && state.focused) {
@@ -278,19 +300,19 @@ var stdin_default = defineComponent({
       }
     };
     const onBlur = (event) => {
-      if (getProp("readonly")) {
-        return;
-      }
       state.focused = false;
       updateValue(getModelValue(), "onBlur");
       emit("blur", event);
+      if (getProp("readonly")) {
+        return;
+      }
       validateWithTrigger("onBlur");
       nextTick(adjustTextareaSize);
       resetScroll();
     };
-    const onClickInput = (event) => emit("click-input", event);
-    const onClickLeftIcon = (event) => emit("click-left-icon", event);
-    const onClickRightIcon = (event) => emit("click-right-icon", event);
+    const onClickInput = (event) => emit("clickInput", event);
+    const onClickLeftIcon = (event) => emit("clickLeftIcon", event);
+    const onClickRightIcon = (event) => emit("clickRightIcon", event);
     const onClear = (event) => {
       preventDefault(event);
       emit("update:modelValue", "");
@@ -306,7 +328,8 @@ var stdin_default = defineComponent({
     });
     const labelStyle = computed(() => {
       const labelWidth = getProp("labelWidth");
-      if (labelWidth) {
+      const labelAlign = getProp("labelAlign");
+      if (labelWidth && labelAlign !== "top") {
         return {
           width: addUnit(labelWidth)
         };
@@ -350,8 +373,12 @@ var stdin_default = defineComponent({
         autofocus: props.autofocus,
         placeholder: props.placeholder,
         autocomplete: props.autocomplete,
+        autocapitalize: props.autocapitalize,
+        autocorrect: props.autocorrect,
         enterkeyhint: props.enterkeyhint,
+        spellcheck: props.spellcheck,
         "aria-labelledby": props.label ? `${id}-label` : void 0,
+        "data-allow-mismatch": "attribute",
         onBlur,
         onFocus,
         onInput,
@@ -362,9 +389,11 @@ var stdin_default = defineComponent({
         onCompositionstart: startComposing
       };
       if (props.type === "textarea") {
-        return _createVNode("textarea", inputAttrs, null);
+        return _createVNode("textarea", _mergeProps(inputAttrs, {
+          "inputmode": props.inputmode
+        }), null);
       }
-      return _createVNode("input", _mergeProps(mapInputType(props.type), inputAttrs), null);
+      return _createVNode("input", _mergeProps(mapInputType(props.type, props.inputmode), inputAttrs), null);
     };
     const renderLeftIcon = () => {
       const leftIconSlot = slots["left-icon"];
@@ -416,6 +445,8 @@ var stdin_default = defineComponent({
       }
     };
     const renderLabel = () => {
+      const labelWidth = getProp("labelWidth");
+      const labelAlign = getProp("labelAlign");
       const colon = getProp("colon") ? ":" : "";
       if (slots.label) {
         return [slots.label(), colon];
@@ -423,7 +454,15 @@ var stdin_default = defineComponent({
       if (props.label) {
         return _createVNode("label", {
           "id": `${id}-label`,
-          "for": getInputId()
+          "for": slots.input ? void 0 : getInputId(),
+          "data-allow-mismatch": "attribute",
+          "onClick": (event) => {
+            preventDefault(event);
+            focus();
+          },
+          "style": labelAlign === "top" && labelWidth ? {
+            width: addUnit(labelWidth)
+          } : void 0
         }, [props.label + colon]);
       }
     };
@@ -468,11 +507,16 @@ var stdin_default = defineComponent({
     return () => {
       const disabled = getProp("disabled");
       const labelAlign = getProp("labelAlign");
-      const Label = renderLabel();
       const LeftIcon = renderLeftIcon();
+      const renderTitle = () => {
+        const Label = renderLabel();
+        if (labelAlign === "top") {
+          return [LeftIcon, Label].filter(Boolean);
+        }
+        return Label || [];
+      };
       return _createVNode(Cell, {
         "size": props.size,
-        "icon": props.leftIcon,
         "class": bem({
           error: showError.value,
           disabled,
@@ -485,12 +529,12 @@ var stdin_default = defineComponent({
         "titleStyle": labelStyle.value,
         "valueClass": bem("value"),
         "titleClass": [bem("label", [labelAlign, {
-          required: props.required
+          required: showRequiredMark.value
         }]), props.labelClass],
         "arrowDirection": props.arrowDirection
       }, {
-        icon: LeftIcon ? () => LeftIcon : null,
-        title: Label ? () => Label : null,
+        icon: LeftIcon && labelAlign !== "top" ? () => LeftIcon : null,
+        title: renderTitle,
         value: renderFieldBody,
         extra: slots.extra
       });
@@ -499,5 +543,6 @@ var stdin_default = defineComponent({
 });
 export {
   stdin_default as default,
+  fieldProps,
   fieldSharedProps
 };

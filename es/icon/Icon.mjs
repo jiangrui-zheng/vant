@@ -1,5 +1,4 @@
-import { mergeProps as _mergeProps, createVNode as _createVNode } from "vue";
-import { inject, computed, defineComponent } from "vue";
+import { inject, computed, defineComponent, createVNode as _createVNode, mergeProps as _mergeProps } from "vue";
 import { addUnit, numericProp, makeStringProp, createNamespace } from "../utils/index.mjs";
 import { Badge } from "../badge/index.mjs";
 import { CONFIG_PROVIDER_KEY } from "../config-provider/ConfigProvider.mjs";
@@ -55,5 +54,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  iconProps
 };

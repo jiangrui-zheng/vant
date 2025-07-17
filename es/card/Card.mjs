@@ -1,5 +1,4 @@
-import { createTextVNode as _createTextVNode, createVNode as _createVNode } from "vue";
-import { defineComponent } from "vue";
+import { defineComponent, createVNode as _createVNode, Fragment as _Fragment, createTextVNode as _createTextVNode } from "vue";
 import { isDef, numericProp, makeStringProp, createNamespace } from "../utils/index.mjs";
 import { Tag } from "../tag/index.mjs";
 import { Image } from "../image/index.mjs";
@@ -20,7 +19,7 @@ const cardProps = {
 var stdin_default = defineComponent({
   name,
   props: cardProps,
-  emits: ["click-thumb"],
+  emits: ["clickThumb"],
   setup(props, {
     slots,
     emit
@@ -41,7 +40,7 @@ var stdin_default = defineComponent({
           "class": bem("tag")
         }, [slots.tag ? slots.tag() : _createVNode(Tag, {
           "mark": true,
-          "type": "danger"
+          "type": "primary"
         }, {
           default: () => [props.tag]
         })]);
@@ -64,7 +63,7 @@ var stdin_default = defineComponent({
         return _createVNode("a", {
           "href": props.thumbLink,
           "class": bem("thumb"),
-          "onClick": (event) => emit("click-thumb", event)
+          "onClick": (event) => emit("clickThumb", event)
         }, [renderThumbImage(), renderThumbTag()]);
       }
     };
@@ -84,9 +83,9 @@ var stdin_default = defineComponent({
         "class": bem("price-currency")
       }, [props.currency]), _createVNode("span", {
         "class": bem("price-integer")
-      }, [priceArr[0]]), _createTextVNode("."), _createVNode("span", {
+      }, [priceArr[0]]), priceArr.length > 1 && _createVNode(_Fragment, null, [_createTextVNode("."), _createVNode("span", {
         "class": bem("price-decimal")
-      }, [priceArr[1]])]);
+      }, [priceArr[1]])])]);
     };
     return () => {
       var _a, _b, _c;
@@ -122,5 +121,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
+  cardProps,
   stdin_default as default
 };

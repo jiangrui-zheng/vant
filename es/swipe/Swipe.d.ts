@@ -1,6 +1,6 @@
 import { type ExtractPropTypes, type InjectionKey } from 'vue';
 import { SwipeProvide } from './types';
-declare const swipeProps: {
+export declare const swipeProps: {
     loop: {
         type: BooleanConstructor;
         default: true;
@@ -35,9 +35,9 @@ declare const swipeProps: {
         default: true;
     };
 };
-export declare type SwipeProps = ExtractPropTypes<typeof swipeProps>;
+export type SwipeProps = ExtractPropTypes<typeof swipeProps>;
 export declare const SWIPE_KEY: InjectionKey<SwipeProvide>;
-declare const _default: import("vue").DefineComponent<{
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     loop: {
         type: BooleanConstructor;
         default: true;
@@ -71,7 +71,7 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: true;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "change"[], "change", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("change" | "dragStart" | "dragEnd")[], "change" | "dragStart" | "dragEnd", import("vue").PublicProps, Readonly<ExtractPropTypes<{
     loop: {
         type: BooleanConstructor;
         default: true;
@@ -105,9 +105,11 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: true;
     };
-}>> & {
+}>> & Readonly<{
     onChange?: ((...args: any[]) => any) | undefined;
-}, {
+    onDragStart?: ((...args: any[]) => any) | undefined;
+    onDragEnd?: ((...args: any[]) => any) | undefined;
+}>, {
     autoplay: string | number;
     loop: boolean;
     vertical: boolean;
@@ -117,5 +119,5 @@ declare const _default: import("vue").DefineComponent<{
     initialSwipe: string | number;
     showIndicators: boolean;
     stopPropagation: boolean;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

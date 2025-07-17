@@ -1,10 +1,10 @@
-import { createVNode as _createVNode } from "vue";
-import { defineComponent } from "vue";
-import { extend, createNamespace, makeRequiredProp } from "../utils/index.mjs";
+import { defineComponent, createVNode as _createVNode } from "vue";
+import { extend, createNamespace, makeRequiredProp, makeStringProp } from "../utils/index.mjs";
 import { Tag } from "../tag/index.mjs";
 import { Icon } from "../icon/index.mjs";
 import { Cell } from "../cell/index.mjs";
 import { Radio } from "../radio/index.mjs";
+import { Checkbox } from "../checkbox/index.mjs";
 const [name, bem] = createNamespace("address-item");
 var stdin_default = defineComponent({
   name,
@@ -12,26 +12,28 @@ var stdin_default = defineComponent({
     address: makeRequiredProp(Object),
     disabled: Boolean,
     switchable: Boolean,
-    defaultTagText: String
+    singleChoice: Boolean,
+    defaultTagText: String,
+    rightIcon: makeStringProp("edit")
   },
   emits: ["edit", "click", "select"],
   setup(props, {
     slots,
     emit
   }) {
-    const onClick = () => {
+    const onClick = (event) => {
       if (props.switchable) {
         emit("select");
       }
-      emit("click");
+      emit("click", event);
     };
     const renderRightIcon = () => _createVNode(Icon, {
-      "name": "edit",
+      "name": props.rightIcon,
       "class": bem("edit"),
       "onClick": (event) => {
         event.stopPropagation();
         emit("edit");
-        emit("click");
+        emit("click", event);
       }
     }, null);
     const renderTag = () => {
@@ -40,7 +42,7 @@ var stdin_default = defineComponent({
       }
       if (props.address.isDefault && props.defaultTagText) {
         return _createVNode(Tag, {
-          "type": "danger",
+          "type": "primary",
           "round": true,
           "class": bem("tag")
         }, {
@@ -52,7 +54,8 @@ var stdin_default = defineComponent({
       const {
         address,
         disabled,
-        switchable
+        switchable,
+        singleChoice
       } = props;
       const Info = [_createVNode("div", {
         "class": bem("name")
@@ -60,12 +63,21 @@ var stdin_default = defineComponent({
         "class": bem("address")
       }, [address.address])];
       if (switchable && !disabled) {
-        return _createVNode(Radio, {
-          "name": address.id,
-          "iconSize": 18
-        }, {
-          default: () => [Info]
-        });
+        if (singleChoice) {
+          return _createVNode(Radio, {
+            "name": address.id,
+            "iconSize": 18
+          }, {
+            default: () => [Info]
+          });
+        } else {
+          return _createVNode(Checkbox, {
+            "name": address.id,
+            "iconSize": 18
+          }, {
+            default: () => [Info]
+          });
+        }
       }
       return Info;
     };
@@ -81,9 +93,9 @@ var stdin_default = defineComponent({
         "onClick": onClick
       }, [_createVNode(Cell, {
         "border": false,
-        "valueClass": bem("value")
+        "titleClass": bem("title")
       }, {
-        value: renderContent,
+        title: renderContent,
         "right-icon": renderRightIcon
       }), (_a = slots.bottom) == null ? void 0 : _a.call(slots, extend({}, props.address, {
         disabled

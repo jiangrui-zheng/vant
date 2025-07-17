@@ -1,10 +1,10 @@
-import { createVNode as _createVNode } from "vue";
-import { defineComponent } from "vue";
+import { defineComponent, createVNode as _createVNode } from "vue";
 import { truthProp, makeStringProp, createNamespace } from "../utils/index.mjs";
 const [name, bem] = createNamespace("divider");
 const dividerProps = {
   dashed: Boolean,
   hairline: truthProp,
+  vertical: Boolean,
   contentPosition: makeStringProp("center")
 };
 var stdin_default = defineComponent({
@@ -20,12 +20,14 @@ var stdin_default = defineComponent({
         "class": bem({
           dashed: props.dashed,
           hairline: props.hairline,
-          [`content-${props.contentPosition}`]: !!slots.default
+          vertical: props.vertical,
+          [`content-${props.contentPosition}`]: !!slots.default && !props.vertical
         })
-      }, [(_a = slots.default) == null ? void 0 : _a.call(slots)]);
+      }, [!props.vertical && ((_a = slots.default) == null ? void 0 : _a.call(slots))]);
     };
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  dividerProps
 };

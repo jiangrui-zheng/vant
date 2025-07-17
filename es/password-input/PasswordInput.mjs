@@ -1,5 +1,4 @@
-import { createVNode as _createVNode } from "vue";
-import { defineComponent } from "vue";
+import { defineComponent, createVNode as _createVNode } from "vue";
 import { addUnit, truthProp, numericProp, BORDER_LEFT, makeStringProp, BORDER_SURROUND, createNamespace, makeNumericProp } from "../utils/index.mjs";
 const [name, bem] = createNamespace("password-input");
 const passwordInputProps = {
@@ -27,10 +26,10 @@ var stdin_default = defineComponent({
       const {
         mask,
         value,
-        length,
         gutter,
         focused
       } = props;
+      const length = +props.length;
       for (let i = 0; i < length; i++) {
         const char = value[i];
         const showBorder = i !== 0 && !gutter;
@@ -74,5 +73,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  passwordInputProps
 };

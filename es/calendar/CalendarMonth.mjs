@@ -1,7 +1,6 @@
-import { createVNode as _createVNode } from "vue";
-import { ref, computed, defineComponent } from "vue";
+import { ref, computed, defineComponent, createVNode as _createVNode } from "vue";
 import { pick, addUnit, numericProp, setScrollTop, createNamespace, makeRequiredProp } from "../utils/index.mjs";
-import { getMonthEndDay } from "../datetime-picker/utils.mjs";
+import { getMonthEndDay } from "../date-picker/utils.mjs";
 import { t, bem, compareDay, getPrevDay, getNextDay, formatMonthTitle } from "./utils.mjs";
 import { useRect, useToggle } from "@vant/use";
 import { useExpose } from "../composables/use-expose.mjs";
@@ -12,8 +11,8 @@ const calendarMonthProps = {
   date: makeRequiredProp(Date),
   type: String,
   color: String,
-  minDate: makeRequiredProp(Date),
-  maxDate: makeRequiredProp(Date),
+  minDate: Date,
+  maxDate: Date,
   showMark: Boolean,
   rowHeight: numericProp,
   formatter: Function,
@@ -27,7 +26,7 @@ const calendarMonthProps = {
 var stdin_default = defineComponent({
   name,
   props: calendarMonthProps,
-  emits: ["click", "update-height"],
+  emits: ["click", "clickDisabledDate"],
   setup(props, {
     emit,
     slots
@@ -39,7 +38,9 @@ var stdin_default = defineComponent({
     const title = computed(() => formatMonthTitle(props.date));
     const rowHeight = computed(() => addUnit(props.rowHeight));
     const offset = computed(() => {
-      const realDay = props.date.getDay();
+      const date = props.date.getDate();
+      const day = props.date.getDay();
+      const realDay = (day - date % 7 + 8) % 7;
       if (props.firstDayOfWeek) {
         return (realDay + 7 - props.firstDayOfWeek) % 7;
       }
@@ -99,7 +100,7 @@ var stdin_default = defineComponent({
         maxDate,
         currentDate
       } = props;
-      if (compareDay(day, minDate) < 0 || compareDay(day, maxDate) > 0) {
+      if (minDate && compareDay(day, minDate) < 0 || maxDate && compareDay(day, maxDate) > 0) {
         return "disabled";
       }
       if (currentDate === null) {
@@ -131,7 +132,10 @@ var stdin_default = defineComponent({
       if (props.showMonthTitle) {
         return _createVNode("div", {
           "class": bem("month-title")
-        }, [title.value]);
+        }, [slots["month-title"] ? slots["month-title"]({
+          date: props.date,
+          text: title.value
+        }) : title.value]);
       }
     };
     const renderMark = () => {
@@ -183,8 +187,9 @@ var stdin_default = defineComponent({
       "color": props.color,
       "offset": offset.value,
       "rowHeight": rowHeight.value,
-      "onClick": (item2) => emit("click", item2)
-    }, pick(slots, ["top-info", "bottom-info"]));
+      "onClick": (item2) => emit("click", item2),
+      "onClickDisabledDate": (item2) => emit("clickDisabledDate", item2)
+    }, pick(slots, ["top-info", "bottom-info", "text"]));
     const renderDays = () => _createVNode("div", {
       "ref": daysRef,
       "role": "grid",

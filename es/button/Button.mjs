@@ -1,5 +1,4 @@
-import { createVNode as _createVNode } from "vue";
-import { defineComponent } from "vue";
+import { defineComponent, createVNode as _createVNode } from "vue";
 import { extend, numericProp, preventDefault, makeStringProp, createNamespace, BORDER_SURROUND } from "../utils/index.mjs";
 import { useRoute, routeProps } from "../composables/use-route.mjs";
 import { Icon } from "../icon/index.mjs";
@@ -144,5 +143,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
+  buttonProps,
   stdin_default as default
 };

@@ -1,5 +1,4 @@
-import { createVNode as _createVNode } from "vue";
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, createVNode as _createVNode } from "vue";
 import { extend, createNamespace } from "../utils/index.mjs";
 import { ACTION_BAR_KEY } from "../action-bar/ActionBar.mjs";
 import { useParent } from "@vant/use";
@@ -69,5 +68,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
+  actionBarButtonProps,
   stdin_default as default
 };

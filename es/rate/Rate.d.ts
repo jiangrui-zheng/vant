@@ -1,8 +1,8 @@
 import { type ExtractPropTypes } from 'vue';
-declare const rateProps: {
+export declare const rateProps: {
     size: (NumberConstructor | StringConstructor)[];
     icon: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T>;
         default: string;
     };
     color: StringConstructor;
@@ -11,10 +11,11 @@ declare const rateProps: {
         default: number;
     };
     gutter: (NumberConstructor | StringConstructor)[];
+    clearable: BooleanConstructor;
     readonly: BooleanConstructor;
     disabled: BooleanConstructor;
     voidIcon: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T>;
         default: string;
     };
     allowHalf: BooleanConstructor;
@@ -30,11 +31,11 @@ declare const rateProps: {
     };
     disabledColor: StringConstructor;
 };
-export declare type RateProps = ExtractPropTypes<typeof rateProps>;
-declare const _default: import("vue").DefineComponent<{
+export type RateProps = ExtractPropTypes<typeof rateProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     size: (NumberConstructor | StringConstructor)[];
     icon: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T>;
         default: string;
     };
     color: StringConstructor;
@@ -43,10 +44,11 @@ declare const _default: import("vue").DefineComponent<{
         default: number;
     };
     gutter: (NumberConstructor | StringConstructor)[];
+    clearable: BooleanConstructor;
     readonly: BooleanConstructor;
     disabled: BooleanConstructor;
     voidIcon: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T>;
         default: string;
     };
     allowHalf: BooleanConstructor;
@@ -61,10 +63,10 @@ declare const _default: import("vue").DefineComponent<{
         default: number;
     };
     disabledColor: StringConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", import("vue").PublicProps, Readonly<ExtractPropTypes<{
     size: (NumberConstructor | StringConstructor)[];
     icon: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T>;
         default: string;
     };
     color: StringConstructor;
@@ -73,10 +75,11 @@ declare const _default: import("vue").DefineComponent<{
         default: number;
     };
     gutter: (NumberConstructor | StringConstructor)[];
+    clearable: BooleanConstructor;
     readonly: BooleanConstructor;
     disabled: BooleanConstructor;
     voidIcon: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T>;
         default: string;
     };
     allowHalf: BooleanConstructor;
@@ -91,17 +94,18 @@ declare const _default: import("vue").DefineComponent<{
         default: number;
     };
     disabledColor: StringConstructor;
-}>> & {
+}>> & Readonly<{
     onChange?: ((...args: any[]) => any) | undefined;
     "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     disabled: boolean;
     icon: string;
+    clearable: boolean;
     modelValue: number;
     readonly: boolean;
     touchable: boolean;
     count: string | number;
     voidIcon: string;
     allowHalf: boolean;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

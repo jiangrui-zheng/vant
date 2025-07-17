@@ -1,9 +1,9 @@
-import { mergeProps as _mergeProps, createVNode as _createVNode } from "vue";
-import { defineComponent } from "vue";
+import { defineComponent, createVNode as _createVNode, mergeProps as _mergeProps } from "vue";
 import { pick, extend, truthProp, makeArrayProp, createNamespace, HAPTICS_FEEDBACK } from "../utils/index.mjs";
 import { popupSharedProps, popupSharedPropKeys } from "../popup/shared.mjs";
 import { Icon } from "../icon/index.mjs";
 import { Popup } from "../popup/index.mjs";
+const isImage = (name2) => name2 == null ? void 0 : name2.includes("/");
 const popupInheritKeys = [...popupSharedPropKeys, "round", "closeOnPopstate", "safeAreaInsetBottom"];
 const iconMap = {
   qq: "qq",
@@ -53,17 +53,17 @@ var stdin_default = defineComponent({
       }
     };
     const renderIcon = (icon) => {
-      if (iconMap[icon]) {
-        return _createVNode("div", {
-          "class": bem("icon", [icon])
-        }, [_createVNode(Icon, {
-          "name": iconMap[icon] || icon
-        }, null)]);
+      if (isImage(icon)) {
+        return _createVNode("img", {
+          "src": icon,
+          "class": bem("image-icon")
+        }, null);
       }
-      return _createVNode("img", {
-        "src": icon,
-        "class": bem("image-icon")
-      }, null);
+      return _createVNode("div", {
+        "class": bem("icon", [icon])
+      }, [_createVNode(Icon, {
+        "name": iconMap[icon] || icon
+      }, null)]);
     };
     const renderOption = (option, index) => {
       const {
@@ -118,5 +118,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  shareSheetProps
 };

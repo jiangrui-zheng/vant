@@ -1,5 +1,4 @@
-import { createVNode as _createVNode } from "vue";
-import { ref, defineComponent } from "vue";
+import { ref, defineComponent, createVNode as _createVNode } from "vue";
 import { truthProp, numericProp, BORDER_BOTTOM, getZIndexStyle, createNamespace, HAPTICS_FEEDBACK } from "../utils/index.mjs";
 import { usePlaceholder } from "../composables/use-placeholder.mjs";
 import { Icon } from "../icon/index.mjs";
@@ -11,22 +10,33 @@ const navBarProps = {
   border: truthProp,
   leftText: String,
   rightText: String,
+  leftDisabled: Boolean,
+  rightDisabled: Boolean,
   leftArrow: Boolean,
   placeholder: Boolean,
-  safeAreaInsetTop: Boolean
+  safeAreaInsetTop: Boolean,
+  clickable: truthProp
 };
 var stdin_default = defineComponent({
   name,
   props: navBarProps,
-  emits: ["click-left", "click-right"],
+  emits: ["clickLeft", "clickRight"],
   setup(props, {
     emit,
     slots
   }) {
     const navBarRef = ref();
     const renderPlaceholder = usePlaceholder(navBarRef, bem);
-    const onClickLeft = (event) => emit("click-left", event);
-    const onClickRight = (event) => emit("click-right", event);
+    const onClickLeft = (event) => {
+      if (!props.leftDisabled) {
+        emit("clickLeft", event);
+      }
+    };
+    const onClickRight = (event) => {
+      if (!props.rightDisabled) {
+        emit("clickRight", event);
+      }
+    };
     const renderLeft = () => {
       if (slots.left) {
         return slots.left();
@@ -68,12 +78,16 @@ var stdin_default = defineComponent({
       }, [_createVNode("div", {
         "class": bem("content")
       }, [hasLeft && _createVNode("div", {
-        "class": [bem("left"), HAPTICS_FEEDBACK],
+        "class": [bem("left", {
+          disabled: props.leftDisabled
+        }), props.clickable && !props.leftDisabled ? HAPTICS_FEEDBACK : ""],
         "onClick": onClickLeft
       }, [renderLeft()]), _createVNode("div", {
         "class": [bem("title"), "van-ellipsis"]
       }, [slots.title ? slots.title() : title]), hasRight && _createVNode("div", {
-        "class": [bem("right"), HAPTICS_FEEDBACK],
+        "class": [bem("right", {
+          disabled: props.rightDisabled
+        }), props.clickable && !props.rightDisabled ? HAPTICS_FEEDBACK : ""],
         "onClick": onClickRight
       }, [renderRight()])])]);
     };
@@ -86,5 +100,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  navBarProps
 };

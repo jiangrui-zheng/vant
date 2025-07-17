@@ -1,6 +1,6 @@
 import { type PropType, type InjectionKey, type ExtractPropTypes } from 'vue';
-export declare type GridDirection = 'horizontal' | 'vertical';
-declare const gridProps: {
+export type GridDirection = 'horizontal' | 'vertical';
+export declare const gridProps: {
     square: BooleanConstructor;
     center: {
         type: BooleanConstructor;
@@ -20,12 +20,12 @@ declare const gridProps: {
         default: number;
     };
 };
-export declare type GridProps = ExtractPropTypes<typeof gridProps>;
-export declare type GridProvide = {
+export type GridProps = ExtractPropTypes<typeof gridProps>;
+export type GridProvide = {
     props: GridProps;
 };
 export declare const GRID_KEY: InjectionKey<GridProvide>;
-declare const _default: import("vue").DefineComponent<{
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     square: BooleanConstructor;
     center: {
         type: BooleanConstructor;
@@ -44,7 +44,7 @@ declare const _default: import("vue").DefineComponent<{
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<ExtractPropTypes<{
     square: BooleanConstructor;
     center: {
         type: BooleanConstructor;
@@ -63,12 +63,12 @@ declare const _default: import("vue").DefineComponent<{
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-}>>, {
+}>> & Readonly<{}>, {
     reverse: boolean;
     center: boolean;
     border: boolean;
-    clickable: boolean;
     square: boolean;
+    clickable: boolean;
     columnNum: string | number;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

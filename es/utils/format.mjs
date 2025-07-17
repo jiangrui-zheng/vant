@@ -1,6 +1,6 @@
 import { inBrowser } from "./basic.mjs";
 import { windowWidth, windowHeight } from "./dom.mjs";
-import { isDef, isNumeric } from "./validate.mjs";
+import { isDef, isNumeric } from "./basic.mjs";
 function addUnit(value) {
   if (isDef(value)) {
     return isNumeric(value) ? `${value}px` : String(value);

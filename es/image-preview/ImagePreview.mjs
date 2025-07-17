@@ -1,5 +1,4 @@
-import { mergeProps as _mergeProps, createVNode as _createVNode } from "vue";
-import { ref, watch, nextTick, reactive, onMounted, defineComponent } from "vue";
+import { ref, watch, nextTick, reactive, onMounted, defineComponent, createVNode as _createVNode, mergeProps as _mergeProps } from "vue";
 import { pick, truthProp, unknownProp, windowWidth, windowHeight, makeArrayProp, makeStringProp, makeNumericProp, callInterceptor, createNamespace, HAPTICS_FEEDBACK } from "../utils/index.mjs";
 import { useRect } from "@vant/use";
 import { useExpose } from "../composables/use-expose.mjs";
@@ -8,7 +7,7 @@ import { Swipe } from "../swipe/index.mjs";
 import { Popup } from "../popup/index.mjs";
 import ImagePreviewItem from "./ImagePreviewItem.mjs";
 const [name, bem] = createNamespace("image-preview");
-const popupProps = ["show", "transition", "overlayStyle", "closeOnPopstate"];
+const popupProps = ["show", "teleport", "transition", "overlayStyle", "closeOnPopstate"];
 const imagePreviewProps = {
   show: Boolean,
   loop: truthProp,
@@ -16,33 +15,40 @@ const imagePreviewProps = {
   minZoom: makeNumericProp(1 / 3),
   maxZoom: makeNumericProp(3),
   overlay: truthProp,
+  vertical: Boolean,
   closeable: Boolean,
   showIndex: truthProp,
   className: unknownProp,
   closeIcon: makeStringProp("clear"),
   transition: String,
   beforeClose: Function,
+  doubleScale: truthProp,
   overlayClass: unknownProp,
   overlayStyle: Object,
   swipeDuration: makeNumericProp(300),
   startPosition: makeNumericProp(0),
   showIndicators: Boolean,
   closeOnPopstate: truthProp,
-  closeIconPosition: makeStringProp("top-right")
+  closeOnClickImage: truthProp,
+  closeOnClickOverlay: truthProp,
+  closeIconPosition: makeStringProp("top-right"),
+  teleport: [String, Object]
 };
 var stdin_default = defineComponent({
   name,
   props: imagePreviewProps,
-  emits: ["scale", "close", "closed", "change", "update:show"],
+  emits: ["scale", "close", "closed", "change", "longPress", "update:show"],
   setup(props, {
     emit,
     slots
   }) {
     const swipeRef = ref();
+    const activedPreviewItemRef = ref();
     const state = reactive({
       active: 0,
       rootWidth: 0,
-      rootHeight: 0
+      rootHeight: 0,
+      disableZoom: false
     });
     const resize = () => {
       if (swipeRef.value) {
@@ -82,18 +88,32 @@ var stdin_default = defineComponent({
         }, [slots.cover()]);
       }
     };
+    const onDragStart = () => {
+      state.disableZoom = true;
+    };
+    const onDragEnd = () => {
+      state.disableZoom = false;
+    };
     const renderImages = () => _createVNode(Swipe, {
       "ref": swipeRef,
       "lazyRender": true,
       "loop": props.loop,
       "class": bem("swipe"),
+      "vertical": props.vertical,
       "duration": props.swipeDuration,
       "initialSwipe": props.startPosition,
       "showIndicators": props.showIndicators,
       "indicatorColor": "white",
-      "onChange": setActive
+      "onChange": setActive,
+      "onDragEnd": onDragEnd,
+      "onDragStart": onDragStart
     }, {
-      default: () => [props.images.map((image) => _createVNode(ImagePreviewItem, {
+      default: () => [props.images.map((image, index) => _createVNode(ImagePreviewItem, {
+        "ref": (item) => {
+          if (index === state.active) {
+            activedPreviewItemRef.value = item;
+          }
+        },
         "src": image,
         "show": props.show,
         "active": state.active,
@@ -101,8 +121,16 @@ var stdin_default = defineComponent({
         "minZoom": props.minZoom,
         "rootWidth": state.rootWidth,
         "rootHeight": state.rootHeight,
+        "disableZoom": state.disableZoom,
+        "doubleScale": props.doubleScale,
+        "closeOnClickImage": props.closeOnClickImage,
+        "closeOnClickOverlay": props.closeOnClickOverlay,
+        "vertical": props.vertical,
         "onScale": emitScale,
-        "onClose": emitClose
+        "onClose": emitClose,
+        "onLongPress": () => emit("longPress", {
+          index
+        })
       }, {
         image: slots.image
       }))]
@@ -123,6 +151,10 @@ var stdin_default = defineComponent({
       return (_a = swipeRef.value) == null ? void 0 : _a.swipeTo(index, options);
     };
     useExpose({
+      resetScale: () => {
+        var _a;
+        (_a = activedPreviewItemRef.value) == null ? void 0 : _a.resetScale();
+      },
       swipeTo
     });
     onMounted(resize);
@@ -159,5 +191,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  imagePreviewProps
 };
