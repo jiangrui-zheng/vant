@@ -1,7 +1,7 @@
 import { type PropType, type ExtractPropTypes } from 'vue';
 import { Interceptor } from '../utils';
-export declare type StepperTheme = 'default' | 'round';
-declare const stepperProps: {
+export type StepperTheme = 'default' | 'round';
+export declare const stepperProps: {
     min: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
@@ -34,6 +34,10 @@ declare const stepperProps: {
         default: true;
     };
     longPress: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    autoFixed: {
         type: BooleanConstructor;
         default: true;
     };
@@ -52,8 +56,8 @@ declare const stepperProps: {
     };
     decimalLength: (NumberConstructor | StringConstructor)[];
 };
-export declare type StepperProps = ExtractPropTypes<typeof stepperProps>;
-declare const _default: import("vue").DefineComponent<{
+export type StepperProps = ExtractPropTypes<typeof stepperProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     min: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
@@ -89,6 +93,10 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: true;
     };
+    autoFixed: {
+        type: BooleanConstructor;
+        default: true;
+    };
     allowEmpty: BooleanConstructor;
     modelValue: (NumberConstructor | StringConstructor)[];
     inputWidth: (NumberConstructor | StringConstructor)[];
@@ -103,7 +111,7 @@ declare const _default: import("vue").DefineComponent<{
         default: number;
     };
     decimalLength: (NumberConstructor | StringConstructor)[];
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("focus" | "blur" | "update:modelValue" | "change" | "plus" | "minus" | "overlimit")[], "focus" | "blur" | "update:modelValue" | "change" | "plus" | "minus" | "overlimit", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("focus" | "blur" | "update:modelValue" | "change" | "minus" | "plus" | "overlimit")[], "focus" | "blur" | "update:modelValue" | "change" | "minus" | "plus" | "overlimit", import("vue").PublicProps, Readonly<ExtractPropTypes<{
     min: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
@@ -139,6 +147,10 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: true;
     };
+    autoFixed: {
+        type: BooleanConstructor;
+        default: true;
+    };
     allowEmpty: BooleanConstructor;
     modelValue: (NumberConstructor | StringConstructor)[];
     inputWidth: (NumberConstructor | StringConstructor)[];
@@ -153,29 +165,30 @@ declare const _default: import("vue").DefineComponent<{
         default: number;
     };
     decimalLength: (NumberConstructor | StringConstructor)[];
-}>> & {
+}>> & Readonly<{
     onFocus?: ((...args: any[]) => any) | undefined;
     onBlur?: ((...args: any[]) => any) | undefined;
     onChange?: ((...args: any[]) => any) | undefined;
     "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
-    onPlus?: ((...args: any[]) => any) | undefined;
     onMinus?: ((...args: any[]) => any) | undefined;
+    onPlus?: ((...args: any[]) => any) | undefined;
     onOverlimit?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     name: string | number;
     max: string | number;
     disabled: boolean;
     min: string | number;
+    longPress: boolean;
     step: string | number;
     integer: boolean;
     showPlus: boolean;
     showMinus: boolean;
     showInput: boolean;
-    longPress: boolean;
+    autoFixed: boolean;
     allowEmpty: boolean;
     disablePlus: boolean;
     disableMinus: boolean;
     disableInput: boolean;
     defaultValue: string | number;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

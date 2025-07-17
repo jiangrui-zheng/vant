@@ -1,5 +1,4 @@
-import { withDirectives as _withDirectives, mergeProps as _mergeProps, resolveDirective as _resolveDirective, createVNode as _createVNode } from "vue";
-import { ref, watch, computed, nextTick, onBeforeUnmount, defineComponent, getCurrentInstance } from "vue";
+import { ref, watch, computed, nextTick, onMounted, onBeforeUnmount, defineComponent, getCurrentInstance, createVNode as _createVNode, resolveDirective as _resolveDirective, mergeProps as _mergeProps, withDirectives as _withDirectives } from "vue";
 import { isDef, addUnit, inBrowser, truthProp, numericProp, makeStringProp, createNamespace } from "../utils/index.mjs";
 import { Icon } from "../icon/index.mjs";
 const [name, bem] = createNamespace("image");
@@ -19,7 +18,9 @@ const imageProps = {
   errorIcon: makeStringProp("photo-fail"),
   iconPrefix: String,
   showLoading: truthProp,
-  loadingIcon: makeStringProp("photo")
+  loadingIcon: makeStringProp("photo"),
+  crossorigin: String,
+  referrerpolicy: String
 };
 var stdin_default = defineComponent({
   name,
@@ -51,8 +52,18 @@ var stdin_default = defineComponent({
       loading.value = true;
     });
     const onLoad = (event) => {
-      loading.value = false;
-      emit("load", event);
+      if (loading.value) {
+        loading.value = false;
+        emit("load", event);
+      }
+    };
+    const triggerLoad = () => {
+      const loadEvent = new Event("load");
+      Object.defineProperty(loadEvent, "target", {
+        value: imageRef.value,
+        enumerable: true
+      });
+      onLoad(loadEvent);
     };
     const onError = (event) => {
       error.value = true;
@@ -92,7 +103,9 @@ var stdin_default = defineComponent({
         style: {
           objectFit: props.fit,
           objectPosition: props.position
-        }
+        },
+        crossorigin: props.crossorigin,
+        referrerpolicy: props.referrerpolicy
       };
       if (props.lazyLoad) {
         return _withDirectives(_createVNode("img", _mergeProps({
@@ -100,6 +113,7 @@ var stdin_default = defineComponent({
         }, attrs), null), [[_resolveDirective("lazy"), props.src]]);
       }
       return _createVNode("img", _mergeProps({
+        "ref": imageRef,
         "src": props.src,
         "onLoad": onLoad,
         "onError": onError
@@ -110,7 +124,7 @@ var stdin_default = defineComponent({
     }) => {
       const check = () => {
         if (el === imageRef.value && loading.value) {
-          onLoad();
+          triggerLoad();
         }
       };
       if (imageRef.value) {
@@ -134,6 +148,14 @@ var stdin_default = defineComponent({
         $Lazyload.$off("error", onLazyLoadError);
       });
     }
+    onMounted(() => {
+      nextTick(() => {
+        var _a;
+        if (((_a = imageRef.value) == null ? void 0 : _a.complete) && !props.lazyLoad) {
+          triggerLoad();
+        }
+      });
+    });
     return () => {
       var _a;
       return _createVNode("div", {
@@ -147,5 +169,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  imageProps
 };

@@ -5,7 +5,9 @@ import { ActionSheet } from "./action-sheet/index.mjs";
 import { AddressEdit } from "./address-edit/index.mjs";
 import { AddressList } from "./address-list/index.mjs";
 import { Area } from "./area/index.mjs";
+import { BackTop } from "./back-top/index.mjs";
 import { Badge } from "./badge/index.mjs";
+import { Barrage } from "./barrage/index.mjs";
 import { Button } from "./button/index.mjs";
 import { Calendar } from "./calendar/index.mjs";
 import { Card } from "./card/index.mjs";
@@ -26,16 +28,19 @@ import { CountDown } from "./count-down/index.mjs";
 import { Coupon } from "./coupon/index.mjs";
 import { CouponCell } from "./coupon-cell/index.mjs";
 import { CouponList } from "./coupon-list/index.mjs";
-import { DatetimePicker } from "./datetime-picker/index.mjs";
+import { DatePicker } from "./date-picker/index.mjs";
 import { Dialog } from "./dialog/index.mjs";
 import { Divider } from "./divider/index.mjs";
 import { DropdownItem } from "./dropdown-item/index.mjs";
 import { DropdownMenu } from "./dropdown-menu/index.mjs";
 import { Empty } from "./empty/index.mjs";
 import { Field } from "./field/index.mjs";
+import { FloatingBubble } from "./floating-bubble/index.mjs";
+import { FloatingPanel } from "./floating-panel/index.mjs";
 import { Form } from "./form/index.mjs";
 import { Grid } from "./grid/index.mjs";
 import { GridItem } from "./grid-item/index.mjs";
+import { Highlight } from "./highlight/index.mjs";
 import { Icon } from "./icon/index.mjs";
 import { Image } from "./image/index.mjs";
 import { ImagePreview } from "./image-preview/index.mjs";
@@ -52,6 +57,7 @@ import { Overlay } from "./overlay/index.mjs";
 import { Pagination } from "./pagination/index.mjs";
 import { PasswordInput } from "./password-input/index.mjs";
 import { Picker } from "./picker/index.mjs";
+import { PickerGroup } from "./picker-group/index.mjs";
 import { Popover } from "./popover/index.mjs";
 import { Popup } from "./popup/index.mjs";
 import { Progress } from "./progress/index.mjs";
@@ -59,12 +65,18 @@ import { PullRefresh } from "./pull-refresh/index.mjs";
 import { Radio } from "./radio/index.mjs";
 import { RadioGroup } from "./radio-group/index.mjs";
 import { Rate } from "./rate/index.mjs";
+import { RollingText } from "./rolling-text/index.mjs";
 import { Row } from "./row/index.mjs";
 import { Search } from "./search/index.mjs";
 import { ShareSheet } from "./share-sheet/index.mjs";
 import { Sidebar } from "./sidebar/index.mjs";
 import { SidebarItem } from "./sidebar-item/index.mjs";
+import { Signature } from "./signature/index.mjs";
 import { Skeleton } from "./skeleton/index.mjs";
+import { SkeletonAvatar } from "./skeleton-avatar/index.mjs";
+import { SkeletonImage } from "./skeleton-image/index.mjs";
+import { SkeletonParagraph } from "./skeleton-paragraph/index.mjs";
+import { SkeletonTitle } from "./skeleton-title/index.mjs";
 import { Slider } from "./slider/index.mjs";
 import { Space } from "./space/index.mjs";
 import { Step } from "./step/index.mjs";
@@ -81,10 +93,13 @@ import { Tabbar } from "./tabbar/index.mjs";
 import { TabbarItem } from "./tabbar-item/index.mjs";
 import { Tabs } from "./tabs/index.mjs";
 import { Tag } from "./tag/index.mjs";
+import { TextEllipsis } from "./text-ellipsis/index.mjs";
+import { TimePicker } from "./time-picker/index.mjs";
 import { Toast } from "./toast/index.mjs";
 import { TreeSelect } from "./tree-select/index.mjs";
 import { Uploader } from "./uploader/index.mjs";
-const version = "3.6.12";
+import { Watermark } from "./watermark/index.mjs";
+const version = "4.9.10";
 function install(app) {
   const components = [
     ActionBar,
@@ -94,7 +109,9 @@ function install(app) {
     AddressEdit,
     AddressList,
     Area,
+    BackTop,
     Badge,
+    Barrage,
     Button,
     Calendar,
     Card,
@@ -115,16 +132,19 @@ function install(app) {
     Coupon,
     CouponCell,
     CouponList,
-    DatetimePicker,
+    DatePicker,
     Dialog,
     Divider,
     DropdownItem,
     DropdownMenu,
     Empty,
     Field,
+    FloatingBubble,
+    FloatingPanel,
     Form,
     Grid,
     GridItem,
+    Highlight,
     Icon,
     Image,
     ImagePreview,
@@ -141,6 +161,7 @@ function install(app) {
     Pagination,
     PasswordInput,
     Picker,
+    PickerGroup,
     Popover,
     Popup,
     Progress,
@@ -148,12 +169,18 @@ function install(app) {
     Radio,
     RadioGroup,
     Rate,
+    RollingText,
     Row,
     Search,
     ShareSheet,
     Sidebar,
     SidebarItem,
+    Signature,
     Skeleton,
+    SkeletonAvatar,
+    SkeletonImage,
+    SkeletonParagraph,
+    SkeletonTitle,
     Slider,
     Space,
     Step,
@@ -170,9 +197,12 @@ function install(app) {
     TabbarItem,
     Tabs,
     Tag,
+    TextEllipsis,
+    TimePicker,
     Toast,
     TreeSelect,
-    Uploader
+    Uploader,
+    Watermark
   ];
   components.forEach((item) => {
     if (item.install) {
@@ -189,7 +219,9 @@ export * from "./action-sheet/index.mjs";
 export * from "./address-edit/index.mjs";
 export * from "./address-list/index.mjs";
 export * from "./area/index.mjs";
+export * from "./back-top/index.mjs";
 export * from "./badge/index.mjs";
+export * from "./barrage/index.mjs";
 export * from "./button/index.mjs";
 export * from "./calendar/index.mjs";
 export * from "./card/index.mjs";
@@ -210,16 +242,19 @@ export * from "./count-down/index.mjs";
 export * from "./coupon/index.mjs";
 export * from "./coupon-cell/index.mjs";
 export * from "./coupon-list/index.mjs";
-export * from "./datetime-picker/index.mjs";
+export * from "./date-picker/index.mjs";
 export * from "./dialog/index.mjs";
 export * from "./divider/index.mjs";
 export * from "./dropdown-item/index.mjs";
 export * from "./dropdown-menu/index.mjs";
 export * from "./empty/index.mjs";
 export * from "./field/index.mjs";
+export * from "./floating-bubble/index.mjs";
+export * from "./floating-panel/index.mjs";
 export * from "./form/index.mjs";
 export * from "./grid/index.mjs";
 export * from "./grid-item/index.mjs";
+export * from "./highlight/index.mjs";
 export * from "./icon/index.mjs";
 export * from "./image/index.mjs";
 export * from "./image-preview/index.mjs";
@@ -237,6 +272,7 @@ export * from "./overlay/index.mjs";
 export * from "./pagination/index.mjs";
 export * from "./password-input/index.mjs";
 export * from "./picker/index.mjs";
+export * from "./picker-group/index.mjs";
 export * from "./popover/index.mjs";
 export * from "./popup/index.mjs";
 export * from "./progress/index.mjs";
@@ -244,12 +280,18 @@ export * from "./pull-refresh/index.mjs";
 export * from "./radio/index.mjs";
 export * from "./radio-group/index.mjs";
 export * from "./rate/index.mjs";
+export * from "./rolling-text/index.mjs";
 export * from "./row/index.mjs";
 export * from "./search/index.mjs";
 export * from "./share-sheet/index.mjs";
 export * from "./sidebar/index.mjs";
 export * from "./sidebar-item/index.mjs";
+export * from "./signature/index.mjs";
 export * from "./skeleton/index.mjs";
+export * from "./skeleton-avatar/index.mjs";
+export * from "./skeleton-image/index.mjs";
+export * from "./skeleton-paragraph/index.mjs";
+export * from "./skeleton-title/index.mjs";
 export * from "./slider/index.mjs";
 export * from "./space/index.mjs";
 export * from "./step/index.mjs";
@@ -266,9 +308,12 @@ export * from "./tabbar/index.mjs";
 export * from "./tabbar-item/index.mjs";
 export * from "./tabs/index.mjs";
 export * from "./tag/index.mjs";
+export * from "./text-ellipsis/index.mjs";
+export * from "./time-picker/index.mjs";
 export * from "./toast/index.mjs";
 export * from "./tree-select/index.mjs";
 export * from "./uploader/index.mjs";
+export * from "./watermark/index.mjs";
 var stdin_default = {
   install,
   version

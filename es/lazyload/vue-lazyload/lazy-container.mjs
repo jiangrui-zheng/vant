@@ -57,14 +57,12 @@ class LazyContainerManager {
   }
   update(el, binding, vnode) {
     const container = this.queue.find((item) => item.el === el);
-    if (!container)
-      return;
+    if (!container) return;
     container.update({ el, binding, vnode });
   }
   unbind(el) {
     const container = this.queue.find((item) => item.el === el);
-    if (!container)
-      return;
+    if (!container) return;
     container.clear();
     remove(this.queue, container);
   }

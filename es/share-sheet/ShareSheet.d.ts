@@ -1,12 +1,12 @@
 import { type ExtractPropTypes } from 'vue';
-export declare type ShareSheetOption = {
+export type ShareSheetOption = {
     name: string;
     icon: string;
     className?: string;
     description?: string;
 };
-export declare type ShareSheetOptions = ShareSheetOption[] | ShareSheetOption[][];
-declare const shareSheetProps: {
+export type ShareSheetOptions = ShareSheetOption[] | ShareSheetOption[][];
+export declare const shareSheetProps: {
     show: BooleanConstructor;
     zIndex: (NumberConstructor | StringConstructor)[];
     overlay: {
@@ -14,7 +14,7 @@ declare const shareSheetProps: {
         default: true;
     };
     duration: (NumberConstructor | StringConstructor)[];
-    teleport: import("vue").PropType<string | import("vue").RendererElement | null | undefined>;
+    teleport: import("vue").PropType<import("vue").TeleportProps["to"]>;
     lockScroll: {
         type: BooleanConstructor;
         default: true;
@@ -38,7 +38,7 @@ declare const shareSheetProps: {
         default: true;
     };
     options: {
-        type: import("vue").PropType<(ShareSheetOption | ShareSheetOption[])[]>;
+        type: import("vue").PropType<T[]>;
         default: () => never[];
     };
     cancelText: StringConstructor;
@@ -52,8 +52,8 @@ declare const shareSheetProps: {
         default: true;
     };
 };
-export declare type ShareSheetProps = ExtractPropTypes<typeof shareSheetProps>;
-declare const _default: import("vue").DefineComponent<{
+export type ShareSheetProps = ExtractPropTypes<typeof shareSheetProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     show: BooleanConstructor;
     zIndex: (NumberConstructor | StringConstructor)[];
     overlay: {
@@ -61,7 +61,7 @@ declare const _default: import("vue").DefineComponent<{
         default: true;
     };
     duration: (NumberConstructor | StringConstructor)[];
-    teleport: import("vue").PropType<string | import("vue").RendererElement | null | undefined>;
+    teleport: import("vue").PropType<import("vue").TeleportProps["to"]>;
     lockScroll: {
         type: BooleanConstructor;
         default: true;
@@ -85,7 +85,7 @@ declare const _default: import("vue").DefineComponent<{
         default: true;
     };
     options: {
-        type: import("vue").PropType<(ShareSheetOption | ShareSheetOption[])[]>;
+        type: import("vue").PropType<T[]>;
         default: () => never[];
     };
     cancelText: StringConstructor;
@@ -98,7 +98,7 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: true;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("select" | "update:show" | "cancel")[], "select" | "update:show" | "cancel", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("select" | "cancel" | "update:show")[], "select" | "cancel" | "update:show", import("vue").PublicProps, Readonly<ExtractPropTypes<{
     show: BooleanConstructor;
     zIndex: (NumberConstructor | StringConstructor)[];
     overlay: {
@@ -106,7 +106,7 @@ declare const _default: import("vue").DefineComponent<{
         default: true;
     };
     duration: (NumberConstructor | StringConstructor)[];
-    teleport: import("vue").PropType<string | import("vue").RendererElement | null | undefined>;
+    teleport: import("vue").PropType<import("vue").TeleportProps["to"]>;
     lockScroll: {
         type: BooleanConstructor;
         default: true;
@@ -130,7 +130,7 @@ declare const _default: import("vue").DefineComponent<{
         default: true;
     };
     options: {
-        type: import("vue").PropType<(ShareSheetOption | ShareSheetOption[])[]>;
+        type: import("vue").PropType<T[]>;
         default: () => never[];
     };
     cancelText: StringConstructor;
@@ -143,20 +143,20 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: true;
     };
-}>> & {
+}>> & Readonly<{
     onSelect?: ((...args: any[]) => any) | undefined;
     "onUpdate:show"?: ((...args: any[]) => any) | undefined;
     onCancel?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     round: boolean;
-    safeAreaInsetBottom: boolean;
     overlay: boolean;
     show: boolean;
+    safeAreaInsetBottom: boolean;
     lockScroll: boolean;
     lazyRender: boolean;
     transitionAppear: boolean;
     closeOnClickOverlay: boolean;
     closeOnPopstate: boolean;
     options: (ShareSheetOption | ShareSheetOption[])[];
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

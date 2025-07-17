@@ -7,14 +7,8 @@ declare const calendarMonthProps: {
     };
     type: PropType<CalendarType>;
     color: StringConstructor;
-    minDate: {
-        type: DateConstructor;
-        required: true;
-    };
-    maxDate: {
-        type: DateConstructor;
-        required: true;
-    };
+    minDate: DateConstructor;
+    maxDate: DateConstructor;
     showMark: BooleanConstructor;
     rowHeight: (NumberConstructor | StringConstructor)[];
     formatter: PropType<(item: CalendarDayItem) => CalendarDayItem>;
@@ -25,22 +19,16 @@ declare const calendarMonthProps: {
     showMonthTitle: BooleanConstructor;
     firstDayOfWeek: NumberConstructor;
 };
-export declare type CalendarMonthProps = ExtractPropTypes<typeof calendarMonthProps>;
-declare const _default: import("vue").DefineComponent<{
+export type CalendarMonthProps = ExtractPropTypes<typeof calendarMonthProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     date: {
         type: DateConstructor;
         required: true;
     };
     type: PropType<CalendarType>;
     color: StringConstructor;
-    minDate: {
-        type: DateConstructor;
-        required: true;
-    };
-    maxDate: {
-        type: DateConstructor;
-        required: true;
-    };
+    minDate: DateConstructor;
+    maxDate: DateConstructor;
     showMark: BooleanConstructor;
     rowHeight: (NumberConstructor | StringConstructor)[];
     formatter: PropType<(item: CalendarDayItem) => CalendarDayItem>;
@@ -50,21 +38,15 @@ declare const _default: import("vue").DefineComponent<{
     showSubtitle: BooleanConstructor;
     showMonthTitle: BooleanConstructor;
     firstDayOfWeek: NumberConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("click" | "update-height")[], "click" | "update-height", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("click" | "clickDisabledDate")[], "click" | "clickDisabledDate", import("vue").PublicProps, Readonly<ExtractPropTypes<{
     date: {
         type: DateConstructor;
         required: true;
     };
     type: PropType<CalendarType>;
     color: StringConstructor;
-    minDate: {
-        type: DateConstructor;
-        required: true;
-    };
-    maxDate: {
-        type: DateConstructor;
-        required: true;
-    };
+    minDate: DateConstructor;
+    maxDate: DateConstructor;
     showMark: BooleanConstructor;
     rowHeight: (NumberConstructor | StringConstructor)[];
     formatter: PropType<(item: CalendarDayItem) => CalendarDayItem>;
@@ -74,14 +56,14 @@ declare const _default: import("vue").DefineComponent<{
     showSubtitle: BooleanConstructor;
     showMonthTitle: BooleanConstructor;
     firstDayOfWeek: NumberConstructor;
-}>> & {
+}>> & Readonly<{
     onClick?: ((...args: any[]) => any) | undefined;
-    "onUpdate-height"?: ((...args: any[]) => any) | undefined;
-}, {
+    onClickDisabledDate?: ((...args: any[]) => any) | undefined;
+}>, {
     lazyRender: boolean;
     showMark: boolean;
     allowSameDay: boolean;
     showSubtitle: boolean;
     showMonthTitle: boolean;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

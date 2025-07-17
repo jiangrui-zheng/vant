@@ -23,7 +23,7 @@ function isOversize(items, maxSize) {
       if (isFunction(maxSize)) {
         return maxSize(item.file);
       }
-      return item.file.size > maxSize;
+      return item.file.size > +maxSize;
     }
     return false;
   });

@@ -27,10 +27,30 @@ function getDayByOffset(date, offset) {
   cloned.setDate(cloned.getDate() + offset);
   return cloned;
 }
+function getMonthByOffset(date, offset) {
+  const cloned = cloneDate(date);
+  cloned.setMonth(cloned.getMonth() + offset);
+  if (cloned.getDate() !== date.getDate()) {
+    cloned.setDate(0);
+  }
+  return cloned;
+}
+function getYearByOffset(date, offset) {
+  const cloned = cloneDate(date);
+  cloned.setFullYear(cloned.getFullYear() + offset);
+  if (cloned.getDate() !== date.getDate()) {
+    cloned.setDate(0);
+  }
+  return cloned;
+}
 const getPrevDay = (date) => getDayByOffset(date, -1);
 const getNextDay = (date) => getDayByOffset(date, 1);
+const getPrevMonth = (date) => getMonthByOffset(date, -1);
+const getNextMonth = (date) => getMonthByOffset(date, 1);
+const getPrevYear = (date) => getYearByOffset(date, -1);
+const getNextYear = (date) => getYearByOffset(date, 1);
 const getToday = () => {
-  const today = new Date();
+  const today = /* @__PURE__ */ new Date();
   today.setHours(0, 0, 0, 0);
   return today;
 };
@@ -48,9 +68,15 @@ export {
   compareMonth,
   formatMonthTitle,
   getDayByOffset,
+  getMonthByOffset,
   getNextDay,
+  getNextMonth,
+  getNextYear,
   getPrevDay,
+  getPrevMonth,
+  getPrevYear,
   getToday,
+  getYearByOffset,
   name,
   t
 };

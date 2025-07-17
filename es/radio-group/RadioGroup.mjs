@@ -1,9 +1,9 @@
-import { createVNode as _createVNode } from "vue";
-import { watch, defineComponent } from "vue";
+import { watch, defineComponent, createVNode as _createVNode } from "vue";
 import { unknownProp, numericProp, createNamespace } from "../utils/index.mjs";
 import { useChildren, useCustomFieldValue } from "@vant/use";
 const [name, bem] = createNamespace("radio-group");
 const radioGroupProps = {
+  shape: String,
   disabled: Boolean,
   iconSize: numericProp,
   direction: String,
@@ -40,5 +40,6 @@ var stdin_default = defineComponent({
 });
 export {
   RADIO_KEY,
-  stdin_default as default
+  stdin_default as default,
+  radioGroupProps
 };

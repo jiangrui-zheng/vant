@@ -1,13 +1,15 @@
-import { createVNode as _createVNode, mergeProps as _mergeProps } from "vue";
-import { defineComponent } from "vue";
-import { pick, createNamespace } from "../utils/index.mjs";
+import { defineComponent, mergeProps as _mergeProps, createVNode as _createVNode } from "vue";
+import { pick, extend, createNamespace } from "../utils/index.mjs";
 import { RADIO_KEY } from "../radio-group/RadioGroup.mjs";
 import { useParent } from "@vant/use";
 import Checker, { checkerProps } from "../checkbox/Checker.mjs";
+const radioProps = extend({}, checkerProps, {
+  shape: String
+});
 const [name, bem] = createNamespace("radio");
 var stdin_default = defineComponent({
   name,
-  props: checkerProps,
+  props: radioProps,
   emits: ["update:modelValue"],
   setup(props, {
     emit,
@@ -37,5 +39,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  radioProps
 };

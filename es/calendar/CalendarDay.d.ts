@@ -1,6 +1,6 @@
 import { type PropType } from 'vue';
 import type { CalendarDayItem } from './types';
-declare const _default: import("vue").DefineComponent<{
+declare const _default: import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     item: {
         type: PropType<CalendarDayItem>;
         required: true;
@@ -12,7 +12,7 @@ declare const _default: import("vue").DefineComponent<{
         default: number;
     };
     rowHeight: StringConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "click"[], "click", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("click" | "clickDisabledDate")[], "click" | "clickDisabledDate", import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
     item: {
         type: PropType<CalendarDayItem>;
         required: true;
@@ -24,9 +24,10 @@ declare const _default: import("vue").DefineComponent<{
         default: number;
     };
     rowHeight: StringConstructor;
-}>> & {
+}>> & Readonly<{
     onClick?: ((...args: any[]) => any) | undefined;
-}, {
+    onClickDisabledDate?: ((...args: any[]) => any) | undefined;
+}>, {
     offset: number;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

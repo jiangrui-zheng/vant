@@ -1,16 +1,16 @@
-import { type ExtractPropTypes } from 'vue';
+import { type PropType, type ExtractPropTypes } from 'vue';
 import { CouponInfo } from '../coupon';
-declare const couponListProps: {
+export declare const couponListProps: {
     code: {
-        type: import("vue").PropType<string>;
+        type: PropType<T>;
         default: string;
     };
     coupons: {
-        type: import("vue").PropType<CouponInfo[]>;
+        type: PropType<T_1[]>;
         default: () => never[];
     };
     currency: {
-        type: import("vue").PropType<string>;
+        type: PropType<T>;
         default: string;
     };
     showCount: {
@@ -18,14 +18,10 @@ declare const couponListProps: {
         default: true;
     };
     emptyImage: StringConstructor;
-    chosenCoupon: {
-        type: NumberConstructor;
-        default: number;
-    };
     enabledTitle: StringConstructor;
     disabledTitle: StringConstructor;
     disabledCoupons: {
-        type: import("vue").PropType<CouponInfo[]>;
+        type: PropType<T_1[]>;
         default: () => never[];
     };
     showExchangeBar: {
@@ -49,19 +45,23 @@ declare const couponListProps: {
     };
     exchangeButtonLoading: BooleanConstructor;
     exchangeButtonDisabled: BooleanConstructor;
+    chosenCoupon: {
+        type: PropType<number | number[]>;
+        default: number;
+    };
 };
-export declare type CouponListProps = ExtractPropTypes<typeof couponListProps>;
-declare const _default: import("vue").DefineComponent<{
+export type CouponListProps = ExtractPropTypes<typeof couponListProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     code: {
-        type: import("vue").PropType<string>;
+        type: PropType<T>;
         default: string;
     };
     coupons: {
-        type: import("vue").PropType<CouponInfo[]>;
+        type: PropType<T_1[]>;
         default: () => never[];
     };
     currency: {
-        type: import("vue").PropType<string>;
+        type: PropType<T>;
         default: string;
     };
     showCount: {
@@ -69,14 +69,10 @@ declare const _default: import("vue").DefineComponent<{
         default: true;
     };
     emptyImage: StringConstructor;
-    chosenCoupon: {
-        type: NumberConstructor;
-        default: number;
-    };
     enabledTitle: StringConstructor;
     disabledTitle: StringConstructor;
     disabledCoupons: {
-        type: import("vue").PropType<CouponInfo[]>;
+        type: PropType<T_1[]>;
         default: () => never[];
     };
     showExchangeBar: {
@@ -100,17 +96,21 @@ declare const _default: import("vue").DefineComponent<{
     };
     exchangeButtonLoading: BooleanConstructor;
     exchangeButtonDisabled: BooleanConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("change" | "exchange" | "update:code")[], "change" | "exchange" | "update:code", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+    chosenCoupon: {
+        type: PropType<number | number[]>;
+        default: number;
+    };
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("change" | "exchange" | "update:code")[], "change" | "exchange" | "update:code", import("vue").PublicProps, Readonly<ExtractPropTypes<{
     code: {
-        type: import("vue").PropType<string>;
+        type: PropType<T>;
         default: string;
     };
     coupons: {
-        type: import("vue").PropType<CouponInfo[]>;
+        type: PropType<T_1[]>;
         default: () => never[];
     };
     currency: {
-        type: import("vue").PropType<string>;
+        type: PropType<T>;
         default: string;
     };
     showCount: {
@@ -118,14 +118,10 @@ declare const _default: import("vue").DefineComponent<{
         default: true;
     };
     emptyImage: StringConstructor;
-    chosenCoupon: {
-        type: NumberConstructor;
-        default: number;
-    };
     enabledTitle: StringConstructor;
     disabledTitle: StringConstructor;
     disabledCoupons: {
-        type: import("vue").PropType<CouponInfo[]>;
+        type: PropType<T_1[]>;
         default: () => never[];
     };
     showExchangeBar: {
@@ -149,15 +145,19 @@ declare const _default: import("vue").DefineComponent<{
     };
     exchangeButtonLoading: BooleanConstructor;
     exchangeButtonDisabled: BooleanConstructor;
-}>> & {
+    chosenCoupon: {
+        type: PropType<number | number[]>;
+        default: number;
+    };
+}>> & Readonly<{
     onChange?: ((...args: any[]) => any) | undefined;
     onExchange?: ((...args: any[]) => any) | undefined;
     "onUpdate:code"?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     code: string;
     currency: string;
     coupons: CouponInfo[];
-    chosenCoupon: number;
+    chosenCoupon: number | number[];
     showCount: boolean;
     disabledCoupons: CouponInfo[];
     showExchangeBar: boolean;
@@ -166,5 +166,5 @@ declare const _default: import("vue").DefineComponent<{
     displayedCouponIndex: number;
     exchangeButtonLoading: boolean;
     exchangeButtonDisabled: boolean;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

@@ -1,5 +1,5 @@
 import { type PropType, type CSSProperties, type ExtractPropTypes } from 'vue';
-declare const tabProps: {
+export declare const tabProps: {
     to: PropType<import("vue-router").RouteLocationRaw>;
     url: StringConstructor;
     replace: BooleanConstructor;
@@ -16,8 +16,8 @@ declare const tabProps: {
         default: true;
     };
 };
-export declare type TabProps = ExtractPropTypes<typeof tabProps>;
-declare const _default: import("vue").DefineComponent<{
+export type TabProps = ExtractPropTypes<typeof tabProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     to: PropType<import("vue-router").RouteLocationRaw>;
     url: StringConstructor;
     replace: BooleanConstructor;
@@ -33,7 +33,7 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: true;
     };
-}, (() => JSX.Element | undefined) | undefined, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, (() => import("vue/jsx-runtime").JSX.Element | undefined) | undefined, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<ExtractPropTypes<{
     to: PropType<import("vue-router").RouteLocationRaw>;
     url: StringConstructor;
     replace: BooleanConstructor;
@@ -49,10 +49,10 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: true;
     };
-}>>, {
+}>> & Readonly<{}>, {
     replace: boolean;
     dot: boolean;
     disabled: boolean;
     showZeroBadge: boolean;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

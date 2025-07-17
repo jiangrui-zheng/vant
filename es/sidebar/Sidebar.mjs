@@ -1,5 +1,4 @@
-import { createVNode as _createVNode } from "vue";
-import { defineComponent } from "vue";
+import { defineComponent, createVNode as _createVNode } from "vue";
 import { makeNumericProp, createNamespace } from "../utils/index.mjs";
 import { useChildren } from "@vant/use";
 const [name, bem] = createNamespace("sidebar");
@@ -40,5 +39,6 @@ var stdin_default = defineComponent({
 });
 export {
   SIDEBAR_KEY,
-  stdin_default as default
+  stdin_default as default,
+  sidebarProps
 };

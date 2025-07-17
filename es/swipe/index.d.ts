@@ -1,5 +1,5 @@
 import { SwipeProps } from './Swipe';
-export declare const Swipe: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const Swipe: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     loop: {
         type: BooleanConstructor;
         default: true;
@@ -33,7 +33,7 @@ export declare const Swipe: import("../utils").WithInstall<import("vue").DefineC
         type: BooleanConstructor;
         default: true;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "change"[], "change", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("change" | "dragStart" | "dragEnd")[], "change" | "dragStart" | "dragEnd", import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
     loop: {
         type: BooleanConstructor;
         default: true;
@@ -67,9 +67,11 @@ export declare const Swipe: import("../utils").WithInstall<import("vue").DefineC
         type: BooleanConstructor;
         default: true;
     };
-}>> & {
+}>> & Readonly<{
     onChange?: ((...args: any[]) => any) | undefined;
-}, {
+    onDragStart?: ((...args: any[]) => any) | undefined;
+    onDragEnd?: ((...args: any[]) => any) | undefined;
+}>, {
     autoplay: string | number;
     loop: boolean;
     vertical: boolean;
@@ -79,10 +81,11 @@ export declare const Swipe: import("../utils").WithInstall<import("vue").DefineC
     initialSwipe: string | number;
     showIndicators: boolean;
     stopPropagation: boolean;
-}>>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default Swipe;
+export { swipeProps } from './Swipe';
 export type { SwipeProps };
-export type { SwipeInstance, SwipeToOptions } from './types';
+export type { SwipeInstance, SwipeToOptions, SwipeThemeVars } from './types';
 declare module 'vue' {
     interface GlobalComponents {
         VanSwipe: typeof Swipe;

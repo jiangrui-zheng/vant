@@ -1,19 +1,20 @@
-import { mergeProps as _mergeProps, createVNode as _createVNode } from "vue";
-import { defineComponent } from "vue";
-import { addUnit, truthProp, numericProp, getSizeStyle, makeStringProp, makeNumericProp, createNamespace } from "../utils/index.mjs";
+import { defineComponent, createVNode as _createVNode, Fragment as _Fragment, mergeProps as _mergeProps } from "vue";
+import { addUnit, truthProp, numericProp, makeStringProp, makeNumericProp, createNamespace } from "../utils/index.mjs";
+import SkeletonTitle from "../skeleton-title/index.mjs";
+import SkeletonAvatar from "../skeleton-avatar/index.mjs";
+import SkeletonParagraph, { DEFAULT_ROW_WIDTH } from "../skeleton-paragraph/index.mjs";
 const [name, bem] = createNamespace("skeleton");
-const DEFAULT_ROW_WIDTH = "100%";
 const DEFAULT_LAST_ROW_WIDTH = "60%";
 const skeletonProps = {
   row: makeNumericProp(0),
-  title: Boolean,
   round: Boolean,
+  title: Boolean,
+  titleWidth: numericProp,
   avatar: Boolean,
+  avatarSize: numericProp,
+  avatarShape: makeStringProp("round"),
   loading: truthProp,
   animate: truthProp,
-  avatarSize: numericProp,
-  titleWidth: numericProp,
-  avatarShape: makeStringProp("round"),
   rowWidth: {
     type: [Number, String, Array],
     default: DEFAULT_ROW_WIDTH
@@ -29,19 +30,17 @@ var stdin_default = defineComponent({
   }) {
     const renderAvatar = () => {
       if (props.avatar) {
-        return _createVNode("div", {
-          "class": bem("avatar", props.avatarShape),
-          "style": getSizeStyle(props.avatarSize)
+        return _createVNode(SkeletonAvatar, {
+          "avatarShape": props.avatarShape,
+          "avatarSize": props.avatarSize
         }, null);
       }
     };
     const renderTitle = () => {
       if (props.title) {
-        return _createVNode("h3", {
-          "class": bem("title"),
-          "style": {
-            width: addUnit(props.titleWidth)
-          }
+        return _createVNode(SkeletonTitle, {
+          "round": props.round,
+          "titleWidth": props.titleWidth
         }, null);
       }
     };
@@ -57,12 +56,19 @@ var stdin_default = defineComponent({
       }
       return rowWidth;
     };
-    const renderRows = () => Array(+props.row).fill("").map((_, i) => _createVNode("div", {
-      "class": bem("row"),
-      "style": {
-        width: addUnit(getRowWidth(i))
-      }
+    const renderRows = () => Array(+props.row).fill("").map((_, i) => _createVNode(SkeletonParagraph, {
+      "key": i,
+      "round": props.round,
+      "rowWidth": addUnit(getRowWidth(i))
     }, null));
+    const renderContents = () => {
+      if (slots.template) {
+        return slots.template();
+      }
+      return _createVNode(_Fragment, null, [renderAvatar(), _createVNode("div", {
+        "class": bem("content")
+      }, [renderTitle(), renderRows()])]);
+    };
     return () => {
       var _a;
       if (!props.loading) {
@@ -73,12 +79,11 @@ var stdin_default = defineComponent({
           animate: props.animate,
           round: props.round
         })
-      }, attrs), [renderAvatar(), _createVNode("div", {
-        "class": bem("content")
-      }, [renderTitle(), renderRows()])]);
+      }, attrs), [renderContents()]);
     };
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  skeletonProps
 };

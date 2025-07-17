@@ -1,5 +1,4 @@
-import { mergeProps as _mergeProps, createVNode as _createVNode } from "vue";
-import { ref, reactive, withKeys, defineComponent } from "vue";
+import { ref, reactive, withKeys, defineComponent, createVNode as _createVNode, mergeProps as _mergeProps } from "vue";
 import { noop, pick, extend, addUnit, truthProp, isFunction, BORDER_TOP, BORDER_LEFT, unknownProp, numericProp, makeStringProp, callInterceptor, createNamespace } from "../utils/index.mjs";
 import { popupSharedProps, popupSharedPropKeys } from "../popup/shared.mjs";
 import { Popup } from "../popup/index.mjs";
@@ -26,7 +25,8 @@ const dialogProps = extend({}, popupSharedProps, {
   confirmButtonColor: String,
   confirmButtonDisabled: Boolean,
   showConfirmButton: truthProp,
-  closeOnClickOverlay: Boolean
+  closeOnClickOverlay: Boolean,
+  keyboardEnabled: truthProp
 });
 const popupInheritKeys = [...popupSharedPropKeys, "transition", "closeOnPopstate"];
 var stdin_default = defineComponent({
@@ -73,6 +73,9 @@ var stdin_default = defineComponent({
     const onConfirm = getActionHandler("confirm");
     const onKeydown = withKeys((event) => {
       var _a, _b;
+      if (!props.keyboardEnabled) {
+        return;
+      }
       if (event.target !== ((_b = (_a = root.value) == null ? void 0 : _a.popupRef) == null ? void 0 : _b.value)) {
         return;
       }
@@ -213,5 +216,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  dialogProps
 };

@@ -1,5 +1,4 @@
-import { withDirectives as _withDirectives, createVNode as _createVNode, vShow as _vShow } from "vue";
-import { ref, Transition, defineComponent } from "vue";
+import { ref, defineComponent, Teleport, Transition, vShow as _vShow, createVNode as _createVNode, withDirectives as _withDirectives } from "vue";
 import { isDef, extend, truthProp, numericProp, unknownProp, preventDefault, createNamespace, getZIndexStyle } from "../utils/index.mjs";
 import { useEventListener } from "@vant/use";
 import { useLazyRender } from "../composables/use-lazy-render.mjs";
@@ -11,7 +10,8 @@ const overlayProps = {
   className: unknownProp,
   lockScroll: truthProp,
   lazyRender: truthProp,
-  customStyle: Object
+  customStyle: Object,
+  teleport: [String, Object]
 };
 var stdin_default = defineComponent({
   name,
@@ -41,14 +41,25 @@ var stdin_default = defineComponent({
     useEventListener("touchmove", onTouchMove, {
       target: root
     });
-    return () => _createVNode(Transition, {
-      "name": "van-fade",
-      "appear": true
-    }, {
-      default: renderOverlay
-    });
+    return () => {
+      const Content = _createVNode(Transition, {
+        "name": "van-fade",
+        "appear": true
+      }, {
+        default: renderOverlay
+      });
+      if (props.teleport) {
+        return _createVNode(Teleport, {
+          "to": props.teleport
+        }, {
+          default: () => [Content]
+        });
+      }
+      return Content;
+    };
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  overlayProps
 };

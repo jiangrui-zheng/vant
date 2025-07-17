@@ -1,5 +1,4 @@
-import { createVNode as _createVNode } from "vue";
-import { watch, computed, defineComponent } from "vue";
+import { watch, computed, defineComponent, createVNode as _createVNode } from "vue";
 import { truthProp, makeStringProp, makeNumericProp, createNamespace } from "../utils/index.mjs";
 import { parseFormat } from "./utils.mjs";
 import { useCountDown } from "@vant/use";
@@ -52,5 +51,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
+  countDownProps,
   stdin_default as default
 };

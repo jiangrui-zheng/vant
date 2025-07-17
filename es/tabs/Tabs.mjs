@@ -1,6 +1,5 @@
-import { createVNode as _createVNode, mergeProps as _mergeProps } from "vue";
-import { ref, watch, computed, reactive, nextTick, onActivated, defineComponent, getCurrentInstance } from "vue";
-import { pick, isDef, addUnit, isHidden, unitToPx, truthProp, numericProp, windowWidth, getElementTop, makeStringProp, callInterceptor, createNamespace, makeNumericProp, setRootScrollTop, BORDER_TOP_BOTTOM } from "../utils/index.mjs";
+import { ref, watch, computed, reactive, nextTick, onActivated, defineComponent, createVNode as _createVNode } from "vue";
+import { isDef, addUnit, isHidden, unitToPx, truthProp, numericProp, windowWidth, getElementTop, makeStringProp, callInterceptor, createNamespace, makeNumericProp, setRootScrollTop, BORDER_TOP_BOTTOM } from "../utils/index.mjs";
 import { scrollLeftTo, scrollTopTo } from "./utils.mjs";
 import { useRect, useChildren, useScrollParent, useEventListener, onMountedOrActivated } from "@vant/use";
 import { useId } from "../composables/use-id.mjs";
@@ -8,8 +7,8 @@ import { route } from "../composables/use-route.mjs";
 import { useRefs } from "../composables/use-refs.mjs";
 import { useExpose } from "../composables/use-expose.mjs";
 import { onPopupReopen } from "../composables/on-popup-reopen.mjs";
+import { useVisibilityChange } from "../composables/use-visibility-change.mjs";
 import { Sticky } from "../sticky/index.mjs";
-import TabsTitle from "./TabsTitle.mjs";
 import TabsContent from "./TabsContent.mjs";
 const [name, bem] = createNamespace("tabs");
 const tabsProps = {
@@ -27,6 +26,7 @@ const tabsProps = {
   offsetTop: makeNumericProp(0),
   background: String,
   lazyRender: truthProp,
+  showHeader: truthProp,
   lineWidth: numericProp,
   lineHeight: numericProp,
   beforeChange: Function,
@@ -38,24 +38,16 @@ const TABS_KEY = Symbol(name);
 var stdin_default = defineComponent({
   name,
   props: tabsProps,
-  emits: ["click", "change", "scroll", "disabled", "rendered", "click-tab", "update:active"],
+  emits: ["change", "scroll", "rendered", "clickTab", "update:active"],
   setup(props, {
     emit,
     slots
   }) {
-    var _a, _b;
-    if (process.env.NODE_ENV !== "production") {
-      const props2 = (_b = (_a = getCurrentInstance()) == null ? void 0 : _a.vnode) == null ? void 0 : _b.props;
-      if (props2 && "onClick" in props2) {
-        console.warn('[Vant] Tabs: "click" event is deprecated, using "click-tab" instead.');
-      }
-      if (props2 && "onDisabled" in props2) {
-        console.warn('[Vant] Tabs: "disabled" event is deprecated, using "click-tab" instead.');
-      }
-    }
     let tabHeight;
     let lockScroll;
     let stickyFixed;
+    let cancelScrollLeftToRaf;
+    let cancelScrollTopToRaf;
     const root = ref();
     const navRef = ref();
     const wrapRef = ref();
@@ -73,14 +65,14 @@ var stdin_default = defineComponent({
       lineStyle: {},
       currentIndex: -1
     });
-    const scrollable = computed(() => children.length > props.swipeThreshold || !props.ellipsis || props.shrink);
+    const scrollable = computed(() => children.length > +props.swipeThreshold || !props.ellipsis || props.shrink);
     const navStyle = computed(() => ({
       borderColor: props.color,
       background: props.background
     }));
     const getTabName = (tab, index) => {
-      var _a2;
-      return (_a2 = tab.name) != null ? _a2 : index;
+      var _a;
+      return (_a = tab.name) != null ? _a : index;
     };
     const currentName = computed(() => {
       const activeTab = children[state.currentIndex];
@@ -103,7 +95,8 @@ var stdin_default = defineComponent({
       }
       const title = titles[state.currentIndex].$el;
       const to = title.offsetLeft - (nav.offsetWidth - title.offsetWidth) / 2;
-      scrollLeftTo(nav, to, immediate ? 0 : +props.duration);
+      if (cancelScrollLeftToRaf) cancelScrollLeftToRaf();
+      cancelScrollLeftToRaf = scrollLeftTo(nav, to, immediate ? 0 : +props.duration);
     };
     const setLine = () => {
       const shouldAnimate = state.inited;
@@ -179,7 +172,8 @@ var stdin_default = defineComponent({
         if (target && scroller.value) {
           const to = getElementTop(target, scroller.value) - scrollOffset.value;
           lockScroll = true;
-          scrollTopTo(scroller.value, to, immediate ? 0 : +props.duration, () => {
+          if (cancelScrollTopToRaf) cancelScrollTopToRaf();
+          cancelScrollTopToRaf = scrollTopTo(scroller.value, to, immediate ? 0 : +props.duration, () => {
             lockScroll = false;
           });
         }
@@ -191,9 +185,7 @@ var stdin_default = defineComponent({
         disabled
       } = children[index];
       const name2 = getTabName(children[index], index);
-      if (disabled) {
-        emit("disabled", name2, title);
-      } else {
+      if (!disabled) {
         callInterceptor(props.beforeChange, {
           args: [name2],
           done: () => {
@@ -201,10 +193,9 @@ var stdin_default = defineComponent({
             scrollToCurrentContent();
           }
         });
-        emit("click", name2, title);
         route(item);
       }
-      emit("click-tab", {
+      emit("clickTab", {
         name: name2,
         title,
         event,
@@ -238,24 +229,6 @@ var stdin_default = defineComponent({
         setCurrentIndex(index);
       }
     };
-    const renderNav = () => children.map((item, index) => _createVNode(TabsTitle, _mergeProps({
-      "key": item.id,
-      "id": `${id}-${index}`,
-      "ref": setTitleRefs(index),
-      "type": props.type,
-      "color": props.color,
-      "style": item.titleStyle,
-      "class": item.titleClass,
-      "shrink": props.shrink,
-      "isActive": index === state.currentIndex,
-      "controls": item.id,
-      "scrollable": scrollable.value,
-      "activeColor": props.titleActiveColor,
-      "inactiveColor": props.titleInactiveColor,
-      "onClick": (event) => onClickTab(item, index, event)
-    }, pick(item, ["dot", "badge", "title", "disabled", "showZeroBadge"])), {
-      title: item.$slots.title
-    }));
     const renderLine = () => {
       if (props.type === "line" && children.length) {
         return _createVNode("div", {
@@ -265,7 +238,7 @@ var stdin_default = defineComponent({
       }
     };
     const renderHeader = () => {
-      var _a2, _b2, _c;
+      var _a, _b, _c;
       const {
         type,
         border,
@@ -285,7 +258,7 @@ var stdin_default = defineComponent({
         }]),
         "style": navStyle.value,
         "aria-orientation": "horizontal"
-      }, [(_a2 = slots["nav-left"]) == null ? void 0 : _a2.call(slots), renderNav(), renderLine(), (_b2 = slots["nav-right"]) == null ? void 0 : _b2.call(slots)])]), (_c = slots["nav-bottom"]) == null ? void 0 : _c.call(slots)];
+      }, [(_a = slots["nav-left"]) == null ? void 0 : _a.call(slots), children.map((item) => item.renderTitle(onClickTab)), renderLine(), (_b = slots["nav-right"]) == null ? void 0 : _b.call(slots)])]), (_c = slots["nav-bottom"]) == null ? void 0 : _c.call(slots)];
       if (sticky) {
         return _createVNode("div", {
           "ref": wrapRef
@@ -293,7 +266,16 @@ var stdin_default = defineComponent({
       }
       return Header;
     };
-    watch([() => props.color, windowWidth], setLine);
+    const resize = () => {
+      setLine();
+      nextTick(() => {
+        var _a, _b;
+        scrollIntoView(true);
+        (_b = (_a = contentRef.value) == null ? void 0 : _a.swipeRef.value) == null ? void 0 : _b.resize();
+      });
+    };
+    watch(() => [props.color, props.duration, props.lineWidth, props.lineHeight], setLine);
+    watch(windowWidth, resize);
     watch(() => props.active, (value) => {
       if (value !== currentName.value) {
         setCurrentIndexByName(value);
@@ -319,13 +301,6 @@ var stdin_default = defineComponent({
       });
     };
     const onRendered = (name2, title) => emit("rendered", name2, title);
-    const resize = () => {
-      setLine();
-      nextTick(() => {
-        var _a2, _b2;
-        return (_b2 = (_a2 = contentRef.value) == null ? void 0 : _a2.swipeRef.value) == null ? void 0 : _b2.resize();
-      });
-    };
     useExpose({
       resize,
       scrollTo
@@ -333,6 +308,7 @@ var stdin_default = defineComponent({
     onActivated(setLine);
     onPopupReopen(setLine);
     onMountedOrActivated(init);
+    useVisibilityChange(root, setLine);
     useEventListener("scroll", onScroll, {
       target: scroller,
       passive: true
@@ -341,20 +317,22 @@ var stdin_default = defineComponent({
       id,
       props,
       setLine,
+      scrollable,
       onRendered,
       currentName,
+      setTitleRefs,
       scrollIntoView
     });
     return () => _createVNode("div", {
       "ref": root,
       "class": bem([props.type])
-    }, [props.sticky ? _createVNode(Sticky, {
+    }, [props.showHeader ? props.sticky ? _createVNode(Sticky, {
       "container": root.value,
       "offsetTop": offsetTopPx.value,
       "onScroll": onStickyScroll
     }, {
       default: () => [renderHeader()]
-    }) : renderHeader(), _createVNode(TabsContent, {
+    }) : renderHeader() : null, _createVNode(TabsContent, {
       "ref": contentRef,
       "count": children.length,
       "inited": state.inited,
@@ -366,13 +344,14 @@ var stdin_default = defineComponent({
       "onChange": setCurrentIndex
     }, {
       default: () => {
-        var _a2;
-        return [(_a2 = slots.default) == null ? void 0 : _a2.call(slots)];
+        var _a;
+        return [(_a = slots.default) == null ? void 0 : _a.call(slots)];
       }
     })]);
   }
 });
 export {
   TABS_KEY,
-  stdin_default as default
+  stdin_default as default,
+  tabsProps
 };

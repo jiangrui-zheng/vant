@@ -1,7 +1,11 @@
 import { type PropType, type CSSProperties, type ExtractPropTypes } from 'vue';
-export declare type CellSize = 'normal' | 'large';
-export declare type CellArrowDirection = 'up' | 'down' | 'left' | 'right';
+export type CellSize = 'normal' | 'large';
+export type CellArrowDirection = 'up' | 'down' | 'left' | 'right';
 export declare const cellSharedProps: {
+    tag: {
+        type: PropType<T>;
+        default: keyof HTMLElementTagNameMap;
+    };
     icon: StringConstructor;
     size: PropType<CellSize>;
     title: (NumberConstructor | StringConstructor)[];
@@ -13,19 +17,26 @@ export declare const cellSharedProps: {
         type: BooleanConstructor;
         default: true;
     };
-    required: BooleanConstructor;
     iconPrefix: StringConstructor;
     valueClass: PropType<unknown>;
     labelClass: PropType<unknown>;
     titleClass: PropType<unknown>;
     titleStyle: PropType<string | CSSProperties>;
     arrowDirection: PropType<CellArrowDirection>;
+    required: {
+        type: PropType<boolean | "auto">;
+        default: null;
+    };
     clickable: {
         type: PropType<boolean | null>;
         default: null;
     };
 };
-declare const cellProps: {
+export declare const cellProps: {
+    tag: {
+        type: PropType<T>;
+        default: keyof HTMLElementTagNameMap;
+    };
     icon: StringConstructor;
     size: PropType<CellSize>;
     title: (NumberConstructor | StringConstructor)[];
@@ -37,13 +48,16 @@ declare const cellProps: {
         type: BooleanConstructor;
         default: true;
     };
-    required: BooleanConstructor;
     iconPrefix: StringConstructor;
     valueClass: PropType<unknown>;
     labelClass: PropType<unknown>;
     titleClass: PropType<unknown>;
     titleStyle: PropType<string | CSSProperties>;
     arrowDirection: PropType<CellArrowDirection>;
+    required: {
+        type: PropType<boolean | "auto">;
+        default: null;
+    };
     clickable: {
         type: PropType<boolean | null>;
         default: null;
@@ -53,8 +67,12 @@ declare const cellProps: {
     url: StringConstructor;
     replace: BooleanConstructor;
 };
-export declare type CellProps = ExtractPropTypes<typeof cellProps>;
-declare const _default: import("vue").DefineComponent<{
+export type CellProps = ExtractPropTypes<typeof cellProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
+    tag: {
+        type: PropType<T>;
+        default: keyof HTMLElementTagNameMap;
+    };
     icon: StringConstructor;
     size: PropType<CellSize>;
     title: (NumberConstructor | StringConstructor)[];
@@ -66,13 +84,16 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: true;
     };
-    required: BooleanConstructor;
     iconPrefix: StringConstructor;
     valueClass: PropType<unknown>;
     labelClass: PropType<unknown>;
     titleClass: PropType<unknown>;
     titleStyle: PropType<string | CSSProperties>;
     arrowDirection: PropType<CellArrowDirection>;
+    required: {
+        type: PropType<boolean | "auto">;
+        default: null;
+    };
     clickable: {
         type: PropType<boolean | null>;
         default: null;
@@ -81,7 +102,11 @@ declare const _default: import("vue").DefineComponent<{
     to: PropType<import("vue-router").RouteLocationRaw>;
     url: StringConstructor;
     replace: BooleanConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<ExtractPropTypes<{
+    tag: {
+        type: PropType<T>;
+        default: keyof HTMLElementTagNameMap;
+    };
     icon: StringConstructor;
     size: PropType<CellSize>;
     title: (NumberConstructor | StringConstructor)[];
@@ -93,13 +118,16 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: true;
     };
-    required: BooleanConstructor;
     iconPrefix: StringConstructor;
     valueClass: PropType<unknown>;
     labelClass: PropType<unknown>;
     titleClass: PropType<unknown>;
     titleStyle: PropType<string | CSSProperties>;
     arrowDirection: PropType<CellArrowDirection>;
+    required: {
+        type: PropType<boolean | "auto">;
+        default: null;
+    };
     clickable: {
         type: PropType<boolean | null>;
         default: null;
@@ -108,12 +136,13 @@ declare const _default: import("vue").DefineComponent<{
     to: PropType<import("vue-router").RouteLocationRaw>;
     url: StringConstructor;
     replace: BooleanConstructor;
-}>>, {
+}>> & Readonly<{}>, {
     replace: boolean;
-    required: boolean;
+    tag: keyof HTMLElementTagNameMap;
     center: boolean;
-    isLink: boolean;
     border: boolean;
+    isLink: boolean;
+    required: boolean | "auto";
     clickable: boolean | null;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

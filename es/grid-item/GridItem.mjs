@@ -1,5 +1,4 @@
-import { createVNode as _createVNode, mergeProps as _mergeProps } from "vue";
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, mergeProps as _mergeProps, createVNode as _createVNode } from "vue";
 import { BORDER, extend, addUnit, numericProp, createNamespace } from "../utils/index.mjs";
 import { GRID_KEY } from "../grid/Grid.mjs";
 import { useParent } from "@vant/use";
@@ -48,7 +47,7 @@ var stdin_default = defineComponent({
       } else if (gutter) {
         const gutterValue = addUnit(gutter);
         style.paddingRight = gutterValue;
-        if (index.value >= columnNum) {
+        if (index.value >= +columnNum) {
           style.marginTop = gutterValue;
         }
       }
@@ -141,5 +140,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  gridItemProps
 };

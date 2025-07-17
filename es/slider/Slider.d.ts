@@ -1,7 +1,7 @@
 import { type PropType, type ExtractPropTypes } from 'vue';
-declare type NumberRange = [number, number];
-declare type SliderValue = number | NumberRange;
-declare const sliderProps: {
+type NumberRange = [number, number];
+type SliderValue = number | NumberRange;
+export declare const sliderProps: {
     min: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
@@ -28,8 +28,8 @@ declare const sliderProps: {
         default: number;
     };
 };
-export declare type SliderProps = ExtractPropTypes<typeof sliderProps>;
-declare const _default: import("vue").DefineComponent<{
+export type SliderProps = ExtractPropTypes<typeof sliderProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     min: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
@@ -55,7 +55,7 @@ declare const _default: import("vue").DefineComponent<{
         type: PropType<SliderValue>;
         default: number;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change" | "drag-end" | "drag-start")[], "update:modelValue" | "change" | "drag-end" | "drag-start", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change" | "dragStart" | "dragEnd")[], "update:modelValue" | "change" | "dragStart" | "dragEnd", import("vue").PublicProps, Readonly<ExtractPropTypes<{
     min: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
@@ -81,20 +81,20 @@ declare const _default: import("vue").DefineComponent<{
         type: PropType<SliderValue>;
         default: number;
     };
-}>> & {
+}>> & Readonly<{
     onChange?: ((...args: any[]) => any) | undefined;
     "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
-    "onDrag-end"?: ((...args: any[]) => any) | undefined;
-    "onDrag-start"?: ((...args: any[]) => any) | undefined;
-}, {
+    onDragStart?: ((...args: any[]) => any) | undefined;
+    onDragEnd?: ((...args: any[]) => any) | undefined;
+}>, {
+    reverse: boolean;
     range: boolean;
     max: string | number;
-    reverse: boolean;
     disabled: boolean;
-    modelValue: SliderValue;
-    readonly: boolean;
     vertical: boolean;
     min: string | number;
+    modelValue: SliderValue;
+    readonly: boolean;
     step: string | number;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

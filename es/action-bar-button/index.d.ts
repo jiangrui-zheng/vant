@@ -1,4 +1,4 @@
-export declare const ActionBarButton: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const ActionBarButton: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     to: import("vue").PropType<import("vue-router").RouteLocationRaw>;
     url: StringConstructor;
     replace: BooleanConstructor;
@@ -9,7 +9,7 @@ export declare const ActionBarButton: import("../utils").WithInstall<import("vue
     color: StringConstructor;
     loading: BooleanConstructor;
     disabled: BooleanConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
     to: import("vue").PropType<import("vue-router").RouteLocationRaw>;
     url: StringConstructor;
     replace: BooleanConstructor;
@@ -20,13 +20,15 @@ export declare const ActionBarButton: import("../utils").WithInstall<import("vue
     color: StringConstructor;
     loading: BooleanConstructor;
     disabled: BooleanConstructor;
-}>>, {
+}>> & Readonly<{}>, {
     replace: boolean;
     disabled: boolean;
     loading: boolean;
-}>>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default ActionBarButton;
+export { actionBarButtonProps } from './ActionBarButton';
 export type { ActionBarButtonProps } from './ActionBarButton';
+export type { ActionBarButtonThemeVars } from './types';
 declare module 'vue' {
     interface GlobalComponents {
         VanActionBarButton: typeof ActionBarButton;

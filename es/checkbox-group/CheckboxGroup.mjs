@@ -1,11 +1,11 @@
-import { createVNode as _createVNode } from "vue";
-import { watch, defineComponent } from "vue";
-import { numericProp, createNamespace, makeArrayProp } from "../utils/index.mjs";
+import { watch, defineComponent, createVNode as _createVNode } from "vue";
+import { numericProp, makeArrayProp, makeStringProp, createNamespace } from "../utils/index.mjs";
 import { useChildren, useCustomFieldValue } from "@vant/use";
 import { useExpose } from "../composables/use-expose.mjs";
 const [name, bem] = createNamespace("checkbox-group");
 const checkboxGroupProps = {
   max: numericProp,
+  shape: makeStringProp("round"),
   disabled: Boolean,
   iconSize: numericProp,
   direction: String,
@@ -67,5 +67,6 @@ var stdin_default = defineComponent({
 });
 export {
   CHECKBOX_GROUP_KEY,
+  checkboxGroupProps,
   stdin_default as default
 };

@@ -1,16 +1,20 @@
-export declare const Popover: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const Popover: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     show: BooleanConstructor;
     theme: {
-        type: import("vue").PropType<import("./types").PopoverTheme>;
+        type: import("vue").PropType<T>;
         default: import("./types").PopoverTheme;
     };
     overlay: BooleanConstructor;
     actions: {
-        type: import("vue").PropType<import("./types").PopoverAction[]>;
+        type: import("vue").PropType<T_1[]>;
         default: () => never[];
     };
+    actionsDirection: {
+        type: import("vue").PropType<T>;
+        default: import("./types").PopoverActionsDirection;
+    };
     trigger: {
-        type: import("vue").PropType<import("./types").PopoverTrigger>;
+        type: import("vue").PropType<T>;
         default: import("./types").PopoverTrigger;
     };
     duration: (NumberConstructor | StringConstructor)[];
@@ -19,7 +23,7 @@ export declare const Popover: import("../utils").WithInstall<import("vue").Defin
         default: true;
     };
     placement: {
-        type: import("vue").PropType<import("./types").PopoverPlacement>;
+        type: import("vue").PropType<T>;
         default: import("./types").PopoverPlacement;
     };
     iconPrefix: StringConstructor;
@@ -42,22 +46,26 @@ export declare const Popover: import("../utils").WithInstall<import("vue").Defin
         default: () => number[];
     };
     teleport: {
-        type: import("vue").PropType<string | import("vue").RendererElement | null | undefined>;
+        type: import("vue").PropType<import("vue").TeleportProps["to"]>;
         default: string;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("select" | "touchstart" | "update:show")[], "select" | "touchstart" | "update:show", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("select" | "touchstart" | "update:show")[], "select" | "touchstart" | "update:show", import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
     show: BooleanConstructor;
     theme: {
-        type: import("vue").PropType<import("./types").PopoverTheme>;
+        type: import("vue").PropType<T>;
         default: import("./types").PopoverTheme;
     };
     overlay: BooleanConstructor;
     actions: {
-        type: import("vue").PropType<import("./types").PopoverAction[]>;
+        type: import("vue").PropType<T_1[]>;
         default: () => never[];
     };
+    actionsDirection: {
+        type: import("vue").PropType<T>;
+        default: import("./types").PopoverActionsDirection;
+    };
     trigger: {
-        type: import("vue").PropType<import("./types").PopoverTrigger>;
+        type: import("vue").PropType<T>;
         default: import("./types").PopoverTrigger;
     };
     duration: (NumberConstructor | StringConstructor)[];
@@ -66,7 +74,7 @@ export declare const Popover: import("../utils").WithInstall<import("vue").Defin
         default: true;
     };
     placement: {
-        type: import("vue").PropType<import("./types").PopoverPlacement>;
+        type: import("vue").PropType<T>;
         default: import("./types").PopoverPlacement;
     };
     iconPrefix: StringConstructor;
@@ -89,30 +97,32 @@ export declare const Popover: import("../utils").WithInstall<import("vue").Defin
         default: () => number[];
     };
     teleport: {
-        type: import("vue").PropType<string | import("vue").RendererElement | null | undefined>;
+        type: import("vue").PropType<import("vue").TeleportProps["to"]>;
         default: string;
     };
-}>> & {
+}>> & Readonly<{
     onSelect?: ((...args: any[]) => any) | undefined;
     onTouchstart?: ((...args: any[]) => any) | undefined;
     "onUpdate:show"?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     offset: [number, number];
+    theme: import("./types").PopoverTheme;
     overlay: boolean;
     show: boolean;
     teleport: string | import("vue").RendererElement | null | undefined;
     closeOnClickOverlay: boolean;
     actions: import("./types").PopoverAction[];
     closeOnClickAction: boolean;
-    theme: import("./types").PopoverTheme;
     closeOnClickOutside: boolean;
+    actionsDirection: import("./types").PopoverActionsDirection;
     trigger: import("./types").PopoverTrigger;
     showArrow: boolean;
     placement: import("./types").PopoverPlacement;
-}>>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default Popover;
+export { popoverProps } from './Popover';
 export type { PopoverProps } from './Popover';
-export type { PopoverTheme, PopoverAction, PopoverTrigger, PopoverPlacement, } from './types';
+export type { PopoverTheme, PopoverAction, PopoverTrigger, PopoverThemeVars, PopoverPlacement, } from './types';
 declare module 'vue' {
     interface GlobalComponents {
         VanPopover: typeof Popover;

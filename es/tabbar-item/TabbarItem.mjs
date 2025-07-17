@@ -1,5 +1,4 @@
-import { mergeProps as _mergeProps, createVNode as _createVNode } from "vue";
-import { computed, defineComponent, getCurrentInstance } from "vue";
+import { computed, defineComponent, getCurrentInstance, createVNode as _createVNode, mergeProps as _mergeProps } from "vue";
 import { createNamespace, extend, isObject, numericProp } from "../utils/index.mjs";
 import { TABBAR_KEY } from "../tabbar/Tabbar.mjs";
 import { useParent } from "@vant/use";
@@ -116,5 +115,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  tabbarItemProps
 };

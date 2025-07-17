@@ -1,5 +1,5 @@
 import { type ExtractPropTypes } from 'vue';
-declare const cardProps: {
+export declare const cardProps: {
     tag: StringConstructor;
     num: (NumberConstructor | StringConstructor)[];
     desc: StringConstructor;
@@ -9,14 +9,14 @@ declare const cardProps: {
     centered: BooleanConstructor;
     lazyLoad: BooleanConstructor;
     currency: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T>;
         default: string;
     };
     thumbLink: StringConstructor;
     originPrice: (NumberConstructor | StringConstructor)[];
 };
-export declare type CardProps = ExtractPropTypes<typeof cardProps>;
-declare const _default: import("vue").DefineComponent<{
+export type CardProps = ExtractPropTypes<typeof cardProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     tag: StringConstructor;
     num: (NumberConstructor | StringConstructor)[];
     desc: StringConstructor;
@@ -26,12 +26,12 @@ declare const _default: import("vue").DefineComponent<{
     centered: BooleanConstructor;
     lazyLoad: BooleanConstructor;
     currency: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T>;
         default: string;
     };
     thumbLink: StringConstructor;
     originPrice: (NumberConstructor | StringConstructor)[];
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "click-thumb"[], "click-thumb", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "clickThumb"[], "clickThumb", import("vue").PublicProps, Readonly<ExtractPropTypes<{
     tag: StringConstructor;
     num: (NumberConstructor | StringConstructor)[];
     desc: StringConstructor;
@@ -41,16 +41,16 @@ declare const _default: import("vue").DefineComponent<{
     centered: BooleanConstructor;
     lazyLoad: BooleanConstructor;
     currency: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T>;
         default: string;
     };
     thumbLink: StringConstructor;
     originPrice: (NumberConstructor | StringConstructor)[];
-}>> & {
-    "onClick-thumb"?: ((...args: any[]) => any) | undefined;
-}, {
+}>> & Readonly<{
+    onClickThumb?: ((...args: any[]) => any) | undefined;
+}>, {
     lazyLoad: boolean;
     centered: boolean;
     currency: string;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

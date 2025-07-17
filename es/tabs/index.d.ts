@@ -1,7 +1,7 @@
 import { TabsProps } from './Tabs';
-export declare const Tabs: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const Tabs: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     type: {
-        type: import("vue").PropType<import("./types").TabsType>;
+        type: import("vue").PropType<T>;
         default: import("./types").TabsType;
     };
     color: StringConstructor;
@@ -32,6 +32,10 @@ export declare const Tabs: import("../utils").WithInstall<import("vue").DefineCo
         type: BooleanConstructor;
         default: true;
     };
+    showHeader: {
+        type: BooleanConstructor;
+        default: true;
+    };
     lineWidth: (NumberConstructor | StringConstructor)[];
     lineHeight: (NumberConstructor | StringConstructor)[];
     beforeChange: import("vue").PropType<import("../utils").Interceptor>;
@@ -41,9 +45,9 @@ export declare const Tabs: import("../utils").WithInstall<import("vue").DefineCo
     };
     titleActiveColor: StringConstructor;
     titleInactiveColor: StringConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("scroll" | "disabled" | "change" | "click" | "rendered" | "click-tab" | "update:active")[], "scroll" | "disabled" | "change" | "click" | "rendered" | "click-tab" | "update:active", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("scroll" | "change" | "rendered" | "clickTab" | "update:active")[], "scroll" | "change" | "rendered" | "clickTab" | "update:active", import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
     type: {
-        type: import("vue").PropType<import("./types").TabsType>;
+        type: import("vue").PropType<T>;
         default: import("./types").TabsType;
     };
     color: StringConstructor;
@@ -74,6 +78,10 @@ export declare const Tabs: import("../utils").WithInstall<import("vue").DefineCo
         type: BooleanConstructor;
         default: true;
     };
+    showHeader: {
+        type: BooleanConstructor;
+        default: true;
+    };
     lineWidth: (NumberConstructor | StringConstructor)[];
     lineHeight: (NumberConstructor | StringConstructor)[];
     beforeChange: import("vue").PropType<import("../utils").Interceptor>;
@@ -83,32 +91,32 @@ export declare const Tabs: import("../utils").WithInstall<import("vue").DefineCo
     };
     titleActiveColor: StringConstructor;
     titleInactiveColor: StringConstructor;
-}>> & {
+}>> & Readonly<{
     onChange?: ((...args: any[]) => any) | undefined;
-    onClick?: ((...args: any[]) => any) | undefined;
     onScroll?: ((...args: any[]) => any) | undefined;
-    onDisabled?: ((...args: any[]) => any) | undefined;
     onRendered?: ((...args: any[]) => any) | undefined;
-    "onClick-tab"?: ((...args: any[]) => any) | undefined;
+    onClickTab?: ((...args: any[]) => any) | undefined;
     "onUpdate:active"?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     type: import("./types").TabsType;
-    border: boolean;
     ellipsis: boolean;
     sticky: boolean;
+    border: boolean;
     active: string | number;
     duration: string | number;
     lazyRender: boolean;
     offsetTop: string | number;
-    shrink: boolean;
     animated: boolean;
     swipeable: boolean;
+    shrink: boolean;
     scrollspy: boolean;
+    showHeader: boolean;
     swipeThreshold: string | number;
-}>>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default Tabs;
+export { tabsProps } from './Tabs';
 export type { TabsProps };
-export type { TabsType, TabsInstance } from './types';
+export type { TabsType, TabsInstance, TabsThemeVars } from './types';
 declare module 'vue' {
     interface GlobalComponents {
         VanTabs: typeof Tabs;

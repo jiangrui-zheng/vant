@@ -1,6 +1,6 @@
-import { type ExtractPropTypes } from 'vue';
+import { type PropType, type ExtractPropTypes } from 'vue';
 import type { CouponInfo } from '../coupon';
-declare const couponCellProps: {
+export declare const couponCellProps: {
     title: StringConstructor;
     border: {
         type: BooleanConstructor;
@@ -11,20 +11,20 @@ declare const couponCellProps: {
         default: true;
     };
     coupons: {
-        type: import("vue").PropType<CouponInfo[]>;
+        type: PropType<T[]>;
         default: () => never[];
     };
     currency: {
-        type: import("vue").PropType<string>;
+        type: PropType<T_1>;
         default: string;
     };
     chosenCoupon: {
-        type: (NumberConstructor | StringConstructor)[];
+        type: PropType<number | number[]>;
         default: number;
     };
 };
-export declare type CouponCellProps = ExtractPropTypes<typeof couponCellProps>;
-declare const _default: import("vue").DefineComponent<{
+export type CouponCellProps = ExtractPropTypes<typeof couponCellProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     title: StringConstructor;
     border: {
         type: BooleanConstructor;
@@ -35,18 +35,18 @@ declare const _default: import("vue").DefineComponent<{
         default: true;
     };
     coupons: {
-        type: import("vue").PropType<CouponInfo[]>;
+        type: PropType<T[]>;
         default: () => never[];
     };
     currency: {
-        type: import("vue").PropType<string>;
+        type: PropType<T_1>;
         default: string;
     };
     chosenCoupon: {
-        type: (NumberConstructor | StringConstructor)[];
+        type: PropType<number | number[]>;
         default: number;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<ExtractPropTypes<{
     title: StringConstructor;
     border: {
         type: BooleanConstructor;
@@ -57,22 +57,22 @@ declare const _default: import("vue").DefineComponent<{
         default: true;
     };
     coupons: {
-        type: import("vue").PropType<CouponInfo[]>;
+        type: PropType<T[]>;
         default: () => never[];
     };
     currency: {
-        type: import("vue").PropType<string>;
+        type: PropType<T_1>;
         default: string;
     };
     chosenCoupon: {
-        type: (NumberConstructor | StringConstructor)[];
+        type: PropType<number | number[]>;
         default: number;
     };
-}>>, {
+}>> & Readonly<{}>, {
     border: boolean;
     currency: string;
     editable: boolean;
     coupons: CouponInfo[];
-    chosenCoupon: string | number;
-}>;
+    chosenCoupon: number | number[];
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

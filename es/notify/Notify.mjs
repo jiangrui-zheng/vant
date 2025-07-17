@@ -1,9 +1,9 @@
-import { createVNode as _createVNode } from "vue";
-import { defineComponent } from "vue";
-import { extend, numericProp, unknownProp, makeStringProp, createNamespace } from "../utils/index.mjs";
+import { defineComponent, mergeProps as _mergeProps, createVNode as _createVNode } from "vue";
+import { pick, extend, numericProp, unknownProp, makeStringProp, createNamespace } from "../utils/index.mjs";
 import { Popup } from "../popup/index.mjs";
 import { popupSharedProps } from "../popup/shared.mjs";
 const [name, bem] = createNamespace("notify");
+const popupInheritProps = ["lockScroll", "position", "show", "teleport", "zIndex"];
 const notifyProps = extend({}, popupSharedProps, {
   type: makeStringProp("danger"),
   color: String,
@@ -22,23 +22,21 @@ var stdin_default = defineComponent({
     slots
   }) {
     const updateShow = (show) => emit("update:show", show);
-    return () => _createVNode(Popup, {
-      "show": props.show,
+    return () => _createVNode(Popup, _mergeProps({
       "class": [bem([props.type]), props.className],
       "style": {
         color: props.color,
         background: props.background
       },
       "overlay": false,
-      "position": props.position,
       "duration": 0.2,
-      "lockScroll": props.lockScroll,
       "onUpdate:show": updateShow
-    }, {
+    }, pick(props, popupInheritProps)), {
       default: () => [slots.default ? slots.default() : props.message]
     });
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  notifyProps
 };

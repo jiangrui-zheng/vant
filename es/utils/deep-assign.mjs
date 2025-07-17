@@ -1,4 +1,4 @@
-import { isDef, isObject } from "./validate.mjs";
+import { isDef, isObject } from "./basic.mjs";
 const { hasOwnProperty } = Object.prototype;
 function assignKey(to, from, key) {
   const val = from[key];

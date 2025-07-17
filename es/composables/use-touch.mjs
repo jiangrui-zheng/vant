@@ -1,4 +1,5 @@
 import { ref } from "vue";
+import { TAP_OFFSET } from "../utils/index.mjs";
 function getDirection(x, y) {
   if (x > y) {
     return "horizontal";
@@ -16,6 +17,7 @@ function useTouch() {
   const offsetX = ref(0);
   const offsetY = ref(0);
   const direction = ref("");
+  const isTap = ref(true);
   const isVertical = () => direction.value === "vertical";
   const isHorizontal = () => direction.value === "horizontal";
   const reset = () => {
@@ -24,6 +26,7 @@ function useTouch() {
     offsetX.value = 0;
     offsetY.value = 0;
     direction.value = "";
+    isTap.value = true;
   };
   const start = (event) => {
     reset();
@@ -40,6 +43,9 @@ function useTouch() {
     if (!direction.value || offsetX.value < LOCK_DIRECTION_DISTANCE && offsetY.value < LOCK_DIRECTION_DISTANCE) {
       direction.value = getDirection(offsetX.value, offsetY.value);
     }
+    if (isTap.value && (offsetX.value > TAP_OFFSET || offsetY.value > TAP_OFFSET)) {
+      isTap.value = false;
+    }
   };
   return {
     move,
@@ -53,7 +59,8 @@ function useTouch() {
     offsetY,
     direction,
     isVertical,
-    isHorizontal
+    isHorizontal,
+    isTap
   };
 }
 export {

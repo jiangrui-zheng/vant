@@ -1,6 +1,5 @@
-import { createVNode as _createVNode } from "vue";
-import { ref, computed, defineComponent } from "vue";
-import { clamp, addUnit, addNumber, numericProp, getSizeStyle, preventDefault, stopPropagation, createNamespace, makeNumericProp } from "../utils/index.mjs";
+import { ref, computed, defineComponent, createVNode as _createVNode } from "vue";
+import { clamp, addUnit, addNumber, numericProp, isSameValue, getSizeStyle, preventDefault, stopPropagation, createNamespace, makeNumericProp } from "../utils/index.mjs";
 import { useRect, useCustomFieldValue, useEventListener } from "@vant/use";
 import { useTouch } from "../composables/use-touch.mjs";
 const [name, bem] = createNamespace("slider");
@@ -25,7 +24,7 @@ const sliderProps = {
 var stdin_default = defineComponent({
   name,
   props: sliderProps,
-  emits: ["change", "drag-end", "drag-start", "update:modelValue"],
+  emits: ["change", "dragEnd", "dragStart", "update:modelValue"],
   setup(props, {
     emit,
     slots
@@ -34,7 +33,7 @@ var stdin_default = defineComponent({
     let current;
     let startValue;
     const root = ref();
-    const slider = ref();
+    const slider = [ref(), ref()];
     const dragStatus = ref();
     const touch = useTouch();
     const scope = computed(() => Number(props.max) - Number(props.min));
@@ -92,7 +91,14 @@ var stdin_default = defineComponent({
       const diff = Math.round((value - min) / step) * step;
       return addNumber(min, diff);
     };
-    const isSameValue = (newValue, oldValue) => JSON.stringify(newValue) === JSON.stringify(oldValue);
+    const updateStartValue = () => {
+      const current2 = props.modelValue;
+      if (isRange(current2)) {
+        startValue = current2.map(format);
+      } else {
+        startValue = format(current2);
+      }
+    };
     const handleRangeValue = (value) => {
       var _a, _b;
       const left = (_a = value[0]) != null ? _a : Number(props.min);
@@ -117,6 +123,7 @@ var stdin_default = defineComponent({
       if (props.disabled || props.readonly) {
         return;
       }
+      updateStartValue();
       const {
         min,
         reverse,
@@ -156,11 +163,7 @@ var stdin_default = defineComponent({
       }
       touch.start(event);
       current = props.modelValue;
-      if (isRange(current)) {
-        startValue = current.map(format);
-      } else {
-        startValue = format(current);
-      }
+      updateStartValue();
       dragStatus.value = "start";
     };
     const onTouchMove = (event) => {
@@ -168,7 +171,7 @@ var stdin_default = defineComponent({
         return;
       }
       if (dragStatus.value === "start") {
-        emit("drag-start", event);
+        emit("dragStart", event);
       }
       preventDefault(event, true);
       touch.move(event);
@@ -194,7 +197,7 @@ var stdin_default = defineComponent({
       }
       if (dragStatus.value === "dragging") {
         updateValue(current, true);
-        emit("drag-end", event);
+        emit("dragEnd", event);
       }
       dragStatus.value = "";
     };
@@ -206,17 +209,25 @@ var stdin_default = defineComponent({
       return bem("button-wrapper", props.reverse ? "left" : "right");
     };
     const renderButtonContent = (value, index) => {
+      const dragging = dragStatus.value === "dragging";
       if (typeof index === "number") {
         const slot = slots[index === 0 ? "left-button" : "right-button"];
+        let dragIndex;
+        if (dragging && Array.isArray(current)) {
+          dragIndex = current[0] > current[1] ? buttonIndex ^ 1 : buttonIndex;
+        }
         if (slot) {
           return slot({
-            value
+            value,
+            dragging,
+            dragIndex
           });
         }
       }
       if (slots.button) {
         return slots.button({
-          value
+          value,
+          dragging
         });
       }
       return _createVNode("div", {
@@ -227,7 +238,7 @@ var stdin_default = defineComponent({
     const renderButton = (index) => {
       const current2 = typeof index === "number" ? props.modelValue[index] : props.modelValue;
       return _createVNode("div", {
-        "ref": slider,
+        "ref": slider[index != null ? index : 0],
         "role": "slider",
         "class": getButtonClassName(index),
         "tabindex": props.disabled ? void 0 : 0,
@@ -250,8 +261,10 @@ var stdin_default = defineComponent({
     };
     updateValue(props.modelValue);
     useCustomFieldValue(() => props.modelValue);
-    useEventListener("touchmove", onTouchMove, {
-      target: slider
+    slider.forEach((item) => {
+      useEventListener("touchmove", onTouchMove, {
+        target: item
+      });
     });
     return () => _createVNode("div", {
       "ref": root,
@@ -268,5 +281,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  sliderProps
 };

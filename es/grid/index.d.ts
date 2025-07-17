@@ -1,4 +1,4 @@
-export declare const Grid: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const Grid: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     square: BooleanConstructor;
     center: {
         type: BooleanConstructor;
@@ -17,7 +17,7 @@ export declare const Grid: import("../utils").WithInstall<import("vue").DefineCo
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
     square: BooleanConstructor;
     center: {
         type: BooleanConstructor;
@@ -36,15 +36,16 @@ export declare const Grid: import("../utils").WithInstall<import("vue").DefineCo
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-}>>, {
+}>> & Readonly<{}>, {
     reverse: boolean;
     center: boolean;
     border: boolean;
-    clickable: boolean;
     square: boolean;
+    clickable: boolean;
     columnNum: string | number;
-}>>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default Grid;
+export { gridProps } from './Grid';
 export type { GridProps, GridDirection } from './Grid';
 declare module 'vue' {
     interface GlobalComponents {

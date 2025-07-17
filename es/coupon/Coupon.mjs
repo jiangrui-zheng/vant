@@ -1,5 +1,4 @@
-import { createVNode as _createVNode } from "vue";
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, createVNode as _createVNode } from "vue";
 import { makeStringProp, createNamespace, makeRequiredProp } from "../utils/index.mjs";
 import { getDate, formatAmount, formatDiscount } from "./utils.mjs";
 import { Checkbox } from "../checkbox/index.mjs";

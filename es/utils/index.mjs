@@ -4,6 +4,6 @@ export * from "./dom.mjs";
 export * from "./create.mjs";
 export * from "./format.mjs";
 export * from "./constant.mjs";
-export * from "./validate.mjs";
 export * from "./interceptor.mjs";
 export * from "./with-install.mjs";
+export * from "./closest.mjs";

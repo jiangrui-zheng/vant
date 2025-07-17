@@ -1,6 +1,6 @@
-export declare const Pagination: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const Pagination: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     mode: {
-        type: import("vue").PropType<import("./Pagination").PaginationMode>;
+        type: import("vue").PropType<T>;
         default: import("./Pagination").PaginationMode;
     };
     prevText: StringConstructor;
@@ -26,9 +26,17 @@ export declare const Pagination: import("../utils").WithInstall<import("vue").De
         default: number;
     };
     forceEllipses: BooleanConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+    showPrevButton: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    showNextButton: {
+        type: BooleanConstructor;
+        default: true;
+    };
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
     mode: {
-        type: import("vue").PropType<import("./Pagination").PaginationMode>;
+        type: import("vue").PropType<T>;
         default: import("./Pagination").PaginationMode;
     };
     prevText: StringConstructor;
@@ -54,10 +62,18 @@ export declare const Pagination: import("../utils").WithInstall<import("vue").De
         default: number;
     };
     forceEllipses: BooleanConstructor;
-}>> & {
+    showPrevButton: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    showNextButton: {
+        type: BooleanConstructor;
+        default: true;
+    };
+}>> & Readonly<{
     onChange?: ((...args: any[]) => any) | undefined;
     "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     modelValue: number;
     mode: import("./Pagination").PaginationMode;
     pageCount: string | number;
@@ -65,9 +81,13 @@ export declare const Pagination: import("../utils").WithInstall<import("vue").De
     showPageSize: string | number;
     itemsPerPage: string | number;
     forceEllipses: boolean;
-}>>;
+    showPrevButton: boolean;
+    showNextButton: boolean;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default Pagination;
+export { paginationProps } from './Pagination';
 export type { PaginationMode, PaginationProps } from './Pagination';
+export type { PaginationThemeVars } from './types';
 declare module 'vue' {
     interface GlobalComponents {
         VanPagination: typeof Pagination;

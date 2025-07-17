@@ -1,5 +1,4 @@
-import { withDirectives as _withDirectives, vShow as _vShow, createVNode as _createVNode } from "vue";
-import { ref, watch, computed, nextTick, reactive, defineComponent } from "vue";
+import { ref, watch, computed, nextTick, reactive, defineComponent, createVNode as _createVNode, vShow as _vShow, withDirectives as _withDirectives } from "vue";
 import { extend, isObject, isMobile, truthProp, numericProp, makeArrayProp, makeNumericProp, createNamespace } from "../utils/index.mjs";
 import { useExpose } from "../composables/use-expose.mjs";
 import { Area } from "../area/index.mjs";
@@ -7,10 +6,11 @@ import { Cell } from "../cell/index.mjs";
 import { Form } from "../form/index.mjs";
 import { Field } from "../field/index.mjs";
 import { Popup } from "../popup/index.mjs";
-import { Toast } from "../toast/index.mjs";
+import { showToast } from "../toast/index.mjs";
 import { Button } from "../button/index.mjs";
 import { Switch } from "../switch/index.mjs";
 import AddressEditDetail from "./AddressEditDetail.mjs";
+import { AREA_EMPTY_CODE } from "../area/utils.mjs";
 const [name, bem, t] = createNamespace("address-edit");
 const DEFAULT_DATA = {
   name: "",
@@ -21,10 +21,8 @@ const DEFAULT_DATA = {
   province: "",
   areaCode: "",
   isDefault: false,
-  postalCode: "",
   addressDetail: ""
 };
-const isPostal = (value) => /^\d{6}$/.test(value);
 const addressEditProps = {
   areaList: Object,
   isSaving: Boolean,
@@ -33,7 +31,6 @@ const addressEditProps = {
   showArea: truthProp,
   showDetail: truthProp,
   showDelete: Boolean,
-  showPostal: Boolean,
   disableArea: Boolean,
   searchResult: Array,
   telMaxlength: numericProp,
@@ -52,16 +49,12 @@ const addressEditProps = {
   telValidator: {
     type: Function,
     default: isMobile
-  },
-  postalValidator: {
-    type: Function,
-    default: isPostal
   }
 };
 var stdin_default = defineComponent({
   name,
   props: addressEditProps,
-  emits: ["save", "focus", "delete", "click-area", "change-area", "change-detail", "select-search", "change-default"],
+  emits: ["save", "focus", "change", "delete", "clickArea", "changeArea", "changeDetail", "selectSearch", "changeDefault"],
   setup(props, {
     emit,
     slots
@@ -73,14 +66,13 @@ var stdin_default = defineComponent({
     const areaListLoaded = computed(() => isObject(props.areaList) && Object.keys(props.areaList).length);
     const areaText = computed(() => {
       const {
-        country,
         province,
         city,
         county,
         areaCode
       } = data;
       if (areaCode) {
-        const arr = [country, province, city, county];
+        const arr = [province, city, county];
         if (province && province === city) {
           arr.splice(1, 1);
         }
@@ -92,23 +84,20 @@ var stdin_default = defineComponent({
       var _a;
       return ((_a = props.searchResult) == null ? void 0 : _a.length) && detailFocused.value;
     });
-    const assignAreaValues = () => {
-      if (areaRef.value) {
-        const detail = areaRef.value.getArea();
-        detail.areaCode = detail.code;
-        delete detail.code;
-        extend(data, detail);
-      }
-    };
     const onFocus = (key) => {
       detailFocused.value = key === "addressDetail";
       emit("focus", key);
     };
+    const onChange = (key, value) => {
+      emit("change", {
+        key,
+        value
+      });
+    };
     const rules = computed(() => {
       const {
         validator,
-        telValidator,
-        postalValidator
+        telValidator
       } = props;
       const makeRule = (name2, emptyMessage) => ({
         validator: (value) => {
@@ -131,38 +120,34 @@ var stdin_default = defineComponent({
           message: t("telInvalid")
         }],
         areaCode: [makeRule("areaCode", t("areaEmpty"))],
-        addressDetail: [makeRule("addressDetail", t("addressEmpty"))],
-        postalCode: [makeRule("addressDetail", t("postalEmpty")), {
-          validator: postalValidator,
-          message: t("postalEmpty")
-        }]
+        addressDetail: [makeRule("addressDetail", t("addressEmpty"))]
       };
     });
     const onSave = () => emit("save", data);
     const onChangeDetail = (val) => {
       data.addressDetail = val;
-      emit("change-detail", val);
+      emit("changeDetail", val);
     };
-    const onAreaConfirm = (values) => {
-      values = values.filter(Boolean);
-      if (values.some((value) => !value.code)) {
-        Toast(t("areaEmpty"));
+    const assignAreaText = (options) => {
+      data.province = options[0].text;
+      data.city = options[1].text;
+      data.county = options[2].text;
+    };
+    const onAreaConfirm = ({
+      selectedValues,
+      selectedOptions
+    }) => {
+      if (selectedValues.some((value) => value === AREA_EMPTY_CODE)) {
+        showToast(t("areaEmpty"));
       } else {
         showAreaPopup.value = false;
-        assignAreaValues();
-        emit("change-area", values);
+        assignAreaText(selectedOptions);
+        emit("changeArea", selectedOptions);
       }
     };
     const onDelete = () => emit("delete", data);
-    const getArea = () => {
-      var _a;
-      return ((_a = areaRef.value) == null ? void 0 : _a.getValues()) || [];
-    };
     const setAreaCode = (code) => {
       data.areaCode = code || "";
-      if (code) {
-        nextTick(assignAreaValues);
-      }
     };
     const onDetailBlur = () => {
       setTimeout(() => {
@@ -178,26 +163,30 @@ var stdin_default = defineComponent({
           "right-icon": () => _createVNode(Switch, {
             "modelValue": data.isDefault,
             "onUpdate:modelValue": ($event) => data.isDefault = $event,
-            "size": "24",
-            "onChange": (event) => emit("change-default", event)
+            "onChange": (event) => emit("changeDefault", event)
           }, null)
         };
         return _withDirectives(_createVNode(Cell, {
           "center": true,
+          "border": false,
           "title": t("defaultAddress"),
           "class": bem("default")
         }, slots2), [[_vShow, !hideBottomFields.value]]);
       }
     };
     useExpose({
-      getArea,
       setAreaCode,
       setAddressDetail
     });
-    watch(() => props.areaList, () => setAreaCode(data.areaCode));
     watch(() => props.addressInfo, (value) => {
       extend(data, DEFAULT_DATA, value);
-      setAreaCode(value.areaCode);
+      nextTick(() => {
+        var _a;
+        const options = (_a = areaRef.value) == null ? void 0 : _a.getSelectedOptions();
+        if (options && options.every((option) => option && option.value !== AREA_EMPTY_CODE)) {
+          assignAreaText(options);
+        }
+      });
     }, {
       deep: true,
       immediate: true
@@ -216,7 +205,7 @@ var stdin_default = defineComponent({
             "class": bem("fields")
           }, [_createVNode(Field, {
             "modelValue": data.name,
-            "onUpdate:modelValue": ($event) => data.name = $event,
+            "onUpdate:modelValue": [($event) => data.name = $event, (val) => onChange("name", val)],
             "clearable": true,
             "label": t("name"),
             "rules": rules.value.name,
@@ -224,7 +213,7 @@ var stdin_default = defineComponent({
             "onFocus": () => onFocus("name")
           }, null), _createVNode(Field, {
             "modelValue": data.tel,
-            "onUpdate:modelValue": ($event) => data.tel = $event,
+            "onUpdate:modelValue": [($event) => data.tel = $event, (val) => onChange("tel", val)],
             "clearable": true,
             "type": "tel",
             "label": t("tel"),
@@ -237,11 +226,11 @@ var stdin_default = defineComponent({
             "label": t("area"),
             "is-link": !disableArea,
             "modelValue": areaText.value,
-            "rules": rules.value.areaCode,
+            "rules": props.showArea ? rules.value.areaCode : void 0,
             "placeholder": props.areaPlaceholder || t("area"),
             "onFocus": () => onFocus("areaCode"),
             "onClick": () => {
-              emit("click-area");
+              emit("clickArea");
               showAreaPopup.value = !disableArea;
             }
           }, null), [[_vShow, props.showArea]]), _createVNode(AddressEditDetail, {
@@ -256,22 +245,13 @@ var stdin_default = defineComponent({
             "onBlur": onDetailBlur,
             "onFocus": () => onFocus("addressDetail"),
             "onInput": onChangeDetail,
-            "onSelect-search": (event) => emit("select-search", event)
-          }, null), props.showPostal && _withDirectives(_createVNode(Field, {
-            "modelValue": data.postalCode,
-            "onUpdate:modelValue": ($event) => data.postalCode = $event,
-            "type": "tel",
-            "rules": rules.value.postalCode,
-            "label": t("postal"),
-            "maxlength": "6",
-            "placeholder": t("postal"),
-            "onFocus": () => onFocus("postalCode")
-          }, null), [[_vShow, !hideBottomFields.value]]), (_a = slots.default) == null ? void 0 : _a.call(slots)]), renderSetDefaultCell(), _withDirectives(_createVNode("div", {
+            "onSelectSearch": (event) => emit("selectSearch", event)
+          }, null), (_a = slots.default) == null ? void 0 : _a.call(slots)]), renderSetDefaultCell(), _withDirectives(_createVNode("div", {
             "class": bem("buttons")
           }, [_createVNode(Button, {
             "block": true,
             "round": true,
-            "type": "danger",
+            "type": "primary",
             "text": props.saveButtonText || t("save"),
             "class": bem("button"),
             "loading": props.isSaving,
@@ -292,8 +272,9 @@ var stdin_default = defineComponent({
             "lazyRender": false
           }, {
             default: () => [_createVNode(Area, {
+              "modelValue": data.areaCode,
+              "onUpdate:modelValue": ($event) => data.areaCode = $event,
               "ref": areaRef,
-              "value": data.areaCode,
               "loading": !areaListLoaded.value,
               "areaList": props.areaList,
               "columnsPlaceholder": props.areaColumnsPlaceholder,
@@ -309,5 +290,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
+  addressEditProps,
   stdin_default as default
 };

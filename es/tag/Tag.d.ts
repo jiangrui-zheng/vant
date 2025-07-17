@@ -1,7 +1,6 @@
 import { type PropType, type ExtractPropTypes } from 'vue';
-export declare type TagSize = 'large' | 'medium';
-export declare type TagType = 'default' | 'primary' | 'success' | 'warning' | 'danger';
-declare const tagProps: {
+import type { TagType, TagSize } from './types';
+export declare const tagProps: {
     size: PropType<TagSize>;
     mark: BooleanConstructor;
     show: {
@@ -9,7 +8,7 @@ declare const tagProps: {
         default: true;
     };
     type: {
-        type: PropType<TagType>;
+        type: PropType<T>;
         default: TagType;
     };
     color: StringConstructor;
@@ -18,8 +17,8 @@ declare const tagProps: {
     textColor: StringConstructor;
     closeable: BooleanConstructor;
 };
-export declare type TagProps = ExtractPropTypes<typeof tagProps>;
-declare const _default: import("vue").DefineComponent<{
+export type TagProps = ExtractPropTypes<typeof tagProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     size: PropType<TagSize>;
     mark: BooleanConstructor;
     show: {
@@ -27,7 +26,7 @@ declare const _default: import("vue").DefineComponent<{
         default: true;
     };
     type: {
-        type: PropType<TagType>;
+        type: PropType<T>;
         default: TagType;
     };
     color: StringConstructor;
@@ -35,7 +34,7 @@ declare const _default: import("vue").DefineComponent<{
     round: BooleanConstructor;
     textColor: StringConstructor;
     closeable: BooleanConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "close"[], "close", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "close"[], "close", import("vue").PublicProps, Readonly<ExtractPropTypes<{
     size: PropType<TagSize>;
     mark: BooleanConstructor;
     show: {
@@ -43,7 +42,7 @@ declare const _default: import("vue").DefineComponent<{
         default: true;
     };
     type: {
-        type: PropType<TagType>;
+        type: PropType<T>;
         default: TagType;
     };
     color: StringConstructor;
@@ -51,14 +50,14 @@ declare const _default: import("vue").DefineComponent<{
     round: BooleanConstructor;
     textColor: StringConstructor;
     closeable: BooleanConstructor;
-}>> & {
+}>> & Readonly<{
     onClose?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     type: TagType;
     mark: boolean;
     round: boolean;
     show: boolean;
     plain: boolean;
     closeable: boolean;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

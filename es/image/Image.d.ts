@@ -1,11 +1,10 @@
-import { type PropType, type ExtractPropTypes } from 'vue';
-export declare type ImageFit = 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
-export declare type ImagePosition = 'center' | 'top' | 'right' | 'bottom' | 'left' | string;
-declare const imageProps: {
+import { type PropType, type ExtractPropTypes, type ImgHTMLAttributes } from 'vue';
+import type { ImageFit, ImagePosition } from './types';
+export declare const imageProps: {
     src: StringConstructor;
     alt: StringConstructor;
     fit: PropType<ImageFit>;
-    position: PropType<string>;
+    position: PropType<ImagePosition>;
     round: BooleanConstructor;
     block: BooleanConstructor;
     width: (NumberConstructor | StringConstructor)[];
@@ -18,7 +17,7 @@ declare const imageProps: {
         default: true;
     };
     errorIcon: {
-        type: PropType<string>;
+        type: PropType<T>;
         default: string;
     };
     iconPrefix: StringConstructor;
@@ -27,16 +26,18 @@ declare const imageProps: {
         default: true;
     };
     loadingIcon: {
-        type: PropType<string>;
+        type: PropType<T>;
         default: string;
     };
+    crossorigin: PropType<ImgHTMLAttributes["crossorigin"]>;
+    referrerpolicy: PropType<ImgHTMLAttributes["referrerpolicy"]>;
 };
-export declare type ImageProps = ExtractPropTypes<typeof imageProps>;
-declare const _default: import("vue").DefineComponent<{
+export type ImageProps = ExtractPropTypes<typeof imageProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     src: StringConstructor;
     alt: StringConstructor;
     fit: PropType<ImageFit>;
-    position: PropType<string>;
+    position: PropType<ImagePosition>;
     round: BooleanConstructor;
     block: BooleanConstructor;
     width: (NumberConstructor | StringConstructor)[];
@@ -49,7 +50,7 @@ declare const _default: import("vue").DefineComponent<{
         default: true;
     };
     errorIcon: {
-        type: PropType<string>;
+        type: PropType<T>;
         default: string;
     };
     iconPrefix: StringConstructor;
@@ -58,14 +59,16 @@ declare const _default: import("vue").DefineComponent<{
         default: true;
     };
     loadingIcon: {
-        type: PropType<string>;
+        type: PropType<T>;
         default: string;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("error" | "load")[], "error" | "load", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+    crossorigin: PropType<ImgHTMLAttributes["crossorigin"]>;
+    referrerpolicy: PropType<ImgHTMLAttributes["referrerpolicy"]>;
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("error" | "load")[], "error" | "load", import("vue").PublicProps, Readonly<ExtractPropTypes<{
     src: StringConstructor;
     alt: StringConstructor;
     fit: PropType<ImageFit>;
-    position: PropType<string>;
+    position: PropType<ImagePosition>;
     round: BooleanConstructor;
     block: BooleanConstructor;
     width: (NumberConstructor | StringConstructor)[];
@@ -78,7 +81,7 @@ declare const _default: import("vue").DefineComponent<{
         default: true;
     };
     errorIcon: {
-        type: PropType<string>;
+        type: PropType<T>;
         default: string;
     };
     iconPrefix: StringConstructor;
@@ -87,19 +90,21 @@ declare const _default: import("vue").DefineComponent<{
         default: true;
     };
     loadingIcon: {
-        type: PropType<string>;
+        type: PropType<T>;
         default: string;
     };
-}>> & {
+    crossorigin: PropType<ImgHTMLAttributes["crossorigin"]>;
+    referrerpolicy: PropType<ImgHTMLAttributes["referrerpolicy"]>;
+}>> & Readonly<{
     onLoad?: ((...args: any[]) => any) | undefined;
     onError?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     round: boolean;
-    showError: boolean;
     block: boolean;
+    showError: boolean;
     lazyLoad: boolean;
     errorIcon: string;
     showLoading: boolean;
     loadingIcon: string;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

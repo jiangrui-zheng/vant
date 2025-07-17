@@ -1,5 +1,4 @@
-import { Fragment as _Fragment, withDirectives as _withDirectives, mergeProps as _mergeProps, vShow as _vShow, createVNode as _createVNode } from "vue";
-import { ref, watch, provide, Teleport, nextTick, computed, onMounted, Transition, onActivated, onDeactivated, defineComponent } from "vue";
+import { ref, watch, provide, Teleport, nextTick, computed, onMounted, Transition, onActivated, onDeactivated, defineComponent, mergeProps as _mergeProps, createVNode as _createVNode, vShow as _vShow, withDirectives as _withDirectives, Fragment as _Fragment } from "vue";
 import { popupSharedProps } from "./shared.mjs";
 import { isDef, extend, makeStringProp, callInterceptor, createNamespace, HAPTICS_FEEDBACK } from "../utils/index.mjs";
 import { useEventListener } from "@vant/use";
@@ -8,6 +7,7 @@ import { useLockScroll } from "../composables/use-lock-scroll.mjs";
 import { useLazyRender } from "../composables/use-lazy-render.mjs";
 import { POPUP_TOGGLE_KEY } from "../composables/on-popup-reopen.mjs";
 import { useGlobalZIndex } from "../composables/use-global-z-index.mjs";
+import { useScopeId } from "../composables/use-scope-id.mjs";
 import { Icon } from "../icon/index.mjs";
 import { Overlay } from "../overlay/index.mjs";
 const popupProps = extend({}, popupSharedProps, {
@@ -19,6 +19,7 @@ const popupProps = extend({}, popupSharedProps, {
   iconPrefix: String,
   closeOnPopstate: Boolean,
   closeIconPosition: makeStringProp("top-right"),
+  destroyOnClose: Boolean,
   safeAreaInsetTop: Boolean,
   safeAreaInsetBottom: Boolean
 });
@@ -27,7 +28,7 @@ var stdin_default = defineComponent({
   name,
   inheritAttrs: false,
   props: popupProps,
-  emits: ["open", "close", "opened", "closed", "keydown", "update:show", "click-overlay", "click-close-icon"],
+  emits: ["open", "close", "opened", "closed", "keydown", "update:show", "clickOverlay", "clickCloseIcon"],
   setup(props, {
     emit,
     attrs,
@@ -67,29 +68,30 @@ var stdin_default = defineComponent({
       }
     };
     const onClickOverlay = (event) => {
-      emit("click-overlay", event);
+      emit("clickOverlay", event);
       if (props.closeOnClickOverlay) {
         close();
       }
     };
     const renderOverlay = () => {
       if (props.overlay) {
-        return _createVNode(Overlay, {
+        return _createVNode(Overlay, _mergeProps({
           "show": props.show,
           "class": props.overlayClass,
           "zIndex": zIndex.value,
           "duration": props.duration,
           "customStyle": props.overlayStyle,
           "role": props.closeOnClickOverlay ? "button" : void 0,
-          "tabindex": props.closeOnClickOverlay ? 0 : void 0,
+          "tabindex": props.closeOnClickOverlay ? 0 : void 0
+        }, useScopeId(), {
           "onClick": onClickOverlay
-        }, {
+        }), {
           default: slots["overlay-content"]
         });
       }
     };
     const onClickCloseIcon = (event) => {
-      emit("click-close-icon", event);
+      emit("clickCloseIcon", event);
       close();
     };
     const renderCloseIcon = () => {
@@ -104,17 +106,28 @@ var stdin_default = defineComponent({
         }, null);
       }
     };
-    const onOpened = () => emit("opened");
+    let timer;
+    const onOpened = () => {
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(() => {
+        emit("opened");
+      });
+    };
     const onClosed = () => emit("closed");
     const onKeydown = (event) => emit("keydown", event);
     const renderPopup = lazyRender(() => {
       var _a;
       const {
+        destroyOnClose,
         round,
         position,
         safeAreaInsetTop,
-        safeAreaInsetBottom
+        safeAreaInsetBottom,
+        show
       } = props;
+      if (!show && destroyOnClose) {
+        return;
+      }
       return _withDirectives(_createVNode("div", _mergeProps({
         "ref": popupRef,
         "style": style.value,
@@ -128,7 +141,7 @@ var stdin_default = defineComponent({
           "van-safe-area-bottom": safeAreaInsetBottom
         }],
         "onKeydown": onKeydown
-      }, attrs), [(_a = slots.default) == null ? void 0 : _a.call(slots), renderCloseIcon()]), [[_vShow, props.show]]);
+      }, attrs, useScopeId()), [(_a = slots.default) == null ? void 0 : _a.call(slots), renderCloseIcon()]), [[_vShow, show]]);
     });
     const renderTransition = () => {
       const {
@@ -202,5 +215,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  popupProps
 };

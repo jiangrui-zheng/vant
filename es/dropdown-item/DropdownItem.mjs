@@ -1,8 +1,7 @@
-import { withDirectives as _withDirectives, vShow as _vShow, createVNode as _createVNode } from "vue";
-import { reactive, Teleport, defineComponent } from "vue";
-import { truthProp, unknownProp, getZIndexStyle, createNamespace, makeArrayProp } from "../utils/index.mjs";
+import { reactive, Teleport, defineComponent, ref, createVNode as _createVNode, vShow as _vShow, mergeProps as _mergeProps, withDirectives as _withDirectives } from "vue";
+import { truthProp, unknownProp, getZIndexStyle, createNamespace, makeArrayProp, getContainingBlock } from "../utils/index.mjs";
 import { DROPDOWN_KEY } from "../dropdown-menu/DropdownMenu.mjs";
-import { useParent } from "@vant/use";
+import { useParent, useRect } from "@vant/use";
 import { useExpose } from "../composables/use-expose.mjs";
 import { Cell } from "../cell/index.mjs";
 import { Icon } from "../icon/index.mjs";
@@ -19,17 +18,20 @@ const dropdownItemProps = {
 };
 var stdin_default = defineComponent({
   name,
+  inheritAttrs: false,
   props: dropdownItemProps,
   emits: ["open", "opened", "close", "closed", "change", "update:modelValue"],
   setup(props, {
     emit,
-    slots
+    slots,
+    attrs
   }) {
     const state = reactive({
       showPopup: false,
       transition: true,
       showWrapper: false
     });
+    const wrapperRef = ref();
     const {
       parent,
       index
@@ -60,6 +62,7 @@ var stdin_default = defineComponent({
       state.showPopup = show;
       state.transition = !options.immediate;
       if (show) {
+        parent.updateOffset();
         state.showWrapper = true;
       }
     };
@@ -77,8 +80,14 @@ var stdin_default = defineComponent({
       const {
         activeColor
       } = parent.props;
+      const {
+        disabled
+      } = option;
       const active = option.value === props.modelValue;
       const onClick = () => {
+        if (disabled) {
+          return;
+        }
         state.showPopup = false;
         if (option.value !== props.modelValue) {
           emit("update:modelValue", option.value);
@@ -89,24 +98,25 @@ var stdin_default = defineComponent({
         if (active) {
           return _createVNode(Icon, {
             "class": bem("icon"),
-            "color": activeColor,
+            "color": disabled ? void 0 : activeColor,
             "name": "success"
           }, null);
         }
       };
       return _createVNode(Cell, {
         "role": "menuitem",
-        "key": option.value,
+        "key": String(option.value),
         "icon": option.icon,
         "title": option.text,
         "class": bem("option", {
-          active
+          active,
+          disabled
         }),
         "style": {
           color: active ? activeColor : ""
         },
         "tabindex": active ? 0 : -1,
-        "clickable": true,
+        "clickable": !disabled,
         "onClick": onClick
       }, {
         value: renderIcon
@@ -117,6 +127,7 @@ var stdin_default = defineComponent({
         offset
       } = parent;
       const {
+        autoLocate,
         zIndex,
         overlay,
         duration,
@@ -124,16 +135,24 @@ var stdin_default = defineComponent({
         closeOnClickOverlay
       } = parent.props;
       const style = getZIndexStyle(zIndex);
-      if (direction === "down") {
-        style.top = `${offset.value}px`;
-      } else {
-        style.bottom = `${offset.value}px`;
+      let offsetValue = offset.value;
+      if (autoLocate && wrapperRef.value) {
+        const offsetParent = getContainingBlock(wrapperRef.value);
+        if (offsetParent) {
+          offsetValue -= useRect(offsetParent).top;
+        }
       }
-      return _withDirectives(_createVNode("div", {
+      if (direction === "down") {
+        style.top = `${offsetValue}px`;
+      } else {
+        style.bottom = `${offsetValue}px`;
+      }
+      return _withDirectives(_createVNode("div", _mergeProps({
+        "ref": wrapperRef,
         "style": style,
         "class": bem([direction]),
         "onClick": onClickWrapper
-      }, [_createVNode(Popup, {
+      }, attrs), [_createVNode(Popup, {
         "show": state.showPopup,
         "onUpdate:show": ($event) => state.showPopup = $event,
         "role": "menu",
@@ -146,6 +165,7 @@ var stdin_default = defineComponent({
           position: "absolute"
         },
         "aria-labelledby": `${parent.id}-${index.value}`,
+        "data-allow-mismatch": "attribute",
         "closeOnClickOverlay": closeOnClickOverlay,
         "onOpen": onOpen,
         "onClose": onClose,
@@ -176,5 +196,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  dropdownItemProps
 };
