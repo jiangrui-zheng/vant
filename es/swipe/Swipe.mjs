@@ -1,5 +1,4 @@
-import { createVNode as _createVNode } from "vue";
-import { ref, watch, reactive, computed, onMounted, onActivated, onDeactivated, onBeforeUnmount, defineComponent, nextTick } from "vue";
+import { ref, watch, reactive, computed, onMounted, onActivated, onDeactivated, onBeforeUnmount, defineComponent, nextTick, createVNode as _createVNode } from "vue";
 import { clamp, isHidden, truthProp, numericProp, windowWidth, windowHeight, preventDefault, createNamespace, makeNumericProp } from "../utils/index.mjs";
 import { doubleRaf, useChildren, useEventListener, usePageVisibility } from "@vant/use";
 import { useTouch } from "../composables/use-touch.mjs";
@@ -24,7 +23,7 @@ const SWIPE_KEY = Symbol(name);
 var stdin_default = defineComponent({
   name,
   props: swipeProps,
-  emits: ["change"],
+  emits: ["change", "dragStart", "dragEnd"],
   setup(props, {
     emit,
     slots
@@ -39,6 +38,7 @@ var stdin_default = defineComponent({
       active: 0,
       swiping: false
     });
+    let dragging = false;
     const touch = useTouch();
     const {
       children,
@@ -54,7 +54,7 @@ var stdin_default = defineComponent({
       }
       return 0;
     });
-    const maxCount = computed(() => Math.ceil(Math.abs(minOffset.value) / size.value));
+    const maxCount = computed(() => size.value ? Math.ceil(Math.abs(minOffset.value) / size.value) : count.value);
     const trackSize = computed(() => count.value * size.value);
     const activeIndicator = computed(() => (state.active + count.value) % count.value);
     const isCorrectDirection = computed(() => {
@@ -64,7 +64,7 @@ var stdin_default = defineComponent({
     const trackStyle = computed(() => {
       const style = {
         transitionDuration: `${state.swiping ? 0 : props.duration}ms`,
-        transform: `translate${props.vertical ? "Y" : "X"}(${state.offset}px)`
+        transform: `translate${props.vertical ? "Y" : "X"}(${+state.offset.toFixed(2)}px)`
       };
       if (size.value) {
         const mainAxis = props.vertical ? "height" : "width";
@@ -164,7 +164,7 @@ var stdin_default = defineComponent({
     const stopAutoplay = () => clearTimeout(autoplayTimer);
     const autoplay = () => {
       stopAutoplay();
-      if (props.autoplay > 0 && count.value > 1) {
+      if (+props.autoplay > 0 && count.value > 1) {
         autoplayTimer = setTimeout(() => {
           next();
           autoplay();
@@ -188,6 +188,9 @@ var stdin_default = defineComponent({
         }
         if (count.value) {
           active = Math.min(count.value - 1, active);
+          if (active === -1) {
+            active = count.value - 1;
+          }
         }
         state.active = active;
         state.swiping = true;
@@ -206,9 +209,10 @@ var stdin_default = defineComponent({
     const resize = () => initialize(state.active);
     let touchStartTime;
     const onTouchStart = (event) => {
-      if (!props.touchable)
-        return;
+      if (!props.touchable || // avoid resetting position on multi-finger touch
+      event.touches.length > 1) return;
       touch.start(event);
+      dragging = false;
       touchStartTime = Date.now();
       stopAutoplay();
       correctPosition();
@@ -223,6 +227,12 @@ var stdin_default = defineComponent({
             move({
               offset: delta.value
             });
+            if (!dragging) {
+              emit("dragStart", {
+                index: activeIndicator.value
+              });
+              dragging = true;
+            }
           }
         }
       }
@@ -251,7 +261,11 @@ var stdin_default = defineComponent({
           pace: 0
         });
       }
+      dragging = false;
       state.swiping = false;
+      emit("dragEnd", {
+        index: activeIndicator.value
+      });
       autoplay();
     };
     const swipeTo = (index, options = {}) => {
@@ -320,7 +334,7 @@ var stdin_default = defineComponent({
     watch(() => props.initialSwipe, (value) => initialize(+value));
     watch(count, () => initialize(state.active));
     watch(() => props.autoplay, autoplay);
-    watch([windowWidth, windowHeight], resize);
+    watch([windowWidth, windowHeight, () => props.width, () => props.height], resize);
     watch(usePageVisibility(), (visible) => {
       if (visible === "visible") {
         autoplay();
@@ -356,5 +370,6 @@ var stdin_default = defineComponent({
 });
 export {
   SWIPE_KEY,
-  stdin_default as default
+  stdin_default as default,
+  swipeProps
 };

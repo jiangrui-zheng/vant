@@ -1,13 +1,17 @@
-import { createVNode as _createVNode, mergeProps as _mergeProps } from "vue";
-import { watch, computed, defineComponent } from "vue";
-import { createNamespace, extend, pick, truthProp } from "../utils/index.mjs";
+import { watch, computed, defineComponent, mergeProps as _mergeProps, createVNode as _createVNode } from "vue";
+import { pick, extend, truthProp, createNamespace } from "../utils/index.mjs";
 import { CHECKBOX_GROUP_KEY } from "../checkbox-group/CheckboxGroup.mjs";
 import { useParent, useCustomFieldValue } from "@vant/use";
 import { useExpose } from "../composables/use-expose.mjs";
 import Checker, { checkerProps } from "./Checker.mjs";
 const [name, bem] = createNamespace("checkbox");
 const checkboxProps = extend({}, checkerProps, {
-  bindGroup: truthProp
+  shape: String,
+  bindGroup: truthProp,
+  indeterminate: {
+    type: Boolean,
+    default: null
+  }
 });
 var stdin_default = defineComponent({
   name,
@@ -30,7 +34,7 @@ var stdin_default = defineComponent({
       } = parent.props;
       const value = modelValue.slice();
       if (checked2) {
-        const overlimit = max && value.length >= max;
+        const overlimit = max && value.length >= +max;
         if (!overlimit && !value.includes(name2)) {
           value.push(name2);
           if (props.bindGroup) {
@@ -59,8 +63,11 @@ var stdin_default = defineComponent({
       } else {
         emit("update:modelValue", newValue);
       }
+      if (props.indeterminate !== null) emit("change", newValue);
     };
-    watch(() => props.modelValue, (value) => emit("change", value));
+    watch(() => props.modelValue, (value) => {
+      if (props.indeterminate === null) emit("change", value);
+    });
     useExpose({
       toggle,
       props,
@@ -77,5 +84,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
+  checkboxProps,
   stdin_default as default
 };

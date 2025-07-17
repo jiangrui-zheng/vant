@@ -1,5 +1,6 @@
 import { type ExtractPropTypes } from 'vue';
-export declare type ActionSheetAction = {
+export type ActionSheetAction = {
+    icon?: string;
     name?: string;
     color?: string;
     subname?: string;
@@ -8,7 +9,7 @@ export declare type ActionSheetAction = {
     callback?: (action: ActionSheetAction) => void;
     className?: unknown;
 };
-declare const actionSheetProps: {
+export declare const actionSheetProps: {
     show: BooleanConstructor;
     zIndex: (NumberConstructor | StringConstructor)[];
     overlay: {
@@ -16,7 +17,7 @@ declare const actionSheetProps: {
         default: true;
     };
     duration: (NumberConstructor | StringConstructor)[];
-    teleport: import("vue").PropType<string | import("vue").RendererElement | null | undefined>;
+    teleport: import("vue").PropType<import("vue").TeleportProps["to"]>;
     lockScroll: {
         type: BooleanConstructor;
         default: true;
@@ -40,11 +41,11 @@ declare const actionSheetProps: {
         default: true;
     };
     actions: {
-        type: import("vue").PropType<ActionSheetAction[]>;
+        type: import("vue").PropType<T[]>;
         default: () => never[];
     };
     closeIcon: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T_1>;
         default: string;
     };
     closeable: {
@@ -63,8 +64,8 @@ declare const actionSheetProps: {
         default: true;
     };
 };
-export declare type ActionSheetProps = ExtractPropTypes<typeof actionSheetProps>;
-declare const _default: import("vue").DefineComponent<{
+export type ActionSheetProps = ExtractPropTypes<typeof actionSheetProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     show: BooleanConstructor;
     zIndex: (NumberConstructor | StringConstructor)[];
     overlay: {
@@ -72,7 +73,7 @@ declare const _default: import("vue").DefineComponent<{
         default: true;
     };
     duration: (NumberConstructor | StringConstructor)[];
-    teleport: import("vue").PropType<string | import("vue").RendererElement | null | undefined>;
+    teleport: import("vue").PropType<import("vue").TeleportProps["to"]>;
     lockScroll: {
         type: BooleanConstructor;
         default: true;
@@ -96,11 +97,11 @@ declare const _default: import("vue").DefineComponent<{
         default: true;
     };
     actions: {
-        type: import("vue").PropType<ActionSheetAction[]>;
+        type: import("vue").PropType<T[]>;
         default: () => never[];
     };
     closeIcon: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T_1>;
         default: string;
     };
     closeable: {
@@ -118,7 +119,7 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: true;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("select" | "update:show" | "cancel")[], "select" | "update:show" | "cancel", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("select" | "cancel" | "update:show")[], "select" | "cancel" | "update:show", import("vue").PublicProps, Readonly<ExtractPropTypes<{
     show: BooleanConstructor;
     zIndex: (NumberConstructor | StringConstructor)[];
     overlay: {
@@ -126,7 +127,7 @@ declare const _default: import("vue").DefineComponent<{
         default: true;
     };
     duration: (NumberConstructor | StringConstructor)[];
-    teleport: import("vue").PropType<string | import("vue").RendererElement | null | undefined>;
+    teleport: import("vue").PropType<import("vue").TeleportProps["to"]>;
     lockScroll: {
         type: BooleanConstructor;
         default: true;
@@ -150,11 +151,11 @@ declare const _default: import("vue").DefineComponent<{
         default: true;
     };
     actions: {
-        type: import("vue").PropType<ActionSheetAction[]>;
+        type: import("vue").PropType<T[]>;
         default: () => never[];
     };
     closeIcon: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T_1>;
         default: string;
     };
     closeable: {
@@ -172,15 +173,15 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: true;
     };
-}>> & {
+}>> & Readonly<{
     onSelect?: ((...args: any[]) => any) | undefined;
     "onUpdate:show"?: ((...args: any[]) => any) | undefined;
     onCancel?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     round: boolean;
-    safeAreaInsetBottom: boolean;
     overlay: boolean;
     show: boolean;
+    safeAreaInsetBottom: boolean;
     lockScroll: boolean;
     lazyRender: boolean;
     transitionAppear: boolean;
@@ -190,5 +191,5 @@ declare const _default: import("vue").DefineComponent<{
     closeOnPopstate: boolean;
     actions: ActionSheetAction[];
     closeOnClickAction: boolean;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

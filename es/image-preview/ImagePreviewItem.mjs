@@ -1,24 +1,35 @@
-import { createVNode as _createVNode } from "vue";
-import { ref, watch, computed, reactive, defineComponent } from "vue";
-import { clamp, numericProp, preventDefault, createNamespace, makeRequiredProp } from "../utils/index.mjs";
+import { ref, watch, computed, reactive, defineComponent, createVNode as _createVNode } from "vue";
+import { clamp, numericProp, preventDefault, createNamespace, makeRequiredProp, LONG_PRESS_START_TIME } from "../utils/index.mjs";
+import { useExpose } from "../composables/use-expose.mjs";
 import { useTouch } from "../composables/use-touch.mjs";
-import { useEventListener } from "@vant/use";
+import { raf, useEventListener, useRect } from "@vant/use";
 import { Image } from "../image/index.mjs";
 import { Loading } from "../loading/index.mjs";
 import { SwipeItem } from "../swipe-item/index.mjs";
 const getDistance = (touches) => Math.sqrt((touches[0].clientX - touches[1].clientX) ** 2 + (touches[0].clientY - touches[1].clientY) ** 2);
+const getCenter = (touches) => ({
+  x: (touches[0].clientX + touches[1].clientX) / 2,
+  y: (touches[0].clientY + touches[1].clientY) / 2
+});
 const bem = createNamespace("image-preview")[1];
+const longImageRatio = 2.6;
+const imagePreviewItemProps = {
+  src: String,
+  show: Boolean,
+  active: Number,
+  minZoom: makeRequiredProp(numericProp),
+  maxZoom: makeRequiredProp(numericProp),
+  rootWidth: makeRequiredProp(Number),
+  rootHeight: makeRequiredProp(Number),
+  disableZoom: Boolean,
+  doubleScale: Boolean,
+  closeOnClickImage: Boolean,
+  closeOnClickOverlay: Boolean,
+  vertical: Boolean
+};
 var stdin_default = defineComponent({
-  props: {
-    src: String,
-    show: Boolean,
-    active: Number,
-    minZoom: makeRequiredProp(numericProp),
-    maxZoom: makeRequiredProp(numericProp),
-    rootWidth: makeRequiredProp(Number),
-    rootHeight: makeRequiredProp(Number)
-  },
-  emits: ["scale", "close"],
+  props: imagePreviewItemProps,
+  emits: ["scale", "close", "longPress"],
   setup(props, {
     emit,
     slots
@@ -29,35 +40,29 @@ var stdin_default = defineComponent({
       moveY: 0,
       moving: false,
       zooming: false,
-      imageRatio: 0,
-      displayWidth: 0,
-      displayHeight: 0
+      initializing: false,
+      imageRatio: 0
     });
     const touch = useTouch();
+    const imageRef = ref();
     const swipeItem = ref();
-    const vertical = computed(() => {
-      const {
-        rootWidth,
-        rootHeight
-      } = props;
-      const rootRatio = rootHeight / rootWidth;
-      return state.imageRatio > rootRatio;
-    });
+    const vertical = ref(false);
+    const isLongImage = ref(false);
+    let initialMoveY = 0;
     const imageStyle = computed(() => {
       const {
         scale,
         moveX,
         moveY,
         moving,
-        zooming
+        zooming,
+        initializing
       } = state;
       const style = {
-        transitionDuration: zooming || moving ? "0s" : ".3s"
+        transitionDuration: zooming || moving || initializing ? "0s" : ".3s"
       };
-      if (scale !== 1) {
-        const offsetX = moveX / scale;
-        const offsetY = moveY / scale;
-        style.transform = `scale(${scale}, ${scale}) translate(${offsetX}px, ${offsetY}px)`;
+      if (scale !== 1 || isLongImage.value) {
+        style.transform = `matrix(${scale}, 0, 0, ${scale}, ${moveX}, ${moveY})`;
       }
       return style;
     });
@@ -83,10 +88,26 @@ var stdin_default = defineComponent({
       }
       return 0;
     });
-    const setScale = (scale) => {
+    const setScale = (scale, center) => {
+      var _a;
       scale = clamp(scale, +props.minZoom, +props.maxZoom + 1);
       if (scale !== state.scale) {
+        const ratio = scale / state.scale;
         state.scale = scale;
+        if (center) {
+          const imageRect = useRect((_a = imageRef.value) == null ? void 0 : _a.$el);
+          const origin = {
+            x: imageRect.width * 0.5,
+            y: imageRect.height * 0.5
+          };
+          const moveX = state.moveX - (center.x - imageRect.left - origin.x) * (ratio - 1);
+          const moveY = state.moveY - (center.y - imageRect.top - origin.y) * (ratio - 1);
+          state.moveX = clamp(moveX, -maxMoveX.value, maxMoveX.value);
+          state.moveY = clamp(moveY, -maxMoveY.value, maxMoveY.value);
+        } else {
+          state.moveX = 0;
+          state.moveY = isLongImage.value ? initialMoveY : 0;
+        }
         emit("scale", {
           scale,
           index: props.active
@@ -95,39 +116,44 @@ var stdin_default = defineComponent({
     };
     const resetScale = () => {
       setScale(1);
-      state.moveX = 0;
-      state.moveY = 0;
     };
     const toggleScale = () => {
       const scale = state.scale > 1 ? 1 : 2;
-      setScale(scale);
-      state.moveX = 0;
-      state.moveY = 0;
+      setScale(scale, scale === 2 || isLongImage.value ? {
+        x: touch.startX.value,
+        y: touch.startY.value
+      } : void 0);
     };
     let fingerNum;
     let startMoveX;
     let startMoveY;
     let startScale;
     let startDistance;
+    let lastCenter;
     let doubleTapTimer;
     let touchStartTime;
+    let isImageMoved = false;
     const onTouchStart = (event) => {
       const {
         touches
       } = event;
+      fingerNum = touches.length;
+      if (fingerNum === 2 && props.disableZoom) {
+        return;
+      }
       const {
         offsetX
       } = touch;
       touch.start(event);
-      fingerNum = touches.length;
       startMoveX = state.moveX;
       startMoveY = state.moveY;
       touchStartTime = Date.now();
-      state.moving = fingerNum === 1 && state.scale !== 1;
+      isImageMoved = false;
+      state.moving = fingerNum === 1 && (state.scale !== 1 || isLongImage.value);
       state.zooming = fingerNum === 2 && !offsetX.value;
       if (state.zooming) {
         startScale = state.scale;
-        startDistance = getDistance(event.touches);
+        startDistance = getDistance(touches);
       }
     };
     const onTouchMove = (event) => {
@@ -135,9 +161,6 @@ var stdin_default = defineComponent({
         touches
       } = event;
       touch.move(event);
-      if (state.moving || state.zooming) {
-        preventDefault(event, true);
-      }
       if (state.moving) {
         const {
           deltaX,
@@ -145,36 +168,60 @@ var stdin_default = defineComponent({
         } = touch;
         const moveX = deltaX.value + startMoveX;
         const moveY = deltaY.value + startMoveY;
+        if ((props.vertical ? touch.isVertical() && Math.abs(moveY) > maxMoveY.value : touch.isHorizontal() && Math.abs(moveX) > maxMoveX.value) && !isImageMoved) {
+          state.moving = false;
+          return;
+        }
+        isImageMoved = true;
+        preventDefault(event, true);
         state.moveX = clamp(moveX, -maxMoveX.value, maxMoveX.value);
         state.moveY = clamp(moveY, -maxMoveY.value, maxMoveY.value);
       }
-      if (state.zooming && touches.length === 2) {
-        const distance = getDistance(touches);
-        const scale = startScale * distance / startDistance;
-        setScale(scale);
+      if (state.zooming) {
+        preventDefault(event, true);
+        if (touches.length === 2) {
+          const distance = getDistance(touches);
+          const scale = startScale * distance / startDistance;
+          lastCenter = getCenter(touches);
+          setScale(scale, lastCenter);
+        }
       }
     };
-    const checkTap = () => {
+    const checkClose = (event) => {
+      var _a;
+      const swipeItemEl = (_a = swipeItem.value) == null ? void 0 : _a.$el;
+      if (!swipeItemEl) return;
+      const imageEl = swipeItemEl.firstElementChild;
+      const isClickOverlay = event.target === swipeItemEl;
+      const isClickImage = imageEl == null ? void 0 : imageEl.contains(event.target);
+      if (!props.closeOnClickImage && isClickImage) return;
+      if (!props.closeOnClickOverlay && isClickOverlay) return;
+      emit("close");
+    };
+    const checkTap = (event) => {
       if (fingerNum > 1) {
         return;
       }
-      const {
-        offsetX,
-        offsetY
-      } = touch;
       const deltaTime = Date.now() - touchStartTime;
       const TAP_TIME = 250;
-      const TAP_OFFSET = 5;
-      if (offsetX.value < TAP_OFFSET && offsetY.value < TAP_OFFSET && deltaTime < TAP_TIME) {
-        if (doubleTapTimer) {
-          clearTimeout(doubleTapTimer);
-          doubleTapTimer = null;
-          toggleScale();
-        } else {
-          doubleTapTimer = setTimeout(() => {
-            emit("close");
-            doubleTapTimer = null;
-          }, TAP_TIME);
+      if (touch.isTap.value) {
+        if (deltaTime < TAP_TIME) {
+          if (props.doubleScale) {
+            if (doubleTapTimer) {
+              clearTimeout(doubleTapTimer);
+              doubleTapTimer = null;
+              toggleScale();
+            } else {
+              doubleTapTimer = setTimeout(() => {
+                checkClose(event);
+                doubleTapTimer = null;
+              }, TAP_TIME);
+            }
+          } else {
+            checkClose(event);
+          }
+        } else if (deltaTime > LONG_PRESS_START_TIME) {
+          emit("longPress");
         }
       }
     };
@@ -198,14 +245,36 @@ var stdin_default = defineComponent({
           if (state.scale < 1) {
             resetScale();
           }
-          if (state.scale > props.maxZoom) {
-            state.scale = +props.maxZoom;
+          const maxZoom = +props.maxZoom;
+          if (state.scale > maxZoom) {
+            setScale(maxZoom, lastCenter);
           }
         }
       }
       preventDefault(event, stopPropagation);
-      checkTap();
+      checkTap(event);
       touch.reset();
+    };
+    const resize = () => {
+      const {
+        rootWidth,
+        rootHeight
+      } = props;
+      const rootRatio = rootHeight / rootWidth;
+      const {
+        imageRatio
+      } = state;
+      vertical.value = state.imageRatio > rootRatio && imageRatio < longImageRatio;
+      isLongImage.value = state.imageRatio > rootRatio && imageRatio >= longImageRatio;
+      if (isLongImage.value) {
+        initialMoveY = (imageRatio * rootWidth - rootHeight) / 2;
+        state.moveY = initialMoveY;
+        state.initializing = true;
+        raf(() => {
+          state.initializing = false;
+        });
+      }
+      resetScale();
     };
     const onLoad = (event) => {
       const {
@@ -213,6 +282,7 @@ var stdin_default = defineComponent({
         naturalHeight
       } = event.target;
       state.imageRatio = naturalHeight / naturalWidth;
+      resize();
     };
     watch(() => props.active, resetScale);
     watch(() => props.show, (value) => {
@@ -220,11 +290,15 @@ var stdin_default = defineComponent({
         resetScale();
       }
     });
+    watch(() => [props.rootWidth, props.rootHeight], resize);
     useEventListener("touchmove", onTouchMove, {
       target: computed(() => {
         var _a;
         return (_a = swipeItem.value) == null ? void 0 : _a.$el;
       })
+    });
+    useExpose({
+      resetScale
     });
     return () => {
       const imageSlots = {
@@ -242,8 +316,11 @@ var stdin_default = defineComponent({
         default: () => [slots.image ? _createVNode("div", {
           "class": bem("image-wrap")
         }, [slots.image({
-          src: props.src
+          src: props.src,
+          onLoad,
+          style: imageStyle.value
         })]) : _createVNode(Image, {
+          "ref": imageRef,
           "src": props.src,
           "fit": "contain",
           "class": bem("image", {

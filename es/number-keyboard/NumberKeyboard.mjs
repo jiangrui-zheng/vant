@@ -1,5 +1,4 @@
-import { withDirectives as _withDirectives, mergeProps as _mergeProps, vShow as _vShow, createVNode as _createVNode } from "vue";
-import { ref, watch, computed, Teleport, Transition, defineComponent } from "vue";
+import { ref, watch, computed, Teleport, Transition, defineComponent, createVNode as _createVNode, vShow as _vShow, mergeProps as _mergeProps, withDirectives as _withDirectives } from "vue";
 import { truthProp, numericProp, getZIndexStyle, makeStringProp, makeNumericProp, stopPropagation, createNamespace, HAPTICS_FEEDBACK } from "../utils/index.mjs";
 import { useClickAway } from "@vant/use";
 import NumberKeyboardKey from "./NumberKeyboardKey.mjs";
@@ -70,7 +69,12 @@ var stdin_default = defineComponent({
         extraKey
       } = props;
       const extraKeys = Array.isArray(extraKey) ? extraKey : [extraKey];
-      if (extraKeys.length === 1) {
+      if (extraKeys.length === 0) {
+        keys2.push({
+          text: 0,
+          wider: true
+        });
+      } else if (extraKeys.length === 1) {
         keys2.push({
           text: 0,
           wider: true
@@ -117,7 +121,7 @@ var stdin_default = defineComponent({
         emit("update:modelValue", value.slice(0, value.length - 1));
       } else if (type === "close") {
         onClose();
-      } else if (value.length < props.maxlength) {
+      } else if (value.length < +props.maxlength) {
         emit("input", text);
         emit("update:modelValue", value + text);
       }
@@ -173,7 +177,7 @@ var stdin_default = defineComponent({
           "type": "delete",
           "onPress": onPress
         }, {
-          delete: slots.delete
+          default: slots.delete
         }), _createVNode(NumberKeyboardKey, {
           "large": true,
           "text": props.closeButtonText,
@@ -226,5 +230,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  numberKeyboardProps
 };

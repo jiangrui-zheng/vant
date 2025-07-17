@@ -1,5 +1,4 @@
-import { createVNode as _createVNode } from "vue";
-import { ref, watch, computed, nextTick, Teleport, onMounted, defineComponent } from "vue";
+import { ref, watch, computed, nextTick, Teleport, onMounted, defineComponent, createVNode as _createVNode } from "vue";
 import { isDef, isHidden, truthProp, numericProp, getScrollTop, preventDefault, makeNumberProp, createNamespace, getRootScrollTop, setRootScrollTop } from "../utils/index.mjs";
 import { useRect, useChildren, useScrollParent, useEventListener } from "@vant/use";
 import { useTouch } from "../composables/use-touch.mjs";
@@ -84,7 +83,11 @@ var stdin_default = defineComponent({
         const match = getMatchAnchor(selectActiveIndex);
         if (match) {
           const rect = match.getRect(scrollParent.value, scrollParentRect);
-          active = getActiveAnchor(rect.top, rects);
+          if (props.sticky && props.stickyOffsetTop) {
+            active = getActiveAnchor(rect.top - props.stickyOffsetTop, rects);
+          } else {
+            active = getActiveAnchor(rect.top, rects);
+          }
         }
       } else {
         active = getActiveAnchor(scrollTop, rects);
@@ -157,7 +160,11 @@ var stdin_default = defineComponent({
           return;
         }
         if (props.sticky && props.stickyOffsetTop) {
-          setRootScrollTop(getRootScrollTop() - props.stickyOffsetTop);
+          if (getRootScrollTop() === offsetHeight - scrollParentRect.height) {
+            setRootScrollTop(getRootScrollTop());
+          } else {
+            setRootScrollTop(getRootScrollTop() - props.stickyOffsetTop);
+          }
         }
         emit("select", match.index);
       }
@@ -222,5 +229,6 @@ var stdin_default = defineComponent({
 });
 export {
   INDEX_BAR_KEY,
-  stdin_default as default
+  stdin_default as default,
+  indexBarProps
 };

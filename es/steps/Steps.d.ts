@@ -1,16 +1,16 @@
 import { type ExtractPropTypes, type InjectionKey } from 'vue';
-export declare type StepsDirection = 'horizontal' | 'vertical';
-declare const stepsProps: {
+export type StepsDirection = 'horizontal' | 'vertical';
+export declare const stepsProps: {
     active: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
     direction: {
-        type: import("vue").PropType<StepsDirection>;
+        type: import("vue").PropType<T>;
         default: StepsDirection;
     };
     activeIcon: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T>;
         default: string;
     };
     iconPrefix: StringConstructor;
@@ -19,23 +19,23 @@ declare const stepsProps: {
     inactiveIcon: StringConstructor;
     inactiveColor: StringConstructor;
 };
-export declare type StepsProps = ExtractPropTypes<typeof stepsProps>;
-export declare type StepsProvide = {
+export type StepsProps = ExtractPropTypes<typeof stepsProps>;
+export type StepsProvide = {
     props: StepsProps;
     onClickStep: (index: number) => void;
 };
 export declare const STEPS_KEY: InjectionKey<StepsProvide>;
-declare const _default: import("vue").DefineComponent<{
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     active: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
     direction: {
-        type: import("vue").PropType<StepsDirection>;
+        type: import("vue").PropType<T>;
         default: StepsDirection;
     };
     activeIcon: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T>;
         default: string;
     };
     iconPrefix: StringConstructor;
@@ -43,17 +43,17 @@ declare const _default: import("vue").DefineComponent<{
     activeColor: StringConstructor;
     inactiveIcon: StringConstructor;
     inactiveColor: StringConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "click-step"[], "click-step", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "clickStep"[], "clickStep", import("vue").PublicProps, Readonly<ExtractPropTypes<{
     active: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
     direction: {
-        type: import("vue").PropType<StepsDirection>;
+        type: import("vue").PropType<T>;
         default: StepsDirection;
     };
     activeIcon: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T>;
         default: string;
     };
     iconPrefix: StringConstructor;
@@ -61,11 +61,11 @@ declare const _default: import("vue").DefineComponent<{
     activeColor: StringConstructor;
     inactiveIcon: StringConstructor;
     inactiveColor: StringConstructor;
-}>> & {
-    "onClick-step"?: ((...args: any[]) => any) | undefined;
-}, {
+}>> & Readonly<{
+    onClickStep?: ((...args: any[]) => any) | undefined;
+}>, {
     active: string | number;
     direction: StepsDirection;
     activeIcon: string;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

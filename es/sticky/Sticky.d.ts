@@ -1,9 +1,9 @@
 import { type PropType, type ExtractPropTypes } from 'vue';
-export declare type StickyPosition = 'top' | 'bottom';
-declare const stickyProps: {
+export type StickyPosition = 'top' | 'bottom';
+export declare const stickyProps: {
     zIndex: (NumberConstructor | StringConstructor)[];
     position: {
-        type: PropType<StickyPosition>;
+        type: PropType<T>;
         default: StickyPosition;
     };
     container: PropType<Element>;
@@ -16,11 +16,11 @@ declare const stickyProps: {
         default: number;
     };
 };
-export declare type StickyProps = ExtractPropTypes<typeof stickyProps>;
-declare const _default: import("vue").DefineComponent<{
+export type StickyProps = ExtractPropTypes<typeof stickyProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     zIndex: (NumberConstructor | StringConstructor)[];
     position: {
-        type: PropType<StickyPosition>;
+        type: PropType<T>;
         default: StickyPosition;
     };
     container: PropType<Element>;
@@ -32,10 +32,10 @@ declare const _default: import("vue").DefineComponent<{
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("scroll" | "change")[], "scroll" | "change", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("scroll" | "change")[], "scroll" | "change", import("vue").PublicProps, Readonly<ExtractPropTypes<{
     zIndex: (NumberConstructor | StringConstructor)[];
     position: {
-        type: PropType<StickyPosition>;
+        type: PropType<T>;
         default: StickyPosition;
     };
     container: PropType<Element>;
@@ -47,12 +47,12 @@ declare const _default: import("vue").DefineComponent<{
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-}>> & {
+}>> & Readonly<{
     onChange?: ((...args: any[]) => any) | undefined;
     onScroll?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     position: StickyPosition;
     offsetTop: string | number;
     offsetBottom: string | number;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

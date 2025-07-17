@@ -1,4 +1,4 @@
-export declare const Tab: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const Tab: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     to: import("vue").PropType<import("vue-router").RouteLocationRaw>;
     url: StringConstructor;
     replace: BooleanConstructor;
@@ -14,7 +14,7 @@ export declare const Tab: import("../utils").WithInstall<import("vue").DefineCom
         type: BooleanConstructor;
         default: true;
     };
-}, (() => JSX.Element | undefined) | undefined, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+}>, (() => import("vue/jsx-runtime").JSX.Element | undefined) | undefined, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
     to: import("vue").PropType<import("vue-router").RouteLocationRaw>;
     url: StringConstructor;
     replace: BooleanConstructor;
@@ -30,13 +30,14 @@ export declare const Tab: import("../utils").WithInstall<import("vue").DefineCom
         type: BooleanConstructor;
         default: true;
     };
-}>>, {
+}>> & Readonly<{}>, {
     replace: boolean;
     dot: boolean;
     disabled: boolean;
     showZeroBadge: boolean;
-}>>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default Tab;
+export { tabProps } from './Tab';
 export type { TabProps } from './Tab';
 declare module 'vue' {
     interface GlobalComponents {

@@ -1,5 +1,9 @@
 import { FieldProps } from './Field';
-export declare const Field: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const Field: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
+    tag: {
+        type: import("vue").PropType<T>;
+        default: keyof HTMLElementTagNameMap;
+    };
     icon: StringConstructor;
     size: import("vue").PropType<import("..").CellSize>;
     title: (NumberConstructor | StringConstructor)[];
@@ -11,13 +15,16 @@ export declare const Field: import("../utils").WithInstall<import("vue").DefineC
         type: BooleanConstructor;
         default: true;
     };
-    required: BooleanConstructor;
     iconPrefix: StringConstructor;
     valueClass: import("vue").PropType<unknown>;
     labelClass: import("vue").PropType<unknown>;
     titleClass: import("vue").PropType<unknown>;
     titleStyle: import("vue").PropType<string | import("vue").CSSProperties>;
     arrowDirection: import("vue").PropType<import("..").CellArrowDirection>;
+    required: {
+        type: import("vue").PropType<boolean | "auto">;
+        default: null;
+    };
     clickable: {
         type: import("vue").PropType<boolean | null>;
         default: null;
@@ -30,9 +37,11 @@ export declare const Field: import("../utils").WithInstall<import("vue").DefineC
     autofocus: BooleanConstructor;
     clearable: BooleanConstructor;
     maxlength: (NumberConstructor | StringConstructor)[];
+    max: NumberConstructor;
+    min: NumberConstructor;
     formatter: import("vue").PropType<(value: string) => string>;
     clearIcon: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T>;
         default: string;
     };
     modelValue: {
@@ -42,15 +51,21 @@ export declare const Field: import("../utils").WithInstall<import("vue").DefineC
     inputAlign: import("vue").PropType<import("./types").FieldTextAlign>;
     placeholder: StringConstructor;
     autocomplete: StringConstructor;
+    autocapitalize: StringConstructor;
+    autocorrect: StringConstructor;
     errorMessage: StringConstructor;
     enterkeyhint: StringConstructor;
     clearTrigger: {
-        type: import("vue").PropType<import("./types").FieldClearTrigger>;
+        type: import("vue").PropType<T>;
         default: import("./types").FieldClearTrigger;
     };
     formatTrigger: {
-        type: import("vue").PropType<import("./types").FieldFormatTrigger>;
+        type: import("vue").PropType<T>;
         default: import("./types").FieldFormatTrigger;
+    };
+    spellcheck: {
+        type: BooleanConstructor;
+        default: null;
     };
     error: {
         type: BooleanConstructor;
@@ -64,10 +79,11 @@ export declare const Field: import("../utils").WithInstall<import("vue").DefineC
         type: BooleanConstructor;
         default: null;
     };
+    inputmode: import("vue").PropType<import("vue").HTMLAttributes["inputmode"]>;
 } & {
     rows: (NumberConstructor | StringConstructor)[];
     type: {
-        type: import("vue").PropType<import("./types").FieldType>;
+        type: import("vue").PropType<T>;
         default: import("./types").FieldType;
     };
     rules: import("vue").PropType<import("./types").FieldRule[]>;
@@ -81,7 +97,11 @@ export declare const Field: import("../utils").WithInstall<import("vue").DefineC
         type: BooleanConstructor;
         default: null;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("clear" | "focus" | "blur" | "keypress" | "click-input" | "end-validate" | "start-validate" | "click-left-icon" | "click-right-icon" | "update:modelValue")[], "clear" | "focus" | "blur" | "keypress" | "click-input" | "end-validate" | "start-validate" | "click-left-icon" | "click-right-icon" | "update:modelValue", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("clear" | "focus" | "blur" | "keypress" | "clickInput" | "endValidate" | "startValidate" | "clickLeftIcon" | "clickRightIcon" | "update:modelValue")[], "clear" | "focus" | "blur" | "keypress" | "clickInput" | "endValidate" | "startValidate" | "clickLeftIcon" | "clickRightIcon" | "update:modelValue", import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    tag: {
+        type: import("vue").PropType<T>;
+        default: keyof HTMLElementTagNameMap;
+    };
     icon: StringConstructor;
     size: import("vue").PropType<import("..").CellSize>;
     title: (NumberConstructor | StringConstructor)[];
@@ -93,13 +113,16 @@ export declare const Field: import("../utils").WithInstall<import("vue").DefineC
         type: BooleanConstructor;
         default: true;
     };
-    required: BooleanConstructor;
     iconPrefix: StringConstructor;
     valueClass: import("vue").PropType<unknown>;
     labelClass: import("vue").PropType<unknown>;
     titleClass: import("vue").PropType<unknown>;
     titleStyle: import("vue").PropType<string | import("vue").CSSProperties>;
     arrowDirection: import("vue").PropType<import("..").CellArrowDirection>;
+    required: {
+        type: import("vue").PropType<boolean | "auto">;
+        default: null;
+    };
     clickable: {
         type: import("vue").PropType<boolean | null>;
         default: null;
@@ -112,9 +135,11 @@ export declare const Field: import("../utils").WithInstall<import("vue").DefineC
     autofocus: BooleanConstructor;
     clearable: BooleanConstructor;
     maxlength: (NumberConstructor | StringConstructor)[];
+    max: NumberConstructor;
+    min: NumberConstructor;
     formatter: import("vue").PropType<(value: string) => string>;
     clearIcon: {
-        type: import("vue").PropType<string>;
+        type: import("vue").PropType<T>;
         default: string;
     };
     modelValue: {
@@ -124,15 +149,21 @@ export declare const Field: import("../utils").WithInstall<import("vue").DefineC
     inputAlign: import("vue").PropType<import("./types").FieldTextAlign>;
     placeholder: StringConstructor;
     autocomplete: StringConstructor;
+    autocapitalize: StringConstructor;
+    autocorrect: StringConstructor;
     errorMessage: StringConstructor;
     enterkeyhint: StringConstructor;
     clearTrigger: {
-        type: import("vue").PropType<import("./types").FieldClearTrigger>;
+        type: import("vue").PropType<T>;
         default: import("./types").FieldClearTrigger;
     };
     formatTrigger: {
-        type: import("vue").PropType<import("./types").FieldFormatTrigger>;
+        type: import("vue").PropType<T>;
         default: import("./types").FieldFormatTrigger;
+    };
+    spellcheck: {
+        type: BooleanConstructor;
+        default: null;
     };
     error: {
         type: BooleanConstructor;
@@ -146,10 +177,11 @@ export declare const Field: import("../utils").WithInstall<import("vue").DefineC
         type: BooleanConstructor;
         default: null;
     };
+    inputmode: import("vue").PropType<import("vue").HTMLAttributes["inputmode"]>;
 } & {
     rows: (NumberConstructor | StringConstructor)[];
     type: {
-        type: import("vue").PropType<import("./types").FieldType>;
+        type: import("vue").PropType<T>;
         default: import("./types").FieldType;
     };
     rules: import("vue").PropType<import("./types").FieldRule[]>;
@@ -163,39 +195,42 @@ export declare const Field: import("../utils").WithInstall<import("vue").DefineC
         type: BooleanConstructor;
         default: null;
     };
-}>> & {
+}>> & Readonly<{
     onFocus?: ((...args: any[]) => any) | undefined;
     onBlur?: ((...args: any[]) => any) | undefined;
     onKeypress?: ((...args: any[]) => any) | undefined;
     onClear?: ((...args: any[]) => any) | undefined;
-    "onClick-input"?: ((...args: any[]) => any) | undefined;
-    "onEnd-validate"?: ((...args: any[]) => any) | undefined;
-    "onStart-validate"?: ((...args: any[]) => any) | undefined;
-    "onClick-left-icon"?: ((...args: any[]) => any) | undefined;
-    "onClick-right-icon"?: ((...args: any[]) => any) | undefined;
+    onClickInput?: ((...args: any[]) => any) | undefined;
+    onEndValidate?: ((...args: any[]) => any) | undefined;
+    onStartValidate?: ((...args: any[]) => any) | undefined;
+    onClickLeftIcon?: ((...args: any[]) => any) | undefined;
+    onClickRightIcon?: ((...args: any[]) => any) | undefined;
     "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     type: import("./types").FieldType;
-    required: boolean;
+    tag: keyof HTMLElementTagNameMap;
     center: boolean;
     autofocus: boolean;
     disabled: boolean;
-    isLink: boolean;
     border: boolean;
+    isLink: boolean;
+    required: boolean | "auto";
     clickable: boolean | null;
     clearable: boolean;
     clearIcon: string;
     modelValue: string | number;
     clearTrigger: import("./types").FieldClearTrigger;
     formatTrigger: import("./types").FieldFormatTrigger;
+    spellcheck: boolean;
     error: boolean;
     readonly: boolean;
     showWordLimit: boolean;
     colon: boolean;
-}>>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default Field;
+export { fieldProps } from './Field';
 export type { FieldProps };
-export type { FieldType, FieldRule, FieldInstance, FieldTextAlign, FieldRuleMessage, FieldClearTrigger, FieldFormatTrigger, FieldRuleValidator, FiledRuleFormatter, FieldValidateError, FieldAutosizeConfig, FieldValidateTrigger, FieldValidationStatus, } from './types';
+export type { FieldType, FieldRule, FieldInstance, FieldTextAlign, FieldThemeVars, FieldRuleMessage, FieldClearTrigger, FieldFormatTrigger, FieldRuleValidator, FieldRuleFormatter, FieldValidateError, FieldAutosizeConfig, FieldValidateTrigger, FieldValidationStatus, } from './types';
 declare module 'vue' {
     interface GlobalComponents {
         VanField: typeof Field;

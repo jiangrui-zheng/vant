@@ -1,20 +1,20 @@
-export declare const Button: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const Button: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     to: import("vue").PropType<import("vue-router").RouteLocationRaw>;
     url: StringConstructor;
     replace: BooleanConstructor;
 } & {
     tag: {
-        type: import("vue").PropType<keyof HTMLElementTagNameMap>;
+        type: import("vue").PropType<T>;
         default: keyof HTMLElementTagNameMap;
     };
     text: StringConstructor;
     icon: StringConstructor;
     type: {
-        type: import("vue").PropType<import("./types").ButtonType>;
+        type: import("vue").PropType<T>;
         default: import("./types").ButtonType;
     };
     size: {
-        type: import("vue").PropType<import("./types").ButtonSize>;
+        type: import("vue").PropType<T>;
         default: import("./types").ButtonSize;
     };
     color: StringConstructor;
@@ -27,33 +27,33 @@ export declare const Button: import("../utils").WithInstall<import("vue").Define
     disabled: BooleanConstructor;
     iconPrefix: StringConstructor;
     nativeType: {
-        type: import("vue").PropType<import("./types").ButtonNativeType>;
+        type: import("vue").PropType<T>;
         default: import("./types").ButtonNativeType;
     };
     loadingSize: (NumberConstructor | StringConstructor)[];
     loadingText: StringConstructor;
     loadingType: import("vue").PropType<import("..").LoadingType>;
     iconPosition: {
-        type: import("vue").PropType<import("./types").ButtonIconPosition>;
+        type: import("vue").PropType<T>;
         default: import("./types").ButtonIconPosition;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "click"[], "click", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "click"[], "click", import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
     to: import("vue").PropType<import("vue-router").RouteLocationRaw>;
     url: StringConstructor;
     replace: BooleanConstructor;
 } & {
     tag: {
-        type: import("vue").PropType<keyof HTMLElementTagNameMap>;
+        type: import("vue").PropType<T>;
         default: keyof HTMLElementTagNameMap;
     };
     text: StringConstructor;
     icon: StringConstructor;
     type: {
-        type: import("vue").PropType<import("./types").ButtonType>;
+        type: import("vue").PropType<T>;
         default: import("./types").ButtonType;
     };
     size: {
-        type: import("vue").PropType<import("./types").ButtonSize>;
+        type: import("vue").PropType<T>;
         default: import("./types").ButtonSize;
     };
     color: StringConstructor;
@@ -66,36 +66,37 @@ export declare const Button: import("../utils").WithInstall<import("vue").Define
     disabled: BooleanConstructor;
     iconPrefix: StringConstructor;
     nativeType: {
-        type: import("vue").PropType<import("./types").ButtonNativeType>;
+        type: import("vue").PropType<T>;
         default: import("./types").ButtonNativeType;
     };
     loadingSize: (NumberConstructor | StringConstructor)[];
     loadingText: StringConstructor;
     loadingType: import("vue").PropType<import("..").LoadingType>;
     iconPosition: {
-        type: import("vue").PropType<import("./types").ButtonIconPosition>;
+        type: import("vue").PropType<T>;
         default: import("./types").ButtonIconPosition;
     };
-}>> & {
+}>> & Readonly<{
     onClick?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     replace: boolean;
     type: import("./types").ButtonType;
     tag: keyof HTMLElementTagNameMap;
     round: boolean;
-    disabled: boolean;
     size: import("./types").ButtonSize;
-    loading: boolean;
+    disabled: boolean;
     block: boolean;
     square: boolean;
+    loading: boolean;
     plain: boolean;
     hairline: boolean;
     nativeType: import("./types").ButtonNativeType;
     iconPosition: import("./types").ButtonIconPosition;
-}>>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default Button;
+export { buttonProps } from './Button';
 export type { ButtonProps } from './Button';
-export type { ButtonType, ButtonSize, ButtonNativeType, ButtonIconPosition, } from './types';
+export type { ButtonType, ButtonSize, ButtonThemeVars, ButtonNativeType, ButtonIconPosition, } from './types';
 declare module 'vue' {
     interface GlobalComponents {
         VanButton: typeof Button;

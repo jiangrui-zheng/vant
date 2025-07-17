@@ -1,6 +1,6 @@
 import { type PropType, type InjectionKey, type ExtractPropTypes } from 'vue';
 import { type Numeric, type Interceptor } from '../utils';
-declare const tabbarProps: {
+export declare const tabbarProps: {
     route: BooleanConstructor;
     fixed: {
         type: BooleanConstructor;
@@ -24,13 +24,13 @@ declare const tabbarProps: {
         default: null;
     };
 };
-export declare type TabbarProps = ExtractPropTypes<typeof tabbarProps>;
-export declare type TabbarProvide = {
+export type TabbarProps = ExtractPropTypes<typeof tabbarProps>;
+export type TabbarProvide = {
     props: TabbarProps;
     setActive: (active: Numeric, afterChange: () => void) => void;
 };
 export declare const TABBAR_KEY: InjectionKey<TabbarProvide>;
-declare const _default: import("vue").DefineComponent<{
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     route: BooleanConstructor;
     fixed: {
         type: BooleanConstructor;
@@ -53,7 +53,7 @@ declare const _default: import("vue").DefineComponent<{
         type: PropType<boolean | null>;
         default: null;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", import("vue").PublicProps, Readonly<ExtractPropTypes<{
     route: BooleanConstructor;
     fixed: {
         type: BooleanConstructor;
@@ -76,15 +76,15 @@ declare const _default: import("vue").DefineComponent<{
         type: PropType<boolean | null>;
         default: null;
     };
-}>> & {
+}>> & Readonly<{
     onChange?: ((...args: any[]) => any) | undefined;
     "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     fixed: boolean;
     border: boolean;
     modelValue: string | number;
     placeholder: boolean;
     safeAreaInsetBottom: boolean | null;
     route: boolean;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

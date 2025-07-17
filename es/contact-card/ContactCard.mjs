@@ -1,5 +1,4 @@
-import { createVNode as _createVNode } from "vue";
-import { defineComponent } from "vue";
+import { defineComponent, createVNode as _createVNode } from "vue";
 import { truthProp, makeStringProp, createNamespace } from "../utils/index.mjs";
 import { Cell } from "../cell/index.mjs";
 const [name, bem, t] = createNamespace("contact-card");
@@ -34,13 +33,14 @@ var stdin_default = defineComponent({
       "class": bem([props.type]),
       "border": false,
       "isLink": props.editable,
-      "valueClass": bem("value"),
+      "titleClass": bem("title"),
       "onClick": onClick
     }, {
-      value: renderContent
+      title: renderContent
     });
   }
 });
 export {
+  contactCardProps,
   stdin_default as default
 };

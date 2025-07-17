@@ -1,5 +1,4 @@
-import { createVNode as _createVNode } from "vue";
-import { defineComponent } from "vue";
+import { defineComponent, createVNode as _createVNode } from "vue";
 import { FORM_KEY, truthProp, numericProp, preventDefault, createNamespace } from "../utils/index.mjs";
 import { useChildren } from "@vant/use";
 import { useExpose } from "../composables/use-expose.mjs";
@@ -8,11 +7,13 @@ const formProps = {
   colon: Boolean,
   disabled: Boolean,
   readonly: Boolean,
+  required: [Boolean, String],
   showError: Boolean,
   labelWidth: numericProp,
   labelAlign: String,
   inputAlign: String,
   scrollToError: Boolean,
+  scrollToErrorPosition: String,
   validateFirst: Boolean,
   submitOnEnter: truthProp,
   showErrorMessage: truthProp,
@@ -114,7 +115,9 @@ var stdin_default = defineComponent({
       });
     };
     const getValues = () => children.reduce((form, field) => {
-      form[field.name] = field.formValue.value;
+      if (field.name !== void 0) {
+        form[field.name] = field.formValue.value;
+      }
       return form;
     }, {});
     const submit = () => {
@@ -124,8 +127,14 @@ var stdin_default = defineComponent({
           values,
           errors
         });
-        if (props.scrollToError && errors[0].name) {
-          scrollToField(errors[0].name);
+        const {
+          scrollToError,
+          scrollToErrorPosition
+        } = props;
+        if (scrollToError && errors[0].name) {
+          scrollToField(errors[0].name, scrollToErrorPosition ? {
+            block: scrollToErrorPosition
+          } : void 0);
         }
       });
     };
@@ -154,5 +163,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  formProps
 };

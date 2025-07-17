@@ -1,4 +1,8 @@
-export declare const CollapseItem: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const CollapseItem: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
+    tag: {
+        type: import("vue").PropType<T>;
+        default: keyof HTMLElementTagNameMap;
+    };
     icon: StringConstructor;
     size: import("vue").PropType<import("..").CellSize>;
     title: (NumberConstructor | StringConstructor)[];
@@ -10,13 +14,16 @@ export declare const CollapseItem: import("../utils").WithInstall<import("vue").
         type: BooleanConstructor;
         default: true;
     };
-    required: BooleanConstructor;
     iconPrefix: StringConstructor;
     valueClass: import("vue").PropType<unknown>;
     labelClass: import("vue").PropType<unknown>;
     titleClass: import("vue").PropType<unknown>;
     titleStyle: import("vue").PropType<string | import("vue").CSSProperties>;
     arrowDirection: import("vue").PropType<import("..").CellArrowDirection>;
+    required: {
+        type: import("vue").PropType<boolean | "auto">;
+        default: null;
+    };
     clickable: {
         type: import("vue").PropType<boolean | null>;
         default: null;
@@ -33,7 +40,11 @@ export declare const CollapseItem: import("../utils").WithInstall<import("vue").
         type: BooleanConstructor;
         default: true;
     };
-}, (() => JSX.Element) | undefined, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+}>, (() => import("vue/jsx-runtime").JSX.Element) | undefined, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
+    tag: {
+        type: import("vue").PropType<T>;
+        default: keyof HTMLElementTagNameMap;
+    };
     icon: StringConstructor;
     size: import("vue").PropType<import("..").CellSize>;
     title: (NumberConstructor | StringConstructor)[];
@@ -45,13 +56,16 @@ export declare const CollapseItem: import("../utils").WithInstall<import("vue").
         type: BooleanConstructor;
         default: true;
     };
-    required: BooleanConstructor;
     iconPrefix: StringConstructor;
     valueClass: import("vue").PropType<unknown>;
     labelClass: import("vue").PropType<unknown>;
     titleClass: import("vue").PropType<unknown>;
     titleStyle: import("vue").PropType<string | import("vue").CSSProperties>;
     arrowDirection: import("vue").PropType<import("..").CellArrowDirection>;
+    required: {
+        type: import("vue").PropType<boolean | "auto">;
+        default: null;
+    };
     clickable: {
         type: import("vue").PropType<boolean | null>;
         default: null;
@@ -68,19 +82,21 @@ export declare const CollapseItem: import("../utils").WithInstall<import("vue").
         type: BooleanConstructor;
         default: true;
     };
-}>>, {
-    required: boolean;
+}>> & Readonly<{}>, {
+    tag: keyof HTMLElementTagNameMap;
     center: boolean;
     disabled: boolean;
-    isLink: boolean;
     border: boolean;
+    isLink: boolean;
+    required: boolean | "auto";
     clickable: boolean | null;
     readonly: boolean;
     lazyRender: boolean;
-}>>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default CollapseItem;
+export { collapseItemProps } from './CollapseItem';
 export type { CollapseItemProps } from './CollapseItem';
-export type { CollapseItemInstance } from './types';
+export type { CollapseItemInstance, CollapseItemThemeVars } from './types';
 declare module 'vue' {
     interface GlobalComponents {
         VanCollapseItem: typeof CollapseItem;

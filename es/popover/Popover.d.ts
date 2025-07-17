@@ -1,18 +1,22 @@
-import { type PropType, type CSSProperties, type ExtractPropTypes } from 'vue';
-import { PopoverTheme, PopoverAction, PopoverTrigger, PopoverPlacement } from './types';
-declare const popoverProps: {
+import { type PropType, type CSSProperties, type TeleportProps, type ExtractPropTypes } from 'vue';
+import { PopoverTheme, PopoverAction, PopoverActionsDirection, PopoverTrigger, PopoverPlacement } from './types';
+export declare const popoverProps: {
     show: BooleanConstructor;
     theme: {
-        type: PropType<PopoverTheme>;
+        type: PropType<T>;
         default: PopoverTheme;
     };
     overlay: BooleanConstructor;
     actions: {
-        type: PropType<PopoverAction[]>;
+        type: PropType<T_1[]>;
         default: () => never[];
     };
+    actionsDirection: {
+        type: PropType<T>;
+        default: PopoverActionsDirection;
+    };
     trigger: {
-        type: PropType<PopoverTrigger>;
+        type: PropType<T>;
         default: PopoverTrigger;
     };
     duration: (NumberConstructor | StringConstructor)[];
@@ -21,7 +25,7 @@ declare const popoverProps: {
         default: true;
     };
     placement: {
-        type: PropType<PopoverPlacement>;
+        type: PropType<T>;
         default: PopoverPlacement;
     };
     iconPrefix: StringConstructor;
@@ -44,24 +48,28 @@ declare const popoverProps: {
         default: () => number[];
     };
     teleport: {
-        type: PropType<string | import("vue").RendererElement | null | undefined>;
+        type: PropType<TeleportProps["to"]>;
         default: string;
     };
 };
-export declare type PopoverProps = ExtractPropTypes<typeof popoverProps>;
-declare const _default: import("vue").DefineComponent<{
+export type PopoverProps = ExtractPropTypes<typeof popoverProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     show: BooleanConstructor;
     theme: {
-        type: PropType<PopoverTheme>;
+        type: PropType<T>;
         default: PopoverTheme;
     };
     overlay: BooleanConstructor;
     actions: {
-        type: PropType<PopoverAction[]>;
+        type: PropType<T_1[]>;
         default: () => never[];
     };
+    actionsDirection: {
+        type: PropType<T>;
+        default: PopoverActionsDirection;
+    };
     trigger: {
-        type: PropType<PopoverTrigger>;
+        type: PropType<T>;
         default: PopoverTrigger;
     };
     duration: (NumberConstructor | StringConstructor)[];
@@ -70,7 +78,7 @@ declare const _default: import("vue").DefineComponent<{
         default: true;
     };
     placement: {
-        type: PropType<PopoverPlacement>;
+        type: PropType<T>;
         default: PopoverPlacement;
     };
     iconPrefix: StringConstructor;
@@ -93,22 +101,26 @@ declare const _default: import("vue").DefineComponent<{
         default: () => number[];
     };
     teleport: {
-        type: PropType<string | import("vue").RendererElement | null | undefined>;
+        type: PropType<TeleportProps["to"]>;
         default: string;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("select" | "touchstart" | "update:show")[], "select" | "touchstart" | "update:show", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("select" | "touchstart" | "update:show")[], "select" | "touchstart" | "update:show", import("vue").PublicProps, Readonly<ExtractPropTypes<{
     show: BooleanConstructor;
     theme: {
-        type: PropType<PopoverTheme>;
+        type: PropType<T>;
         default: PopoverTheme;
     };
     overlay: BooleanConstructor;
     actions: {
-        type: PropType<PopoverAction[]>;
+        type: PropType<T_1[]>;
         default: () => never[];
     };
+    actionsDirection: {
+        type: PropType<T>;
+        default: PopoverActionsDirection;
+    };
     trigger: {
-        type: PropType<PopoverTrigger>;
+        type: PropType<T>;
         default: PopoverTrigger;
     };
     duration: (NumberConstructor | StringConstructor)[];
@@ -117,7 +129,7 @@ declare const _default: import("vue").DefineComponent<{
         default: true;
     };
     placement: {
-        type: PropType<PopoverPlacement>;
+        type: PropType<T>;
         default: PopoverPlacement;
     };
     iconPrefix: StringConstructor;
@@ -140,25 +152,26 @@ declare const _default: import("vue").DefineComponent<{
         default: () => number[];
     };
     teleport: {
-        type: PropType<string | import("vue").RendererElement | null | undefined>;
+        type: PropType<TeleportProps["to"]>;
         default: string;
     };
-}>> & {
+}>> & Readonly<{
     onSelect?: ((...args: any[]) => any) | undefined;
     onTouchstart?: ((...args: any[]) => any) | undefined;
     "onUpdate:show"?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     offset: [number, number];
+    theme: PopoverTheme;
     overlay: boolean;
     show: boolean;
     teleport: string | import("vue").RendererElement | null | undefined;
     closeOnClickOverlay: boolean;
     actions: PopoverAction[];
     closeOnClickAction: boolean;
-    theme: PopoverTheme;
     closeOnClickOutside: boolean;
+    actionsDirection: PopoverActionsDirection;
     trigger: PopoverTrigger;
     showArrow: boolean;
     placement: PopoverPlacement;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

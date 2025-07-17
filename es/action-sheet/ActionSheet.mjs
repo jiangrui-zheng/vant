@@ -1,5 +1,4 @@
-import { mergeProps as _mergeProps, createVNode as _createVNode } from "vue";
-import { nextTick, defineComponent } from "vue";
+import { nextTick, defineComponent, createVNode as _createVNode, mergeProps as _mergeProps } from "vue";
 import { pick, extend, truthProp, makeArrayProp, makeStringProp, createNamespace, HAPTICS_FEEDBACK } from "../utils/index.mjs";
 import { Icon } from "../icon/index.mjs";
 import { Popup } from "../popup/index.mjs";
@@ -54,6 +53,14 @@ var stdin_default = defineComponent({
         }, [slots.cancel ? slots.cancel() : props.cancelText])];
       }
     };
+    const renderIcon = (action) => {
+      if (action.icon) {
+        return _createVNode(Icon, {
+          "class": bem("item-icon"),
+          "name": action.icon
+        }, null);
+      }
+    };
     const renderActionContent = (action, index) => {
       if (action.loading) {
         return _createVNode(Loading, {
@@ -102,7 +109,7 @@ var stdin_default = defineComponent({
           disabled
         }), className],
         "onClick": onClick
-      }, [renderActionContent(action, index)]);
+      }, [renderIcon(action), renderActionContent(action, index)]);
     };
     const renderDescription = () => {
       if (props.description || slots.description) {
@@ -127,5 +134,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
+  actionSheetProps,
   stdin_default as default
 };

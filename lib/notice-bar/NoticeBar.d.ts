@@ -1,6 +1,6 @@
 import { type PropType, type ExtractPropTypes } from 'vue';
 import { NoticeBarMode } from './types';
-declare const noticeBarProps: {
+export declare const noticeBarProps: {
     text: StringConstructor;
     mode: PropType<NoticeBarMode>;
     color: StringConstructor;
@@ -20,8 +20,8 @@ declare const noticeBarProps: {
         default: null;
     };
 };
-export declare type NoticeBarProps = ExtractPropTypes<typeof noticeBarProps>;
-declare const _default: import("vue").DefineComponent<{
+export type NoticeBarProps = ExtractPropTypes<typeof noticeBarProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     text: StringConstructor;
     mode: PropType<NoticeBarMode>;
     color: StringConstructor;
@@ -40,7 +40,7 @@ declare const _default: import("vue").DefineComponent<{
         type: PropType<boolean | null>;
         default: null;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("close" | "replay")[], "close" | "replay", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("close" | "replay")[], "close" | "replay", import("vue").PublicProps, Readonly<ExtractPropTypes<{
     text: StringConstructor;
     mode: PropType<NoticeBarMode>;
     color: StringConstructor;
@@ -59,13 +59,13 @@ declare const _default: import("vue").DefineComponent<{
         type: PropType<boolean | null>;
         default: null;
     };
-}>> & {
+}>> & Readonly<{
     onClose?: ((...args: any[]) => any) | undefined;
     onReplay?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     scrollable: boolean | null;
-    speed: string | number;
     delay: string | number;
+    speed: string | number;
     wrapable: boolean;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

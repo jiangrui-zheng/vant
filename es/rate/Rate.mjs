@@ -1,5 +1,4 @@
-import { createVNode as _createVNode } from "vue";
-import { computed, defineComponent, ref } from "vue";
+import { computed, defineComponent, ref, createVNode as _createVNode } from "vue";
 import { addUnit, truthProp, numericProp, preventDefault, makeStringProp, makeNumberProp, makeNumericProp, createNamespace } from "../utils/index.mjs";
 import { useRect, useCustomFieldValue, useEventListener } from "@vant/use";
 import { useRefs } from "../composables/use-refs.mjs";
@@ -37,6 +36,7 @@ const rateProps = {
   color: String,
   count: makeNumericProp(5),
   gutter: numericProp,
+  clearable: Boolean,
   readonly: Boolean,
   disabled: Boolean,
   voidIcon: makeStringProp("star-o"),
@@ -57,7 +57,8 @@ var stdin_default = defineComponent({
     const touch = useTouch();
     const [itemRefs, setItemRefs] = useRefs();
     const groupRef = ref();
-    const untouchable = () => props.readonly || props.disabled || !props.touchable;
+    const unselectable = computed(() => props.readonly || props.disabled);
+    const untouchable = computed(() => unselectable.value || !props.touchable);
     const list = computed(() => Array(+props.count).fill("").map((_, i) => getRateStatus(props.modelValue, i + 1, props.allowHalf, props.readonly)));
     let ranges;
     let groupRefRect;
@@ -107,25 +108,24 @@ var stdin_default = defineComponent({
       }
       return props.allowHalf ? 0.5 : 1;
     };
-    const select = (index) => {
-      if (!props.disabled && !props.readonly && index !== props.modelValue) {
-        emit("update:modelValue", index);
-        emit("change", index);
-      }
+    const select = (value) => {
+      if (unselectable.value || value === props.modelValue) return;
+      emit("update:modelValue", value);
+      emit("change", value);
     };
     const onTouchStart = (event) => {
-      if (untouchable()) {
+      if (untouchable.value) {
         return;
       }
       touch.start(event);
       updateRanges();
     };
     const onTouchMove = (event) => {
-      if (untouchable()) {
+      if (untouchable.value) {
         return;
       }
       touch.move(event);
-      if (touch.isHorizontal()) {
+      if (touch.isHorizontal() && !touch.isTap.value) {
         const {
           clientX,
           clientY
@@ -160,7 +160,11 @@ var stdin_default = defineComponent({
       }
       const onClickItem = (event) => {
         updateRanges();
-        select(allowHalf ? getScoreByPosition(event.clientX, event.clientY) : score);
+        let value = allowHalf ? getScoreByPosition(event.clientX, event.clientY) : score;
+        if (props.clearable && touch.isTap.value && value === props.modelValue) {
+          value = 0;
+        }
+        select(value);
       };
       return _createVNode("div", {
         "key": index,
@@ -215,5 +219,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  rateProps
 };

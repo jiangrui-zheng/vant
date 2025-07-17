@@ -1,6 +1,5 @@
-import { createVNode as _createVNode } from "vue";
-import { computed, watchEffect, defineComponent } from "vue";
-import { clamp, makeStringProp, makeNumberProp, makeNumericProp, createNamespace, BORDER_SURROUND } from "../utils/index.mjs";
+import { computed, watchEffect, defineComponent, createVNode as _createVNode } from "vue";
+import { clamp, truthProp, makeStringProp, makeNumberProp, makeNumericProp, createNamespace, BORDER_SURROUND } from "../utils/index.mjs";
 const [name, bem, t] = createNamespace("pagination");
 const makePage = (number, text, active) => ({
   number,
@@ -16,7 +15,9 @@ const paginationProps = {
   totalItems: makeNumericProp(0),
   showPageSize: makeNumericProp(5),
   itemsPerPage: makeNumericProp(10),
-  forceEllipses: Boolean
+  forceEllipses: Boolean,
+  showPrevButton: truthProp,
+  showNextButton: truthProp
 };
 var stdin_default = defineComponent({
   name,
@@ -86,8 +87,12 @@ var stdin_default = defineComponent({
     const renderPrevButton = () => {
       const {
         mode,
-        modelValue
+        modelValue,
+        showPrevButton
       } = props;
+      if (!showPrevButton) {
+        return;
+      }
       const slot = slots["prev-text"];
       const disabled = modelValue === 1;
       return _createVNode("li", {
@@ -105,8 +110,12 @@ var stdin_default = defineComponent({
     const renderNextButton = () => {
       const {
         mode,
-        modelValue
+        modelValue,
+        showNextButton
       } = props;
+      if (!showNextButton) {
+        return;
+      }
       const slot = slots["next-text"];
       const disabled = modelValue === count.value;
       return _createVNode("li", {
@@ -140,5 +149,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  paginationProps
 };

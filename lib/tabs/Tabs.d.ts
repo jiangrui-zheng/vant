@@ -1,9 +1,9 @@
 import { type PropType, type InjectionKey, type ExtractPropTypes } from 'vue';
 import { type Interceptor } from '../utils';
 import type { TabsProvide, TabsType } from './types';
-declare const tabsProps: {
+export declare const tabsProps: {
     type: {
-        type: PropType<TabsType>;
+        type: PropType<T>;
         default: TabsType;
     };
     color: StringConstructor;
@@ -31,6 +31,10 @@ declare const tabsProps: {
     };
     background: StringConstructor;
     lazyRender: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    showHeader: {
         type: BooleanConstructor;
         default: true;
     };
@@ -44,11 +48,11 @@ declare const tabsProps: {
     titleActiveColor: StringConstructor;
     titleInactiveColor: StringConstructor;
 };
-export declare type TabsProps = ExtractPropTypes<typeof tabsProps>;
+export type TabsProps = ExtractPropTypes<typeof tabsProps>;
 export declare const TABS_KEY: InjectionKey<TabsProvide>;
-declare const _default: import("vue").DefineComponent<{
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     type: {
-        type: PropType<TabsType>;
+        type: PropType<T>;
         default: TabsType;
     };
     color: StringConstructor;
@@ -79,6 +83,10 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: true;
     };
+    showHeader: {
+        type: BooleanConstructor;
+        default: true;
+    };
     lineWidth: (NumberConstructor | StringConstructor)[];
     lineHeight: (NumberConstructor | StringConstructor)[];
     beforeChange: PropType<Interceptor>;
@@ -88,9 +96,9 @@ declare const _default: import("vue").DefineComponent<{
     };
     titleActiveColor: StringConstructor;
     titleInactiveColor: StringConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("scroll" | "disabled" | "change" | "click" | "rendered" | "click-tab" | "update:active")[], "scroll" | "disabled" | "change" | "click" | "rendered" | "click-tab" | "update:active", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("scroll" | "change" | "rendered" | "clickTab" | "update:active")[], "scroll" | "change" | "rendered" | "clickTab" | "update:active", import("vue").PublicProps, Readonly<ExtractPropTypes<{
     type: {
-        type: PropType<TabsType>;
+        type: PropType<T>;
         default: TabsType;
     };
     color: StringConstructor;
@@ -121,6 +129,10 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: true;
     };
+    showHeader: {
+        type: BooleanConstructor;
+        default: true;
+    };
     lineWidth: (NumberConstructor | StringConstructor)[];
     lineHeight: (NumberConstructor | StringConstructor)[];
     beforeChange: PropType<Interceptor>;
@@ -130,27 +142,26 @@ declare const _default: import("vue").DefineComponent<{
     };
     titleActiveColor: StringConstructor;
     titleInactiveColor: StringConstructor;
-}>> & {
+}>> & Readonly<{
     onChange?: ((...args: any[]) => any) | undefined;
-    onClick?: ((...args: any[]) => any) | undefined;
     onScroll?: ((...args: any[]) => any) | undefined;
-    onDisabled?: ((...args: any[]) => any) | undefined;
     onRendered?: ((...args: any[]) => any) | undefined;
-    "onClick-tab"?: ((...args: any[]) => any) | undefined;
+    onClickTab?: ((...args: any[]) => any) | undefined;
     "onUpdate:active"?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     type: TabsType;
-    border: boolean;
     ellipsis: boolean;
     sticky: boolean;
+    border: boolean;
     active: string | number;
     duration: string | number;
     lazyRender: boolean;
     offsetTop: string | number;
-    shrink: boolean;
     animated: boolean;
     swipeable: boolean;
+    shrink: boolean;
     scrollspy: boolean;
+    showHeader: boolean;
     swipeThreshold: string | number;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

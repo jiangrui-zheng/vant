@@ -1,4 +1,4 @@
-export declare const Tabbar: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const Tabbar: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     route: BooleanConstructor;
     fixed: {
         type: BooleanConstructor;
@@ -21,7 +21,7 @@ export declare const Tabbar: import("../utils").WithInstall<import("vue").Define
         type: import("vue").PropType<boolean | null>;
         default: null;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
     route: BooleanConstructor;
     fixed: {
         type: BooleanConstructor;
@@ -44,19 +44,21 @@ export declare const Tabbar: import("../utils").WithInstall<import("vue").Define
         type: import("vue").PropType<boolean | null>;
         default: null;
     };
-}>> & {
+}>> & Readonly<{
     onChange?: ((...args: any[]) => any) | undefined;
     "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     fixed: boolean;
     border: boolean;
     modelValue: string | number;
     placeholder: boolean;
     safeAreaInsetBottom: boolean | null;
     route: boolean;
-}>>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default Tabbar;
+export { tabbarProps } from './Tabbar';
 export type { TabbarProps } from './Tabbar';
+export type { TabbarThemeVars } from './types';
 declare module 'vue' {
     interface GlobalComponents {
         VanTabbar: typeof Tabbar;

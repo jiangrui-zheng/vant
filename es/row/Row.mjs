@@ -1,6 +1,5 @@
-import { createVNode as _createVNode } from "vue";
-import { computed, defineComponent } from "vue";
-import { truthProp, makeStringProp, makeNumericProp, createNamespace } from "../utils/index.mjs";
+import { computed, defineComponent, createVNode as _createVNode } from "vue";
+import { truthProp, makeStringProp, createNamespace } from "../utils/index.mjs";
 import { useChildren } from "@vant/use";
 const [name, bem] = createNamespace("row");
 const ROW_KEY = Symbol(name);
@@ -8,7 +7,10 @@ const rowProps = {
   tag: makeStringProp("div"),
   wrap: truthProp,
   align: String,
-  gutter: makeNumericProp(0),
+  gutter: {
+    type: [String, Number, Array],
+    default: 0
+  },
   justify: String
 };
 var stdin_default = defineComponent({
@@ -36,7 +38,12 @@ var stdin_default = defineComponent({
       return groups2;
     });
     const spaces = computed(() => {
-      const gutter = Number(props.gutter);
+      let gutter = 0;
+      if (Array.isArray(props.gutter)) {
+        gutter = Number(props.gutter[0]) || 0;
+      } else {
+        gutter = Number(props.gutter);
+      }
       const spaces2 = [];
       if (!gutter) {
         return spaces2;
@@ -60,8 +67,30 @@ var stdin_default = defineComponent({
       });
       return spaces2;
     });
+    const verticalSpaces = computed(() => {
+      const {
+        gutter
+      } = props;
+      const spaces2 = [];
+      if (Array.isArray(gutter) && gutter.length > 1) {
+        const bottom = Number(gutter[1]) || 0;
+        if (bottom <= 0) {
+          return spaces2;
+        }
+        groups.value.forEach((group, index) => {
+          if (index === groups.value.length - 1) return;
+          group.forEach(() => {
+            spaces2.push({
+              bottom
+            });
+          });
+        });
+      }
+      return spaces2;
+    });
     linkChildren({
-      spaces
+      spaces,
+      verticalSpaces
     });
     return () => {
       const {
@@ -87,5 +116,6 @@ var stdin_default = defineComponent({
 });
 export {
   ROW_KEY,
-  stdin_default as default
+  stdin_default as default,
+  rowProps
 };

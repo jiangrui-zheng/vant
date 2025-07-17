@@ -1,9 +1,9 @@
-import { noop } from "./basic.mjs";
-import { isPromise } from "./validate.mjs";
+import { noop, isPromise } from "./basic.mjs";
 function callInterceptor(interceptor, {
   args = [],
   done,
-  canceled
+  canceled,
+  error
 }) {
   if (interceptor) {
     const returnVal = interceptor.apply(null, args);
@@ -14,7 +14,7 @@ function callInterceptor(interceptor, {
         } else if (canceled) {
           canceled();
         }
-      }).catch(noop);
+      }).catch(error || noop);
     } else if (returnVal) {
       done();
     } else if (canceled) {

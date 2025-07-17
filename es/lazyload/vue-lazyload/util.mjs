@@ -5,15 +5,12 @@ const modeType = {
   observer: "observer"
 };
 function remove(arr, item) {
-  if (!arr.length)
-    return;
+  if (!arr.length) return;
   const index = arr.indexOf(item);
-  if (index > -1)
-    return arr.splice(index, 1);
+  if (index > -1) return arr.splice(index, 1);
 }
 function getBestSelectionFromSrcset(el, scale) {
-  if (el.tagName !== "IMG" || !el.getAttribute("data-srcset"))
-    return;
+  if (el.tagName !== "IMG" || !el.getAttribute("data-srcset")) return;
   let options = el.getAttribute("data-srcset");
   const container = el.parentNode;
   const containerWidth = container.offsetWidth * scale;
@@ -71,8 +68,7 @@ function getBestSelectionFromSrcset(el, scale) {
 }
 const getDPR = (scale = 1) => inBrowser ? window.devicePixelRatio || scale : scale;
 function supportWebp() {
-  if (!inBrowser)
-    return false;
+  if (!inBrowser) return false;
   let support = true;
   try {
     const elem = document.createElement("canvas");
@@ -140,8 +136,7 @@ class ImageCache {
     return this.caches.indexOf(key) > -1;
   }
   add(key) {
-    if (this.has(key))
-      return;
+    if (this.has(key)) return;
     this.caches.push(key);
     if (this.caches.length > this.options.max) {
       this.free();

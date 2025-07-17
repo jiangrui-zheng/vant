@@ -1,6 +1,5 @@
-import { createVNode as _createVNode } from "vue";
-import { ref, watch, computed, reactive, defineComponent } from "vue";
-import { extend, isHidden, unitToPx, numericProp, getScrollTop, getZIndexStyle, makeStringProp, makeNumericProp, createNamespace } from "../utils/index.mjs";
+import { ref, watch, computed, nextTick, reactive, defineComponent, createVNode as _createVNode } from "vue";
+import { extend, isHidden, unitToPx, numericProp, windowWidth, windowHeight, getScrollTop, getZIndexStyle, makeStringProp, makeNumericProp, createNamespace } from "../utils/index.mjs";
 import { useRect, useEventListener, useScrollParent } from "@vant/use";
 import { useVisibilityChange } from "../composables/use-visibility-change.mjs";
 const [name, bem] = createNamespace("sticky");
@@ -24,11 +23,17 @@ var stdin_default = defineComponent({
     const state = reactive({
       fixed: false,
       width: 0,
+      // root width
       height: 0,
+      // root height
       transform: 0
     });
+    const isReset = ref(false);
     const offset = computed(() => unitToPx(props.position === "top" ? props.offsetTop : props.offsetBottom));
     const rootStyle = computed(() => {
+      if (isReset.value) {
+        return;
+      }
       const {
         fixed,
         height,
@@ -42,7 +47,7 @@ var stdin_default = defineComponent({
       }
     });
     const stickyStyle = computed(() => {
-      if (!state.fixed) {
+      if (!state.fixed || isReset.value) {
         return;
       }
       const style = extend(getZIndexStyle(props.zIndex), {
@@ -101,6 +106,18 @@ var stdin_default = defineComponent({
       passive: true
     });
     useVisibilityChange(root, onScroll);
+    watch([windowWidth, windowHeight], () => {
+      if (!root.value || isHidden(root) || !state.fixed) {
+        return;
+      }
+      isReset.value = true;
+      nextTick(() => {
+        const rootRect = useRect(root);
+        state.width = rootRect.width;
+        state.height = rootRect.height;
+        isReset.value = false;
+      });
+    });
     return () => {
       var _a;
       return _createVNode("div", {
@@ -108,7 +125,7 @@ var stdin_default = defineComponent({
         "style": rootStyle.value
       }, [_createVNode("div", {
         "class": bem({
-          fixed: state.fixed
+          fixed: state.fixed && !isReset.value
         }),
         "style": stickyStyle.value
       }, [(_a = slots.default) == null ? void 0 : _a.call(slots)])]);
@@ -116,5 +133,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  stickyProps
 };

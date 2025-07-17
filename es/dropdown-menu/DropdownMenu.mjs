@@ -1,7 +1,7 @@
-import { createVNode as _createVNode } from "vue";
-import { ref, computed, defineComponent } from "vue";
+import { ref, computed, defineComponent, createVNode as _createVNode } from "vue";
 import { isDef, truthProp, numericProp, windowHeight, makeStringProp, makeNumericProp, createNamespace, HAPTICS_FEEDBACK } from "../utils/index.mjs";
 import { useId } from "../composables/use-id.mjs";
+import { useExpose } from "../composables/use-expose.mjs";
 import { useRect, useChildren, useClickAway, useScrollParent, useEventListener } from "@vant/use";
 const [name, bem] = createNamespace("dropdown-menu");
 const dropdownMenuProps = {
@@ -10,8 +10,10 @@ const dropdownMenuProps = {
   duration: makeNumericProp(0.2),
   direction: makeStringProp("down"),
   activeColor: String,
+  autoLocate: Boolean,
   closeOnClickOutside: truthProp,
-  closeOnClickOverlay: truthProp
+  closeOnClickOverlay: truthProp,
+  swipeThreshold: numericProp
 };
 const DROPDOWN_KEY = Symbol(name);
 var stdin_default = defineComponent({
@@ -30,6 +32,7 @@ var stdin_default = defineComponent({
     } = useChildren(DROPDOWN_KEY);
     const scrollParent = useScrollParent(root);
     const opened = computed(() => children.some((item) => item.state.showWrapper));
+    const scrollable = computed(() => props.swipeThreshold && children.length > +props.swipeThreshold);
     const barStyle = computed(() => {
       if (opened.value && isDef(props.zIndex)) {
         return {
@@ -37,11 +40,14 @@ var stdin_default = defineComponent({
         };
       }
     });
+    const close = () => {
+      children.forEach((item) => {
+        item.toggle(false);
+      });
+    };
     const onClickAway = () => {
       if (props.closeOnClickOutside) {
-        children.forEach((item) => {
-          item.toggle(false);
-        });
+        close();
       }
     };
     const updateOffset = () => {
@@ -62,7 +68,6 @@ var stdin_default = defineComponent({
     const toggleItem = (active) => {
       children.forEach((item, index) => {
         if (index === active) {
-          updateOffset();
           item.toggle();
         } else if (item.state.showPopup) {
           item.toggle(false, {
@@ -83,8 +88,10 @@ var stdin_default = defineComponent({
         "id": `${id}-${index}`,
         "role": "button",
         "tabindex": disabled ? void 0 : 0,
+        "data-allow-mismatch": "attribute",
         "class": [bem("item", {
-          disabled
+          disabled,
+          grow: scrollable.value
         }), {
           [HAPTICS_FEEDBACK]: !disabled
         }],
@@ -105,10 +112,14 @@ var stdin_default = defineComponent({
         "class": "van-ellipsis"
       }, [item.renderTitle()])])]);
     };
+    useExpose({
+      close
+    });
     linkChildren({
       id,
       props,
-      offset
+      offset,
+      updateOffset
     });
     useClickAway(root, onClickAway);
     useEventListener("scroll", onScroll, {
@@ -124,7 +135,8 @@ var stdin_default = defineComponent({
         "ref": barRef,
         "style": barStyle.value,
         "class": bem("bar", {
-          opened: opened.value
+          opened: opened.value,
+          scrollable: scrollable.value
         })
       }, [children.map(renderTitle)]), (_a = slots.default) == null ? void 0 : _a.call(slots)]);
     };
@@ -132,5 +144,6 @@ var stdin_default = defineComponent({
 });
 export {
   DROPDOWN_KEY,
-  stdin_default as default
+  stdin_default as default,
+  dropdownMenuProps
 };

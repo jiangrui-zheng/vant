@@ -1,5 +1,5 @@
 import { NoticeBarProps } from './NoticeBar';
-export declare const NoticeBar: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const NoticeBar: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     text: StringConstructor;
     mode: import("vue").PropType<import("./types").NoticeBarMode>;
     color: StringConstructor;
@@ -18,7 +18,7 @@ export declare const NoticeBar: import("../utils").WithInstall<import("vue").Def
         type: import("vue").PropType<boolean | null>;
         default: null;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("close" | "replay")[], "close" | "replay", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("close" | "replay")[], "close" | "replay", import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
     text: StringConstructor;
     mode: import("vue").PropType<import("./types").NoticeBarMode>;
     color: StringConstructor;
@@ -37,18 +37,19 @@ export declare const NoticeBar: import("../utils").WithInstall<import("vue").Def
         type: import("vue").PropType<boolean | null>;
         default: null;
     };
-}>> & {
+}>> & Readonly<{
     onClose?: ((...args: any[]) => any) | undefined;
     onReplay?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     scrollable: boolean | null;
-    speed: string | number;
     delay: string | number;
+    speed: string | number;
     wrapable: boolean;
-}>>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default NoticeBar;
+export { noticeBarProps } from './NoticeBar';
 export type { NoticeBarProps };
-export type { NoticeBarMode, NoticeBarInstance } from './types';
+export type { NoticeBarMode, NoticeBarInstance, NoticeBarThemeVars, } from './types';
 declare module 'vue' {
     interface GlobalComponents {
         VanNoticeBar: typeof NoticeBar;

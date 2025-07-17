@@ -1,5 +1,4 @@
-import { createVNode as _createVNode } from "vue";
-import { ref, reactive, computed, defineComponent } from "vue";
+import { ref, reactive, computed, defineComponent, createVNode as _createVNode } from "vue";
 import { extend, numericProp, BORDER_BOTTOM, getZIndexStyle, createNamespace } from "../utils/index.mjs";
 import { INDEX_BAR_KEY } from "../index-bar/IndexBar.mjs";
 import { getScrollTop, getRootScrollTop } from "../utils/dom.mjs";
@@ -83,5 +82,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  indexAnchorProps
 };

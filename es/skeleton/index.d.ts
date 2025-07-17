@@ -1,11 +1,17 @@
-export declare const Skeleton: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const Skeleton: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     row: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-    title: BooleanConstructor;
     round: BooleanConstructor;
+    title: BooleanConstructor;
+    titleWidth: (NumberConstructor | StringConstructor)[];
     avatar: BooleanConstructor;
+    avatarSize: (NumberConstructor | StringConstructor)[];
+    avatarShape: {
+        type: import("vue").PropType<T>;
+        default: import("..").SkeletonAvatarShape;
+    };
     loading: {
         type: BooleanConstructor;
         default: true;
@@ -14,26 +20,26 @@ export declare const Skeleton: import("../utils").WithInstall<import("vue").Defi
         type: BooleanConstructor;
         default: true;
     };
-    avatarSize: (NumberConstructor | StringConstructor)[];
-    titleWidth: (NumberConstructor | StringConstructor)[];
-    avatarShape: {
-        type: import("vue").PropType<import("./Skeleton").SkeletonAvatarShape>;
-        default: import("./Skeleton").SkeletonAvatarShape;
-    };
     rowWidth: {
         type: import("vue").PropType<import("../utils").Numeric | import("../utils").Numeric[]>;
         default: string;
     };
-}, () => JSX.Element | import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+}>, () => import("vue/jsx-runtime").JSX.Element | import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
     [key: string]: any;
-}>[] | undefined, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+}>[] | undefined, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
     row: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-    title: BooleanConstructor;
     round: BooleanConstructor;
+    title: BooleanConstructor;
+    titleWidth: (NumberConstructor | StringConstructor)[];
     avatar: BooleanConstructor;
+    avatarSize: (NumberConstructor | StringConstructor)[];
+    avatarShape: {
+        type: import("vue").PropType<T>;
+        default: import("..").SkeletonAvatarShape;
+    };
     loading: {
         type: BooleanConstructor;
         default: true;
@@ -42,28 +48,24 @@ export declare const Skeleton: import("../utils").WithInstall<import("vue").Defi
         type: BooleanConstructor;
         default: true;
     };
-    avatarSize: (NumberConstructor | StringConstructor)[];
-    titleWidth: (NumberConstructor | StringConstructor)[];
-    avatarShape: {
-        type: import("vue").PropType<import("./Skeleton").SkeletonAvatarShape>;
-        default: import("./Skeleton").SkeletonAvatarShape;
-    };
     rowWidth: {
         type: import("vue").PropType<import("../utils").Numeric | import("../utils").Numeric[]>;
         default: string;
     };
-}>>, {
+}>> & Readonly<{}>, {
     title: boolean;
     animate: boolean;
     round: boolean;
-    loading: boolean;
     row: string | number;
-    avatar: boolean;
-    avatarShape: import("./Skeleton").SkeletonAvatarShape;
+    loading: boolean;
+    avatarShape: import("..").SkeletonAvatarShape;
     rowWidth: import("../utils").Numeric | import("../utils").Numeric[];
-}>>;
+    avatar: boolean;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default Skeleton;
-export type { SkeletonProps, SkeletonAvatarShape } from './Skeleton';
+export { skeletonProps } from './Skeleton';
+export type { SkeletonProps } from './Skeleton';
+export type { SkeletonThemeVars } from './types';
 declare module 'vue' {
     interface GlobalComponents {
         VanSkeleton: typeof Skeleton;

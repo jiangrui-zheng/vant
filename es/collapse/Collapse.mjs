@@ -1,5 +1,4 @@
-import { createVNode as _createVNode } from "vue";
-import { defineComponent } from "vue";
+import { defineComponent, createVNode as _createVNode } from "vue";
 import { truthProp, createNamespace, BORDER_TOP_BOTTOM } from "../utils/index.mjs";
 import { useChildren } from "@vant/use";
 import { useExpose } from "../composables/use-expose.mjs";
@@ -104,5 +103,6 @@ var stdin_default = defineComponent({
 });
 export {
   COLLAPSE_KEY,
+  collapseProps,
   stdin_default as default
 };

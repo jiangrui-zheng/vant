@@ -1,20 +1,20 @@
-import { type PropType, type ExtractPropTypes } from 'vue';
-export declare type NumberKeyboardTheme = 'default' | 'custom';
-declare const numberKeyboardProps: {
+import { type PropType, type TeleportProps, type ExtractPropTypes } from 'vue';
+export type NumberKeyboardTheme = 'default' | 'custom';
+export declare const numberKeyboardProps: {
     show: BooleanConstructor;
     title: StringConstructor;
     theme: {
-        type: PropType<NumberKeyboardTheme>;
+        type: PropType<T>;
         default: NumberKeyboardTheme;
     };
     zIndex: (NumberConstructor | StringConstructor)[];
-    teleport: PropType<string | import("vue").RendererElement | null | undefined>;
+    teleport: PropType<TeleportProps["to"]>;
     maxlength: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
     modelValue: {
-        type: PropType<string>;
+        type: PropType<T>;
         default: string;
     };
     transition: {
@@ -46,22 +46,22 @@ declare const numberKeyboardProps: {
         default: string;
     };
 };
-export declare type NumberKeyboardProps = ExtractPropTypes<typeof numberKeyboardProps>;
-declare const _default: import("vue").DefineComponent<{
+export type NumberKeyboardProps = ExtractPropTypes<typeof numberKeyboardProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     show: BooleanConstructor;
     title: StringConstructor;
     theme: {
-        type: PropType<NumberKeyboardTheme>;
+        type: PropType<T>;
         default: NumberKeyboardTheme;
     };
     zIndex: (NumberConstructor | StringConstructor)[];
-    teleport: PropType<string | import("vue").RendererElement | null | undefined>;
+    teleport: PropType<TeleportProps["to"]>;
     maxlength: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
     modelValue: {
-        type: PropType<string>;
+        type: PropType<T>;
         default: string;
     };
     transition: {
@@ -92,21 +92,21 @@ declare const _default: import("vue").DefineComponent<{
         type: PropType<string | string[]>;
         default: string;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("input" | "blur" | "update:modelValue" | "close" | "hide" | "show" | "delete")[], "input" | "blur" | "update:modelValue" | "close" | "hide" | "show" | "delete", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("input" | "delete" | "hide" | "show" | "blur" | "update:modelValue" | "close")[], "input" | "delete" | "hide" | "show" | "blur" | "update:modelValue" | "close", import("vue").PublicProps, Readonly<ExtractPropTypes<{
     show: BooleanConstructor;
     title: StringConstructor;
     theme: {
-        type: PropType<NumberKeyboardTheme>;
+        type: PropType<T>;
         default: NumberKeyboardTheme;
     };
     zIndex: (NumberConstructor | StringConstructor)[];
-    teleport: PropType<string | import("vue").RendererElement | null | undefined>;
+    teleport: PropType<TeleportProps["to"]>;
     maxlength: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
     modelValue: {
-        type: PropType<string>;
+        type: PropType<T>;
         default: string;
     };
     transition: {
@@ -137,26 +137,26 @@ declare const _default: import("vue").DefineComponent<{
         type: PropType<string | string[]>;
         default: string;
     };
-}>> & {
+}>> & Readonly<{
     onBlur?: ((...args: any[]) => any) | undefined;
     onInput?: ((...args: any[]) => any) | undefined;
-    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
     onClose?: ((...args: any[]) => any) | undefined;
+    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
     onDelete?: ((...args: any[]) => any) | undefined;
     onHide?: ((...args: any[]) => any) | undefined;
     onShow?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
+    theme: NumberKeyboardTheme;
+    show: boolean;
     maxlength: string | number;
     modelValue: string;
     safeAreaInsetBottom: boolean;
-    show: boolean;
     transition: boolean;
-    theme: NumberKeyboardTheme;
     blurOnClose: boolean;
     showDeleteKey: boolean;
     randomKeyOrder: boolean;
     closeButtonLoading: boolean;
     hideOnClickOutside: boolean;
     extraKey: string | string[];
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

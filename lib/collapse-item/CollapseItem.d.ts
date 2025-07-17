@@ -1,5 +1,9 @@
 import { type ExtractPropTypes } from 'vue';
-declare const collapseItemProps: {
+export declare const collapseItemProps: {
+    tag: {
+        type: import("vue").PropType<T>;
+        default: keyof HTMLElementTagNameMap;
+    };
     icon: StringConstructor;
     size: import("vue").PropType<import("../cell").CellSize>;
     title: (NumberConstructor | StringConstructor)[];
@@ -11,13 +15,16 @@ declare const collapseItemProps: {
         type: BooleanConstructor;
         default: true;
     };
-    required: BooleanConstructor;
     iconPrefix: StringConstructor;
     valueClass: import("vue").PropType<unknown>;
     labelClass: import("vue").PropType<unknown>;
     titleClass: import("vue").PropType<unknown>;
     titleStyle: import("vue").PropType<string | import("vue").CSSProperties>;
     arrowDirection: import("vue").PropType<import("../cell").CellArrowDirection>;
+    required: {
+        type: import("vue").PropType<boolean | "auto">;
+        default: null;
+    };
     clickable: {
         type: import("vue").PropType<boolean | null>;
         default: null;
@@ -35,8 +42,12 @@ declare const collapseItemProps: {
         default: true;
     };
 };
-export declare type CollapseItemProps = ExtractPropTypes<typeof collapseItemProps>;
-declare const _default: import("vue").DefineComponent<{
+export type CollapseItemProps = ExtractPropTypes<typeof collapseItemProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
+    tag: {
+        type: import("vue").PropType<T>;
+        default: keyof HTMLElementTagNameMap;
+    };
     icon: StringConstructor;
     size: import("vue").PropType<import("../cell").CellSize>;
     title: (NumberConstructor | StringConstructor)[];
@@ -48,13 +59,16 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: true;
     };
-    required: BooleanConstructor;
     iconPrefix: StringConstructor;
     valueClass: import("vue").PropType<unknown>;
     labelClass: import("vue").PropType<unknown>;
     titleClass: import("vue").PropType<unknown>;
     titleStyle: import("vue").PropType<string | import("vue").CSSProperties>;
     arrowDirection: import("vue").PropType<import("../cell").CellArrowDirection>;
+    required: {
+        type: import("vue").PropType<boolean | "auto">;
+        default: null;
+    };
     clickable: {
         type: import("vue").PropType<boolean | null>;
         default: null;
@@ -71,7 +85,11 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: true;
     };
-}, (() => JSX.Element) | undefined, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+}>, (() => import("vue/jsx-runtime").JSX.Element) | undefined, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<ExtractPropTypes<{
+    tag: {
+        type: import("vue").PropType<T>;
+        default: keyof HTMLElementTagNameMap;
+    };
     icon: StringConstructor;
     size: import("vue").PropType<import("../cell").CellSize>;
     title: (NumberConstructor | StringConstructor)[];
@@ -83,13 +101,16 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: true;
     };
-    required: BooleanConstructor;
     iconPrefix: StringConstructor;
     valueClass: import("vue").PropType<unknown>;
     labelClass: import("vue").PropType<unknown>;
     titleClass: import("vue").PropType<unknown>;
     titleStyle: import("vue").PropType<string | import("vue").CSSProperties>;
     arrowDirection: import("vue").PropType<import("../cell").CellArrowDirection>;
+    required: {
+        type: import("vue").PropType<boolean | "auto">;
+        default: null;
+    };
     clickable: {
         type: import("vue").PropType<boolean | null>;
         default: null;
@@ -106,14 +127,15 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: true;
     };
-}>>, {
-    required: boolean;
+}>> & Readonly<{}>, {
+    tag: keyof HTMLElementTagNameMap;
     center: boolean;
     disabled: boolean;
-    isLink: boolean;
     border: boolean;
+    isLink: boolean;
+    required: boolean | "auto";
     clickable: boolean | null;
     readonly: boolean;
     lazyRender: boolean;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

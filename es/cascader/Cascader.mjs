@@ -1,6 +1,6 @@
-import { createVNode as _createVNode } from "vue";
-import { ref, watch, nextTick, defineComponent } from "vue";
+import { ref, watch, nextTick, defineComponent, createVNode as _createVNode } from "vue";
 import { extend, truthProp, numericProp, makeArrayProp, makeStringProp, createNamespace, HAPTICS_FEEDBACK } from "../utils/index.mjs";
+import { useRefs } from "../composables/use-refs.mjs";
 import { Tab } from "../tab/index.mjs";
 import { Tabs } from "../tabs/index.mjs";
 import { Icon } from "../icon/index.mjs";
@@ -20,13 +20,14 @@ const cascaderProps = {
 var stdin_default = defineComponent({
   name,
   props: cascaderProps,
-  emits: ["close", "change", "finish", "click-tab", "update:modelValue"],
+  emits: ["close", "change", "finish", "clickTab", "update:modelValue"],
   setup(props, {
     slots,
     emit
   }) {
     const tabs = ref([]);
     const activeTab = ref(0);
+    const [selectedElementRefs, setSelectedElementRefs] = useRefs();
     const {
       text: textKey,
       value: valueKey,
@@ -124,7 +125,7 @@ var stdin_default = defineComponent({
     const onClickTab = ({
       name: name2,
       title
-    }) => emit("click-tab", name2, title);
+    }) => emit("clickTab", name2, title);
     const renderHeader = () => props.showHeader ? _createVNode("div", {
       "class": bem("header")
     }, [_createVNode("h2", {
@@ -145,6 +146,7 @@ var stdin_default = defineComponent({
         selected
       }) : _createVNode("span", null, [option[textKey]]);
       return _createVNode("li", {
+        "ref": selected ? setSelectedElementRefs(tabIndex) : void 0,
         "role": "menuitemradio",
         "class": [bem("option", {
           selected,
@@ -197,11 +199,21 @@ var stdin_default = defineComponent({
       "class": bem("tabs"),
       "color": props.activeColor,
       "swipeable": props.swipeable,
-      "onClick-tab": onClickTab
+      "onClickTab": onClickTab
     }, {
       default: () => [tabs.value.map(renderTab)]
     });
+    const scrollIntoView = (el) => {
+      const scrollParent = el.parentElement;
+      if (scrollParent) {
+        scrollParent.scrollTop = el.offsetTop - (scrollParent.offsetHeight - el.offsetHeight) / 2;
+      }
+    };
     updateTabs();
+    watch(activeTab, (value) => {
+      const el = selectedElementRefs.value[value];
+      if (el) scrollIntoView(el);
+    });
     watch(() => props.options, updateTabs, {
       deep: true
     });
@@ -223,5 +235,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
+  cascaderProps,
   stdin_default as default
 };

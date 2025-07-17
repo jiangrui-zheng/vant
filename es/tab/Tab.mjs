@@ -1,12 +1,13 @@
-import { withDirectives as _withDirectives, vShow as _vShow, createVNode as _createVNode } from "vue";
-import { ref, watch, provide, computed, nextTick, defineComponent } from "vue";
-import { extend, truthProp, unknownProp, numericProp, createNamespace } from "../utils/index.mjs";
+import { ref, watch, provide, computed, nextTick, watchEffect, defineComponent, getCurrentInstance, mergeProps as _mergeProps, createVNode as _createVNode, vShow as _vShow, withDirectives as _withDirectives } from "vue";
+import { normalizeClass, normalizeStyle, stringifyStyle } from "@vue/shared";
+import { pick, extend, truthProp, unknownProp, numericProp, createNamespace } from "../utils/index.mjs";
 import { TABS_KEY } from "../tabs/Tabs.mjs";
 import { doubleRaf, useParent } from "@vant/use";
 import { useId } from "../composables/use-id.mjs";
 import { useExpose } from "../composables/use-expose.mjs";
 import { routeProps } from "../composables/use-route.mjs";
 import { TAB_STATUS_KEY } from "../composables/use-tab-status.mjs";
+import { TabTitle } from "./TabTitle.mjs";
 import { SwipeItem } from "../swipe-item/index.mjs";
 const [name, bem] = createNamespace("tab");
 const tabProps = extend({}, routeProps, {
@@ -27,6 +28,7 @@ var stdin_default = defineComponent({
   }) {
     const id = useId();
     const inited = ref(false);
+    const instance = getCurrentInstance();
     const {
       parent,
       index
@@ -56,6 +58,31 @@ var stdin_default = defineComponent({
       }
       return isActive;
     });
+    const parsedClass = ref("");
+    const parsedStyle = ref("");
+    watchEffect(() => {
+      const {
+        titleClass,
+        titleStyle
+      } = props;
+      parsedClass.value = titleClass ? normalizeClass(titleClass) : "";
+      parsedStyle.value = titleStyle && typeof titleStyle !== "string" ? stringifyStyle(normalizeStyle(titleStyle)) : titleStyle;
+    });
+    const renderTitle = (onClickTab) => _createVNode(TabTitle, _mergeProps({
+      "key": id,
+      "id": `${parent.id}-${index.value}`,
+      "ref": parent.setTitleRefs(index.value),
+      "style": parsedStyle.value,
+      "class": parsedClass.value,
+      "isActive": active.value,
+      "controls": id,
+      "scrollable": parent.scrollable.value,
+      "activeColor": parent.props.titleActiveColor,
+      "inactiveColor": parent.props.titleInactiveColor,
+      "onClick": (event) => onClickTab(instance.proxy, index.value, event)
+    }, pick(parent.props, ["type", "color", "shrink"]), pick(props, ["dot", "badge", "title", "disabled", "showZeroBadge"])), {
+      title: slots.title
+    });
     const hasInactiveClass = ref(!active.value);
     watch(active, (val) => {
       if (val) {
@@ -71,6 +98,10 @@ var stdin_default = defineComponent({
       parent.scrollIntoView();
     });
     provide(TAB_STATUS_KEY, active);
+    useExpose({
+      id,
+      renderTitle
+    });
     return () => {
       var _a;
       const label = `${parent.id}-${index.value}`;
@@ -93,7 +124,8 @@ var stdin_default = defineComponent({
           }),
           "tabindex": active.value ? 0 : -1,
           "aria-hidden": !active.value,
-          "aria-labelledby": label
+          "aria-labelledby": label,
+          "data-allow-mismatch": "attribute"
         }, {
           default: () => {
             var _a2;
@@ -105,19 +137,18 @@ var stdin_default = defineComponent({
       }
       const shouldRender = inited.value || scrollspy || !lazyRender;
       const Content = shouldRender ? (_a = slots.default) == null ? void 0 : _a.call(slots) : null;
-      useExpose({
-        id
-      });
       return _withDirectives(_createVNode("div", {
         "id": id,
         "role": "tabpanel",
         "class": bem("panel"),
         "tabindex": show ? 0 : -1,
-        "aria-labelledby": label
+        "aria-labelledby": label,
+        "data-allow-mismatch": "attribute"
       }, [Content]), [[_vShow, show]]);
     };
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  tabProps
 };

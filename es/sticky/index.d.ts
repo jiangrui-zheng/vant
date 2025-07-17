@@ -1,7 +1,7 @@
-export declare const Sticky: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const Sticky: import("../utils").WithInstall<import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     zIndex: (NumberConstructor | StringConstructor)[];
     position: {
-        type: import("vue").PropType<import("./Sticky").StickyPosition>;
+        type: import("vue").PropType<T>;
         default: import("./Sticky").StickyPosition;
     };
     container: import("vue").PropType<Element>;
@@ -13,10 +13,10 @@ export declare const Sticky: import("../utils").WithInstall<import("vue").Define
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("scroll" | "change")[], "scroll" | "change", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("scroll" | "change")[], "scroll" | "change", import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
     zIndex: (NumberConstructor | StringConstructor)[];
     position: {
-        type: import("vue").PropType<import("./Sticky").StickyPosition>;
+        type: import("vue").PropType<T>;
         default: import("./Sticky").StickyPosition;
     };
     container: import("vue").PropType<Element>;
@@ -28,16 +28,18 @@ export declare const Sticky: import("../utils").WithInstall<import("vue").Define
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-}>> & {
+}>> & Readonly<{
     onChange?: ((...args: any[]) => any) | undefined;
     onScroll?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     position: import("./Sticky").StickyPosition;
     offsetTop: string | number;
     offsetBottom: string | number;
-}>>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>>;
 export default Sticky;
+export { stickyProps } from './Sticky';
 export type { StickyProps, StickyPosition } from './Sticky';
+export type { StickyThemeVars } from './types';
 declare module 'vue' {
     interface GlobalComponents {
         VanSticky: typeof Sticky;

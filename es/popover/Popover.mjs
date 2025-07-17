@@ -1,17 +1,19 @@
-import { mergeProps as _mergeProps, Fragment as _Fragment, createVNode as _createVNode } from "vue";
-import { ref, watch, nextTick, onMounted, watchEffect, onBeforeUnmount, defineComponent } from "vue";
+import { ref, watch, nextTick, onMounted, watchEffect, onBeforeUnmount, defineComponent, createVNode as _createVNode, Fragment as _Fragment, mergeProps as _mergeProps } from "vue";
 import { createPopper, offsetModifier } from "@vant/popperjs";
-import { pick, extend, truthProp, numericProp, unknownProp, BORDER_BOTTOM, makeArrayProp, makeStringProp, createNamespace } from "../utils/index.mjs";
+import { pick, extend, inBrowser, truthProp, numericProp, unknownProp, BORDER_RIGHT, BORDER_BOTTOM, makeArrayProp, makeStringProp, createNamespace } from "../utils/index.mjs";
 import { useClickAway } from "@vant/use";
+import { useScopeId } from "../composables/use-scope-id.mjs";
+import { useSyncPropRef } from "../composables/use-sync-prop-ref.mjs";
 import { Icon } from "../icon/index.mjs";
 import { Popup } from "../popup/index.mjs";
 const [name, bem] = createNamespace("popover");
-const popupProps = ["show", "overlay", "duration", "teleport", "overlayStyle", "overlayClass", "closeOnClickOverlay"];
+const popupProps = ["overlay", "duration", "teleport", "overlayStyle", "overlayClass", "closeOnClickOverlay"];
 const popoverProps = {
   show: Boolean,
   theme: makeStringProp("light"),
   overlay: Boolean,
   actions: makeArrayProp(),
+  actionsDirection: makeStringProp("vertical"),
   trigger: makeStringProp("click"),
   duration: numericProp,
   showArrow: truthProp,
@@ -44,6 +46,7 @@ var stdin_default = defineComponent({
     const popupRef = ref();
     const wrapperRef = ref();
     const popoverRef = ref();
+    const show = useSyncPropRef(() => props.show, (value) => emit("update:show", value));
     const getPopoverOptions = () => ({
       placement: props.placement,
       modifiers: [{
@@ -66,20 +69,26 @@ var stdin_default = defineComponent({
     };
     const updateLocation = () => {
       nextTick(() => {
-        if (!props.show) {
+        if (!show.value) {
           return;
         }
         if (!popper) {
           popper = createPopperInstance();
+          if (inBrowser) {
+            window.addEventListener("animationend", updateLocation);
+            window.addEventListener("transitionend", updateLocation);
+          }
         } else {
           popper.setOptions(getPopoverOptions());
         }
       });
     };
-    const updateShow = (value) => emit("update:show", value);
+    const updateShow = (value) => {
+      show.value = value;
+    };
     const onClickWrapper = () => {
       if (props.trigger === "click") {
-        updateShow(!props.show);
+        show.value = !show.value;
       }
     };
     const onClickAction = (action, index) => {
@@ -88,12 +97,12 @@ var stdin_default = defineComponent({
       }
       emit("select", action, index);
       if (props.closeOnClickAction) {
-        updateShow(false);
+        show.value = false;
       }
     };
     const onClickAway = () => {
-      if (props.show && props.closeOnClickOutside && (!props.overlay || props.closeOnClickOverlay)) {
-        updateShow(false);
+      if (show.value && props.closeOnClickOutside && (!props.overlay || props.closeOnClickOverlay)) {
+        show.value = false;
       }
     };
     const renderActionContent = (action, index) => {
@@ -108,7 +117,9 @@ var stdin_default = defineComponent({
         "classPrefix": props.iconPrefix,
         "class": bem("action-icon")
       }, null), _createVNode("div", {
-        "class": [bem("action-text"), BORDER_BOTTOM]
+        "class": [bem("action-text"), {
+          [BORDER_BOTTOM]: props.actionsDirection === "vertical"
+        }]
       }, [action.text])];
     };
     const renderAction = (action, index) => {
@@ -123,7 +134,9 @@ var stdin_default = defineComponent({
         "class": [bem("action", {
           disabled,
           "with-icon": icon
-        }), className],
+        }), {
+          [BORDER_RIGHT]: props.actionsDirection === "horizontal"
+        }, className],
         "style": {
           color
         },
@@ -141,11 +154,15 @@ var stdin_default = defineComponent({
     });
     onBeforeUnmount(() => {
       if (popper) {
+        if (inBrowser) {
+          window.removeEventListener("animationend", updateLocation);
+          window.removeEventListener("transitionend", updateLocation);
+        }
         popper.destroy();
         popper = null;
       }
     });
-    watch(() => [props.show, props.offset, props.placement], updateLocation);
+    watch(() => [show.value, props.offset, props.placement], updateLocation);
     useClickAway([wrapperRef, popupRef], onClickAway, {
       eventName: "touchstart"
     });
@@ -157,22 +174,24 @@ var stdin_default = defineComponent({
         "onClick": onClickWrapper
       }, [(_a = slots.reference) == null ? void 0 : _a.call(slots)]), _createVNode(Popup, _mergeProps({
         "ref": popoverRef,
+        "show": show.value,
         "class": bem([props.theme]),
         "position": "",
         "transition": "van-popover-zoom",
         "lockScroll": false,
         "onUpdate:show": updateShow
-      }, attrs, pick(props, popupProps)), {
+      }, attrs, useScopeId(), pick(props, popupProps)), {
         default: () => [props.showArrow && _createVNode("div", {
           "class": bem("arrow")
         }, null), _createVNode("div", {
           "role": "menu",
-          "class": bem("content")
+          "class": bem("content", props.actionsDirection)
         }, [slots.default ? slots.default() : props.actions.map(renderAction)])]
       })]);
     };
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  popoverProps
 };

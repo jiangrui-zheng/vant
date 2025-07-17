@@ -1,5 +1,4 @@
-import { withDirectives as _withDirectives, vShow as _vShow, createVNode as _createVNode } from "vue";
-import { ref, watch, reactive, defineComponent } from "vue";
+import { ref, watch, reactive, defineComponent, createVNode as _createVNode, vShow as _vShow, withDirectives as _withDirectives } from "vue";
 import { isDef, createNamespace, makeNumericProp } from "../utils/index.mjs";
 import { raf, useRect, doubleRaf, useEventListener, onMountedOrActivated } from "@vant/use";
 import { useExpose } from "../composables/use-expose.mjs";
@@ -161,5 +160,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
-  stdin_default as default
+  stdin_default as default,
+  noticeBarProps
 };

@@ -1,5 +1,4 @@
-import { withDirectives as _withDirectives, vShow as _vShow, createVNode as _createVNode, mergeProps as _mergeProps } from "vue";
-import { ref, watch, computed, nextTick, defineComponent } from "vue";
+import { ref, watch, computed, nextTick, defineComponent, mergeProps as _mergeProps, createVNode as _createVNode, vShow as _vShow, withDirectives as _withDirectives } from "vue";
 import { cellSharedProps } from "../cell/Cell.mjs";
 import { pick, extend, truthProp, numericProp, createNamespace } from "../utils/index.mjs";
 import { COLLAPSE_KEY } from "../collapse/Collapse.mjs";
@@ -132,5 +131,6 @@ var stdin_default = defineComponent({
   }
 });
 export {
+  collapseItemProps,
   stdin_default as default
 };

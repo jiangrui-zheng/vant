@@ -1,11 +1,11 @@
-import { type PropType, type CSSProperties, type ExtractPropTypes } from 'vue';
+import { type PropType, type TeleportProps, type CSSProperties, type ExtractPropTypes } from 'vue';
 import { LoadingType } from '../loading';
-import type { ToastType, ToastPosition } from './types';
-declare const toastProps: {
+import type { ToastType, ToastPosition, ToastWordBreak } from './types';
+export declare const toastProps: {
     icon: StringConstructor;
     show: BooleanConstructor;
     type: {
-        type: PropType<ToastType>;
+        type: PropType<T>;
         default: ToastType;
     };
     overlay: BooleanConstructor;
@@ -16,14 +16,15 @@ declare const toastProps: {
         default: number;
     };
     position: {
-        type: PropType<ToastPosition>;
+        type: PropType<T>;
         default: ToastPosition;
     };
-    teleport: PropType<string | import("vue").RendererElement | null | undefined>;
+    teleport: PropType<TeleportProps["to"]>;
+    wordBreak: PropType<ToastWordBreak>;
     className: PropType<unknown>;
     iconPrefix: StringConstructor;
     transition: {
-        type: PropType<string>;
+        type: PropType<T>;
         default: string;
     };
     loadingType: PropType<LoadingType>;
@@ -32,13 +33,14 @@ declare const toastProps: {
     overlayStyle: PropType<CSSProperties>;
     closeOnClick: BooleanConstructor;
     closeOnClickOverlay: BooleanConstructor;
+    zIndex: (NumberConstructor | StringConstructor)[];
 };
-export declare type ToastProps = ExtractPropTypes<typeof toastProps>;
-declare const _default: import("vue").DefineComponent<{
+export type ToastProps = ExtractPropTypes<typeof toastProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     icon: StringConstructor;
     show: BooleanConstructor;
     type: {
-        type: PropType<ToastType>;
+        type: PropType<T>;
         default: ToastType;
     };
     overlay: BooleanConstructor;
@@ -49,14 +51,15 @@ declare const _default: import("vue").DefineComponent<{
         default: number;
     };
     position: {
-        type: PropType<ToastPosition>;
+        type: PropType<T>;
         default: ToastPosition;
     };
-    teleport: PropType<string | import("vue").RendererElement | null | undefined>;
+    teleport: PropType<TeleportProps["to"]>;
+    wordBreak: PropType<ToastWordBreak>;
     className: PropType<unknown>;
     iconPrefix: StringConstructor;
     transition: {
-        type: PropType<string>;
+        type: PropType<T>;
         default: string;
     };
     loadingType: PropType<LoadingType>;
@@ -65,11 +68,12 @@ declare const _default: import("vue").DefineComponent<{
     overlayStyle: PropType<CSSProperties>;
     closeOnClick: BooleanConstructor;
     closeOnClickOverlay: BooleanConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:show"[], "update:show", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+    zIndex: (NumberConstructor | StringConstructor)[];
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:show"[], "update:show", import("vue").PublicProps, Readonly<ExtractPropTypes<{
     icon: StringConstructor;
     show: BooleanConstructor;
     type: {
-        type: PropType<ToastType>;
+        type: PropType<T>;
         default: ToastType;
     };
     overlay: BooleanConstructor;
@@ -80,14 +84,15 @@ declare const _default: import("vue").DefineComponent<{
         default: number;
     };
     position: {
-        type: PropType<ToastPosition>;
+        type: PropType<T>;
         default: ToastPosition;
     };
-    teleport: PropType<string | import("vue").RendererElement | null | undefined>;
+    teleport: PropType<TeleportProps["to"]>;
+    wordBreak: PropType<ToastWordBreak>;
     className: PropType<unknown>;
     iconPrefix: StringConstructor;
     transition: {
-        type: PropType<string>;
+        type: PropType<T>;
         default: string;
     };
     loadingType: PropType<LoadingType>;
@@ -96,9 +101,10 @@ declare const _default: import("vue").DefineComponent<{
     overlayStyle: PropType<CSSProperties>;
     closeOnClick: BooleanConstructor;
     closeOnClickOverlay: BooleanConstructor;
-}>> & {
+    zIndex: (NumberConstructor | StringConstructor)[];
+}>> & Readonly<{
     "onUpdate:show"?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     type: ToastType;
     position: ToastPosition;
     overlay: boolean;
@@ -108,5 +114,5 @@ declare const _default: import("vue").DefineComponent<{
     transition: string;
     forbidClick: boolean;
     closeOnClick: boolean;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

@@ -1,5 +1,5 @@
-import { createVNode as _createVNode, mergeProps as _mergeProps } from "vue";
-import { extend, inBrowser, withInstall } from "../utils/index.mjs";
+import { mergeProps as _mergeProps, createVNode as _createVNode } from "vue";
+import { extend, inBrowser } from "../utils/index.mjs";
 import { mountComponent, usePopupState } from "../utils/mount-component.mjs";
 import VanImagePreview from "./ImagePreview.mjs";
 let instance;
@@ -11,6 +11,7 @@ const defaultConfig = {
   onScale: void 0,
   onClose: void 0,
   onChange: void 0,
+  vertical: false,
   teleport: "body",
   className: "",
   showIndex: true,
@@ -18,12 +19,14 @@ const defaultConfig = {
   closeIcon: "clear",
   transition: void 0,
   beforeClose: void 0,
+  doubleScale: true,
   overlayStyle: void 0,
   overlayClass: void 0,
   startPosition: 0,
   swipeDuration: 300,
   showIndicators: false,
   closeOnPopstate: true,
+  closeOnClickOverlay: true,
   closeIconPosition: "top-right"
 };
 function initInstance() {
@@ -45,7 +48,7 @@ function initInstance() {
     }
   }));
 }
-const ImagePreview = (options, startPosition = 0) => {
+const showImagePreview = (options, startPosition = 0) => {
   if (!inBrowser) {
     return;
   }
@@ -59,10 +62,6 @@ const ImagePreview = (options, startPosition = 0) => {
   instance.open(extend({}, defaultConfig, options));
   return instance;
 };
-ImagePreview.Component = withInstall(VanImagePreview);
-ImagePreview.install = (app) => {
-  app.use(ImagePreview.Component);
-};
 export {
-  ImagePreview
+  showImagePreview
 };

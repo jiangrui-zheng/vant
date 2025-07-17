@@ -2,8 +2,9 @@ var stdin_default = {
   name: "\u59D3\u540D",
   tel: "\u96FB\u8A71",
   save: "\u4FDD\u5B58",
-  confirm: "\u78BA\u8A8D",
+  clear: "\u6E05\u7A7A",
   cancel: "\u53D6\u6D88",
+  confirm: "\u78BA\u8A8D",
   delete: "\u522A\u9664",
   loading: "\u52A0\u8F09\u4E2D...",
   noCoupon: "\u66AB\u7121\u512A\u60E0\u5238",
@@ -50,10 +51,8 @@ var stdin_default = {
   },
   vanAddressEdit: {
     area: "\u5730\u5340",
-    postal: "\u90F5\u653F\u7DE8\u78BC",
     areaEmpty: "\u8ACB\u9078\u64C7\u5730\u5340",
     addressEmpty: "\u8ACB\u586B\u5BEB\u8A73\u7D30\u5730\u5740",
-    postalEmpty: "\u90F5\u653F\u7DE8\u78BC\u4E0D\u6B63\u78BA",
     addressDetail: "\u8A73\u7D30\u5730\u5740",
     defaultAddress: "\u8A2D\u70BA\u9ED8\u8A8D\u6536\u8CA8\u5730\u5740"
   },

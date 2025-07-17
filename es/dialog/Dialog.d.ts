@@ -1,6 +1,6 @@
 import { type PropType, type ExtractPropTypes } from 'vue';
 import type { DialogTheme, DialogAction, DialogMessage, DialogMessageAlign } from './types';
-declare const dialogProps: {
+export declare const dialogProps: {
     show: BooleanConstructor;
     zIndex: (NumberConstructor | StringConstructor)[];
     overlay: {
@@ -8,7 +8,7 @@ declare const dialogProps: {
         default: true;
     };
     duration: (NumberConstructor | StringConstructor)[];
-    teleport: PropType<string | import("vue").RendererElement | null | undefined>;
+    teleport: PropType<import("vue").TeleportProps["to"]>;
     lockScroll: {
         type: BooleanConstructor;
         default: true;
@@ -34,7 +34,7 @@ declare const dialogProps: {
     allowHtml: BooleanConstructor;
     className: PropType<unknown>;
     transition: {
-        type: PropType<string>;
+        type: PropType<T>;
         default: string;
     };
     messageAlign: PropType<DialogMessageAlign>;
@@ -54,9 +54,13 @@ declare const dialogProps: {
         default: true;
     };
     closeOnClickOverlay: BooleanConstructor;
+    keyboardEnabled: {
+        type: BooleanConstructor;
+        default: true;
+    };
 };
-export declare type DialogProps = ExtractPropTypes<typeof dialogProps>;
-declare const _default: import("vue").DefineComponent<{
+export type DialogProps = ExtractPropTypes<typeof dialogProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     show: BooleanConstructor;
     zIndex: (NumberConstructor | StringConstructor)[];
     overlay: {
@@ -64,7 +68,7 @@ declare const _default: import("vue").DefineComponent<{
         default: true;
     };
     duration: (NumberConstructor | StringConstructor)[];
-    teleport: PropType<string | import("vue").RendererElement | null | undefined>;
+    teleport: PropType<import("vue").TeleportProps["to"]>;
     lockScroll: {
         type: BooleanConstructor;
         default: true;
@@ -86,11 +90,11 @@ declare const _default: import("vue").DefineComponent<{
     theme: PropType<DialogTheme>;
     width: (NumberConstructor | StringConstructor)[];
     message: PropType<DialogMessage>;
-    callback: PropType<(action?: DialogAction | undefined) => void>;
+    callback: PropType<(action?: DialogAction) => void>;
     allowHtml: BooleanConstructor;
     className: PropType<unknown>;
     transition: {
-        type: PropType<string>;
+        type: PropType<T>;
         default: string;
     };
     messageAlign: PropType<DialogMessageAlign>;
@@ -110,7 +114,11 @@ declare const _default: import("vue").DefineComponent<{
         default: true;
     };
     closeOnClickOverlay: BooleanConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("keydown" | "update:show" | "cancel" | "confirm")[], "keydown" | "update:show" | "cancel" | "confirm", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+    keyboardEnabled: {
+        type: BooleanConstructor;
+        default: true;
+    };
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("cancel" | "keydown" | "update:show" | "confirm")[], "cancel" | "keydown" | "update:show" | "confirm", import("vue").PublicProps, Readonly<ExtractPropTypes<{
     show: BooleanConstructor;
     zIndex: (NumberConstructor | StringConstructor)[];
     overlay: {
@@ -118,7 +126,7 @@ declare const _default: import("vue").DefineComponent<{
         default: true;
     };
     duration: (NumberConstructor | StringConstructor)[];
-    teleport: PropType<string | import("vue").RendererElement | null | undefined>;
+    teleport: PropType<import("vue").TeleportProps["to"]>;
     lockScroll: {
         type: BooleanConstructor;
         default: true;
@@ -140,11 +148,11 @@ declare const _default: import("vue").DefineComponent<{
     theme: PropType<DialogTheme>;
     width: (NumberConstructor | StringConstructor)[];
     message: PropType<DialogMessage>;
-    callback: PropType<(action?: DialogAction | undefined) => void>;
+    callback: PropType<(action?: DialogAction) => void>;
     allowHtml: BooleanConstructor;
     className: PropType<unknown>;
     transition: {
-        type: PropType<string>;
+        type: PropType<T>;
         default: string;
     };
     messageAlign: PropType<DialogMessageAlign>;
@@ -164,12 +172,16 @@ declare const _default: import("vue").DefineComponent<{
         default: true;
     };
     closeOnClickOverlay: BooleanConstructor;
-}>> & {
+    keyboardEnabled: {
+        type: BooleanConstructor;
+        default: true;
+    };
+}>> & Readonly<{
     onKeydown?: ((...args: any[]) => any) | undefined;
     "onUpdate:show"?: ((...args: any[]) => any) | undefined;
     onCancel?: ((...args: any[]) => any) | undefined;
     onConfirm?: ((...args: any[]) => any) | undefined;
-}, {
+}>, {
     overlay: boolean;
     show: boolean;
     lockScroll: boolean;
@@ -183,5 +195,6 @@ declare const _default: import("vue").DefineComponent<{
     cancelButtonDisabled: boolean;
     confirmButtonDisabled: boolean;
     showConfirmButton: boolean;
-}>;
+    keyboardEnabled: boolean;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;

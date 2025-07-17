@@ -1,7 +1,7 @@
 {
   "name": "vant",
-  "version": "3.6.12",
-  "description": "Lightweight Mobile UI Components built on Vue",
+  "version": "3.6.13",
+  "description": "Mobile UI Components built on Vue",
   "main": "lib/vant.cjs.js",
   "module": "es/index.mjs",
   "style": "lib/index.css",
@@ -12,19 +12,19 @@
     "es",
     "lib"
   ],
-  "npm": {
-    "tag": "latest-v3"
-  },
   "scripts": {
     "dev": "vant-cli dev",
     "lint": "vant-cli lint",
-    "test": "vant-cli test",
+    "test": "vitest run",
     "build": "vant-cli build",
     "build:site": "vant-cli build-site",
-    "release": "cp ../../README.md ./ && vant-cli release --tag latest-v3 && rm ./README.md",
+    "release": "cp ../../README.md ./ && vant-cli release --gitTag && rm ./README.md",
     "release:site": "pnpm build:site && npx gh-pages -d site-dist --add",
-    "test:watch": "vant-cli test --watch",
-    "test:coverage": "open test/coverage/index.html"
+    "test:update": "vitest run -u",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "open:coverage": "open test/coverage/lcov-report/index.html",
+    "postinstall": "node lib/utils/support.js"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
@@ -47,30 +47,38 @@
     "components"
   ],
   "dependencies": {
-    "@vant/icons": "^1.8.0",
-    "@vant/popperjs": "^1.2.1",
-    "@vant/use": "^1.4.2"
+    "@vant/popperjs": "workspace:^",
+    "@vant/use": "workspace:^",
+    "@vue/shared": "^3.5.13"
   },
   "peerDependencies": {
     "vue": "^3.0.0"
   },
   "devDependencies": {
-    "@types/node": "^16.11.56",
-    "@types/jest": "^27.0.0",
+    "@types/node": "^22.10.1",
     "@vant/area-data": "workspace:*",
     "@vant/cli": "workspace:*",
     "@vant/eslint-config": "workspace:*",
-    "@vue/runtime-core": "^3.2.38",
-    "@vue/test-utils": "^2.0.2",
-    "typescript": "^4.8.2",
-    "vue": "^3.2.38",
-    "vue-router": "^4.1.5"
+    "@vant/icons": "workspace:*",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vitejs/plugin-vue-jsx": "^4.1.1",
+    "@vitest/coverage-istanbul": "^2.1.6",
+    "@vue/runtime-core": "^3.5.13",
+    "@vue/test-utils": "^2.4.6",
+    "csstype": "^3.1.3",
+    "diffable-html": "^5.0.0",
+    "jsdom": "^25.0.1",
+    "typescript": "^5.7.2",
+    "vite": "^5.4.11",
+    "vitest": "^2.1.6",
+    "vitest-canvas-mock": "^0.3.3",
+    "vue": "^3.5.13",
+    "vue-router": "^4.4.5"
   },
   "sideEffects": [
     "es/**/style/*",
     "lib/**/style/*",
-    "*.css",
-    "*.less"
+    "*.css"
   ],
   "web-types": "lib/web-types.json"
 }

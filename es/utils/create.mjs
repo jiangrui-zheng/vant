@@ -1,6 +1,5 @@
-import { get } from "./basic.mjs";
+import { get, isFunction } from "./basic.mjs";
 import { camelize } from "./format.mjs";
-import { isFunction } from "./validate.mjs";
 import locale from "../locale/index.mjs";
 function createTranslate(name) {
   const prefix = camelize(name) + ".";
