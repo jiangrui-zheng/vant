@@ -1,10 +1,15 @@
-@import '../style/var.less';
+@import './var.less';
+@import '../dropdown-menu/var.less';
+
+:root {
+  --van-dropdown-item-z-index: @dropdown-item-z-index;
+}
 
 .van-dropdown-item {
   position: fixed;
   right: 0;
   left: 0;
-  z-index: @dropdown-item-z-index;
+  z-index: var(--van-dropdown-item-z-index);
   overflow: hidden;
 
   &__icon {
@@ -16,10 +21,10 @@
     text-align: left;
 
     &--active {
-      color: @dropdown-menu-option-active-color;
+      color: var(--van-dropdown-menu-option-active-color);
 
       .van-dropdown-item__icon {
-        color: @dropdown-menu-option-active-color;
+        color: var(--van-dropdown-menu-option-active-color);
       }
     }
   }
@@ -34,6 +39,6 @@
 
   &__content {
     position: absolute;
-    max-height: @dropdown-menu-content-max-height;
+    max-height: var(--van-dropdown-menu-content-max-height);
   }
 }

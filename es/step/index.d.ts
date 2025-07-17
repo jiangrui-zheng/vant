@@ -1,3 +1,7 @@
-declare const Step: import("../utils").WithInstall<import("vue").DefineComponent<{}, (() => JSX.Element) | undefined, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, import("vue").EmitsOptions, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{} & {}>, {}>>;
+export declare const Step: import("../utils").WithInstall<import("vue").DefineComponent<{}, (() => JSX.Element) | undefined, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{}>>, {}>>;
 export default Step;
-export { Step };
+declare module 'vue' {
+    interface GlobalComponents {
+        VanStep: typeof Step;
+    }
+}

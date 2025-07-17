@@ -1,6 +1,15 @@
-declare const Grid: import("../utils").WithInstall<import("vue").DefineComponent<{
+export declare const Grid: import("../utils").WithInstall<import("vue").DefineComponent<{
     square: BooleanConstructor;
+    center: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    border: {
+        type: BooleanConstructor;
+        default: true;
+    };
     gutter: (NumberConstructor | StringConstructor)[];
+    reverse: BooleanConstructor;
     iconSize: (NumberConstructor | StringConstructor)[];
     direction: import("vue").PropType<import("./Grid").GridDirection>;
     clickable: BooleanConstructor;
@@ -8,31 +17,37 @@ declare const Grid: import("../utils").WithInstall<import("vue").DefineComponent
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+    square: BooleanConstructor;
     center: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
     border: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    gutter: (NumberConstructor | StringConstructor)[];
+    reverse: BooleanConstructor;
+    iconSize: (NumberConstructor | StringConstructor)[];
+    direction: import("vue").PropType<import("./Grid").GridDirection>;
+    clickable: BooleanConstructor;
+    columnNum: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+}>>, {
+    reverse: boolean;
     center: boolean;
     border: boolean;
-    square: boolean;
     clickable: boolean;
-    columnNum: string | number;
-} & {
-    iconSize?: string | number | undefined;
-    direction?: import("./Grid").GridDirection | undefined;
-    gutter?: string | number | undefined;
-}>, {
-    center: boolean;
-    border: boolean;
     square: boolean;
-    clickable: boolean;
     columnNum: string | number;
 }>>;
 export default Grid;
-export { Grid };
-export type { GridDirection } from './Grid';
+export type { GridProps, GridDirection } from './Grid';
+declare module 'vue' {
+    interface GlobalComponents {
+        VanGrid: typeof Grid;
+    }
+}

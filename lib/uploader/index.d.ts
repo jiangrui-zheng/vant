@@ -1,103 +1,154 @@
-declare const Uploader: import("../utils").WithInstall<import("vue").DefineComponent<{
-    capture: StringConstructor;
-    multiple: BooleanConstructor;
-    disabled: BooleanConstructor;
-    lazyLoad: BooleanConstructor;
-    uploadText: StringConstructor;
-    afterRead: import("vue").PropType<import("./Uploader").UploaderAfterRead>;
-    beforeRead: import("vue").PropType<import("./Uploader").UploaderBeforeRead>;
-    beforeDelete: import("vue").PropType<import("../utils/interceptor").Interceptor>;
-    previewSize: (NumberConstructor | StringConstructor)[];
-    previewOptions: import("vue").PropType<import("../image-preview").ImagePreviewOptions>;
+import { UploaderProps } from './Uploader';
+export declare const Uploader: import("../utils").WithInstall<import("vue").DefineComponent<{
     name: {
         type: (NumberConstructor | StringConstructor)[];
         default: string;
     };
     accept: {
-        type: StringConstructor;
+        type: import("vue").PropType<string>;
         default: string;
     };
-    modelValue: {
-        type: import("vue").PropType<import("./utils").UploaderFileListItem[]>;
-        default: () => never[];
-    };
-    maxSize: {
-        type: (NumberConstructor | StringConstructor)[];
-        default: number;
-    };
+    capture: StringConstructor;
+    multiple: BooleanConstructor;
+    disabled: BooleanConstructor;
+    readonly: BooleanConstructor;
+    lazyLoad: BooleanConstructor;
     maxCount: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-    deletable: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    showUpload: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    previewImage: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    previewFullImage: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
     imageFit: {
-        type: import("vue").PropType<import("../image").ImageFit>;
-        default: string;
+        type: import("vue").PropType<import("..").ImageFit>;
+        default: import("..").ImageFit;
     };
     resultType: {
-        type: import("vue").PropType<import("./utils").UploaderResultType>;
-        default: string;
+        type: import("vue").PropType<import("./types").UploaderResultType>;
+        default: import("./types").UploaderResultType;
     };
     uploadIcon: {
-        type: StringConstructor;
+        type: import("vue").PropType<string>;
         default: string;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "delete" | "oversize" | "close-preview" | "click-preview")[], "update:modelValue" | "delete" | "oversize" | "close-preview" | "click-preview", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    uploadText: StringConstructor;
+    deletable: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    afterRead: import("vue").PropType<import("./types").UploaderAfterRead>;
+    showUpload: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    modelValue: {
+        type: import("vue").PropType<import("./types").UploaderFileListItem[]>;
+        default: () => never[];
+    };
+    beforeRead: import("vue").PropType<import("./types").UploaderBeforeRead>;
+    beforeDelete: import("vue").PropType<import("../utils").Interceptor>;
+    previewSize: import("vue").PropType<import("../utils").Numeric | [import("../utils").Numeric, import("../utils").Numeric]>;
+    previewImage: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    previewOptions: import("vue").PropType<Partial<import("..").ImagePreviewOptions>>;
+    previewFullImage: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    maxSize: {
+        type: import("vue").PropType<import("./types").UploaderMaxSize>;
+        default: number;
+    };
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "delete" | "oversize" | "click-upload" | "close-preview" | "click-preview")[], "update:modelValue" | "delete" | "oversize" | "click-upload" | "close-preview" | "click-preview", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+    name: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: string;
+    };
+    accept: {
+        type: import("vue").PropType<string>;
+        default: string;
+    };
+    capture: StringConstructor;
+    multiple: BooleanConstructor;
+    disabled: BooleanConstructor;
+    readonly: BooleanConstructor;
+    lazyLoad: BooleanConstructor;
+    maxCount: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    imageFit: {
+        type: import("vue").PropType<import("..").ImageFit>;
+        default: import("..").ImageFit;
+    };
+    resultType: {
+        type: import("vue").PropType<import("./types").UploaderResultType>;
+        default: import("./types").UploaderResultType;
+    };
+    uploadIcon: {
+        type: import("vue").PropType<string>;
+        default: string;
+    };
+    uploadText: StringConstructor;
+    deletable: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    afterRead: import("vue").PropType<import("./types").UploaderAfterRead>;
+    showUpload: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    modelValue: {
+        type: import("vue").PropType<import("./types").UploaderFileListItem[]>;
+        default: () => never[];
+    };
+    beforeRead: import("vue").PropType<import("./types").UploaderBeforeRead>;
+    beforeDelete: import("vue").PropType<import("../utils").Interceptor>;
+    previewSize: import("vue").PropType<import("../utils").Numeric | [import("../utils").Numeric, import("../utils").Numeric]>;
+    previewImage: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    previewOptions: import("vue").PropType<Partial<import("..").ImagePreviewOptions>>;
+    previewFullImage: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    maxSize: {
+        type: import("vue").PropType<import("./types").UploaderMaxSize>;
+        default: number;
+    };
+}>> & {
+    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+    onDelete?: ((...args: any[]) => any) | undefined;
+    onOversize?: ((...args: any[]) => any) | undefined;
+    "onClick-upload"?: ((...args: any[]) => any) | undefined;
+    "onClose-preview"?: ((...args: any[]) => any) | undefined;
+    "onClick-preview"?: ((...args: any[]) => any) | undefined;
+}, {
     name: string | number;
-    multiple: boolean;
-    disabled: boolean;
-    modelValue: import("./utils").UploaderFileListItem[];
-    lazyLoad: boolean;
-    imageFit: import("../image").ImageFit;
-    deletable: boolean;
     accept: string;
-    maxSize: string | number;
+    disabled: boolean;
+    modelValue: import("./types").UploaderFileListItem[];
+    readonly: boolean;
+    multiple: boolean;
+    lazyLoad: boolean;
     maxCount: string | number;
+    imageFit: import("..").ImageFit;
+    resultType: import("./types").UploaderResultType;
+    uploadIcon: string;
+    deletable: boolean;
     showUpload: boolean;
     previewImage: boolean;
     previewFullImage: boolean;
-    resultType: import("./utils").UploaderResultType;
-    uploadIcon: string;
-} & {
-    beforeRead?: import("./Uploader").UploaderBeforeRead | undefined;
-    afterRead?: import("./Uploader").UploaderAfterRead | undefined;
-    previewSize?: string | number | undefined;
-    beforeDelete?: import("../utils/interceptor").Interceptor | undefined;
-    capture?: string | undefined;
-    uploadText?: string | undefined;
-    previewOptions?: import("../image-preview").ImagePreviewOptions | undefined;
-}>, {
-    name: string | number;
-    multiple: boolean;
-    disabled: boolean;
-    modelValue: import("./utils").UploaderFileListItem[];
-    lazyLoad: boolean;
-    imageFit: import("../image").ImageFit;
-    deletable: boolean;
-    accept: string;
-    maxSize: string | number;
-    maxCount: string | number;
-    showUpload: boolean;
-    previewImage: boolean;
-    previewFullImage: boolean;
-    resultType: import("./utils").UploaderResultType;
-    uploadIcon: string;
+    maxSize: import("./types").UploaderMaxSize;
 }>>;
 export default Uploader;
-export { Uploader };
-export type { UploaderResultType, UploaderFileListItem } from './utils';
+export type { UploaderProps };
+export type { UploaderInstance, UploaderResultType, UploaderFileListItem, } from './types';
+declare module 'vue' {
+    interface GlobalComponents {
+        VanUploader: typeof Uploader;
+    }
+}

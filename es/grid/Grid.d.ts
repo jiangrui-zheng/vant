@@ -1,21 +1,17 @@
-import { PropType } from 'vue';
-export declare const GRID_KEY: unique symbol;
+import { type PropType, type InjectionKey, type ExtractPropTypes } from 'vue';
 export declare type GridDirection = 'horizontal' | 'vertical';
-export declare type GridProvide = {
-    props: {
-        center: boolean;
-        border: boolean;
-        square?: boolean;
-        gutter?: number | string;
-        iconSize?: number | string;
-        columnNum: number | string;
-        direction?: GridDirection;
-        clickable?: boolean;
-    };
-};
-declare const _default: import("vue").DefineComponent<{
+declare const gridProps: {
     square: BooleanConstructor;
+    center: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    border: {
+        type: BooleanConstructor;
+        default: true;
+    };
     gutter: (NumberConstructor | StringConstructor)[];
+    reverse: BooleanConstructor;
     iconSize: (NumberConstructor | StringConstructor)[];
     direction: PropType<GridDirection>;
     clickable: BooleanConstructor;
@@ -23,29 +19,56 @@ declare const _default: import("vue").DefineComponent<{
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
+};
+export declare type GridProps = ExtractPropTypes<typeof gridProps>;
+export declare type GridProvide = {
+    props: GridProps;
+};
+export declare const GRID_KEY: InjectionKey<GridProvide>;
+declare const _default: import("vue").DefineComponent<{
+    square: BooleanConstructor;
     center: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
     border: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    gutter: (NumberConstructor | StringConstructor)[];
+    reverse: BooleanConstructor;
+    iconSize: (NumberConstructor | StringConstructor)[];
+    direction: PropType<GridDirection>;
+    clickable: BooleanConstructor;
+    columnNum: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+    square: BooleanConstructor;
+    center: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    border: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    gutter: (NumberConstructor | StringConstructor)[];
+    reverse: BooleanConstructor;
+    iconSize: (NumberConstructor | StringConstructor)[];
+    direction: PropType<GridDirection>;
+    clickable: BooleanConstructor;
+    columnNum: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+}>>, {
+    reverse: boolean;
     center: boolean;
     border: boolean;
-    square: boolean;
     clickable: boolean;
-    columnNum: string | number;
-} & {
-    iconSize?: string | number | undefined;
-    direction?: GridDirection | undefined;
-    gutter?: string | number | undefined;
-}>, {
-    center: boolean;
-    border: boolean;
     square: boolean;
-    clickable: boolean;
     columnNum: string | number;
 }>;
 export default _default;

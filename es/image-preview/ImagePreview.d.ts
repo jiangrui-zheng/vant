@@ -1,29 +1,15 @@
-import { PropType, CSSProperties } from 'vue';
-import { Interceptor } from '../utils/interceptor';
+import { type PropType, type CSSProperties, type ExtractPropTypes } from 'vue';
+import { Interceptor } from '../utils';
 import { PopupCloseIconPosition } from '../popup';
-export declare type ScaleEventParams = {
-    scale: number;
-    index: number;
-};
-declare const _default: import("vue").DefineComponent<{
+declare const imagePreviewProps: {
     show: BooleanConstructor;
-    closeable: BooleanConstructor;
-    transition: StringConstructor;
-    className: PropType<unknown>;
-    beforeClose: PropType<Interceptor>;
-    overlayStyle: PropType<CSSProperties>;
-    showIndicators: BooleanConstructor;
+    loop: {
+        type: BooleanConstructor;
+        default: true;
+    };
     images: {
         type: PropType<string[]>;
         default: () => never[];
-    };
-    loop: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    overlay: {
-        type: BooleanConstructor;
-        default: boolean;
     };
     minZoom: {
         type: (NumberConstructor | StringConstructor)[];
@@ -33,10 +19,24 @@ declare const _default: import("vue").DefineComponent<{
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
+    overlay: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    closeable: BooleanConstructor;
     showIndex: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
+    className: PropType<unknown>;
+    closeIcon: {
+        type: PropType<string>;
+        default: string;
+    };
+    transition: StringConstructor;
+    beforeClose: PropType<Interceptor>;
+    overlayClass: PropType<unknown>;
+    overlayStyle: PropType<CSSProperties>;
     swipeDuration: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
@@ -45,52 +45,143 @@ declare const _default: import("vue").DefineComponent<{
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-    closeIcon: {
-        type: StringConstructor;
-        default: string;
-    };
+    showIndicators: BooleanConstructor;
     closeOnPopstate: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
     closeIconPosition: {
         type: PropType<PopupCloseIconPosition>;
+        default: PopupCloseIconPosition;
+    };
+};
+export declare type ImagePreviewProps = ExtractPropTypes<typeof imagePreviewProps>;
+declare const _default: import("vue").DefineComponent<{
+    show: BooleanConstructor;
+    loop: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    images: {
+        type: PropType<string[]>;
+        default: () => never[];
+    };
+    minZoom: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    maxZoom: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    overlay: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    closeable: BooleanConstructor;
+    showIndex: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    className: PropType<unknown>;
+    closeIcon: {
+        type: PropType<string>;
         default: string;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("change" | "close" | "closed" | "update:show" | "scale")[], "change" | "close" | "closed" | "update:show" | "scale", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    transition: StringConstructor;
+    beforeClose: PropType<Interceptor>;
+    overlayClass: PropType<unknown>;
+    overlayStyle: PropType<CSSProperties>;
+    swipeDuration: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    startPosition: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    showIndicators: BooleanConstructor;
+    closeOnPopstate: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    closeIconPosition: {
+        type: PropType<PopupCloseIconPosition>;
+        default: PopupCloseIconPosition;
+    };
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("change" | "close" | "closed" | "update:show" | "scale")[], "change" | "close" | "closed" | "update:show" | "scale", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+    show: BooleanConstructor;
+    loop: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    images: {
+        type: PropType<string[]>;
+        default: () => never[];
+    };
+    minZoom: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    maxZoom: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    overlay: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    closeable: BooleanConstructor;
+    showIndex: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    className: PropType<unknown>;
+    closeIcon: {
+        type: PropType<string>;
+        default: string;
+    };
+    transition: StringConstructor;
+    beforeClose: PropType<Interceptor>;
+    overlayClass: PropType<unknown>;
+    overlayStyle: PropType<CSSProperties>;
+    swipeDuration: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    startPosition: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    showIndicators: BooleanConstructor;
+    closeOnPopstate: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    closeIconPosition: {
+        type: PropType<PopupCloseIconPosition>;
+        default: PopupCloseIconPosition;
+    };
+}>> & {
+    onChange?: ((...args: any[]) => any) | undefined;
+    onClose?: ((...args: any[]) => any) | undefined;
+    onClosed?: ((...args: any[]) => any) | undefined;
+    "onUpdate:show"?: ((...args: any[]) => any) | undefined;
+    onScale?: ((...args: any[]) => any) | undefined;
+}, {
+    loop: boolean;
     overlay: boolean;
     show: boolean;
+    closeIcon: string;
     closeable: boolean;
     closeOnPopstate: boolean;
-    closeIcon: string;
     closeIconPosition: PopupCloseIconPosition;
     swipeDuration: string | number;
-    loop: boolean;
     showIndicators: boolean;
+    startPosition: string | number;
     minZoom: string | number;
     maxZoom: string | number;
     images: string[];
     showIndex: boolean;
-    startPosition: string | number;
-} & {
-    overlayStyle?: CSSProperties | undefined;
-    className?: unknown;
-    transition?: string | undefined;
-    beforeClose?: Interceptor | undefined;
-}>, {
-    overlay: boolean;
-    show: boolean;
-    closeable: boolean;
-    closeOnPopstate: boolean;
-    closeIcon: string;
-    closeIconPosition: PopupCloseIconPosition;
-    swipeDuration: string | number;
-    loop: boolean;
-    showIndicators: boolean;
-    minZoom: string | number;
-    maxZoom: string | number;
-    images: string[];
-    showIndex: boolean;
-    startPosition: string | number;
 }>;
 export default _default;

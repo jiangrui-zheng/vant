@@ -1,48 +1,42 @@
 {
   "name": "vant",
-  "version": "3.0.9",
-  "description": "Mobile UI Components built on Vue",
-  "main": "lib/index.js",
-  "module": "es/index.js",
+  "version": "3.6.12",
+  "description": "Lightweight Mobile UI Components built on Vue",
+  "main": "lib/vant.cjs.js",
+  "module": "es/index.mjs",
   "style": "lib/index.css",
   "typings": "lib/index.d.ts",
+  "unpkg": "lib/vant.min.js",
+  "jsdelivr": "lib/vant.min.js",
   "files": [
     "es",
-    "lib",
-    "vetur"
+    "lib"
   ],
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+  "npm": {
+    "tag": "latest-v3"
   },
   "scripts": {
     "dev": "vant-cli dev",
     "lint": "vant-cli lint",
     "test": "vant-cli test",
     "build": "vant-cli build",
-    "release": "vant-cli release --tag next",
+    "build:site": "vant-cli build-site",
+    "release": "cp ../../README.md ./ && vant-cli release --tag latest-v3 && rm ./README.md",
+    "release:site": "pnpm build:site && npx gh-pages -d site-dist --add",
     "test:watch": "vant-cli test --watch",
-    "release:site": "sh docs/site/release.sh",
     "test:coverage": "open test/coverage/index.html"
   },
-  "npm": {
-    "tag": "next"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "commit-msg": "vant-cli commit-lint"
-    }
-  },
-  "lint-staged": {
-    "*.md": "prettier --write",
-    "*.{ts,tsx,js,vue,less}": "prettier --write",
-    "*.{ts,tsx,js,vue}": "eslint --fix",
-    "*.{vue,css,less}": "stylelint --fix"
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:youzan/vant.git"
+    "url": "https://github.com/vant-ui/vant.git",
+    "directory": "packages/vant"
   },
+  "bugs": "https://github.com/vant-ui/vant/issues",
+  "author": "chenjiahan",
+  "license": "MIT",
   "keywords": [
     "ui",
     "vue",
@@ -52,23 +46,25 @@
     "component",
     "components"
   ],
-  "author": "youzanfe",
-  "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "7.x",
-    "@vant/icons": "^1.5.3",
-    "@vant/lazyload": "^1.0.4",
-    "@vant/popperjs": "^1.0.4",
-    "@vant/use": "^1.0.5"
+    "@vant/icons": "^1.8.0",
+    "@vant/popperjs": "^1.2.1",
+    "@vant/use": "^1.4.2"
   },
   "peerDependencies": {
     "vue": "^3.0.0"
   },
   "devDependencies": {
-    "@vant/cli": "^3.6.1",
-    "@vue/compiler-sfc": "^3.0.6",
-    "prettier": "2.1.0",
-    "vue": "^3.0.6"
+    "@types/node": "^16.11.56",
+    "@types/jest": "^27.0.0",
+    "@vant/area-data": "workspace:*",
+    "@vant/cli": "workspace:*",
+    "@vant/eslint-config": "workspace:*",
+    "@vue/runtime-core": "^3.2.38",
+    "@vue/test-utils": "^2.0.2",
+    "typescript": "^4.8.2",
+    "vue": "^3.2.38",
+    "vue-router": "^4.1.5"
   },
   "sideEffects": [
     "es/**/style/*",
@@ -76,13 +72,5 @@
     "*.css",
     "*.less"
   ],
-  "vetur": {
-    "tags": "vetur/tags.json",
-    "attributes": "vetur/attributes.json"
-  },
-  "web-types": "vetur/web-types.json",
-  "browserslist": [
-    "Chrome >= 51",
-    "iOS >= 10"
-  ]
+  "web-types": "lib/web-types.json"
 }

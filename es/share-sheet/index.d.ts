@@ -1,72 +1,113 @@
-declare const ShareSheet: import("../utils").WithInstall<import("vue").DefineComponent<{
-    title: StringConstructor;
-    cancelText: StringConstructor;
-    description: StringConstructor;
-    options: {
-        type: import("vue").PropType<import("./ShareSheet").ShareSheetOptions>;
-        default: () => never[];
-    };
-    closeOnPopstate: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
-    safeAreaInsetBottom: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
+export declare const ShareSheet: import("../utils").WithInstall<import("vue").DefineComponent<{
     show: BooleanConstructor;
     zIndex: (NumberConstructor | StringConstructor)[];
-    duration: (NumberConstructor | StringConstructor)[];
-    teleport: import("vue").PropType<string | import("vue").RendererElement | null | undefined>;
-    overlayStyle: import("vue").PropType<import("vue").CSSProperties>;
-    overlayClass: import("vue").PropType<unknown>;
-    transitionAppear: BooleanConstructor;
     overlay: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
+    duration: (NumberConstructor | StringConstructor)[];
+    teleport: import("vue").PropType<string | import("vue").RendererElement | null | undefined>;
     lockScroll: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
     lazyRender: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
+    beforeClose: import("vue").PropType<import("../utils").Interceptor>;
+    overlayStyle: import("vue").PropType<import("vue").CSSProperties>;
+    overlayClass: import("vue").PropType<unknown>;
+    transitionAppear: BooleanConstructor;
     closeOnClickOverlay: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("select" | "cancel" | "update:show")[], "select" | "cancel" | "update:show", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    safeAreaInsetBottom: boolean;
-    overlay: boolean;
-    show: boolean;
-    transitionAppear: boolean;
-    lockScroll: boolean;
-    lazyRender: boolean;
-    closeOnClickOverlay: boolean;
-    closeOnPopstate: boolean;
-    options: import("./ShareSheet").ShareSheetOptions;
 } & {
-    title?: string | undefined;
-    zIndex?: string | number | undefined;
-    duration?: string | number | undefined;
-    teleport?: string | import("vue").RendererElement | null | undefined;
-    overlayStyle?: import("vue").CSSProperties | undefined;
-    overlayClass?: unknown;
-    cancelText?: string | undefined;
-    description?: string | undefined;
-}>, {
+    title: StringConstructor;
+    round: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    options: {
+        type: import("vue").PropType<(import("./ShareSheet").ShareSheetOption | import("./ShareSheet").ShareSheetOption[])[]>;
+        default: () => never[];
+    };
+    cancelText: StringConstructor;
+    description: StringConstructor;
+    closeOnPopstate: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    safeAreaInsetBottom: {
+        type: BooleanConstructor;
+        default: true;
+    };
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("select" | "update:show" | "cancel")[], "select" | "update:show" | "cancel", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+    show: BooleanConstructor;
+    zIndex: (NumberConstructor | StringConstructor)[];
+    overlay: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    duration: (NumberConstructor | StringConstructor)[];
+    teleport: import("vue").PropType<string | import("vue").RendererElement | null | undefined>;
+    lockScroll: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    lazyRender: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    beforeClose: import("vue").PropType<import("../utils").Interceptor>;
+    overlayStyle: import("vue").PropType<import("vue").CSSProperties>;
+    overlayClass: import("vue").PropType<unknown>;
+    transitionAppear: BooleanConstructor;
+    closeOnClickOverlay: {
+        type: BooleanConstructor;
+        default: true;
+    };
+} & {
+    title: StringConstructor;
+    round: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    options: {
+        type: import("vue").PropType<(import("./ShareSheet").ShareSheetOption | import("./ShareSheet").ShareSheetOption[])[]>;
+        default: () => never[];
+    };
+    cancelText: StringConstructor;
+    description: StringConstructor;
+    closeOnPopstate: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    safeAreaInsetBottom: {
+        type: BooleanConstructor;
+        default: true;
+    };
+}>> & {
+    onSelect?: ((...args: any[]) => any) | undefined;
+    "onUpdate:show"?: ((...args: any[]) => any) | undefined;
+    onCancel?: ((...args: any[]) => any) | undefined;
+}, {
+    round: boolean;
     safeAreaInsetBottom: boolean;
     overlay: boolean;
     show: boolean;
-    transitionAppear: boolean;
     lockScroll: boolean;
     lazyRender: boolean;
+    transitionAppear: boolean;
     closeOnClickOverlay: boolean;
     closeOnPopstate: boolean;
-    options: import("./ShareSheet").ShareSheetOptions;
+    options: (import("./ShareSheet").ShareSheetOption | import("./ShareSheet").ShareSheetOption[])[];
 }>>;
 export default ShareSheet;
-export { ShareSheet };
-export type { ShareSheetOption, ShareSheetOptions } from './ShareSheet';
+export type { ShareSheetProps, ShareSheetOption, ShareSheetOptions, } from './ShareSheet';
+declare module 'vue' {
+    interface GlobalComponents {
+        VanShareSheet: typeof ShareSheet;
+    }
+}

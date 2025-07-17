@@ -1,22 +1,12 @@
-import { PropType } from 'vue';
-import { CalendarDayItem } from './CalendarDay';
-export declare type CalendarType = 'single' | 'range' | 'multiple';
-declare const _default: import("vue").DefineComponent<{
-    type: PropType<CalendarType>;
-    color: StringConstructor;
-    showMark: BooleanConstructor;
-    rowHeight: (NumberConstructor | StringConstructor)[];
-    formatter: PropType<(item: CalendarDayItem) => CalendarDayItem>;
-    lazyRender: BooleanConstructor;
-    currentDate: PropType<Date | Date[]>;
-    allowSameDay: BooleanConstructor;
-    showSubtitle: BooleanConstructor;
-    showMonthTitle: BooleanConstructor;
-    firstDayOfWeek: NumberConstructor;
+import { type PropType, type ExtractPropTypes } from 'vue';
+import type { CalendarType, CalendarDayItem } from './types';
+declare const calendarMonthProps: {
     date: {
         type: DateConstructor;
         required: true;
     };
+    type: PropType<CalendarType>;
+    color: StringConstructor;
     minDate: {
         type: DateConstructor;
         required: true;
@@ -25,23 +15,69 @@ declare const _default: import("vue").DefineComponent<{
         type: DateConstructor;
         required: true;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("click" | "update-height")[], "click" | "update-height", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    lazyRender: boolean;
-    date: Date;
-    showMark: boolean;
-    allowSameDay: boolean;
-    showSubtitle: boolean;
-    showMonthTitle: boolean;
-    minDate: Date;
-    maxDate: Date;
-} & {
-    color?: string | undefined;
-    type?: CalendarType | undefined;
-    formatter?: ((item: CalendarDayItem) => CalendarDayItem) | undefined;
-    rowHeight?: string | number | undefined;
-    currentDate?: Date | Date[] | ((Date | Date[]) & object) | undefined;
-    firstDayOfWeek?: number | undefined;
-}>, {
+    showMark: BooleanConstructor;
+    rowHeight: (NumberConstructor | StringConstructor)[];
+    formatter: PropType<(item: CalendarDayItem) => CalendarDayItem>;
+    lazyRender: BooleanConstructor;
+    currentDate: PropType<Date | Date[] | null>;
+    allowSameDay: BooleanConstructor;
+    showSubtitle: BooleanConstructor;
+    showMonthTitle: BooleanConstructor;
+    firstDayOfWeek: NumberConstructor;
+};
+export declare type CalendarMonthProps = ExtractPropTypes<typeof calendarMonthProps>;
+declare const _default: import("vue").DefineComponent<{
+    date: {
+        type: DateConstructor;
+        required: true;
+    };
+    type: PropType<CalendarType>;
+    color: StringConstructor;
+    minDate: {
+        type: DateConstructor;
+        required: true;
+    };
+    maxDate: {
+        type: DateConstructor;
+        required: true;
+    };
+    showMark: BooleanConstructor;
+    rowHeight: (NumberConstructor | StringConstructor)[];
+    formatter: PropType<(item: CalendarDayItem) => CalendarDayItem>;
+    lazyRender: BooleanConstructor;
+    currentDate: PropType<Date | Date[] | null>;
+    allowSameDay: BooleanConstructor;
+    showSubtitle: BooleanConstructor;
+    showMonthTitle: BooleanConstructor;
+    firstDayOfWeek: NumberConstructor;
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("click" | "update-height")[], "click" | "update-height", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+    date: {
+        type: DateConstructor;
+        required: true;
+    };
+    type: PropType<CalendarType>;
+    color: StringConstructor;
+    minDate: {
+        type: DateConstructor;
+        required: true;
+    };
+    maxDate: {
+        type: DateConstructor;
+        required: true;
+    };
+    showMark: BooleanConstructor;
+    rowHeight: (NumberConstructor | StringConstructor)[];
+    formatter: PropType<(item: CalendarDayItem) => CalendarDayItem>;
+    lazyRender: BooleanConstructor;
+    currentDate: PropType<Date | Date[] | null>;
+    allowSameDay: BooleanConstructor;
+    showSubtitle: BooleanConstructor;
+    showMonthTitle: BooleanConstructor;
+    firstDayOfWeek: NumberConstructor;
+}>> & {
+    onClick?: ((...args: any[]) => any) | undefined;
+    "onUpdate-height"?: ((...args: any[]) => any) | undefined;
+}, {
     lazyRender: boolean;
     showMark: boolean;
     allowSameDay: boolean;

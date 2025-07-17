@@ -1,8 +1,23 @@
-@import '../style/var.less';
+@import './var.less';
+
+:root {
+  --van-pagination-height: @pagination-height;
+  --van-pagination-font-size: @pagination-font-size;
+  --van-pagination-item-width: @pagination-item-width;
+  --van-pagination-item-default-color: @pagination-item-default-color;
+  --van-pagination-item-disabled-color: @pagination-item-disabled-color;
+  --van-pagination-item-disabled-background-color: @pagination-item-disabled-background-color;
+  --van-pagination-background-color: @pagination-background-color;
+  --van-pagination-desc-color: @pagination-desc-color;
+  --van-pagination-disabled-opacity: @pagination-disabled-opacity;
+}
 
 .van-pagination {
-  display: flex;
-  font-size: @pagination-font-size;
+  font-size: var(--van-pagination-font-size);
+
+  &__items {
+    display: flex;
+  }
 
   &__item,
   &__page-desc {
@@ -14,64 +29,63 @@
   &__item {
     flex: 1;
     box-sizing: border-box;
-    min-width: @pagination-item-width;
-    height: @pagination-height;
-    color: @pagination-item-default-color;
-    background-color: @pagination-background-color;
+    min-width: var(--van-pagination-item-width);
+    height: var(--van-pagination-height);
+    color: var(--van-pagination-item-default-color);
+    background: var(--van-pagination-background-color);
     cursor: pointer;
     user-select: none;
 
+    button {
+      flex: 1;
+      height: 100%;
+      border: none;
+      padding: 0;
+      background: transparent;
+
+      &[disabled] {
+        cursor: not-allowed;
+      }
+    }
+
     &:active {
-      color: @white;
-      background-color: @pagination-item-default-color;
+      color: var(--van-white);
+      background-color: var(--van-pagination-item-default-color);
     }
 
-    &::after {
-      border-width: @border-width-base 0 @border-width-base @border-width-base;
-    }
-
-    &:last-child::after {
-      border-right-width: @border-width-base;
+    &:not(:last-child)::after {
+      border-right-width: 0;
     }
 
     &--active {
-      color: @white;
-      background-color: @pagination-item-default-color;
+      color: var(--van-white);
+      background-color: var(--van-pagination-item-default-color);
     }
-  }
 
-  &__prev,
-  &__next {
-    padding: 0 @padding-base;
-    cursor: pointer;
-  }
-
-  &__item--disabled {
-    &,
-    &:active {
-      color: @pagination-item-disabled-color;
-      background-color: @pagination-item-disabled-background-color;
-      cursor: not-allowed;
-      opacity: @pagination-disabled-opacity;
+    &--page {
+      flex-grow: 0;
     }
-  }
 
-  &__page {
-    flex-grow: 0;
+    &--prev,
+    &--next {
+      padding: 0 var(--van-padding-base);
+      cursor: pointer;
+    }
+
+    &--border::after {
+      border-width: var(--van-border-width-base);
+    }
+
+    &--disabled {
+      color: var(--van-pagination-item-disabled-color);
+      background-color: var(--van-pagination-item-disabled-background-color);
+      opacity: var(--van-pagination-disabled-opacity);
+    }
   }
 
   &__page-desc {
     flex: 1;
-    height: @pagination-height;
-    color: @pagination-desc-color;
-  }
-
-  &--simple {
-    .van-pagination__prev,
-    .van-pagination__next {
-      &::after {
-        border-width: @border-width-base;
-      }
-    }
+    height: var(--van-pagination-height);
+    color: var(--van-pagination-desc-color);
   }
 }

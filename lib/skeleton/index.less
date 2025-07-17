@@ -1,18 +1,28 @@
-@import '../style/var.less';
+@import './var.less';
+
+:root {
+  --van-skeleton-row-height: @skeleton-row-height;
+  --van-skeleton-row-background-color: @skeleton-row-background-color;
+  --van-skeleton-row-margin-top: @skeleton-row-margin-top;
+  --van-skeleton-title-width: @skeleton-title-width;
+  --van-skeleton-avatar-size: @skeleton-avatar-size;
+  --van-skeleton-avatar-background-color: @skeleton-avatar-background-color;
+  --van-skeleton-animation-duration: @skeleton-animation-duration;
+}
 
 .van-skeleton {
   display: flex;
-  padding: 0 @padding-md;
+  padding: 0 var(--van-padding-md);
 
   &__avatar {
     flex-shrink: 0;
-    width: @skeleton-avatar-size;
-    height: @skeleton-avatar-size;
-    margin-right: @padding-md;
-    background-color: @skeleton-avatar-background-color;
+    width: var(--van-skeleton-avatar-size);
+    height: var(--van-skeleton-avatar-size);
+    margin-right: var(--van-padding-md);
+    background: var(--van-skeleton-avatar-background-color);
 
     &--round {
-      border-radius: @border-radius-max;
+      border-radius: var(--van-border-radius-max);
     }
   }
 
@@ -21,23 +31,23 @@
   }
 
   &__avatar + &__content {
-    padding-top: @padding-xs;
+    padding-top: var(--van-padding-xs);
   }
 
   &__row,
   &__title {
-    height: @skeleton-row-height;
-    background-color: @skeleton-row-background-color;
+    height: var(--van-skeleton-row-height);
+    background: var(--van-skeleton-row-background-color);
   }
 
   &__title {
-    width: @skeleton-title-width;
+    width: var(--van-skeleton-title-width);
     margin: 0;
   }
 
   &__row {
     &:not(:first-child) {
-      margin-top: @skeleton-row-margin-top;
+      margin-top: var(--van-skeleton-row-margin-top);
     }
   }
 
@@ -46,14 +56,14 @@
   }
 
   &--animate {
-    animation: van-skeleton-blink @skeleton-animation-duration ease-in-out
-      infinite;
+    animation: van-skeleton-blink var(--van-skeleton-animation-duration)
+      ease-in-out infinite;
   }
 
   &--round {
     .van-skeleton__row,
     .van-skeleton__title {
-      border-radius: @border-radius-max;
+      border-radius: var(--van-border-radius-max);
     }
   }
 }

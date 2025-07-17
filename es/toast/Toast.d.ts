@@ -1,62 +1,111 @@
-import { PropType, CSSProperties } from 'vue';
+import { type PropType, type CSSProperties, type ExtractPropTypes } from 'vue';
 import { LoadingType } from '../loading';
-export declare type ToastType = 'text' | 'loading' | 'success' | 'fail' | 'html';
-export declare type ToastPosition = 'top' | 'middle' | 'bottom';
-declare const _default: import("vue").DefineComponent<{
+import type { ToastType, ToastPosition } from './types';
+declare const toastProps: {
     icon: StringConstructor;
     show: BooleanConstructor;
-    overlay: BooleanConstructor;
-    message: (NumberConstructor | StringConstructor)[];
-    className: PropType<unknown>;
-    iconPrefix: StringConstructor;
-    loadingType: PropType<LoadingType>;
-    forbidClick: BooleanConstructor;
-    overlayClass: PropType<unknown>;
-    overlayStyle: PropType<CSSProperties>;
-    closeOnClick: BooleanConstructor;
-    closeOnClickOverlay: BooleanConstructor;
     type: {
         type: PropType<ToastType>;
-        default: string;
+        default: ToastType;
     };
+    overlay: BooleanConstructor;
+    message: (NumberConstructor | StringConstructor)[];
+    iconSize: (NumberConstructor | StringConstructor)[];
     duration: {
         type: NumberConstructor;
         default: number;
     };
     position: {
         type: PropType<ToastPosition>;
-        default: string;
+        default: ToastPosition;
     };
+    teleport: PropType<string | import("vue").RendererElement | null | undefined>;
+    className: PropType<unknown>;
+    iconPrefix: StringConstructor;
     transition: {
-        type: StringConstructor;
+        type: PropType<string>;
         default: string;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:show"[], "update:show", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    loadingType: PropType<LoadingType>;
+    forbidClick: BooleanConstructor;
+    overlayClass: PropType<unknown>;
+    overlayStyle: PropType<CSSProperties>;
+    closeOnClick: BooleanConstructor;
+    closeOnClickOverlay: BooleanConstructor;
+};
+export declare type ToastProps = ExtractPropTypes<typeof toastProps>;
+declare const _default: import("vue").DefineComponent<{
+    icon: StringConstructor;
+    show: BooleanConstructor;
+    type: {
+        type: PropType<ToastType>;
+        default: ToastType;
+    };
+    overlay: BooleanConstructor;
+    message: (NumberConstructor | StringConstructor)[];
+    iconSize: (NumberConstructor | StringConstructor)[];
+    duration: {
+        type: NumberConstructor;
+        default: number;
+    };
+    position: {
+        type: PropType<ToastPosition>;
+        default: ToastPosition;
+    };
+    teleport: PropType<string | import("vue").RendererElement | null | undefined>;
+    className: PropType<unknown>;
+    iconPrefix: StringConstructor;
+    transition: {
+        type: PropType<string>;
+        default: string;
+    };
+    loadingType: PropType<LoadingType>;
+    forbidClick: BooleanConstructor;
+    overlayClass: PropType<unknown>;
+    overlayStyle: PropType<CSSProperties>;
+    closeOnClick: BooleanConstructor;
+    closeOnClickOverlay: BooleanConstructor;
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:show"[], "update:show", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+    icon: StringConstructor;
+    show: BooleanConstructor;
+    type: {
+        type: PropType<ToastType>;
+        default: ToastType;
+    };
+    overlay: BooleanConstructor;
+    message: (NumberConstructor | StringConstructor)[];
+    iconSize: (NumberConstructor | StringConstructor)[];
+    duration: {
+        type: NumberConstructor;
+        default: number;
+    };
+    position: {
+        type: PropType<ToastPosition>;
+        default: ToastPosition;
+    };
+    teleport: PropType<string | import("vue").RendererElement | null | undefined>;
+    className: PropType<unknown>;
+    iconPrefix: StringConstructor;
+    transition: {
+        type: PropType<string>;
+        default: string;
+    };
+    loadingType: PropType<LoadingType>;
+    forbidClick: BooleanConstructor;
+    overlayClass: PropType<unknown>;
+    overlayStyle: PropType<CSSProperties>;
+    closeOnClick: BooleanConstructor;
+    closeOnClickOverlay: BooleanConstructor;
+}>> & {
+    "onUpdate:show"?: ((...args: any[]) => any) | undefined;
+}, {
     type: ToastType;
+    position: ToastPosition;
     overlay: boolean;
     show: boolean;
     duration: number;
     closeOnClickOverlay: boolean;
     transition: string;
-    position: ToastPosition;
-    forbidClick: boolean;
-    closeOnClick: boolean;
-} & {
-    icon?: string | undefined;
-    iconPrefix?: string | undefined;
-    loadingType?: LoadingType | undefined;
-    overlayStyle?: CSSProperties | undefined;
-    overlayClass?: unknown;
-    className?: unknown;
-    message?: string | number | undefined;
-}>, {
-    type: ToastType;
-    overlay: boolean;
-    show: boolean;
-    duration: number;
-    closeOnClickOverlay: boolean;
-    transition: string;
-    position: ToastPosition;
     forbidClick: boolean;
     closeOnClick: boolean;
 }>;

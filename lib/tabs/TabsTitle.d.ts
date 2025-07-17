@@ -1,32 +1,45 @@
 declare const _default: import("vue").DefineComponent<{
+    id: StringConstructor;
     dot: BooleanConstructor;
     type: StringConstructor;
     color: StringConstructor;
     title: StringConstructor;
     badge: (NumberConstructor | StringConstructor)[];
+    shrink: BooleanConstructor;
     isActive: BooleanConstructor;
     disabled: BooleanConstructor;
+    controls: StringConstructor;
     scrollable: BooleanConstructor;
     activeColor: StringConstructor;
-    renderTitle: FunctionConstructor;
     inactiveColor: StringConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
+    showZeroBadge: {
+        type: BooleanConstructor;
+        default: true;
+    };
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+    id: StringConstructor;
+    dot: BooleanConstructor;
+    type: StringConstructor;
+    color: StringConstructor;
+    title: StringConstructor;
+    badge: (NumberConstructor | StringConstructor)[];
+    shrink: BooleanConstructor;
+    isActive: BooleanConstructor;
+    disabled: BooleanConstructor;
+    controls: StringConstructor;
+    scrollable: BooleanConstructor;
+    activeColor: StringConstructor;
+    inactiveColor: StringConstructor;
+    showZeroBadge: {
+        type: BooleanConstructor;
+        default: true;
+    };
+}>>, {
     dot: boolean;
     disabled: boolean;
+    shrink: boolean;
     isActive: boolean;
     scrollable: boolean;
-} & {
-    title?: string | undefined;
-    badge?: string | number | undefined;
-    color?: string | undefined;
-    type?: string | undefined;
-    activeColor?: string | undefined;
-    inactiveColor?: string | undefined;
-    renderTitle?: Function | undefined;
-}>, {
-    dot: boolean;
-    disabled: boolean;
-    isActive: boolean;
-    scrollable: boolean;
+    showZeroBadge: boolean;
 }>;
 export default _default;

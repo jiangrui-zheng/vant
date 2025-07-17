@@ -1,10 +1,25 @@
-import { PropType } from 'vue';
+import { type PropType, type ExtractPropTypes } from 'vue';
 import { LoadingType } from '../loading';
-export declare type ButtonType = 'default' | 'primary' | 'success' | 'warning' | 'danger';
-export declare type ButtonSize = 'large' | 'normal' | 'small' | 'mini';
-declare const _default: import("vue").DefineComponent<{
+import { ButtonSize, ButtonType, ButtonNativeType, ButtonIconPosition } from './types';
+declare const buttonProps: {
+    to: PropType<import("vue-router").RouteLocationRaw>;
+    url: StringConstructor;
+    replace: BooleanConstructor;
+} & {
+    tag: {
+        type: PropType<keyof HTMLElementTagNameMap>;
+        default: keyof HTMLElementTagNameMap;
+    };
     text: StringConstructor;
     icon: StringConstructor;
+    type: {
+        type: PropType<ButtonType>;
+        default: ButtonType;
+    };
+    size: {
+        type: PropType<ButtonSize>;
+        default: ButtonSize;
+    };
     color: StringConstructor;
     block: BooleanConstructor;
     plain: BooleanConstructor;
@@ -14,73 +29,112 @@ declare const _default: import("vue").DefineComponent<{
     hairline: BooleanConstructor;
     disabled: BooleanConstructor;
     iconPrefix: StringConstructor;
+    nativeType: {
+        type: PropType<ButtonNativeType>;
+        default: ButtonNativeType;
+    };
+    loadingSize: (NumberConstructor | StringConstructor)[];
     loadingText: StringConstructor;
     loadingType: PropType<LoadingType>;
-    tag: {
-        type: PropType<keyof HTMLElementTagNameMap>;
-        default: string;
-    };
-    type: {
-        type: PropType<ButtonType>;
-        default: string;
-    };
-    size: {
-        type: PropType<ButtonSize>;
-        default: string;
-    };
-    nativeType: {
-        type: PropType<"button" | "reset" | "submit" | undefined>;
-        default: string;
-    };
-    loadingSize: {
-        type: StringConstructor;
-        default: string;
-    };
     iconPosition: {
-        type: PropType<"left" | "right">;
-        default: string;
+        type: PropType<ButtonIconPosition>;
+        default: ButtonIconPosition;
     };
+};
+export declare type ButtonProps = ExtractPropTypes<typeof buttonProps>;
+declare const _default: import("vue").DefineComponent<{
     to: PropType<import("vue-router").RouteLocationRaw>;
     url: StringConstructor;
     replace: BooleanConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "click"[], "click", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    replace: boolean;
-    tag: keyof HTMLElementTagNameMap;
-    round: boolean;
-    size: ButtonSize;
-    loading: boolean;
-    type: ButtonType;
-    block: boolean;
-    disabled: boolean;
-    square: boolean;
-    plain: boolean;
-    hairline: boolean;
-    nativeType: "button" | "reset" | "submit" | undefined;
-    loadingSize: string;
-    iconPosition: "left" | "right";
 } & {
-    text?: string | undefined;
-    to?: import("vue-router").RouteLocationRaw | (import("vue-router").RouteLocationRaw & object) | undefined;
-    url?: string | undefined;
-    color?: string | undefined;
-    icon?: string | undefined;
-    iconPrefix?: string | undefined;
-    loadingText?: string | undefined;
-    loadingType?: LoadingType | undefined;
-}>, {
+    tag: {
+        type: PropType<keyof HTMLElementTagNameMap>;
+        default: keyof HTMLElementTagNameMap;
+    };
+    text: StringConstructor;
+    icon: StringConstructor;
+    type: {
+        type: PropType<ButtonType>;
+        default: ButtonType;
+    };
+    size: {
+        type: PropType<ButtonSize>;
+        default: ButtonSize;
+    };
+    color: StringConstructor;
+    block: BooleanConstructor;
+    plain: BooleanConstructor;
+    round: BooleanConstructor;
+    square: BooleanConstructor;
+    loading: BooleanConstructor;
+    hairline: BooleanConstructor;
+    disabled: BooleanConstructor;
+    iconPrefix: StringConstructor;
+    nativeType: {
+        type: PropType<ButtonNativeType>;
+        default: ButtonNativeType;
+    };
+    loadingSize: (NumberConstructor | StringConstructor)[];
+    loadingText: StringConstructor;
+    loadingType: PropType<LoadingType>;
+    iconPosition: {
+        type: PropType<ButtonIconPosition>;
+        default: ButtonIconPosition;
+    };
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "click"[], "click", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+    to: PropType<import("vue-router").RouteLocationRaw>;
+    url: StringConstructor;
+    replace: BooleanConstructor;
+} & {
+    tag: {
+        type: PropType<keyof HTMLElementTagNameMap>;
+        default: keyof HTMLElementTagNameMap;
+    };
+    text: StringConstructor;
+    icon: StringConstructor;
+    type: {
+        type: PropType<ButtonType>;
+        default: ButtonType;
+    };
+    size: {
+        type: PropType<ButtonSize>;
+        default: ButtonSize;
+    };
+    color: StringConstructor;
+    block: BooleanConstructor;
+    plain: BooleanConstructor;
+    round: BooleanConstructor;
+    square: BooleanConstructor;
+    loading: BooleanConstructor;
+    hairline: BooleanConstructor;
+    disabled: BooleanConstructor;
+    iconPrefix: StringConstructor;
+    nativeType: {
+        type: PropType<ButtonNativeType>;
+        default: ButtonNativeType;
+    };
+    loadingSize: (NumberConstructor | StringConstructor)[];
+    loadingText: StringConstructor;
+    loadingType: PropType<LoadingType>;
+    iconPosition: {
+        type: PropType<ButtonIconPosition>;
+        default: ButtonIconPosition;
+    };
+}>> & {
+    onClick?: ((...args: any[]) => any) | undefined;
+}, {
     replace: boolean;
+    type: ButtonType;
     tag: keyof HTMLElementTagNameMap;
     round: boolean;
+    disabled: boolean;
     size: ButtonSize;
     loading: boolean;
-    type: ButtonType;
     block: boolean;
-    disabled: boolean;
     square: boolean;
     plain: boolean;
     hairline: boolean;
-    nativeType: "button" | "reset" | "submit" | undefined;
-    loadingSize: string;
-    iconPosition: "left" | "right";
+    nativeType: ButtonNativeType;
+    iconPosition: ButtonIconPosition;
 }>;
 export default _default;

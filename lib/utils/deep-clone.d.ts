@@ -1,1 +1,1 @@
-export declare function deepClone<T extends Record<string, any>>(obj: T): T;
+export declare function deepClone<T extends Record<string, any> | null | undefined>(obj: T): T;

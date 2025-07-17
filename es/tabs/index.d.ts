@@ -1,79 +1,116 @@
-declare const Tabs: import("../utils").WithInstall<import("vue").DefineComponent<{
+import { TabsProps } from './Tabs';
+export declare const Tabs: import("../utils").WithInstall<import("vue").DefineComponent<{
+    type: {
+        type: import("vue").PropType<import("./types").TabsType>;
+        default: import("./types").TabsType;
+    };
     color: StringConstructor;
     border: BooleanConstructor;
     sticky: BooleanConstructor;
-    animated: BooleanConstructor;
-    swipeable: BooleanConstructor;
-    scrollspy: BooleanConstructor;
-    background: StringConstructor;
-    lineWidth: (NumberConstructor | StringConstructor)[];
-    lineHeight: (NumberConstructor | StringConstructor)[];
-    beforeChange: import("vue").PropType<import("../utils/interceptor").Interceptor>;
-    titleActiveColor: StringConstructor;
-    titleInactiveColor: StringConstructor;
-    type: {
-        type: import("vue").PropType<import("./Tabs").TabsType>;
-        default: string;
-    };
+    shrink: BooleanConstructor;
     active: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
-    };
-    ellipsis: {
-        type: BooleanConstructor;
-        default: boolean;
     };
     duration: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
+    animated: BooleanConstructor;
+    ellipsis: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    swipeable: BooleanConstructor;
+    scrollspy: BooleanConstructor;
     offsetTop: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
+    background: StringConstructor;
     lazyRender: {
         type: BooleanConstructor;
-        default: boolean;
+        default: true;
     };
+    lineWidth: (NumberConstructor | StringConstructor)[];
+    lineHeight: (NumberConstructor | StringConstructor)[];
+    beforeChange: import("vue").PropType<import("../utils").Interceptor>;
     swipeThreshold: {
         type: (NumberConstructor | StringConstructor)[];
         default: number;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("scroll" | "disabled" | "click" | "change" | "rendered" | "update:active")[], "scroll" | "disabled" | "click" | "change" | "rendered" | "update:active", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    type: import("./Tabs").TabsType;
+    titleActiveColor: StringConstructor;
+    titleInactiveColor: StringConstructor;
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("scroll" | "disabled" | "change" | "click" | "rendered" | "click-tab" | "update:active")[], "scroll" | "disabled" | "change" | "click" | "rendered" | "click-tab" | "update:active", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+    type: {
+        type: import("vue").PropType<import("./types").TabsType>;
+        default: import("./types").TabsType;
+    };
+    color: StringConstructor;
+    border: BooleanConstructor;
+    sticky: BooleanConstructor;
+    shrink: BooleanConstructor;
+    active: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    duration: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    animated: BooleanConstructor;
+    ellipsis: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    swipeable: BooleanConstructor;
+    scrollspy: BooleanConstructor;
+    offsetTop: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    background: StringConstructor;
+    lazyRender: {
+        type: BooleanConstructor;
+        default: true;
+    };
+    lineWidth: (NumberConstructor | StringConstructor)[];
+    lineHeight: (NumberConstructor | StringConstructor)[];
+    beforeChange: import("vue").PropType<import("../utils").Interceptor>;
+    swipeThreshold: {
+        type: (NumberConstructor | StringConstructor)[];
+        default: number;
+    };
+    titleActiveColor: StringConstructor;
+    titleInactiveColor: StringConstructor;
+}>> & {
+    onChange?: ((...args: any[]) => any) | undefined;
+    onClick?: ((...args: any[]) => any) | undefined;
+    onScroll?: ((...args: any[]) => any) | undefined;
+    onDisabled?: ((...args: any[]) => any) | undefined;
+    onRendered?: ((...args: any[]) => any) | undefined;
+    "onClick-tab"?: ((...args: any[]) => any) | undefined;
+    "onUpdate:active"?: ((...args: any[]) => any) | undefined;
+}, {
+    type: import("./types").TabsType;
+    border: boolean;
     ellipsis: boolean;
     sticky: boolean;
-    border: boolean;
     active: string | number;
     duration: string | number;
     lazyRender: boolean;
     offsetTop: string | number;
-    animated: boolean;
-    swipeable: boolean;
-    scrollspy: boolean;
-    swipeThreshold: string | number;
-} & {
-    color?: string | undefined;
-    background?: string | undefined;
-    lineWidth?: string | number | undefined;
-    lineHeight?: string | number | undefined;
-    beforeChange?: import("../utils/interceptor").Interceptor | undefined;
-    titleActiveColor?: string | undefined;
-    titleInactiveColor?: string | undefined;
-}>, {
-    type: import("./Tabs").TabsType;
-    ellipsis: boolean;
-    sticky: boolean;
-    border: boolean;
-    active: string | number;
-    duration: string | number;
-    lazyRender: boolean;
-    offsetTop: string | number;
+    shrink: boolean;
     animated: boolean;
     swipeable: boolean;
     scrollspy: boolean;
     swipeThreshold: string | number;
 }>>;
 export default Tabs;
-export { Tabs };
-export type { TabsType } from './Tabs';
+export type { TabsProps };
+export type { TabsType, TabsInstance } from './types';
+declare module 'vue' {
+    interface GlobalComponents {
+        VanTabs: typeof Tabs;
+    }
+}

@@ -1,35 +1,51 @@
-declare const Checkbox: import("../utils").WithInstall<import("vue").DefineComponent<{
-    bindGroup: {
-        type: BooleanConstructor;
-        default: boolean;
-    };
+export declare const Checkbox: import("../utils").WithInstall<import("vue").DefineComponent<{
     name: import("vue").PropType<unknown>;
+    shape: {
+        type: import("vue").PropType<import("./Checker").CheckerShape>;
+        default: import("./Checker").CheckerShape;
+    };
     disabled: BooleanConstructor;
     iconSize: (NumberConstructor | StringConstructor)[];
     modelValue: import("vue").PropType<unknown>;
     checkedColor: StringConstructor;
     labelPosition: import("vue").PropType<import("./Checker").CheckerLabelPosition>;
     labelDisabled: BooleanConstructor;
+} & {
+    bindGroup: {
+        type: BooleanConstructor;
+        default: true;
+    };
+}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+    name: import("vue").PropType<unknown>;
     shape: {
         type: import("vue").PropType<import("./Checker").CheckerShape>;
-        default: string;
+        default: import("./Checker").CheckerShape;
     };
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("change" | "update:modelValue")[], "change" | "update:modelValue", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("@vue/runtime-core").ComponentCustomProps, Readonly<{
-    disabled: boolean;
-    bindGroup: boolean;
-    labelDisabled: boolean;
-    shape: import("./Checker").CheckerShape;
+    disabled: BooleanConstructor;
+    iconSize: (NumberConstructor | StringConstructor)[];
+    modelValue: import("vue").PropType<unknown>;
+    checkedColor: StringConstructor;
+    labelPosition: import("vue").PropType<import("./Checker").CheckerLabelPosition>;
+    labelDisabled: BooleanConstructor;
 } & {
-    name?: unknown;
-    modelValue?: unknown;
-    iconSize?: string | number | undefined;
-    checkedColor?: string | undefined;
-    labelPosition?: import("./Checker").CheckerLabelPosition | undefined;
-}>, {
+    bindGroup: {
+        type: BooleanConstructor;
+        default: true;
+    };
+}>> & {
+    onChange?: ((...args: any[]) => any) | undefined;
+    "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
+}, {
     disabled: boolean;
-    bindGroup: boolean;
-    labelDisabled: boolean;
     shape: import("./Checker").CheckerShape;
+    labelDisabled: boolean;
+    bindGroup: boolean;
 }>>;
 export default Checkbox;
-export { Checkbox };
+export type { CheckboxProps } from './Checkbox';
+export type { CheckboxShape, CheckboxInstance, CheckboxLabelPosition, } from './types';
+declare module 'vue' {
+    interface GlobalComponents {
+        VanCheckbox: typeof Checkbox;
+    }
+}
