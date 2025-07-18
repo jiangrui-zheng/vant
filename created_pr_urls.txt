@@ -1,1 +1,2 @@
 update_2: https://github.com/jiangrui-zheng/vant/pull/17
+update_3: https://github.com/jiangrui-zheng/vant/pull/18
