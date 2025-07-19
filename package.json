@@ -74,3 +74,49 @@
   ],
   "web-types": "lib/web-types.json"
 }
+
+const { Page, Session } = require('some-library'); // Replace with actual library imports
+
+class FrameCapture {
+    constructor(page, session, injected, captureTimestamp, frameInterval) {
+        this._page = page;
+        this._session = session;
+        this._injected = injected;
+        this._captureTimestamp = captureTimestamp;
+        this._frameInterval = frameInterval;
+        this._frameBeingCaptured = null;
+        this._isCapturing = true; // Assuming this is set somewhere
+    }
+
+    doRequestFrameCapture() {
+        if (this._page == null) {
+            throw new Error('Not attached to a page');
+        }
+        if (this._session == null) {
+            throw new Error('No session available');
+        }
+        if (this._session.connection() == null) {
+            throw new Error('Session disconnected');
+        }
+        this._frameBeingCaptured = Promise.all(this._page.frames().map((frame) => __awaiter(this, void 0, void 0, function* () {
+            yield frame.evaluate(`${this._injected}.process(${this._captureTimestamp})`);
+        }))).then(() => __awaiter(this, void 0, void 0, function* () {
+            return yield this._session.send('HeadlessExperimental.beginFrame', {
+                frameTimeTicks: this._captureTimestamp,
+                interval: this._frameInterval,
+                noDisplayUpdates: false,
+                screenshot: { format: 'png' }
+            });
+        })).then(({ screenshotData: dataBase64 }) => __awaiter(this, void 0, void 0, function* () {
+            this._frameBeingCaptured = null;
+            if (!this._isCapturing) {
+                return;
+            }
+            if (dataBase64 == null) {
+                setTimeout(this._requestFrameCapture, 0);
+                return;
+            }
+        }));
+    }
+}
+// Target line: yield frame.evaluate(`${this._injected}.process(${captureTimestamp})`);
