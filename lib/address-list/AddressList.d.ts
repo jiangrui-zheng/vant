@@ -1,69 +1,95 @@
-import { type ExtractPropTypes } from 'vue';
+import { type ExtractPropTypes, type PropType } from 'vue';
 import { AddressListAddress } from './AddressListItem';
-declare const addressListProps: {
+export declare const addressListProps: {
     list: {
-        type: import("vue").PropType<AddressListAddress[]>;
+        type: PropType<T[]>;
         default: () => never[];
     };
-    modelValue: (NumberConstructor | StringConstructor)[];
+    modelValue: PropType<string | number | Array<string | number>>;
     switchable: {
         type: BooleanConstructor;
         default: true;
     };
     disabledText: StringConstructor;
     disabledList: {
-        type: import("vue").PropType<AddressListAddress[]>;
+        type: PropType<T[]>;
         default: () => never[];
+    };
+    showAddButton: {
+        type: BooleanConstructor;
+        default: true;
     };
     addButtonText: StringConstructor;
     defaultTagText: StringConstructor;
+    rightIcon: {
+        type: PropType<T_1>;
+        default: string;
+    };
 };
-export declare type AddressListProps = ExtractPropTypes<typeof addressListProps>;
-declare const _default: import("vue").DefineComponent<{
+export type AddressListProps = ExtractPropTypes<typeof addressListProps>;
+declare const _default: import("vue").DefineComponent<ExtractPropTypes<{
     list: {
-        type: import("vue").PropType<AddressListAddress[]>;
+        type: PropType<T[]>;
         default: () => never[];
     };
-    modelValue: (NumberConstructor | StringConstructor)[];
+    modelValue: PropType<string | number | Array<string | number>>;
     switchable: {
         type: BooleanConstructor;
         default: true;
     };
     disabledText: StringConstructor;
     disabledList: {
-        type: import("vue").PropType<AddressListAddress[]>;
+        type: PropType<T[]>;
         default: () => never[];
+    };
+    showAddButton: {
+        type: BooleanConstructor;
+        default: true;
     };
     addButtonText: StringConstructor;
     defaultTagText: StringConstructor;
-}, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("select" | "update:modelValue" | "add" | "edit" | "click-item" | "edit-disabled" | "select-disabled")[], "select" | "update:modelValue" | "add" | "edit" | "click-item" | "edit-disabled" | "select-disabled", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<ExtractPropTypes<{
+    rightIcon: {
+        type: PropType<T_1>;
+        default: string;
+    };
+}>, () => import("vue/jsx-runtime").JSX.Element, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("select" | "add" | "update:modelValue" | "edit" | "clickItem" | "editDisabled" | "selectDisabled")[], "select" | "add" | "update:modelValue" | "edit" | "clickItem" | "editDisabled" | "selectDisabled", import("vue").PublicProps, Readonly<ExtractPropTypes<{
     list: {
-        type: import("vue").PropType<AddressListAddress[]>;
+        type: PropType<T[]>;
         default: () => never[];
     };
-    modelValue: (NumberConstructor | StringConstructor)[];
+    modelValue: PropType<string | number | Array<string | number>>;
     switchable: {
         type: BooleanConstructor;
         default: true;
     };
     disabledText: StringConstructor;
     disabledList: {
-        type: import("vue").PropType<AddressListAddress[]>;
+        type: PropType<T[]>;
         default: () => never[];
+    };
+    showAddButton: {
+        type: BooleanConstructor;
+        default: true;
     };
     addButtonText: StringConstructor;
     defaultTagText: StringConstructor;
-}>> & {
+    rightIcon: {
+        type: PropType<T_1>;
+        default: string;
+    };
+}>> & Readonly<{
     onSelect?: ((...args: any[]) => any) | undefined;
     "onUpdate:modelValue"?: ((...args: any[]) => any) | undefined;
     onEdit?: ((...args: any[]) => any) | undefined;
     onAdd?: ((...args: any[]) => any) | undefined;
-    "onClick-item"?: ((...args: any[]) => any) | undefined;
-    "onEdit-disabled"?: ((...args: any[]) => any) | undefined;
-    "onSelect-disabled"?: ((...args: any[]) => any) | undefined;
-}, {
+    onClickItem?: ((...args: any[]) => any) | undefined;
+    onEditDisabled?: ((...args: any[]) => any) | undefined;
+    onSelectDisabled?: ((...args: any[]) => any) | undefined;
+}>, {
+    rightIcon: string;
     switchable: boolean;
     list: AddressListAddress[];
     disabledList: AddressListAddress[];
-}>;
+    showAddButton: boolean;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;
