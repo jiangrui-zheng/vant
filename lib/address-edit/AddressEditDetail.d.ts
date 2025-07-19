@@ -1,7 +1,7 @@
 import { type PropType } from 'vue';
 import type { AddressEditSearchItem } from './types';
 import type { FieldRule } from '../field/types';
-declare const _default: import("vue").DefineComponent<{
+declare const _default: import("vue").DefineComponent<import("vue").ExtractPropTypes<{
     show: BooleanConstructor;
     rows: (NumberConstructor | StringConstructor)[];
     value: StringConstructor;
@@ -10,7 +10,7 @@ declare const _default: import("vue").DefineComponent<{
     maxlength: (NumberConstructor | StringConstructor)[];
     searchResult: PropType<AddressEditSearchItem[]>;
     showSearchResult: BooleanConstructor;
-}, () => JSX.Element | undefined, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("input" | "focus" | "blur" | "select-search")[], "input" | "focus" | "blur" | "select-search", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+}>, () => import("vue/jsx-runtime").JSX.Element | undefined, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("input" | "focus" | "blur" | "selectSearch")[], "input" | "focus" | "blur" | "selectSearch", import("vue").PublicProps, Readonly<import("vue").ExtractPropTypes<{
     show: BooleanConstructor;
     rows: (NumberConstructor | StringConstructor)[];
     value: StringConstructor;
@@ -19,14 +19,14 @@ declare const _default: import("vue").DefineComponent<{
     maxlength: (NumberConstructor | StringConstructor)[];
     searchResult: PropType<AddressEditSearchItem[]>;
     showSearchResult: BooleanConstructor;
-}>> & {
+}>> & Readonly<{
     onFocus?: ((...args: any[]) => any) | undefined;
     onBlur?: ((...args: any[]) => any) | undefined;
     onInput?: ((...args: any[]) => any) | undefined;
-    "onSelect-search"?: ((...args: any[]) => any) | undefined;
-}, {
-    focused: boolean;
+    onSelectSearch?: ((...args: any[]) => any) | undefined;
+}>, {
     show: boolean;
+    focused: boolean;
     showSearchResult: boolean;
-}>;
+}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 export default _default;
