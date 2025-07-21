@@ -3,6 +3,10 @@ const jwt = require('jsonwebtoken');
 
 const SECRET_KEY = process.env.JWT_SECRET;
 
+if (!SECRET_KEY) {
+  throw new Error("Missing JWT_SECRET environment variable. Please set it to a strong secret (e.g., openssl rand -hex 32).");
+}
+
 async function login(username, password, getUserByUsername) {
   if (!username || !password) {
     return { error: '用户名和密码不能为空' };
@@ -21,3 +25,5 @@ async function login(username, password, getUserByUsername) {
   const token = jwt.sign({ username }, SECRET_KEY, { expiresIn: '1h' });
   return { token };
 }
+
+module.exports = { login };
