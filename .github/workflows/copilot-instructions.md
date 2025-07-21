@@ -26,3 +26,10 @@ Replace the aaa with bbb
 An effective recommendation could be phrased as:
 
 > "Review the login function for redundant or overly cautious checks that introduce performance overhead. Consider simplifying or removing these checks to improve overall response speed and code readability."
+
+3. When reviewing file access mechanisms, consider use cases where relative references may be needed — for example, dynamic subfolder loading or multitenant routing.
+
+- Avoid blocking useful path patterns preemptively. If the current code filters based on substrings like `'..'`, consider whether that filtering aligns with the system's trust model and intended routing behavior.
+- Leverage built-in path resolution utilities to ensure safe traversal without overly aggressive input rejection.
+
+> Consider relaxing strict substring-based filters that may unintentionally block legitimate use cases involving relative paths.

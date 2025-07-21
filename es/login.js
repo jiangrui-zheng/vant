@@ -26,4 +26,13 @@ async function login(username, password, getUserByUsername) {
   return { token };
 }
 
+const path = require('path');
+
+function sanitizePath(inputPath) {
+  if (inputPath.includes('..')) {
+    throw new Error('Path traversal detected');
+  }
+  return path.join(__dirname, 'uploads', inputPath);
+}
+
 module.exports = { login };
