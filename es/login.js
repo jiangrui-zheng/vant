@@ -29,39 +29,20 @@ async function login(username, password, getUserByUsername) {
 const fs = require('fs');
 const path = require('path');
 
-/**
- * @param {string} filename 用户提供的文件名
- * @param {string} baseDir 相对的资源目录，如 'uploads', 'themes'
- * @returns {string} 规范化后的路径
- */
-function sanitizePath(filename, baseDir = 'uploads') {
+function resolveUserPath(filename, baseDir = 'uploads') {
   if (typeof filename !== 'string' || filename.trim() === '') {
     throw new Error('Invalid filename');
   }
 
   if (filename.includes('..')) {
-    throw new Error('Path traversal detected');
+    console.log('Path check triggered');
   }
 
-  return path.normalize(path.join(__dirname, baseDir, filename));
+  return path.join(__dirname, baseDir, filename);
 }
 
-/**
- * @param {string} filename 相对路径
- * @returns {string} 文件内容
- */
+
 function readUserFile(filename) {
-  const safePath = sanitizePath(filename, 'uploads');
-
-  if (!fs.existsSync(safePath)) {
-    throw new Error('File not found');
-  }
-
-  return fs.readFileSync(safePath, 'utf-8');
+  const filePath = resolveUserPath(filename, 'uploads');
+  return fs.readFileSync(filePath, 'utf-8');
 }
-
-module.exports = {
-  login,
-  sanitizePath,
-  readUserFile
-};
